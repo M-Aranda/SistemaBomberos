@@ -751,18 +751,43 @@ BEGIN
 DECLARE nombreUsuario VARCHAR(12);
 DECLARE idMasAlto INT;
 
+DECLARE pass VARCHAR (12);
+
 START TRANSACTION;
 
 SELECT MAX(id) INTO @idMasAlto FROM informacionPersonal;
 SELECT rut INTO @nombreUsuario FROM informacionPersonal WHERE id= @idMasAlto;
 
+SET pass='123';
 
-CREATE USER 'wee'@'localhost' IDENTIFIED BY '123';
-GRANT SELECT ON bomberosPrimeraIteracion.* TO 'wee'@'localhost';
+SET @query1 = CONCAT("
+        CREATE USER  ",@nombreUsuario,"@localhost IDENTIFIED BY ",@pass,"" 
+        );
+PREPARE stmt FROM @query1; EXECUTE stmt; DEALLOCATE PREPARE stmt;
+
+
+
+SET @query1 = CONCAT("
+    GRANT SELECT ON bomberosPrimeraIteracion.* TO ",@nombreUsuario,"@localhost" 
+        );
+PREPARE stmt FROM @query1; EXECUTE stmt; DEALLOCATE PREPARE stmt;
+
+
 COMMIT;
 
 END //
 DELIMITER ;
+
+
+
+
+
+
+/*
+CREATE USER huehue@localhost IDENTIFIED BY '123';
+DROP USER 'exporter'@'localhost';
+*/
+
 
 /*
 DELIMITER // 
@@ -779,7 +804,7 @@ DELIMITER ;
 
 
 /*
-
+CALL crearUsuario;
 select * from mysql.user;
 SELECT * FROM usuario;
 SELECT * FROM informacionPersonal;
@@ -807,6 +832,16 @@ LIMIT 0,14;
 
 INSERT INTO informacionPersonal VALUES (NULL,'38895588-2', 'Marcelo Andres', 'dfgkhjfdghjkskdhjhjsdfhjksdfhjksdfg','dfgdfgfdghhfhjkdfhjdfghkfdhjkfghjkf',
 '1991-03-07',1,'ddsdf','sdasdasd','asasdasd','assdasdasdasd',0.39, 1.34,'asdsaddasasdsa',1,'sadadasd','asdadsd','asdadadasasd',2,0 );
+
+
+SET @exporter = 'yolo';
+
+SET @createUser = CONCAT(
+            "CREATE USER ",@exporter,"@localhost IDENTIFIED BY 'mypass'" 
+          );
+
+PREPARE smtpCreateUser FROM @createUser;
+EXECUTE smtpCreateUser;
 
 
 DROP DATABASE bomberosPrimeraIteracion;
