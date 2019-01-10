@@ -1,77 +1,85 @@
-CREATE DATABASE bomberosPrimeraIteracion;
+CREATE DATABASE bomberosBD;
 
-USE bomberosPrimeraIteracion;
+USE bomberosBD;
 
-CREATE TABLE usuario(
-id INT AUTO_INCREMENT,
-nombre VARCHAR(20000),
-contrasenia VARCHAR (2000),
-PRIMARY KEY (id)
+CREATE TABLE tbl_usuario(
+id_usuario INT AUTO_INCREMENT,
+nombre_usuario VARCHAR(20000),
+contrasenia_usuario VARCHAR (2000),
+PRIMARY KEY (id_usuario)
 );
 
 
-CREATE TABLE estado_civil(
-id INT AUTO_INCREMENT,
-nombre TEXT,
-PRIMARY KEY (id)
+CREATE TABLE tbl_estado_civil(
+id_estado_civil INT AUTO_INCREMENT,
+nombre_estado_civil TEXT,
+PRIMARY KEY (id_estado_civil)
 );
 
 
-INSERT INTO estado_civil VALUES (NULL, 'Hijo/a');
-INSERT INTO estado_civil VALUES (NULL, 'Padre/Madre');
-INSERT INTO estado_civil VALUES (NULL, 'Soltero/a');
-INSERT INTO estado_civil VALUES (NULL, 'Viudo/a');
-INSERT INTO estado_civil VALUES (NULL, 'Divorciado/a');
-INSERT INTO estado_civil VALUES (NULL, 'Separado/a');
-INSERT INTO estado_civil VALUES (NULL, 'Conviviente');
+INSERT INTO tbl_estado_civil VALUES (NULL, 'Hijo/a');
+INSERT INTO tbl_estado_civil VALUES (NULL, 'Padre/Madre');
+INSERT INTO tbl_estado_civil VALUES (NULL, 'Soltero/a');
+INSERT INTO tbl_estado_civil VALUES (NULL, 'Viudo/a');
+INSERT INTO tbl_estado_civil VALUES (NULL, 'Divorciado/a');
+INSERT INTO tbl_estado_civil VALUES (NULL, 'Separado/a');
+INSERT INTO tbl_estado_civil VALUES (NULL, 'Conviviente');
 
-CREATE TABLE genero(
-id INT AUTO_INCREMENT,
-nombre VARCHAR (21844),
-PRIMARY KEY (id)
+CREATE TABLE tbl_genero(
+id_genero INT AUTO_INCREMENT,
+nombre_genero VARCHAR (21844),
+PRIMARY KEY (id_genero)
 );
 
-INSERT INTO genero VALUES (NULL, 'Masculino');
-INSERT INTO genero VALUES (NULL, 'Femenino');
+INSERT INTO tbl_genero VALUES (NULL, 'Masculino');
+INSERT INTO tbl_genero VALUES (NULL, 'Femenino');
 
 
 
-
-CREATE TABLE informacionPersonal(
-id INT AUTO_INCREMENT,
-rut VARCHAR (12) UNIQUE,
-nombre TEXT,
-apellido_paterno TEXT,
-apellido_materno TEXT,
-fecha_de_nacimiento DATE,
-fk_estado_civil INT,
-talla_de_chaqueta_o_camisa TEXT,
-talla_de_pantalon TEXT,
-talla_de_buzo TEXT,
-talla_de_calzado TEXT,
-altura_en_metros FLOAT,
-peso_en_kg FLOAT,
-e_mail TEXT,
-fk_genero INT,
-telefono_fijo TEXT,
-telefono_movil TEXT,
-direccion_personal TEXT,
-pertenecio_a_brigada_juvenil BOOLEAN,
-esInstructor BOOLEAN,
-FOREIGN KEY (fk_estado_civil) REFERENCES estado_civil (id),
-FOREIGN KEY (fk_genero) REFERENCES genero (id),
-PRIMARY KEY (id)
+CREATE TABLE tbl_medida (
+id_medida INT,
+talla_de_chaqueta_camisa_medida VARCHAR (5000),
+talla_de_pantalon_medida VARCHAR (5000),
+talla_de_buzo_medida VARCHAR (5000),
+talla_de_calzado_medida VARCHAR (5000),
+PRIMARY KEY(id_medida)
 );
 
 
-CREATE TABLE region (
-  id INT AUTO_INCREMENT,
-  nombre VARCHAR(64) ,
-  ordinal VARCHAR(4),
-  PRIMARY KEY (id)
+
+CREATE TABLE tbl_informacionPersonal(
+id_informacionPersonal INT AUTO_INCREMENT,
+rut_informacionPersonal VARCHAR (12) UNIQUE,
+nombre_informacionPersonal VARCHAR (5000),
+apellido_paterno_informacionPersonal VARCHAR (5000),
+apellido_materno_informacionPersonal VARCHAR (5000),
+fecha_de_nacimiento_informacionPersonal DATE,
+fk_estado_civil_informacionPersonal INT,
+fk_medida_informacionPersonal INT,
+altura_en_metros_informacionPersonal VARCHAR (5000),
+peso_en_kg_informacionPersonal VARCHAR (5000),
+e_mail_informacionPersonal VARCHAR (5000),
+fk_genero_informacionPersonal INT,
+telefono_fijo_informacionPersonal VARCHAR (5000),
+telefono_movil_informacionPersonal VARCHAR (5000),
+direccion_personal_informacionPersonal VARCHAR (5000),
+pertenecio_a_brigada_juvenil_informacionPersonal VARCHAR (5000),
+esInstructor_informacionPersonal VARCHAR (5000),
+FOREIGN KEY (fk_estado_civil_informacionPersonal) REFERENCES tbl_estado_civil (id_estado_civil),
+FOREIGN KEY (fk_medida_informacionPersonal) REFERENCES tbl_medida (id_medida),
+FOREIGN KEY (fk_genero_informacionPersonal) REFERENCES tbl_genero (id_genero),
+PRIMARY KEY (id_informacionPersonal)
 );
 
-INSERT INTO region (id,nombre,ordinal)
+
+CREATE TABLE tbl_region (
+  id_region INT AUTO_INCREMENT,
+  nombre_region VARCHAR(64) ,
+  ordinal_region VARCHAR(4),
+  PRIMARY KEY (id_region)
+);
+
+INSERT INTO tbl_region (id_region,nombre_region,ordinal_region)
 VALUES
 	(1,'Arica y Parinacota','XV'),
 	(2,'Tarapacá','I'),
@@ -91,15 +99,15 @@ VALUES
     
    
 
-CREATE TABLE provincia (
-  id INT AUTO_INCREMENT,
-  nombre VARCHAR(64),
-  fk_region INT,
-  FOREIGN KEY (fk_region) REFERENCES region (id),
-  PRIMARY KEY (id)
+CREATE TABLE tbl_provincia (
+  id_provincia INT AUTO_INCREMENT,
+  nombre_provincia VARCHAR(64),
+  fk_region_provincia INT,
+  FOREIGN KEY (fk_region_provincia) REFERENCES tbl_region (id_region),
+  PRIMARY KEY (id_provincia)
 ); 
 
-INSERT INTO provincia (id,nombre,fk_region)
+INSERT INTO tbl_provincia (id_provincia,nombre_provincia,fk_region_provincia)
 VALUES
 	(1,'Arica',1),
 	(2,'Parinacota',1),
@@ -157,14 +165,15 @@ VALUES
 
 
 
-CREATE TABLE comuna (
-  id INT AUTO_INCREMENT,
-  nombre VARCHAR(64),
-  fk_provincia INT,
-  PRIMARY KEY (id)
+CREATE TABLE tbl_comuna (
+  id_comuna INT AUTO_INCREMENT,
+  nombre_comuna VARCHAR(64),
+  fk_provincia_comuna INT,
+  FOREIGN KEY (fk_provincia_comuna) REFERENCES tbl_provincia (id_provincia),
+  PRIMARY KEY (id_comuna)
 );
 
-INSERT INTO comuna (id,nombre,fk_provincia)
+INSERT INTO tbl_comuna (id_comuna,nombre_comuna,fk_provincia_comuna)
 VALUES
 	(1,'Arica',1),
 	(2,'Camarones',1),
@@ -518,284 +527,231 @@ VALUES
 -- consulta de prueba SELECT * FROM comuna ORDER BY comuna_nombre ASC;
 
 
-CREATE TABLE cargo (
-id INT AUTO_INCREMENT,
-nombre VARCHAR (20000),
-PRIMARY KEY (id)
+CREATE TABLE tbl_cargo (
+id_cargo INT AUTO_INCREMENT,
+nombre_cargo VARCHAR (20000),
+PRIMARY KEY (id_cargo)
 );
 
-CREATE TABLE estado (
-id INT AUTO_INCREMENT,
-nombre VARCHAR (20000),
-PRIMARY KEY (id)
+CREATE TABLE tbl_estado (
+id_estado INT AUTO_INCREMENT,
+nombre_estado VARCHAR (20000),
+PRIMARY KEY (id_estado)
 );
 
-INSERT INTO estado VALUES (NULL, 'Activo');
-INSERT INTO estado VALUES (NULL, 'Suspendido');
-INSERT INTO estado VALUES (NULL, 'Separado');
-INSERT INTO estado VALUES (NULL, 'Fallecido');
-INSERT INTO estado VALUES (NULL, 'Mártir');
+INSERT INTO tbl_estado VALUES (NULL, 'Activo');
+INSERT INTO tbl_estado VALUES (NULL, 'Suspendido');
+INSERT INTO tbl_estado VALUES (NULL, 'Separado');
+INSERT INTO tbl_estado VALUES (NULL, 'Fallecido');
+INSERT INTO tbl_estado VALUES (NULL, 'Mártir');
 
-
-CREATE TABLE informacionBomberil (
-id INT AUTO_INCREMENT,
-fk_region INT,
-cuerpo VARCHAR (20000),
-compania VARCHAR (20000),
-fk_cargo INT,
-fecha_de_ingreso DATE,
-N_Reg_General INT,
-fk_estado INT,
-N_Reg_Cia INT,
-FOREIGN KEY (fk_region) REFERENCES region (id),
-FOREIGN KEY (fk_cargo) REFERENCEs cargo (id),
-FOREIGN KEY (fk_estado) REFERENCEs estado (id),
-PRIMARY KEY (id)
+DROP TABLE tbl_cargo;
+CREATE TABLE tbl_cargo (
+id_cargo INT AUTO_INCREMENT,
+nombre_cargo VARCHAR (5000),
+PRIMARY KEY (id_cargo)
 );
 
+INSERT INTO tbl_cargo (nombre_cargo) VALUES
+('Superintendente'),
+('Vice Superintendente'),
+('Comandante Primero'),
+('Comandante Segundo'),
+('Tesorero General'),
+('Secretario General')
+;
 
-CREATE TABLE informacionLaboral (
-id INT AUTO_INCREMENT,
-nombre_de_empresa TEXT,
-direccion_de_empresa TEXT,
-telefono_de_empresa TEXT,
-cargo_en_la_empresa TEXT,
-fecha_de_ingreso_a_la_empresa DATE,
-area_o_departamento_en_la_empresa TEXT,
-afp TEXT,
-profesion TEXT,
-PRIMARY KEY (id)
+CREATE TABLE tbl_compania (
+id_compania INT AUTO_INCREMENT,
+nombre_compania VARCHAR (5000),
+PRIMARY KEY (id_compania)
 );
 
-
-CREATE TABLE grupo_sanguineo (
-id INT AUTO_INCREMENT,
-nombre VARCHAR (30), 
-factorRHPositivo BOOLEAN,
-PRIMARY KEY (id)
-);
-
-INSERT INTO grupo_sanguineo VALUES (NULL,'A',0);
-INSERT INTO grupo_sanguineo VALUES (NULL,'B',0);
-INSERT INTO grupo_sanguineo VALUES (NULL,'AB',0);
-INSERT INTO grupo_sanguineo VALUES (NULL,'0',0);
-INSERT INTO grupo_sanguineo VALUES (NULL,'A',1);
-INSERT INTO grupo_sanguineo VALUES (NULL,'B',1);
-INSERT INTO grupo_sanguineo VALUES (NULL,'AB',1);
-INSERT INTO grupo_sanguineo VALUES (NULL,'0',1);
-
-CREATE TABLE enfermedad_cronica (
-id INT AUTO_INCREMENT,
-nombre TEXT (300),
-PRIMARY KEY (id)
-);
-
-INSERT INTO enfermedad_cronica VALUES (NULL, 'Alergia');
-INSERT INTO enfermedad_cronica VALUES (NULL, 'Algo');
+INSERT INTO tbl_compania (nombre_compania) VALUES 
+('Primera'),
+('Segunda'),
+('Tercera')
+;
 
 
-
-CREATE TABLE nivel_de_actividad_fisica (
-id INT AUTO_INCREMENT,
-nombre VARCHAR (300),
-PRIMARY KEY (id)
-);
-
-INSERT INTO nivel_de_actividad_fisica VALUES (NULL, 'Alto');
-INSERT INTO nivel_de_actividad_fisica VALUES (NULL, 'Medio');
-INSERT INTO nivel_de_actividad_fisica VALUES (NULL, 'Bajo');
-INSERT INTO nivel_de_actividad_fisica VALUES (NULL, 'Nulo');
-
-
-CREATE TABLE informacionMedica (
-id INT AUTO_INCREMENT,
-prestacionMedica VARCHAR (5000),
-medicamentos_habituales VARCHAR (5000),
-nombre_de_contacto VARCHAR (5000),
-telefono_de_contacto VARCHAR (5000),
-parentesco_del_contacto VARCHAR (5000),
-fk_nivel_de_actividad_fisica INT,
-es_donante BOOLEAN,
-es_fumador BOOLEAN,
-fk_grupo_sanguineo INT,
-FOREIGN KEY (fk_nivel_de_actividad_fisica) REFERENCES nivel_de_actividad_fisica (id),
-FOREIGN KEY (fk_grupo_sanguineo) REFERENCES grupo_sanguineo (id),
-PRIMARY KEY (id)
-);
-
-INSERT INTO informacionMedica VALUES (NULL, 'assdsadad','asdasd','asdasdas','asdasdasd','asasasd',1,1,0,1);
-
-
-CREATE TABLE enfermedad_cronica_informacionMedica (
-id INT AUTO_INCREMENT,
-fk_enfermedad_cronica INT,
-fk_informacionMedica INT,
-FOREIGN KEY (fk_enfermedad_cronica) REFERENCES enfermedad_cronica (id),
-FOREIGN KEY (fk_informacionMedica) REFERENCES informacionMedica (id),
-PRIMARY KEY (id)
-);
-
-INSERT INTO enfermedad_cronica_informacionMedica VALUES (NULL,1,1);
-INSERT INTO enfermedad_cronica_informacionMedica VALUES (NULL,2,1);
-
-
-
-CREATE TABLE informacionFamiliar (
-id INT AUTO_INCREMENT,
-nombres VARCHAR (5000),
-fecha_de_nacimiento DATE,
-parentesco VARCHAR (5000),
-fk_informacionPersonal INT,
-FOREIGN KEY (fk_informacionPersonal) REFERENCES informacionPersonal (id),
-PRIMARY KEY(id)
+CREATE TABLE tbl_informacionBomberil (
+id_informacionBomberil INT AUTO_INCREMENT,
+fk_region_informacionBomberil INT,
+cuerpo_informacionBomberil VARCHAR (20000),
+fk_compania_informacionBomberil INT,
+fk_cargo_informacionBomberil INT,
+fecha_de_ingreso_informacionBomberil DATE,
+N_Reg_General_informacionBomberil INT,
+fk_estado_informacionBomberil INT,
+N_Reg_Cia_informacionBomberil INT,
+FOREIGN KEY (fk_region_informacionBomberil) REFERENCES tbl_region (id_region),
+FOREIGN KEY (fk_cargo_informacionBomberil) REFERENCEs tbl_cargo (id_cargo),
+FOREIGN KEY (fk_estado_informacionBomberil) REFERENCEs tbl_estado (id_estado),
+FOREIGN KEY (fk_compania_informacionBomberil) REFERENCEs tbl_compania (id_compania),
+PRIMARY KEY (id_informacionBomberil)
 );
 
 
-CREATE TABLE informacionAcademica(
-id INT AUTO_INCREMENT,
-fecha DATE,
-actividad VARCHAR (300),
-aprobado BOOLEAN,
-fk_informacionPersonal INT,
-FOREIGN KEY (fk_informacionPersonal) REFERENCES informacionPersonal (id), 
-PRIMARY KEY (id)
-);
-
-CREATE TABLE entrenamientoEstandar(
-id INT AUTO_INCREMENT,
-fecha DATE,
-actividad VARCHAR (300),
-aprobado BOOLEAN,
-fk_informacionPersonal INT,
-FOREIGN KEY (fk_informacionPersonal) REFERENCES informacionPersonal (id), 
-PRIMARY KEY (id)
+CREATE TABLE tbl_informacionLaboral (
+id_informacionLaboral INT AUTO_INCREMENT,
+nombre_de_empresa_informacionLaboral VARCHAR (5000),
+direccion_de_empresa_informacionLaboral VARCHAR (5000),
+telefono_de_empresa_informacionLaboral VARCHAR (5000),
+cargo_en_la_empresa_informacionLaboral VARCHAR (5000),
+fecha_de_ingreso_a_la_empresa_informacionLaboral DATE,
+area_o_departamento_en_la_empresa_informacionLaboral VARCHAR (5000),
+afp_informacionLaboral VARCHAR (5000),
+profesion_informacionLaboral VARCHAR (5000),
+PRIMARY KEY (id_informacionLaboral)
 );
 
 
--- estas 2 tablas podrian variar dependiendo de la naturaleza de los campos, y estan pendientes
+CREATE TABLE tbl_grupo_sanguineo (
+id_grupo_sanguineo INT AUTO_INCREMENT,
+nombre_grupo_sanguineo VARCHAR (30), 
+factorRHPositivo_grupo_sanguineo BOOLEAN,
+PRIMARY KEY (id_grupo_sanguineo)
+);
 
-CREATE TABLE informacionHistorica(
-id INT AUTO_INCREMENT,
-fk_region INT,
-fk_comuna INT,
-compania VARCHAR (20000),
+INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'A',0);
+INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'B',0);
+INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'AB',0);
+INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'0',0);
+INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'A',1);
+INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'B',1);
+INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'AB',1);
+INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'0',1);
+
+CREATE TABLE tbl_parentesco (
+id_parentesco INT AUTO_INCREMENT,
+nombre_parentesco VARCHAR (5000),
+PRIMARY KEY(id_parentesco)
+);
+
+INSERT INTO tbl_parentesco VALUES (NULL, 'Padre');
+INSERT INTO tbl_parentesco VALUES (NULL, 'Madre');
+INSERT INTO tbl_parentesco VALUES (NULL, 'Hijo');
+INSERT INTO tbl_parentesco VALUES (NULL, 'Hija');
+INSERT INTO tbl_parentesco VALUES (NULL, 'Abuelo');
+INSERT INTO tbl_parentesco VALUES (NULL, 'Abuela');
+INSERT INTO tbl_parentesco VALUES (NULL, 'Hermano');
+INSERT INTO tbl_parentesco VALUES (NULL, 'Hermana');
+INSERT INTO tbl_parentesco VALUES (NULL, 'Primo');
+INSERT INTO tbl_parentesco VALUES (NULL, 'Prima');
+INSERT INTO tbl_parentesco VALUES (NULL, 'Tío');
+INSERT INTO tbl_parentesco VALUES (NULL, 'Tía');
+
+-- informacion medica es la tabla que hay que partir en 2
+CREATE TABLE tbl_informacionMedica (
+id_informacionMedica INT AUTO_INCREMENT,
+prestacionMedica_informacionMedica VARCHAR (5000),
+alergias_informacionMedica VARCHAR (5000),
+enfermedades_croncias_informacionMedica VARCHAR (5000),
+medicamentos_habituales_informacionMedica VARCHAR (5000),
+nombre_de_contacto_informacionMedica VARCHAR (5000),
+telefono_de_contacto_informacionMedica VARCHAR (5000),
+fk_parentesco_del_contacto_informacionMedica INT,
+nivel_de_actividad_fisica_informacionMedica VARCHAR (5000),
+es_donante_informacionMedica BOOLEAN,
+es_fumador_informacionMedica BOOLEAN,
+fk_grupo_sanguineo_informacionMedica INT,
+FOREIGN KEY (fk_grupo_sanguineo_informacionMedica) REFERENCES tbl_grupo_sanguineo (id_grupo_sanguineo),
+FOREIGN KEY (fk_parentesco_del_contacto_informacionMedica) REFERENCES tbl_parentesco (id_parentesco),
+PRIMARY KEY (id_informacionMedica)
+);
+
+
+
+CREATE TABLE tbl_informacionFamiliar (
+id_informacionFamiliar INT AUTO_INCREMENT,
+nombres_informacionFamiliar VARCHAR (5000),
+fecha_de_nacimiento_informacionFamiliar DATE,
+fk_parentesco_informacionFamiliar INT,
+fk_informacionPersonal_informacionFamiliar INT,
+FOREIGN KEY (fk_informacionPersonal_informacionFamiliar) REFERENCES tbl_informacionPersonal (id_informacionPersonal),
+FOREIGN KEY (fk_parentesco_informacionFamiliar) REFERENCES tbl_informacionPersonal (id_informacionPersonal),
+PRIMARY KEY(id_informacionFamiliar)
+);
+
+
+CREATE TABLE tbl_estado_curso(
+id_estado_curso INT AUTO_INCREMENT,
+nombre_estado_curso VARCHAR (5000),
+PRIMARY KEY(id_estado_curso)
+);
+
+INSERT INTO tbl_estado_curso VALUES (NULL, 'Aprobado');
+INSERT INTO tbl_estado_curso VALUES (NULL, 'Rechazado');
+INSERT INTO tbl_estado_curso VALUES (NULL, 'En curso');
+INSERT INTO tbl_estado_curso VALUES (NULL, 'Congelado');
+
+
+CREATE TABLE tbl_informacionAcademica(
+id_informacionAcademica INT AUTO_INCREMENT,
+fecha_informacionAcademica DATE,
+actividad_informacionAcademica VARCHAR (300),
+fk_estado_curso_informacionAcademica INT,
+fk_informacionPersonal_informacionAcademica INT,
+FOREIGN KEY (fk_informacionPersonal_informacionAcademica) REFERENCES tbl_informacionPersonal (id_informacionPersonal), 
+FOREIGN KEY (fk_estado_curso_informacionAcademica) REFERENCES tbl_estado_curso (id_estado_curso), 
+PRIMARY KEY (id_informacionAcademica)
+);
+
+CREATE TABLE tbl_entrenamientoEstandar(
+id_entrenamientoEstandar INT AUTO_INCREMENT,
+fecha_entrenamientoEstandar DATE,
+actividad_entrenamientoEstandar VARCHAR (300),
+fk_estado_curso_entrenamientoEstandar INT,
+fk_informacionPersonal_entrenamientoEstandar INT,
+FOREIGN KEY (fk_informacionPersonal_entrenamientoEstandar) REFERENCES tbl_informacionPersonal (id_informacionPersonal), 
+FOREIGN KEY (fk_estado_curso_entrenamientoEstandar) REFERENCES tbl_estado_curso (id_estado_curso), 
+PRIMARY KEY (id_entrenamientoEstandar)
+);
+
+
+
+CREATE TABLE tbl_informacionHistorica(
+id_informacionHistorica INT AUTO_INCREMENT,
+fk_region_informacionHistorica INT,
+cuerpo VARCHAR (5000),
+compania VARCHAR (5000),
 fechaDeCambio DATE,
 tipoDeCambio VARCHAR (20000),
-motivo TEXT (200),
+motivo TEXT (2000),
 detalle VARCHAR (20000),
-fk_informacionPersonal INT,
-FOREIGN KEY (fk_informacionPersonal) REFERENCES informacionPersonal (id), 
-FOREIGN KEY (fk_region) REFERENCES region (id), 
-FOREIGN KEY (fk_comuna) REFERENCES comuna (id), 
-PRIMARY KEY (id)
-);
-
-CREATE TABLE mes (
-id INT AUTO_INCREMENT,
-nombre VARCHAR (50),
-PRIMARY KEY (id)
-);
-
-INSERT INTO mes VALUES (NULL, 'Enero');
-INSERT INTO mes VALUES (NULL, 'Febrero');
-INSERT INTO mes VALUES (NULL, 'Marzo');
-INSERT INTO mes VALUES (NULL, 'Abril');
-INSERT INTO mes VALUES (NULL, 'Mayo');
-INSERT INTO mes VALUES (NULL, 'Junio');
-INSERT INTO mes VALUES (NULL, 'Julio');
-INSERT INTO mes VALUES (NULL, 'Agosto');
-INSERT INTO mes VALUES (NULL, 'Septiembre');
-INSERT INTO mes VALUES (NULL, 'Octubre');
-INSERT INTO mes VALUES (NULL, 'Noviembre');
-INSERT INTO mes VALUES (NULL, 'Diciembre');
-
-CREATE TABLE asistenciaActosDeServicio(
-id INT AUTO_INCREMENT,
-fk_comuna INT,
-anioAsistencia DATE,
-fk_mes INT,
-cantidadMensual INT,
-fk_informacionPersonal INT,
-FOREIGN KEY (fk_comuna) REFERENCES comuna (id), 
-FOREIGN KEY (fk_mes) REFERENCES mes (id), 
-FOREIGN KEY (fk_informacionPersonal) REFERENCES informacionPersonal (id), 
-PRIMARY KEY (id)
+fk_informacionPersonal_informacionHistorica INT,
+FOREIGN KEY (fk_informacionPersonal_informacionHistorica) REFERENCES tbl_informacionPersonal (id_informacionPersonal), 
+FOREIGN KEY (fk_region_informacionHistorica) REFERENCES tbl_region (id_region), 
+PRIMARY KEY (id_informacionHistorica)
 );
 
 
-CREATE TABLE fichaBombero (
-id INT AUTO_INCREMENT,
-fk_informacionPersonal INT,
-fk_informacionBomberil INT,
-fk_informacionLaboral INT,
-fk_informacionMedica INT,
-FOREIGN KEY (fk_informacionPersonal) REFERENCES informacionPersonal (id),
-FOREIGN KEY (fk_informacionBomberil) REFERENCES informacionBomberil (id),
-FOREIGN KEY (fk_informacionLaboral) REFERENCES informacionLaboral (id),
-FOREIGN KEY (fk_informacionMedica) REFERENCES informacionMedica (id),
-PRIMARY KEY (id)
-);
+
+
+
 
 
 
 /*
-Crear usuario funciona, pero necesito que el usuario se cree con en el rut y contrasenia especificados
-*/
-
 DELIMITER //
 CREATE PROCEDURE crearUsuario () -- DROP PROCEDURE crearUsuario
-
 MODIFIES SQL DATA
 BEGIN
-
 DECLARE nombreUsuario VARCHAR(12);
 DECLARE idMasAlto INT;
-
 DECLARE pass VARCHAR (12);
-
 START TRANSACTION;
-
 SELECT MAX(id) INTO @idMasAlto FROM informacionPersonal;
 SELECT rut INTO @nombreUsuario FROM informacionPersonal WHERE id= @idMasAlto;
-
 SET pass='123';
-
 SET @query1 = CONCAT("
         CREATE USER  ",@nombreUsuario,"@localhost IDENTIFIED BY ",@pass,"" 
         );
 PREPARE stmt FROM @query1; EXECUTE stmt; DEALLOCATE PREPARE stmt;
-
-
-
 SET @query1 = CONCAT("
     GRANT SELECT ON bomberosPrimeraIteracion.* TO ",@nombreUsuario,"@localhost" 
         );
 PREPARE stmt FROM @query1; EXECUTE stmt; DEALLOCATE PREPARE stmt;
-
-
-COMMIT;
-
-END //
-DELIMITER ;
-
-
-
-
-
-
-/*
-CREATE USER huehue@localhost IDENTIFIED BY '123';
-DROP USER 'exporter'@'localhost';
-*/
-
-
-/*
-DELIMITER // 
-CREATE TRIGGER creacionAutomaticaDeUsuario AFTER INSERT ON informacionPersonal
-FOR EACH ROW
-BEGIN
-START TRANSACTION;
-CALL crearUsuario();
 COMMIT;
 END //
 DELIMITER ;
@@ -803,8 +759,13 @@ DELIMITER ;
 
 
 
+
+
+
+
+
+
 /*
-CALL crearUsuario;
 select * from mysql.user;
 SELECT * FROM usuario;
 SELECT * FROM informacionPersonal;
@@ -844,7 +805,7 @@ PREPARE smtpCreateUser FROM @createUser;
 EXECUTE smtpCreateUser;
 
 
-DROP DATABASE bomberosPrimeraIteracion;
+DROP DATABASE bomberosBD;
 
 
 */
