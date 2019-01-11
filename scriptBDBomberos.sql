@@ -1,6 +1,7 @@
 CREATE DATABASE bomberosBD;
 
 USE bomberosBD;
+SET lc_time_names = 'es_CL';
 
 CREATE TABLE tbl_usuario(
 id_usuario INT AUTO_INCREMENT,
@@ -37,7 +38,7 @@ INSERT INTO tbl_genero VALUES (NULL, 'Femenino');
 
 
 CREATE TABLE tbl_medida (
-id_medida INT,
+id_medida INT AUTO_INCREMENT,
 talla_de_chaqueta_camisa_medida VARCHAR (5000),
 talla_de_pantalon_medida VARCHAR (5000),
 talla_de_buzo_medida VARCHAR (5000),
@@ -45,6 +46,7 @@ talla_de_calzado_medida VARCHAR (5000),
 PRIMARY KEY(id_medida)
 );
 
+INSERT INTO tbl_medida VALUES (NULL,'XX','L','S','44' );
 
 
 CREATE TABLE tbl_informacionPersonal(
@@ -70,6 +72,11 @@ FOREIGN KEY (fk_medida_informacionPersonal) REFERENCES tbl_medida (id_medida),
 FOREIGN KEY (fk_genero_informacionPersonal) REFERENCES tbl_genero (id_genero),
 PRIMARY KEY (id_informacionPersonal)
 );
+-- Parece que hay que saber hacer los insert enn formato yyyy/mm/dd
+INSERT INTO tbl_informacionPersonal VALUES (NULL, '20898088-2','Marcelo', 'Aranda', 'Tatto','1991-12-16',1,1,'1,70','80,2','cheloz_20@hotmail.com',
+1,'123123123123','958677107','Carretera El Cobre','No sabe', 'Creo que no');
+
+-- SELECT * FROM tbl_informacionPersonal;
 
 
 CREATE TABLE tbl_region (
@@ -584,6 +591,8 @@ fecha_de_ingreso_informacionBomberil DATE,
 N_Reg_General_informacionBomberil INT,
 fk_estado_informacionBomberil INT,
 N_Reg_Cia_informacionBomberil INT,
+fk_informacion_personal__informacionBomberil INT,
+FOREIGN KEY (fk_informacion_personal__informacionBomberil) REFERENCES tbl_informacionPersonal (id_informacionPersonal),
 FOREIGN KEY (fk_region_informacionBomberil) REFERENCES tbl_region (id_region),
 FOREIGN KEY (fk_cargo_informacionBomberil) REFERENCEs tbl_cargo (id_cargo),
 FOREIGN KEY (fk_estado_informacionBomberil) REFERENCEs tbl_estado (id_estado),
@@ -602,6 +611,8 @@ fecha_de_ingreso_a_la_empresa_informacionLaboral DATE,
 area_o_departamento_en_la_empresa_informacionLaboral VARCHAR (5000),
 afp_informacionLaboral VARCHAR (5000),
 profesion_informacionLaboral VARCHAR (5000),
+fk_informacion_personal_informacionLaboral INT,
+FOREIGN KEY (fk_informacion_personal_informacionLaboral) REFERENCES tbl_informacionPersonal (id_informacionPersonal),
 PRIMARY KEY (id_informacionLaboral)
 );
 
@@ -642,22 +653,33 @@ INSERT INTO tbl_parentesco VALUES (NULL, 'Tío');
 INSERT INTO tbl_parentesco VALUES (NULL, 'Tía');
 
 -- informacion medica es la tabla que hay que partir en 2
-CREATE TABLE tbl_informacionMedica (
-id_informacionMedica INT AUTO_INCREMENT,
-prestacionMedica_informacionMedica VARCHAR (5000),
-alergias_informacionMedica VARCHAR (5000),
-enfermedades_croncias_informacionMedica VARCHAR (5000),
-medicamentos_habituales_informacionMedica VARCHAR (5000),
-nombre_de_contacto_informacionMedica VARCHAR (5000),
-telefono_de_contacto_informacionMedica VARCHAR (5000),
-fk_parentesco_del_contacto_informacionMedica INT,
-nivel_de_actividad_fisica_informacionMedica VARCHAR (5000),
-es_donante_informacionMedica BOOLEAN,
-es_fumador_informacionMedica BOOLEAN,
-fk_grupo_sanguineo_informacionMedica INT,
-FOREIGN KEY (fk_grupo_sanguineo_informacionMedica) REFERENCES tbl_grupo_sanguineo (id_grupo_sanguineo),
-FOREIGN KEY (fk_parentesco_del_contacto_informacionMedica) REFERENCES tbl_parentesco (id_parentesco),
-PRIMARY KEY (id_informacionMedica)
+CREATE TABLE tbl_informacionMedica1 (
+id_informacionMedica1 INT AUTO_INCREMENT,
+prestacionMedica_informacionMedica1 VARCHAR (5000),
+alergias_informacionMedica1 VARCHAR (5000),
+enfermedades_croncias_informacionMedica1 VARCHAR (5000),
+fk_informacion_personal_informacionMedica1 INT,
+FOREIGN KEY (fk_informacion_personal_informacionMedica1) REFERENCES tbl_informacionPersonal (id_informacionPersonal),
+PRIMARY KEY (id_informacionMedica1)
+);
+
+
+CREATE TABLE tbl_informacionMedica2 (
+id_informacionMedica2 INT,
+medicamentos_habituales_informacionMedica2 VARCHAR (5000),
+nombre_de_contacto_informacionMedica2 VARCHAR (5000),
+telefono_de_contacto_informacionMedica2 VARCHAR (5000),
+fk_parentesco_del_contacto_informacionMedica2 INT,
+nivel_de_actividad_fisica_informacionMedica2 VARCHAR (5000),
+es_donante_informacionMedica2 BOOLEAN,
+es_fumador_informacionMedica2 BOOLEAN,
+fk_grupo_sanguineo_informacionMedica2 INT,
+fk_informacion_personal_informacionMedica2 INT,
+FOREIGN KEY (fk_informacion_personal_informacionMedica2) REFERENCES tbl_informacionPersonal (id_informacionPersonal),
+FOREIGN KEY (fk_parentesco_del_contacto_informacionMedica2) REFERENCES tbl_parentesco (id_parentesco),
+FOREIGN KEY (fk_grupo_sanguineo_informacionMedica2) REFERENCES tbl_grupo_sanguineo (id_grupo_sanguineo),
+PRIMARY KEY (id_informacionMedica2)
+
 );
 
 
@@ -788,11 +810,6 @@ SELECT *, DATE_FORMAT(fecha_de_nacimiento,'%d/%m/%Y') AS niceDate
 FROM informacionPersonal 
 ORDER BY fecha_de_nacimiento DESC
 LIMIT 0,14;
-
-
-
-INSERT INTO informacionPersonal VALUES (NULL,'38895588-2', 'Marcelo Andres', 'dfgkhjfdghjkskdhjhjsdfhjksdfhjksdfg','dfgdfgfdghhfhjkdfhjdfghkfdhjkfghjkf',
-'1991-03-07',1,'ddsdf','sdasdasd','asasdasd','assdasdasdasd',0.39, 1.34,'asdsaddasasdsa',1,'sadadasd','asdadsd','asdadadasasd',2,0 );
 
 
 SET @exporter = 'yolo';
