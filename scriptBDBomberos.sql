@@ -51,6 +51,7 @@ nombre_tipo_usuario VARCHAR (2000),
 PRIMARY KEY (id_tipo_usuario)
 );
 
+
 INSERT INTO tbl_tipo_usuario VALUES (NULL,'Administrador');
 INSERT INTO tbl_tipo_usuario VALUES (NULL,'Secretaria');
 INSERT INTO tbl_tipo_usuario VALUES (NULL,'Superintendente');
@@ -767,6 +768,8 @@ PRIMARY KEY (id_informacionMedica1)
 );
 
 
+
+
 CREATE TABLE tbl_informacionMedica2 (
 id_informacionMedica2 INT,
 medicamentos_habituales_informacionMedica2 VARCHAR (5000),
@@ -782,7 +785,6 @@ FOREIGN KEY (fk_informacion_personal_informacionMedica2) REFERENCES tbl_informac
 FOREIGN KEY (fk_parentesco_del_contacto_informacionMedica2) REFERENCES tbl_parentesco (id_parentesco),
 FOREIGN KEY (fk_grupo_sanguineo_informacionMedica2) REFERENCES tbl_grupo_sanguineo (id_grupo_sanguineo),
 PRIMARY KEY (id_informacionMedica2)
-
 );
 
 
@@ -797,6 +799,7 @@ FOREIGN KEY (fk_informacionPersonal_informacionFamiliar) REFERENCES tbl_informac
 FOREIGN KEY (fk_parentesco_informacionFamiliar) REFERENCES tbl_informacionPersonal (id_informacionPersonal),
 PRIMARY KEY(id_informacionFamiliar)
 );
+
 
 
 CREATE TABLE tbl_estado_curso(
@@ -822,6 +825,9 @@ FOREIGN KEY (fk_estado_curso_informacionAcademica) REFERENCES tbl_estado_curso (
 PRIMARY KEY (id_informacionAcademica)
 );
 
+
+
+
 CREATE TABLE tbl_entrenamientoEstandar(
 id_entrenamientoEstandar INT AUTO_INCREMENT,
 fecha_entrenamientoEstandar DATE,
@@ -832,6 +838,7 @@ FOREIGN KEY (fk_informacionPersonal_entrenamientoEstandar) REFERENCES tbl_inform
 FOREIGN KEY (fk_estado_curso_entrenamientoEstandar) REFERENCES tbl_estado_curso (id_estado_curso), 
 PRIMARY KEY (id_entrenamientoEstandar)
 );
+
 
 
 
@@ -885,8 +892,78 @@ END//
 DELIMITER ;
 
 
+DELIMITER //
+CREATE PROCEDURE crearInformacionBomberil (nombreEmpresa VARCHAR (5000), direccionEmpresa VARCHAR (5000), telefonoEmpresa VARCHAR (5000), cargoEmpresa VARCHAR (5000),
+fechaDeIngresoALaEmpresa DATE, dptoEnEmpresa VARCHAR (5000), afp VARCHAR (5000), profesion VARCHAR (5000), fkInfoPersonal INT)
+BEGIN
+INSERT INTO tbl_informacionBomberil VALUES (NULL, nombreEmpresa, direccionEmpresa, telefonoEmpresa, cargoEmpresa, fechaDeIngresoALaEmpresa,
+dptoEnEmpresa, afp, profesion,fkInfoPersonal);
+END//
+DELIMITER ;
 
 
+DELIMITER //
+CREATE PROCEDURE crearInformacionMedica1 (prestacionMedica VARCHAR (5000), alergias VARCHAR (5000), enfermedadesCronicas VARCHAR (5000), fkInfoPersonal INT)
+BEGIN
+INSERT INTO tbl_informacionMedica1 VALUES (prestacionMedica, alergias, enfermedadesCronicas, fkInfoPersonal );
+END//
+DELIMITER ;
+
+
+DELIMITER //
+CREATE PROCEDURE crearInformacionMedica2 (medicamentos_habituales VARCHAR (5000), nombre_de_contacto VARCHAR (5000), telefono_de_contacto VARCHAR (5000), fkParentesco INT,
+nivel_de_actividad_fisica VARCHAR (5000), es_donante BOOLEAN, es_fumador BOOLEAN, fk_grupoSanguineo INT, fk_inforPersonal INT)
+BEGIN
+INSERT INTO tbl_informacionMedica2 VALUES (medicamentos_habituales, nombre_de_contacto, telefono_de_contacto, fkParentesco, nivel_de_actividad_fisica, es_donante,
+ es_fumador, fk_grupoSanguineo, fk_inforPersonal );
+END//
+DELIMITER ;
+
+
+DELIMITER //
+CREATE PROCEDURE crearInformacionFamiliar (nombresInfoFlia VARCHAR (5000), fechaDeNacimientoInfoFlia DATE, fk_parentesco INT , fk_inforPersonal INT)
+BEGIN
+INSERT INTO tbl_informacionFamiliar VALUES (nombresInfoFlia , fechaDeNacimientoInfoFlia , fk_parentesco  , fk_inforPersonal  );
+END//
+DELIMITER ;
+
+
+DELIMITER //
+CREATE PROCEDURE crearInformacionAcademica (fechaInfoAcademica DATE, actividadInfoAcademica INT , fk_estadoCurso INT, fk_inforPersonal INT)
+BEGIN
+INSERT INTO tbl_informacionAcademica VALUES (fechaInfoAcademica, actividadInfoAcademica , fk_estadoCurso, fk_inforPersonal);
+END//
+DELIMITER ;
+
+
+DELIMITER //
+CREATE PROCEDURE crearInformacionEntrenamientoEstandar (fechaInfoEntrenamientoEstandar DATE, actividadEntrenamientoEstandar INT , fk_estadoCurso INT, fk_inforPersonal INT)
+BEGIN
+INSERT INTO tbl_entrenamientoEstandar VALUES (fechaInfoEntrenamientoEstandar , actividadEntrenamientoEstandar  , fk_estadoCurso , fk_inforPersonal );
+END//
+DELIMITER ;
+
+
+DELIMITER //
+CREATE PROCEDURE crearInformacionHistorica (fkRegion INT, cuerpo VARCHAR (5000) , compania VARCHAR (5000), fechaDeCambio DATE, tipoDeCambio VARCHAR (20000),
+motivo TEXT (20000), detalle VARCHAR (20000))
+BEGIN
+INSERT INTO tbl_informacionHistorica VALUES (fkRegion , cuerpo  , compania , fechaDeCambio , tipoDeCambio,
+motivo,  detalle );
+END//
+DELIMITER ;
+
+
+
+
+
+DELIMITER // 
+CREATE PROCEDURE crearUsuario (nombre VARCHAR (2000), contrasenia VARCHAR (2000), tipo_usuario INT )
+BEGIN
+INSERT INTO tbl_usuario VALUES (NULL,nombre, tipo_usuario, contrasenia);
+
+END// 
+DELIMITER ;
 
 CALL crearMedidas ('XX','SS','42','41');
 
@@ -894,6 +971,8 @@ CALL crearBombero ('20898088-2','Marcelo', 'Aranda', 'Tatto','1991-12-16',1,'1,7
 1,'123123123123','958677107','Carretera El Cobre','No sabe', 'Creo que no');
 
 CALL crearFichaInformacionBomberil(1,'Machali',1,1,'2001-12-16',1,1,1,1);
+
+CALL crearUsuario ('Marcelo','123',1);
 
 
 /*
