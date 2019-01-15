@@ -3,121 +3,14 @@ CREATE DATABASE bomberosBD;
 USE bomberosBD;
 SET lc_time_names = 'es_CL';
 
-CREATE TABLE tbl_permiso (
-id_permiso INT AUTO_INCREMENT,
-nombre_permiso VARCHAR (5000),
-PRIMARY KEY (id_permiso)
-);
-
-
-INSERT INTO tbl_permiso (nombre_permiso) VALUES 
-('Ficha Bomberos - Buscar Bomberos'),
-('Ficha Bomberos - Crear Bombero'),
-('Ficha Bomberos - Modificar'),
-('Ficha Bomberos - Eliminar'),
-('Ficha Bomberos - Ver Ficha Bomberos'),
-('Ficha Bomberos - Generar reporte'),
-
-('Ficha Unidades - Buscar Unidades'),
-('Ficha Unidades - Crear Unidades'),
-('Ficha Unidades - Modificar'),
-('Ficha Unidades - Eliminar'),
-('Ficha Unidades - Ver Ficha Unidades'),
-('Ficha Unidades - Generar reporte'),
-
-('Inventario - Buscar Material'),
-('Inventario - Crear Material'),
-('Inventario - Modificar'),
-('Inventario - Eliminar'),
-('Inventario - Ver Ficha Materiales'),
-('Inventario - Generar reporte'),
-
-('Central de Alarma - Central de Despacho'),
-('Central de Alarma - Disponibilidad de Unidades'),
-('Central de Alarma - Disponibilidad de Oficiales'),
-('Central de Alarma - Disponibilidad de Bomberos'),
-('Central de Alarma - Generar reporte'),
-
-('Usuarios - Crear Usuario'),
-('Usuarios - Perfiles'),
-('Usuarios - Restablecer Password'),
-('Usuarios - Modificar Usuarios');
-
-
-
-CREATE TABLE tbl_tipo_usuario(
-id_tipo_usuario INT AUTO_INCREMENT,
-nombre_tipo_usuario VARCHAR (2000),
-PRIMARY KEY (id_tipo_usuario)
-);
-
-
-INSERT INTO tbl_tipo_usuario VALUES (NULL,'Administrador');
-INSERT INTO tbl_tipo_usuario VALUES (NULL,'Secretaria');
-INSERT INTO tbl_tipo_usuario VALUES (NULL,'Superintendente');
-INSERT INTO tbl_tipo_usuario VALUES (NULL,'Comandante');
-INSERT INTO tbl_tipo_usuario VALUES (NULL,'Director');
-INSERT INTO tbl_tipo_usuario VALUES (NULL,'Capitan');
-INSERT INTO tbl_tipo_usuario VALUES (NULL,'Secretario');
-INSERT INTO tbl_tipo_usuario VALUES (NULL,'Ayudante');
-INSERT INTO tbl_tipo_usuario VALUES (NULL,'Central de Alarma');
-INSERT INTO tbl_tipo_usuario VALUES (NULL,'Ayudante General');
-INSERT INTO tbl_tipo_usuario VALUES (NULL,'Ayudante Maquinista');
-INSERT INTO tbl_tipo_usuario VALUES (NULL,'Secretario General');
-
-CREATE TABLE tbl_tipo_usuario_permisos (
-id_tipo_usuario_permisos INT AUTO_INCREMENT,
-fk_tipo_usuario_tipo_usuario_permisos INT,
-fk_permiso_tipo_usuario_permisos INT,
-otorgado_tipo_usuario_permisos BOOLEAN,
-FOREIGN KEY (fk_tipo_usuario_tipo_usuario_permisos) REFERENCES tbl_tipo_usuario (id_tipo_usuario),
-FOREIGN KEY (fk_permiso_tipo_usuario_permisos) REFERENCES tbl_permiso (id_permiso),
-PRIMARY KEY (id_tipo_usuario_permisos)
-);
-
-
-INSERT INTO tbl_tipo_usuario_permisos (fk_tipo_usuario_tipo_usuario_permisos,fk_permiso_tipo_usuario_permisos,otorgado_tipo_usuario_permisos) VALUES 
-(1,1,1),(1,2,1),(1,3,1),(1,4,1),(1,5,1),(1,6,1),(1,7,1),(1,8,1),(1,9,1),(1,10,1),(1,11,1),(1,12,1),(1,13,1),(1,14,1),(1,15,1),(1,16,1),(1,17,1),(1,18,1),(1,19,1),(1,20,1),(1,21,1),(1,22,1),(1,23,1),(1,24,1),(1,25,1),(1,26,1),(1,27,1),
-
-(2,1,1),(2,2,1),(2,3,1),(2,4,1),(2,5,1),(2,6,1),(2,7,1),(2,8,1),(2,9,1),(2,10,1),(2,11,1),(2,12,1),(2,13,1),(2,14,1),(2,15,1),(2,16,1),(2,17,1),(2,18,1),(2,19,0),(2,20,0),(2,21,0),(2,22,0),(2,23,0),(2,24,0),(2,25,0),(2,26,0),(2,27,0),
-
-(3,1,1),(3,2,1),(3,3,1),(3,4,1),(3,5,1),(3,6,1),(3,7,1),(3,8,1),(3,9,1),(3,10,1),(3,11,1),(3,12,1),(3,13,1),(3,14,1),(3,15,1),(3,16,1),(3,17,1),(3,18,1),(3,19,0),(3,20,0),(3,21,0),(3,22,0),(3,23,1),(3,24,0),(3,25,0),(3,26,0),(3,27,0),
-
-(4,1,1),(4,2,0),(4,3,0),(4,4,0),(4,5,1),(4,6,1),(4,7,1),(4,8,1),(4,9,1),(4,10,1),(4,11,1),(4,12,1),(4,13,1),(4,14,1),(4,15,1),(4,16,1),(4,17,1),(4,18,1),(4,19,0),(4,20,1),(4,21,1),(4,22,1),(4,23,1),(4,24,0),(4,25,0),(4,26,0),(4,27,0),
-
-(5,1,1),(5,2,1),(5,3,1),(5,4,1),(5,5,1),(5,6,1),(5,7,1),(5,8,0),(5,9,0),(5,10,0),(5,11,1),(5,12,1),(5,13,0),(5,14,0),(5,15,0),(5,16,0),(5,17,0),(5,18,0),(5,19,0),(5,20,1),(5,21,1),(5,22,1),(5,23,1),(5,24,0),(5,25,0),(5,26,0),(5,27,0),
-
-(6,1,1),(6,2,1),(6,3,1),(6,4,1),(6,5,1),(6,6,1),(6,7,1),(6,8,0),(6,9,0),(6,10,0),(6,11,1),(6,12,1),(6,13,1),(6,14,1),(6,15,1),(6,16,1),(6,17,1),(6,18,1),(6,19,0),(6,20,1),(6,21,1),(6,22,1),(6,23,1),(6,24,0),(6,25,0),(6,26,0),(6,27,0),
-
-(7,1,1),(7,2,1),(7,3,1),(7,4,1),(7,5,1),(7,6,1),(7,7,0),(7,8,0),(7,9,0),(7,10,0),(7,11,0),(7,12,0),(7,13,0),(7,14,0),(7,15,0),(7,16,0),(7,17,0),(7,18,0),(7,19,0),(7,20,0),(7,21,0),(7,22,0),(7,23,1),(7,24,0),(7,25,0),(7,26,0),(7,27,0),
-
-(8,1,1),(8,2,1),(8,3,1),(8,4,1),(8,5,1),(8,6,1),(8,7,1),(8,8,1),(8,9,1),(8,10,1),(8,11,1),(8,12,1),(8,13,1),(8,14,1),(8,15,1),(8,16,1),(8,17,1),(8,18,1),(8,19,0),(8,20,0),(8,21,0),(8,22,0),(8,23,1),(8,24,0),(8,25,0),(8,26,0),(8,27,0),
-
-(9,1,0),(9,2,0),(9,3,0),(9,4,0),(9,5,0),(9,6,0),(9,7,0),(9,8,0),(9,9,0),(9,10,0),(9,11,0),(9,12,0),(9,13,0),(9,14,0),(9,15,0),(9,16,0),(9,17,0),(9,18,0),(9,19,1),(9,20,1),(9,21,1),(9,22,1),(9,23,0),(9,24,0),(9,25,0),(9,26,0),(9,27,0),
-
-(10,1,1),(10,2,1),(10,3,1),(10,4,1),(10,5,1),(10,6,1),(10,7,1),(10,8,1),(10,9,1),(10,10,1),(10,11,1),(10,12,1),(10,13,1),(10,14,1),(10,15,1),(10,16,1),(10,17,1),(10,18,1),(10,19,0),(10,20,0),(10,21,0),(10,22,0),(10,23,1),(10,24,0),(10,25,0),(10,26,0),(10,27,0),
-
-(11,1,0),(11,2,0),(11,3,0),(11,4,0),(11,5,0),(11,6,1),(11,7,1),(11,8,1),(11,9,1),(11,10,1),(11,11,1),(11,12,1),(11,13,0),(11,14,0),(11,15,0),(11,16,0),(11,17,0),(11,18,0),(11,19,0),(11,20,0),(11,21,0),(11,22,0),(11,23,0),(11,24,0),(11,25,0),(11,26,0),(11,27,0),
-
-(12,1,1),(12,2,1),(12,3,1),(12,4,1),(12,5,1),(12,6,1),(12,7,1),(12,8,1),(12,9,1),(12,10,1),(12,11,1),(12,12,1),(12,13,1),(12,14,1),(12,15,1),(12,16,1),(12,17,1),(12,18,1),(12,19,0),(12,20,0),(12,21,0),(12,22,0),(12,23,1),(12,24,0),(12,25,0),(12,26,0),(12,27,0)
-;
-
-
 CREATE TABLE tbl_usuario(
-id_usuario_usuario INT AUTO_INCREMENT,
-nombre_usuario_usuario VARCHAR(20000),
-fk_tipo_usuario__usuario INT,
-contrasenia_usuario_usuario VARCHAR (2000),
-FOREIGN KEY (fk_tipo_usuario__usuario) REFERENCES tbl_tipo_usuario (id_tipo_usuario),
-PRIMARY KEY (id_usuario_usuario)
+id_usuario INT AUTO_INCREMENT,
+nombre_usuario VARCHAR(20000),
+contrasenia_usuario VARCHAR (2000),
+PRIMARY KEY (id_usuario)
 );
 
-/*
-INSERT INTO tbl_usuario VALUES (NULL,'Johnny Soto',1,'123');
-CREATE USER 'Johnny Soto'@'localhost' IDENTIFIED BY '123';
-GRANT ALL PRIVILEGES ON * . * TO 'Johnny Soto'@'localhost';
--- DROP USER 'Johnny Soto'@'localhost';
-*/
+select * from tbl_usuario;
 
 CREATE TABLE tbl_estado_civil(
 id_estado_civil INT AUTO_INCREMENT,
@@ -154,6 +47,8 @@ talla_de_calzado_medida VARCHAR (5000),
 PRIMARY KEY(id_medida)
 );
 
+INSERT INTO tbl_medida VALUES (NULL,'XX','L','S','44' );
+
 
 CREATE TABLE tbl_informacionPersonal(
 id_informacionPersonal INT AUTO_INCREMENT,
@@ -178,6 +73,11 @@ FOREIGN KEY (fk_medida_informacionPersonal) REFERENCES tbl_medida (id_medida),
 FOREIGN KEY (fk_genero_informacionPersonal) REFERENCES tbl_genero (id_genero),
 PRIMARY KEY (id_informacionPersonal)
 );
+-- Parece que hay que saber hacer los insert enn formato yyyy/mm/dd
+INSERT INTO tbl_informacionPersonal VALUES (NULL, '20898088-2','Marcelo', 'Aranda', 'Tatto','1991-12-16',1,1,'1,70','80,2','cheloz_20@hotmail.com',
+1,'123123123123','958677107','Carretera El Cobre','No sabe', 'Creo que no');
+
+-- SELECT * FROM tbl_informacionPersonal;
 
 
 CREATE TABLE tbl_region (
@@ -653,7 +553,7 @@ INSERT INTO tbl_estado VALUES (NULL, 'Separado');
 INSERT INTO tbl_estado VALUES (NULL, 'Fallecido');
 INSERT INTO tbl_estado VALUES (NULL, 'Mártir');
 
-DROP TABLE tbl_cargo;
+/*DROP TABLE tbl_cargo;*/
 CREATE TABLE tbl_cargo (
 id_cargo INT AUTO_INCREMENT,
 nombre_cargo VARCHAR (5000),
@@ -700,9 +600,6 @@ FOREIGN KEY (fk_estado_informacionBomberil) REFERENCEs tbl_estado (id_estado),
 FOREIGN KEY (fk_compania_informacionBomberil) REFERENCEs tbl_compania (id_compania),
 PRIMARY KEY (id_informacionBomberil)
 );
-
-
-
 
 
 CREATE TABLE tbl_informacionLaboral (
@@ -768,8 +665,6 @@ PRIMARY KEY (id_informacionMedica1)
 );
 
 
-
-
 CREATE TABLE tbl_informacionMedica2 (
 id_informacionMedica2 INT,
 medicamentos_habituales_informacionMedica2 VARCHAR (5000),
@@ -785,6 +680,7 @@ FOREIGN KEY (fk_informacion_personal_informacionMedica2) REFERENCES tbl_informac
 FOREIGN KEY (fk_parentesco_del_contacto_informacionMedica2) REFERENCES tbl_parentesco (id_parentesco),
 FOREIGN KEY (fk_grupo_sanguineo_informacionMedica2) REFERENCES tbl_grupo_sanguineo (id_grupo_sanguineo),
 PRIMARY KEY (id_informacionMedica2)
+
 );
 
 
@@ -799,7 +695,6 @@ FOREIGN KEY (fk_informacionPersonal_informacionFamiliar) REFERENCES tbl_informac
 FOREIGN KEY (fk_parentesco_informacionFamiliar) REFERENCES tbl_informacionPersonal (id_informacionPersonal),
 PRIMARY KEY(id_informacionFamiliar)
 );
-
 
 
 CREATE TABLE tbl_estado_curso(
@@ -825,9 +720,6 @@ FOREIGN KEY (fk_estado_curso_informacionAcademica) REFERENCES tbl_estado_curso (
 PRIMARY KEY (id_informacionAcademica)
 );
 
-
-
-
 CREATE TABLE tbl_entrenamientoEstandar(
 id_entrenamientoEstandar INT AUTO_INCREMENT,
 fecha_entrenamientoEstandar DATE,
@@ -838,7 +730,6 @@ FOREIGN KEY (fk_informacionPersonal_entrenamientoEstandar) REFERENCES tbl_inform
 FOREIGN KEY (fk_estado_curso_entrenamientoEstandar) REFERENCES tbl_estado_curso (id_estado_curso), 
 PRIMARY KEY (id_entrenamientoEstandar)
 );
-
 
 
 
@@ -859,164 +750,9 @@ PRIMARY KEY (id_informacionHistorica)
 
 
 
-CREATE TABLE tbl_entidadPropietaria (
-id_entidadPropietaria INT AUTO_INCREMENT,
-nombre_entidadPropietaria VARCHAR (5000),
-PRIMARY KEY(id_entidadPropietaria)
-);
-
-INSERT INTO tbl_entidadPropietaria (nombre_entidadPropietaria) VALUES ('Cuerpo de Bomberos de Machali'), ('1° Compañía'),('2° Compañía'),('3° Compañía');
-
-
-CREATE TABLE tbl_tipo_vehiculo (
-id_tipo_vehiculo INT AUTO_INCREMENT,
-nombre_tipo_vehiculo VARCHAR (5000),
-PRIMARY KEY(id_tipo_vehiculo)
-);
-
-INSERT INTO tbl_tipo_vehiculo (nombre_tipo_vehiculo) VALUES  ('Carro bomba'), ('Transporte'), ('Vehiculo menor');
-
-CREATE TABLE tbl_estado_unidad (
-id_estado_unidad INT AUTO_INCREMENT,
-nombre_estado_unidad VARCHAR (5000),
-PRIMARY KEY(id_estado_unidad)
-);
-
-INSERT INTO tbl_estado_unidad (nombre_estado_unidad) VALUES  ('Activo'), ('Inactivo'), ('Dado de baja'), ('Vendido');
-
-CREATE TABLE tbl_unidad (
-id_unidad INT AUTO_INCREMENT,
-anioDeFabricacion_unidad VARCHAR (300),
-marca_unidad VARCHAR (300),
-nMotor_unidad VARCHAR (300),
-nChasis_unidad VARCHAR (300),
-nVIN_unidad VARCHAR (300),
-color_unidad VARCHAR (300),
-ppu_unidad VARCHAR (300) UNIQUE,
-fechaInscripcion_unidad DATE,
-fechaAdquisicion_unidad DATE,
-capacidadOcupantes_unidad INT,
-fk_estado_unidad_unidad INT,
-fk_tipo_vehiculo_unidad INT,
-fk_entidadPropietaria INT,
-FOREIGN KEY (fk_estado_unidad_unidad) REFERENCES tbl_estado_unidad (id_estado_unidad),
-FOREIGN KEY (fk_tipo_vehiculo_unidad) REFERENCES tbl_tipo_vehiculo (id_tipo_vehiculo),
-FOREIGN KEY (fk_entidadPropietaria) REFERENCES tbl_entidadPropietaria (id_entidadPropietaria),
-PRIMARY KEY (id_unidad)
-);
-
--- Procedimientos
-
-DELIMITER //
-CREATE PROCEDURE crearMedidas (talla_chaqueta VARCHAR (5000), talla_pantalon VARCHAR (5000), talla_buzo VARCHAR (5000), talla_calzado VARCHAR (5000))
-BEGIN
-INSERT INTO tbl_medida VALUES (NULL, talla_chaqueta, talla_pantalon, talla_buzo, talla_calzado );
-END//
-DELIMITER ; 
-
-
-DELIMITER //
-CREATE PROCEDURE crearBombero (rut VARCHAR(12), nombre VARCHAR (5000), apellidoPaterno VARCHAR(5000), apellidoMaterno VARCHAR(5000), fechaDeNacimeiento DATE,
-fkEstadoCivil INT, alutra VARCHAR (5000), peso VARCHAR (5000), email VARCHAR (5000), fkGenero INT, telefonoFijo VARCHAR (5000), telefonoMovil VARCHAR (5000),
-direccionPersonal VARCHAR (5000), pertenecioABrigadaJuvenil VARCHAR (5000), esInstructor VARCHAR (5000) ) 
-BEGIN
-
-DECLARE fkMedidas INT;
-SELECT MAX(id_medida) INTO @fkMedidas FROM tbl_medida;
-
-INSERT INTO tbl_informacionPersonal VALUES (NULL, rut, nombre, apellidoPaterno, apellidoMaterno, fechaDeNacimeiento, fkEstadoCivil, fkMedidas,
-alutra, peso, email, fkGenero, telefonoFijo, telefonoMovil, direccionPersonal, pertenecioABrigadaJuvenil, esInstructor);
-END//
-DELIMITER ;
-
-
-DELIMITER //
-CREATE PROCEDURE crearFichaInformacionBomberil (fkRegion INT, cuerpo VARCHAR (2000), fkCompania INT, fkCargo INT, 
-fechaIngreso DATE, NRG INT, fkEstado INT, NRC INT, fkInformacionPersonal INT)
-BEGIN
-INSERT INTO tbl_informacionBomberil VALUES (NULL, fkRegion, cuerpo, fkCompania, fkCargo, fechaIngreso, NRG, fkEstado, NRC, fkInformacionPersonal);
-END//
-DELIMITER ;
-
-
-DELIMITER //
-CREATE PROCEDURE crearInformacionBomberil (nombreEmpresa VARCHAR (5000), direccionEmpresa VARCHAR (5000), telefonoEmpresa VARCHAR (5000), cargoEmpresa VARCHAR (5000),
-fechaDeIngresoALaEmpresa DATE, dptoEnEmpresa VARCHAR (5000), afp VARCHAR (5000), profesion VARCHAR (5000), fkInfoPersonal INT)
-BEGIN
-INSERT INTO tbl_informacionBomberil VALUES (NULL, nombreEmpresa, direccionEmpresa, telefonoEmpresa, cargoEmpresa, fechaDeIngresoALaEmpresa,
-dptoEnEmpresa, afp, profesion,fkInfoPersonal);
-END//
-DELIMITER ;
-
-
-DELIMITER //
-CREATE PROCEDURE crearInformacionMedica1 (prestacionMedica VARCHAR (5000), alergias VARCHAR (5000), enfermedadesCronicas VARCHAR (5000), fkInfoPersonal INT)
-BEGIN
-INSERT INTO tbl_informacionMedica1 VALUES (prestacionMedica, alergias, enfermedadesCronicas, fkInfoPersonal );
-END//
-DELIMITER ;
-
-
-DELIMITER //
-CREATE PROCEDURE crearInformacionMedica2 (medicamentos_habituales VARCHAR (5000), nombre_de_contacto VARCHAR (5000), telefono_de_contacto VARCHAR (5000), fkParentesco INT,
-nivel_de_actividad_fisica VARCHAR (5000), es_donante BOOLEAN, es_fumador BOOLEAN, fk_grupoSanguineo INT, fk_inforPersonal INT)
-BEGIN
-INSERT INTO tbl_informacionMedica2 VALUES (medicamentos_habituales, nombre_de_contacto, telefono_de_contacto, fkParentesco, nivel_de_actividad_fisica, es_donante,
- es_fumador, fk_grupoSanguineo, fk_inforPersonal );
-END//
-DELIMITER ;
-
-
-DELIMITER //
-CREATE PROCEDURE crearInformacionFamiliar (nombresInfoFlia VARCHAR (5000), fechaDeNacimientoInfoFlia DATE, fk_parentesco INT , fk_inforPersonal INT)
-BEGIN
-INSERT INTO tbl_informacionFamiliar VALUES (nombresInfoFlia , fechaDeNacimientoInfoFlia , fk_parentesco  , fk_inforPersonal  );
-END//
-DELIMITER ;
-
-
-DELIMITER //
-CREATE PROCEDURE crearInformacionAcademica (fechaInfoAcademica DATE, actividadInfoAcademica INT , fk_estadoCurso INT, fk_inforPersonal INT)
-BEGIN
-INSERT INTO tbl_informacionAcademica VALUES (fechaInfoAcademica, actividadInfoAcademica , fk_estadoCurso, fk_inforPersonal);
-END//
-DELIMITER ;
-
-
-DELIMITER //
-CREATE PROCEDURE crearInformacionEntrenamientoEstandar (fechaInfoEntrenamientoEstandar DATE, actividadEntrenamientoEstandar INT , fk_estadoCurso INT, fk_inforPersonal INT)
-BEGIN
-INSERT INTO tbl_entrenamientoEstandar VALUES (fechaInfoEntrenamientoEstandar , actividadEntrenamientoEstandar  , fk_estadoCurso , fk_inforPersonal );
-END//
-DELIMITER ;
-
-
-DELIMITER //
-CREATE PROCEDURE crearInformacionHistorica (fkRegion INT, cuerpo VARCHAR (5000) , compania VARCHAR (5000), fechaDeCambio DATE, tipoDeCambio VARCHAR (20000),
-motivo TEXT (20000), detalle VARCHAR (20000))
-BEGIN
-INSERT INTO tbl_informacionHistorica VALUES (fkRegion , cuerpo  , compania , fechaDeCambio , tipoDeCambio,
-motivo,  detalle );
-END//
-DELIMITER ;
 
 
 
-
-
-DELIMITER // 
-CREATE PROCEDURE crearUsuario (nombre VARCHAR (2000), contrasenia VARCHAR (2000), tipo_usuario INT )
-BEGIN
-INSERT INTO tbl_usuario VALUES (NULL,nombre, tipo_usuario, contrasenia);
-
-END// 
-DELIMITER ;
-
-CALL crearMedidas ('XX','SS','42','41');
-CALL crearBombero ('20898088-2','Marcelo', 'Aranda', 'Tatto','1991-12-16',1,'1,70','80,2','cheloz_20@hotmail.com',
-1,'123123123123','958677107','Carretera El Cobre','No sabe', 'Creo que no');
-
-CALL crearFichaInformacionBomberil(1,'Machali',1,1,'2001-12-16',1,1,1,1);
 
 
 /*
@@ -1043,6 +779,13 @@ COMMIT;
 END //
 DELIMITER ;
 */
+
+
+
+
+
+
+
 
 
 /*
