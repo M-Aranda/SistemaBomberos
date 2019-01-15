@@ -76,6 +76,8 @@ PRIMARY KEY (id_tipo_usuario_permisos)
 );
 
 
+
+
 INSERT INTO tbl_tipo_usuario_permisos (fk_tipo_usuario_tipo_usuario_permisos,fk_permiso_tipo_usuario_permisos,otorgado_tipo_usuario_permisos) VALUES 
 (1,1,1),(1,2,1),(1,3,1),(1,4,1),(1,5,1),(1,6,1),(1,7,1),(1,8,1),(1,9,1),(1,10,1),(1,11,1),(1,12,1),(1,13,1),(1,14,1),(1,15,1),(1,16,1),(1,17,1),(1,18,1),(1,19,1),(1,20,1),(1,21,1),(1,22,1),(1,23,1),(1,24,1),(1,25,1),(1,26,1),(1,27,1),
 
@@ -178,6 +180,7 @@ FOREIGN KEY (fk_medida_informacionPersonal) REFERENCES tbl_medida (id_medida),
 FOREIGN KEY (fk_genero_informacionPersonal) REFERENCES tbl_genero (id_genero),
 PRIMARY KEY (id_informacionPersonal)
 );
+
 
 
 CREATE TABLE tbl_region (
@@ -704,7 +707,6 @@ PRIMARY KEY (id_informacionBomberil)
 
 
 
-
 CREATE TABLE tbl_informacionLaboral (
 id_informacionLaboral INT AUTO_INCREMENT,
 nombre_de_empresa_informacionLaboral VARCHAR (5000),
@@ -799,6 +801,7 @@ FOREIGN KEY (fk_informacionPersonal_informacionFamiliar) REFERENCES tbl_informac
 FOREIGN KEY (fk_parentesco_informacionFamiliar) REFERENCES tbl_informacionPersonal (id_informacionPersonal),
 PRIMARY KEY(id_informacionFamiliar)
 );
+
 
 
 
@@ -911,39 +914,135 @@ PRIMARY KEY (id_unidad)
 -- Procedimientos
 
 DELIMITER //
-CREATE PROCEDURE crearMedidas (talla_chaqueta VARCHAR (5000), talla_pantalon VARCHAR (5000), talla_buzo VARCHAR (5000), talla_calzado VARCHAR (5000))
+CREATE PROCEDURE CRUDPermiso (id INT, nombre VARCHAR (5000), tipoDeOperacion INT)
+
 BEGIN
-INSERT INTO tbl_medida VALUES (NULL, talla_chaqueta, talla_pantalon, talla_buzo, talla_calzado );
-END//
-DELIMITER ; 
+IF tipoDeOperacion= 1 THEN
+INSERT INTO tbl_permiso VALUES (NULL , nombre);
+ELSEIF tipoDeOperacion= 2 THEN
+SELECT * FROM tbl_permiso WHERE id_permiso=id;
+ELSEIF tipoDeOperacion= 3 THEN
+UPDATE tbl_permiso SET nombre_permiso=nombre WHERE id_permiso=id ;
+ELSEIF tipoDeOperacion= 4 THEN
+DELETE FROM tbl_permiso  WHERE id_permiso=id;
+END IF;
+
+END //
+DELIMITER ;
 
 
 DELIMITER //
-CREATE PROCEDURE crearBombero (rut VARCHAR(12), nombre VARCHAR (5000), apellidoPaterno VARCHAR(5000), apellidoMaterno VARCHAR(5000), fechaDeNacimeiento DATE,
+CREATE PROCEDURE CRUDTipo_usuario (id INT, nombre VARCHAR (5000), tipoDeOperacion INT )
+
+BEGIN
+IF tipoDeOperacion= 1 THEN
+INSERT INTO tbl_tipo_usuario VALUES (NULL , nombre);
+ELSEIF tipoDeOperacion= 2 THEN
+SELECT * FROM tbl_tipo_usuario WHERE id_tipo_usuario=id;
+ELSEIF tipoDeOperacion= 3 THEN
+UPDATE tbl_tipo_usuario SET nombre_tipo_usuario=nombre WHERE id_tipo_usuario=id ;
+ELSEIF tipoDeOperacion= 4 THEN
+DELETE FROM tbl_tipo_usuario  WHERE id_tipo_usuario=id;
+END IF;
+
+END //
+DELIMITER ;
+
+
+DELIMITER //
+CREATE PROCEDURE CRUDTipo_usuario_permisos (id INT, tipo_usuario_fk INT, permiso_usuario_fk INT, autorizado BOOLEAN, tipoDeOperacion INT )
+
+BEGIN
+IF tipoDeOperacion= 1 THEN
+INSERT INTO tbl_tipo_usuario_permisos VALUES (NULL , tipo_usuario_fk, permiso_usuario_fk, autorizado);
+ELSEIF tipoDeOperacion= 2 THEN
+SELECT * FROM tbl_tipo_usuario_permisos WHERE id_tipo_usuario_permisos=id;
+ELSEIF tipoDeOperacion= 3 THEN
+UPDATE tbl_tipo_usuario_permisos SET fk_tipo_usuario_tipo_usuario_permisos=tipo_usuario_fk, fk_permiso_tipo_usuario_permisos= permiso_usuario_fk,
+otorgado_tipo_usuario_permisos=autorizado WHERE id_tipo_usuario_permisos=id ;
+ELSEIF tipoDeOperacion= 4 THEN
+DELETE FROM tbl_tipo_usuario_permisos  WHERE id_tipo_usuario_permisos=id;
+END IF;
+
+END //
+DELIMITER ;
+
+
+
+DELIMITER //
+CREATE PROCEDURE CRUDMedida (id INT, talla_chaqueta VARCHAR (5000), talla_pantalon VARCHAR (5000), talla_buzo VARCHAR (5000), talla_calzado VARCHAR (5000), tipoDeOperacion INT)
+
+BEGIN
+IF tipoDeOperacion= 1 THEN
+INSERT INTO tbl_medida VALUES (NULL , talla_chaqueta, talla_pantalon, talla_buzo, talla_calzado);
+ELSEIF tipoDeOperacion= 2 THEN
+SELECT * FROM tbl_medida WHERE id_medida=id;
+ELSEIF tipoDeOperacion= 3 THEN
+UPDATE tbl_medida SET talla_chaqueta_medida=talla_chaqueta, talla_pantalon_medida= talla_pantalon,
+talla_buzo_medida=talla_buzo, talla_calzado_medida=talla_calzado WHERE id_medida=id ;
+ELSEIF tipoDeOperacion= 4 THEN
+DELETE FROM tbl_medida  WHERE id_medida=id;
+END IF;
+
+END //
+DELIMITER ;
+
+
+
+
+
+DELIMITER //
+CREATE PROCEDURE CRUDInformacionPersonal (id INT,rut VARCHAR(12), nombre VARCHAR (5000), apellidoPaterno VARCHAR(5000), apellidoMaterno VARCHAR(5000), fechaDeNacimiento DATE,
 fkEstadoCivil INT, alutra VARCHAR (5000), peso VARCHAR (5000), email VARCHAR (5000), fkGenero INT, telefonoFijo VARCHAR (5000), telefonoMovil VARCHAR (5000),
-direccionPersonal VARCHAR (5000), pertenecioABrigadaJuvenil VARCHAR (5000), esInstructor VARCHAR (5000) ) 
+direccionPersonal VARCHAR (5000), pertenecioABrigadaJuvenil VARCHAR (5000), esInstructor VARCHAR (5000), tipoOperacion INT ) 
 BEGIN
 
 DECLARE fkMedidas INT;
 SELECT MAX(id_medida) INTO @fkMedidas FROM tbl_medida;
 
-INSERT INTO tbl_informacionPersonal VALUES (NULL, rut, nombre, apellidoPaterno, apellidoMaterno, fechaDeNacimeiento, fkEstadoCivil, fkMedidas,
+IF tipoOperacion=1 THEN
+INSERT INTO tbl_informacionPersonal VALUES (NULL, rut, nombre, apellidoPaterno, apellidoMaterno, fechaDeNacimiento, fkEstadoCivil, fkMedidas,
 alutra, peso, email, fkGenero, telefonoFijo, telefonoMovil, direccionPersonal, pertenecioABrigadaJuvenil, esInstructor);
+ELSEIF tipoOperacion=2 THEN
+SELECT * FROM tbl_informacionPersonal WHERE id_informacionPersonal=id;
+ELSEIF tipoOperacion=3 THEN
+UPDATE tbl_informacionPersonal SET rut_informacionPersonal=rut, nombre_informacionPersonal=nombre, apellidoPaterno_informacionPersonal=apellidoPaterno,
+apellidoMaterno_informacionPersonal=apellidoMaterno, fechaDeNacimiento_informacionPersonal=fechaDeNacimiento, fk_estado_civil_informacionPersonal=fkEstadoCivil,
+fk_medida_informacionPersonal=fkMedidas, altura_en_metros_informacionPersonal=altura, peso_en_kg_informacionPersonal=peso, e_mail_informacionPersonal=email,
+fk_genero_informacionPersonal=fkGenero, telefono_fijo_informacionPersonal=telefonoFijo, telefono_movil_informacionPersonal=telefonoMovil, direccion_personal_informacionPersonal=direccionPersonal,
+pertenecio_a_brigada_juvenil_informacionPersonal=pertenecioABrigadaJuvenil, esInstructor_informacionPersonal=esInstructor WHERE id_informacionPersonal=id;
+ELSEIF tipoOperacion=4 THEN
+DELETE FROM tbl_informacionPersonal WHERE id_informacionPersonal=id;
+END IF;
 END//
+
 DELIMITER ;
 
 
 DELIMITER //
-CREATE PROCEDURE crearFichaInformacionBomberil (fkRegion INT, cuerpo VARCHAR (2000), fkCompania INT, fkCargo INT, 
-fechaIngreso DATE, NRG INT, fkEstado INT, NRC INT, fkInformacionPersonal INT)
+CREATE PROCEDURE CRUDFichaInformacionBomberil (id INT,fkRegion INT, cuerpo VARCHAR (2000), fkCompania INT, fkCargo INT, 
+fechaIngreso DATE, NRG INT, fkEstado INT, NRC INT, fkInformacionPersonal INT, tipoOperacion INT)
 BEGIN
+IF tipoOperacion=1 THEN
 INSERT INTO tbl_informacionBomberil VALUES (NULL, fkRegion, cuerpo, fkCompania, fkCargo, fechaIngreso, NRG, fkEstado, NRC, fkInformacionPersonal);
+ELSEIF tipoOperacion=2 THEN
+SELECT * FROM tbl_informacionBomberil WHERE id_informacionBomberil=id;
+ELSEIF tipoOperacion=3 THEN
+UPDATE tbl_informacionBomberil SET fk_region_informacionBomberil=fkRegion,cuerpo_informacionBomberil=cuerpo,fk_compania_informacionBomberil=fkCompania,
+fk_cargo_informacionBomberil=fkCargo, fecha_de_ingreso_informacionBomberil=fechaIngreso, N_Reg_General_informacionBomberil=NRG, fk_estado_informacionBomberil=fkEstado,
+ N_Reg_Cia_informacionBomberil=NRC, fk_informacion_personal__informacionBomberil=fkInformacionPersonal  WHERE id_informacionBomberil=id;
+ELSEIF tipoOperacion=4 THEN
+DELETE FROM tbl_informacionBomberil WHERE id_informacionBomberil=id;
+END IF;
 END//
 DELIMITER ;
 
 
+
+
+
 DELIMITER //
-CREATE PROCEDURE crearInformacionBomberil (nombreEmpresa VARCHAR (5000), direccionEmpresa VARCHAR (5000), telefonoEmpresa VARCHAR (5000), cargoEmpresa VARCHAR (5000),
+CREATE PROCEDURE crearInformacionLaborall (nombreEmpresa VARCHAR (5000), direccionEmpresa VARCHAR (5000), telefonoEmpresa VARCHAR (5000), cargoEmpresa VARCHAR (5000),
 fechaDeIngresoALaEmpresa DATE, dptoEnEmpresa VARCHAR (5000), afp VARCHAR (5000), profesion VARCHAR (5000), fkInfoPersonal INT)
 BEGIN
 INSERT INTO tbl_informacionBomberil VALUES (NULL, nombreEmpresa, direccionEmpresa, telefonoEmpresa, cargoEmpresa, fechaDeIngresoALaEmpresa,
@@ -970,12 +1069,24 @@ END//
 DELIMITER ;
 
 
+
 DELIMITER //
-CREATE PROCEDURE crearInformacionFamiliar (nombresInfoFlia VARCHAR (5000), fechaDeNacimientoInfoFlia DATE, fk_parentesco INT , fk_inforPersonal INT)
+CREATE PROCEDURE CRUDInformacionFamiliar (id INT,nombresInfoFlia VARCHAR (5000), fechaDeNacimientoInfoFlia DATE, fk_parentesco INT , fk_inforPersonal INT, tipoOperacion INT)
 BEGIN
-INSERT INTO tbl_informacionFamiliar VALUES (nombresInfoFlia , fechaDeNacimientoInfoFlia , fk_parentesco  , fk_inforPersonal  );
+IF tipoOperacion=1 THEN
+INSERT INTO tbl_informacionFamiliar VALUES (NULL, nombresInfoFlia , fechaDeNacimientoInfoFlia , fk_parentesco  , fk_inforPersonal);
+ELSEIF tipoOperacion=2 THEN
+SELECT * FROM tbl_informacionFamiliar WHERE id_informacionFamiliar=id;
+ELSEIF tipoOperacion=3 THEN
+UPDATE tbl_informacionFamiliar SET nombres_informacionFamiliar=nombresInfoFlia, fecha_de_nacimiento_informacionFamiliar=fechaDeNacimientoInfoFlia,
+fk_parentesco_informacionFamiliar=fk_parentesco, fk_informacionPersonal_informacionFamiliar=fk_inforPersonal WHERE id_informacionFamiliar=id;
+ELSEIF tipoOperacion=4 THEN
+DELETE FROM tbl_informacionFamiliar WHERE id_informacionFamiliar=id;
+
+END IF;
 END//
 DELIMITER ;
+
 
 
 DELIMITER //
@@ -1038,10 +1149,11 @@ DELIMITER ;
 CALL CRUDUnidad (6,'2000','200','300','333','555','3333','YOLO','2000-12-03','2012-06-11',15,2,1,1,1);
 
 
-CALL crearMedidas ('XX','SS','42','41');
-CALL crearBombero ('20898088-2','Marcelo', 'Aranda', 'Tatto','1991-12-16',1,'1,70','80,2','cheloz_20@hotmail.com',
-1,'123123123123','958677107','Carretera El Cobre','No sabe', 'Creo que no');
-CALL crearFichaInformacionBomberil(1,'Machali',1,1,'2001-12-16',1,1,1,1);
+CALL CRUDMedida (1,'XX','SS','42','41',1);
+CALL CRUDInformacionPersonal (1,'20898088-2','Marcelo', 'Aranda', 'Tatto','1991-12-16',1,'1,70','80,2','cheloz_20@hotmail.com',
+1,'123123123123','958677107','Carretera El Cobre','No sabe', 'Creo que no',1);
+
+CALL CRUDFichaInformacionBomberil(1,1,'Machali',1,1,'2001-12-16',1,1,1,1,1);
 
 
 /*
