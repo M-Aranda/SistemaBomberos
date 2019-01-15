@@ -898,12 +898,15 @@ fechaAdquisicion_unidad DATE,
 capacidadOcupantes_unidad INT,
 fk_estado_unidad_unidad INT,
 fk_tipo_vehiculo_unidad INT,
-fk_entidadPropietaria INT,
+fk_entidadPropietaria_unidad INT,
 FOREIGN KEY (fk_estado_unidad_unidad) REFERENCES tbl_estado_unidad (id_estado_unidad),
 FOREIGN KEY (fk_tipo_vehiculo_unidad) REFERENCES tbl_tipo_vehiculo (id_tipo_vehiculo),
-FOREIGN KEY (fk_entidadPropietaria) REFERENCES tbl_entidadPropietaria (id_entidadPropietaria),
+FOREIGN KEY (fk_entidadPropietaria_unidad) REFERENCES tbl_entidadPropietaria (id_entidadPropietaria),
 PRIMARY KEY (id_unidad)
 );
+
+
+
 
 -- Procedimientos
 
@@ -986,7 +989,7 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE crearInformacionEntrenamientoEstandar (fechaInfoEntrenamientoEstandar DATE, actividadEntrenamientoEstandar INT , fk_estadoCurso INT, fk_inforPersonal INT)
 BEGIN
-INSERT INTO tbl_entrenamientoEstandar VALUES (fechaInfoEntrenamientoEstandar , actividadEntrenamientoEstandar  , fk_estadoCurso , fk_inforPersonal );
+INSERT INTO tbl_entrenamientoEstandar VALUES (fechaInfoEntrenamientoEstandar, actividadEntrenamientoEstandar, fk_estadoCurso, fk_inforPersonal );
 END//
 DELIMITER ;
 
@@ -995,14 +998,10 @@ DELIMITER //
 CREATE PROCEDURE crearInformacionHistorica (fkRegion INT, cuerpo VARCHAR (5000) , compania VARCHAR (5000), fechaDeCambio DATE, tipoDeCambio VARCHAR (20000),
 motivo TEXT (20000), detalle VARCHAR (20000))
 BEGIN
-INSERT INTO tbl_informacionHistorica VALUES (fkRegion , cuerpo  , compania , fechaDeCambio , tipoDeCambio,
-motivo,  detalle );
+INSERT INTO tbl_informacionHistorica VALUES (fkRegion, cuerpo, compania, fechaDeCambio, tipoDeCambio,
+motivo,  detalle);
 END//
 DELIMITER ;
-
-
-
-
 
 DELIMITER // 
 CREATE PROCEDURE crearUsuario (nombre VARCHAR (2000), contrasenia VARCHAR (2000), tipo_usuario INT )
@@ -1012,10 +1011,36 @@ INSERT INTO tbl_usuario VALUES (NULL,nombre, tipo_usuario, contrasenia);
 END// 
 DELIMITER ;
 
+
+DELIMITER //
+CREATE PROCEDURE CRUDUnidad (id INT, anioDeFabricacion VARCHAR (300), marca VARCHAR (300), nMotor VARCHAR (300), nChasis VARCHAR  (300),
+nVIN VARCHAR (300), color VARCHAR (300), ppu VARCHAR (300), fechaInscripcion DATE, fechaAdquisicion DATE,
+capacidadOcupantes INT, fk_estado INT, fk_tipo_vehiculo INT, fk_entidadProp INT, tipoDeOperacion INT)
+
+BEGIN
+IF tipoDeOperacion= 1 THEN
+INSERT INTO tbl_unidad VALUES (NULL , anioDeFabricacion, marca , nMotor, nChasis ,
+nVIN  , color , ppu , fechaInscripcion , fechaAdquisicion ,capacidadOcupantes , fk_estado, fk_tipo_vehiculo , fk_entidadProp );
+ELSEIF tipoDeOperacion= 2 THEN
+SELECT * FROM tbl_unidad WHERE id_unidad=id_unidad;
+ELSEIF tipoDeOperacion= 3 THEN
+UPDATE tbl_unidad SET anioDeFabricacion_unidad=anioDeFabricacion, marca_unidad=marca, nMotor_unidad=nMotor, nChasis_unidad=nChasis,
+nVIN_unidad=nVIN, color_unidad=color, ppu_unidad=ppu, fechaInscripcion_unidad=fechaInscripcion , fechaAdquisicion_unidad=fechaAdquisicion,
+capacidadOcupantes_unidad=capacidadOcupantes , fk_estado_unidad_unidad=fk_estado , fk_tipo_vehiculo_unidad=fk_tipo_vehiculo, fk_entidadPropietaria_unidad=fk_entidadProp WHERE id_unidad=id_unidad ;
+ELSEIF tipoDeOperacion= 4 THEN
+DELETE FROM tbl_unidad  WHERE id_unidad=id;
+END IF;
+
+END //
+DELIMITER ;
+
+
+CALL CRUDUnidad (6,'2000','200','300','333','555','3333','YOLO','2000-12-03','2012-06-11',15,2,1,1,1);
+
+
 CALL crearMedidas ('XX','SS','42','41');
 CALL crearBombero ('20898088-2','Marcelo', 'Aranda', 'Tatto','1991-12-16',1,'1,70','80,2','cheloz_20@hotmail.com',
 1,'123123123123','958677107','Carretera El Cobre','No sabe', 'Creo que no');
-
 CALL crearFichaInformacionBomberil(1,'Machali',1,1,'2001-12-16',1,1,1,1);
 
 
