@@ -1,6 +1,6 @@
 <?php
 
-Class Tbl_Estado{
+Class Tbl_EstadoBombero{
 
   private $idEstado;
   private $nombreEstado;

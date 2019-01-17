@@ -40,10 +40,9 @@ PRIMARY KEY (id_usuario_usuario)
 
 CREATE TABLE tbl_estado_civil(
 id_estado_civil INT AUTO_INCREMENT,
-nombre_estado_civil TEXT,
+nombre_estado_civil VARCHAR (300),
 PRIMARY KEY (id_estado_civil)
 );
-
 
 CREATE TABLE tbl_genero(
 id_genero INT AUTO_INCREMENT,
@@ -113,7 +112,7 @@ CREATE TABLE tbl_comuna (
 );
 
 
-CREATE TABLE tbl_estado (
+CREATE TABLE tbl_estadoBombero (
 id_estado INT AUTO_INCREMENT,
 nombre_estado VARCHAR (20000),
 PRIMARY KEY (id_estado)
@@ -147,7 +146,7 @@ fk_informacion_personal__informacionBomberil INT,
 FOREIGN KEY (fk_informacion_personal__informacionBomberil) REFERENCES tbl_informacionPersonal (id_informacionPersonal),
 FOREIGN KEY (fk_region_informacionBomberil) REFERENCES tbl_region (id_region),
 FOREIGN KEY (fk_cargo_informacionBomberil) REFERENCEs tbl_cargo (id_cargo),
-FOREIGN KEY (fk_estado_informacionBomberil) REFERENCEs tbl_estado (id_estado),
+FOREIGN KEY (fk_estado_informacionBomberil) REFERENCEs tbl_estadoBombero (id_estado),
 FOREIGN KEY (fk_compania_informacionBomberil) REFERENCEs tbl_compania (id_compania),
 PRIMARY KEY (id_informacionBomberil)
 );
@@ -287,21 +286,17 @@ nombre_entidadPropietaria VARCHAR (5000),
 PRIMARY KEY(id_entidadPropietaria)
 );
 
-
-
 CREATE TABLE tbl_tipo_vehiculo (
 id_tipo_vehiculo INT AUTO_INCREMENT,
 nombre_tipo_vehiculo VARCHAR (5000),
 PRIMARY KEY(id_tipo_vehiculo)
 );
 
-
 CREATE TABLE tbl_estado_unidad (
 id_estado_unidad INT AUTO_INCREMENT,
 nombre_estado_unidad VARCHAR (5000),
 PRIMARY KEY(id_estado_unidad)
 );
-
 
 CREATE TABLE tbl_unidad (
 id_unidad INT AUTO_INCREMENT,
@@ -325,13 +320,10 @@ PRIMARY KEY (id_unidad)
 );
 
 
-
-
 -- Procedimientos
 
 DELIMITER //
 CREATE PROCEDURE CRUDPermiso (id INT, nombre VARCHAR (5000), tipoDeOperacion INT)
-
 BEGIN
 IF tipoDeOperacion= 1 THEN
 INSERT INTO tbl_permiso VALUES (NULL , nombre);
@@ -342,14 +334,12 @@ UPDATE tbl_permiso SET nombre_permiso=nombre WHERE id_permiso=id ;
 ELSEIF tipoDeOperacion= 4 THEN
 DELETE FROM tbl_permiso  WHERE id_permiso=id;
 END IF;
-
 END //
 DELIMITER ;
 
 
 DELIMITER //
 CREATE PROCEDURE CRUDTipo_usuario (id INT, nombre VARCHAR (5000), tipoDeOperacion INT )
-
 BEGIN
 IF tipoDeOperacion= 1 THEN
 INSERT INTO tbl_tipo_usuario VALUES (NULL , nombre);
@@ -367,7 +357,6 @@ DELIMITER ;
 
 DELIMITER //
 CREATE PROCEDURE CRUDTipo_usuario_permisos (id INT, tipo_usuario_fk INT, permiso_usuario_fk INT, autorizado BOOLEAN, tipoDeOperacion INT )
-
 BEGIN
 IF tipoDeOperacion= 1 THEN
 INSERT INTO tbl_tipo_usuario_permisos VALUES (NULL , tipo_usuario_fk, permiso_usuario_fk, autorizado);
@@ -379,11 +368,8 @@ otorgado_tipo_usuario_permisos=autorizado WHERE id_tipo_usuario_permisos=id ;
 ELSEIF tipoDeOperacion= 4 THEN
 DELETE FROM tbl_tipo_usuario_permisos  WHERE id_tipo_usuario_permisos=id;
 END IF;
-
 END //
 DELIMITER ;
-
-
 
 DELIMITER //
 CREATE PROCEDURE CRUDUsuario (id INT, nombre_usuario VARCHAR (20000), fk_tipo_usuario INT, contrasenia VARCHAR (2000), tipoOperacion INT)
@@ -402,6 +388,112 @@ DELIMITER ;
 
 
 DELIMITER //
+CREATE PROCEDURE CRUDEstadoCivil (id INT, nombre VARCHAR (300), tipoOperacion INT)
+BEGIN
+IF tipoOperacion=1 THEN
+INSERT INTO tbl_estado_civil VALUES (NULL, nombre);
+ELSEIF tipoOperacion=2 THEN
+SELECT * FROM tbl_estado_civil WHERE id_estado_civil=id;
+ELSEIF tipoOperacion=3 THEN
+UPDATE tbl_estado_civil SET nombre_estado_civil=nombre WHERE id_estado_civil=id;
+ELSEIF tipoOperacion=4 THEN
+DELETE FROM tbl_estado_civil WHERE id_estado_civil=id;
+END IF;
+END//
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE CRUDGenero (id INT, nombre VARCHAR (300), tipoOperacion INT)
+BEGIN
+IF tipoOperacion=1 THEN
+INSERT INTO tbl_genero VALUES (NULL, nombre);
+ELSEIF tipoOperacion=2 THEN
+SELECT * FROM tbl_genero WHERE id_genero=id;
+ELSEIF tipoOperacion=3 THEN
+UPDATE tbl_genero SET nombre_genero=nombre WHERE id_genero=id;
+ELSEIF tipoOperacion=4 THEN
+DELETE FROM tbl_genero WHERE id_genero=id;
+END IF;
+END//
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE CRUDRegion (id INT, nombre VARCHAR (300), tipoOperacion INT)
+BEGIN
+IF tipoOperacion=1 THEN
+INSERT INTO tbl_region VALUES (NULL, nombre);
+ELSEIF tipoOperacion=2 THEN
+SELECT * FROM tbl_region WHERE id_region=id;
+ELSEIF tipoOperacion=3 THEN
+UPDATE tbl_region SET nombre_region=nombre WHERE id_region=id;
+ELSEIF tipoOperacion=4 THEN
+DELETE FROM tbl_region WHERE id_region=id;
+END IF;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE CRUDProvincia (id INT, nombre VARCHAR (64), fkRegion INT, tipoOperacion INT)
+BEGIN
+IF tipoOperacion=1 THEN
+INSERT INTO tbl_provincia VALUES (NULL, nombre, fkRegion);
+ELSEIF tipoOperacion=2 THEN
+SELECT * FROM tbl_provincia WHERE id_provincia=id;
+ELSEIF tipoOperacion=3 THEN
+UPDATE tbl_provincia SET nombre_provincia=nombre, fk_region_provincia=fkRegion WHERE id_provincia=id;
+ELSEIF tipoOperacion=4 THEN
+DELETE FROM tbl_provincia WHERE id_provincia=id;
+END IF;
+END//
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE CRUDComuna (id INT, nombre VARCHAR (64), fkProvincia INT, tipoOperacion INT)
+BEGIN
+IF tipoOperacion=1 THEN
+INSERT INTO tbl_comuna VALUES (NULL, nombre, fkProvincia);
+ELSEIF tipoOperacion=2 THEN
+SELECT * FROM tbl_comuna WHERE id_comuna=id;
+ELSEIF tipoOperacion=3 THEN
+UPDATE tbl_comuna SET nombre_comuna=nombre, fk_provincia_comuna=fkProvincia WHERE id_comuna=id;
+ELSEIF tipoOperacion=4 THEN
+DELETE FROM tbl_comuna WHERE id_comuna=id;
+END IF;
+END//
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE CRUDCargo (id INT, nombre VARCHAR (5000), tipoOperacion INT)
+BEGIN
+IF tipoOperacion=1 THEN
+INSERT INTO tbl_cargo VALUES (NULL, nombre);
+ELSEIF tipoOperacion=2 THEN
+SELECT * FROM tbl_cargo WHERE id_cargo=id;
+ELSEIF tipoOperacion=3 THEN
+UPDATE tbl_cargo SET nombre_cargo=nombre WHERE id_cargo=id;
+ELSEIF tipoOperacion=4 THEN
+DELETE FROM tbl_cargo WHERE id_cargo=id;
+END IF;
+END//
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE CRUDCompania (id INT, nombre VARCHAR (5000), tipoOperacion INT)
+BEGIN
+IF tipoOperacion=1 THEN
+INSERT INTO tbl_compania VALUES (NULL, nombre);
+ELSEIF tipoOperacion=2 THEN
+SELECT * FROM tbl_compania WHERE id_compania=id;
+ELSEIF tipoOperacion=3 THEN
+UPDATE tbl_compania SET nombre_compania=nombre WHERE id_compania=id;
+ELSEIF tipoOperacion=4 THEN
+DELETE FROM tbl_compania WHERE id_compania=id;
+END IF;
+END//
+DELIMITER ;
+
+
+DELIMITER //
 CREATE PROCEDURE CRUDMedida (id INT, talla_chaqueta VARCHAR (5000), talla_pantalon VARCHAR (5000), talla_buzo VARCHAR (5000), talla_calzado VARCHAR (5000), tipoDeOperacion INT)
 BEGIN
 IF tipoDeOperacion= 1 THEN
@@ -414,12 +506,8 @@ talla_buzo_medida=talla_buzo, talla_calzado_medida=talla_calzado WHERE id_medida
 ELSEIF tipoDeOperacion= 4 THEN
 DELETE FROM tbl_medida  WHERE id_medida=id;
 END IF;
-
 END //
 DELIMITER ;
-
-
-
 
 
 DELIMITER //
@@ -464,6 +552,8 @@ fk_cargo_informacionBomberil=fkCargo, fecha_de_ingreso_informacionBomberil=fecha
  N_Reg_Cia_informacionBomberil=NRC, fk_informacion_personal__informacionBomberil=fkInformacionPersonal  WHERE id_informacionBomberil=id;
 ELSEIF tipoOperacion=4 THEN
 DELETE FROM tbl_informacionBomberil WHERE id_informacionBomberil=id;
+ELSEIF tipoOperacion=5 THEN
+SELECT * FROM tbl_informacionBomberil WHERE fk_informacion_personal__informacionBomberil=fkInformacionPersonal;
 END IF;
 END//
 DELIMITER ;
@@ -484,6 +574,8 @@ cargo_en_la_empresa_informacionLaboral=cargoEmpresa, fecha_de_ingreso_a_la_empre
 afp_informacionLaboral=afp, profesion_informacionLaboral=profesion, fk_informacion_personal_informacionLaboral=fkInfoPersonal   WHERE id_informacionLaboral=id;
 ELSEIF tipoOperacion=4 THEN
 DELETE FROM tbl_informacionLaboral WHERE id_informacionLaboral=id;
+ELSEIF tipoOperacion=5 THEN
+SELECT * FROM tbl_informacionLaboral WHERE fk_informacion_personal_informacionLaboral=fkInfoPersonal;
 END IF;
 END//
 DELIMITER ;
@@ -501,6 +593,8 @@ UPDATE tbl_informacionMedica1 SET prestacionMedica_informacionMedica1=prestacion
 fk_informacion_personal_informacionMedica1=fkInfoPersonal WHERE tbl_informacionMedica1=id;
 ELSEIF tipoOperacion=4 THEN
 DELETE FROM tbl_informacionMedica1 WHERE tbl_informacionMedica1=id;
+ELSEIF tipoOperacion=5 THEN
+SELECT *  FROM tbl_informacionMedica1 WHERE fk_informacion_personal_informacionMedica1=fkInfoPersonal;
 END IF;
 END//
 DELIMITER ;
@@ -521,6 +615,8 @@ fk_parentesco_del_contacto_informacionMedica2=fkParentesco, nivel_de_actividad_f
 es_fumador_informacionMedica2=es_fumador, fk_grupo_sanguineo_informacionMedica2=fk_grupoSanguineo, fk_informacion_personal_informacionMedica2=fk_inforPersonal WHERE id_informacionMedica2=id;
 ELSEIF tipoOperacion=4 THEN
 DELETE FROM tbl_informacionMedica2 WHERE id_informacionMedica2=id;
+ELSEIF tipoOperacion=5 THEN
+SELECT * FROM tbl_informacionMedica2 WHERE fk_informacion_personal_informacionMedica2=fk_inforPersonal;
  END IF;
 END//
 DELIMITER ;
@@ -538,7 +634,8 @@ UPDATE tbl_informacionFamiliar SET nombres_informacionFamiliar=nombresInfoFlia, 
 fk_parentesco_informacionFamiliar=fk_parentesco, fk_informacionPersonal_informacionFamiliar=fk_inforPersonal WHERE id_informacionFamiliar=id;
 ELSEIF tipoOperacion=4 THEN
 DELETE FROM tbl_informacionFamiliar WHERE id_informacionFamiliar=id;
-
+ELSEIF tipoOperacion=5 THEN
+SELECT * FROM tbl_informacionFamiliar WHERE fk_informacionPersonal_informacionFamiliar=fk_inforPersonal;
 END IF;
 END//
 DELIMITER ;
@@ -553,9 +650,11 @@ ELSEIF tipoOperacion=2 THEN
 SELECT * FROM tbl_informacionAcademica WHERE id_informacionAcademica=id;
 ELSEIF tipoOperacion=3 THEN
 UPDATE tbl_informacionAcademica SET fecha_informacionAcademica=fechaInfoAcademica, actividad_informacionAcademica=actividadInfoAcademica, fk_estado_curso_informacionAcademica=fk_estadoCurso,
-fk_informacionPersonal_informacionAcademica=fk_infoPersonal   WHERE id_informacionAcademica=id;
+fk_informacionPersonal_informacionAcademica=fk_infoPersonal WHERE id_informacionAcademica=id;
 ELSEIF tipoOperacion=4 THEN
 DELETE FROM tbl_informacionAcademica WHERE id_informacionAcademica=id;
+ELSEIF tipoOperacion=5 THEN
+SELECT * FROM tbl_informacionAcademica WHERE fk_informacionPersonal_informacionAcademica=fk_infoPersonal;
 END IF;
 END//
 DELIMITER ;
@@ -574,6 +673,8 @@ UPDATE tbl_entrenamientoEstandar SET fecha_entrenamientoEstandar=fechaInfoEntren
 fk_estado_curso_entrenamientoEstandar=fk_estadoCurso, fk_informacionPersonal_entrenamientoEstandar=fk_inforPersonal WHERE id_entrenamientoEstandar=id;
 ELSEIF tipoOperacion=4 THEN
 DELETE FROM tbl_entrenamientoEstandar WHERE id_entrenamientoEstandar=id;
+ELSEIF tipoOperacion=5 THEN
+SELECT * FROM tbl_entrenamientoEstandar WHERE fk_informacionPersonal_entrenamientoEstandar=fk_inforPersonal;
 END IF;
 END//
 DELIMITER ;
@@ -592,6 +693,8 @@ UPDATE tbl_informacionHistorica SET fk_region_informacionHistorica=fkRegion, cue
  tipoDeCambio_informacionHistorica=tipoDeCambio, motivo_informacionHistorica=motivo, detalle_informacionHistorica=detalle, fk_informacionPersonal_informacionHistorica=fkInformacionPersonal  WHERE id_informacionHistorica=id;
 ELSEIF tipoOperacion=4 THEN
 DELETE FROM  tbl_informacionHistorica WHERE id_informacionHistorica=id;
+ELSEIF tipoOperacion=5 THEN
+SELECT * FROM  tbl_informacionHistorica WHERE fk_informacionPersonal_informacionHistorica=fkInformacionPersonal;
 END IF;
 END//
 DELIMITER ;
@@ -1131,11 +1234,11 @@ VALUES
 	(345,'Torres del Paine',53);
 
 
-INSERT INTO tbl_estado VALUES (NULL, 'Activo');
-INSERT INTO tbl_estado VALUES (NULL, 'Suspendido');
-INSERT INTO tbl_estado VALUES (NULL, 'Separado');
-INSERT INTO tbl_estado VALUES (NULL, 'Fallecido');
-INSERT INTO tbl_estado VALUES (NULL, 'Mártir');
+INSERT INTO tbl_estadoBombero VALUES (NULL, 'Activo');
+INSERT INTO tbl_estadoBombero VALUES (NULL, 'Suspendido');
+INSERT INTO tbl_estadoBombero VALUES (NULL, 'Separado');
+INSERT INTO tbl_estadoBombero VALUES (NULL, 'Fallecido');
+INSERT INTO tbl_estadoBombero VALUES (NULL, 'Mártir');
 
 INSERT INTO tbl_cargo (nombre_cargo) VALUES
 ('Superintendente'),
@@ -1206,65 +1309,10 @@ CALL CRUDInformacionEntrenamientoEstandar (1,'2018-09-09', 'algo',1,1,1);
 CALL CRUDInformacionHistorica (1,1,'Algun cuerpo',1,'2010-10-10', 'Transferencia', 'Solicitud personal', 'No disponible',1,1);
 
 
-/*
-DELIMITER //
-CREATE PROCEDURE crearUsuario () -- DROP PROCEDURE crearUsuario
-MODIFIES SQL DATA
-BEGIN
-DECLARE nombreUsuario VARCHAR(12);
-DECLARE idMasAlto INT;
-DECLARE pass VARCHAR (12);
-START TRANSACTION;
-SELECT MAX(id) INTO @idMasAlto FROM informacionPersonal;
-SELECT rut INTO @nombreUsuario FROM informacionPersonal WHERE id= @idMasAlto;
-SET pass='123';
-SET @query1 = CONCAT("
-        CREATE USER  ",@nombreUsuario,"@localhost IDENTIFIED BY ",@pass,""
-        );
-PREPARE stmt FROM @query1; EXECUTE stmt; DEALLOCATE PREPARE stmt;
-SET @query1 = CONCAT("
-    GRANT SELECT ON bomberosPrimeraIteracion.* TO ",@nombreUsuario,"@localhost"
-        );
-PREPARE stmt FROM @query1; EXECUTE stmt; DEALLOCATE PREPARE stmt;
-COMMIT;
-END //
-DELIMITER ;
-*/
+
 
 
 /*
-select * from mysql.user;
-SELECT * FROM usuario;
-SELECT * FROM informacionPersonal;
-SELECT * FROM region;
-
-SELECT nombre AS 'Nombre',
-             CASE WHEN factorRHPositivo=0
-             THEN 'Negativo'
-                ELSE 'Positivo'
-       END AS Factor_RH FROM grupo_sanguineo;
-
-
-
-SELECT enfermedad_cronica.nombre FROM enfermedad_cronica, enfermedad_cronica_informacionMedica, informacionMedica  WHERE enfermedad_cronica_informacionMedica.fk_enfermedad_cronica=enfermedad_cronica.id
-AND enfermedad_cronica_informacionMedica.fk_informacionMedica=informacionMedica.id; -- con esta se pueden ver los nombres de las alergias
-
-
-
-SELECT *, DATE_FORMAT(fecha_de_nacimiento,'%d/%m/%Y') AS niceDate
-FROM informacionPersonal
-ORDER BY fecha_de_nacimiento DESC
-LIMIT 0,14;
-
-
-SET @exporter = 'yolo';
-
-SET @createUser = CONCAT(
-            "CREATE USER ",@exporter,"@localhost IDENTIFIED BY 'mypass'"
-          );
-
-PREPARE smtpCreateUser FROM @createUser;
-EXECUTE smtpCreateUser;
 
 
 DROP DATABASE bomberosBD;
