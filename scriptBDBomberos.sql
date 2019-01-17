@@ -1291,6 +1291,10 @@ INSERT INTO tbl_estado_unidad (nombre_estado_unidad) VALUES  ('Activo'), ('Inact
 
 
 -- Lamadas a procedimientos para probar
+
+SELECT * FROM tbl_medida;
+
+/*
 CALL CRUDUsuario (1,'Marcelo',1,'123',1); 
 
 CALL CRUDUnidad (6,'2000','200','300','333','555','3333','YOLO','2000-12-03','2012-06-11',15,2,1,1,1);
@@ -1309,7 +1313,7 @@ CALL CRUDInformacionEntrenamientoEstandar (1,'2018-09-09', 'algo',1,1,1);
 CALL CRUDInformacionHistorica (1,1,'Algun cuerpo',1,'2010-10-10', 'Transferencia', 'Solicitud personal', 'No disponible',1,1);
 
 
-
+*/
 
 
 /*

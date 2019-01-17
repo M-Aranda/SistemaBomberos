@@ -1,6 +1,6 @@
 <?php
 
-  Class Tbl_InfoMedica1{
+  Class Tbl_InfoMedica2{
 
 
         private $idInformacionMedica2;

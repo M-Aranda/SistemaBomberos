@@ -47,7 +47,7 @@
         return $this->tallaCalzado;
     }
 
-    public function setTallaChaquetaCamisa($tallaCalzado){
+    public function setTallaCalzado($tallaCalzado){
         $this->tallaCalzado = $tallaCalzado;
     }
 

@@ -51,6 +51,7 @@
         <br>
 
 
+<form method="post" action="controlador/CrearBombero.php">
 
 
 <div class="container " style="background:transparent">
@@ -102,6 +103,9 @@
                     </div>
                 </div>
             </div>
+
+            <input type="submit" value="Crear">
+            </form>
             <!-- INFORMACION PERSONAL -->
             <!-- INFORMACION bomberilL -->
             <br><br>
