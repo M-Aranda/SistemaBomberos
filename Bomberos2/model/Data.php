@@ -50,7 +50,7 @@ class Data{
     public function crearUsuario($usuario){
         $insert = "insert into tbl_usuario
         values(null, '".$usuario->getNombreUsuario()."',
-        '".$usuario->getPassUsuario()."')";
+        '".$usuario->getPassUsuario()."','".$usuario->getfkTipoUsuario()."')";
 
         $this->c->conectar();
         $this->c->ejecutar($insert);
@@ -59,6 +59,186 @@ class Data{
     }
 
 
+    public function getUsuario($nombre,$pass) {
+        $this->c->conectar();
+
+
+        $query = "SELECT * from usuario where nombre_usuario_usuario = '$nombre' and contrasenia_usuario_usuario = '$pass' ";
+
+        $rs = $this->c->ejecutar($query);
+
+
+        if($obj = $rs->fetch_object()){#por cada vuelta, pongo el registro en un objeto y el objeto en una lista
+            $u = new Tbl_Usuario();
+
+            $u->setIdUsuario($obj->id_usuario_usuario);
+            $u->setNombreUsuario($obj->nombre_usuario_usuario);
+            $u->setfkTipoUsuario($obj->fk_tipo_usuario__usuario);
+            $u->setPassUsuario($obj->contrasenia_usuario_usuario);
+            //nombre debe ser igual a lo que muestro en la bd
+        }
+        $this->c->desconectar();
+        return $u;
+    }
+
+
+    public function getUnidades(){
+
+        $lista = array();
+        $this->c->conectar();
+
+        $select = "SELECT * from tbl_estado_unidad;";
+
+
+
+        $rs = $this->c->ejecutar($select);
+        while($obj = $rs->fetch_object()){
+
+            $eu = new Tbl_EstadoUnidad();
+
+            $eu->setIdEstadoUnidad($obj->id_estado_unidad);
+            $eu->setNombreEstadoUnidad($obj->nombre_estado_unidad);
+
+
+            array_push($lista,$eu);
+        }
+
+        $this->c->desconectar();
+        return $lista;
+    }
+
+    public function getVehiculos(){
+
+        $lista = array();
+        $this->c->conectar();
+
+        $select = "SELECT * from tbl_tipo_vehiculo;";
+
+
+
+        $rs = $this->c->ejecutar($select);
+        while($obj = $rs->fetch_object()){
+
+            $eu = new Tbl_TipoVehiculo();
+
+            $eu->setIdTipoVehiculo($obj->id_tipo_vehiculo);
+            $eu->setNombreTipoVehiculo($obj->nombre_tipo_vehiculo);
+
+
+            array_push($lista,$eu);
+        }
+
+        $this->c->desconectar();
+        return $lista;
+    }
+
+
+
+    public function getEntidadPropietaria(){
+
+        $lista = array();
+
+        $this->c->conectar();
+
+        $select = "SELECT * from tbl_entidadPropietaria;";
+
+        $rs = $this->c->ejecutar($select);
+
+        while($obj = $rs->fetch_object()){
+
+            $eu = new Tbl_EntidadPropietaria();
+
+            $eu->setIdEntidadPropietaria($obj->id_entidadPropietaria);
+            $eu->setNombreEntidadPropietaria($obj->nombre_entidadPropietaria);
+
+
+            array_push($lista,$eu);
+        }
+
+        $this->c->desconectar();
+        return $lista;
+    }
+
+
+    public function getPerfiles(){
+
+        $lista = array();
+        $this->c->conectar();
+
+        $select = "SELECT * from tbl_tipo_usuario;";
+
+        $rs = $this->c->ejecutar($select);
+        while($obj = $rs->fetch_object()){
+
+            $tu = new Tbl_TipoUsuario();
+
+            $tu->setidTipoUsuario($obj->id_tipo_usuario);
+            $tu->setnombreTipoUsuario($obj->nombre_tipo_usuario);
+
+
+            array_push($lista,$tu);
+        }
+
+        $this->c->desconectar();
+        return $lista;
+    }
+
+
+    public function getTipoBombero(){
+
+        $lista = array();
+        $this->c->conectar();
+
+        $select = "SELECT * from tbl_estado;";
+
+
+
+        $rs = $this->c->ejecutar($select);
+        while($obj = $rs->fetch_object()){
+
+            $eu = new Tbl_Estado();
+
+            $eu->setIdEstado($obj->id_estado);
+            $eu->setNombreEstado($obj->nombre_estado);
+
+
+            array_push($lista,$eu);
+        }
+
+        $this->c->desconectar();
+        return $lista;
+    }
+
+    public function getCompanias(){
+
+        $lista = array();
+        $this->c->conectar();
+
+        $select = "SELECT * from tbl_compania;";
+
+
+
+        $rs = $this->c->ejecutar($select);
+        while($obj = $rs->fetch_object()){
+
+            $eu = new Tbl_Compania();
+
+            $eu->setIdCompania($obj->id_compania);
+            $eu->setNombreCompania($obj->nombre_compania);
+
+
+            array_push($lista,$eu);
+        }
+
+        $this->c->desconectar();
+        return $lista;
+    }
+
+
+}
+
+
+// uso de cruds y algunso gets para los combobox
     public function crearMedida ($medida){
       $query="CALL CRUDMedida (".$medida->getIdMedida().", '".$medida->getTallaChaquetaCamisa()."', '".$medida->getTallaPantalon()."',
     '".$medida->getTallaBuzo()."', '".$medida->getTallaCalzado()."', 1);";
