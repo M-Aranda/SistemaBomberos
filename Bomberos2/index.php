@@ -53,7 +53,7 @@
         <br>
 
 
-<form method="post" action="controlador/CrearBombero.php">
+<form method="post" action="controlador/CrearInfoPersonal.php">
 
 
 <div class="container " style="background:transparent">
