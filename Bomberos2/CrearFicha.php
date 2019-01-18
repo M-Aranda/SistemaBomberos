@@ -568,6 +568,42 @@
                             </div>
                             <div class="panel-body" style="margin-left: -30px;">
                                 <div class="col-sm-6">
+                                  Region : <!-- <input class="form-control" type="text" name="txtregion"> --><!--Region del libertador bernardo ohggins-->
+                                  <select class="form-control" name="cboRegion2">
+                                    <?php
+                                    require_once("model/Data.php");
+                                    require_once("model/Tbl_Region.php");
+                                    $d= new Data();
+
+                                    $regiones = $d->readRegiones();
+                                    foreach($regiones as $r => $region){
+                                    ?>
+                                    <option value="<?php echo $region->getIdRegion(); ?>"><?php echo $region->getNombreRegion(); ?></option>
+                                    <?php
+                                    }
+                                    ?>
+                                    </select>
+                                    Cuerpo : <input class="form-control" type="text" name="txtCuerpoInfoHistorica">
+                                    Compañia:
+                                    <select class="form-control" name="cboCompania2">
+                                      <?php
+                                      require_once("model/Data.php");
+                                      require_once("model/Tbl_Compania.php");
+                                      $d= new Data();
+
+                                      $companias = $d->readCompanias();
+                                      foreach($companias as $c => $compania){
+                                      ?>
+                                      <option value="<?php echo $compania->getIdCompania(); ?>"><?php echo $compania->getNombreCompania(); ?></option>
+                                      <?php
+                                      }
+                                      ?>
+                                      </select>
+                                    Fecha: <input class="form-control" type="date" name="fechaInfoHistorica">
+                                    Tipo de cambio: <input class="form-control" type="text" name="txtTipoCambioInfoHistorica">
+                                    Motivo: <input class="form-control" type="text" name="txtMotivoInfoHistorica">
+                                    Detalles: <input class="form-control" type="text" name="txtDetallesInfoHistorica">
+
                                   <table class="table table-striped">
                                       <thead>
                                         <tr>

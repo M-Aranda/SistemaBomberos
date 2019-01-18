@@ -133,9 +133,7 @@ class Data{
     }
 
 
-
     public function getEntidadPropietaria(){
-
         $lista = array();
 
         $this->c->conectar();
@@ -235,7 +233,7 @@ class Data{
     }
 
 
-}
+
 
 
 // uso de cruds y algunso gets para los combobox
