@@ -105,6 +105,7 @@
         require_once("model/Data.php");
         $data = new Data();
 
+
     ?>
 
 
@@ -128,6 +129,7 @@
                               <div style="margin-left: 0px;">
                                 <img src="images/avatar_opt.jpg">
                               </div>
+                              <form action="controlador/CrearInfoPersonal.php" method="post">
                               Talla Chaqueta/camisa : <input class="form-control" type="text" name="txtchaqueta">
                               Talla Pantalon: <input class="form-control" type="text" name="txtpantalon">
                               Talla buzo: <input class="form-control" type="text" name="txtbuzo">
@@ -145,18 +147,44 @@
                               Apellido Materno: <input class="form-control" name="txtApeMa">
                               Fecha Nacimiento: <input class="form-control" name="txtFecha" type="date">
                               Estado Civil:
-                              <select>
+                              <select class="form-control" name="cboEstadoCivil">
+                              <?php
 
+                              require_once("model/Data.php");
+                              require_once("model/Tbl_EstadoCivil.php");
+                              $d= new Data();
+
+                              $estadosCiviles = $d->readEstadosCiviles();
+                              foreach($estadosCiviles as $e => $estado){
+                              ?>
+                              <option value="<?php echo $estado->getIdEstadoCivil(); ?>"><?php echo $estado->getNombreEstadoCivil(); ?></option>
+                              <?php
+                              }
+                              ?>
                               </select>
                               Dirección: <textarea class="form-control" Type="textarea" name="txtDireccion" ></textarea>
                               Telefonos:  <input class="form-control" type="text" name="txtTelefonos">
                               Email: <input class="form-control" type="text" name="txtemail">
-                              Genero: <input class="form-control" type="text" name="txtgenero"> <!--Combobox-->
-                              <br>
+                              Genero:
+                              <select class="form-control" name="cboGenero">
+                                <?php
+                                require_once("model/Data.php");
+                                require_once("model/Tbl_Genero.php");
+                                $d= new Data();
+
+                                $generos = $d->readGeneros();
+                                foreach($generos as $g => $genero){
+                                ?>
+                                <option value="<?php echo $genero->getIdGenero(); ?>"><?php echo $genero->getNombreGenero(); ?></option>
+                                <?php
+                                }
+                                ?>
+                                </select>
                               <center> <input type="submit" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
                                   <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                               </center>
+                            </form>
 
                                                           <br>
                             </div>

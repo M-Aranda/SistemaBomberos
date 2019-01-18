@@ -1,18 +1,23 @@
 <?php
 
 require_once("Conexion.php");
-require_once("Tbl_Usuario.php");
-require_once("Tbl_InfoPersonal.php");
-require_once("Tbl_Medida.php");
 require_once("Tbl_EstadoCivil.php");
 require_once("Tbl_Genero.php");
+require_once("Tbl_InfoPersonal.php");
+require_once("Tbl_Medida.php");
+
+/*
+require_once("Tbl_Usuario.php");
 
 
 
-require_once("../model/Tbl_Region.php");
-require_once("../model/Tbl_Compañia.php");
-require_once("../model/Tbl_EstadoBombero.php");
-require_once("../model/Tbl_Cargo.php");
+
+
+
+require_once("Tbl_Region.php");
+require_once("Tbl_Compañia.php");
+require_once("Tbl_EstadoBombero.php");
+require_once("Tbl_Cargo.php");
 require_once("Tbl_comuna.php");
 require_once("Tbl_EntrenamientoEstandar.php");
 require_once("Tbl_EstadoCurso.php");
@@ -24,9 +29,9 @@ require_once("Tbl_InfoHistorica.php");
 require_once("Tbl_InfoLaboral.php");
 require_once("Tbl_InfoMedica1.php");
 require_once("Tbl_InfoMedica2.php");
-require_once("model/Parentesco.php");
-require_once("model/Provincia.php");
-
+require_once("Parentesco.php");
+require_once("Provincia.php");
+*/
 
 class Data{
     private $c;

@@ -1322,5 +1322,5 @@ CALL CRUDInformacionHistorica (1,1,'Algun cuerpo',1,'2010-10-10', 'Transferencia
 
 DROP DATABASE bomberosBD;
 
---comentario
+
 */

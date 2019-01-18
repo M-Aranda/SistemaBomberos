@@ -100,7 +100,7 @@ CREATE TABLE tbl_provincia (
   fk_region_provincia INT,
   FOREIGN KEY (fk_region_provincia) REFERENCES tbl_region (id_region),
   PRIMARY KEY (id_provincia)
-);
+); 
 
 
 CREATE TABLE tbl_comuna (
@@ -170,7 +170,7 @@ PRIMARY KEY (id_informacionLaboral)
 
 CREATE TABLE tbl_grupo_sanguineo (
 id_grupo_sanguineo INT AUTO_INCREMENT,
-nombre_grupo_sanguineo VARCHAR (30),
+nombre_grupo_sanguineo VARCHAR (30), 
 factorRHPositivo_grupo_sanguineo BOOLEAN,
 PRIMARY KEY (id_grupo_sanguineo)
 );
@@ -243,8 +243,8 @@ fecha_informacionAcademica DATE,
 actividad_informacionAcademica VARCHAR (300),
 fk_estado_curso_informacionAcademica INT,
 fk_informacionPersonal_informacionAcademica INT,
-FOREIGN KEY (fk_informacionPersonal_informacionAcademica) REFERENCES tbl_informacionPersonal (id_informacionPersonal),
-FOREIGN KEY (fk_estado_curso_informacionAcademica) REFERENCES tbl_estado_curso (id_estado_curso),
+FOREIGN KEY (fk_informacionPersonal_informacionAcademica) REFERENCES tbl_informacionPersonal (id_informacionPersonal), 
+FOREIGN KEY (fk_estado_curso_informacionAcademica) REFERENCES tbl_estado_curso (id_estado_curso), 
 PRIMARY KEY (id_informacionAcademica)
 );
 
@@ -256,8 +256,8 @@ fecha_entrenamientoEstandar DATE,
 actividad_entrenamientoEstandar VARCHAR (300),
 fk_estado_curso_entrenamientoEstandar INT,
 fk_informacionPersonal_entrenamientoEstandar INT,
-FOREIGN KEY (fk_informacionPersonal_entrenamientoEstandar) REFERENCES tbl_informacionPersonal (id_informacionPersonal),
-FOREIGN KEY (fk_estado_curso_entrenamientoEstandar) REFERENCES tbl_estado_curso (id_estado_curso),
+FOREIGN KEY (fk_informacionPersonal_entrenamientoEstandar) REFERENCES tbl_informacionPersonal (id_informacionPersonal), 
+FOREIGN KEY (fk_estado_curso_entrenamientoEstandar) REFERENCES tbl_estado_curso (id_estado_curso), 
 PRIMARY KEY (id_entrenamientoEstandar)
 );
 
@@ -274,8 +274,8 @@ motivo_informacionHistorica TEXT (2000),
 detalle_informacionHistorica VARCHAR (20000),
 fk_informacionPersonal_informacionHistorica INT,
 FOREIGN KEY (fk_compania_informacionHistorica) REFERENCES tbl_compania(id_compania),
-FOREIGN KEY (fk_informacionPersonal_informacionHistorica) REFERENCES tbl_informacionPersonal (id_informacionPersonal),
-FOREIGN KEY (fk_region_informacionHistorica) REFERENCES tbl_region (id_region),
+FOREIGN KEY (fk_informacionPersonal_informacionHistorica) REFERENCES tbl_informacionPersonal (id_informacionPersonal), 
+FOREIGN KEY (fk_region_informacionHistorica) REFERENCES tbl_region (id_region), 
 PRIMARY KEY (id_informacionHistorica)
 );
 
@@ -511,9 +511,9 @@ DELIMITER ;
 
 
 DELIMITER //
-CREATE PROCEDURE CRUDInformacionPersonal (id INT,rut VARCHAR(12), nombre VARCHAR (5000), apellidoPaterno VARCHAR(5000), apellidoMaterno VARCHAR(5000), fechaDeNacimiento DATE,
-fkEstadoCivil INT, alutra VARCHAR (5000), peso VARCHAR (5000), email VARCHAR (5000), fkGenero INT, telefonoFijo VARCHAR (5000), telefonoMovil VARCHAR (5000),
-direccionPersonal VARCHAR (5000), pertenecioABrigadaJuvenil VARCHAR (5000), esInstructor VARCHAR (5000), tipoOperacion INT )
+CREATE PROCEDURE CRUDInformacionPersonal (id INT, rut VARCHAR(12), nombre VARCHAR (5000), apellidoPaterno VARCHAR(5000), apellidoMaterno VARCHAR(5000), fechaDeNacimiento DATE,
+fkEstadoCivil INT, fkMedida INT, altura VARCHAR (5000), peso VARCHAR (5000), email VARCHAR (5000), fkGenero INT, telefonoFijo VARCHAR (5000), telefonoMovil VARCHAR (5000),
+direccionPersonal VARCHAR (5000), pertenecioABrigadaJuvenil VARCHAR (5000), esInstructor VARCHAR (5000), tipoOperacion INT ) 
 BEGIN
 
 DECLARE fkMedidas INT;
@@ -521,13 +521,13 @@ SELECT MAX(id_medida) INTO @fkMedidas FROM tbl_medida;
 
 IF tipoOperacion=1 THEN
 INSERT INTO tbl_informacionPersonal VALUES (NULL, rut, nombre, apellidoPaterno, apellidoMaterno, fechaDeNacimiento, fkEstadoCivil, fkMedidas,
-alutra, peso, email, fkGenero, telefonoFijo, telefonoMovil, direccionPersonal, pertenecioABrigadaJuvenil, esInstructor);
+altura, peso, email, fkGenero, telefonoFijo, telefonoMovil, direccionPersonal, pertenecioABrigadaJuvenil, esInstructor);
 ELSEIF tipoOperacion=2 THEN
 SELECT * FROM tbl_informacionPersonal WHERE id_informacionPersonal=id;
 ELSEIF tipoOperacion=3 THEN
 UPDATE tbl_informacionPersonal SET rut_informacionPersonal=rut, nombre_informacionPersonal=nombre, apellidoPaterno_informacionPersonal=apellidoPaterno,
 apellidoMaterno_informacionPersonal=apellidoMaterno, fechaDeNacimiento_informacionPersonal=fechaDeNacimiento, fk_estado_civil_informacionPersonal=fkEstadoCivil,
-fk_medida_informacionPersonal=fkMedidas, altura_en_metros_informacionPersonal=altura, peso_en_kg_informacionPersonal=peso, e_mail_informacionPersonal=email,
+fk_medida_informacionPersonal=fkMedida, altura_en_metros_informacionPersonal=altura, peso_en_kg_informacionPersonal=peso, e_mail_informacionPersonal=email,
 fk_genero_informacionPersonal=fkGenero, telefono_fijo_informacionPersonal=telefonoFijo, telefono_movil_informacionPersonal=telefonoMovil, direccion_personal_informacionPersonal=direccionPersonal,
 pertenecio_a_brigada_juvenil_informacionPersonal=pertenecioABrigadaJuvenil, esInstructor_informacionPersonal=esInstructor WHERE id_informacionPersonal=id;
 ELSEIF tipoOperacion=4 THEN
@@ -539,7 +539,7 @@ DELIMITER ;
 
 
 DELIMITER //
-CREATE PROCEDURE CRUDFichaInformacionBomberil (id INT,fkRegion INT, cuerpo VARCHAR (2000), fkCompania INT, fkCargo INT,
+CREATE PROCEDURE CRUDFichaInformacionBomberil (id INT,fkRegion INT, cuerpo VARCHAR (2000), fkCompania INT, fkCargo INT, 
 fechaIngreso DATE, NRG INT, fkEstado INT, NRC INT, fkInformacionPersonal INT, tipoOperacion INT)
 BEGIN
 IF tipoOperacion=1 THEN
@@ -725,7 +725,7 @@ DELIMITER ;
 
 -- INSERTS simples
 
-INSERT INTO tbl_permiso (nombre_permiso) VALUES
+INSERT INTO tbl_permiso (nombre_permiso) VALUES 
 ('Ficha Bomberos - Buscar Bomberos'),
 ('Ficha Bomberos - Crear Bombero'),
 ('Ficha Bomberos - Modificar'),
@@ -772,7 +772,7 @@ INSERT INTO tbl_tipo_usuario VALUES (NULL,'Ayudante General');
 INSERT INTO tbl_tipo_usuario VALUES (NULL,'Ayudante Maquinista');
 INSERT INTO tbl_tipo_usuario VALUES (NULL,'Secretario General');
 
-INSERT INTO tbl_tipo_usuario_permisos (fk_tipo_usuario_tipo_usuario_permisos,fk_permiso_tipo_usuario_permisos,otorgado_tipo_usuario_permisos) VALUES
+INSERT INTO tbl_tipo_usuario_permisos (fk_tipo_usuario_tipo_usuario_permisos,fk_permiso_tipo_usuario_permisos,otorgado_tipo_usuario_permisos) VALUES 
 (1,1,1),(1,2,1),(1,3,1),(1,4,1),(1,5,1),(1,6,1),(1,7,1),(1,8,1),(1,9,1),(1,10,1),(1,11,1),(1,12,1),(1,13,1),(1,14,1),(1,15,1),(1,16,1),(1,17,1),(1,18,1),(1,19,1),(1,20,1),(1,21,1),(1,22,1),(1,23,1),(1,24,1),(1,25,1),(1,26,1),(1,27,1),
 
 (2,1,1),(2,2,1),(2,3,1),(2,4,1),(2,5,1),(2,6,1),(2,7,1),(2,8,1),(2,9,1),(2,10,1),(2,11,1),(2,12,1),(2,13,1),(2,14,1),(2,15,1),(2,16,1),(2,17,1),(2,18,1),(2,19,0),(2,20,0),(2,21,0),(2,22,0),(2,23,0),(2,24,0),(2,25,0),(2,26,0),(2,27,0),
@@ -806,6 +806,7 @@ INSERT INTO tbl_estado_civil VALUES (NULL, 'Divorciado/a');
 INSERT INTO tbl_estado_civil VALUES (NULL, 'Separado/a');
 INSERT INTO tbl_estado_civil VALUES (NULL, 'Conviviente');
 
+
 INSERT INTO tbl_genero VALUES (NULL, 'Masculino');
 INSERT INTO tbl_genero VALUES (NULL, 'Femenino');
 
@@ -827,8 +828,8 @@ VALUES
 	(13,'Los Lagos','X'),
 	(14,'Aisén del General Carlos Ibáñez del Campo','XI'),
 	(15,'Magallanes y de la Antártica Chilena','XII');
-
-
+    
+    
     INSERT INTO tbl_provincia (id_provincia,nombre_provincia,fk_region_provincia)
 VALUES
 	(1,'Arica',1),
@@ -884,7 +885,7 @@ VALUES
 	(51,'Magallanes',15),
 	(52,'Tierra del Fuego',15),
 	(53,'Última Esperanza',15);
-
+    
     INSERT INTO tbl_comuna (id_comuna,nombre_comuna,fk_provincia_comuna)
 VALUES
 	(1,'Arica',1),
@@ -1233,7 +1234,7 @@ VALUES
 	(344,'Natales',53),
 	(345,'Torres del Paine',53);
 
-
+   
 INSERT INTO tbl_estadoBombero VALUES (NULL, 'Activo');
 INSERT INTO tbl_estadoBombero VALUES (NULL, 'Suspendido');
 INSERT INTO tbl_estadoBombero VALUES (NULL, 'Separado');
@@ -1249,7 +1250,7 @@ INSERT INTO tbl_cargo (nombre_cargo) VALUES
 ('Secretario General')
 ;
 
-INSERT INTO tbl_compania (nombre_compania) VALUES
+INSERT INTO tbl_compania (nombre_compania) VALUES 
 ('Primera'),
 ('Segunda'),
 ('Tercera')
@@ -1291,13 +1292,17 @@ INSERT INTO tbl_estado_unidad (nombre_estado_unidad) VALUES  ('Activo'), ('Inact
 
 
 -- Lamadas a procedimientos para probar
-CALL CRUDUsuario (1,'Marcelo',1,'123',1);
+
+-- SELECT * FROM tbl_medida;
+-- SELECT * FROM tbl_informacionPersonal;
+/*
+CALL CRUDUsuario (1,'Marcelo',1,'123',1); 
 
 CALL CRUDUnidad (6,'2000','200','300','333','555','3333','YOLO','2000-12-03','2012-06-11',15,2,1,1,1);
 
 
 CALL CRUDMedida (1,'XX','SS','42','41',1);
-CALL CRUDInformacionPersonal (1,'20898088-2','Marcelo', 'Aranda', 'Tatto','1991-12-16',1,'1,70','80,2','cheloz_20@hotmail.com',
+CALL CRUDInformacionPersonal (1,'20898088-2','Marcelo', 'Aranda', 'Tatto','1991-12-16',1,1,'1,70','80,2','cheloz_20@hotmail.com',
 1,'123123123123','958677107','Carretera El Cobre','No sabe', 'Creo que no',1);
 CALL CRUDFichaInformacionBomberil(1,1,'Machali',1,1,'2001-12-16',1,1,1,1,1);
 CALL CRUDInformacionLaboral (1,'Acquiried','algun lado','598677','empleado','2018-08-12','ciencias','masvida','ingeniero', 1, 1);
@@ -1309,7 +1314,7 @@ CALL CRUDInformacionEntrenamientoEstandar (1,'2018-09-09', 'algo',1,1,1);
 CALL CRUDInformacionHistorica (1,1,'Algun cuerpo',1,'2010-10-10', 'Transferencia', 'Solicitud personal', 'No disponible',1,1);
 
 
-
+*/
 
 
 /*

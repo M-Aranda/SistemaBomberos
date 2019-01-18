@@ -74,6 +74,6 @@ $d->crearInformacionPersonalDeBombero($inforPersonal);
 
 
 
-header("location: ../index.php");
+header("location: ../CrearFicha.php");
 
 ?>
