@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-
-
-
-
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -41,11 +37,11 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bomberos <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="CrearFicha.php">Crear</a></li>
+            <li><a href="index.php">Crear</a></li>
             <li><a href="verFicha.php">Ver Ficha</a></li>
-            <li><a href="buscarBombero.php">Buscar</a></li>
-            <li><a href="modificarBombero.php">Modificar</a></li>
-            <li><a href="eliminarBombero.php">Eliminar</a></li>
+            <li><a href="#">Buscar</a></li>
+            <li><a href="#">Modificar</a></li>
+            <li><a href="#">Eliminar</a></li>
           </ul>
         </li>
       </ul>
@@ -54,10 +50,10 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Unidades <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="crearUnidades.php">Crear</a></li>
-            <li><a href="verUnidades.php">Ver Unidades</a></li>
-            <li><a href="modificarUnidades.php">Modificar</a></li>
-            <li><a href="eliminarUnidades.php">Eliminar</a></li>
+            <li><a href="index.php">Crear</a></li>
+            <li><a href="#">Ver Unidades</a></li>
+            <li><a href="#">Modificar</a></li>
+            <li><a href="#">Eliminar</a></li>
           </ul>
         </li>
       </ul>
@@ -77,19 +73,61 @@
       <br>
       <br>
       <br>
-      <button class="btn btn-default" style="width: 150px;" style="margin-top: 400px"> <a href="crearUsuario.php" style="text-decoration:none;color:black;">Crear Usuario</a> </button>
+      <button class="btn btn-default" style="width: 150px;" style="margin-top: 400px"> <a href="crearUsuario.html" style="text-decoration:none;color:black;">Crear Usuario</a> </button>
 
       <br>
       <br>
-      <button class="btn btn-danger" style="width: 150px;" style="margin-top: 400px"> <a href="controlador/CerrarSesion.php" style="text-decoration:none;color:black;">Cerrar Sesion</a> </button>
-
-
-
-
+      <button class="btn btn-danger" style="width: 150px;" style="margin-top: 400px"> <a href="#" style="text-decoration:none;color:black;">Cerrar Sesion</a> </button>
 
     </div><!-- /.navbar-collapse -->
+
   </nav>
 
-  </div>
+  <div class = "cuerpo" style="
+    margin-left: 20%;
+    float: left;
+    width: 75%;
+    padding-left: 5%;
+    padding-top: -100%;
+    margin-top: -600px;
+    margin-bottom: -1000px;
+    ">
+
+  <h5>Buscar</h5> <input type="text" name="txtBuscar"  placeholder="Buscar por nombre">
+
+    <h5>Tipo Bombero</h5>
+    <select>
+
+    </select>
+
+      <h5>Compañia</h5>
+      <select>
+
+      </select>
+
+  <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Rut</th>
+          <th>Nombre</th>
+          <th>APP</th>
+          <th>Compañia</th>
+          <th>Ver Ficha</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>John</td>
+          <td>Doe</td>
+          <td>john@example.com</td>
+          <td>sadsda</td>
+        </tr>
+
+      </tbody>
+    </table>
+
+
+
+
   </body>
 </html>

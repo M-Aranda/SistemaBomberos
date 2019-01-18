@@ -148,7 +148,14 @@ class Data{
     }
 
 
+    public function crearInformacionHistorica($infoHistorica){
+      $query="CALL CRUDInformacionHistorica (1, ".$infoHistorica->getfkRegioninformacionHistorica().", '".$infoHistorica->getcuerpo()."', ".$infoHistorica->getcompania().",
+       ".$infoHistorica->getfechaDeCambio().", '".$infoHistorica->gettipoDeCambio()."', '".$infoHistorica->getmotivo()."', '".$infoHistorica->getdetalle()."', ".$infoHistorica->getfkInfoPersonalinformacionHistorica().", 1);";
 
+      $this->c->conectar();
+      $this->c->ejecutar($query);
+      $this->c->desconectar();
+    }
 
 
 

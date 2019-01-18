@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 
 
 
@@ -77,7 +77,7 @@
       <br>
       <br>
       <br>
-      <button class="btn btn-default" style="width: 150px;" style="margin-top: 400px"> <a href="crearUsuario.html" style="text-decoration:none;color:black;">Crear Usuario</a> </button>
+      <button class="btn btn-default" style="width: 150px;" style="margin-top: 400px"> <a href="crearUsuario.php" style="text-decoration:none;color:black;">Crear Usuario</a> </button>
 
       <br>
       <br>
@@ -100,7 +100,12 @@
     margin-top: -600px;
     margin-bottom: -1000px;
     ">
+    <?php
+        // unir vista con el modelo sin pasar por un controlador
+        require_once("model/Data.php");
+        $data = new Data();
 
+    ?>
 
 
   <!--  <div class="container " style="background:transparent">-->
@@ -139,7 +144,10 @@
                               Apellido Paterno: <input class="form-control" type="text" name="txtApePa" >
                               Apellido Materno: <input class="form-control" name="txtApeMa">
                               Fecha Nacimiento: <input class="form-control" name="txtFecha" type="date">
-                              Estado Civil: <input class="form-control" type="text"> <!--Combobox-->
+                              Estado Civil:
+                              <select>
+
+                              </select>
                               Dirección: <textarea class="form-control" Type="textarea" name="txtDireccion" ></textarea>
                               Telefonos:  <input class="form-control" type="text" name="txtTelefonos">
                               Email: <input class="form-control" type="text" name="txtemail">

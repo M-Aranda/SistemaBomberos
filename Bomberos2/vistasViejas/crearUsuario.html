@@ -2,8 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Inicio</title>
-    <link rel ="stylesheet" href="css/style.css" type="text/css">
+    <title>Crear Usuario</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -23,23 +22,30 @@
     <br>
     <br>
     <br>
-    <br>
-    <div class="container" style="width: 600px" style="height: 200px">
+    <div class="container" style="width: 589px" style="height: 200px">
             <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" >
                 <div class="container" >
                     <h3>Sistema Bomberos</h3>
                     <br>
-                    <form action= "Mantenedor.php" method="post" class="form-inline">
+                    <form action="controlador/CrearUsuario.php" method="post" class="form-inline">
                         <div class="form-group">
-                         &nbsp;&nbsp;Nombre: &nbsp;&nbsp;&nbsp;&nbsp; <input id="rut" type="text" name="txtNombre" placeholder="Ingrese Nombre" required="" class="form-control" style="width: 250px; text-align: center">
+                         &nbsp;&nbsp;Nombre: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input id="nombre" type="text" name="txtnombre" placeholder="EJ: nombre" required="" class="form-control" style="width: 250px; text-align: center">
                         </div>
                         <br>
                         <br>
                         <div class="form-group">
                         &nbsp;&nbsp;Contraseña:    <input id="pass" type="password" name="txtpass" placeholder="******" required="" class="form-control" style="width: 250px; text-align: center">
-                      </div>
-                 <input type="submit" value="Entrar" name="btnIniciarSesion" class="btn button-primary" style="width: 70px;"><br>
+                       </div>
+                       <br>
+                       <br>
+                    <!--   <div class="form-group">
+                       &nbsp;&nbsp;Perfil: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   <input id="pass" type="text" name="txtperfil" placeholder="" required="" class="form-control" style="width: 250px; text-align: center">
+                     </div> -->
+                 <input type="submit" value="Crear"  name="btnAceptar"class="btn button-primary" style="width: 60px;">
                     </form>
+                    <br>
+                <center>     <button class="btn button-primary" style="width: 60px;"> <a href="Mantenedor.html" style="text-decoration:none;color:black;">Volver</a> </button></center>
 
                 </div>
             </div>
