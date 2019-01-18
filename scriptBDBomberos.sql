@@ -118,6 +118,8 @@ nombre_estado VARCHAR (20000),
 PRIMARY KEY (id_estado)
 );
 
+
+
 CREATE TABLE tbl_cargo (
 id_cargo INT AUTO_INCREMENT,
 nombre_cargo VARCHAR (5000),
@@ -171,7 +173,6 @@ PRIMARY KEY (id_informacionLaboral)
 CREATE TABLE tbl_grupo_sanguineo (
 id_grupo_sanguineo INT AUTO_INCREMENT,
 nombre_grupo_sanguineo VARCHAR (30), 
-factorRHPositivo_grupo_sanguineo BOOLEAN,
 PRIMARY KEY (id_grupo_sanguineo)
 );
 
@@ -1257,14 +1258,14 @@ INSERT INTO tbl_compania (nombre_compania) VALUES
 ;
 
 
-INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'A',0);
-INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'B',0);
-INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'AB',0);
-INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'0',0);
-INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'A',1);
-INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'B',1);
-INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'AB',1);
-INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'0',1);
+INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'A Negativo');
+INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'B Negativo');
+INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'AB Negativo');
+INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'0 Negativo');
+INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'A Positivo');
+INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'B Positivo');
+INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'AB Positivo');
+INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'0 Positivo');
 
 INSERT INTO tbl_parentesco VALUES (NULL, 'Padre');
 INSERT INTO tbl_parentesco VALUES (NULL, 'Madre');

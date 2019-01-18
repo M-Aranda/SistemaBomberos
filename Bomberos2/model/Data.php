@@ -1,14 +1,16 @@
 <?php
 
 require_once("Conexion.php");
+/*
 require_once("Tbl_EstadoCivil.php");
 require_once("Tbl_Genero.php");
 require_once("Tbl_InfoPersonal.php");
 require_once("Tbl_Medida.php");
+*/
 
 /*
 require_once("Tbl_Usuario.php");
-
+require_once("Tbl_Compania"); (innecesario)
 
 
 
@@ -208,6 +210,126 @@ class Data{
        $this->c->desconectar();
        return $listadoGeneros;
 
+    }
+
+
+    public function readCompanias (){
+      $this->c->conectar();
+      $query="SELECT * FROM tbl_compania;";
+      $rs = $this->c->ejecutar($query);
+      $listado = array();
+      while($reg = $rs->fetch_array()){
+            $id=$reg[0];
+           $nombre=$reg[1];
+           $objeto = new Tbl_Compania();
+           $objeto->setIdCompania($id);
+           $objeto->setNombreCompania($nombre);
+           $listado[]=$objeto;
+       }
+       $this->c->desconectar();
+       return $listado;
+    }
+
+    public function readCargos (){
+      $this->c->conectar();
+      $query="SELECT * FROM tbl_cargo;";
+      $rs = $this->c->ejecutar($query);
+      $listado = array();
+      while($reg = $rs->fetch_array()){
+          $id=$reg[0];
+           $nombre=$reg[1];
+           $cargo= new Tbl_Cargo();
+           $cargo->setIdCargo($id);
+           $cargo->setNombreCargo($nombre);
+           $listado[]=$cargo;
+       }
+       $this->c->desconectar();
+       return $listado;
+    }
+
+    public function readEstadosDeBomberos (){
+      $this->c->conectar();
+      $query="SELECT * FROM tbl_estadoBombero;";
+      $rs = $this->c->ejecutar($query);
+      $listado = array();
+      while($reg = $rs->fetch_array()){
+           $id=$reg[0];
+           $nombre=$reg[1];
+           $obj = new Tbl_EstadoBombero();
+           $obj->setIdEstado($id);
+           $obj->setNombreEstado($nombre);
+           $listado[]=$obj;
+       }
+       $this->c->desconectar();
+       return $listado;
+    }
+
+    public function readRegiones (){
+      $this->c->conectar();
+      $query="SELECT * FROM tbl_region;";
+      $rs = $this->c->ejecutar($query);
+      $listado = array();
+      while($reg = $rs->fetch_array()){
+           $id=$reg[0];
+           $nombre=$reg[1];
+           $obj = new Tbl_Region();
+           $obj->setIdRegion($id);
+           $obj->setNombreRegion($nombre);
+           $listado[]=$obj;
+       }
+       $this->c->desconectar();
+       return $listado;
+    }
+
+    public function readGruposSanguineos (){
+      $this->c->conectar();
+      $query="SELECT * FROM tbl_grupo_sanguineo;";
+      $rs = $this->c->ejecutar($query);
+      $listado = array();
+      while($reg = $rs->fetch_array()){
+           $id=$reg[0];
+           $nombre=$reg[1];
+           $obj = new Tbl_GrupoSanguineo();
+           $obj->setIdGrupoSanguineo($id);
+           $obj->setNombreGrupoSanguineo($nombre);
+           $listado[]=$obj;
+       }
+       $this->c->desconectar();
+       return $listado;
+    }
+
+    public function readParentescos (){
+      $this->c->conectar();
+      $query="SELECT * FROM tbl_parentesco;";
+      $rs = $this->c->ejecutar($query);
+      $listado = array();
+      while($reg = $rs->fetch_array()){
+           $id=$reg[0];
+           $nombre=$reg[1];
+           $obj = new Tbl_Parentesco();
+           $obj->setIdParentesco($id);
+           $obj->setNombreParentesco($nombre);
+           $listado[]=$obj;
+       }
+       $this->c->desconectar();
+       return $listado;
+    }
+
+    public function readEstadosCurso (){
+      $this->c->conectar();
+      $query="SELECT * FROM tbl_estado_curso;";
+      $rs = $this->c->ejecutar($query);
+      $listado = array();
+      while($reg = $rs->fetch_array()){
+           $id=$reg[0];
+           $nombre=$reg[1];
+           $obj = new Tbl_EstadoCurso();
+           $obj->setIdEstadoCurso($id);
+           $obj->setNombreEstadoCurso($nombre);
+           $listado[]=$obj;
+       }
+       $this->c->desconectar();
+       return $listado;
     }
 
 

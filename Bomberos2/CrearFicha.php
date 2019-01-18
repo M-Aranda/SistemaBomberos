@@ -210,15 +210,72 @@
                         </div>
                         <div class="panel-body">
                             <div class="col-sm-6">
-                              Region : <input class="form-control" type="text" name="txtregion"> <!--Region del libertador bernardo ohggins-->
-                              Compañia: <input class="form-control" type="text" name="txtcompania">  <!--Combobox-->
-                              Fecha Ingreso: <input class="form-control" type="text" name="txtfingreso">
+                              Region : <!-- <input class="form-control" type="text" name="txtregion"> --><!--Region del libertador bernardo ohggins-->
+                              <select class="form-control" name="cboRegion">
+                                <?php
+                                require_once("model/Data.php");
+                                require_once("model/Tbl_Region.php");
+                                $d= new Data();
+
+                                $regiones = $d->readRegiones();
+                                foreach($regiones as $r => $region){
+                                ?>
+                                <option value="<?php echo $region->getIdRegion(); ?>"><?php echo $region->getNombreRegion(); ?></option>
+                                <?php
+                                }
+                                ?>
+                                </select>
+                              Compañia: <!-- <input class="form-control" type="text" name="txtcompania"> --> <!--Combobox-->
+                              <select class="form-control" name="cboCompania">
+                                <?php
+                                require_once("model/Data.php");
+                                require_once("model/Tbl_Compania.php");
+                                $d= new Data();
+
+                                $companias = $d->readCompanias();
+                                foreach($companias as $c => $compania){
+                                ?>
+                                <option value="<?php echo $compania->getIdCompania(); ?>"><?php echo $compania->getNombreCompania(); ?></option>
+                                <?php
+                                }
+                                ?>
+                                </select>
+                              Fecha Ingreso: <input class="form-control" type="date" name="txtfingreso">
                               Nº Reg.General: <input class="form-control" type="text" name="txtgeneral">
                             </div>
                             <div class="col-md-6">
                               Cuerpo: <input class="form-control" type="text" name="txtcuerpo"> <!-- Machali-->
-                              Cargo: <input class="form-control" type="text" name="txtcargo">
-                              Estado: <input class="form-control" type="text" name="txtestado" > <!--Combobox -->
+                              Cargo: <!-- <input class="form-control" type="text" name="txtcargo"> -->
+                              <select class="form-control" name="cboCargo">
+                                <?php
+                                require_once("model/Data.php");
+                                require_once("model/Tbl_Cargo.php");
+                                $d= new Data();
+
+                                $cargos = $d->readCargos();
+                                foreach($cargos as $c => $cargo){
+                                ?>
+                                <option value="<?php echo $cargo->getIdCargo(); ?>"><?php echo $cargo->getNombreCargo(); ?></option>
+                                <?php
+                                }
+                                ?>
+                                </select>
+
+                              Estado: <!-- <input class="form-control" type="text" name="txtestado" > --> <!--Combobox -->
+                              <select class="form-control" name="cboEstadoBombero">
+                                <?php
+                                require_once("model/Data.php");
+                                require_once("model/Tbl_EstadoBombero.php");
+                                $d= new Data();
+
+                                $estados = $d->readEstadosDeBomberos();
+                                foreach($estados as $e => $estado){
+                                ?>
+                                <option value="<?php echo $estado->getIdEstado(); ?>"><?php echo $estado->getNombreEstado(); ?></option>
+                                <?php
+                                }
+                                ?>
+                                </select>
                               Nº Reg.Cia: <input class="form-control" name="txtcia">
 
                             </div>
@@ -281,11 +338,39 @@
                             </div>
                             <div class="col-md-6">
                               Telefono del Contacto : <input class="form-control" type="text" name="txttlfcontacto">
-                              Parentesco del Contacto: <input class="form-control" type="text" name="txtparentesco">
+                              Parentesco del Contacto: <!-- <input class="form-control" type="text" name="txtparentesco"> -->
+                              <select class="form-control" name="cboParentesco1">
+                                <?php
+                                require_once("model/Data.php");
+                                require_once("model/Tbl_Parentesco.php");
+                                $d= new Data();
+
+                                $parentescos = $d->readParentescos();
+                                foreach($parentescos as $p => $parentesco){
+                                ?>
+                                <option value="<?php echo $parentesco->getIdParentesco(); ?>"><?php echo $parentesco->getNombreParentesco(); ?></option>
+                                <?php
+                                }
+                                ?>
+                                </select>
                               Nivel de Actividad Fisica: <input class="form-control" type="text" name="txtactvfisica">
                               Donante: <input class="form-control" type="text" name="txtdonante">
                               Fumador: <input class="form-control" type="text" name="txtfumador">
-                              Grupo Sanguineo: <input class="form-control" type="text" name="txtgruposanguineo">
+                              Grupo Sanguineo: <!-- <input class="form-control" type="text" name="txtgruposanguineo"> -->
+                              <select class="form-control" name="cboGrupoSanguineo">
+                                <?php
+                                require_once("model/Data.php");
+                                require_once("model/Tbl_GrupoSanguineo.php");
+                                $d= new Data();
+
+                                $gruposSanguineos = $d->readGruposSanguineos();
+                                foreach($gruposSanguineos as $gs => $grupoSanguineo){
+                                ?>
+                                <option value="<?php echo $grupoSanguineo->getIdGrupoSanguineo(); ?>"><?php echo $grupoSanguineo->getNombreGrupoSanguineo(); ?></option>
+                                <?php
+                                }
+                                ?>
+                                </select>
 
                             </div>
                         </div>
@@ -310,8 +395,23 @@
 
                             <div class="col-sm-6">
                               Nombre: <input class="form-control" type="text" name="txttlfcontacto">
-                              Fecha de Nacimiento: <input class="form-control" type="date" name="txtparentesco">
-                              Parentesco: <input class="form-control" type="text" name="txtactvfisica">
+                              Fecha de Nacimiento: <input class="form-control" type="date" name="fechaNacPariente">
+                              Parentesco:
+                              <select class="form-control" name="cboParentesco2">
+                                <?php
+                                require_once("model/Data.php");
+                                require_once("model/Tbl_Parentesco.php");
+                                $d= new Data();
+
+                                $parentescos = $d->readParentescos();
+                                foreach($parentescos as $p => $parentesco){
+                                ?>
+                                <option value="<?php echo $parentesco->getIdParentesco(); ?>"><?php echo $parentesco->getNombreParentesco(); ?></option>
+                                <?php
+                                }
+                                ?>
+                                </select>
+                              <!-- Nivel de actividad fisica: <input class="form-control" type="text" name="txtactvfisica"> -->
                               <table class="table table-striped">
                                   <thead>
                                     <tr>
@@ -352,9 +452,23 @@
                         </div>
                         <div class="panel-body">
                             <div class="col-sm-6">
-                              Fecha: <input class="form-control" type="text" name="txttlfcontacto">
-                              Actividad: <input class="form-control" type="date" name="txtparentesco">
-                              Estado: <input class="form-control" type="text" name="txtactvfisica">
+                              Fecha: <input class="form-control" type="text" name="txtFechaActividadAcademica">
+                              Actividad: <input class="form-control" type="date" name="txtActivdidadAcademica">
+                              Estado:
+                              <select class="form-control" name="cboEstadoCursoAcademico">
+                                <?php
+                                require_once("model/Data.php");
+                                require_once("model/Tbl_EstadoCurso.php");
+                                $d= new Data();
+
+                                $estadosDeCursos = $d->readEstadosCurso();
+                                foreach($estadosDeCursos as $ec => $estado){
+                                ?>
+                                <option value="<?php echo $estado->getIdEstadoCurso(); ?>"><?php echo $estado->getNombreEstadoCurso(); ?></option>
+                                <?php
+                                }
+                                ?>
+                                </select>
                               <table class="table table-striped">
                                   <thead>
                                     <tr>
@@ -395,9 +509,24 @@
                             </div>
                             <div class="panel-body">
                                 <div class="col-sm-6">
-                                  Fecha: <input class="form-control" type="text" name="txttlfcontacto">
-                                  Actividad: <input class="form-control" type="date" name="txtparentesco">
-                                  Estado: <input class="form-control" type="text" name="txtactvfisica">
+                                  Fecha: <input class="form-control" type="date" name="fechaEntreamientoEstandar">
+                                  Actividad: <input class="form-control" type="text" name="txtActividadEntrenamientoEstandar">
+                                  Estado:
+                                  <select class="form-control" name="cboEstadoCursoEstandar">
+                                    <?php
+                                    require_once("model/Data.php");
+                                    require_once("model/Tbl_EstadoCurso.php");
+                                    $d= new Data();
+
+                                    $estadosDeCursos2 = $d->readEstadosCurso();
+                                    foreach($estadosDeCursos2 as $ec2 => $estado2){
+                                    ?>
+                                    <option value="<?php echo $estado2->getIdEstadoCurso(); ?>"><?php echo $estado2->getNombreEstadoCurso(); ?></option>
+                                    <?php
+                                    }
+                                    ?>
+                                    </select>
+
                                   <table class="table table-striped">
                                       <thead>
                                         <tr>
