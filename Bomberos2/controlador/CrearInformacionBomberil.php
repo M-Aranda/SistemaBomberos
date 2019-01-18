@@ -6,7 +6,7 @@ require_once("../model/Tbl_InfoBomberil.php");
 require_once("../model/Tbl_InfoPersonal.php");
 
 require_once("../model/Tbl_Region.php");
-require_once("../model/Tbl_Compañia.php");
+require_once("../model/Tbl_Compania.php");
 require_once("../model/Tbl_EstadoBombero.php");
 require_once("../model/Tbl_Cargo.php");
 
@@ -26,19 +26,23 @@ require_once("../model/Parentesco.php");
 require_once("../model/Provincia.php");
 */
 
-$id=0;
-$fk_region=$_REQUEST[""];
-$cuerpo=$_REQUEST[""];
-$fk_compania=$_REQUEST[""];
-$fk_cargo=$_REQUEST[""];
-$fecha_ingreso=$_REQUEST[""];
-$nrg=$_REQUEST[""];
-$fk_estado=$_REQUEST[""];
-$nrc=$_REQUEST[""];
-$fk_infoPersonal=$_REQUEST[""];
-
 $d= new Data();
+
+$id=0;
+$fk_region=$_REQUEST["cboRegion"];
+$cuerpo=$_REQUEST["txtcuerpo"];
+$fk_compania=$_REQUEST["cboCompania"];
+$fk_cargo=$_REQUEST["cboCargo"];
+$fecha_ingreso=$_REQUEST["txtfingreso"];
+$nrg=$_REQUEST["txtgeneral"];
+$fk_estado=$_REQUEST["cboEstadoBombero"];
+$nrc=$_REQUEST["txtcia"];
+$fk_infoPersonal=$d->getIdBomberoMasReciente();
+
+
 $infoBomberil= new Tbl_InfoBomberil();
+
+
 
 $infoBomberil->setIdInformacionBomberil($id);
 $infoBomberil->setfkRegioninformacionBomberil($fk_region);
@@ -53,7 +57,7 @@ $infoBomberil->setfkInfoPersonalinformacionBomberil($fk_infoPersonal);
 
 
 
-header("location: ../index.php");
+ header("location: ../CrearFicha.php");
 
 
 ?>

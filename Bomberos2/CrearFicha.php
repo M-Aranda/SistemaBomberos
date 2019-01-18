@@ -207,6 +207,10 @@
                     <div class="panel panel-primary">
                         <div class="panel-heading panel-title">
                             Informacion Bomberil
+
+                            <form action="controlador/CrearInformacionBomberil.php" method="post">
+
+
                         </div>
                         <div class="panel-body">
                             <div class="col-sm-6">
@@ -277,6 +281,9 @@
                                 ?>
                                 </select>
                               Nº Reg.Cia: <input class="form-control" name="txtcia">
+
+                              <input type="submit" value="agregar">
+                            </form>
 
                             </div>
                         </div>
@@ -602,7 +609,7 @@
                                     Fecha: <input class="form-control" type="date" name="fechaInfoHistorica">
                                     Tipo de cambio: <input class="form-control" type="text" name="txtTipoCambioInfoHistorica">
                                     Motivo: <input class="form-control" type="text" name="txtMotivoInfoHistorica">
-                                    Detalles: <input class="form-control" type="text" name="txtDetallesInfoHistorica">
+                                    Detalles: <input class="form-control" type="textarea" name="txtDetallesInfoHistorica">
 
                                   <table class="table table-striped">
                                       <thead>

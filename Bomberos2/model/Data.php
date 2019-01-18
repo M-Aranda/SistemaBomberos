@@ -514,6 +514,22 @@ class Data{
 
 
 
+    public function getIdBomberoMasReciente (){
+      $this->c->conectar();
+      $query="SELECT MAX(id_informacionPersonal ) FROM tbl_informacionPersonal;";
+      $rs = $this->c->ejecutar($query);
+
+      while($reg = $rs->fetch_array()){
+           $id=$reg[0];
+       }
+
+       $this->c->desconectar();
+       return $id;
+    }
+
+
+
+
     //header("location: ../Mantenedor.php");
 
 }
