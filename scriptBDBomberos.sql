@@ -511,8 +511,8 @@ DELIMITER ;
 
 
 DELIMITER //
-CREATE PROCEDURE CRUDInformacionPersonal (id INT,rut VARCHAR(12), nombre VARCHAR (5000), apellidoPaterno VARCHAR(5000), apellidoMaterno VARCHAR(5000), fechaDeNacimiento DATE,
-fkEstadoCivil INT, alutra VARCHAR (5000), peso VARCHAR (5000), email VARCHAR (5000), fkGenero INT, telefonoFijo VARCHAR (5000), telefonoMovil VARCHAR (5000),
+CREATE PROCEDURE CRUDInformacionPersonal (id INT, rut VARCHAR(12), nombre VARCHAR (5000), apellidoPaterno VARCHAR(5000), apellidoMaterno VARCHAR(5000), fechaDeNacimiento DATE,
+fkEstadoCivil INT, fkMedida INT, altura VARCHAR (5000), peso VARCHAR (5000), email VARCHAR (5000), fkGenero INT, telefonoFijo VARCHAR (5000), telefonoMovil VARCHAR (5000),
 direccionPersonal VARCHAR (5000), pertenecioABrigadaJuvenil VARCHAR (5000), esInstructor VARCHAR (5000), tipoOperacion INT ) 
 BEGIN
 
@@ -521,13 +521,13 @@ SELECT MAX(id_medida) INTO @fkMedidas FROM tbl_medida;
 
 IF tipoOperacion=1 THEN
 INSERT INTO tbl_informacionPersonal VALUES (NULL, rut, nombre, apellidoPaterno, apellidoMaterno, fechaDeNacimiento, fkEstadoCivil, fkMedidas,
-alutra, peso, email, fkGenero, telefonoFijo, telefonoMovil, direccionPersonal, pertenecioABrigadaJuvenil, esInstructor);
+altura, peso, email, fkGenero, telefonoFijo, telefonoMovil, direccionPersonal, pertenecioABrigadaJuvenil, esInstructor);
 ELSEIF tipoOperacion=2 THEN
 SELECT * FROM tbl_informacionPersonal WHERE id_informacionPersonal=id;
 ELSEIF tipoOperacion=3 THEN
 UPDATE tbl_informacionPersonal SET rut_informacionPersonal=rut, nombre_informacionPersonal=nombre, apellidoPaterno_informacionPersonal=apellidoPaterno,
 apellidoMaterno_informacionPersonal=apellidoMaterno, fechaDeNacimiento_informacionPersonal=fechaDeNacimiento, fk_estado_civil_informacionPersonal=fkEstadoCivil,
-fk_medida_informacionPersonal=fkMedidas, altura_en_metros_informacionPersonal=altura, peso_en_kg_informacionPersonal=peso, e_mail_informacionPersonal=email,
+fk_medida_informacionPersonal=fkMedida, altura_en_metros_informacionPersonal=altura, peso_en_kg_informacionPersonal=peso, e_mail_informacionPersonal=email,
 fk_genero_informacionPersonal=fkGenero, telefono_fijo_informacionPersonal=telefonoFijo, telefono_movil_informacionPersonal=telefonoMovil, direccion_personal_informacionPersonal=direccionPersonal,
 pertenecio_a_brigada_juvenil_informacionPersonal=pertenecioABrigadaJuvenil, esInstructor_informacionPersonal=esInstructor WHERE id_informacionPersonal=id;
 ELSEIF tipoOperacion=4 THEN
@@ -805,6 +805,7 @@ INSERT INTO tbl_estado_civil VALUES (NULL, 'Viudo/a');
 INSERT INTO tbl_estado_civil VALUES (NULL, 'Divorciado/a');
 INSERT INTO tbl_estado_civil VALUES (NULL, 'Separado/a');
 INSERT INTO tbl_estado_civil VALUES (NULL, 'Conviviente');
+
 
 INSERT INTO tbl_genero VALUES (NULL, 'Masculino');
 INSERT INTO tbl_genero VALUES (NULL, 'Femenino');
@@ -1292,8 +1293,8 @@ INSERT INTO tbl_estado_unidad (nombre_estado_unidad) VALUES  ('Activo'), ('Inact
 
 -- Lamadas a procedimientos para probar
 
-SELECT * FROM tbl_medida;
-
+-- SELECT * FROM tbl_medida;
+-- SELECT * FROM tbl_informacionPersonal;
 /*
 CALL CRUDUsuario (1,'Marcelo',1,'123',1); 
 
@@ -1301,7 +1302,7 @@ CALL CRUDUnidad (6,'2000','200','300','333','555','3333','YOLO','2000-12-03','20
 
 
 CALL CRUDMedida (1,'XX','SS','42','41',1);
-CALL CRUDInformacionPersonal (1,'20898088-2','Marcelo', 'Aranda', 'Tatto','1991-12-16',1,'1,70','80,2','cheloz_20@hotmail.com',
+CALL CRUDInformacionPersonal (1,'20898088-2','Marcelo', 'Aranda', 'Tatto','1991-12-16',1,1,'1,70','80,2','cheloz_20@hotmail.com',
 1,'123123123123','958677107','Carretera El Cobre','No sabe', 'Creo que no',1);
 CALL CRUDFichaInformacionBomberil(1,1,'Machali',1,1,'2001-12-16',1,1,1,1,1);
 CALL CRUDInformacionLaboral (1,'Acquiried','algun lado','598677','empleado','2018-08-12','ciencias','masvida','ingeniero', 1, 1);
@@ -1321,5 +1322,5 @@ CALL CRUDInformacionHistorica (1,1,'Algun cuerpo',1,'2010-10-10', 'Transferencia
 
 DROP DATABASE bomberosBD;
 
-
+--comentario
 */

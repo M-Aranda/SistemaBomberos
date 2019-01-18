@@ -24,7 +24,7 @@ Class Tbl_InfoPersonal{
         }
 
         public function getIdInfoPersonal(){
-            return $this->$idInformacionPersonal;
+            return $this->idInformacionPersonal;
         }
 
         public function setIdInfoPersonal($idInformacionPersonal){

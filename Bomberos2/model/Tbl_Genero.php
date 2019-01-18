@@ -19,10 +19,10 @@ Class Tbl_Genero{
 
 
   public function getNombreGenero(){
-    return $this->nombreGenero;
+    return $this->NombreGenero;
   }
 
-  public function setNombreEstadoCivil($NombreGenero){
+  public function setNombreGenero($NombreGenero){
       $this->NombreGenero = $NombreGenero;
   }
 

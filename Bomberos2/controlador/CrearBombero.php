@@ -48,20 +48,20 @@ $medida->setTallaCalzado($talla_calzado);
 
 $d->crearMedida($medida);
 
-/*
+$id=0;
 $rut=$_REQUEST["txtRut"];
 $nombre=$_REQUEST["txtNombre"];
 $apellido_paterno=$_REQUEST["txtApePa"];
 $apellido_materno=$_REQUEST["txtApeMa"];
 $fecha_de_nacimiento=$_REQUEST["txtFecha"];
-$fk_estado_civil=$_REQUEST[""];
-$fkMedida=$_REQUEST[""];
+$fk_estado_civil=$_REQUEST["cboEstadoCivil"];
+$fkMedida=0;//$_REQUEST[""];
 $altura=$_REQUEST["txtaltura"];
 $peso=$_REQUEST["txtpeso"];
 $e_mail=$_REQUEST["txtemail"];
-$fk_genero=$_REQUEST[""];
-$telefono_fijo=$_REQUEST[""];
-$telefono_movil=$_REQUEST[""];
+$fk_genero=$_REQUEST["cboGenero"];
+$telefono_fijo=$_REQUEST["txtTelefonos"];
+$telefono_movil=$_REQUEST["txtTelefonos"];
 $direccion_personal=$_REQUEST["txtDireccion"];
 $pertenecioABrigadaJuvenil=$_REQUEST["txtbrigada"];
 $esInstructor=$_REQUEST["txtinstructor"];
@@ -69,6 +69,7 @@ $esInstructor=$_REQUEST["txtinstructor"];
 
 $inforPersonal= new Tbl_InfoPersonal();
 
+$inforPersonal->setIdInfoPersonal($id);
 $inforPersonal->setRutInformacionPersonal($rut);
 $inforPersonal->setNombreInformacionPersonal($nombre);
 $inforPersonal->setApellidoPaterno($apellido_paterno);
@@ -88,7 +89,8 @@ $inforPersonal->setEsInstructor($esInstructor);
 
 $d->crearInformacionPersonalDeBombero($inforPersonal);
 
-*/
+
+
 
 header("location: ../index.php");
 

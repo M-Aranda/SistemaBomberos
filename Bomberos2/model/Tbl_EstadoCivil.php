@@ -3,7 +3,7 @@
 Class Tbl_EstadoCivil{
 
     private $idEstadoCivil;
-    private $NombreEstadoCivil;
+    private $nombreEstadoCivil;
 
     public function __construct(){
 
@@ -21,8 +21,8 @@ Class Tbl_EstadoCivil{
       return $this->nombreEstadoCivil;
     }
 
-    public function setNombreEstadoCivil($NombreEstadoCivil){
-        $this->NombreEstadoCivil = $NombreEstadoCivil;
+    public function setNombreEstadoCivil($nombreEstadoCivil){
+        $this->nombreEstadoCivil = $nombreEstadoCivil;
     }
 
 }

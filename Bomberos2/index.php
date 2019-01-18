@@ -12,6 +12,8 @@
         <title>Ficha Bomberos</title>
 </head>
 
+
+
 <body  background="images/fondofichaintranet.jpg" >
 
 
@@ -91,14 +93,37 @@
                           Apellido Paterno: <input class="form-control" type="text" name="txtApePa" >
                           Apellido Materno: <input class="form-control" name="txtApeMa">
                           Fecha Nacimiento: <input class="form-control" name="txtFecha" type="date">
-                          Estado Civil: <input class="form-control" type="text"> <!--Combobox-->
+                          Estado Civil:<!-- <input class="form-control" name="estadoCivil" type="text"> > <!--Combobox-->
+                          <select class="form-control" name="cboEstadoCivil">
+                          <?php
+                          require_once("model/Data.php");
+                          require_once("model/Tbl_EstadoCivil.php");
+                          $d=new Data();
+                          $estadosCiviles = $d->readEstadosCiviles();
+                          foreach($estadosCiviles as $e => $estado){
+                          ?>
+                          <option value="<?php echo $estado->getIdEstadoCivil(); ?>"><?php echo $estado->getNombreEstadoCivil(); ?></option>
+                          <?php
+                          }
+                          ?>
+                          </select>
                           Dirección: <textarea class="form-control" Type="textarea" name="txtDireccion" ></textarea>
                           Telefonos:  <input class="form-control" type="text" name="txtTelefonos">
                           Email: <input class="form-control" type="text" name="txtemail">
                           Altura :<input class="form-control" type="text" name="txtaltura">
                           Peso: <input class="form-control" type="text" name="txtpeso">
-                          Genero: <input class="form-control" type="text" name="txtgenero"> <!--Combobox-->
-
+                          Genero: <!--<input class="form-control" type="text" name="txtgenero">> <!--Combobox-->
+                          <select class="form-control" name="cboGenero">
+                          <?php
+                          require_once("model/Tbl_Genero.php");
+                          $generos = $d->readGeneros();
+                          foreach($generos as $g => $genero){
+                          ?>
+                          <option value="<?php echo $genero->getIdGenero(); ?>"><?php echo $genero->getNombreGenero(); ?></option>
+                          <?php
+                          }
+                          ?>
+                          </select>
                         </div>
                     </div>
                 </div>
