@@ -122,6 +122,7 @@
         <span><h5 style="font-weight:bold;">Tipo Bombero</h5></span>
               <select name="tipoBombero">
                 <?php
+                require_once("model/Tbl_EstadoBombero.php");
                     $tipoBombero = $data->readEstadosDeBomberos();
                     foreach ($tipoBombero as $tb) {
                         echo "<option value='".$tb->getIdEstado()."'>";
@@ -136,6 +137,7 @@
               <span><h5 style="font-weight:bold;">Compañia</h5></span>
                 <select name="compania">
                   <?php
+                  require_once("model/Tbl_Compania.php");
                       $compania = $data->readCompanias();
                       foreach ($compania as $c) {
                           echo "<option value='".$c->getIdCompania()."'>";
