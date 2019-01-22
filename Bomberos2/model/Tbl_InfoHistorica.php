@@ -1,6 +1,6 @@
 <?php
 
-Class Tbl_InfoHistorico{
+Class Tbl_InfoHistorica{
 
 
       private $idInformacionHistorica;

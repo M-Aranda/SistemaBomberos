@@ -4,7 +4,7 @@
 require_once("../model/Data.php");
 
 require_once("../model/Tbl_InfoFamiliar.php");
-require_once("../model/Parentesco.php");
+require_once("../model/Tbl_Parentesco.php");
 require_once("../model/Tbl_InfoPersonal.php");
 
 
@@ -25,11 +25,11 @@ require_once("../model/Provincia.php");
 */
 
 
-$idInformacionFamiliar=$_REQUEST[""];
-$nombresInformacionFamiliar=$_REQUEST[""];
-$fechaNacimientoInformacionFamiliar=$_REQUEST[""];
-$fkParentescoinformacionFamiliar=$_REQUEST[""];
-$fkInfoPersonalinformacionFamiliar=$_REQUEST[""];
+$idInformacionFamiliar=1;
+$nombresInformacionFamiliar=$_REQUEST["txtNombreContactoFamiliar"];
+$fechaNacimientoInformacionFamiliar=$_REQUEST["fechaNacPariente"];
+$fkParentescoinformacionFamiliar=$_REQUEST["cboParentesco2"];
+$fkInfoPersonalinformacionFamiliar=1;
 
 
 $infoFamiliar=new Tbl_InfoFamiliar();
@@ -46,7 +46,7 @@ $d= new Data();
 $d->crearInformacionFamiliar($infoFamiliar);
 
 
-header("location: ../index.php");
+header("location: ../CrearFicha.php");
 
 
 

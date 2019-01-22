@@ -55,7 +55,7 @@ $infoBomberil->setfkEstadoinformacionBomberil($fk_estado);
 $infoBomberil->setNRegCiainformacionBomberil($nrc);
 $infoBomberil->setfkInfoPersonalinformacionBomberil($fk_infoPersonal);
 
-
+$d->crearInformacionBomberil($infoBomberil);
 
  header("location: ../CrearFicha.php");
 

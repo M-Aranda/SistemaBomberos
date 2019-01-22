@@ -5,7 +5,7 @@ require_once("../model/Data.php");
 
 require_once("../model/Tbl_InfoMedica2.php");
 require_once("../model/Tbl_GrupoSanguineo.php");
-require_once("../model/Parentesco.php");
+require_once("../model/Tbl_Parentesco.php");
 require_once("../model/Tbl_InfoPersonal.php");
 
 
@@ -28,16 +28,16 @@ require_once("../model/Provincia.php");
 
 
 
- $idInformacionMedica2=$_REQUEST[""];
- $medicamentosHabitualesinformacionMedica2=$_REQUEST[""];
- $nombreContactoinformacionMedica2=$_REQUEST[""];
- $telefonoContactoinformacionMedica2=$_REQUEST[""];
- $fkParentescoContactoinformacionMedica2=$_REQUEST[""];
- $nivelActividadFisicainformacionMedica2=$_REQUEST[""];
- $esDonanteinformacionMedica2=$_REQUEST[""];
- $esFumadorinformacionMedica2=$_REQUEST[""];
- $fkGrupoSanguineoinformacionMedica2=$_REQUEST[""];
- $fkInfoPersonalinformacionMedica2=$_REQUEST[""];
+ $idInformacionMedica2=0;
+ $medicamentosHabitualesinformacionMedica2=$_REQUEST["medHabituales"];
+ $nombreContactoinformacionMedica2=$_REQUEST["txtNombContactoInfoMedica2"];
+ $telefonoContactoinformacionMedica2=$_REQUEST["txtTlfContactoInfoMedica2"];
+ $fkParentescoContactoinformacionMedica2=$_REQUEST["cboParentesco1"];
+ $nivelActividadFisicainformacionMedica2=$_REQUEST["txtactvfisica"];
+ $esDonanteinformacionMedica2=$_REQUEST["txtdonante"];
+ $esFumadorinformacionMedica2=$_REQUEST["txtfumador"];
+ $fkGrupoSanguineoinformacionMedica2=$_REQUEST["cboGrupoSanguineo"];
+ $fkInfoPersonalinformacionMedica2=1;
 
 
 $infoMedica2=new Tbl_InfoMedica2();
@@ -58,8 +58,9 @@ $d= new Data();
 
 $d->crearInformacionMedica2($infoMedica2);
 
+echo $medicamentosHabitualesinformacionMedica2;
 
-header("location: ../index.php");
+ header("location: ../CrearFicha.php");
 
 
 

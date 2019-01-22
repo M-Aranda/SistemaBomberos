@@ -1296,6 +1296,16 @@ INSERT INTO tbl_estado_unidad (nombre_estado_unidad) VALUES  ('Activo'), ('Inact
 
 -- SELECT * FROM tbl_medida;
 -- SELECT * FROM tbl_informacionPersonal;
+-- SELECT * FROM tbl_informacionBomberil
+-- SELECT * FROM tbl_informacionLaboral;
+-- SELECT * FROM tbl_informacionMedica1;
+-- SELECT * FROM tbl_informacionMedica2;
+-- SELECT * FROM tbl_informacionFamiliar;
+-- SELECT * FROM tbl_informacionAcademica;
+-- SELECT * FROM tbl_entrenamientoEstandar;
+-- SELECT * FROM tbl_informacionHistorica;
+
+
 /*
 CALL CRUDUsuario (1,'Marcelo',1,'123',1); 
 

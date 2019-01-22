@@ -5,8 +5,7 @@ require_once("../model/Data.php");
 
 require_once("../model/Tbl_InfoHistorica.php");
 require_once("../model/Tbl_InfoPersonal.php");
-
-require_once("../model/Tbl_Compañia.php");
+require_once("../model/Tbl_Compania.php");
 require_once("../model/Tbl_Region.php");
 
 
@@ -26,15 +25,15 @@ require_once("../model/Parentesco.php");
 require_once("../model/Provincia.php");
 */
 
- $idInformacionHistorica=$_REQUEST[""];
- $fkRegioninformacionHistorica=$_REQUEST[""];
- $cuerpo=$_REQUEST[""];
- $compania=$_REQUEST[""];
- $fechaDeCambio=$_REQUEST[""];
- $tipoDeCambio=$_REQUEST[""];
- $motivo=$_REQUEST[""];
- $detalle=$_REQUEST[""];
- $fkInfoPersonalinformacionHistorica=$_REQUEST[""];
+ $idInformacionHistorica=0;
+ $fkRegioninformacionHistorica=$_REQUEST["cboRegion2"];
+ $cuerpo=$_REQUEST["txtCuerpoInfoHistorica"];
+ $compania=$_REQUEST["cboCompania2"];
+ $fechaDeCambio=$_REQUEST["fechaInfoHistorica"];
+ $tipoDeCambio=$_REQUEST["txtTipoCambioInfoHistorica"];
+ $motivo=$_REQUEST["txtMotivoInfoHistorica"];
+ $detalle=$_REQUEST["txtDetallesInfoHistorica"];
+ $fkInfoPersonalinformacionHistorica=1;
 
 
 $infoHistorica=new Tbl_InfoHistorica();
@@ -51,14 +50,10 @@ $infoHistorica->setfkInfoPersonalinformacionHistorica($fkInfoPersonalinformacion
 
 $d= new Data();
 
+
 $d->crearInformacionHistorica($infoHistorica);
 
 
-header("location: ../index.php");
-
-
-
-
-
+header("location: ../CrearFicha.php");
 
 ?>

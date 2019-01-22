@@ -8,32 +8,7 @@ require_once("Tbl_InfoPersonal.php");
 require_once("Tbl_Medida.php");
 */
 
-/*
-require_once("Tbl_Usuario.php");
-require_once("Tbl_Compania"); (innecesario)
 
-
-
-
-
-require_once("Tbl_Region.php");
-require_once("Tbl_Compañia.php");
-require_once("Tbl_EstadoBombero.php");
-require_once("Tbl_Cargo.php");
-require_once("Tbl_comuna.php");
-require_once("Tbl_EntrenamientoEstandar.php");
-require_once("Tbl_EstadoCurso.php");
-require_once("Tbl_GrupoSanguineo.php");
-require_once("Tbl_InfoAcademica.php");
-require_once(".Tbl_InfoBomberil.php");
-require_once("Tbl_InfoFamiliar.php");
-require_once("Tbl_InfoHistorica.php");
-require_once("Tbl_InfoLaboral.php");
-require_once("Tbl_InfoMedica1.php");
-require_once("Tbl_InfoMedica2.php");
-require_once("Parentesco.php");
-require_once("Provincia.php");
-*/
 
 class Data{
     private $c;
@@ -271,7 +246,7 @@ class Data{
 
 
     public function crearInformacionLaboral($infoLaboral){
-      $query="CALL CRUDFichaInformacionBomberil (1, '".$infoLaboral->getnombreEmpresainformacionLaboral()."', '".$infoLaboral->getdireccionEmpresainformacionLaboral()."', '".$infoLaboral->gettelefonoEmpresainformacionLaboral()."',
+      $query="CALL CRUDInformacionLaboral (1, '".$infoLaboral->getnombreEmpresainformacionLaboral()."', '".$infoLaboral->getdireccionEmpresainformacionLaboral()."', '".$infoLaboral->gettelefonoEmpresainformacionLaboral()."',
        '".$infoLaboral->getcargoEmpresainformacionLaboral()."','".$infoLaboral->getfechaIngresoEmpresainformacionLaboral()."', '".$infoLaboral->getareaDeptoEmpresainformacionLaboral()."', '".$infoLaboral->getafp_informacionLaboral()."',
       '".$infoLaboral->getprofesion_informacionLaboral()."', ".$infoLaboral->getfkInfoPersonalinformacionLaboral().", 1);";
 
@@ -335,7 +310,7 @@ class Data{
 
     public function crearInformacionHistorica($infoHistorica){
       $query="CALL CRUDInformacionHistorica (1, ".$infoHistorica->getfkRegioninformacionHistorica().", '".$infoHistorica->getcuerpo()."', ".$infoHistorica->getcompania().",
-       ".$infoHistorica->getfechaDeCambio().", '".$infoHistorica->gettipoDeCambio()."', '".$infoHistorica->getmotivo()."', '".$infoHistorica->getdetalle()."', ".$infoHistorica->getfkInfoPersonalinformacionHistorica().", 1);";
+       '".$infoHistorica->getfechaDeCambio()."', '".$infoHistorica->gettipoDeCambio()."', '".$infoHistorica->getmotivo()."', '".$infoHistorica->getdetalle()."', ".$infoHistorica->getfkInfoPersonalinformacionHistorica().", 1);";
 
       $this->c->conectar();
       $this->c->ejecutar($query);

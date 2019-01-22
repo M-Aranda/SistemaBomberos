@@ -25,11 +25,11 @@ require_once("../model/Provincia.php");
 
 
 
-$idInformacionMedica1=$_REQUEST[""];
-$prestacionMedica_informacionMedica1=$_REQUEST[""];
-$alergias_informacionMedica1=$_REQUEST[""];
-$enfermedadesCronicasinformacionMedica1=$_REQUEST[""];
-$fkInfoPersonalinformacionMedica1=$_REQUEST[""];
+$idInformacionMedica1=0;
+$prestacionMedica_informacionMedica1=$_REQUEST["txtpresmedica"];
+$alergias_informacionMedica1=$_REQUEST["txtalergias"];
+$enfermedadesCronicasinformacionMedica1=$_REQUEST["txtenfermedadescronicas"];
+$fkInfoPersonalinformacionMedica1=1;
 
 $infoMedica1=new Tbl_InfoMedica1();
 
@@ -45,7 +45,7 @@ $d= new Data();
 $d->crearInformacionMedica1($infoMedica1);
 
 
-header("location: ../index.php");
+ header("location: ../CrearFicha.php");
 
 
 

@@ -23,16 +23,16 @@ require_once("../model/Provincia.php");
 */
 
 
-$idInformacionLaboral=$_REQUEST[""];
-$nombreEmpresainformacionLaboral=$_REQUEST[""];
-$direccionEmpresainformacionLaboral=$_REQUEST[""];
-$telefonoEmpresainformacionLaboral=$_REQUEST[""];
-$cargoEmpresainformacionLaboral=$_REQUEST[""];
-$fechaIngresoEmpresainformacionLaboral=$_REQUEST[""];
-$areaDeptoEmpresainformacionLaboral=$_REQUEST[""];
-$afp_informacionLaboral=$_REQUEST[""];
-$profesion_informacionLaboral=$_REQUEST[""];
-$fkInfoPersonalinformacionLaboral=$_REQUEST[""];
+$idInformacionLaboral=0;
+$nombreEmpresainformacionLaboral=$_REQUEST["txtnomempresa"];
+$direccionEmpresainformacionLaboral=$_REQUEST["txtdirecempresa"];
+$telefonoEmpresainformacionLaboral=$_REQUEST["txttlfempresa"];
+$cargoEmpresainformacionLaboral=$_REQUEST["cargoEmpresa"];
+$fechaIngresoEmpresainformacionLaboral=$_REQUEST["txfingresoempresa"];
+$areaDeptoEmpresainformacionLaboral=$_REQUEST["txtareatrabajo"];
+$afp_informacionLaboral=$_REQUEST["txtafp"];
+$profesion_informacionLaboral=$_REQUEST["txtprofesion"];
+$fkInfoPersonalinformacionLaboral=1;
 
 $infoLaboral=new Tbl_InfoLaboral();
 
@@ -53,11 +53,7 @@ $d->crearInformacionLaboral($infoLaboral);
 
 
 
-header("location: ../index.php");
-
-
-
-
+ header("location: ../CrearFicha.php");
 
 
 ?>

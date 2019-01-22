@@ -5,7 +5,7 @@
 
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
     <title>Mantenedor</title>
 
 
@@ -305,6 +305,9 @@
                         </div>
                         <div class="panel-body">
                             <div class="col-sm-5">
+                              <form action="controlador/crearInformacionLaboral.php" method="post">
+
+                              Cargo : <input class="form-control" type="text" name="cargoEmpresa">
                               Nombre Empresa : <input class="form-control" type="text" name="txtnomempresa">
                               Direccion Empresa: <textarea class="form-control" type="text" name="txtdirecempresa"></textarea>
                               Telefono Empresa: <input class="form-control" type="text" name="txttlfempresa">
@@ -316,6 +319,8 @@
                               AFP: <input class="form-control" type="text" name="txtafp" >
                               Profesion: <input class="form-control" name="txtprofesion">
 
+                              <input type="submit" value="crear">
+                              </form>
                             </div>
                         </div>
                     </div>
@@ -336,15 +341,23 @@
                         </div>
                         <div class="panel-body">
                             <div class="col-sm-6">
+
+                              <form action="controlador/CrearInformacionMedica1.php" method="post">
+
                               Prestacion Medica : <input class="form-control" type="text" name="txtpresmedica">
                               Alergias: <input class="form-control" type="text" name="txtalergias">
                               Enfermedades Cronicas: <input class="form-control" type="text" name="txtenfermedadescronicas">
-                              Medicamentos Habituales: <input class="form-control" type="text" name="txtalergias">
-                              Nombre del Contacto: <input class="form-control" type="text" name="txtnomContacto">
+                              <input type="submit" value="guardarInfoMedica1">
+                              </form>
+
+                              <form action="controlador/CrearInformacionMedica2.php" method="post">
+
+                              Medicamentos Habituales: <input class="form-control" type="text" name="medHabituales">
+                              Nombre del Contacto: <input class="form-control" type="text" name="txtNombContactoInfoMedica2">
 
                             </div>
                             <div class="col-md-6">
-                              Telefono del Contacto : <input class="form-control" type="text" name="txttlfcontacto">
+                              Telefono del Contacto : <input class="form-control" type="text" name="txtTlfContactoInfoMedica2">
                               Parentesco del Contacto: <!-- <input class="form-control" type="text" name="txtparentesco"> -->
                               <select class="form-control" name="cboParentesco1">
                                 <?php
@@ -379,6 +392,10 @@
                                 ?>
                                 </select>
 
+                                <input type="submit" value="guardarInfoMedica2">
+                                </form>
+
+
                             </div>
                         </div>
                     </div>
@@ -400,8 +417,11 @@
                         <div class="panel-body">
 
 
+                          <form action="controlador/CrearInformacionFamiliar.php" method="">
+
+
                             <div class="col-sm-6">
-                              Nombre: <input class="form-control" type="text" name="txttlfcontacto">
+                              Nombre: <input class="form-control" type="text" name="txtNombreContactoFamiliar">
                               Fecha de Nacimiento: <input class="form-control" type="date" name="fechaNacPariente">
                               Parentesco:
                               <select class="form-control" name="cboParentesco2">
@@ -418,7 +438,11 @@
                                 }
                                 ?>
                                 </select>
+
+                                <input type="submit" method="post">
+                                </form>
                               <!-- Nivel de actividad fisica: <input class="form-control" type="text" name="txtactvfisica"> -->
+                              <!--
                               <table class="table table-striped">
                                   <thead>
                                     <tr>
@@ -436,7 +460,7 @@
 
                                   </tbody>
                                 </table>
-
+                                -->
                            </div>
                         </div>
 
@@ -457,10 +481,13 @@
                         <div class="panel-heading panel-title">
                             Informacion Academica
                         </div>
+
+                        <form action="controlador/CrearInformacionAcademica.php" method="post">
+
                         <div class="panel-body">
                             <div class="col-sm-6">
-                              Fecha: <input class="form-control" type="text" name="txtFechaActividadAcademica">
-                              Actividad: <input class="form-control" type="date" name="txtActivdidadAcademica">
+                              Fecha: <input class="form-control" type="date" name="txtFechaActividadAcademica">
+                              Actividad: <input class="form-control" type="text" name="txtActivdidadAcademica">
                               Estado:
                               <select class="form-control" name="cboEstadoCursoAcademico">
                                 <?php
@@ -476,6 +503,10 @@
                                 }
                                 ?>
                                 </select>
+
+                               <input type="submit" value="guardar">
+                              </form>
+                              <!--
                               <table class="table table-striped">
                                   <thead>
                                     <tr>
@@ -493,7 +524,7 @@
 
                                   </tbody>
                                 </table>
-
+                                -->
                            </div>
                         </div>
 
@@ -514,6 +545,10 @@
                             <div class="panel-heading panel-title">
                                 Informacion Estandar
                             </div>
+
+                            <form action="controlador/CrearInfoEntrenamientoEstandar.php" method="post">
+
+
                             <div class="panel-body">
                                 <div class="col-sm-6">
                                   Fecha: <input class="form-control" type="date" name="fechaEntreamientoEstandar">
@@ -534,6 +569,9 @@
                                     ?>
                                     </select>
 
+                                    <input type="submit" value="Guardar">
+                                    </form>
+                                    <!--
                                   <table class="table table-striped">
                                       <thead>
                                         <tr>
@@ -551,6 +589,7 @@
 
                                       </tbody>
                                     </table>
+                                    -->
 
                                </div>
                             </div>
@@ -572,6 +611,9 @@
                         <div class="panel panel-primary">
                             <div class="panel-heading panel-title">
                                 Informacion Historica
+
+                                <form action="controlador/CrearInformacionHistorica.php" method="post">
+
                             </div>
                             <div class="panel-body" style="margin-left: -30px;">
                                 <div class="col-sm-6">
@@ -611,6 +653,9 @@
                                     Motivo: <input class="form-control" type="text" name="txtMotivoInfoHistorica">
                                     Detalles: <input class="form-control" type="textarea" name="txtDetallesInfoHistorica">
 
+                                    <input type="submit" value="guardar">
+                                    </form>
+                                    <!--
                                   <table class="table table-striped">
                                       <thead>
                                         <tr>
@@ -636,6 +681,7 @@
 
                                       </tbody>
                                     </table>
+                                    -->
 
                                </div>
                             </div>
@@ -643,7 +689,7 @@
                         </div>
                     </div>
                       <!-- INFORMACION historica -->
-                        <!-- INFORMACION servicio -->
+                        <!-- INFORMACION servicio
                     <br>
                     <br>
 
@@ -684,7 +730,7 @@
 
                         </div>
                     </div>
-
+-->
                       <!-- INFORMACION servicio -->
                     <br>
                     <br>

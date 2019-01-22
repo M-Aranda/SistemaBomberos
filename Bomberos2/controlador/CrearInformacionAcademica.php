@@ -24,11 +24,11 @@ require_once("../model/Provincia.php");
 */
 
 
- $idInformacionAcademica=$_REQUEST[""];
- $fechaInformacionAcademica=$_REQUEST[""];
- $actividadInformacionAcademica=$_REQUEST[""];
- $fkEstadoCursoInformacionAcademica=$_REQUEST[""];
- $fkInformacionPersonalInformacionAcademica=$_REQUEST[""];
+ $idInformacionAcademica=0;
+ $fechaInformacionAcademica=$_REQUEST["txtFechaActividadAcademica"];
+ $actividadInformacionAcademica=$_REQUEST["txtActivdidadAcademica"];
+ $fkEstadoCursoInformacionAcademica=$_REQUEST["cboEstadoCursoAcademico"];
+ $fkInformacionPersonalInformacionAcademica=1;
 
 
 $infoAcademica=new Tbl_InfoAcademica();
@@ -45,7 +45,7 @@ $d= new Data();
 $d->crearInformacionAcademica($infoAcademica);
 
 
-header("location: ../index.php");
+ header("location: ../CrearFicha.php");
 
 
 
