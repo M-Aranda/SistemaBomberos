@@ -58,10 +58,11 @@
                            ?>
                          </select>
                            <input type="submit" value="Crear"  name="btnAceptar"class="btn button-primary" style="width: 55px;">
-                           <button class="btn button-primary" style="width: 57px;"> <a href="Mantenedor.html" style="text-decoration:none;color:black;">Volver</a> </button>
                      </div>
 
                     </form>
+
+                    <button class="btn button-primary" style="width: 57px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>
 
                 </div>
             </div>
