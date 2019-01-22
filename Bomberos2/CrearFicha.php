@@ -5,7 +5,7 @@
 
 <html lang="en" dir="ltr">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Mantenedor</title>
 
 
@@ -180,7 +180,7 @@
                                 }
                                 ?>
                                 </select>
-                              <center> <input type="submit" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                              <center> <input type="submit" name="btnInfoPersonal" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
                                   <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                               </center>
@@ -282,7 +282,8 @@
                                 </select>
                               Nº Reg.Cia: <input class="form-control" name="txtcia">
 
-                              <input type="submit" value="agregar">
+                              <center> <input type="submit" name="btninfoBomberil" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+
                             </form>
 
                             </div>
@@ -319,7 +320,8 @@
                               AFP: <input class="form-control" type="text" name="txtafp" >
                               Profesion: <input class="form-control" name="txtprofesion">
 
-                              <input type="submit" value="crear">
+                              <center> <input type="submit" name="btninfoLaboral" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+
                               </form>
                             </div>
                         </div>
@@ -347,7 +349,8 @@
                               Prestacion Medica : <input class="form-control" type="text" name="txtpresmedica">
                               Alergias: <input class="form-control" type="text" name="txtalergias">
                               Enfermedades Cronicas: <input class="form-control" type="text" name="txtenfermedadescronicas">
-                              <input type="submit" value="guardarInfoMedica1">
+                              <center> <input type="submit" name="btninfoMedica1" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+
                               </form>
 
                               <form action="controlador/CrearInformacionMedica2.php" method="post">
@@ -392,7 +395,8 @@
                                 ?>
                                 </select>
 
-                                <input type="submit" value="guardarInfoMedica2">
+                                <center> <input type="submit" name="btninfoMedica2" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+
                                 </form>
 
 
@@ -417,7 +421,7 @@
                         <div class="panel-body">
 
 
-                          <form action="controlador/CrearInformacionFamiliar.php" method="">
+                          <form action="controlador/CrearInformacionFamiliar.php" method="post">
 
 
                             <div class="col-sm-6">
@@ -439,7 +443,8 @@
                                 ?>
                                 </select>
 
-                                <input type="submit" method="post">
+                                <center> <input type="submit" name="btninfoFamiliar" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+
                                 </form>
                               <!-- Nivel de actividad fisica: <input class="form-control" type="text" name="txtactvfisica"> -->
                               <!--
@@ -504,7 +509,8 @@
                                 ?>
                                 </select>
 
-                               <input type="submit" value="guardar">
+                                <center> <input type="submit" name="btninfoAcademica" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+
                               </form>
                               <!--
                               <table class="table table-striped">
@@ -569,7 +575,8 @@
                                     ?>
                                     </select>
 
-                                    <input type="submit" value="Guardar">
+                                    <center> <input type="submit" name="btninfoEntrenamientoEstandar" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+
                                     </form>
                                     <!--
                                   <table class="table table-striped">
@@ -653,7 +660,8 @@
                                     Motivo: <input class="form-control" type="text" name="txtMotivoInfoHistorica">
                                     Detalles: <input class="form-control" type="textarea" name="txtDetallesInfoHistorica">
 
-                                    <input type="submit" value="guardar">
+                                    <center> <input type="submit" name="btninfoHistorica" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+
                                     </form>
                                     <!--
                                   <table class="table table-striped">

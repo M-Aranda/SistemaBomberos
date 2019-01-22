@@ -2,6 +2,7 @@
 Class Tbl_Usuario{
     private $idUsuario;
     private $nombreUsuario;
+    private $fkTipoUsuario;
     private $passUsuario;
 
     public function __construct(){
@@ -22,6 +23,14 @@ Class Tbl_Usuario{
 
     public function setNombreUsuario($nombreUsuario){
         $this->nombreUsuario = $nombreUsuario;
+    }
+
+    public function getfkTipoUsuario(){
+        return $this->fkTipoUsuario;
+    }
+
+    public function setfkTipoUsuario($fkTipoUsuario){
+        $this->fkTipoUsuario = $fkTipoUsuario;
     }
 
     public function getPassUsuario(){

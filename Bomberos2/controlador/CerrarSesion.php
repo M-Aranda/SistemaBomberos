@@ -1,7 +1,7 @@
 <?php
   session_start();
     session_destroy();
-    unset($_SESSION["nombre"]); Elimina una variable a la vez
+    unset($_SESSION["txtNombre"]); 
 
     header("location: ../inicio.html");
 

@@ -11,19 +11,18 @@ if (isset($_POST['btnIniciarSesion'])) {
     $usuario = $d->getUsuario($nombre,$contrasenia);
 
 
-      if ($usario == null) {
+      if ($usuario == null) {
 
          header("location: ../inicio.html");
 
-    } else {
+       } else {
 
-      session_start();
-      $_SESSION["usuario"] = serialize($usuario);
+          session_start();
+          $_SESSION["txtNombre"] = serialize($usuario);
 
-     header("location: ../Mantenedor.php");
+         header("location: ../Mantenedor.php");
 
-    }
-//  header("location: ../initSesion.php?mensaje=2");
+      }
 
 }
 ?>

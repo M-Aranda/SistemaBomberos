@@ -22,11 +22,11 @@ if(isset($_POST["btnAceptar"])){//if usuario presiona boton
       $data = new Data();
       $data->crearUsuario($usuario);
 
-   header("location: ../Mantenedor.php");
+      header("location: ../Mantenedor.php");
 
-    }else{
+      }else{
      header("location: ../crearUsuario.php");
-    }
+      }
 
 }
 

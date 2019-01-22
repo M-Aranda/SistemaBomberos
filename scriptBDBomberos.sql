@@ -1304,6 +1304,7 @@ INSERT INTO tbl_estado_unidad (nombre_estado_unidad) VALUES  ('Activo'), ('Inact
 -- SELECT * FROM tbl_informacionAcademica;
 -- SELECT * FROM tbl_entrenamientoEstandar;
 -- SELECT * FROM tbl_informacionHistorica;
+-- SELECT * FROM tbl_unidad;
 
 
 /*

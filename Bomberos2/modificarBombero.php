@@ -122,7 +122,7 @@
         <span><h5 style="font-weight:bold;">Tipo Bombero</h5></span>
               <select name="tipoBombero">
                 <?php
-                    $tipoBombero = $data->getTipoBombero();
+                    $tipoBombero = $data->readEstadosDeBomberos();
                     foreach ($tipoBombero as $tb) {
                         echo "<option value='".$tb->getIdEstado()."'>";
                             echo $tb->getNombreEstado();
@@ -136,7 +136,7 @@
               <span><h5 style="font-weight:bold;">Compañia</h5></span>
                 <select name="compania">
                   <?php
-                      $compania = $data->getCompanias();
+                      $compania = $data->readCompanias();
                       foreach ($compania as $c) {
                           echo "<option value='".$c->getIdCompania()."'>";
                               echo $c->getNombreCompania();

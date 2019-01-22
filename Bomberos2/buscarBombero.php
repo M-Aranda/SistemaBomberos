@@ -106,6 +106,8 @@
 <?php
     // unir vista con el modelo sin pasar por un controlador
     require_once("model/Data.php");
+    require_once("model/Tbl_EstadoBombero.php");
+    require_once("model/Tbl_Compania.php");
     $data = new Data();
 
 ?>
@@ -117,12 +119,14 @@
       <div class="form-group" style="margin-left:50px;">
         <span><h5 style="font-weight:bold;">Buscar</h5></span>
         <input type="text" name="txtBuscar"  placeholder="Buscar por nombre">
-        <button class="btn btn-default" style="width: 100px; height:30px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Buscar</a> </button>
+        <button class="btn btn-default" name="btnBuscar" style="width: 100px; height:30px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Buscar</a> </button>
 
         <span><h5 style="font-weight:bold;">Tipo Bombero</h5></span>
               <select name="tipoBombero">
                 <?php
-                    $tipoBombero = $data->getTipoBombero();
+
+
+                    $tipoBombero = $data->readEstadosDeBomberos();
                     foreach ($tipoBombero as $tb) {
                         echo "<option value='".$tb->getIdEstado()."'>";
                             echo $tb->getNombreEstado();
@@ -130,13 +134,13 @@
                     }
                 ?>
               </select>
-              <button class="btn btn-default" style="width: 90px; height:30px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Buscar</a> </button>
+              <button class="btn btn-default" name="btnBuscarTipo" style="width: 90px; height:30px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Buscar</a> </button>
 
 
               <span><h5 style="font-weight:bold;">Compañia</h5></span>
                 <select name="compania">
                   <?php
-                      $compania = $data->getCompanias();
+                      $compania = $data->readCompanias();
                       foreach ($compania as $c) {
                           echo "<option value='".$c->getIdCompania()."'>";
                               echo $c->getNombreCompania();
@@ -145,7 +149,7 @@
                   ?>
 
                 </select>
-                <button class="btn btn-default" style="width: 90px; height:30px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Buscar</a> </button>
+                <button class="btn btn-default" name="btnBuscarCompania" style="width: 90px; height:30px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Buscar</a> </button>
 
       </div>
 

@@ -319,6 +319,30 @@ class Data{
 
 
 
+        public function crearUnidades($unidad){
+          $query = "insert into tbl_unidad values(null,
+                    '".$unidad->getaniodeFabricacion()."',
+                    '".$unidad->getMarca()."',
+                    '".$unidad->getNmotor()."',
+                    '".$unidad->getNchasis()."',
+                    '".$unidad->getNVIN()."',
+                    '".$unidad->getColor()."',
+                    '".$unidad->getPPu()."',
+                    '".$unidad->getfechaInscripcion()."',
+                    '".$unidad->getfechaAdquisicion()."',
+                    ".$unidad->getcapacidadOcupantes().",
+                    ".$unidad->getfkEstadoUnidad().",
+                    ".$unidad->getfkTipoVehiculo().",
+                    ".$unidad->getfkEntidadPropietaria().");";
+
+            $this->c->conectar();
+            $this->c->ejecutar($query);
+            $this->c->desconectar();
+            echo "insertBD".$query;
+
+        }
+
+
     public function readEstadosCiviles (){
       $this->c->conectar();
 
@@ -484,6 +508,8 @@ class Data{
        $this->c->desconectar();
        return $listado;
     }
+
+
 
 
 

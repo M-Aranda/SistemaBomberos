@@ -439,7 +439,7 @@
                     <br>
                     <br>
 
-                    <div class="col-md-13">
+              <!--      <div class="col-md-13">
                         <button type="button" class="btn btn-default col-md-7" data-toggle="collapse" data-target="#servicio">
                             Asistencia Actos de Servicio
                         </button>
@@ -475,7 +475,7 @@
                             </div>
 
                         </div>
-                    </div>
+                    </div> -->
 
                       <!-- INFORMACION servicio -->
                     <br>

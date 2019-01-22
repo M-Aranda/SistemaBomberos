@@ -49,7 +49,7 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Unidades <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="index.php">Crear</a></li>
+            <li><a href="crearUnidades.php">Crear</a></li>
             <li><a href="#">Ver Unidades</a></li>
             <li><a href="#">Modificar</a></li>
             <li><a href="#">Eliminar</a></li>
@@ -108,6 +108,9 @@
     <?php
         // unir vista con el modelo sin pasar por un controlador
         require_once("model/Data.php");
+        require_once("model/Tbl_EstadoUnidad.php");
+        require_once("model/Tbl_TipoVehiculo.php");
+        require_once("model/Tbl_EntidadPropietaria.php");
         $data = new Data();
 
     ?>
@@ -118,41 +121,40 @@
 
           <span><h5 style="font-weight:bold;">Crear Unidades</h5></span>
 
-      <form action="controlador/CrearUnidad.php" style="margin-left:50px;">
-        <?php
-            // unir vista con el modelo sin pasar por un controlador
-            require_once("model/Data.php");
-            $data = new Data();
+      <form action="controlador/CrearUnidades.php" style="margin-left:50px;" method="post">
 
-        ?>
 
           Año de Fabricacion: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="nombre" type="text" name="txtanioFabricacion"  required="">
 
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           Marca: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
            <input id="nombre" type="text" name="txtmarca"  required=""><br><br>
-          N Motor:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <input id="nombre" type="text" name="txtmotor"  required="">
+          Nº Motor:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input id="nombre" type="text" name="txtmotor"  required="">
 
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          N Chasis : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          Nº Chasis : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
            <input id="nombre" type="text" name="txtchasis"  required=""><br><br>
-          N VIN: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input id="nombre" type="text" name="txtvin"  required="">
+          Nº VIN: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input id="nombre" type="text" name="txtvin"  required="">
 
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          Color:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          Color:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
             <input id="nombre" type="text" name="txtcolor"  required=""><br><br>
           PPU:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="nombre" type="text" name="txtppu"  required="">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="nombre" type="text" name="txtppu"  required="">
 
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          Fecha de Inscripcion:  <input id="nombre" type="text" name="txtfechainscripcion"  required=""><br><br>
-          Capacidad Ocupantes :  <input id="nombre" type="text" name="txtcapaocupantes"  required="">
+          Fecha de Inscripcion: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input id="nombre" type="date" name="txtfechainscripcion"  required=""><br><br>
 
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          Estado de Unidad:&nbsp;&nbsp;&nbsp;&nbsp;
+          Fecha de Adquisición: &nbsp;&nbsp; <input id="nombre" type="date" name="txtfechaadquisicion"  required="">
+          &nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp; Capacidad Ocupantes : &nbsp;&nbsp; <input id="nombre" type="text" name="txtcapaocupantes"  required=""><br><br>
+
+
+          Estado de Unidad:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <select name="unidades">
               <?php
                   $unidad = $data->getUnidades();
@@ -162,9 +164,9 @@
                       echo"</option>";
                   }
               ?>
-          </select><br><br>
-
-          Tipo de Vehiculo: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </select>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          Tipo de Vehiculo: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <select name="vehiculos">
               <?php
                   $vehiculo = $data->getVehiculos();
@@ -175,14 +177,14 @@
                   }
               ?>
           </select>
-
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          Entidad Propietaria:&nbsp;&nbsp;
-          <select name="entidadPropietaria">
+          <br>
+          <br>
+          Entidad Propietaria: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <select name="entidad">
               <?php
                   $entiPropietaria = $data->getEntidadPropietaria();
                   foreach ($entiPropietaria as $ep) {
-                      echo "<option value='".$ep->getIdEntidadPropietaria()."'>";
+                      echo "<option value='".$ep->getIdEntidadPropietaria()."' >";
                           echo $ep->getNombreEntidadPropietaria();
                       echo"</option>";
                   }
@@ -190,13 +192,10 @@
           </select><br><br>
 
       <center>
-        <button class="btn btn-default" style="width: 100px; height:50px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Crear</a> </button>
+        <input type="submit" value="Crear Unidad"  name="btncrear" class="btn button-primary" style="width: 100px; height:60px;" style="margin-top: 400px">
       </center>
 
       </form>
-
-
-
 
           </div>
        </div>
