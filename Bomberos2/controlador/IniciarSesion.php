@@ -19,6 +19,7 @@ if (isset($_POST['btnIniciarSesion'])) {
 
           session_start();
           $_SESSION["txtNombre"] = serialize($usuario);
+          $_SESSION["usuarioIniciado"] = $usuario;
 
          header("location: ../Mantenedor.php");
 

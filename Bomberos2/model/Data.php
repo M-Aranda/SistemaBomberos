@@ -6,6 +6,7 @@ require_once("Tbl_Genero.php");
 require_once("Tbl_InfoPersonal.php");
 require_once("Tbl_Medida.php");
 require_once("Tbl_TipoUsuario.php");
+require_once("Tbl_Usuario.php");
 
 class Data{
     private $c;
@@ -25,7 +26,7 @@ class Data{
     }
     public function getUsuario($nombre,$pass) {
         $this->c->conectar();
-        $query = "SELECT * from usuario where nombre_usuario_usuario = '$nombre' and contrasenia_usuario_usuario = '$pass' ";
+        $query = "SELECT * from tbl_usuario where nombre_usuario_usuario = '$nombre' and contrasenia_usuario_usuario = '$pass' ";
         $rs = $this->c->ejecutar($query);
         if($obj = $rs->fetch_object()){#por cada vuelta, pongo el registro en un objeto y el objeto en una lista
             $u = new Tbl_Usuario();
@@ -369,6 +370,27 @@ class Data{
        $this->c->desconectar();
        return $id;
     }
+
+
+    public function verificarSiUsuarioTienePermiso ($usuario, $idPermiso){
+      $this->c->conectar();
+      $query="SELECT tbl_tipo_usuario_permisos.otorgado_tipo_usuario_permisos FROM
+      tbl_tipo_usuario_permisos, tbl_permiso, tbl_tipo_usuario, tbl_usuario  WHERE
+      tbl_tipo_usuario_permisos.fk_tipo_usuario_tipo_usuario_permisos=tbl_tipo_usuario.id_tipo_usuario AND
+      tbl_tipo_usuario_permisos.fk_permiso_tipo_usuario_permisos=tbl_permiso.id_permiso AND
+      tbl_tipo_usuario.id_tipo_usuario=tbl_usuario.fk_tipo_usuario__usuario AND tbl_permiso.id_permiso=".$idPermiso." AND
+       tbl_usuario.id_usuario_usuario=".$usuario->getIdUsuario().";";
+      $rs = $this->c->ejecutar($query);
+      while($reg = $rs->fetch_array()){
+           $valor=$reg[0];
+       }
+       $this->c->desconectar();
+       return $valor;
+    }
+
+
+
+
     //header("location: ../Mantenedor.php");
 }
  ?>

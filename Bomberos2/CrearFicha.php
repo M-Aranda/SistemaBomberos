@@ -2,7 +2,6 @@
 
 
 
-
 <html lang="en" dir="ltr">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -19,6 +18,23 @@
    <script src="js/bootstrap.js"></script>
 
   </head>
+
+  <?php
+  require_once("model/Data.php");
+  require_once("model/Tbl_Usuario.php");
+  $dataUsuario= new Data();
+
+  session_start();
+
+  if($_SESSION["usuarioIniciado"]!=null){
+    $u=$_SESSION["usuarioIniciado"];
+
+    if($dataUsuario->verificarSiUsuarioTienePermiso($u,2)==0){
+      header("location: Error.php");
+    }
+  }
+  ?>
+
 
 <body  background="images/fondofichaintranet.jpg">
 

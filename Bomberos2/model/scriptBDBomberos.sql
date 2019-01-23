@@ -366,6 +366,7 @@ PRIMARY KEY (id_tipo_servicio)
 
 
 
+
 -- Procedimientos
 
 DELIMITER //
@@ -1335,6 +1336,11 @@ INSERT INTO tbl_tipoDeMantencion (nombre_tipoDeMantencion) VALUES ('Preventiva')
 
 INSERT INTO tbl_tipo_combustible (nombre_tipo_combustible) VALUES ('Diesel'),('93 bencina'),('97 bencina'),('95 bencina');
 
+INSERT INTO tbl_tipo_servicio (codigo_tipo_servicio,nombre_tipo_servicio) VALUES ('10-0','LLamado estructural'),('10-1','LLamado de vehículo'),
+('10-2','Llamado de pastizales y/o basura'),('10-3','Llamado de rescate de personas atrapadas'),('10-4','Llamado de Rescate vehicular'),
+('10-5','Llamado de Materiales Peligrosos'),('10-6','Llamado de emanación de gases'),('10-7','Llamado eléctrico'),('10-8','Llamado no clasificado'),
+('10-9','Llamado a otros servicios'),('10-10','Llamado a escombros'),('10-11','Llamado a servicio áreo'),('10-12','Llamado a apoyar a otros Cuerpos'),
+('10-13','Llamado a artefacto explosivo, sobre sospechoso, acto terrorista'),('10-14','Llamado a accidente de aviación');
 
 -- SELECTs
 
@@ -1350,6 +1356,29 @@ INSERT INTO tbl_tipo_combustible (nombre_tipo_combustible) VALUES ('Diesel'),('9
 -- SELECT * FROM tbl_informacionHistorica;
 -- SELECT * FROM tbl_unidad;
 -- SELECT * FROM tbl_entidadACargo WHERE nombre_entidadACargo LIKE '%Compañía%';
+-- SELECT * FROM tbl_permiso;
+-- SELECT * FROM tbl_usuario;
+
+/*Consulta que requiere id de permiso e id de tipo de usuario
+
+SELECT tbl_tipo_usuario_permisos.otorgado_tipo_usuario_permisos FROM tbl_tipo_usuario_permisos, tbl_permiso, tbl_tipo_usuario
+WHERE 
+tbl_tipo_usuario_permisos.fk_tipo_usuario_tipo_usuario_permisos=tbl_tipo_usuario.id_tipo_usuario AND
+tbl_tipo_usuario_permisos.fk_permiso_tipo_usuario_permisos=tbl_permiso.id_permiso AND
+tbl_permiso.id_permiso=1 AND tbl_tipo_usuario.id_tipo_usuario=1;
+*/
+
+/*
+Consulta que requiere id de usuario e id de permiso
+
+SELECT tbl_tipo_usuario_permisos.otorgado_tipo_usuario_permisos FROM tbl_tipo_usuario_permisos, tbl_permiso, tbl_tipo_usuario, tbl_usuario
+WHERE 
+tbl_tipo_usuario_permisos.fk_tipo_usuario_tipo_usuario_permisos=tbl_tipo_usuario.id_tipo_usuario AND
+tbl_tipo_usuario_permisos.fk_permiso_tipo_usuario_permisos=tbl_permiso.id_permiso AND 
+tbl_tipo_usuario.id_tipo_usuario=tbl_usuario.fk_tipo_usuario__usuario AND tbl_permiso.id_permiso=27 AND tbl_usuario.id_usuario_usuario=2;
+
+*/
+
 
 -- Lamadas a procedimientos para probar
 

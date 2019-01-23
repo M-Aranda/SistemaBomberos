@@ -15,6 +15,22 @@
 
   </head>
 
+  <?php
+  require_once("model/Data.php");
+  require_once("model/Tbl_Usuario.php");
+  $dataUsuario= new Data();
+
+  session_start();
+
+  if($_SESSION["usuarioIniciado"]!=null){
+    $u=$_SESSION["usuarioIniciado"];
+
+    if($dataUsuario->verificarSiUsuarioTienePermiso($u,8)==0){
+      header("location: Error.php");
+    }
+  }
+  ?>
+
 <body  background="images/fondofichaintranet.jpg">
 
     <br>
