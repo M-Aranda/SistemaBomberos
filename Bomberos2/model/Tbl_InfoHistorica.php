@@ -8,9 +8,10 @@ Class Tbl_InfoHistorica{
       private $cuerpo;
       private $compania;
       private $fechaDeCambio;
-      private $tipoDeCambio;
+      private $premio;
       private $motivo;
       private $detalle;
+      private $cargo
       private $fkInfoPersonalinformacionHistorica;
 
       public function __construct(){
@@ -57,12 +58,12 @@ Class Tbl_InfoHistorica{
           $this->fechaDeCambio = $fechaDeCambio;
       }
 
-      public function gettipoDeCambio(){
-          return $this->tipoDeCambio;
+      public function getPremio(){
+          return $this->premio;
       }
 
-      public function settipoDeCambio($tipoDeCambio){
-          $this->tipoDeCambio = $tipoDeCambio;
+      public function setPremio($premio){
+          $this->premio = $premio;
       }
 
       public function getmotivo(){
@@ -79,6 +80,15 @@ Class Tbl_InfoHistorica{
 
       public function setdetalle($detalle){
           $this->detalle = $detalle;
+      }
+
+
+      public function getCargo(){
+          return $this->cargo;
+      }
+
+      public function setCargo($cargo){
+          $this->cargo = $cargo;
       }
 
       public function getfkInfoPersonalinformacionHistorica(){

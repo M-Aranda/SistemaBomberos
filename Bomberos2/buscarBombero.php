@@ -41,7 +41,7 @@
             <li><a href="verFicha.php">Ver Ficha</a></li>
             <li><a href="buscarBombero.php">Buscar</a></li>
             <li><a href="modificarBombero.php">Modificar</a></li>
-            <li><a href="eliminarBombero.php">Eliminar</a></li>
+            <!-- <li><a href="eliminarBombero.php">Eliminar</a></li> -->
           </ul>
         </li>
       </ul>
@@ -51,12 +51,10 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Unidades <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="crearUnidades.php">Crear</a></li>
-            <li><a href="#">Ver Unidades</a></li>
-            <li><a href="#">Modificar</a></li>
-            <li><a href="#">Eliminar</a></li>
+            <li><a href="verUnidades.php">Ver Unidades</a></li>
+            <li><a href="modificarUnidades.php">Modificar</a></li>
+            <!-- <li><a href="eliminarUnidades.php">Eliminar</a></li> -->
           </ul>
-        </li>
-      </ul>
       <br>
       <br>
       <br>
@@ -107,7 +105,7 @@
     // unir vista con el modelo sin pasar por un controlador
     require_once("model/Data.php");
     require_once("model/Tbl_EstadoBombero.php");
-    require_once("model/Tbl_Compania.php");
+    require_once("model/Tbl_EntidadACargo.php");
     $data = new Data();
 
 ?>
@@ -140,10 +138,10 @@
               <span><h5 style="font-weight:bold;">Compañia</h5></span>
                 <select name="compania">
                   <?php
-                      $compania = $data->readCompanias();
+                      $compania = $data->readSoloCompanias();
                       foreach ($compania as $c) {
-                          echo "<option value='".$c->getIdCompania()."'>";
-                              echo $c->getNombreCompania();
+                          echo "<option value='".$c->getIdEntidadACargo()."'>";
+                              echo $c->getNombreEntidadACargo();
                           echo"</option>";
                       }
                   ?>

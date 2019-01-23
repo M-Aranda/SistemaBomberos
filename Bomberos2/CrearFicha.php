@@ -45,7 +45,7 @@
             <li><a href="verFicha.php">Ver Ficha</a></li>
             <li><a href="buscarBombero.php">Buscar</a></li>
             <li><a href="modificarBombero.php">Modificar</a></li>
-            <li><a href="eliminarBombero.php">Eliminar</a></li>
+            <!-- <li><a href="eliminarBombero.php">Eliminar</a></li> -->
           </ul>
         </li>
       </ul>
@@ -57,7 +57,7 @@
             <li><a href="crearUnidades.php">Crear</a></li>
             <li><a href="verUnidades.php">Ver Unidades</a></li>
             <li><a href="modificarUnidades.php">Modificar</a></li>
-            <li><a href="eliminarUnidades.php">Eliminar</a></li>
+            <!-- <li><a href="eliminarUnidades.php">Eliminar</a></li> -->
           </ul>
         </li>
       </ul>
@@ -223,6 +223,7 @@
 
                                 $regiones = $d->readRegiones();
                                 foreach($regiones as $r => $region){
+
                                 ?>
                                 <option value="<?php echo $region->getIdRegion(); ?>"><?php echo $region->getNombreRegion(); ?></option>
                                 <?php
@@ -233,13 +234,13 @@
                               <select class="form-control" name="cboCompania">
                                 <?php
                                 require_once("model/Data.php");
-                                require_once("model/Tbl_Compania.php");
+                                require_once("model/Tbl_EntidadACargo.php");
                                 $d= new Data();
 
-                                $companias = $d->readCompanias();
+                                $companias = $d->readSoloCompanias();
                                 foreach($companias as $c => $compania){
                                 ?>
-                                <option value="<?php echo $compania->getIdCompania(); ?>"><?php echo $compania->getNombreCompania(); ?></option>
+                                <option value="<?php echo $compania->getIdEntidadACargo(); ?>"><?php echo $compania->getNombreEntidadACargo(); ?></option>
                                 <?php
                                 }
                                 ?>
@@ -640,23 +641,10 @@
                                     ?>
                                     </select>
                                     Cuerpo : <input class="form-control" type="text" name="txtCuerpoInfoHistorica">
-                                    Compañia:
-                                    <select class="form-control" name="cboCompania2">
-                                      <?php
-                                      require_once("model/Data.php");
-                                      require_once("model/Tbl_Compania.php");
-                                      $d= new Data();
-
-                                      $companias = $d->readCompanias();
-                                      foreach($companias as $c => $compania){
-                                      ?>
-                                      <option value="<?php echo $compania->getIdCompania(); ?>"><?php echo $compania->getNombreCompania(); ?></option>
-                                      <?php
-                                      }
-                                      ?>
-                                      </select>
+                                    Compañia:  <input class="form-control" type="text" name="txtCompania">
                                     Fecha: <input class="form-control" type="date" name="fechaInfoHistorica">
-                                    Tipo de cambio: <input class="form-control" type="text" name="txtTipoCambioInfoHistorica">
+                                    Cargo: <input class="form-control" type="textarea" name="txtCargoInfoHistorica">
+                                    Premio: <input class="form-control" type="text" name="txtPremioInforHistorica">
                                     Motivo: <input class="form-control" type="text" name="txtMotivoInfoHistorica">
                                     Detalles: <input class="form-control" type="textarea" name="txtDetallesInfoHistorica">
 

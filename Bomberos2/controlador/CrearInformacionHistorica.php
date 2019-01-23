@@ -28,11 +28,12 @@ require_once("../model/Provincia.php");
  $idInformacionHistorica=0;
  $fkRegioninformacionHistorica=$_REQUEST["cboRegion2"];
  $cuerpo=$_REQUEST["txtCuerpoInfoHistorica"];
- $compania=$_REQUEST["cboCompania2"];
+ $compania=$_REQUEST["txtCompania"];
  $fechaDeCambio=$_REQUEST["fechaInfoHistorica"];
- $tipoDeCambio=$_REQUEST["txtTipoCambioInfoHistorica"];
+ $premio=$_REQUEST["txtPremioInforHistorica"];
  $motivo=$_REQUEST["txtMotivoInfoHistorica"];
  $detalle=$_REQUEST["txtDetallesInfoHistorica"];
+ $cargo=$_REQUEST["txtCargoInfoHistorica"];
  $fkInfoPersonalinformacionHistorica=1;
 
 
@@ -43,9 +44,10 @@ $infoHistorica->setfkRegioninformacionHistorica($fkRegioninformacionHistorica);
 $infoHistorica->setcuerpo($cuerpo);
 $infoHistorica->setcompania($compania);
 $infoHistorica->setfechaDeCambio($fechaDeCambio);
-$infoHistorica->settipoDeCambio($tipoDeCambio);
+$infoHistorica->setPremio($premio);
 $infoHistorica->setmotivo($motivo);
 $infoHistorica->setdetalle($detalle);
+$infoHistorica->setCargo($cargo);
 $infoHistorica->setfkInfoPersonalinformacionHistorica($fkInfoPersonalinformacionHistorica);
 
 $d= new Data();

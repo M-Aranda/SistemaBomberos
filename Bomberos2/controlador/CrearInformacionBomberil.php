@@ -2,11 +2,9 @@
 
 require_once("../model/Data.php");
 require_once("../model/Tbl_InfoBomberil.php");
-
 require_once("../model/Tbl_InfoPersonal.php");
-
 require_once("../model/Tbl_Region.php");
-require_once("../model/Tbl_Compania.php");
+require_once("../model/Tbl_EntidadACargo.php");
 require_once("../model/Tbl_EstadoBombero.php");
 require_once("../model/Tbl_Cargo.php");
 
@@ -39,10 +37,7 @@ $fk_estado=$_REQUEST["cboEstadoBombero"];
 $nrc=$_REQUEST["txtcia"];
 $fk_infoPersonal=$d->getIdBomberoMasReciente();
 
-
 $infoBomberil= new Tbl_InfoBomberil();
-
-
 
 $infoBomberil->setIdInformacionBomberil($id);
 $infoBomberil->setfkRegioninformacionBomberil($fk_region);

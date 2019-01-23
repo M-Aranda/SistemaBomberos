@@ -66,20 +66,8 @@ class Data{
         $this->c->desconectar();
         return $lista;
     }
-    public function getEntidadPropietaria(){
-        $lista = array();
-        $this->c->conectar();
-        $select = "SELECT * from tbl_entidadPropietaria;";
-        $rs = $this->c->ejecutar($select);
-        while($obj = $rs->fetch_object()){
-            $eu = new Tbl_EntidadPropietaria();
-            $eu->setIdEntidadPropietaria($obj->id_entidadPropietaria);
-            $eu->setNombreEntidadPropietaria($obj->nombre_entidadPropietaria);
-            array_push($lista,$eu);
-        }
-        $this->c->desconectar();
-        return $lista;
-    }
+
+
     public function getPerfiles(){
         $lista = array();
         $this->c->conectar();
@@ -108,20 +96,7 @@ class Data{
         $this->c->desconectar();
         return $lista;
     }
-    public function getCompanias(){
-        $lista = array();
-        $this->c->conectar();
-        $select = "SELECT * from tbl_compania;";
-        $rs = $this->c->ejecutar($select);
-        while($obj = $rs->fetch_object()){
-            $eu = new Tbl_Compania();
-            $eu->setIdCompania($obj->id_compania);
-            $eu->setNombreCompania($obj->nombre_compania);
-            array_push($lista,$eu);
-        }
-        $this->c->desconectar();
-        return $lista;
-    }
+
 // uso de cruds y algunso gets para los combobox
     public function crearMedida ($medida){
       $query="CALL CRUDMedida (".$medida->getIdMedida().", '".$medida->getTallaChaquetaCamisa()."', '".$medida->getTallaPantalon()."',
@@ -249,22 +224,45 @@ class Data{
        $this->c->desconectar();
        return $listadoGeneros;
     }
-    public function readCompanias (){
+
+    public function readEntidadesACargo (){
       $this->c->conectar();
-      $query="SELECT * FROM tbl_compania;";
+      $query="SELECT * FROM tbl_entidadACargo;";
       $rs = $this->c->ejecutar($query);
       $listado = array();
       while($reg = $rs->fetch_array()){
-            $id=$reg[0];
+          $id=$reg[0];
            $nombre=$reg[1];
-           $objeto = new Tbl_Compania();
-           $objeto->setIdCompania($id);
-           $objeto->setNombreCompania($nombre);
+           $objeto = new Tbl_EntidadACargo();
+           $objeto->setIdEntidadACargo($id);
+           $objeto->setNombreEntidadACargo($nombre);
            $listado[]=$objeto;
        }
        $this->c->desconectar();
        return $listado;
     }
+
+
+    public function readSoloCompanias (){
+      $this->c->conectar();
+      $query="SELECT * FROM tbl_entidadACargo WHERE nombre_entidadACargo LIKE '%Compa%';";
+      $rs = $this->c->ejecutar($query);
+      $listado = array();
+      while($reg = $rs->fetch_array()){
+          $id=$reg[0];
+           $nombre=$reg[1];
+           $objeto = new Tbl_EntidadACargo();
+           $objeto->setIdEntidadACargo($id);
+           $objeto->setNombreEntidadACargo($nombre);
+           $listado[]=$objeto;
+       }
+       $this->c->desconectar();
+       return $listado;
+    }
+
+
+
+
     public function readCargos (){
       $this->c->conectar();
       $query="SELECT * FROM tbl_cargo;";

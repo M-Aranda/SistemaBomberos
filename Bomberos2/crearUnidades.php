@@ -40,7 +40,7 @@
             <li><a href="verFicha.php">Ver Ficha</a></li>
             <li><a href="buscarBombero.php">Buscar</a></li>
             <li><a href="modificarBombero.php">Modificar</a></li>
-            <li><a href="eliminarBombero.php">Eliminar</a></li>
+            <!-- <li><a href="eliminarBombero.php">Eliminar</a></li> -->
           </ul>
         </li>
       </ul>
@@ -52,7 +52,7 @@
             <li><a href="crearUnidades.php">Crear</a></li>
             <li><a href="#">Ver Unidades</a></li>
             <li><a href="#">Modificar</a></li>
-            <li><a href="#">Eliminar</a></li>
+            <!-- <li><a href="eliminarUnidades.php">Eliminar</a></li> -->
           </ul>
         </li>
       </ul>
@@ -110,7 +110,7 @@
         require_once("model/Data.php");
         require_once("model/Tbl_EstadoUnidad.php");
         require_once("model/Tbl_TipoVehiculo.php");
-        require_once("model/Tbl_EntidadPropietaria.php");
+        require_once("model/Tbl_EntidadACargo.php");
         $data = new Data();
 
     ?>
@@ -179,13 +179,13 @@
           </select>
           <br>
           <br>
-          Entidad Propietaria: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          Entidad a cargo: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <select name="entidad">
               <?php
-                  $entiPropietaria = $data->getEntidadPropietaria();
+                  $entiPropietaria = $data->readEntidadesACargo();
                   foreach ($entiPropietaria as $ep) {
-                      echo "<option value='".$ep->getIdEntidadPropietaria()."' >";
-                          echo $ep->getNombreEntidadPropietaria();
+                      echo "<option value='".$ep->getIdEntidadACargo()."' >";
+                          echo $ep->getNombreEntidadACargo();
                       echo"</option>";
                   }
               ?>
