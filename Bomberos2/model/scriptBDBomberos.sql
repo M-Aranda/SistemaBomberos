@@ -346,12 +346,12 @@ id_cargio_combustible INT AUTO_INCREMENT,
 responsable_cargio_combustible VARCHAR (5000),
 fecha_cargio DATE,
 direccion_cargio VARCHAR (5000),
-tipo_combustible_cargio_combustible INT,
+fk_tipo_combustible_cargio_combustible INT,
 cantidad_litros_cargio_combustible FLOAT,
 precio_litro_cargio_combustible INT,
 observacion_cargio_combustible VARCHAR (5000),
 fk_unidad INT,
-FOREIGN KEY (tipo_combustible_cargio_combustible) REFERENCES tbl_tipo_combustible (id_tipo_combustible),
+FOREIGN KEY (fk_tipo_combustible_cargio_combustible) REFERENCES tbl_tipo_combustible (id_tipo_combustible),
 FOREIGN KEY (fk_unidad) REFERENCES tbl_unidad (id_unidad),
 PRIMARY KEY (id_cargio_combustible)
 );
@@ -360,8 +360,6 @@ CREATE TABLE tbl_tipo_servicio(
 id_tipo_servicio INT AUTO_INCREMENT,
 codigo_tipo_servicio VARCHAR (5000),
 nombre_tipo_servicio VARCHAR (5000),
-fk_unidad INT,
-FOREIGN KEY (fk_unidad) REFERENCES tbl_unidad (id_unidad),
 PRIMARY KEY (id_tipo_servicio)
 );
 
