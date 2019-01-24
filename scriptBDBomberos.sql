@@ -9,7 +9,6 @@ nombre_permiso VARCHAR (5000),
 PRIMARY KEY (id_permiso)
 );
 
-
 CREATE TABLE tbl_tipo_usuario(
 id_tipo_usuario INT AUTO_INCREMENT,
 nombre_tipo_usuario VARCHAR (2000),
@@ -363,7 +362,6 @@ codigo_tipo_servicio VARCHAR (5000),
 nombre_tipo_servicio VARCHAR (5000),
 PRIMARY KEY (id_tipo_servicio)
 );
-
 
 
 -- Procedimientos
@@ -1356,6 +1354,7 @@ INSERT INTO tbl_tipo_servicio (codigo_tipo_servicio,nombre_tipo_servicio) VALUES
 -- SELECT * FROM tbl_usuario;
 -- SELECT * FROM tbl_tipoDeMantencion;
 -- SELECT * FROM tbl_mantencion;
+-- SELECT * FROM tbl_cargio_combustible;
 
 /*Consulta que requiere id de permiso e id de tipo de usuario
 
@@ -1377,12 +1376,11 @@ tbl_tipo_usuario.id_tipo_usuario=tbl_usuario.fk_tipo_usuario__usuario AND tbl_pe
 
 */
 
-
 -- Lamadas a procedimientos para probar
 /*
 CALL CRUDUsuario (1,'Marcelo',1,'123',1); 
 
-CALL CRUDUnidad (6,'Nombre de Prueba','2000','200','300','333','555','3333','YOLO','2000-12-03','2012-06-11',15,2,1,1,1);
+CALL CRUDUnidad (6,'Nombre de Prueba 1','2000','200','300','333','555','3333','YOLO','2000-12-03','2012-06-11',15,2,1,1,1);
 CALL CRUDUnidad (6,'Nombre de Prueba 2','2000','200','300','333','555','3333','BIEN','2000-12-03','2012-06-11',15,2,1,1,1);
 CALL CRUDUnidad (6,'Nombre de Prueba 3','2000','200','300','333','555','3333','jaja','2000-12-03','2012-06-11',15,2,1,1,1);
 

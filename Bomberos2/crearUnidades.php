@@ -311,7 +311,7 @@
 
                                       <div class="col-sm-4" >
 
-                                        <form action="controlador/CrearCombustible.php" method="post">
+                                        <form action="controlador/CrearCarguioDeCombustible.php" method="post">
 
                                           Unidad:
                                           <select name="cboUnidades2"  class="form-control">
@@ -350,10 +350,11 @@
                                         Comentarios/Observaciones: <textarea class="form-control" Type="textarea" name="txtcomentario" ></textarea>
 
                                           <br><br>
-                                        <center> <input type="submit" name="btncrear" value="Crear Unidad" class="btn button-primary" style="width: 150px;"> <span ></span>
+                                        <center> <input type="submit" name="btncrear" value="Crear carga" class="btn button-primary" style="width: 150px;"> <span ></span>
                                             <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                                         </center>
+                                      </form>
                                                                 <br>
                                       </div>
                                       <br>

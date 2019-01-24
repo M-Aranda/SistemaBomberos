@@ -362,6 +362,22 @@ class Data{
       $this->c->desconectar();
     }
 
+    public function crearCargaDeCombustible($carga){
+      $query= "insert into tbl_cargio_combustible values(null,
+                '".$carga->getResponsable_cargio_combustible()."',
+                '".$carga->getFecha_cargio()."',
+                '".$carga->getDireccion_cargio()."',
+                ".$carga->getFk_tipo_combustible_cargio_combustible().",
+                ".$carga->getCantidad_litros_cargio_combustible().",
+                ".$carga->getPrecio_litro_cargio_combustible().",
+                '".$carga->getObservacion_cargio_combustible()."',
+                ".$carga->getFk_unidad().");";
+
+      $this->c->conectar();
+      $this->c->ejecutar($query);
+      $this->c->desconectar();
+    }
+
 
 
     public function readEstadosCiviles (){

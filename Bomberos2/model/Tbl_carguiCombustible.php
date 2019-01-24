@@ -14,7 +14,7 @@ Class Tbl_cargio_combustible{
   public function getId_cargio_combustible(){
       return $this->id_cargio_combustible;
   }
-  public function getId_cargio_combustible($id_cargio_combustible){
+  public function setId_cargio_combustible($id_cargio_combustible){
       $this->id_cargio_combustible = $id_cargio_combustible;
   }
   public function getResponsable_cargio_combustible(){
