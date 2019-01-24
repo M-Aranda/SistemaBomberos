@@ -247,20 +247,7 @@
                            </select>
 
                          Compañía: <!-- <input class="form-control" type="text" name="txtcompania"> --> <!--Combobox-->
-                         <select class="form-control" name="cboCompania">
-                           <?php
-                           require_once("model/Data.php");
-                           require_once("model/Tbl_Compania.php");
-                           $d= new Data();
-
-                           $companias = $d->readCompanias();
-                           foreach($companias as $c => $compania){
-                           ?>
-                           <option value="<?php echo $compania->getIdCompania(); ?>"><?php echo $compania->getNombreCompania(); ?></option>
-                           <?php
-                           }
-                           ?>
-                           </select>
+                         <input class="form-control" type="text" name="txtcompania">
                          Fecha Ingreso: <input class="form-control" type="date" name="txtfingreso">
                          Nº Reg.General: <input class="form-control" type="text" name="txtgeneral">
                        </div>
@@ -659,13 +646,13 @@
                              <select name="cboxCompania" class="form-control">
                                <?php
                                require_once("model/Data.php");
-                               require_once("model/Tbl_Compania.php");
+                               require_once("model/Tbl_EntidadACargo.php");
                                $d= new Data();
 
-                               $companias = $d->readCompanias();
+                               $companias = $d->readSoloCompanias();
                                foreach($companias as $c => $compania){
                                ?>
-                               <option value="<?php echo $compania->getIdCompania(); ?>"><?php echo $compania->getNombreCompania(); ?></option>
+                               <option value="<?php echo $compania->getIdEntidadACargo(); ?>"><?php echo $compania->getNombreEntidadACargo(); ?></option>
                                <?php
                                }
                                ?>
@@ -686,6 +673,7 @@
                                }
                                ?>
                              </select>
+                             Premio: <input type="text" name="txtPremioInforHistorica" class="form-control">
                              Motivo: <input type="text" name="txtmotivo" class="form-control">
                              Detalle: <input type="text" name="txtdetalleHistotico" class="form-control">
 

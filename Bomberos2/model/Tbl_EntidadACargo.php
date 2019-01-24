@@ -2,6 +2,7 @@
   Class Tbl_EntidadACargo{
     private $idEntidadACargo;
     private $nombreEntidadACargo;
+    
     public function __construct(){
     }
     public function getIdEntidadACargo(){

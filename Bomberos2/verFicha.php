@@ -238,20 +238,7 @@
                            </select>
 
                          Compañía: <!-- <input class="form-control" type="text" name="txtcompania"> --> <!--Combobox-->
-                         <select class="form-control" name="cboCompania">
-                           <?php
-                           require_once("model/Data.php");
-                           require_once("model/Tbl_Compania.php");
-                           $d= new Data();
-
-                           $companias = $d->readCompanias();
-                           foreach($companias as $c => $compania){
-                           ?>
-                           <option value="<?php echo $compania->getIdCompania(); ?>"><?php echo $compania->getNombreCompania(); ?></option>
-                           <?php
-                           }
-                           ?>
-                           </select>
+                         <input class="form-control" type="text" name="txtcompania">
                          Fecha Ingreso: <input class="form-control" type="date" name="txtfingreso">
                          Nº Reg.General: <input class="form-control" type="text" name="txtgeneral">
                        </div>
@@ -630,18 +617,27 @@
                            <div class="col-sm-6">
 
                              Región:
-                             <select class="form-control">
+                             <select class="form-control" name="cboRegion">
+                               <?php
+                               require_once("model/Data.php");
+                               require_once("model/Tbl_Region.php");
+                               $d= new Data();
 
-                             </select>
+                               $regiones = $d->readRegiones();
+                               foreach($regiones as $r => $region){
+                               ?>
+                               <option value="<?php echo $region->getIdRegion(); ?>"><?php echo $region->getNombreRegion(); ?></option>
+                               <?php
+                               }
+                               ?>
+                               </select>
 
-                             Cuerpo: <input type="text" name="txtcuerpoHistorico" class="form-control">
-                             Compañia:
-                             <select>
-                             </select>
-                             Fecha: <input type="date" name="txtfechaHistorico" class="form-control">
-                             Cargo: <input type="text" name="txtcargoHistorico" class="form-control">
+                             Cuerpo: <input type="text" name="txtcuerpoHistorica" class="form-control">
+                             Compañia:<input type="text" name="txtCompaniaHistorica" class="form-control">
+                             Fecha: <input type="date" name="txtfechaHistorica" class="form-control">
+                             Cargo: <input type="text" name="txtcargoHistorica" class="form-control">
                              Motivo: <input type="text" name="txtmotivo" class="form-control">
-                             Detalle: <input type="text" name="txtdetalleHistotico" class="form-control">
+                             Detalle: <input type="text" name="txtdetalleHistorica" class="form-control">
 
 
                              <table class="table table-striped">

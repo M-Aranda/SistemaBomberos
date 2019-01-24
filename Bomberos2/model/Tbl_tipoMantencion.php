@@ -1,9 +1,12 @@
 <?php
 Class Tbl_tipoMantencion{
+
   private $id_tipo_de_mantencion;
   private $nombre_tipoDeMantencion;
+
   public function __construct(){
   }
+  
   public function getId_tipo_de_mantencion(){
       return $this->id_tipo_de_mantencion;
   }

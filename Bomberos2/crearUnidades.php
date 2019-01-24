@@ -195,10 +195,10 @@
                                    Entidad a Cargo:
                                     <select name="entidad" class="form-control">
                                         <?php
-                                            $entiPropietaria = $data->getEntidadPropietaria();
+                                            $entiPropietaria = $data->getEntidadACargo();
                                             foreach ($entiPropietaria as $ep) {
-                                                echo "<option value='".$ep->getIdEntidadPropietaria()."'>";
-                                                    echo $ep->getNombreEntidadPropietaria();
+                                                echo "<option value='".$ep->getIdEntidadACargo()."'>";
+                                                    echo $ep->getNombreEntidadACargo();
                                                 echo"</option>";
                                             }
                                         ?>
@@ -240,12 +240,22 @@
                                         <form action="controlador/CrearMantencion.php" method="post">
 
                                           Unidad:
-                                          <select class="form-control">
+                                          <select name="cboUnidad1" class="form-control">
+
 
                                           </select >
 
+
                                           Tipo Mantención:
-                                          <select class="form-control">
+                                          <select name="cboTipoMantencion" class="form-control">
+                                              <?php
+                                                  $listado = $data->readTiposDeMantencion();
+                                                  foreach ($listado as $o) {
+                                                      echo "<option value='".$o->getId_tipo_de_mantencion()."'>";
+                                                          echo $o->getNombre_tipoDeMantencion();
+                                                      echo"</option>";
+                                                  }
+                                              ?>
                                           </select>
 
                                           Responsable:<input id="nombre" type="text" name="txtresponsableMantencion" class="form-control" required="">
@@ -299,8 +309,17 @@
 
                                           </select >
 
+
                                           Tipo Combustible:
-                                          <select class="form-control">
+                                          <select name="cboTipoCombustible" class="form-control">
+                                              <?php
+                                                  $listado = $data->readTiposDeCombustibles();
+                                                  foreach ($listado as $o) {
+                                                      echo "<option value='".$o->getId_tipo_combustible()."'>";
+                                                          echo $o->getNombre_tipo_combustible();
+                                                      echo"</option>";
+                                                  }
+                                              ?>
                                           </select>
 
                                           Responsable:<input id="nombre" type="text" name="txtresponsablecombustible" class="form-control" required="">
@@ -309,7 +328,7 @@
 
                                       </div>
                                       <div class="col-sm-6" style="margin-left: 60px;">
-                                          Fecha:<input id="nombre" type="date" name="txtFechaCombustible" class="form-control" required="">
+                                        Fecha:<input id="nombre" type="date" name="txtFechaCombustible" class="form-control" required="">
                                         Cantidad:<input id="nombre" type="number" name="txtcantidad" class="form-control" required="">
                                         Precio/Litro:<input id="nombre" type="text" name="txtpreciolitro" class="form-control" required="">
                                         Comentarios/Observaciones: <textarea class="form-control" Type="textarea" name="txtcomentario" ></textarea>

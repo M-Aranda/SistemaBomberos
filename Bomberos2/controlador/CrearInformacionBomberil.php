@@ -29,7 +29,7 @@ require_once("../model/Provincia.php");
 $id=0;
 $fk_region=$_REQUEST["cboRegion"];
 $cuerpo=$_REQUEST["txtcuerpo"];
-$fk_compania=$_REQUEST["cboCompania"];
+$fk_compania=$_REQUEST["txtcompania"];
 $fk_cargo=$_REQUEST["cboCargo"];
 $fecha_ingreso=$_REQUEST["txtfingreso"];
 $nrg=$_REQUEST["txtgeneral"];

@@ -5,12 +5,14 @@ require_once("Tbl_Usuario.php");
 require_once("Tbl_EstadoUnidad.php");
 require_once("Tbl_TipoVehiculo.php");
 require_once("Tbl_TipoUsuario.php");
-require_once("Tbl_EntidadPropietaria.php");
+require_once("Tbl_EntidadACargo.php");
 require_once("Tbl_Estado.php");
 require_once("Tbl_EstadoBombero.php");
-require_once("Tbl_Compania.php");
 require_once("Tbl_Genero.php");
 require_once("Tbl_EstadoCivil.php");
+require_once("Tbl_tipoMantencion.php");
+require_once("Tbl_tipoCombustible.php");
+
 
 /*
 require_once("Tbl_EstadoCivil.php");
@@ -158,27 +160,33 @@ class Data{
 
 
 
-    public function getEntidadPropietaria(){
-
+    public function getEntidadACargo(){
         $lista = array();
-
         $this->c->conectar();
-
-        $select = "SELECT * from tbl_entidadPropietaria;";
-
+        $select = "SELECT * from tbl_entidadACargo;";
         $rs = $this->c->ejecutar($select);
-
         while($obj = $rs->fetch_object()){
-
-            $eu = new Tbl_EntidadPropietaria();
-
-            $eu->setIdEntidadPropietaria($obj->id_entidadPropietaria);
-            $eu->setNombreEntidadPropietaria($obj->nombre_entidadPropietaria);
-
-
+            $eu = new Tbl_EntidadACargo();
+            $eu->setIdEntidadACargo($obj->id_entidadACargo);
+            $eu->setNombreEntidadACargo($obj->nombre_entidadACargo);
             array_push($lista,$eu);
         }
+        $this->c->desconectar();
+        return $lista;
+    }
 
+
+    public function readSoloCompanias(){
+        $lista = array();
+        $this->c->conectar();
+        $select = "SELECT * FROM tbl_entidadACargo WHERE nombre_entidadACargo LIKE '%Compa%';";
+        $rs = $this->c->ejecutar($select);
+        while($obj = $rs->fetch_object()){
+            $eu = new Tbl_EntidadACargo();
+            $eu->setIdEntidadACargo($obj->id_entidadACargo);
+            $eu->setNombreEntidadACargo($obj->nombre_entidadACargo);
+            array_push($lista,$eu);
+        }
         $this->c->desconectar();
         return $lista;
     }
@@ -386,22 +394,7 @@ class Data{
     }
 
 
-    public function readCompanias (){
-      $this->c->conectar();
-      $query="SELECT * FROM tbl_compania;";
-      $rs = $this->c->ejecutar($query);
-      $listado = array();
-      while($reg = $rs->fetch_array()){
-            $id=$reg[0];
-           $nombre=$reg[1];
-           $objeto = new Tbl_Compania();
-           $objeto->setIdCompania($id);
-           $objeto->setNombreCompania($nombre);
-           $listado[]=$objeto;
-       }
-       $this->c->desconectar();
-       return $listado;
-    }
+
 
     public function readCargos (){
       $this->c->conectar();
@@ -504,6 +497,46 @@ class Data{
        $this->c->desconectar();
        return $listado;
     }
+
+
+
+    public function readTiposDeMantencion (){
+      $this->c->conectar();
+      $query="SELECT * FROM tbl_tipoDeMantencion;";
+      $rs = $this->c->ejecutar($query);
+      $listado = array();
+      while($reg = $rs->fetch_array()){
+           $id=$reg[0];
+           $nombre=$reg[1];
+           $obj = new Tbl_tipoMantencion();
+           $obj->setId_tipo_de_mantencion($id);
+           $obj->setNombre_tipoDeMantencion($nombre);
+           $listado[]=$obj;
+       }
+       $this->c->desconectar();
+       return $listado;
+    }
+
+
+    public function readTiposDeCombustibles (){
+      $this->c->conectar();
+      $query="SELECT * FROM tbl_tipo_combustible;";
+      $rs = $this->c->ejecutar($query);
+      $listado = array();
+      while($reg = $rs->fetch_array()){
+           $id=$reg[0];
+           $nombre=$reg[1];
+           $obj = new Tbl_tipo_combustible();
+           $obj->setId_tipo_combustible($id);
+           $obj->setNombre_tipo_combustible($nombre);
+           $listado[]=$obj;
+       }
+       $this->c->desconectar();
+       return $listado;
+    }
+
+
+
 
     public function getIdBomberoMasReciente (){
   $this->c->conectar();

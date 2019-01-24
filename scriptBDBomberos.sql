@@ -132,7 +132,6 @@ nombre_cargo VARCHAR (5000),
 PRIMARY KEY (id_cargo)
 );
 
-
 CREATE TABLE tbl_informacionBomberil (
 id_informacionBomberil INT AUTO_INCREMENT,
 fk_region_informacionBomberil INT,
@@ -1340,7 +1339,7 @@ INSERT INTO tbl_tipo_servicio (codigo_tipo_servicio,nombre_tipo_servicio) VALUES
 ('10-2','Llamado de pastizales y/o basura'),('10-3','Llamado de rescate de personas atrapadas'),('10-4','Llamado de Rescate vehicular'),
 ('10-5','Llamado de Materiales Peligrosos'),('10-6','Llamado de emanación de gases'),('10-7','Llamado eléctrico'),('10-8','Llamado no clasificado'),
 ('10-9','Llamado a otros servicios'),('10-10','Llamado a escombros'),('10-11','Llamado a servicio áreo'),('10-12','Llamado a apoyar a otros Cuerpos'),
-('10-13','Llamado a artefacto explosivo, sobre sospechoso, acto terrorista'),('10-14','Llamado a accidente de aviación');
+('10-13','Llamado a artefacto explosivo, sobre sospechoso, acto terrorista'),('10-14','Llamado a accidente de aviación'), ('10-15','Simulacro');
 
 -- SELECTs
 
@@ -1358,6 +1357,7 @@ INSERT INTO tbl_tipo_servicio (codigo_tipo_servicio,nombre_tipo_servicio) VALUES
 -- SELECT * FROM tbl_entidadACargo WHERE nombre_entidadACargo LIKE '%Compañía%';
 -- SELECT * FROM tbl_permiso;
 -- SELECT * FROM tbl_usuario;
+-- SELECT * FROM tbl_tipoDeMantencion;
 
 /*Consulta que requiere id de permiso e id de tipo de usuario
 
