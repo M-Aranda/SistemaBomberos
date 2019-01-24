@@ -20,8 +20,6 @@
 
   </head>
 
-
-
 <body  background="images/fondofichaintranet.jpg">
 
     <br>
@@ -47,7 +45,6 @@
             <li><a href="verFicha.php">Ver Ficha</a></li>
             <li><a href="buscarBombero.php">Buscar</a></li>
             <li><a href="modificarBombero.php">Modificar</a></li>
-          <!--  <li><a href="eliminarBombero.php">Eliminar</a></li> -->
           </ul>
         </li>
       </ul>
@@ -59,7 +56,7 @@
             <li><a href="crearUnidades.php">Crear</a></li>
             <li><a href="verUnidades.php">Ver Unidades</a></li>
             <li><a href="modificarUnidades.php">Modificar</a></li>
-            <!-- <li><a href="eliminarUnidades.php">Eliminar</a></li> -->
+            <li><a href="reporteUnidad.php">Reporte</a></li>
           </ul>
         </li>
       </ul>

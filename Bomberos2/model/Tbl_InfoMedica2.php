@@ -27,7 +27,7 @@
 
 
       public function getmedicamentosHabitualesinformacionMedica2(){
-        return $this->medicamentosHabitualesinformacionMedica2;
+        return $this->prestacionMedica_informacionMedica1;
       }
 
       public function setmedicamentosHabitualesinformacionMedica2($medicamentosHabitualesinformacionMedica2){

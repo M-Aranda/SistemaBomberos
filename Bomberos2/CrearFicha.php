@@ -1,10 +1,7 @@
 <!DOCTYPE html>
-
-
-
 <html lang="en" dir="ltr">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8">
     <title>Mantenedor</title>
 
 
@@ -23,18 +20,14 @@
   require_once("model/Data.php");
   require_once("model/Tbl_Usuario.php");
   $dataUsuario= new Data();
-
   session_start();
-
   if($_SESSION["usuarioIniciado"]!=null){
     $u=$_SESSION["usuarioIniciado"];
-
     if($dataUsuario->verificarSiUsuarioTienePermiso($u,2)==0){
-      header("location: Error.php");
+      header("location: paginaError.php");
     }
   }
   ?>
-
 
 <body  background="images/fondofichaintranet.jpg">
 
@@ -61,7 +54,6 @@
             <li><a href="verFicha.php">Ver Ficha</a></li>
             <li><a href="buscarBombero.php">Buscar</a></li>
             <li><a href="modificarBombero.php">Modificar</a></li>
-            <!-- <li><a href="eliminarBombero.php">Eliminar</a></li> -->
           </ul>
         </li>
       </ul>
@@ -73,7 +65,7 @@
             <li><a href="crearUnidades.php">Crear</a></li>
             <li><a href="verUnidades.php">Ver Unidades</a></li>
             <li><a href="modificarUnidades.php">Modificar</a></li>
-            <!-- <li><a href="eliminarUnidades.php">Eliminar</a></li> -->
+            <li><a href="reporteUnidad.php">Reporte</a></li>
           </ul>
         </li>
       </ul>
@@ -108,7 +100,7 @@
 
 
   <div class = "cuerpo" style="
-    margin-left: 25%;
+    margin-left: 20%;
     float: left;
     width: 75%;
     padding-left: 5%;
@@ -123,639 +115,692 @@
 
 
     ?>
+    <style>
+
+    #transparencia{
+        opacity: .80;
+        -moz-opacity: .80;
+        filter: alpha(opacity=80);
+
+    }
+
+    </style>
+    <div style="width: 800px" style="height: 900px">
+        <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
+          <div class="container">
 
 
-  <!--  <div class="container " style="background:transparent">-->
-                <!-- INFORMACION PERSONAL -->
+          <div style="margin-left:100px;">
+             <div class="col-md-20">
+               <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#antecedentes">
+                   Información Personal
+               </button>
+           </div>
 
-                <div class="col-md-13">
-                    <button type="button" class="btn btn-default col-md-7" data-toggle="collapse" data-target="#antecedentes">
-                        Informacion Personal
-                    </button>
-                </div>
+           <div class="col-md-11 collapse" id="antecedentes">
+               <div class="panel panel-primary">
+                   <div class="panel-heading panel-title">
+                       Información Personal
+                   </div>
+                   <div class="panel-body">
 
-                <div class="col-md-7 collapse" id="antecedentes">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading panel-title">
-                            Informacion Personal
-                        </div>
-                        <div class="panel-body">
+                       <div class="col-sm-5" >
+                         <div style="margin-left: 0px;">
+                           <img src="images/avatar_opt.jpg">
+                         </div>
+                         <form action="controlador/CrearInfoPersonal.php" method="post">
+                         Talla Chaqueta/camisa : <input class="form-control" type="text" name="txtchaqueta">
+                         Talla Pantalón: <input class="form-control" type="text" name="txtpantalon">
+                         Talla buzo: <input class="form-control" type="text" name="txtbuzo">
+                         talla Calzado: <input class="form-control" type="text" name="txtcalzado">
+                         Altura :<input class="form-control" type="text" name="txtaltura">
+                         Peso: <input class="form-control" type="text" name="txtpeso">
+                         Perteneció a Brigada Juvenil? <input class="form-control" type="text" name="txtbrigada">
+                         Instructor: <input class="form-control" type="text" name="txtinstructor">
 
-                            <div class="col-sm-5" >
-                              <div style="margin-left: 0px;">
-                                <img src="images/avatar_opt.jpg">
-                              </div>
-                              <form action="controlador/CrearInfoPersonal.php" method="post">
-                              Talla Chaqueta/camisa : <input class="form-control" type="text" name="txtchaqueta">
-                              Talla Pantalon: <input class="form-control" type="text" name="txtpantalon">
-                              Talla buzo: <input class="form-control" type="text" name="txtbuzo">
-                              talla Calzado: <input class="form-control" type="text" name="txtcalzado">
-                              Altura :<input class="form-control" type="text" name="txtaltura">
-                              Peso: <input class="form-control" type="text" name="txtpeso">
-                              Pertenecio a Brigada Juvenil? <input class="form-control" type="text" name="txtbrigada">
-                              Instructor: <input class="form-control" type="text" name="txtinstructor">
+                       </div>
+                       <div class="col-md-5" style="margin-left: 50px;">
+                         Rut: <input class="form-control" type="text" name="txtRut">
+                         Nombre: <input class="form-control" type="text" name="txtNombre">
+                         Apellido Paterno: <input class="form-control" type="text" name="txtApePa" >
+                         Apellido Materno: <input class="form-control" name="txtApeMa">
+                         Fecha Nacimiento: <input class="form-control" name="txtFecha" type="date">
+                         Estado Civil:
+                         <select class="form-control" name="cboEstadoCivil">
+                         <?php
 
-                            </div>
-                            <div class="col-md-5" style="margin-left: 50px;">
-                              Rut: <input class="form-control" type="text" name="txtRut">
-                              Nombre: <input class="form-control" type="text" name="txtNombre">
-                              Apellido Paterno: <input class="form-control" type="text" name="txtApePa" >
-                              Apellido Materno: <input class="form-control" name="txtApeMa">
-                              Fecha Nacimiento: <input class="form-control" name="txtFecha" type="date">
-                              Estado Civil:
-                              <select class="form-control" name="cboEstadoCivil">
-                              <?php
+                         require_once("model/Data.php");
+                         require_once("model/Tbl_EstadoCivil.php");
+                         $d= new Data();
 
-                              require_once("model/Data.php");
-                              require_once("model/Tbl_EstadoCivil.php");
-                              $d= new Data();
+                         $estadosCiviles = $d->readEstadosCiviles();
+                         foreach($estadosCiviles as $e => $estado){
+                         ?>
+                         <option value="<?php echo $estado->getIdEstadoCivil(); ?>"><?php echo $estado->getNombreEstadoCivil(); ?></option>
+                         <?php
+                         }
+                         ?>
+                         </select>
+                         Dirección: <textarea class="form-control" Type="textarea" name="txtDireccion" ></textarea>
+                         Teléfonos:  <input class="form-control" type="text" name="txtTelefonos">
+                         Email: <input class="form-control" type="text" name="txtemail">
+                         Genero:
+                         <select class="form-control" name="cboGenero">
+                           <?php
+                           require_once("model/Data.php");
+                           require_once("model/Tbl_Genero.php");
+                           $d= new Data();
 
-                              $estadosCiviles = $d->readEstadosCiviles();
-                              foreach($estadosCiviles as $e => $estado){
-                              ?>
-                              <option value="<?php echo $estado->getIdEstadoCivil(); ?>"><?php echo $estado->getNombreEstadoCivil(); ?></option>
-                              <?php
-                              }
-                              ?>
-                              </select>
-                              Dirección: <textarea class="form-control" Type="textarea" name="txtDireccion" ></textarea>
-                              Telefonos:  <input class="form-control" type="text" name="txtTelefonos">
-                              Email: <input class="form-control" type="text" name="txtemail">
-                              Genero:
-                              <select class="form-control" name="cboGenero">
-                                <?php
-                                require_once("model/Data.php");
-                                require_once("model/Tbl_Genero.php");
-                                $d= new Data();
+                           $generos = $d->readGeneros();
+                           foreach($generos as $g => $genero){
+                           ?>
+                           <option value="<?php echo $genero->getIdGenero(); ?>"><?php echo $genero->getNombreGenero(); ?></option>
+                           <?php
+                           }
+                           ?>
+                           </select>
+                           <br>
+                         <center> <input type="submit" name="btnInfoPersonal" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                             <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
-                                $generos = $d->readGeneros();
-                                foreach($generos as $g => $genero){
-                                ?>
-                                <option value="<?php echo $genero->getIdGenero(); ?>"><?php echo $genero->getNombreGenero(); ?></option>
-                                <?php
-                                }
-                                ?>
-                                </select>
-                              <center> <input type="submit" name="btnInfoPersonal" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                         </center>
+                       </form>
+
+                                                     <br>
+                       </div>
+                       <br>
+                       <br>
+
+
+                   </div>
+               </div>
+           </div>
+           <!-- INFORMACION PERSONAL -->
+           <!-- INFORMACION bomberilL -->
+           <br><br>
+           <div class="col-md-20">
+               <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#bomberil">
+                   Información Bomberil
+               </button>
+           </div>
+           <div class="col-md-11 collapse" id="bomberil">
+               <div class="panel panel-primary">
+                   <div class="panel-heading panel-title">
+                       Información Bomberil
+                   </div>
+                   <div class="panel-body">
+                       <div class="col-sm-6">
+                         Región : <!-- <input class="form-control" type="text" name="txtregion"> --><!--Region del libertador bernardo ohggins-->
+                         <select class="form-control" name="cboRegion">
+                           <?php
+                           require_once("model/Data.php");
+                           require_once("model/Tbl_Region.php");
+                           $d= new Data();
+
+                           $regiones = $d->readRegiones();
+                           foreach($regiones as $r => $region){
+                           ?>
+                           <option value="<?php echo $region->getIdRegion(); ?>"><?php echo $region->getNombreRegion(); ?></option>
+                           <?php
+                           }
+                           ?>
+                           </select>
+
+                         Compañía: <!-- <input class="form-control" type="text" name="txtcompania"> --> <!--Combobox-->
+                         <select class="form-control" name="cboCompania">
+                           <?php
+                           require_once("model/Data.php");
+                           require_once("model/Tbl_Compania.php");
+                           $d= new Data();
+
+                           $companias = $d->readCompanias();
+                           foreach($companias as $c => $compania){
+                           ?>
+                           <option value="<?php echo $compania->getIdCompania(); ?>"><?php echo $compania->getNombreCompania(); ?></option>
+                           <?php
+                           }
+                           ?>
+                           </select>
+                         Fecha Ingreso: <input class="form-control" type="date" name="txtfingreso">
+                         Nº Reg.General: <input class="form-control" type="text" name="txtgeneral">
+                       </div>
+                       <div class="col-md-6">
+                         Cuerpo: <input class="form-control" type="text" name="txtcuerpo"> <!-- Machali-->
+                         Cargo: <!-- <input class="form-control" type="text" name="txtcargo"> -->
+                         <select class="form-control" name="cboCargo">
+                           <?php
+                           require_once("model/Data.php");
+                           require_once("model/Tbl_Cargo.php");
+                           $d= new Data();
+
+                           $cargos = $d->readCargos();
+                           foreach($cargos as $c => $cargo){
+                           ?>
+                           <option value="<?php echo $cargo->getIdCargo(); ?>"><?php echo $cargo->getNombreCargo(); ?></option>
+                           <?php
+                           }
+                           ?>
+                           </select>
+
+                         Estado: <!-- <input class="form-control" type="text" name="txtestado" > --> <!--Combobox -->
+                         <!-- no se ve-->
+                         <select class="form-control" name="cboEstadoBombero">
+                           <?php
+                           require_once("model/Data.php");
+                           require_once("model/Tbl_EstadoBombero.php");
+                           $d= new Data();
+
+                           $estados = $d->readEstadosDeBomberos();
+                           foreach($estados as $e => $estado){
+                           ?>
+                           <option value="<?php echo $estado->getIdEstado(); ?>"><?php echo $estado->getNombreEstado(); ?></option>
+                           <?php
+                           }
+                           ?>
+                           </select>
+                         Nº Reg.Cia: <input class="form-control" name="txtcia">
+                         <br>
+                         <center> <input type="submit" name="btnInfoBomberil" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                             <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
+
+                         </center>
+
+                       </div>
+                   </div>
+               </div>
+           </div>
+           <!-- INFORMACION bomberilL -->
+           <!-- INFORMACION laboral -->
+           <br>
+           <br>
+           <div class="col-md-20">
+               <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#laboral">
+                   Información Laboral
+               </button>
+           </div>
+           <div class="col-md-11 collapse" id="laboral">
+               <div class="panel panel-primary">
+                   <div class="panel-heading panel-title">
+                       Información Laboral
+                   </div>
+                   <div class="panel-body">
+                       <div class="col-sm-5">
+                         Nombre Empresa : <input class="form-control" type="text" name="txtnomempresa">
+                         Dirección Empresa: <textarea class="form-control" type="text" name="txtdirecempresa"></textarea>
+                         Teléfono Empresa: <input class="form-control" type="text" name="txttlfempresa">
+                         Fecha Ingreso: <input class="form-control" type="date" name="txfingresoempresa">
+                         cargo : <input class="form-control" type="text" name="txtcargo">
+
+                       </div>
+                       <div class="col-md-5">
+
+                         Area/Depto de trabajo: <input class="form-control" type="text" name="txtareatrabajo">
+                         AFP: <input class="form-control" type="text" name="txtafp" >
+                         Profesión: <input class="form-control" name="txtprofesion">
+                         <br>
+                         <center> <input type="submit" name="btnInfoLaboral" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                             <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
+
+                         </center>
+
+                       </div>
+                   </div>
+               </div>
+           </div>
+           <!-- INFORMACION laboral -->
+           <!-- INFORMACION medica -->
+           <br>
+           <br>
+           <div class="col-md-20">
+               <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#medica">
+                   Informacion Médica
+               </button>
+           </div>
+           <div class="col-md-11 collapse" id="medica">
+               <div class="panel panel-primary">
+                   <div class="panel-heading panel-title">
+                       Informacion Médica
+                   </div>
+                   <div class="panel-body">
+                       <div class="col-sm-6">
+                         Prestación Médica : <input class="form-control" type="text" name="txtpresmedica">
+                         Alergias: <input class="form-control" type="text" name="txtalergias">
+                         Enfermedades Crónicas: <input class="form-control" type="text" name="txtenfermedadescronicas">
+                         Medicamentos Habituales: <input class="form-control" type="text" name="txtmedicamentosHabituales">
+                         Nombre del Contacto: <input class="form-control" type="text" name="txtnomContacto">
+                         Teléfono del Contacto : <input class="form-control" type="text" name="txttlfcontacto">
+
+                       </div>
+                       <div class="col-md-6">
+
+                         Parentesco del Contacto: <!-- <input class="form-control" type="text" name="txtparentesco"> -->
+                         <select class="form-control" name="cboParentesco1">
+                           <?php
+                           require_once("model/Data.php");
+                           require_once("model/Tbl_Parentesco.php");
+                           $d= new Data();
+
+                           $parentescos = $d->readParentescos();
+                           foreach($parentescos as $p => $parentesco){
+                           ?>
+                           <option value="<?php echo $parentesco->getIdParentesco(); ?>"><?php echo $parentesco->getNombreParentesco(); ?></option>
+                           <?php
+                           }
+                           ?>
+                           </select>
+                         Nivel de Actividad Fisica: <input class="form-control" type="text" name="txtactvfisica">
+                         Donante: <input class="form-control" type="text" name="txtdonante">
+                         Fumador: <input class="form-control" type="text" name="txtfumador">
+                         Grupo Sanguineo: <!-- <input class="form-control" type="text" name="txtgruposanguineo"> -->
+                         <select class="form-control" name="cboGrupoSanguineo">
+                           <?php
+                           require_once("model/Data.php");
+                           require_once("model/Tbl_GrupoSanguineo.php");
+                           $d= new Data();
+
+                           $gruposSanguineos = $d->readGruposSanguineos();
+                           foreach($gruposSanguineos as $gs => $grupoSanguineo){
+                           ?>
+                           <option value="<?php echo $grupoSanguineo->getIdGrupoSanguineo(); ?>"><?php echo $grupoSanguineo->getNombreGrupoSanguineo(); ?></option>
+                           <?php
+                           }
+                           ?>
+                           </select>
+                           <br>
+                           <center> <input type="submit" name="btninfoMedica" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                               <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
+
+                           </center>
+
+                       </div>
+                   </div>
+               </div>
+           </div>
+           <!-- INFORMACION medica -->
+           <!-- INFORMACION Familiar -->
+           <br>
+           <br>
+           <div class="col-md-20">
+               <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#familiar">
+                   Información Familiar
+               </button>
+           </div>
+           <div class="col-md-11 collapse" id="familiar">
+               <div class="panel panel-primary">
+                   <div class="panel-heading panel-title">
+                       Información Familiar
+                   </div>
+                   <div class="panel-body">
+
+
+                       <div class="col-sm-6">
+                         Nombre: <input class="form-control" type="text" name="txtnombreFamiliar">
+                         Fecha de Nacimiento: <input class="form-control" type="date" name="txtfechafamiliar">
+                         Parentesco:
+                         <select class="form-control" name="cboParentesco2">
+                           <?php
+                           require_once("model/Data.php");
+                           require_once("model/Tbl_Parentesco.php");
+                           $d= new Data();
+
+                           $parentescos = $d->readParentescos();
+                           foreach($parentescos as $p => $parentesco){
+                           ?>
+                           <option value="<?php echo $parentesco->getIdParentesco(); ?>"><?php echo $parentesco->getNombreParentesco(); ?></option>
+                           <?php
+                           }
+                           ?>
+                         </select>
+
+
+                         <!-- Nivel de actividad fisica: <input class="form-control" type="text" name="txtactvfisica"> -->
+                         <table class="table table-striped">
+                             <thead>
+                               <tr>
+                                 <th>Nombre</th>
+                                 <th>Fecha de Nacimiento</th>
+                                 <th>Parentesco</th>
+                               </tr>
+                             </thead>
+                             <tbody>
+                               <tr>
+                                 <td>John</td>
+                                 <td>Doe</td>
+                                 <td>john@example.com</td>
+                               </tr>
+
+                             </tbody>
+                           </table>
+
+
+
+                      </div>
+                      <div class="col-md-6">
+                         <br><br><br><br><br><br>
+                          <center> <input type="submit" name="btninfoFamiliar" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                              <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
+
+                          </center>
+
+                      </div>
+
+                   </div>
+
+               </div>
+           </div>
+             <!-- INFORMACION Familiar -->
+               <!-- INFORMACION academica -->
+           <br>
+           <br>
+
+           <div class="col-md-20">
+               <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#academica">
+                   Informacion Académica
+               </button>
+           </div>
+           <div class="col-md-11 collapse" id="academica">
+               <div class="panel panel-primary">
+                   <div class="panel-heading panel-title">
+                       Informacion Académica
+                   </div>
+                   <div class="panel-body">
+                       <div class="col-sm-6">
+                         Fecha: <input class="form-control" type="date" name="txtfechaAcademica">
+                         Actividad: <input class="form-control" type="text" name="txtActivdidadAcademica">
+                         Estado:
+                         <select class="form-control" name="cboEstadoCursoAcademico">
+                           <?php
+                           require_once("model/Data.php");
+                           require_once("model/Tbl_EstadoCurso.php");
+                           $d= new Data();
+
+                           $estadosDeCursos = $d->readEstadosCurso();
+                           foreach($estadosDeCursos as $ec => $estado){
+                           ?>
+                           <option value="<?php echo $estado->getIdEstadoCurso(); ?>"><?php echo $estado->getNombreEstadoCurso(); ?></option>
+                           <?php
+                           }
+                           ?>
+                           </select>
+                         <table class="table table-striped">
+                             <thead>
+                               <tr>
+                                 <th>Fecha</th>
+                                 <th>Actividad</th>
+                                 <th>Estado</th>
+                               </tr>
+                             </thead>
+                             <tbody>
+                               <tr>
+                                 <td>John</td>
+                                 <td>Doe</td>
+                                 <td>john@example.com</td>
+                               </tr>
+
+                             </tbody>
+                           </table>
+
+                      </div>
+                      <div class="col-md-6">
+                         <br><br><br><br><br><br>
+                          <center> <input type="submit" name="btninfoAcademica" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                              <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
+
+                          </center>
+
+                      </div>
+                   </div>
+
+               </div>
+             </div>
+               <!-- INFORMACION academica -->
+                 <!-- INFORMACION estandar -->
+               <br>
+               <br>
+
+               <div class="col-md-20">
+                   <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#estandar">
+                       Información Entrenamiento Estandar
+                   </button>
+               </div>
+               <div class="col-md-11 collapse" id="estandar">
+                   <div class="panel panel-primary">
+                       <div class="panel-heading panel-title">
+                           Información Estandar
+                       </div>
+                       <div class="panel-body">
+                           <div class="col-sm-6">
+                             Fecha: <input class="form-control" type="date" name="txtfechaEstandar">
+                             Actividad: <input class="form-control" type="text" name="txtActividadEntrenamientoEstandar">
+                             Estado:
+                             <select class="form-control" name="cboEstadoCursoEstandar">
+                               <?php
+                               require_once("model/Data.php");
+                               require_once("model/Tbl_EstadoCurso.php");
+                               $d= new Data();
+
+                               $estadosDeCursos2 = $d->readEstadosCurso();
+                               foreach($estadosDeCursos2 as $ec2 => $estado2){
+                               ?>
+                               <option value="<?php echo $estado2->getIdEstadoCurso(); ?>"><?php echo $estado2->getNombreEstadoCurso(); ?></option>
+                               <?php
+                               }
+                               ?>
+                               </select>
+
+                             <table class="table table-striped">
+                                 <thead>
+                                   <tr>
+                                     <th>Fecha</th>
+                                     <th>Actividad</th>
+                                     <th>Estado</th>
+                                   </tr>
+                                 </thead>
+                                 <tbody>
+                                   <tr>
+                                     <td>John</td>
+                                     <td>Doe</td>
+                                     <td>john@example.com</td>
+                                   </tr>
+
+                                 </tbody>
+                               </table>
+
+                          </div>
+                          <div class="col-md-6">
+                             <br><br><br><br><br><br>
+                              <center> <input type="submit" name="btninfoEstandar" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
                                   <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                               </center>
-                            </form>
-
-                                                          <br>
-                            </div>
-                            <br>
-                            <br>
-
-
-                        </div>
-                    </div>
-                </div>
-                <!-- INFORMACION PERSONAL -->
-                <!-- INFORMACION bomberilL -->
-                <br><br>
-                <div class="col-md-13">
-                    <button type="button" class="btn btn-default col-md-7" data-toggle="collapse" data-target="#bomberil">
-                        Informacion Bomberil
-                    </button>
-                </div>
-                <div class="col-md-7 collapse" id="bomberil">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading panel-title">
-                            Informacion Bomberil
-
-                            <form action="controlador/CrearInformacionBomberil.php" method="post">
-
-
-                        </div>
-                        <div class="panel-body">
-                            <div class="col-sm-6">
-                              Region : <!-- <input class="form-control" type="text" name="txtregion"> --><!--Region del libertador bernardo ohggins-->
-                              <select class="form-control" name="cboRegion">
-                                <?php
-                                require_once("model/Data.php");
-                                require_once("model/Tbl_Region.php");
-                                $d= new Data();
-
-                                $regiones = $d->readRegiones();
-                                foreach($regiones as $r => $region){
-
-                                ?>
-                                <option value="<?php echo $region->getIdRegion(); ?>"><?php echo $region->getNombreRegion(); ?></option>
-                                <?php
-                                }
-                                ?>
-                                </select>
-                              Compañia: <!-- <input class="form-control" type="text" name="txtcompania"> --> <!--Combobox-->
-                              <select class="form-control" name="cboCompania">
-                                <?php
-                                require_once("model/Data.php");
-                                require_once("model/Tbl_EntidadACargo.php");
-                                $d= new Data();
-
-                                $companias = $d->readSoloCompanias();
-                                foreach($companias as $c => $compania){
-                                ?>
-                                <option value="<?php echo $compania->getIdEntidadACargo(); ?>"><?php echo $compania->getNombreEntidadACargo(); ?></option>
-                                <?php
-                                }
-                                ?>
-                                </select>
-                              Fecha Ingreso: <input class="form-control" type="date" name="txtfingreso">
-                              Nº Reg.General: <input class="form-control" type="text" name="txtgeneral">
-                            </div>
-                            <div class="col-md-6">
-                              Cuerpo: <input class="form-control" type="text" name="txtcuerpo"> <!-- Machali-->
-                              Cargo: <!-- <input class="form-control" type="text" name="txtcargo"> -->
-                              <select class="form-control" name="cboCargo">
-                                <?php
-                                require_once("model/Data.php");
-                                require_once("model/Tbl_Cargo.php");
-                                $d= new Data();
-
-                                $cargos = $d->readCargos();
-                                foreach($cargos as $c => $cargo){
-                                ?>
-                                <option value="<?php echo $cargo->getIdCargo(); ?>"><?php echo $cargo->getNombreCargo(); ?></option>
-                                <?php
-                                }
-                                ?>
-                                </select>
-
-                              Estado: <!-- <input class="form-control" type="text" name="txtestado" > --> <!--Combobox -->
-                              <select class="form-control" name="cboEstadoBombero">
-                                <?php
-                                require_once("model/Data.php");
-                                require_once("model/Tbl_EstadoBombero.php");
-                                $d= new Data();
-
-                                $estados = $d->readEstadosDeBomberos();
-                                foreach($estados as $e => $estado){
-                                ?>
-                                <option value="<?php echo $estado->getIdEstado(); ?>"><?php echo $estado->getNombreEstado(); ?></option>
-                                <?php
-                                }
-                                ?>
-                                </select>
-                              Nº Reg.Cia: <input class="form-control" name="txtcia">
-
-                              <center> <input type="submit" name="btninfoBomberil" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
-
-                            </form>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- INFORMACION bomberilL -->
-                <!-- INFORMACION laboral -->
-                <br>
-                <br>
-                <div class="col-md-13">
-                    <button type="button" class="btn btn-default col-md-7" data-toggle="collapse" data-target="#laboral">
-                        Informacion Laboral
-                    </button>
-                </div>
-                <div class="col-md-7 collapse" id="laboral">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading panel-title">
-                            Informacion Laboral
-                        </div>
-                        <div class="panel-body">
-                            <div class="col-sm-5">
-                              <form action="controlador/crearInformacionLaboral.php" method="post">
-
-                              Cargo : <input class="form-control" type="text" name="cargoEmpresa">
-                              Nombre Empresa : <input class="form-control" type="text" name="txtnomempresa">
-                              Direccion Empresa: <textarea class="form-control" type="text" name="txtdirecempresa"></textarea>
-                              Telefono Empresa: <input class="form-control" type="text" name="txttlfempresa">
-
-                            </div>
-                            <div class="col-md-5">
-                              Fecha Ingreso: <input class="form-control" type="date" name="txfingresoempresa">
-                              Area/Depto de trabajo: <input class="form-control" type="text" name="txtareatrabajo">
-                              AFP: <input class="form-control" type="text" name="txtafp" >
-                              Profesion: <input class="form-control" name="txtprofesion">
-
-                              <center> <input type="submit" name="btninfoLaboral" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
-
-                              </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- INFORMACION laboral -->
-                <!-- INFORMACION medica -->
-                <br>
-                <br>
-                <div class="col-md-13">
-                    <button type="button" class="btn btn-default col-md-7" data-toggle="collapse" data-target="#medica">
-                        Informacion Medica
-                    </button>
-                </div>
-                <div class="col-md-7 collapse" id="medica">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading panel-title">
-                            Informacion Medica
-                        </div>
-                        <div class="panel-body">
-                            <div class="col-sm-6">
-
-                              <form action="controlador/CrearInformacionMedica1.php" method="post">
-
-                              Prestacion Medica : <input class="form-control" type="text" name="txtpresmedica">
-                              Alergias: <input class="form-control" type="text" name="txtalergias">
-                              Enfermedades Cronicas: <input class="form-control" type="text" name="txtenfermedadescronicas">
-                              <center> <input type="submit" name="btninfoMedica1" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
-
-                              </form>
-
-                              <form action="controlador/CrearInformacionMedica2.php" method="post">
-
-                              Medicamentos Habituales: <input class="form-control" type="text" name="medHabituales">
-                              Nombre del Contacto: <input class="form-control" type="text" name="txtNombContactoInfoMedica2">
-
-                            </div>
-                            <div class="col-md-6">
-                              Telefono del Contacto : <input class="form-control" type="text" name="txtTlfContactoInfoMedica2">
-                              Parentesco del Contacto: <!-- <input class="form-control" type="text" name="txtparentesco"> -->
-                              <select class="form-control" name="cboParentesco1">
-                                <?php
-                                require_once("model/Data.php");
-                                require_once("model/Tbl_Parentesco.php");
-                                $d= new Data();
-
-                                $parentescos = $d->readParentescos();
-                                foreach($parentescos as $p => $parentesco){
-                                ?>
-                                <option value="<?php echo $parentesco->getIdParentesco(); ?>"><?php echo $parentesco->getNombreParentesco(); ?></option>
-                                <?php
-                                }
-                                ?>
-                                </select>
-                              Nivel de Actividad Fisica: <input class="form-control" type="text" name="txtactvfisica">
-                              Donante: <input class="form-control" type="text" name="txtdonante">
-                              Fumador: <input class="form-control" type="text" name="txtfumador">
-                              Grupo Sanguineo: <!-- <input class="form-control" type="text" name="txtgruposanguineo"> -->
-                              <select class="form-control" name="cboGrupoSanguineo">
-                                <?php
-                                require_once("model/Data.php");
-                                require_once("model/Tbl_GrupoSanguineo.php");
-                                $d= new Data();
-
-                                $gruposSanguineos = $d->readGruposSanguineos();
-                                foreach($gruposSanguineos as $gs => $grupoSanguineo){
-                                ?>
-                                <option value="<?php echo $grupoSanguineo->getIdGrupoSanguineo(); ?>"><?php echo $grupoSanguineo->getNombreGrupoSanguineo(); ?></option>
-                                <?php
-                                }
-                                ?>
-                                </select>
-
-                                <center> <input type="submit" name="btninfoMedica2" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
-
-                                </form>
-
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- INFORMACION medica -->
-                <!-- INFORMACION Familiar -->
-                <br>
-                <br>
-                <div class="col-md-13">
-                    <button type="button" class="btn btn-default col-md-7" data-toggle="collapse" data-target="#familiar">
-                        Informacion Familiar
-                    </button>
-                </div>
-                <div class="col-md-7 collapse" id="familiar">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading panel-title">
-                            Informacion Familiar
-                        </div>
-                        <div class="panel-body">
-
-
-                          <form action="controlador/CrearInformacionFamiliar.php" method="post">
-
-
-                            <div class="col-sm-6">
-                              Nombre: <input class="form-control" type="text" name="txtNombreContactoFamiliar">
-                              Fecha de Nacimiento: <input class="form-control" type="date" name="fechaNacPariente">
-                              Parentesco:
-                              <select class="form-control" name="cboParentesco2">
-                                <?php
-                                require_once("model/Data.php");
-                                require_once("model/Tbl_Parentesco.php");
-                                $d= new Data();
-
-                                $parentescos = $d->readParentescos();
-                                foreach($parentescos as $p => $parentesco){
-                                ?>
-                                <option value="<?php echo $parentesco->getIdParentesco(); ?>"><?php echo $parentesco->getNombreParentesco(); ?></option>
-                                <?php
-                                }
-                                ?>
-                                </select>
-
-                                <center> <input type="submit" name="btninfoFamiliar" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
-
-                                </form>
-                              <!-- Nivel de actividad fisica: <input class="form-control" type="text" name="txtactvfisica"> -->
-                              <!--
-                              <table class="table table-striped">
-                                  <thead>
-                                    <tr>
-                                      <th>Nombre</th>
-                                      <th>Fecha de Nacimiento</th>
-                                      <th>Parentesco</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    <tr>
-                                      <td>John</td>
-                                      <td>Doe</td>
-                                      <td>john@example.com</td>
-                                    </tr>
-
-                                  </tbody>
-                                </table>
-                                -->
-                           </div>
-                        </div>
-
-                    </div>
-                </div>
-                  <!-- INFORMACION Familiar -->
-                    <!-- INFORMACION academica -->
-                <br>
-                <br>
-
-                <div class="col-md-13">
-                    <button type="button" class="btn btn-default col-md-7" data-toggle="collapse" data-target="#academica">
-                        Informacion Academica
-                    </button>
-                </div>
-                <div class="col-md-7 collapse" id="academica">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading panel-title">
-                            Informacion Academica
-                        </div>
-
-                        <form action="controlador/CrearInformacionAcademica.php" method="post">
-
-                        <div class="panel-body">
-                            <div class="col-sm-6">
-                              Fecha: <input class="form-control" type="date" name="txtFechaActividadAcademica">
-                              Actividad: <input class="form-control" type="text" name="txtActivdidadAcademica">
-                              Estado:
-                              <select class="form-control" name="cboEstadoCursoAcademico">
-                                <?php
-                                require_once("model/Data.php");
-                                require_once("model/Tbl_EstadoCurso.php");
-                                $d= new Data();
-
-                                $estadosDeCursos = $d->readEstadosCurso();
-                                foreach($estadosDeCursos as $ec => $estado){
-                                ?>
-                                <option value="<?php echo $estado->getIdEstadoCurso(); ?>"><?php echo $estado->getNombreEstadoCurso(); ?></option>
-                                <?php
-                                }
-                                ?>
-                                </select>
-
-                                <center> <input type="submit" name="btninfoAcademica" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
-
-                              </form>
-                              <!--
-                              <table class="table table-striped">
-                                  <thead>
-                                    <tr>
-                                      <th>Fecha</th>
-                                      <th>Actividad</th>
-                                      <th>Estado</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    <tr>
-                                      <td>John</td>
-                                      <td>Doe</td>
-                                      <td>john@example.com</td>
-                                    </tr>
-
-                                  </tbody>
-                                </table>
-                                -->
-                           </div>
-                        </div>
-
-                    </div>
-                  </div>
-                    <!-- INFORMACION academica -->
-                      <!-- INFORMACION estandar -->
-                    <br>
-                    <br>
-
-                    <div class="col-md-13">
-                        <button type="button" class="btn btn-default col-md-7" data-toggle="collapse" data-target="#estandar">
-                            Informacion Estandar
-                        </button>
-                    </div>
-                    <div class="col-md-7 collapse" id="estandar">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading panel-title">
-                                Informacion Estandar
-                            </div>
-
-                            <form action="controlador/CrearInfoEntrenamientoEstandar.php" method="post">
-
-
-                            <div class="panel-body">
-                                <div class="col-sm-6">
-                                  Fecha: <input class="form-control" type="date" name="fechaEntreamientoEstandar">
-                                  Actividad: <input class="form-control" type="text" name="txtActividadEntrenamientoEstandar">
-                                  Estado:
-                                  <select class="form-control" name="cboEstadoCursoEstandar">
-                                    <?php
-                                    require_once("model/Data.php");
-                                    require_once("model/Tbl_EstadoCurso.php");
-                                    $d= new Data();
-
-                                    $estadosDeCursos2 = $d->readEstadosCurso();
-                                    foreach($estadosDeCursos2 as $ec2 => $estado2){
-                                    ?>
-                                    <option value="<?php echo $estado2->getIdEstadoCurso(); ?>"><?php echo $estado2->getNombreEstadoCurso(); ?></option>
-                                    <?php
-                                    }
-                                    ?>
-                                    </select>
-
-                                    <center> <input type="submit" name="btninfoEntrenamientoEstandar" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
-
-                                    </form>
-                                    <!--
-                                  <table class="table table-striped">
-                                      <thead>
-                                        <tr>
-                                          <th>Fecha</th>
-                                          <th>Actividad</th>
-                                          <th>Estado</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                        <tr>
-                                          <td>John</td>
-                                          <td>Doe</td>
-                                          <td>john@example.com</td>
-                                        </tr>
-
-                                      </tbody>
-                                    </table>
-                                    -->
-
-                               </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                      <!-- INFORMACION estandar -->
-                      <!-- INFORMACION historica -->
-                    <br>
-                    <br>
-
-                    <div class="col-md-13">
-                        <button type="button" class="btn btn-default col-md-7" data-toggle="collapse" data-target="#historica">
-                            Informacion Historica
-                        </button>
-                    </div>
-                    <div class="col-md-7 collapse" id="historica">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading panel-title">
-                                Informacion Historica
-
-                                <form action="controlador/CrearInformacionHistorica.php" method="post">
-
-                            </div>
-                            <div class="panel-body" style="margin-left: -30px;">
-                                <div class="col-sm-6">
-                                  Region : <!-- <input class="form-control" type="text" name="txtregion"> --><!--Region del libertador bernardo ohggins-->
-                                  <select class="form-control" name="cboRegion2">
-                                    <?php
-                                    require_once("model/Data.php");
-                                    require_once("model/Tbl_Region.php");
-                                    $d= new Data();
-
-                                    $regiones = $d->readRegiones();
-                                    foreach($regiones as $r => $region){
-                                    ?>
-                                    <option value="<?php echo $region->getIdRegion(); ?>"><?php echo $region->getNombreRegion(); ?></option>
-                                    <?php
-                                    }
-                                    ?>
-                                    </select>
-                                    Cuerpo : <input class="form-control" type="text" name="txtCuerpoInfoHistorica">
-                                    Compañia:  <input class="form-control" type="text" name="txtCompania">
-                                    Fecha: <input class="form-control" type="date" name="fechaInfoHistorica">
-                                    Cargo: <input class="form-control" type="textarea" name="txtCargoInfoHistorica">
-                                    Premio: <input class="form-control" type="text" name="txtPremioInforHistorica">
-                                    Motivo: <input class="form-control" type="text" name="txtMotivoInfoHistorica">
-                                    Detalles: <input class="form-control" type="textarea" name="txtDetallesInfoHistorica">
-
-                                    <center> <input type="submit" name="btninfoHistorica" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
-
-                                    </form>
-                                    <!--
-                                  <table class="table table-striped">
-                                      <thead>
-                                        <tr>
-                                          <th>Region</th>
-                                          <th>Cuerpo</th>
-                                          <th>Compañia</th>
-                                          <th>Fecha</th>
-                                          <th>Tipo Cambio</th>
-                                          <th>Motivo</th>
-                                          <th>Detalle</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                        <tr>
-                                          <td>John</td>
-                                          <td>Doe</td>
-                                          <td>john@example.com</td>
-                                          <td>dfds</td>
-                                          <td>fsdfsd</td>
-                                          <td>fdsfds</td>
-                                          <td>fsfsdfs</td>
-                                        </tr>
-
-                                      </tbody>
-                                    </table>
-                                    -->
-
-                               </div>
-                            </div>
-
-                        </div>
-                    </div>
-                      <!-- INFORMACION historica -->
-                        <!-- INFORMACION servicio
-                    <br>
-                    <br>
-
-                    <div class="col-md-13">
-                        <button type="button" class="btn btn-default col-md-7" data-toggle="collapse" data-target="#servicio">
-                            Asistencia Actos de Servicio
-                        </button>
-                    </div>
-                    <div class="col-md-7 collapse" id="servicio">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading panel-title">
-                              Asistencia Actos de Servicio
-                            </div>
-                            <div class="panel-body">
-                                <div class="col-sm-6">
-                                  <table class="table table-striped">
-                                      <thead>
-                                        <tr>
-                                          <th>Cuerpo</th>
-                                          <th>Año</th>
-                                          <th>Mes</th>
-                                          <th>Cantidad Mensual</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                        <tr>
-                                          <td>John</td>
-                                          <td>Doe</td>
-                                          <td>john@example.com</td>
-                                          <td>sadsda</td>
-                                        </tr>
-
-                                      </tbody>
-                                    </table>
-
-                               </div>
-                            </div>
-
-                        </div>
-                    </div>
--->
-                      <!-- INFORMACION servicio -->
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-
-
-
-  <!--  </div>-->
-
-
-
-
-  </div>
+
+                          </div>
+                       </div>
+
+                   </div>
+               </div>
+
+                 <!-- INFORMACION estandar -->
+                 <!-- INFORMACION historica -->
+               <br>
+               <br>
+
+               <div class="col-md-20">
+                   <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#historica">
+                       Información Histórica
+                   </button>
+               </div>
+               <div class="col-md-11 collapse" id="historica">
+                   <div class="panel panel-primary">
+                       <div class="panel-heading panel-title">
+                           Información Histórica
+                       </div>
+                       <div class="panel-body" style="margin-left: -20px;">
+                           <div class="col-sm-6">
+
+                             Región:
+                             <select class="form-control" name="cboxRegion">
+                               <?php
+                               require_once("model/Data.php");
+                               require_once("model/Tbl_Region.php");
+                               $d= new Data();
+
+                               $regiones = $d->readRegiones();
+                               foreach($regiones as $r => $region){
+                               ?>
+                               <option value="<?php echo $region->getIdRegion(); ?>"><?php echo $region->getNombreRegion(); ?></option>
+                               <?php
+                               }
+                               ?>
+                             </select>
+
+                             Cuerpo: <input type="text" name="txtcuerpoHistorico" class="form-control">
+                             Compañia:
+                             <select name="cboxCompania" class="form-control">
+                               <?php
+                               require_once("model/Data.php");
+                               require_once("model/Tbl_Compania.php");
+                               $d= new Data();
+
+                               $companias = $d->readCompanias();
+                               foreach($companias as $c => $compania){
+                               ?>
+                               <option value="<?php echo $compania->getIdCompania(); ?>"><?php echo $compania->getNombreCompania(); ?></option>
+                               <?php
+                               }
+                               ?>
+                             </select>
+                             Fecha: <input type="date" name="txtfechaHistorico" class="form-control">
+                             Cargo:
+                             <select name="cboxCargo" class="form-control">
+                               <?php
+                               require_once("model/Data.php");
+                               require_once("model/Tbl_Cargo.php");
+                               $d= new Data();
+
+                               $cargos = $d->readCargos();
+                               foreach($cargos as $c => $cargo){
+                               ?>
+                               <option value="<?php echo $cargo->getIdCargo(); ?>"><?php echo $cargo->getNombreCargo(); ?></option>
+                               <?php
+                               }
+                               ?>
+                             </select>
+                             Motivo: <input type="text" name="txtmotivo" class="form-control">
+                             Detalle: <input type="text" name="txtdetalleHistotico" class="form-control">
+
+
+                             <table class="table table-striped">
+                                 <thead>
+                                   <tr>
+                                     <th>Región</th>
+                                     <th>Cuerpo</th>
+                                     <th>Compañía</th>
+                                     <th>Fecha</th>
+                                     <th>Cargo</th>
+                                     <th>Motivo</th>
+                                     <th>Detalle</th>
+                                   </tr>
+                                 </thead>
+                                 <tbody>
+                                   <tr>
+                                     <td>John</td>
+                                     <td>Doe</td>
+                                     <td>john@example.com</td>
+                                     <td>dfds</td>
+                                     <td>fsdfsd</td>
+                                     <td>fdsfds</td>
+                                     <td>fsfsdfs</td>
+                                   </tr>
+
+                                 </tbody>
+                               </table>
+
+                          </div>
+
+                          <div class="col-md-6">
+                             <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                              <center> <input type="submit" name="btninfohistorica" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                                  <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
+
+                              </center>
+
+                          </div>
+
+
+
+                       </div>
+
+                   </div>
+               </div>
+                 <!-- INFORMACION historica -->
+                   <!-- INFORMACION servicio -->
+               <br>
+               <br>
+
+      <!--       <div class="col-md-13">
+                   <button type="button" class="btn btn-default col-md-7" data-toggle="collapse" data-target="#servicio">
+                       Asistencia Actos de Servicio
+                   </button>
+               </div>
+               <div class="col-md-7 collapse" id="servicio">
+                   <div class="panel panel-primary">
+                       <div class="panel-heading panel-title">
+                         Asistencia Actos de Servicio
+                       </div>
+                       <div class="panel-body">
+                           <div class="col-sm-6">
+
+                             Cuerpo: <input class="form-control" type="text" name="txtcuerpo">
+                             Año: <input class="form-control" type="date" name="txtanio">
+                             Mes: <input class="form-control" type="text" name="txtmes">
+                             Cantidad Mensual: <input class="form-control" type="date" name="txtCantmensual">
+
+                             <table class="table table-striped">
+                                 <thead>
+                                   <tr>
+                                     <th>Cuerpo</th>
+                                     <th>Año</th>
+                                     <th>Mes</th>
+                                     <th>Cantidad Mensual</th>
+                                   </tr>
+                                 </thead>
+                                 <tbody>
+                                   <tr>
+                                     <td>John</td>
+                                     <td>Doe</td>
+                                     <td>john@example.com</td>
+                                     <td>sadsda</td>
+                                   </tr>
+
+                                 </tbody>
+                               </table>
+
+                          </div>
+                          <div class="col-md-6">
+                             <br><br><br><br><br><br><br><br><br>
+                              <center> <input type="submit" name="btninfoServicio" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+
+                              </center>
+
+                          </div>
+                       </div>
+
+                   </div>
+               </div>  -->
+
+                 <!-- INFORMACION servicio -->
+
+
+<!--  </div>-->
+
+</div>
+
+
+          </div>
+
+   </div>
+ </div>
+
   </body>
 </html>

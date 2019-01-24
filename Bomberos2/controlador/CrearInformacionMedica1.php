@@ -45,7 +45,7 @@ $d= new Data();
 $d->crearInformacionMedica1($infoMedica1);
 
 
- header("location: ../CrearFicha.php");
+header("location: ../index.php");
 
 
 

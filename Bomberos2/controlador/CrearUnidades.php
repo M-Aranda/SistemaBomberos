@@ -7,7 +7,7 @@ echo "despues del click";
   require_once("../model/Tbl_Unidad.php");
   require_once("../model/Tbl_EstadoUnidad.php");
   require_once("../model/Tbl_TipoVehiculo.php");
-  require_once("../model/Tbl_EntidadACargo.php");
+  require_once("../model/Tbl_EntidadPropietaria.php");
 
     $anioFabricacion = $_REQUEST["txtanioFabricacion"];
     $marca = $_REQUEST["txtmarca"];
@@ -50,7 +50,7 @@ echo "despues del click";
     echo "<br>";
     echo "<br>";
 
-  header("location: ../Mantenedor.php");
+//  header("location: ../Mantenedor.php");
 }
 
  ?>

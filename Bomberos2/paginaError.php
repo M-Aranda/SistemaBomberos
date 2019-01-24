@@ -16,22 +16,6 @@
 
   </head>
 
-  <?php
-  require_once("model/Data.php");
-  require_once("model/Tbl_Usuario.php");
-  $dataUsuario= new Data();
-
-  session_start();
-
-  if($_SESSION["usuarioIniciado"]!=null){
-    $u=$_SESSION["usuarioIniciado"];
-
-    if($dataUsuario->verificarSiUsuarioTienePermiso($u,4)==0){
-      header("location: Error.php");
-    }
-  }
-  ?>
-
 <body  background="images/fondofichaintranet.jpg">
 
     <br>
@@ -57,7 +41,6 @@
             <li><a href="verFicha.php">Ver Ficha</a></li>
             <li><a href="buscarBombero.php">Buscar</a></li>
             <li><a href="modificarBombero.php">Modificar</a></li>
-            <!-- <li><a href="eliminarBombero.php">Eliminar</a></li> -->
           </ul>
         </li>
       </ul>
@@ -69,7 +52,6 @@
             <li><a href="crearUnidades.php">Crear</a></li>
             <li><a href="#">Ver Unidades</a></li>
             <li><a href="#">Modificar</a></li>
-            <!-- <li><a href="#">Eliminar</a></li> -->
           </ul>
         </li>
       </ul>
@@ -131,63 +113,10 @@
       <div class="container">
 
       <div class="form-group" style="margin-left:50px;">
-        <span><h5 style="font-weight:bold;">Buscar</h5></span>
-        <input type="text" name="txtBuscar"  placeholder="Buscar por nombre">
-        <button class="btn btn-default" name="btnBuscar" style="width: 100px; height:30px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Buscar</a> </button>
 
-        <span><h5 style="font-weight:bold;">Tipo Bombero</h5></span>
-              <select name="tipoBombero">
-                <?php
-                require_once("model/Tbl_EstadoBombero.php");
-                    $tipoBombero = $data->readEstadosDeBomberos();
-                    foreach ($tipoBombero as $tb) {
-                        echo "<option value='".$tb->getIdEstado()."'>";
-                            echo $tb->getNombreEstado();
-                        echo"</option>";
-                    }
-                ?>
-              </select>
-              <button class="btn btn-default" name="btnBuscarTipo" style="width: 90px; height:30px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Buscar</a> </button>
-
-
-              <span><h5 style="font-weight:bold;">Compañia</h5></span>
-                <select name="compania">
-                  <?php
-                  require_once("model/Tbl_Compania.php");
-                      $compania = $data->readCompanias();
-                      foreach ($compania as $c) {
-                          echo "<option value='".$c->getIdCompania()."'>";
-                              echo $c->getNombreCompania();
-                          echo"</option>";
-                      }
-                  ?>
-
-                </select>
-                <button class="btn btn-default" name="btnBuscarCompania" style="width: 90px; height:30px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Buscar</a> </button>
+        Usted no posee los permisos necesarios para acceder!!
 
       </div>
-
-      <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Rut</th>
-              <th>Nombre</th>
-              <th>APP</th>
-              <th>Compañia</th>
-              <th>Ver Ficha</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>John</td>
-              <td>Doe</td>
-              <td>john@example.com</td>
-              <td>sadsda</td>
-            </tr>
-
-          </tbody>
-        </table>
-
 
      </div>
    </div>

@@ -2,9 +2,11 @@
 
 require_once("../model/Data.php");
 require_once("../model/Tbl_InfoBomberil.php");
+
 require_once("../model/Tbl_InfoPersonal.php");
+
 require_once("../model/Tbl_Region.php");
-require_once("../model/Tbl_EntidadACargo.php");
+require_once("../model/Tbl_Compañia.php");
 require_once("../model/Tbl_EstadoBombero.php");
 require_once("../model/Tbl_Cargo.php");
 
@@ -24,8 +26,6 @@ require_once("../model/Parentesco.php");
 require_once("../model/Provincia.php");
 */
 
-$d= new Data();
-
 $id=0;
 $fk_region=$_REQUEST["cboRegion"];
 $cuerpo=$_REQUEST["txtcuerpo"];
@@ -37,6 +37,7 @@ $fk_estado=$_REQUEST["cboEstadoBombero"];
 $nrc=$_REQUEST["txtcia"];
 $fk_infoPersonal=$d->getIdBomberoMasReciente();
 
+$d= new Data();
 $infoBomberil= new Tbl_InfoBomberil();
 
 $infoBomberil->setIdInformacionBomberil($id);
@@ -50,9 +51,9 @@ $infoBomberil->setfkEstadoinformacionBomberil($fk_estado);
 $infoBomberil->setNRegCiainformacionBomberil($nrc);
 $infoBomberil->setfkInfoPersonalinformacionBomberil($fk_infoPersonal);
 
-$d->crearInformacionBomberil($infoBomberil);
 
- header("location: ../CrearFicha.php");
+
+header("location: ../index.php");
 
 
 ?>

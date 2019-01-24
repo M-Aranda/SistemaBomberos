@@ -10,10 +10,7 @@
 
 
         <title>Ficha Bomberos</title>
-        <!-- Ficha Bomberos seria que tipo de crud?-->
 </head>
-
-
 
 <body  background="images/fondofichaintranet.jpg" >
 

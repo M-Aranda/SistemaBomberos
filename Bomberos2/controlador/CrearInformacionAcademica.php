@@ -25,7 +25,7 @@ require_once("../model/Provincia.php");
 
 
  $idInformacionAcademica=0;
- $fechaInformacionAcademica=$_REQUEST["txtFechaActividadAcademica"];
+ $fechaInformacionAcademica=$_REQUEST["txtfechaAcademica"];
  $actividadInformacionAcademica=$_REQUEST["txtActivdidadAcademica"];
  $fkEstadoCursoInformacionAcademica=$_REQUEST["cboEstadoCursoAcademico"];
  $fkInformacionPersonalInformacionAcademica=1;
@@ -45,7 +45,7 @@ $d= new Data();
 $d->crearInformacionAcademica($infoAcademica);
 
 
- header("location: ../CrearFicha.php");
+header("location: ../index.php");
 
 
 

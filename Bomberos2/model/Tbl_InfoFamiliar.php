@@ -38,7 +38,7 @@
       }
 
       public function getfkParentescoinformacionFamiliar(){
-          return $this->fkParentescoinformacionFamiliar;
+          return $this->$fkParentescoinformacionFamiliar;
       }
 
       public function setfkParentescoinformacionFamiliar($fkParentescoinformacionFamiliar){

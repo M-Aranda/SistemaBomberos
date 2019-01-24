@@ -11,11 +11,10 @@
 
     public function getIdEntidadPropietaria(){
         return $this->idEntidadPropietaria;
-
     }
 
     public function setIdEntidadPropietaria($idEntidadPropietaria){
-        $this->idEntidadPropietaria = $idEntidadPropietaria;
+        $this->idEntidadPropetaria = $idEntidadPropietaria;
     }
 
     public function getNombreEntidadPropietaria(){

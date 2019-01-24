@@ -17,20 +17,17 @@
   </head>
 
   <?php
-  require_once("model/Data.php");
-  require_once("model/Tbl_Usuario.php");
-  $dataUsuario= new Data();
-
-  session_start();
-
-  if($_SESSION["usuarioIniciado"]!=null){
-    $u=$_SESSION["usuarioIniciado"];
-
-    if($dataUsuario->verificarSiUsuarioTienePermiso($u,3)==0){
-      header("location: Error.php");
-    }
+require_once("model/Data.php");
+require_once("model/Tbl_Usuario.php");
+$dataUsuario= new Data();
+session_start();
+if($_SESSION["usuarioIniciado"]!=null){
+  $u=$_SESSION["usuarioIniciado"];
+  if($dataUsuario->verificarSiUsuarioTienePermiso($u,3)==0){
+    header("location: paginaError.php");
   }
-  ?>
+}
+?>
 
 <body  background="images/fondofichaintranet.jpg">
 
@@ -57,7 +54,6 @@
             <li><a href="verFicha.php">Ver Ficha</a></li>
             <li><a href="buscarBombero.php">Buscar</a></li>
             <li><a href="modificarBombero.php">Modificar</a></li>
-          <!--  <li><a href="eliminarBombero.php">Eliminar</a></li> -->
           </ul>
         </li>
       </ul>
@@ -69,7 +65,7 @@
             <li><a href="crearUnidades.php">Crear</a></li>
             <li><a href="#">Ver Unidades</a></li>
             <li><a href="#">Modificar</a></li>
-          <!--  <li><a href="#">Eliminar</a></li>-->
+            <li><a href="reporteUnidad.php">Reporte</a></li>
           </ul>
         </li>
       </ul>
@@ -132,13 +128,12 @@
 
       <div class="form-group" style="margin-left:50px;">
         <span><h5 style="font-weight:bold;">Buscar</h5></span>
-        <input type="text" name="txtBuscar"  placeholder="Buscar por nombre">
-        <button class="btn btn-default" style="width: 100px; height:30px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Buscar</a> </button>
+        <input type="text" name="txtBuscar"  placeholder="Buscar por nombre" style="height:30px;">
+        <button class="btn btn-default" name="btnBuscar" style="width: 100px; height:30px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Buscar</a> </button>
 
         <span><h5 style="font-weight:bold;">Tipo Bombero</h5></span>
-              <select name="tipoBombero">
+              <select name="tipoBombero" style="width:175px; height:30px;">
                 <?php
-                require_once("model/Tbl_EstadoBombero.php");
                     $tipoBombero = $data->readEstadosDeBomberos();
                     foreach ($tipoBombero as $tb) {
                         echo "<option value='".$tb->getIdEstado()."'>";
@@ -147,46 +142,49 @@
                     }
                 ?>
               </select>
-              <button class="btn btn-default" style="width: 90px; height:30px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Buscar</a> </button>
+              <button class="btn btn-default" name="btnBuscarTipo" style="width: 100px; height:30px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Buscar</a> </button>
 
 
               <span><h5 style="font-weight:bold;">Compañia</h5></span>
-                <select name="compania">
+                <select name="compania" style="width:175px; height:30px;">
                   <?php
-                  require_once("model/Tbl_EntidadACargo.php");
-                      $compania = $data->readSoloCompanias();
+                      $compania = $data->readCompanias();
                       foreach ($compania as $c) {
-                          echo "<option value='".$c->getIdEntidadACargo()."'>";
-                              echo $c->getNombreEntidadACargo();
+                          echo "<option value='".$c->getIdCompania()."'>";
+                              echo $c->getNombreCompania();
                           echo"</option>";
                       }
                   ?>
 
                 </select>
-                <button class="btn btn-default" style="width: 90px; height:30px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Buscar</a> </button>
+                <button class="btn btn-default" name="btnBuscarCompania" style="width: 100px; height:30px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Buscar</a> </button>
+
+
+
+                <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>Rut</th>
+                        <th>Nombre</th>
+                        <th>APP</th>
+                        <th>Compañia</th>
+                        <th>Ver Ficha</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>John</td>
+                        <td>Doe</td>
+                        <td>john@example.com</td>
+                        <td>sadsda</td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+
 
       </div>
 
-      <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Rut</th>
-              <th>Nombre</th>
-              <th>APP</th>
-              <th>Compañia</th>
-              <th>Ver Ficha</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>John</td>
-              <td>Doe</td>
-              <td>john@example.com</td>
-              <td>sadsda</td>
-            </tr>
-
-          </tbody>
-        </table>
 
 
      </div>

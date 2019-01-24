@@ -14,20 +14,17 @@
   </head>
 
   <?php
-  require_once("model/Data.php");
-  require_once("model/Tbl_Usuario.php");
-  $dataUsuario= new Data();
-
-  session_start();
-
-  if($_SESSION["usuarioIniciado"]!=null){
-    $u=$_SESSION["usuarioIniciado"];
-
-    if($dataUsuario->verificarSiUsuarioTienePermiso($u,24)==0){
-      header("location: Error.php");
-    }
-  }
-  ?>
+ require_once("model/Data.php");
+ require_once("model/Tbl_Usuario.php");
+ $dataUsuario= new Data();
+ session_start();
+ if($_SESSION["usuarioIniciado"]!=null){
+   $u=$_SESSION["usuarioIniciado"];
+   if($dataUsuario->verificarSiUsuarioTienePermiso($u,24)==0){
+     header("location: paginaError.php");
+   }
+ }
+ ?>
   <body  background="images/fondointranet_opt.jpg" width="100%" height="100" >
 
     <br>
@@ -74,11 +71,10 @@
                            ?>
                          </select>
                            <input type="submit" value="Crear"  name="btnAceptar"class="btn button-primary" style="width: 55px;">
+                           <button class="btn button-primary" style="width: 57px;"> <a href="Mantenedor.html" style="text-decoration:none;color:black;">Volver</a> </button>
                      </div>
 
                     </form>
-
-                    <button class="btn button-primary" style="width: 57px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>
 
                 </div>
             </div>

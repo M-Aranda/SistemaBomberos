@@ -41,7 +41,6 @@
             <li><a href="verFicha.php">Ver Ficha</a></li>
             <li><a href="#">Buscar</a></li>
             <li><a href="#">Modificar</a></li>
-            <li><a href="#">Eliminar</a></li>
           </ul>
         </li>
       </ul>
@@ -53,7 +52,6 @@
             <li><a href="index.php">Crear</a></li>
             <li><a href="#">Ver Unidades</a></li>
             <li><a href="#">Modificar</a></li>
-            <li><a href="#">Eliminar</a></li>
           </ul>
         </li>
       </ul>

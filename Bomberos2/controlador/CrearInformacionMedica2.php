@@ -5,7 +5,7 @@ require_once("../model/Data.php");
 
 require_once("../model/Tbl_InfoMedica2.php");
 require_once("../model/Tbl_GrupoSanguineo.php");
-require_once("../model/Tbl_Parentesco.php");
+require_once("../model/Parentesco.php");
 require_once("../model/Tbl_InfoPersonal.php");
 
 
@@ -29,9 +29,9 @@ require_once("../model/Provincia.php");
 
 
  $idInformacionMedica2=0;
- $medicamentosHabitualesinformacionMedica2=$_REQUEST["medHabituales"];
- $nombreContactoinformacionMedica2=$_REQUEST["txtNombContactoInfoMedica2"];
- $telefonoContactoinformacionMedica2=$_REQUEST["txtTlfContactoInfoMedica2"];
+ $medicamentosHabitualesinformacionMedica2=$_REQUEST["txtmedicamentosHabituales"];
+ $nombreContactoinformacionMedica2=$_REQUEST["txtnomContacto"];
+ $telefonoContactoinformacionMedica2=$_REQUEST["txttlfcontacto"];
  $fkParentescoContactoinformacionMedica2=$_REQUEST["cboParentesco1"];
  $nivelActividadFisicainformacionMedica2=$_REQUEST["txtactvfisica"];
  $esDonanteinformacionMedica2=$_REQUEST["txtdonante"];
@@ -58,9 +58,8 @@ $d= new Data();
 
 $d->crearInformacionMedica2($infoMedica2);
 
-echo $medicamentosHabitualesinformacionMedica2;
 
- header("location: ../CrearFicha.php");
+header("location: ../index.php");
 
 
 

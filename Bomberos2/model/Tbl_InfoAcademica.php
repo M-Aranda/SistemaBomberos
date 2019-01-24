@@ -21,7 +21,7 @@
     }
 
     public function getfechaInformacionAcademica(){
-        return $this->fechaInformacionAcademica;
+        return $this->rutInformacionPersonal;
     }
 
     public function setfechaInformacionAcademica($fechaInformacionAcademica){

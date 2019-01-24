@@ -27,7 +27,7 @@ $idInformacionLaboral=0;
 $nombreEmpresainformacionLaboral=$_REQUEST["txtnomempresa"];
 $direccionEmpresainformacionLaboral=$_REQUEST["txtdirecempresa"];
 $telefonoEmpresainformacionLaboral=$_REQUEST["txttlfempresa"];
-$cargoEmpresainformacionLaboral=$_REQUEST["cargoEmpresa"];
+$cargoEmpresainformacionLaboral=$_REQUEST["txtcargo"];
 $fechaIngresoEmpresainformacionLaboral=$_REQUEST["txfingresoempresa"];
 $areaDeptoEmpresainformacionLaboral=$_REQUEST["txtareatrabajo"];
 $afp_informacionLaboral=$_REQUEST["txtafp"];
@@ -53,7 +53,11 @@ $d->crearInformacionLaboral($infoLaboral);
 
 
 
- header("location: ../CrearFicha.php");
+header("location: ../index.php");
+
+
+
+
 
 
 ?>
