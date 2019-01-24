@@ -12,8 +12,8 @@ require_once("Tbl_Genero.php");
 require_once("Tbl_EstadoCivil.php");
 require_once("Tbl_tipoMantencion.php");
 require_once("Tbl_tipoCombustible.php");
-
-
+require_once("Tbl_Unidad.php");
+require_once("Tbl_tipo_servicio.php");
 /*
 require_once("Tbl_EstadoCivil.php");
 require_once("Tbl_Genero.php");
@@ -324,6 +324,7 @@ class Data{
 
     public function crearUnidades($unidad){
       $query = "insert into tbl_unidad values(null,
+                '".$unidad->getNombreUnidad()."',
                 '".$unidad->getaniodeFabricacion()."',
                 '".$unidad->getMarca()."',
                 '".$unidad->getNmotor()."',
@@ -536,6 +537,71 @@ class Data{
     }
 
 
+    public function readUnidadesVehiculos (){
+      $this->c->conectar();
+      $query="SELECT * FROM tbl_unidad;";
+      $rs = $this->c->ejecutar($query);
+      $listado = array();
+      while($reg = $rs->fetch_array()){
+           $id=$reg[0];
+           $nombre=$reg[1];
+           $aniodeFabricacion=$reg[2];
+           $marca=$reg[3];
+           $Nmotor=$reg[4];
+           $Nchasis=$reg[5];
+           $NVIN=$reg[6];
+           $Color=$reg[7];
+           $PPu=$reg[8];
+           $fechaInscripcion=$reg[9];
+           $fechaAdquisicion=$reg[10];
+           $capacidadOcupantes=$reg[11];
+           $fkEstadoUnidad=$reg[12];
+           $fkTipoVehiculo=$reg[13];
+           $fkEntidadACargo=$reg[14];
+
+           $obj = new Tbl_Unidad();
+           $obj->setIdUnidad($id);
+           $obj->setNombreUnidad($nombre);
+           $obj->setaniodeFabricacion($aniodeFabricacion);
+           $obj->setMarca($marca);
+           $obj->setNmotor($Nmotor);
+           $obj->setNchasis($Nchasis);
+           $obj->setNVIN($NVIN);
+           $obj->setColor($Color);
+           $obj->setPPu($PPu);
+           $obj->setfechaInscripcion($fechaInscripcion);
+           $obj->setfechaAdquisicion($fechaAdquisicion);
+           $obj->setcapacidadOcupantes($capacidadOcupantes);
+           $obj->setfkEstadoUnidad($fkEstadoUnidad);
+           $obj->setfkTipoVehiculo($fkTipoVehiculo);
+           $obj->setfkEntidadPropietaria($fkEntidadACargo);
+           $listado[]=$obj;
+       }
+       $this->c->desconectar();
+       return $listado;
+    }
+
+
+
+
+    public function readTiposDeServicios (){
+      $this->c->conectar();
+      $query="SELECT * FROM tbl_tipo_servicio;";
+      $rs = $this->c->ejecutar($query);
+      $listado = array();
+      while($reg = $rs->fetch_array()){
+           $id=$reg[0];
+           $nombre=$reg[1];
+           $codigo=$reg[2];
+           $obj = new Tbl_tipo_servicio();
+           $obj->setId_tipo_servicio($id);
+           $obj->setCodigo_tipo_servicio($nombre);
+           $obj->setNombre_tipo_servicio($codigo);
+           $listado[]=$obj;
+       }
+       $this->c->desconectar();
+       return $listado;
+    }
 
 
     public function getIdBomberoMasReciente (){

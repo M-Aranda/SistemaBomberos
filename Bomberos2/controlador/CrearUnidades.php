@@ -9,6 +9,7 @@ echo "despues del click";
   require_once("../model/Tbl_TipoVehiculo.php");
   require_once("../model/Tbl_EntidadPropietaria.php");
 
+    $nombre=$_REQUEST["txtnombreUnidad"];
     $anioFabricacion = $_REQUEST["txtanioFabricacion"];
     $marca = $_REQUEST["txtmarca"];
     $nmotor = $_REQUEST["txtmotor"];
@@ -29,6 +30,7 @@ echo "despues del click";
 
     $unidad = new Tbl_Unidad();
     //"seteo" los datos
+    $unidad->setNombreUnidad($nombre);
     $unidad->setaniodeFabricacion($anioFabricacion);
     $unidad->setMarca($marca);
     $unidad->setNmotor($nmotor);
@@ -50,7 +52,7 @@ echo "despues del click";
     echo "<br>";
     echo "<br>";
 
-//  header("location: ../Mantenedor.php");
+  header("location: ../crearUnidades.php");
 }
 
  ?>

@@ -148,10 +148,10 @@ if($_SESSION["usuarioIniciado"]!=null){
               <span><h5 style="font-weight:bold;">Compañia</h5></span>
                 <select name="compania" style="width:175px; height:30px;">
                   <?php
-                      $compania = $data->readCompanias();
+                      $compania = $data->readSoloCompanias();
                       foreach ($compania as $c) {
-                          echo "<option value='".$c->getIdCompania()."'>";
-                              echo $c->getNombreCompania();
+                          echo "<option value='".$c->getIdEntidadACargo()."'>";
+                              echo $c->getNombreEntidadACargo();
                           echo"</option>";
                       }
                   ?>

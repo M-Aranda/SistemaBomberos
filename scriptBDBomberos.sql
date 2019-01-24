@@ -293,6 +293,7 @@ PRIMARY KEY(id_estado_unidad)
 
 CREATE TABLE tbl_unidad (
 id_unidad INT AUTO_INCREMENT,
+nombre_unidad VARCHAR (300),
 anioDeFabricacion_unidad VARCHAR (300),
 marca_unidad VARCHAR (300),
 nMotor_unidad VARCHAR (300),
@@ -361,8 +362,6 @@ codigo_tipo_servicio VARCHAR (5000),
 nombre_tipo_servicio VARCHAR (5000),
 PRIMARY KEY (id_tipo_servicio)
 );
-
-
 
 
 
@@ -733,18 +732,18 @@ DELIMITER ;
 
 
 DELIMITER //
-CREATE PROCEDURE CRUDUnidad (id INT, anioDeFabricacion VARCHAR (300), marca VARCHAR (300), nMotor VARCHAR (300), nChasis VARCHAR  (300),
+CREATE PROCEDURE CRUDUnidad (id INT, nombre VARCHAR (300), anioDeFabricacion VARCHAR (300), marca VARCHAR (300), nMotor VARCHAR (300), nChasis VARCHAR  (300),
 nVIN VARCHAR (300), color VARCHAR (300), ppu VARCHAR (300), fechaInscripcion DATE, fechaAdquisicion DATE,
 capacidadOcupantes INT, fk_estado INT, fk_tipo_vehiculo INT, fk_entidadProp INT, tipoDeOperacion INT)
 
 BEGIN
 IF tipoDeOperacion= 1 THEN
-INSERT INTO tbl_unidad VALUES (NULL , anioDeFabricacion, marca , nMotor, nChasis ,
+INSERT INTO tbl_unidad VALUES (NULL ,nombre, anioDeFabricacion, marca , nMotor, nChasis ,
 nVIN  , color , ppu , fechaInscripcion , fechaAdquisicion ,capacidadOcupantes , fk_estado, fk_tipo_vehiculo , fk_entidadProp );
 ELSEIF tipoDeOperacion= 2 THEN
 SELECT * FROM tbl_unidad WHERE id_unidad=id_unidad;
 ELSEIF tipoDeOperacion= 3 THEN
-UPDATE tbl_unidad SET anioDeFabricacion_unidad=anioDeFabricacion, marca_unidad=marca, nMotor_unidad=nMotor, nChasis_unidad=nChasis,
+UPDATE tbl_unidad SET nombre_unidad=nombre, anioDeFabricacion_unidad=anioDeFabricacion, marca_unidad=marca, nMotor_unidad=nMotor, nChasis_unidad=nChasis,
 nVIN_unidad=nVIN, color_unidad=color, ppu_unidad=ppu, fechaInscripcion_unidad=fechaInscripcion , fechaAdquisicion_unidad=fechaAdquisicion,
 capacidadOcupantes_unidad=capacidadOcupantes , fk_estado_unidad_unidad=fk_estado , fk_tipo_vehiculo_unidad=fk_tipo_vehiculo, fk_entidadPropietaria_unidad=fk_entidadProp WHERE id_unidad=id_unidad ;
 ELSEIF tipoDeOperacion= 4 THEN
@@ -1385,7 +1384,9 @@ tbl_tipo_usuario.id_tipo_usuario=tbl_usuario.fk_tipo_usuario__usuario AND tbl_pe
 /*
 CALL CRUDUsuario (1,'Marcelo',1,'123',1); 
 
-CALL CRUDUnidad (6,'2000','200','300','333','555','3333','YOLO','2000-12-03','2012-06-11',15,2,1,1,1);
+CALL CRUDUnidad (6,'Nombre de Prueba','2000','200','300','333','555','3333','YOLO','2000-12-03','2012-06-11',15,2,1,1,1);
+CALL CRUDUnidad (6,'Nombre de Prueba 2','2000','200','300','333','555','3333','BIEN','2000-12-03','2012-06-11',15,2,1,1,1);
+CALL CRUDUnidad (6,'Nombre de Prueba 3','2000','200','300','333','555','3333','jaja','2000-12-03','2012-06-11',15,2,1,1,1);
 
 CALL CRUDMedida (1,'XX','SS','42','41',1);
 CALL CRUDInformacionPersonal (1,'20898088-2','Marcelo', 'Aranda', 'Tatto','1991-12-16',1,1,'1,70','80,2','cheloz_20@hotmail.com',

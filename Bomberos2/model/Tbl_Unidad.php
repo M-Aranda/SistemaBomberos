@@ -3,6 +3,7 @@
 Class Tbl_Unidad{
 
         private  $idUnidad;
+        private  $nombreUnidad;
         private  $aniodeFabricacion;
         private  $Marca;
         private  $Nmotor;
@@ -26,6 +27,14 @@ Class Tbl_Unidad{
 
         public function setIdUnidad($idUnidad){
             $this->idUnidad = $idUnidad;
+        }
+
+        public function getNombreUnidad(){
+            return $this->nombreUnidad;
+        }
+
+        public function setNombreUnidad($nombreUnidad){
+            $this->nombreUnidad = $nombreUnidad;
         }
 
         public function getaniodeFabricacion(){

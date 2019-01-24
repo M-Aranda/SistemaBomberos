@@ -166,7 +166,7 @@
                                         Año de Fabricacion:<input id="nombre" type="text" class="form-control" name="txtanioFabricacion"  required="">
                                         Fecha de Inscripcion:<input id="nombre" type="date" class="form-control" name="txtfechainscripcion"   required="">
                                         Fecha de Adquisición:<input id="nombre" type="date" class="form-control" name="txtfechaadquisicion" required="">
-                                        Capacidad Ocupantes :<input id="nombre" type="text" class="form-control" name="txtcapaocupantes"  required="">
+                                        Capacidad Ocupantes :<input id="nombre" type="number" class="form-control" name="txtcapaocupantes"  required="">
 
                                         Estado de Unidad:
                                         <select name="unidades"  class="form-control">
@@ -208,6 +208,7 @@
                                             <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                                         </center>
+                                      </form>
                                                                 <br>
                                       </div>
                                       <br>
@@ -240,10 +241,16 @@
                                         <form action="controlador/CrearMantencion.php" method="post">
 
                                           Unidad:
-                                          <select name="cboUnidad1" class="form-control">
-
-
-                                          </select >
+                                          <select name="cboUnidades"  class="form-control">
+                                              <?php
+                                                  $unidad = $data->readUnidadesVehiculos();
+                                                  foreach ($unidad as $u) {
+                                                      echo "<option value='".$u->getIdUnidad()."'>";
+                                                          echo $u->getNombreUnidad();
+                                                      echo"</option>";
+                                                  }
+                                              ?>
+                                          </select>
 
 
                                           Tipo Mantención:
@@ -305,9 +312,16 @@
                                         <form action="controlador/CrearCombustible.php" method="post">
 
                                           Unidad:
-                                          <select class="form-control">
-
-                                          </select >
+                                          <select name="cboUnidades2"  class="form-control">
+                                              <?php
+                                                  $unidad = $data->readUnidadesVehiculos();
+                                                  foreach ($unidad as $u) {
+                                                      echo "<option value='".$u->getIdUnidad()."'>";
+                                                          echo $u->getNombreUnidad();
+                                                      echo"</option>";
+                                                  }
+                                              ?>
+                                          </select>
 
 
                                           Tipo Combustible:
@@ -330,7 +344,7 @@
                                       <div class="col-sm-6" style="margin-left: 60px;">
                                         Fecha:<input id="nombre" type="date" name="txtFechaCombustible" class="form-control" required="">
                                         Cantidad:<input id="nombre" type="number" name="txtcantidad" class="form-control" required="">
-                                        Precio/Litro:<input id="nombre" type="text" name="txtpreciolitro" class="form-control" required="">
+                                        Precio/Litro:<input id="nombre" type="number" name="txtpreciolitro" class="form-control" required="">
                                         Comentarios/Observaciones: <textarea class="form-control" Type="textarea" name="txtcomentario" ></textarea>
 
                                           <br><br>

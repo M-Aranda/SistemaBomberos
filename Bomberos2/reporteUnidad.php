@@ -118,18 +118,33 @@
         <span><h5 style="font-weight:bold;">Reporte Unidades</h5></span>
 
         Unidad:
-        <select >
-
-        </select >
+        <select name="cboUnidades"  class="form-control">
+            <?php
+                $unidad = $data->readUnidadesVehiculos();
+                foreach ($unidad as $u) {
+                    echo "<option value='".$u->getIdUnidad()."'>";
+                        echo $u->getNombreUnidad();
+                    echo"</option>";
+                }
+            ?>
+        </select>
         <br>
         Fecha Inicio:<input type="date"  name="txtfechainicio">  /
         Fecha Final: <input type="date"  name="txtfechafinal">
         <br>
         Tipo Servicio:
-        <select >
+        <select class="form-control" name="cboTiposDeServicios">
+        <?php
 
-        </select >
 
+        $listado = $data->readTiposDeServicios();
+        foreach($listado as $o => $objeto){
+        ?>
+        <option value="<?php echo $objeto->getId_tipo_servicio(); ?>"><?php echo $objeto->getCodigo_tipo_servicio(); ?></option>
+        <?php
+        }
+        ?>
+        </select>
         <br><br>
 
         <table class="table table-striped">

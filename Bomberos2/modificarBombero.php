@@ -146,17 +146,17 @@ if($_SESSION["usuarioIniciado"]!=null){
 
 
               <span><h5 style="font-weight:bold;">Compañia</h5></span>
-                <select name="compania" style="width:175px; height:30px;">
-                  <?php
-                      $compania = $data->readCompanias();
-                      foreach ($compania as $c) {
-                          echo "<option value='".$c->getIdCompania()."'>";
-                              echo $c->getNombreCompania();
-                          echo"</option>";
-                      }
-                  ?>
+              <select name="compania" style="width:175px; height:30px;">
+                <?php
+                    $compania = $data->readSoloCompanias();
+                    foreach ($compania as $c) {
+                        echo "<option value='".$c->getIdEntidadACargo()."'>";
+                            echo $c->getNombreEntidadACargo();
+                        echo"</option>";
+                    }
+                ?>
 
-                </select>
+              </select>
                 <button class="btn btn-default" name="btnBuscarCompania" style="width: 100px; height:30px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Buscar</a> </button>
 
 
