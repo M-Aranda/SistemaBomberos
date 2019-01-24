@@ -330,6 +330,7 @@ direccion_mantencion VARCHAR (5000),
 comentarios_mantencion VARCHAR (5000),
 fk_unidad INT,
 FOREIGN KEY (fk_unidad) REFERENCES tbl_unidad (id_unidad),
+FOREIGN KEY (fk_tipo_mantencion) REFERENCES tbl_tipoDeMantencion (id_tipo_de_mantencion),
 PRIMARY KEY (id_mantencion)
 );
 
@@ -1278,10 +1279,7 @@ INSERT INTO tbl_cargo (nombre_cargo) VALUES
 ('Comandante Primero'),
 ('Comandante Segundo'),
 ('Tesorero General'),
-('Secretario General')
-;
-
-
+('Secretario General');
 
 INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'A Negativo');
 INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'B Negativo');
@@ -1357,6 +1355,7 @@ INSERT INTO tbl_tipo_servicio (codigo_tipo_servicio,nombre_tipo_servicio) VALUES
 -- SELECT * FROM tbl_permiso;
 -- SELECT * FROM tbl_usuario;
 -- SELECT * FROM tbl_tipoDeMantencion;
+-- SELECT * FROM tbl_mantencion;
 
 /*Consulta que requiere id de permiso e id de tipo de usuario
 
@@ -1380,7 +1379,6 @@ tbl_tipo_usuario.id_tipo_usuario=tbl_usuario.fk_tipo_usuario__usuario AND tbl_pe
 
 
 -- Lamadas a procedimientos para probar
-
 /*
 CALL CRUDUsuario (1,'Marcelo',1,'123',1); 
 

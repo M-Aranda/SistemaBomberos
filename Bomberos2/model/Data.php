@@ -348,6 +348,22 @@ class Data{
 
 
 
+    public function crearMantencion($mantencion){
+      $query= "insert into tbl_mantencion values(null,
+                ".$mantencion->getFk_tipo_mantencion().",
+                '".$mantencion->getFecha_mantencion()."',
+                '".$mantencion->getResponsable_mantencion()."',
+                '".$mantencion->getDireccion_mantencion()."',
+                '".$mantencion->getComentarios_mantencion()."',
+                ".$mantencion->getFk_unidad().");";
+
+      $this->c->conectar();
+      $this->c->ejecutar($query);
+      $this->c->desconectar();
+    }
+
+
+
     public function readEstadosCiviles (){
       $this->c->conectar();
 

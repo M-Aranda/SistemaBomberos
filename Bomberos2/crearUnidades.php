@@ -264,6 +264,7 @@
                                                   }
                                               ?>
                                           </select>
+                                          Fecha de mantención: <input id="nombre" type="date" name="fechaMantencion" class="form-control" required="">
 
                                           Responsable:<input id="nombre" type="text" name="txtresponsableMantencion" class="form-control" required="">
 
@@ -276,10 +277,11 @@
                                         Comentarios/Observaciones: <textarea class="form-control" Type="textarea" name="txtcomentario" ></textarea>
 
                                           <br><br>
-                                        <center> <input type="submit" name="btncrear" value="Crear Unidad" class="btn button-primary" style="width: 150px;"> <span ></span>
+                                        <center> <input type="submit" name="btncrear" value="Crear mantención" class="btn button-primary" style="width: 150px;"> <span ></span>
                                             <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                                         </center>
+                                      </form>
                                                                 <br>
                                       </div>
                                       <br>
