@@ -711,7 +711,7 @@ public function buscarInformacionDeBomberoParaTabla ($nombre, $id, $tipoDeBusque
 
   if($tipoDeBusqueda==1){
     $anexoAQuery="AND
-    tbl_informacionPersonal.nombre_informacionPersonal LIKE '%.$nombre.%';";
+    tbl_informacionPersonal.nombre_informacionPersonal LIKE '%".$nombre."%';";
   }else if($tipoDeBusqueda==2){
       $anexoAQuery="AND
       tbl_informacionBomberil.fk_estado_informacionBomberil =".$id." ;";

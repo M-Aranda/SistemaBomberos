@@ -26,13 +26,13 @@ if($tipoDeBusqueda==1)
 $d= new Data();
 
 $resultados=$d->buscarInformacionDeBomberoParaTabla($nombreABuscar, $id, $tipoDeBusqueda);
-echo $tipoDeBusqueda;
+
 
 session_start();
 $_SESSION["resultadosDeBusquedaDeBomberos"] = $resultados;
 
 
-//header("location:../buscarBombero.php ");
+header("location:../buscarBombero.php ");
 
 
 

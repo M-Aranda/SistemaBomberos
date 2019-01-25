@@ -26,7 +26,6 @@ FOREIGN KEY (fk_permiso_tipo_usuario_permisos) REFERENCES tbl_permiso (id_permis
 PRIMARY KEY (id_tipo_usuario_permisos)
 );
 
-
 CREATE TABLE tbl_usuario(
 id_usuario_usuario INT AUTO_INCREMENT,
 nombre_usuario_usuario VARCHAR(20000),

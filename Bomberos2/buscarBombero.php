@@ -132,7 +132,7 @@ if($_SESSION["usuarioIniciado"]!=null){
         <form>
         <input type="text" name="txtBuscar"  placeholder="Buscar por nombre" style="height:30px;">
         <input type="hidden" name="tipoDeBusqueda" value="1">
-        <input class="btn btn-default" type="submit" name="btnInfoPersonal" value="Buscar" class="btn button-primary" style="width: 100px; height:30px;" style="margin-top: 400px;">
+        <input class="btn btn-default" type="submit" name="btnInfoPersonal" value="Buscar" class="btn button-primary" style="width: 100px; height:30px;" style="margin-top: 400px;" onclick="porNombre()">
       <!--  <button class="btn btn-default" name="btnBuscar" style="width: 100px; height:30px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Buscar</a> </button> -->
         <form>
 
@@ -149,7 +149,7 @@ if($_SESSION["usuarioIniciado"]!=null){
                 ?>
               </select>
               <input type="hidden" name="tipoDeBusqueda" value="2">
-              <input class="btn btn-default" type="submit" name="btnInfoPersonal" value="Buscar" class="btn button-primary" style="width: 100px; height:30px;" style="margin-top: 400px;">
+              <input class="btn btn-default" type="submit" name="btnInfoPersonal" value="Buscar" class="btn button-primary" style="width: 100px; height:30px;" style="margin-top: 400px;" onclick="porEstado()">
               <form>
               <!-- <button class="btn btn-default" name="btnBuscarTipo" style="width: 100px; height:30px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Buscar</a> </button> -->
 
@@ -166,8 +166,8 @@ if($_SESSION["usuarioIniciado"]!=null){
                   ?>
 
                 </select>
-                <input type="hidden" name="tipoDeBusqueda" value="3">
-                <input class="btn btn-default" type="submit" name="btnInfoPersonal" value="Buscar" class="btn button-primary" style="width: 100px; height:30px;" style="margin-top: 400px;">
+                <input type="hidden" id="tipoDeBusqueda" name="tipoDeBusqueda" value="3">
+                <input class="btn btn-default" type="submit" name="btnInfoPersonal" value="Buscar" class="btn button-primary" style="width: 100px; height:30px;" style="margin-top: 400px;"  onclick="porCompania()">
               </form>
               <!--  <button class="btn btn-default" name="btnBuscarCompania" style="width: 100px; height:30px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Buscar</a> </button> -->
 
@@ -197,7 +197,13 @@ if($_SESSION["usuarioIniciado"]!=null){
                             <td><?php echo $objeto->getNombre();?></td>
                             <td><?php echo $objeto->getApellidoPaterno();?></td>
                             <td><?php echo $objeto->getCompania();?></td>
-                            <td><?php echo $objeto->getIdInfoPersonal();?></td>
+                            <td>
+                              <form action="verFicha.php" method="post">
+                                <!-- Ya puse el boton para ver ficha, que redirije a ver ficha, pero no puedo ver si el id esta ahi; no estoy seguro de que este-->
+                                <input type="hidden" value="<?php echo $objeto->getIdInfoPersonal();?>">
+
+                              <input type="submit" value="Ver ficha">
+                              </td>
                           </tr>
                         <?php
                       }
@@ -227,6 +233,31 @@ if($_SESSION["usuarioIniciado"]!=null){
    </div>
  </div>
 </div>
+
+<!-- Preciso el javaScript porque tengo 3 hidden con el mismo nombre, lo cual significa que el ultimo es el que se rescata
+en el controlador. Tengo 3 porque la idea era que cada uno mandara un valor distinto, pero se toma solo el ultimo. Asi que use javascript para alterar
+el valor del ultimo hidden con el numero que necesito en el handler
+
+ -->
+<script src="javascript/JQuery.js"></script>
+        <script>
+        function porNombre() {
+          document.getElementById("tipoDeBusqueda").value = "1";
+            }
+
+            function porEstado() {
+              document.getElementById("tipoDeBusqueda").value = "2";
+                }
+
+                function porCompania() {
+                  document.getElementById("tipoDeBusqueda").value = "3";
+                    }
+
+
+
+
+
+        </script>
 
   </body>
 </html>
