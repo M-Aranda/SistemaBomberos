@@ -131,11 +131,13 @@ nombre_cargo VARCHAR (5000),
 PRIMARY KEY (id_cargo)
 );
 
+-- fk_id_entidadACargo_informacionBomberil INT,
+-- FOREIGN KEY (fk_id_entidadACargo_informacionBomberil) REFERENCEs tbl_entidadACargo (id_entidadACargo),
 CREATE TABLE tbl_informacionBomberil (
 id_informacionBomberil INT AUTO_INCREMENT,
 fk_region_informacionBomberil INT,
 cuerpo_informacionBomberil VARCHAR (20000),
-fk_id_entidadACargo_informacionBomberil INT,
+compania VARCHAR (300),
 fk_cargo_informacionBomberil INT,
 fecha_de_ingreso_informacionBomberil DATE,
 N_Reg_General_informacionBomberil INT,
@@ -146,7 +148,6 @@ FOREIGN KEY (fk_informacion_personal__informacionBomberil) REFERENCES tbl_inform
 FOREIGN KEY (fk_region_informacionBomberil) REFERENCES tbl_region (id_region),
 FOREIGN KEY (fk_cargo_informacionBomberil) REFERENCEs tbl_cargo (id_cargo),
 FOREIGN KEY (fk_estado_informacionBomberil) REFERENCEs tbl_estadoBombero (id_estado),
-FOREIGN KEY (fk_id_entidadACargo_informacionBomberil) REFERENCEs tbl_entidadACargo (id_entidadACargo),
 PRIMARY KEY (id_informacionBomberil)
 );
 
@@ -225,14 +226,11 @@ PRIMARY KEY(id_informacionFamiliar)
 );
 
 
-
-
 CREATE TABLE tbl_estado_curso(
 id_estado_curso INT AUTO_INCREMENT,
 nombre_estado_curso VARCHAR (5000),
 PRIMARY KEY(id_estado_curso)
 );
-
 
 
 CREATE TABLE tbl_informacionAcademica(
@@ -245,7 +243,6 @@ FOREIGN KEY (fk_informacionPersonal_informacionAcademica) REFERENCES tbl_informa
 FOREIGN KEY (fk_estado_curso_informacionAcademica) REFERENCES tbl_estado_curso (id_estado_curso), 
 PRIMARY KEY (id_informacionAcademica)
 );
-
 
 
 CREATE TABLE tbl_entrenamientoEstandar(
@@ -569,7 +566,7 @@ DELIMITER ;
 
 
 DELIMITER //
-CREATE PROCEDURE CRUDFichaInformacionBomberil (id INT,fkRegion INT, cuerpo VARCHAR (2000), fkCompania INT, fkCargo INT, 
+CREATE PROCEDURE CRUDFichaInformacionBomberil (id INT, fkRegion INT, cuerpo VARCHAR (2000), fkCompania VARCHAR(300), fkCargo INT, 
 fechaIngreso DATE, NRG INT, fkEstado INT, NRC INT, fkInformacionPersonal INT, tipoOperacion INT)
 BEGIN
 IF tipoOperacion=1 THEN
@@ -577,7 +574,7 @@ INSERT INTO tbl_informacionBomberil VALUES (NULL, fkRegion, cuerpo, fkCompania, 
 ELSEIF tipoOperacion=2 THEN
 SELECT * FROM tbl_informacionBomberil WHERE id_informacionBomberil=id;
 ELSEIF tipoOperacion=3 THEN
-UPDATE tbl_informacionBomberil SET fk_region_informacionBomberil=fkRegion,cuerpo_informacionBomberil=cuerpo,fk_compania_informacionBomberil=fkCompania,
+UPDATE tbl_informacionBomberil SET fk_region_informacionBomberil=fkRegion,cuerpo_informacionBomberil=cuerpo, compania=fkCompania,
 fk_cargo_informacionBomberil=fkCargo, fecha_de_ingreso_informacionBomberil=fechaIngreso, N_Reg_General_informacionBomberil=NRG, fk_estado_informacionBomberil=fkEstado,
  N_Reg_Cia_informacionBomberil=NRC, fk_informacion_personal__informacionBomberil=fkInformacionPersonal  WHERE id_informacionBomberil=id;
 ELSEIF tipoOperacion=4 THEN
@@ -1340,7 +1337,7 @@ INSERT INTO tbl_tipo_servicio (codigo_tipo_servicio,nombre_tipo_servicio) VALUES
 
 -- SELECT * FROM tbl_medida;
 -- SELECT * FROM tbl_informacionPersonal;
--- SELECT * FROM tbl_informacionBomberil
+-- SELECT * FROM tbl_informacionBomberil;
 -- SELECT * FROM tbl_informacionLaboral;
 -- SELECT * FROM tbl_informacionMedica1;
 -- SELECT * FROM tbl_informacionMedica2;
@@ -1387,7 +1384,7 @@ CALL CRUDUnidad (6,'Nombre de Prueba 3','2000','200','300','333','555','3333','j
 CALL CRUDMedida (1,'XX','SS','42','41',1);
 CALL CRUDInformacionPersonal (1,'20898088-2','Marcelo', 'Aranda', 'Tatto','1991-12-16',1,1,'1,70','80,2','cheloz_20@hotmail.com',
 1,'123123123123','958677107','Carretera El Cobre','No sabe', 'Creo que no',1);
-CALL CRUDFichaInformacionBomberil(1,1,'Machali',1,1,'2001-12-16',1,1,1,1,1);
+CALL CRUDFichaInformacionBomberil(1,1,'Machali','algo',1,'2001-12-16',1,1,1,1,1);
 CALL CRUDInformacionLaboral (1,'Acquiried','algun lado','598677','empleado','2018-08-12','ciencias','masvida','ingeniero', 1, 1);
 CALL CRUDInformacionMedica1 (1, 'alguna','ninguna', 'no hay', 1,1);
 CALL CRUDInformacionMedica2 (1,'Ninguno', 'Familiar', '96666',3, 'Sin especificar',0,0,1,1,1);

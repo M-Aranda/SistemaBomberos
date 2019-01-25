@@ -28,7 +28,7 @@ Class Tbl_InfoPersonal{
         }
 
         public function setIdInfoPersonal($idInformacionPersonal){
-            $this->idInfoPersonal = $idInformacionPersonal;
+            $this->idInformacionPersonal = $idInformacionPersonal;
         }
 
         public function getRutInformacionPersonal(){

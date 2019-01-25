@@ -25,7 +25,7 @@ require_once("../model/Provincia.php");
 
 
 
-$idInformacionMedica1=0;
+$idInformacionMedica1=$_REQUEST["cboBombero"];
 $prestacionMedica_informacionMedica1=$_REQUEST["txtpresmedica"];
 $alergias_informacionMedica1=$_REQUEST["txtalergias"];
 $enfermedadesCronicasinformacionMedica1=$_REQUEST["txtenfermedadescronicas"];

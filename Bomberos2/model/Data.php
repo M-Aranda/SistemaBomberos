@@ -14,6 +14,7 @@ require_once("Tbl_tipoMantencion.php");
 require_once("Tbl_tipoCombustible.php");
 require_once("Tbl_Unidad.php");
 require_once("Tbl_tipo_servicio.php");
+require_once("Tbl_InfoPersonal.php");
 /*
 require_once("Tbl_EstadoCivil.php");
 require_once("Tbl_Genero.php");
@@ -240,9 +241,10 @@ class Data{
 
 
     public function crearInformacionBomberil($infoBomberil){
-      $query="CALL CRUDFichaInformacionBomberil (1,".$infoBomberil->getfkRegioninformacionBomberil().", '".$infoBomberil->getcuerpoInformacionBomberil()."', ".$infoBomberil->getfkCompaniainformacionBomberil().",
+      $query="CALL CRUDFichaInformacionBomberil (1,".$infoBomberil->getfkRegioninformacionBomberil().", '".$infoBomberil->getcuerpoInformacionBomberil()."', '".$infoBomberil->getfkCompaniainformacionBomberil()."',
        ".$infoBomberil->getfkCargoinformacionBomberil().",'".$infoBomberil->getfechaIngresoinformacionBomberil()."', '".$infoBomberil->getNRegGeneralinformacionBomberil()."', ".$infoBomberil->getfkEstadoinformacionBomberil().",
       '".$infoBomberil->getNRegCiainformacionBomberil()."', ".$infoBomberil->getfkInfoPersonalinformacionBomberil().", 1);";
+
 
       $this->c->conectar();
       $this->c->ejecutar($query);
@@ -251,7 +253,7 @@ class Data{
 
 
     public function crearInformacionLaboral($infoLaboral){
-      $query="CALL CRUDFichaInformacionBomberil (1, '".$infoLaboral->getnombreEmpresainformacionLaboral()."', '".$infoLaboral->getdireccionEmpresainformacionLaboral()."', '".$infoLaboral->gettelefonoEmpresainformacionLaboral()."',
+      $query="CALL CRUDInformacionLaboral (1, '".$infoLaboral->getnombreEmpresainformacionLaboral()."', '".$infoLaboral->getdireccionEmpresainformacionLaboral()."', '".$infoLaboral->gettelefonoEmpresainformacionLaboral()."',
        '".$infoLaboral->getcargoEmpresainformacionLaboral()."','".$infoLaboral->getfechaIngresoEmpresainformacionLaboral()."', '".$infoLaboral->getareaDeptoEmpresainformacionLaboral()."', '".$infoLaboral->getafp_informacionLaboral()."',
       '".$infoLaboral->getprofesion_informacionLaboral()."', ".$infoLaboral->getfkInfoPersonalinformacionLaboral().", 1);";
 
@@ -283,8 +285,10 @@ class Data{
 
 
     public function crearInformacionFamiliar($infoFamiliar){
-      $query="CALL CRUDInformacionFamiliar (1, '".$infoFamiliar->getNombresInformacionFamiliar()."', '".$infoFamiliar->getFechaNacimientoInformacionFamiliar()."', '".$infoFamiliar->getfkParentescoinformacionFamiliar()."',
+      $query="CALL CRUDInformacionFamiliar (1, '".$infoFamiliar->getNombresInformacionFamiliar()."', '".$infoFamiliar->getFechaNacimientoInformacionFamiliar()."', ".$infoFamiliar->getfkParentescoinformacionFamiliar().",
        ".$infoFamiliar->getfkInfoPersonalinformacionFamiliar().",  1);";
+
+
 
       $this->c->conectar();
       $this->c->ejecutar($query);
@@ -295,6 +299,7 @@ class Data{
     public function crearInformacionAcademica($infoAcademica){
       $query="CALL CRUDInformacionAcademica (1, '".$infoAcademica->getfechaInformacionAcademica()."', '".$infoAcademica->getactividadInformacionAcademica()."', ".$infoAcademica->getfkEstadoCursoInformacionAcademica().",
        ".$infoAcademica->getfkInformacionPersonalInformacionAcademica().", 1);";
+
 
       $this->c->conectar();
       $this->c->ejecutar($query);
@@ -314,8 +319,9 @@ class Data{
 
 
     public function crearInformacionHistorica($infoHistorica){
-      $query="CALL CRUDInformacionHistorica (1, ".$infoHistorica->getfkRegioninformacionHistorica().", '".$infoHistorica->getcuerpo()."', ".$infoHistorica->getcompania().",
-       ".$infoHistorica->getfechaDeCambio().", '".$infoHistorica->gettipoDeCambio()."', '".$infoHistorica->getmotivo()."', '".$infoHistorica->getdetalle()."', ".$infoHistorica->getfkInfoPersonalinformacionHistorica().", 1);";
+      $query="CALL CRUDInformacionHistorica (1, ".$infoHistorica->getfkRegioninformacionHistorica().", '".$infoHistorica->getcuerpo()."', '".$infoHistorica->getcompania()."',
+       '".$infoHistorica->getfechaDeCambio()."', '".$infoHistorica->getPremio()."', '".$infoHistorica->getmotivo()."', '".$infoHistorica->getdetalle()."', '".$infoHistorica->getCargo()."'  , ".$infoHistorica->getfkInfoPersonalinformacionHistorica().", 1);";
+
 
       $this->c->conectar();
       $this->c->ejecutar($query);
@@ -629,6 +635,57 @@ class Data{
            $obj->setId_tipo_servicio($id);
            $obj->setCodigo_tipo_servicio($nombre);
            $obj->setNombre_tipo_servicio($codigo);
+           $listado[]=$obj;
+       }
+       $this->c->desconectar();
+       return $listado;
+    }
+
+
+
+    public function readInformacionPersonalBomberos (){
+      $this->c->conectar();
+      $query="SELECT * FROM tbl_informacionPersonal;";
+      $rs = $this->c->ejecutar($query);
+      $listado = array();
+      while($reg = $rs->fetch_array()){
+          $idInformacionPersonal=$reg[0];
+          $rutInformacionPersonal=$reg[1];
+          $nombreInformacionPersonal=$reg[2];
+          $apellidoPaterno=$reg[3];
+          $apellidoMaterno=$reg[4];
+          $fechaNacimiento=$reg[5];
+          $fkEstadoCivil=$reg[6];
+          $fkMedidaInformacionPersonal=$reg[7];
+          $AlturaEnMetros=$reg[8];
+          $Peso=$reg[9];
+          $Email=$reg[10];
+          $fkGenero=$reg[11];
+          $TelefonoFijo=$reg[12];
+          $TelefonoMovil=$reg[13];
+          $DireccionPersonal=$reg[14];
+          $PertenecioABrigadaJuvenil=$reg[15];
+          $EsInstructor=$reg[16];
+
+           $obj = new Tbl_InfoPersonal();
+           $obj->setIdInfoPersonal($idInformacionPersonal);
+           $obj->setRutInformacionPersonal($rutInformacionPersonal);
+           $obj->setNombreInformacionPersonal($nombreInformacionPersonal);
+           $obj->setApellidoPaterno($apellidoPaterno);
+           $obj->setApellidoMaterno($apellidoMaterno);
+           $obj->setFechaNacimiento($fechaNacimiento);
+           $obj->setFkEstadoCivil($fkEstadoCivil);
+           $obj->setFkMedidaInformacionPersonal($fkMedidaInformacionPersonal);
+           $obj->setAlturaEnMetros($AlturaEnMetros);
+           $obj->setPeso($Peso);
+           $obj->setEmail($Email);
+           $obj->setFkGenero($fkGenero);
+           $obj->setTelefonoFijo($TelefonoFijo);
+           $obj->setTelefonoMovil($TelefonoMovil);
+           $obj->setDireccionPersonal($DireccionPersonal);
+           $obj->setPertenecioABrigadaJuvenil($PertenecioABrigadaJuvenil);
+           $obj->setEsInstructor($EsInstructor);
+
            $listado[]=$obj;
        }
        $this->c->desconectar();

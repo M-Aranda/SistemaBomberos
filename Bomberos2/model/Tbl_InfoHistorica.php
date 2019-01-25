@@ -1,6 +1,6 @@
 <?php
 Class Tbl_InfoHistorica{
-  
+
       private $idInformacionHistorica;
       private $fkRegioninformacionHistorica;
       private $cuerpo;
@@ -9,8 +9,9 @@ Class Tbl_InfoHistorica{
       private $premio;
       private $motivo;
       private $detalle;
-      private $cargo
+      private $cargo;
       private $fkInfoPersonalinformacionHistorica;
+
       public function __construct(){
       }
       public function getIdInformacionHistorica(){

@@ -25,14 +25,14 @@ require_once("../model/Provincia.php");
 
 
 
-  $idEntrenamientoEstandar=$_REQUEST[""];
+  $idEntrenamientoEstandar=1;
   $fechaEntrenamientoEstandar=$_REQUEST["txtfechaEstandar"];
   $actividad=$_REQUEST["txtActividadEntrenamientoEstandar"];
   $fkEstadoCurso=$_REQUEST["cboEstadoCursoEstandar"];
-  $fkInformacionPersonal=1;
+  $fkInformacionPersonal=$_REQUEST["cboBombero"];
 
 
-$infoEntrenamientoEstandar=new Tbl_EntrenamientoEstandar();
+$infoEntrenamientoEstandar=new EntrenamientoEstandar();
 
 $infoEntrenamientoEstandar->setIdEntrenamientoEstandar($idEntrenamientoEstandar);
 $infoEntrenamientoEstandar->setfechaEntrenamientoEstandar($fechaEntrenamientoEstandar);
@@ -46,7 +46,7 @@ $d= new Data();
 $d->crearInformacionEntrenamientoEstandar($infoEntrenamientoEstandar);
 
 
-header("location: ../index.php");
+header("location: ../CrearFicha.php");
 
 
 

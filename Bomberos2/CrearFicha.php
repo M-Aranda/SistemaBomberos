@@ -226,10 +226,27 @@
            <div class="col-md-11 collapse" id="bomberil">
                <div class="panel panel-primary">
                    <div class="panel-heading panel-title">
+                     <form action="controlador/CrearInformacionBomberil.php" method="post">
                        Información Bomberil
                    </div>
                    <div class="panel-body">
                        <div class="col-sm-6">
+                         Creando ficha para:
+                         <select class="form-control" name="cboBombero1">
+                           <?php
+                           require_once("model/Data.php");
+                           $d= new Data();
+                           $listado = $d->readInformacionPersonalBomberos();
+                           foreach($listado as $o => $objeto){
+                          ?>
+                          <option value="<?php echo $objeto->getIdInfoPersonal(); ?>"><?php
+                          echo $objeto->getRutInformacionPersonal()."  ";
+                          echo $objeto->getNombreInformacionPersonal(); ?></option>
+                           <?php
+                           }
+                           ?>
+                           </select>
+
                          Región : <!-- <input class="form-control" type="text" name="txtregion"> --><!--Region del libertador bernardo ohggins-->
                          <select class="form-control" name="cboRegion">
                            <?php
@@ -291,6 +308,7 @@
                              <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                          </center>
+                       </form>
 
                        </div>
                    </div>
@@ -308,10 +326,26 @@
            <div class="col-md-11 collapse" id="laboral">
                <div class="panel panel-primary">
                    <div class="panel-heading panel-title">
+                     <form action="controlador/CrearInformacionLaboral.php" method="post">
                        Información Laboral
                    </div>
                    <div class="panel-body">
                        <div class="col-sm-5">
+                         Creando ficha para:
+                         <select class="form-control" name="cboBomberoInfoLaboral">
+                           <?php
+                           require_once("model/Data.php");
+                           $d= new Data();
+                           $listado = $d->readInformacionPersonalBomberos();
+                           foreach($listado as $o => $objeto){
+                           ?>
+                          <option value="<?php echo $objeto->getIdInfoPersonal();?>">
+                          <?php echo $objeto->getRutInformacionPersonal()."  ";
+                          echo $objeto->getNombreInformacionPersonal(); ?></option>
+                           <?php
+                           }
+                           ?>
+                           </select>
                          Nombre Empresa : <input class="form-control" type="text" name="txtnomempresa">
                          Dirección Empresa: <textarea class="form-control" type="text" name="txtdirecempresa"></textarea>
                          Teléfono Empresa: <input class="form-control" type="text" name="txttlfempresa">
@@ -329,6 +363,7 @@
                              <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                          </center>
+                       </form>
 
                        </div>
                    </div>
@@ -346,10 +381,25 @@
            <div class="col-md-11 collapse" id="medica">
                <div class="panel panel-primary">
                    <div class="panel-heading panel-title">
+                     <form action="controlador/CrearInformacionMedica1.php" method="post">
                        Informacion Médica
                    </div>
                    <div class="panel-body">
                        <div class="col-sm-6">
+                         Creando ficha para:
+                         <select class="form-control" name="cboBombero">
+                           <?php
+                           require_once("model/Data.php");
+                           $d= new Data();
+                           $listado = $d->readInformacionPersonalBomberos();
+                           foreach($listado as $o => $objeto){
+                           ?>
+                           <option value="<?php echo $objeto->getIdInfoPersonal(); ?>"><?php echo $objeto->getRutInformacionPersonal()."  ";
+                          echo $objeto->getNombreInformacionPersonal(); ?></option>
+                           <?php
+                           }
+                           ?>
+                           </select>
                          Prestación Médica : <input class="form-control" type="text" name="txtpresmedica">
                          Alergias: <input class="form-control" type="text" name="txtalergias">
                          Enfermedades Crónicas: <input class="form-control" type="text" name="txtenfermedadescronicas">
@@ -398,6 +448,7 @@
                                <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                            </center>
+                         </form>
 
                        </div>
                    </div>
@@ -415,12 +466,27 @@
            <div class="col-md-11 collapse" id="familiar">
                <div class="panel panel-primary">
                    <div class="panel-heading panel-title">
+                     <form action="controlador/CrearInformacionFamiliar.php" method="post">
                        Información Familiar
                    </div>
                    <div class="panel-body">
 
 
                        <div class="col-sm-6">
+                         Creando ficha para:
+                         <select class="form-control" name="cboBomberoInfoFamiliar">
+                           <?php
+                           require_once("model/Data.php");
+                           $d= new Data();
+                           $listado = $d->readInformacionPersonalBomberos();
+                           foreach($listado as $o => $objeto){
+                           ?>
+                           <option value="<?php echo $objeto->getIdInfoPersonal(); ?>"><?php echo $objeto->getRutInformacionPersonal()."  ";
+                          echo $objeto->getNombreInformacionPersonal(); ?></option>
+                           <?php
+                           }
+                           ?>
+                           </select>
                          Nombre: <input class="form-control" type="text" name="txtnombreFamiliar">
                          Fecha de Nacimiento: <input class="form-control" type="date" name="txtfechafamiliar">
                          Parentesco:
@@ -468,6 +534,7 @@
                               <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                           </center>
+                        </form>
 
                       </div>
 
@@ -488,10 +555,25 @@
            <div class="col-md-11 collapse" id="academica">
                <div class="panel panel-primary">
                    <div class="panel-heading panel-title">
+                     <form action="controlador/CrearInformacionAcademica.php" method="post">
                        Informacion Académica
                    </div>
                    <div class="panel-body">
                        <div class="col-sm-6">
+                         Creando ficha para:
+                         <select class="form-control" name="cboBomberoInfoAcademica">
+                           <?php
+                           require_once("model/Data.php");
+                           $d= new Data();
+                           $listado = $d->readInformacionPersonalBomberos();
+                           foreach($listado as $o => $objeto){
+                           ?>
+                           <option value="<?php echo $objeto->getIdInfoPersonal(); ?>"><?php echo $objeto->getRutInformacionPersonal()."  ";
+                          echo $objeto->getNombreInformacionPersonal(); ?></option>
+                           <?php
+                           }
+                           ?>
+                           </select>
                          Fecha: <input class="form-control" type="date" name="txtfechaAcademica">
                          Actividad: <input class="form-control" type="text" name="txtActivdidadAcademica">
                          Estado:
@@ -534,6 +616,7 @@
                               <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                           </center>
+                        </form>
 
                       </div>
                    </div>
@@ -553,10 +636,25 @@
                <div class="col-md-11 collapse" id="estandar">
                    <div class="panel panel-primary">
                        <div class="panel-heading panel-title">
+                         <form action="controlador/CrearInfoEntrenamientoEstandar.php" method="post">
                            Información Estandar
                        </div>
                        <div class="panel-body">
                            <div class="col-sm-6">
+                             Creando ficha para:
+                             <select class="form-control" name="cboBombero">
+                               <?php
+                               require_once("model/Data.php");
+                               $d= new Data();
+                               $listado = $d->readInformacionPersonalBomberos();
+                               foreach($listado as $o => $objeto){
+                               ?>
+                               <option value="<?php echo $objeto->getIdInfoPersonal(); ?>"><?php echo $objeto->getRutInformacionPersonal()."  ";
+                              echo $objeto->getNombreInformacionPersonal(); ?></option>
+                               <?php
+                               }
+                               ?>
+                               </select>
                              Fecha: <input class="form-control" type="date" name="txtfechaEstandar">
                              Actividad: <input class="form-control" type="text" name="txtActividadEntrenamientoEstandar">
                              Estado:
@@ -600,6 +698,7 @@
                                   <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                               </center>
+                            </form>
 
                           </div>
                        </div>
@@ -620,10 +719,25 @@
                <div class="col-md-11 collapse" id="historica">
                    <div class="panel panel-primary">
                        <div class="panel-heading panel-title">
+                         <form action="controlador/CrearInformacionHistorica.php" method="post">
                            Información Histórica
                        </div>
                        <div class="panel-body" style="margin-left: -20px;">
                            <div class="col-sm-6">
+                             Creando ficha para:
+                             <select class="form-control" name="cboBombero">
+                               <?php
+                               require_once("model/Data.php");
+                               $d= new Data();
+                               $listado = $d->readInformacionPersonalBomberos();
+                               foreach($listado as $o => $objeto){
+                               ?>
+                               <option value="<?php echo $objeto->getIdInfoPersonal(); ?>"><?php echo $objeto->getRutInformacionPersonal()."  ";
+                              echo $objeto->getNombreInformacionPersonal(); ?></option>
+                               <?php
+                               }
+                               ?>
+                               </select>
 
                              Región:
                              <select class="form-control" name="cboxRegion">
@@ -642,8 +756,8 @@
                              </select>
 
                              Cuerpo: <input type="text" name="txtcuerpoHistorico" class="form-control">
-                             Compañia:
-                             <select name="cboxCompania" class="form-control">
+                             Compañia:<input type="text" name="txtCompania" class="form-control">
+                          <!--   <select name="cboxCompania" class="form-control">
                                <?php
                                require_once("model/Data.php");
                                require_once("model/Tbl_EntidadACargo.php");
@@ -652,12 +766,13 @@
                                $companias = $d->readSoloCompanias();
                                foreach($companias as $c => $compania){
                                ?>
-                               <option value="<?php echo $compania->getIdEntidadACargo(); ?>"><?php echo $compania->getNombreEntidadACargo(); ?></option>
+                               <option value="<?php /*echo $compania->getIdEntidadACargo(); ?>"><?php echo $compania->getNombreEntidadACargo();*/ ?></option>
                                <?php
                                }
                                ?>
                              </select>
-                             Fecha: <input type="date" name="txtfechaHistorico" class="form-control">
+                           -->
+                             Fecha: <input type="date" name="txtfechaCambioInfoHistorica" class="form-control">
                              Cargo:
                              <select name="cboxCargo" class="form-control">
                                <?php
@@ -674,8 +789,8 @@
                                ?>
                              </select>
                              Premio: <input type="text" name="txtPremioInforHistorica" class="form-control">
-                             Motivo: <input type="text" name="txtmotivo" class="form-control">
-                             Detalle: <input type="text" name="txtdetalleHistotico" class="form-control">
+                             Motivo: <input type="text" name="txtMotivo" class="form-control">
+                             Detalle: <input type="text" name="txtDetalleHistorico" class="form-control">
 
 
                              <table class="table table-striped">
@@ -712,6 +827,8 @@
                                   <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                               </center>
+
+                            </form>
 
                           </div>
 
