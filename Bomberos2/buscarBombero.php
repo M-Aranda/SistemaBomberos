@@ -128,11 +128,17 @@ if($_SESSION["usuarioIniciado"]!=null){
 
       <div class="form-group" style="margin-left:50px;">
         <span><h5 style="font-weight:bold;">Buscar</h5></span>
+        <form action="controlador/BuscarBomberoPorAlgunParametro.php" method="post">
+        <form>
         <input type="text" name="txtBuscar"  placeholder="Buscar por nombre" style="height:30px;">
-        <button class="btn btn-default" name="btnBuscar" style="width: 100px; height:30px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Buscar</a> </button>
+        <input type="hidden" name="tipoDeBusqueda" value="1">
+        <input class="btn btn-default" type="submit" name="btnInfoPersonal" value="Buscar" class="btn button-primary" style="width: 100px; height:30px;" style="margin-top: 400px;">
+      <!--  <button class="btn btn-default" name="btnBuscar" style="width: 100px; height:30px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Buscar</a> </button> -->
+        <form>
 
-        <span><h5 style="font-weight:bold;">Tipo Bombero</h5></span>
-              <select name="tipoBombero" style="width:175px; height:30px;">
+        <form action="controlador/BuscarBomberoPorAlgunParametro.php" method="post">
+        <span><h5 style="font-weight:bold;">Estado de Bombero</h5></span>
+              <select name="estadoBombero" style="width:175px; height:30px;">
                 <?php
                     $tipoBombero = $data->readEstadosDeBomberos();
                     foreach ($tipoBombero as $tb) {
@@ -142,9 +148,12 @@ if($_SESSION["usuarioIniciado"]!=null){
                     }
                 ?>
               </select>
-              <button class="btn btn-default" name="btnBuscarTipo" style="width: 100px; height:30px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Buscar</a> </button>
+              <input type="hidden" name="tipoDeBusqueda" value="2">
+              <input class="btn btn-default" type="submit" name="btnInfoPersonal" value="Buscar" class="btn button-primary" style="width: 100px; height:30px;" style="margin-top: 400px;">
+              <form>
+              <!-- <button class="btn btn-default" name="btnBuscarTipo" style="width: 100px; height:30px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Buscar</a> </button> -->
 
-
+              <form action="controlador/BuscarBomberoPorAlgunParametro.php" method="post">
               <span><h5 style="font-weight:bold;">Compañia</h5></span>
                 <select name="compania" style="width:175px; height:30px;">
                   <?php
@@ -157,7 +166,10 @@ if($_SESSION["usuarioIniciado"]!=null){
                   ?>
 
                 </select>
-                <button class="btn btn-default" name="btnBuscarCompania" style="width: 100px; height:30px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Buscar</a> </button>
+                <input type="hidden" name="tipoDeBusqueda" value="3">
+                <input class="btn btn-default" type="submit" name="btnInfoPersonal" value="Buscar" class="btn button-primary" style="width: 100px; height:30px;" style="margin-top: 400px;">
+              </form>
+              <!--  <button class="btn btn-default" name="btnBuscarCompania" style="width: 100px; height:30px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Buscar</a> </button> -->
 
 
 
@@ -172,18 +184,42 @@ if($_SESSION["usuarioIniciado"]!=null){
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>John</td>
-                        <td>Doe</td>
-                        <td>john@example.com</td>
-                        <td>sadsda</td>
-                      </tr>
+                      <?php
+
+                      if(isset($_SESSION["resultadosDeBusquedaDeBomberos"])){
+                        // se hizo una busqueda
+                        $listado=$_SESSION["resultadosDeBusquedaDeBomberos"];
+
+                        foreach ($listado as $o => $objeto) {
+                          ?>
+                          <tr>
+                            <td><?php echo $objeto->getRut();?></td>
+                            <td><?php echo $objeto->getNombre();?></td>
+                            <td><?php echo $objeto->getApellidoPaterno();?></td>
+                            <td><?php echo $objeto->getCompania();?></td>
+                            <td><?php echo $objeto->getIdInfoPersonal();?></td>
+                          </tr>
+                        <?php
+                      }
+
+                    unset($_SESSION["resultadosDeBusquedaDeBomberos"]);
+
+
+                    }
+                      ?>
+
+
+
+
+
+
 
                     </tbody>
                   </table>
 
 
       </div>
+
 
 
 

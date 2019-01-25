@@ -264,9 +264,20 @@
                            </select>
 
                          Compañía: <!-- <input class="form-control" type="text" name="txtcompania"> --> <!--Combobox-->
-                         <input class="form-control" type="text" name="txtcompania">
+                         <select name="compania" style="width:175px; height:30px;">
+                           <?php
+                               $compania = $data->readSoloCompanias();
+                               foreach ($compania as $c) {
+                                   echo "<option value='".$c->getIdEntidadACargo()."'>";
+                                       echo $c->getNombreEntidadACargo();
+                                   echo"</option>";
+                               }
+                           ?>
+
+                         </select>
+                         <br>
                          Fecha Ingreso: <input class="form-control" type="date" name="txtfingreso">
-                         Nº Reg.General: <input class="form-control" type="text" name="txtgeneral">
+                         Nº Reg.General: <input class="form-control" type="number" name="txtgeneral">
                        </div>
                        <div class="col-md-6">
                          Cuerpo: <input class="form-control" type="text" name="txtcuerpo"> <!-- Machali-->
@@ -302,7 +313,7 @@
                            }
                            ?>
                            </select>
-                         Nº Reg.Cia: <input class="form-control" name="txtcia">
+                         Nº Reg.Cia: <input class="form-control" type="number" name="txtcia">
                          <br>
                          <center> <input type="submit" name="btnInfoBomberil" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
                              <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
@@ -381,13 +392,13 @@
            <div class="col-md-11 collapse" id="medica">
                <div class="panel panel-primary">
                    <div class="panel-heading panel-title">
-                     <form action="controlador/CrearInformacionMedica1.php" method="post">
+                     <form action="controlador/CrearInformacionMedica.php" method="post">
                        Informacion Médica
                    </div>
                    <div class="panel-body">
                        <div class="col-sm-6">
                          Creando ficha para:
-                         <select class="form-control" name="cboBombero">
+                         <select class="form-control" name="cboBomberoInfoMedica">
                            <?php
                            require_once("model/Data.php");
                            $d= new Data();
@@ -426,8 +437,8 @@
                            ?>
                            </select>
                          Nivel de Actividad Fisica: <input class="form-control" type="text" name="txtactvfisica">
-                         Donante: <input class="form-control" type="text" name="txtdonante">
-                         Fumador: <input class="form-control" type="text" name="txtfumador">
+                         Donante: <input class="form-control" value="seleccionado" type="checkbox" name="txtdonante">
+                         Fumador: <input class="form-control" value="seleccionado" type="checkbox" name="txtfumador">
                          Grupo Sanguineo: <!-- <input class="form-control" type="text" name="txtgruposanguineo"> -->
                          <select class="form-control" name="cboGrupoSanguineo">
                            <?php
@@ -507,6 +518,7 @@
 
 
                          <!-- Nivel de actividad fisica: <input class="form-control" type="text" name="txtactvfisica"> -->
+                         <!--
                          <table class="table table-striped">
                              <thead>
                                <tr>
@@ -524,7 +536,7 @@
 
                              </tbody>
                            </table>
-
+-->
 
 
                       </div>
@@ -591,6 +603,7 @@
                            }
                            ?>
                            </select>
+                           <!--
                          <table class="table table-striped">
                              <thead>
                                <tr>
@@ -608,7 +621,7 @@
 
                              </tbody>
                            </table>
-
+-->
                       </div>
                       <div class="col-md-6">
                          <br><br><br><br><br><br>
@@ -672,7 +685,7 @@
                                }
                                ?>
                                </select>
-
+                               <!--
                              <table class="table table-striped">
                                  <thead>
                                    <tr>
@@ -690,7 +703,7 @@
 
                                  </tbody>
                                </table>
-
+                                      -->
                           </div>
                           <div class="col-md-6">
                              <br><br><br><br><br><br>
@@ -792,7 +805,7 @@
                              Motivo: <input type="text" name="txtMotivo" class="form-control">
                              Detalle: <input type="text" name="txtDetalleHistorico" class="form-control">
 
-
+                            <!--
                              <table class="table table-striped">
                                  <thead>
                                    <tr>
@@ -818,7 +831,7 @@
 
                                  </tbody>
                                </table>
-
+                                -->
                           </div>
 
                           <div class="col-md-6">

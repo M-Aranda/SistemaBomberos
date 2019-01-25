@@ -15,6 +15,7 @@ require_once("Tbl_tipoCombustible.php");
 require_once("Tbl_Unidad.php");
 require_once("Tbl_tipo_servicio.php");
 require_once("Tbl_InfoPersonal.php");
+require_once("Vista_BusquedaBombero.php");
 /*
 require_once("Tbl_EstadoCivil.php");
 require_once("Tbl_Genero.php");
@@ -241,7 +242,7 @@ class Data{
 
 
     public function crearInformacionBomberil($infoBomberil){
-      $query="CALL CRUDFichaInformacionBomberil (1,".$infoBomberil->getfkRegioninformacionBomberil().", '".$infoBomberil->getcuerpoInformacionBomberil()."', '".$infoBomberil->getfkCompaniainformacionBomberil()."',
+      $query="CALL CRUDFichaInformacionBomberil (1,".$infoBomberil->getfkRegioninformacionBomberil().", '".$infoBomberil->getcuerpoInformacionBomberil()."', ".$infoBomberil->getfkCompaniainformacionBomberil().",
        ".$infoBomberil->getfkCargoinformacionBomberil().",'".$infoBomberil->getfechaIngresoinformacionBomberil()."', '".$infoBomberil->getNRegGeneralinformacionBomberil()."', ".$infoBomberil->getfkEstadoinformacionBomberil().",
       '".$infoBomberil->getNRegCiainformacionBomberil()."', ".$infoBomberil->getfkInfoPersonalinformacionBomberil().", 1);";
 
@@ -693,7 +694,7 @@ class Data{
     }
 
 
-    public function getIdBomberoMasReciente (){
+  public function getIdBomberoMasReciente (){
   $this->c->conectar();
   $query="SELECT MAX(id_informacionPersonal ) FROM tbl_informacionPersonal;";
   $rs = $this->c->ejecutar($query);
@@ -703,6 +704,51 @@ class Data{
    $this->c->desconectar();
    return $id;
 }
+
+
+public function buscarInformacionDeBomberoParaTabla ($nombre, $id, $tipoDeBusqueda){
+  $this->c->conectar();
+
+  if($tipoDeBusqueda==1){
+    $anexoAQuery="AND
+    tbl_informacionPersonal.nombre_informacionPersonal LIKE '%.$nombre.%';";
+  }else if($tipoDeBusqueda==2){
+      $anexoAQuery="AND
+      tbl_informacionBomberil.fk_estado_informacionBomberil =".$id." ;";
+  }else if($tipoDeBusqueda==3){
+        $anexoAQuery="AND
+        tbl_entidadACargo.id_entidadACargo =".$id." ;";
+    }
+
+
+  $query="SELECT tbl_informacionPersonal.rut_informacionPersonal, tbl_informacionPersonal.nombre_informacionPersonal,
+  tbl_informacionPersonal.apellido_paterno_informacionPersonal, tbl_entidadACargo.nombre_entidadACargo,
+  tbl_informacionPersonal.id_informacionPersonal FROM tbl_informacionPersonal, tbl_informacionBomberil, tbl_entidadACargo
+  WHERE tbl_informacionBomberil.fk_id_entidadACargo_informacionBomberil=tbl_entidadACargo.id_entidadACargo AND
+  tbl_informacionPersonal.id_informacionPersonal=tbl_informacionBomberil.fk_informacion_personal__informacionBomberil ".$anexoAQuery;
+
+  echo $query;
+
+  $rs = $this->c->ejecutar($query);
+  $listado = array();
+  while($reg = $rs->fetch_array()){
+       $rut=$reg[0];
+       $nombre=$reg[1];
+       $apellidoPaterno=$reg[2];
+       $compania=$reg[3];
+       $id=$reg[4];
+       $obj = new Vista_BusquedaBombero();
+       $obj->setRut($rut);
+       $obj->setNombre($nombre);
+       $obj->setApellidoPaterno($apellidoPaterno);
+       $obj->setCompania($compania);
+       $obj->setIdInfoPersonal($id);
+       $listado[]=$obj;
+   }
+   $this->c->desconectar();
+   return $listado;
+}
+
 
 
 
