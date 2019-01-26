@@ -539,7 +539,6 @@ END IF;
 END //
 DELIMITER ;
 
-
 DELIMITER // 
 CREATE PROCEDURE CRUDInformacionPersonal (id INT, rut VARCHAR(12), nombre VARCHAR (5000), apellidoPaterno VARCHAR(5000), apellidoMaterno VARCHAR(5000), fechaDeNacimiento DATE,
 fkEstadoCivil INT, fkMedida INT, altura VARCHAR (5000), peso VARCHAR (5000), email VARCHAR (5000), fkGenero INT, telefonoFijo VARCHAR (5000), telefonoMovil VARCHAR (5000),
@@ -575,7 +574,7 @@ BEGIN
 IF tipoOperacion=1 THEN
 INSERT INTO tbl_informacionBomberil VALUES (NULL, fkRegion, cuerpo, fkCompania, fkCargo, fechaIngreso, NRG, fkEstado, NRC, fkInformacionPersonal);
 ELSEIF tipoOperacion=2 THEN
-SELECT * FROM tbl_informacionBomberil WHERE id_informacionBomberil=id;
+SELECT * FROM tbl_informacionBomberil WHERE fk_informacion_personal__informacionBomberil=fkInformacionPersonal;
 ELSEIF tipoOperacion=3 THEN
 UPDATE tbl_informacionBomberil SET fk_region_informacionBomberil=fkRegion,cuerpo_informacionBomberil=cuerpo, fk_id_entidadACargo_informacionBomberil=fkCompania,
 fk_cargo_informacionBomberil=fkCargo, fecha_de_ingreso_informacionBomberil=fechaIngreso, N_Reg_General_informacionBomberil=NRG, fk_estado_informacionBomberil=fkEstado,

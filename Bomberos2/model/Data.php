@@ -17,6 +17,8 @@ require_once("Tbl_tipo_servicio.php");
 require_once("Tbl_InfoPersonal.php");
 require_once("Vista_BusquedaBombero.php");
 require_once("Tbl_Medida.php");
+require_once("Tbl_InfoBomberil.php");
+
 /*
 require_once("Tbl_EstadoCivil.php");
 require_once("Tbl_Genero.php");
@@ -797,6 +799,28 @@ while($reg = $rs->fetch_array()){
      $info->setTallaPantalon($reg[2]);
      $info->setTallaBuzo($reg[3]);
      $info->setTallaCalzado($reg[4]);
+ }
+ $this->c->desconectar();
+ return $info;
+}
+
+public function getInfoBomberil ($idABuscar){
+$this->c->conectar();
+$query="CALL CRUDFichaInformacionBomberil(1,1,'Machali',2,1,'2001-12-16',1,1,1,".$idABuscar.",2);";
+$rs = $this->c->ejecutar($query);
+
+while($reg = $rs->fetch_array()){
+     $info= new Tbl_InfoBomberil();
+     $info->setIdInformacionBomberil($reg[0]);
+     $info->setfkRegioninformacionBomberil($reg[1]);
+     $info->setcuerpoInformacionBomberil($reg[2]);
+     $info->setfkCompaniainformacionBomberil($reg[3]);
+     $info->setfkCargoinformacionBomberil($reg[4]);
+     $info->setfechaIngresoinformacionBomberil($reg[5]);
+     $info->setNRegGeneralinformacionBomberil($reg[6]);
+     $info->setfkEstadoinformacionBomberil($reg[7]);
+     $info->setNRegCiainformacionBomberil($reg[6]);
+     $info->setfkInfoPersonalinformacionBomberil($reg[7]);
  }
  $this->c->desconectar();
  return $info;

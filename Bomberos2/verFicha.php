@@ -113,6 +113,10 @@
           $infoMedidas=$_SESSION["infoMedidasSolicitada"];
         }
 
+        if($_SESSION["infoMedidasSolicitada"]!=null){
+          $infoBomberil=$_SESSION["infoBomberilSolicitada"];
+        }
+
 
     ?>
     <style>
@@ -239,7 +243,7 @@
                    <div class="panel-body">
                        <div class="col-sm-6">
                          Región : <!-- <input class="form-control" type="text" name="txtregion"> --><!--Region del libertador bernardo ohggins-->
-                         <select class="form-control" name="cboRegion">
+                         <select class="form-control" name="cboRegion" disabled>
                            <?php
                            require_once("model/Data.php");
                            require_once("model/Tbl_Region.php");
@@ -247,6 +251,10 @@
 
                            $regiones = $d->readRegiones();
                            foreach($regiones as $r => $region){
+                             if($infoBomberil->getfkRegioninformacionBomberil()==$region->getIdRegion()){?>
+                               <option value="<?php echo $region->getIdRegion(); ?>" selected ><?php echo $region->getNombreRegion(); ?></option>
+                               <?php
+                             }
                            ?>
                            <option value="<?php echo $region->getIdRegion(); ?>"><?php echo $region->getNombreRegion(); ?></option>
                            <?php
@@ -255,14 +263,31 @@
                            </select>
 
                          Compañía: <!-- <input class="form-control" type="text" name="txtcompania"> --> <!--Combobox-->
-                         <input class="form-control" type="text" name="txtcompania">
-                         Fecha Ingreso: <input class="form-control" type="date" name="txtfingreso">
-                         Nº Reg.General: <input class="form-control" type="text" name="txtgeneral">
+                         <!-- <input class="form-control" value="<?php /*echo $infoBomberil->getfkCompaniainformacionBomberil();*/?>" type="text" name="txtcompania" disabled> -->
+                         <select name="txtcompania" style="width:175px; height:30px;" disabled>
+                           <?php
+                               $companias = $data->readSoloCompanias();
+                               foreach ($companias as $c => $compania) {
+                               if($infoBomberil->getfkCompaniainformacionBomberil()==$compania->getIdEntidadACargo()){?>
+                                 <option value="<?php echo $compania->getIdEntidadACargo(); ?>" selected ><?php echo $compania->getNombreEntidadACargo(); ?></option>
+                                 <?php
+                               }
+                             ?>
+                             <option value="<?php echo $compania->getIdEntidadACargo(); ?>"><?php echo $compania->getNombreEntidadACargo(); ?></option>
+                             <?php
+                             }
+                             ?>
+                             </select>
+                         <br>
+                         Fecha Ingreso:
+                         <br>
+                         <input class="form-control" value="<?php echo $infoBomberil->getfechaIngresoinformacionBomberil();?>" type="date" name="txtfingreso" disabled>
+                         Nº Reg.General: <input class="form-control" value="<?php echo $infoBomberil->getNRegGeneralinformacionBomberil();?>" type="text" name="txtgeneral" disabled>
                        </div>
                        <div class="col-md-6">
-                         Cuerpo: <input class="form-control" type="text" name="txtcuerpo"> <!-- Machali-->
+                         Cuerpo: <input class="form-control" value="<?php echo $infoBomberil->getcuerpoInformacionBomberil();?>" type="text" name="txtcuerpo" disabled>
                          Cargo: <!-- <input class="form-control" type="text" name="txtcargo"> -->
-                         <select class="form-control" name="cboCargo">
+                         <select class="form-control" name="cboCargo" disabled>
                            <?php
                            require_once("model/Data.php");
                            require_once("model/Tbl_Cargo.php");
@@ -270,6 +295,10 @@
 
                            $cargos = $d->readCargos();
                            foreach($cargos as $c => $cargo){
+                             if($infoBomberil->getfkCargoinformacionBomberil()==$cargo->getIdCargo()){?>
+                               <option value="<?php echo $cargo->getIdCargo(); ?>" selected ><?php echo $cargo->getNombreCargo(); ?></option>
+                               <?php
+                             }
                            ?>
                            <option value="<?php echo $cargo->getIdCargo(); ?>"><?php echo $cargo->getNombreCargo(); ?></option>
                            <?php
@@ -277,9 +306,10 @@
                            ?>
                            </select>
 
+
                          Estado: <!-- <input class="form-control" type="text" name="txtestado" > --> <!--Combobox -->
                          <!-- no se ve-->
-                         <select class="form-control" name="cboEstadoBombero">
+                         <select class="form-control" name="cboEstadoBombero" disabled>
                            <?php
                            require_once("model/Data.php");
                            require_once("model/Tbl_EstadoBombero.php");
@@ -287,13 +317,25 @@
 
                            $estados = $d->readEstadosDeBomberos();
                            foreach($estados as $e => $estado){
+                             if($infoBomberil->getfkEstadoinformacionBomberil()==$estado->getIdEstado()){?>
+                               <option value="<?php echo $estado->getIdEstado(); ?>" selected ><?php echo $estado->getNombreEstado(); ?></option>
+                               <?php
+                             }
                            ?>
                            <option value="<?php echo $estado->getIdEstado(); ?>"><?php echo $estado->getNombreEstado(); ?></option>
                            <?php
                            }
                            ?>
                            </select>
-                         Nº Reg.Cia: <input class="form-control" name="txtcia">
+
+
+
+
+
+
+
+
+                         Nº Reg.Cia: <input class="form-control" value="<?php echo $infoBomberil->getNRegCiainformacionBomberil();?>" name="txtcia" disabled>
                          <br>
                          <center> <input type="submit" name="btnInfoBomberil" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
                              <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->

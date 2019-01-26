@@ -240,7 +240,7 @@ el valor del ultimo hidden con el numero que necesito en el handler
  -->
 <script src="javascript/JQuery.js"></script>
         <script>
-        
+
         function porNombre() {
           document.getElementById("tipoDeBusqueda").value = "1";
             }
@@ -255,30 +255,15 @@ el valor del ultimo hidden con el numero que necesito en el handler
 
           function alterarValor(id) {
                       document.getElementById("idBombero").value=id;
-                      alert(id);
 
-
-
- $.ajax({
-  url: "test.php",
-  type: "POST",
-  data:{"myData":id}
-}).done(function(data) {
-     console.log(data);
-});
-
-
-
-
+                      $.ajax({
+                        url: "iniciarFKInfoPersonalEnSesion.php",
+                        type: "POST",
+                        data:{"idEnviado":id}
+                      }).done(function(data) {
+                        console.log(data);
+                      });
                         }
-
-
-
-
-
-
-
-
 
         </script>
 

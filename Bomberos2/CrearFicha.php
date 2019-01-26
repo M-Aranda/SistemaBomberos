@@ -246,7 +246,7 @@
                            }
                            ?>
                            </select>
-
+                           
                          Región : <!-- <input class="form-control" type="text" name="txtregion"> --><!--Region del libertador bernardo ohggins-->
                          <select class="form-control" name="cboRegion">
                            <?php
