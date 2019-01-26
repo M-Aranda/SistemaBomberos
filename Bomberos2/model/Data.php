@@ -18,6 +18,14 @@ require_once("Tbl_InfoPersonal.php");
 require_once("Vista_BusquedaBombero.php");
 require_once("Tbl_Medida.php");
 require_once("Tbl_InfoBomberil.php");
+require_once("Tbl_InfoLaboral.php");
+require_once("Tbl_InfoMedica1.php");
+require_once("Tbl_InfoMedica2.php");
+require_once("Tbl_InfoFamiliar.php");
+require_once("Tbl_InfoAcademica.php");
+require_once("Tbl_EntrenamientoEstandar.php");
+require_once("Tbl_InfoHistorica.php");
+
 
 /*
 require_once("Tbl_EstadoCivil.php");
@@ -826,6 +834,203 @@ while($reg = $rs->fetch_array()){
  return $info;
 }
 
+
+
+public function getInfoLaboral ($idABuscar){
+$this->c->conectar();
+$query="CALL CRUDInformacionLaboral (1,'Acquiried','algun lado','598677','empleado','2018-08-12','ciencias','masvida','ingeniero', ".$idABuscar.", 2);";
+$rs = $this->c->ejecutar($query);
+
+while($reg = $rs->fetch_array()){
+     $info= new Tbl_InfoLaboral();
+     $info->setIdidInformacionLaboral($reg[0]);
+     $info->setnombreEmpresainformacionLaboral($reg[1]);
+     $info->setdireccionEmpresainformacionLaboral($reg[2]);
+     $info->settelefonoEmpresainformacionLaboral($reg[3]);
+     $info->setcargoEmpresainformacionLaboral($reg[4]);
+     $info->setfechaIngresoEmpresainformacionLaboral($reg[5]);
+     $info->setareaDeptoEmpresainformacionLaboral($reg[6]);
+     $info->setafp_informacionLaboral($reg[7]);
+     $info->setprofesion_informacionLaboral($reg[6]);
+     $info->setfkInfoPersonalinformacionLaboral($reg[7]);
+ }
+ $this->c->desconectar();
+ return $info;
+}
+
+
+public function getInfoMedica1 ($idABuscar){
+$this->c->conectar();
+$query="CALL CRUDInformacionMedica1 (1, 'alguna','ninguna', 'no hay', ".$idABuscar.",2);";
+$rs = $this->c->ejecutar($query);
+
+while($reg = $rs->fetch_array()){
+     $info= new Tbl_InfoMedica1();
+     $info->setidInformacionMedica1($reg[0]);
+     $info->setprestacionMedica_informacionMedica1($reg[1]);
+     $info->setalergias_informacionMedica1($reg[2]);
+     $info->setenfermedadesCronicasinformacionMedica1($reg[3]);
+     $info->setfkInfoPersonalinformacionMedica1($reg[4]);
+
+ }
+ $this->c->desconectar();
+ return $info;
+}
+
+public function getInfoMedica2 ($idABuscar){
+$this->c->conectar();
+$query="CALL CRUDInformacionMedica2 (1,'Ninguno', 'Familiar', '96666',3, 'Sin especificar',0,0,1,".$idABuscar.",2);";
+$rs = $this->c->ejecutar($query);
+
+while($reg = $rs->fetch_array()){
+     $info= new Tbl_InfoMedica2();
+     $info->setidInformacionMedica2($reg[0]);
+     $info->setmedicamentosHabitualesinformacionMedica2($reg[1]);
+     $info->setnombreContactoinformacionMedica2($reg[2]);
+     $info->settelefonoContactoinformacionMedica2($reg[3]);
+     $info->setfkParentescoContactoinformacionMedica2($reg[4]);
+     $info->setnivelActividadFisicainformacionMedica2($reg[5]);
+     $info->setesDonanteinformacionMedica2($reg[6]);
+     $info->setesFumadorinformacionMedica2($reg[7]);
+     $info->setfkGrupoSanguineoinformacionMedica2($reg[6]);
+     $info->setfkInfoPersonalinformacionMedica2($reg[7]);
+ }
+ $this->c->desconectar();
+ return $info;
+}
+
+
+
+
+public function readInfoFamiliar ($idABuscar){
+  $this->c->conectar();
+  $query="CALL CRUDInformacionFamiliar (1,'Alguno', '1991-12-05',1,".$idABuscar.",2);";
+  $rs = $this->c->ejecutar($query);
+  $listado = array();
+  while($reg = $rs->fetch_array()){
+
+       $obj = new Tbl_InfoFamiliar();
+       $obj->setIdInformacionFamiliar($reg[0]);
+       $obj->setNombresInformacionFamiliar($reg[1]);
+       $obj->setFechaNacimientoInformacionFamiliar($reg[2]);
+       $obj->setfkParentescoinformacionFamiliar($reg[3]);
+       $obj->setfkInfoPersonalinformacionFamiliar($reg[4]);
+
+       $listado[]=$obj;
+   }
+   $this->c->desconectar();
+   return $listado;
+}
+
+
+public function buscarNombreParentescoPorId ($idABuscar){
+$this->c->conectar();
+$query="SELECT nombre_parentesco FROM tbl_parentesco WHERE id_parentesco=".$idABuscar.";";
+$rs = $this->c->ejecutar($query);
+while($reg = $rs->fetch_array()){
+     $info= new Tbl_Parentesco();
+     $info->setNombreParentesco($reg[0]);
+
+ }
+ $this->c->desconectar();
+ return $info;
+}
+
+
+public function readInfoAcademica ($idABuscar){
+  $this->c->conectar();
+  $query="CALL CRUDInformacionAcademica (1,'2019-05-06','Curso',1,".$idABuscar.",2);";
+  $rs = $this->c->ejecutar($query);
+  $listado = array();
+  while($reg = $rs->fetch_array()){
+
+       $obj = new Tbl_InfoAcademica();
+       $obj->setIdidInformacionAcademica($reg[0]);
+       $obj->setfechaInformacionAcademica($reg[1]);
+       $obj->setactividadInformacionAcademica($reg[2]);
+       $obj->setfkEstadoCursoInformacionAcademica($reg[3]);
+       $obj->setfkInformacionPersonalInformacionAcademica($reg[4]);
+
+       $listado[]=$obj;
+   }
+   $this->c->desconectar();
+   return $listado;
+}
+
+
+public function buscarEstadoDeCursoPorId ($idABuscar){
+$this->c->conectar();
+$query="SELECT nombre_estado_curso FROM tbl_estado_curso WHERE id_estado_curso=".$idABuscar.";";
+$rs = $this->c->ejecutar($query);
+while($reg = $rs->fetch_array()){
+     $info=($reg[0]);
+ }
+ $this->c->desconectar();
+ return $info;
+}
+
+
+
+
+public function readInfoEntrenamientoEstandar ($idABuscar){
+  $this->c->conectar();
+  $query="CALL CRUDInformacionEntrenamientoEstandar (1,'2018-09-09', 'algo',1,".$idABuscar.",2);";
+  $rs = $this->c->ejecutar($query);
+  $listado = array();
+  while($reg = $rs->fetch_array()){
+
+       $obj = new EntrenamientoEstandar();
+       $obj->setIdEntrenamientoEstandar($reg[0]);
+       $obj->setfechaEntrenamientoEstandar($reg[1]);
+       $obj->setactividad($reg[2]);
+       $obj->setFkEstadoCurso($reg[3]);
+       $obj->setFkInformacionPersonal($reg[4]);
+
+       $listado[]=$obj;
+   }
+   $this->c->desconectar();
+   return $listado;
+}
+
+
+
+public function readInfoHistorica ($idABuscar){
+  $this->c->conectar();
+  $query="CALL CRUDInformacionHistorica (1,1,'Algun cuerpo',1,'2010-10-10', 'Transferencia', 'Solicitud personal', 'No disponible', 'Algo',".$idABuscar.",2);";
+  $rs = $this->c->ejecutar($query);
+  $listado = array();
+  while($reg = $rs->fetch_array()){
+
+       $obj = new Tbl_InfoHistorica();
+       $obj->setIdInformacionHistorica($reg[0]);
+       $obj->setfkRegioninformacionHistorica($reg[1]);
+       $obj->setcuerpo($reg[2]);
+       $obj->setcompania($reg[3]);
+       $obj->setfechaDeCambio($reg[4]);
+       $obj->setPremio($reg[5]);
+       $obj->setmotivo($reg[6]);
+       $obj->setdetalle($reg[7]);
+       $obj->setCargo($reg[8]);
+       $obj->setfkInfoPersonalinformacionHistorica($reg[9]);
+
+       $listado[]=$obj;
+   }
+   $this->c->desconectar();
+   return $listado;
+}
+
+
+
+public function buscarNombreDeRegionPorId ($idABuscar){
+$this->c->conectar();
+$query="SELECT nombre_region FROM tbl_region WHERE id_region=".$idABuscar.";";
+$rs = $this->c->ejecutar($query);
+while($reg = $rs->fetch_array()){
+     $info=($reg[0]);
+ }
+ $this->c->desconectar();
+ return $info;
+}
 
 
 

@@ -246,7 +246,7 @@
                            }
                            ?>
                            </select>
-                           
+
                          Región : <!-- <input class="form-control" type="text" name="txtregion"> --><!--Region del libertador bernardo ohggins-->
                          <select class="form-control" name="cboRegion">
                            <?php
@@ -358,7 +358,7 @@
                            ?>
                            </select>
                          Nombre Empresa : <input class="form-control" type="text" name="txtnomempresa">
-                         Dirección Empresa: <textarea class="form-control" type="text" name="txtdirecempresa"></textarea>
+                         Dirección Empresa: <input class="form-control" type="text" name="txtdirecempresa">
                          Teléfono Empresa: <input class="form-control" type="text" name="txttlfempresa">
                          Fecha Ingreso: <input class="form-control" type="date" name="txfingresoempresa">
                          cargo : <input class="form-control" type="text" name="txtcargo">

@@ -113,9 +113,44 @@
           $infoMedidas=$_SESSION["infoMedidasSolicitada"];
         }
 
-        if($_SESSION["infoMedidasSolicitada"]!=null){
+        if($_SESSION["infoBomberilSolicitada"]!=null){
           $infoBomberil=$_SESSION["infoBomberilSolicitada"];
         }
+
+        if($_SESSION["infoLaboralSolicitada"]!=null){
+          $infoLaboral=$_SESSION["infoLaboralSolicitada"];
+        }
+
+        if($_SESSION["infoMedica1Solicitada"]!=null){
+          $infoMedica1=$_SESSION["infoMedica1Solicitada"];
+        }
+
+        if($_SESSION["infoMedica2Solicitada"]!=null){
+          $infoMedica2=$_SESSION["infoMedica2Solicitada"];
+        }
+
+        if($_SESSION["infoFamiliarSolicitada"]!=null){
+          $infoFamiliar=$_SESSION["infoFamiliarSolicitada"];
+        }
+
+        if($_SESSION["infoAcademicaSolicitada"]!=null){
+          $infoAcademica=$_SESSION["infoAcademicaSolicitada"];
+        }
+
+        if($_SESSION["infoEntrenamientoEstandarSolicitada"]!=null){
+          $infoEntrenamientoEstandar=$_SESSION["infoEntrenamientoEstandarSolicitada"];
+        }
+
+        if($_SESSION["infoHistoricaSolicitada"]!=null){
+          $infoHistorica=$_SESSION["infoHistoricaSolicitada"];
+        }
+
+
+
+
+
+
+
 
 
     ?>
@@ -362,18 +397,19 @@
                    </div>
                    <div class="panel-body">
                        <div class="col-sm-5">
-                         Nombre Empresa : <input class="form-control" type="text" name="txtnomempresa">
-                         Dirección Empresa: <textarea class="form-control" type="text" name="txtdirecempresa"></textarea>
-                         Teléfono Empresa: <input class="form-control" type="text" name="txttlfempresa">
-                         Fecha Ingreso: <input class="form-control" type="date" name="txfingresoempresa">
-                         cargo : <input class="form-control" type="text" name="txtcargo">
+
+                         Nombre Empresa : <input class="form-control" value="<?php echo $infoLaboral->getnombreEmpresainformacionLaboral();?>" type="text" name="txtnomempresa" disabled>
+                         Dirección Empresa: <input class="form-control" value="<?php echo $infoLaboral->getdireccionEmpresainformacionLaboral();?>" type="text" name="txtdirecempresa" disabled>
+                         Teléfono Empresa: <input class="form-control" value="<?php echo $infoLaboral->gettelefonoEmpresainformacionLaboral();?>" type="text" name="txttlfempresa" disabled>
+                         Fecha Ingreso: <input class="form-control" value="<?php echo $infoLaboral->getfechaIngresoEmpresainformacionLaboral();?>" type="date" name="txfingresoempresa" disabled>
+                         cargo : <input class="form-control" value="<?php echo $infoLaboral->getcargoEmpresainformacionLaboral();?>" type="text" name="txtcargo" disabled>
 
                        </div>
                        <div class="col-md-5">
 
-                         Area/Depto de trabajo: <input class="form-control" type="text" name="txtareatrabajo">
-                         AFP: <input class="form-control" type="text" name="txtafp" >
-                         Profesión: <input class="form-control" name="txtprofesion">
+                         Area/Depto de trabajo: <input class="form-control" value="<?php echo $infoLaboral->getareaDeptoEmpresainformacionLaboral();?>" type="text" name="txtareatrabajo" disabled>
+                         AFP: <input class="form-control" value="<?php echo $infoLaboral->getafp_informacionLaboral();?>" type="text" name="txtafp" disabled>
+                         Profesión: <input class="form-control" value="<?php echo $infoLaboral->getprofesion_informacionLaboral();?>" name="txtprofesion" disabled>
                          <br>
                          <center> <input type="submit" name="btnInfoLaboral" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
                              <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
@@ -400,18 +436,18 @@
                    </div>
                    <div class="panel-body">
                        <div class="col-sm-6">
-                         Prestación Médica : <input class="form-control" type="text" name="txtpresmedica">
-                         Alergias: <input class="form-control" type="text" name="txtalergias">
-                         Enfermedades Crónicas: <input class="form-control" type="text" name="txtenfermedadescronicas">
-                         Medicamentos Habituales: <input class="form-control" type="text" name="txtmedicamentosHabituales">
-                         Nombre del Contacto: <input class="form-control" type="text" name="txtnomContacto">
-                         Teléfono del Contacto : <input class="form-control" type="text" name="txttlfcontacto">
+                         Prestación Médica : <input class="form-control"  value="<?php echo $infoMedica1->getprestacionMedica_informacionMedica1();?>" type="text" name="txtpresmedica" disabled>
+                         Alergias: <input class="form-control"  value="<?php echo $infoMedica1->getalergias_informacionMedica1();?>" type="text" name="txtalergias" disabled>
+                         Enfermedades Crónicas: <input class="form-control"  value="<?php echo $infoMedica1->getenfermedadesCronicasinformacionMedica1();?>" type="text" name="txtenfermedadescronicas" disabled>
+                         Medicamentos Habituales: <input class="form-control"  value="<?php echo $infoMedica2->getmedicamentosHabitualesinformacionMedica2();?>" type="text" name="txtmedicamentosHabituales" disabled>
+                         Nombre del Contacto: <input class="form-control"  value="<?php echo $infoMedica2->getnombreContactoinformacionMedica2();?>" type="text" name="txtnomContacto" disabled>
+                         Teléfono del Contacto : <input class="form-control"  value="<?php echo $infoMedica2->gettelefonoContactoinformacionMedica2();?>" type="text" name="txttlfcontacto" disabled>
 
                        </div>
                        <div class="col-md-6">
 
                          Parentesco del Contacto: <!-- <input class="form-control" type="text" name="txtparentesco"> -->
-                         <select class="form-control" name="cboParentesco1">
+                         <select class="form-control" name="cboParentesco1" disabled>
                            <?php
                            require_once("model/Data.php");
                            require_once("model/Tbl_Parentesco.php");
@@ -419,30 +455,52 @@
 
                            $parentescos = $d->readParentescos();
                            foreach($parentescos as $p => $parentesco){
+                             if($infoMedica2->getfkParentescoContactoinformacionMedica2()==$parentesco->getIdParentesco()){?>
+                               <option value="<?php echo $parentesco->getIdParentesco(); ?>" selected ><?php echo $parentesco->getNombreParentesco(); ?></option>
+                               <?php
+                             }
                            ?>
                            <option value="<?php echo $parentesco->getIdParentesco(); ?>"><?php echo $parentesco->getNombreParentesco(); ?></option>
                            <?php
                            }
                            ?>
                            </select>
-                         Nivel de Actividad Fisica: <input class="form-control" type="text" name="txtactvfisica">
-                         Donante: <input class="form-control" type="text" name="txtdonante">
-                         Fumador: <input class="form-control" type="text" name="txtfumador">
+                         Nivel de Actividad Fisica: <input class="form-control"  value="<?php echo $infoMedica2->getnivelActividadFisicainformacionMedica2();?>" type="text" name="txtactvfisica" disabled>
+                         <?php
+                         $donanteChequeado="checked";
+                         $fumadorChequeado="checked";
+                        if($infoMedica2->getesDonanteinformacionMedica2()==FALSE){
+                          $donanteChequeado="";
+                        }
+                        if($infoMedica2->getesFumadorinformacionMedica2()==FALSE){
+                          $fumadorChequeado="";
+                        }
+
+
+                         ?>
+                         Donante:  <input class="form-control" type="checkbox" <?php echo $donanteChequeado;?> name="txtdonante" disabled>
+                         Fumador: <input class="form-control" type="checkbox" <?php echo $fumadorChequeado;?> name="txtfumador" disabled>
                          Grupo Sanguineo: <!-- <input class="form-control" type="text" name="txtgruposanguineo"> -->
-                         <select class="form-control" name="cboGrupoSanguineo">
+                         <select class="form-control" name="cboGrupoSanguineo" disabled>
                            <?php
                            require_once("model/Data.php");
                            require_once("model/Tbl_GrupoSanguineo.php");
                            $d= new Data();
 
-                           $gruposSanguineos = $d->readGruposSanguineos();
-                           foreach($gruposSanguineos as $gs => $grupoSanguineo){
+                           $grupos = $d->readGruposSanguineos();
+                           foreach($grupos as $g => $grupo){
+                             echo $grupo->getIdGrupoSanguineo();;
+                             if($infoMedica2->getfkGrupoSanguineoinformacionMedica2()==$grupo->getIdGrupoSanguineo()){?>
+                               <option value="<?php echo $grupo->getIdGrupoSanguineo(); ?>" selected ><?php echo $grupo->getNombreGrupoSanguineo(); ?></option>
+                               <?php
+                             }
                            ?>
-                           <option value="<?php echo $grupoSanguineo->getIdGrupoSanguineo(); ?>"><?php echo $grupoSanguineo->getNombreGrupoSanguineo(); ?></option>
+                           <option value="<?php echo $grupo->getIdGrupoSanguineo(); ?>"><?php echo $grupo->getNombreGrupoSanguineo(); ?></option>
                            <?php
                            }
                            ?>
                            </select>
+
                            <br>
                            <center> <input type="submit" name="btninfoMedica" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
                                <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
@@ -471,10 +529,10 @@
 
 
                        <div class="col-sm-6">
-                         Nombre: <input class="form-control" type="text" name="txtnombreFamiliar">
-                         Fecha de Nacimiento: <input class="form-control" type="date" name="txtfechafamiliar">
+                         Nombre: <input class="form-control" type="text" name="txtnombreFamiliar" disabled>
+                         Fecha de Nacimiento: <input class="form-control" type="date" name="txtfechafamiliar" disabled>
                          Parentesco:
-                         <select class="form-control" name="cboParentesco2">
+                         <select class="form-control" name="cboParentesco2" disabled>
                            <?php
                            require_once("model/Data.php");
                            require_once("model/Tbl_Parentesco.php");
@@ -490,6 +548,7 @@
                          </select>
 
 
+
                          <!-- Nivel de actividad fisica: <input class="form-control" type="text" name="txtactvfisica"> -->
                          <table class="table table-striped">
                              <thead>
@@ -500,10 +559,20 @@
                                </tr>
                              </thead>
                              <tbody>
+                               <?php
+                               foreach ($infoFamiliar as $iFamiliar => $datos) {
+                               ?>
                                <tr>
-                                 <td>John</td>
-                                 <td>Doe</td>
-                                 <td>john@example.com</td>
+                                 <td><?php echo $datos->getNombresInformacionFamiliar();?></td>
+                                 <td><?php
+                                 $fechaSinConvertir = $datos->getFechaNacimientoInformacionFamiliar();
+                                 $fechaConvertida = date("d-m-Y", strtotime($fechaSinConvertir));
+
+                                 echo $fechaConvertida;?></td>
+                                 <td><?php echo $d->buscarNombreParentescoPorId($datos->getfkParentescoinformacionFamiliar())->getNombreParentesco();?></td>
+                            <?php
+                             }
+                               ?>
                                </tr>
 
                              </tbody>
@@ -542,14 +611,15 @@
                    </div>
                    <div class="panel-body">
                        <div class="col-sm-6">
-                         Fecha: <input class="form-control" type="date" name="txtfechaAcademica">
-                         Actividad: <input class="form-control" type="text" name="txtActivdidadAcademica">
+                         Fecha: <input class="form-control" type="date" name="txtfechaAcademica" disabled>
+                         Actividad: <input class="form-control" type="text" name="txtActivdidadAcademica" disabled>
                          Estado:
-                         <select class="form-control" name="cboEstadoCursoAcademico">
+                         <select class="form-control" name="cboEstadoCursoAcademico" disabled>
                            <?php
                            require_once("model/Data.php");
                            require_once("model/Tbl_EstadoCurso.php");
                            $d= new Data();
+
 
                            $estadosDeCursos = $d->readEstadosCurso();
                            foreach($estadosDeCursos as $ec => $estado){
@@ -568,10 +638,20 @@
                                </tr>
                              </thead>
                              <tbody>
+                               <?php
+                               foreach ($infoAcademica as $iAcademica => $datos) {
+                               ?>
                                <tr>
-                                 <td>John</td>
-                                 <td>Doe</td>
-                                 <td>john@example.com</td>
+                                 <td><?php echo $datos->getactividadInformacionAcademica();?></td>
+                                 <td><?php
+                                 $fechaSinConvertir = $datos->getfechaInformacionAcademica();
+                                 $fechaConvertida = date("d-m-Y", strtotime($fechaSinConvertir));
+
+                                 echo $fechaConvertida;?></td>
+                                 <td><?php echo $d->buscarEstadoDeCursoPorId($datos->getfkEstadoCursoInformacionAcademica());?></td>
+                            <?php
+                             }
+                               ?>
                                </tr>
 
                              </tbody>
@@ -607,10 +687,10 @@
                        </div>
                        <div class="panel-body">
                            <div class="col-sm-6">
-                             Fecha: <input class="form-control" type="date" name="txtfechaEstandar">
-                             Actividad: <input class="form-control" type="text" name="txtActividadEntrenamientoEstandar">
+                             Fecha: <input class="form-control" type="date" name="txtfechaEstandar" disabled>
+                             Actividad: <input class="form-control" type="text" name="txtActividadEntrenamientoEstandar" disabled>
                              Estado:
-                             <select class="form-control" name="cboEstadoCursoEstandar">
+                             <select class="form-control" name="cboEstadoCursoEstandar" disabled>
                                <?php
                                require_once("model/Data.php");
                                require_once("model/Tbl_EstadoCurso.php");
@@ -625,6 +705,8 @@
                                ?>
                                </select>
 
+
+
                              <table class="table table-striped">
                                  <thead>
                                    <tr>
@@ -634,10 +716,20 @@
                                    </tr>
                                  </thead>
                                  <tbody>
+                                   <?php
+                                   foreach ($infoEntrenamientoEstandar as $iEstandar => $datos) {
+                                   ?>
                                    <tr>
-                                     <td>John</td>
-                                     <td>Doe</td>
-                                     <td>john@example.com</td>
+                                     <td><?php echo $datos->getactividad();?></td>
+                                     <td><?php
+                                     $fechaSinConvertir = $datos->getfechaEntrenamientoEstandar();
+                                     $fechaConvertida = date("d-m-Y", strtotime($fechaSinConvertir));
+
+                                     echo $fechaConvertida;?></td>
+                                     <td><?php echo $d->buscarEstadoDeCursoPorId($datos->getFkEstadoCurso());?></td>
+                                <?php
+                                 }
+                                   ?>
                                    </tr>
 
                                  </tbody>
@@ -676,7 +768,7 @@
                            <div class="col-sm-6">
 
                              Región:
-                             <select class="form-control" name="cboRegion">
+                             <select class="form-control" name="cboRegion" disabled>
                                <?php
                                require_once("model/Data.php");
                                require_once("model/Tbl_Region.php");
@@ -691,12 +783,12 @@
                                ?>
                                </select>
 
-                             Cuerpo: <input type="text" name="txtcuerpoHistorica" class="form-control">
-                             Compañia:<input type="text" name="txtCompaniaHistorica" class="form-control">
-                             Fecha: <input type="date" name="txtfechaHistorica" class="form-control">
-                             Cargo: <input type="text" name="txtcargoHistorica" class="form-control">
-                             Motivo: <input type="text" name="txtmotivo" class="form-control">
-                             Detalle: <input type="text" name="txtdetalleHistorica" class="form-control">
+                             Cuerpo: <input type="text" name="txtcuerpoHistorica" class="form-control" disabled>
+                             Compañia:<input type="text" name="txtCompaniaHistorica" class="form-control" disabled>
+                             Fecha: <input type="date" name="txtfechaHistorica" class="form-control" disabled>
+                             Cargo: <input type="text" name="txtcargoHistorica" class="form-control" disabled>
+                             Motivo: <input type="text" name="txtmotivo" class="form-control" disabled>
+                             Detalle: <input type="text" name="txtdetalleHistorica" class="form-control" disabled>
 
 
                              <table class="table table-striped">
@@ -706,21 +798,36 @@
                                      <th>Cuerpo</th>
                                      <th>Compañía</th>
                                      <th>Fecha</th>
-                                     <th>Cargo</th>
+                                     <th>Premio</th>
                                      <th>Motivo</th>
                                      <th>Detalle</th>
+                                     <th>Cargo</th>
                                    </tr>
                                  </thead>
                                  <tbody>
-                                   <tr>
-                                     <td>John</td>
-                                     <td>Doe</td>
-                                     <td>john@example.com</td>
-                                     <td>dfds</td>
-                                     <td>fsdfsd</td>
-                                     <td>fdsfds</td>
-                                     <td>fsfsdfs</td>
-                                   </tr>
+                                   <?php
+
+                                   foreach ($infoHistorica as $iHistorica => $info) {
+                                ?>
+                                <tr>
+                                  <td><?php echo $d->buscarNombreDeRegionPorId($info->getfkRegioninformacionHistorica());   ?></td>
+                                  <td><?php echo $info->getcuerpo();   ?></td>
+                                  <td><?php echo $info->getcompania();  ?></td>
+                                  <td><?php
+                                  $fechaSinConvertir = $info->getfechaDeCambio();
+                                  $fechaConvertida = date("d-m-Y", strtotime($fechaSinConvertir));
+                                  echo $fechaConvertida;   ?></td>
+                                  <td><?php echo $info->getPremio();   ?></td>
+                                  <td><?php echo $info->getmotivo();   ?></td>
+                                  <td><?php echo $info->getdetalle();   ?></td>
+                                  <td><?php echo $info->getCargo();   ?></td>
+                                </tr>
+
+
+                                   <?php
+                                 }
+                                     ?>
+
 
                                  </tbody>
                                </table>

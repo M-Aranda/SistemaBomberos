@@ -178,7 +178,6 @@ nombre_grupo_sanguineo VARCHAR (30),
 PRIMARY KEY (id_grupo_sanguineo)
 );
 
-
 CREATE TABLE tbl_parentesco (
 id_parentesco INT AUTO_INCREMENT,
 nombre_parentesco VARCHAR (5000),
@@ -588,7 +587,7 @@ END//
 DELIMITER ;
 
 
-DELIMITER //
+DELIMITER // 
 CREATE PROCEDURE CRUDInformacionLaboral (id INT, nombreEmpresa VARCHAR (5000), direccionEmpresa VARCHAR (5000), telefonoEmpresa VARCHAR (5000), cargoEmpresa VARCHAR (5000),
 fechaDeIngresoALaEmpresa DATE, dptoEnEmpresa VARCHAR (5000), afp VARCHAR (5000), profesion VARCHAR (5000), fkInfoPersonal INT, tipoOperacion INT)
 BEGIN
@@ -596,7 +595,7 @@ IF tipoOperacion=1 THEN
 INSERT INTO tbl_informacionLaboral VALUES (NULL, nombreEmpresa, direccionEmpresa, telefonoEmpresa, cargoEmpresa, fechaDeIngresoALaEmpresa,
 dptoEnEmpresa, afp, profesion,fkInfoPersonal);
 ELSEIF tipoOperacion=2 THEN
-SELECT * FROM tbl_informacionLaboral WHERE id_informacionLaboral=id;
+SELECT * FROM tbl_informacionLaboral WHERE fk_informacion_personal_informacionLaboral=fkInfoPersonal;
 ELSEIF tipoOperacion=3 THEN
 UPDATE tbl_informacionLaboral SET nombre_de_empresa_informacionLaboral=nombreEmpresa, direccion_de_empresa_informacionLaboral=direccionEmpresa, telefono_de_empresa_informacionLaboral=telefonoEmpresa,
 cargo_en_la_empresa_informacionLaboral=cargoEmpresa, fecha_de_ingreso_a_la_empresa_informacionLaboral=fechaDeIngresoALaEmpresa, area_o_departamento_en_la_empresa_informacionLaboral= dptoEnEmpresa,
@@ -610,13 +609,13 @@ END//
 DELIMITER ;
 
 
-DELIMITER //
+DELIMITER // 
 CREATE PROCEDURE CRUDInformacionMedica1 (id INT, prestacionMedica VARCHAR (5000), alergias VARCHAR (5000), enfermedadesCronicas VARCHAR (5000), fkInfoPersonal INT, tipoOperacion INT)
 BEGIN
 IF tipoOperacion=1 THEN
 INSERT INTO tbl_informacionMedica1 VALUES (NULL, prestacionMedica, alergias, enfermedadesCronicas, fkInfoPersonal);
 ELSEIF tipoOperacion=2 THEN
-SELECT *  FROM tbl_informacionMedica1 WHERE tbl_informacionMedica1=id;
+SELECT *  FROM tbl_informacionMedica1 WHERE fk_informacion_personal_informacionMedica1=fkInfoPersonal;
 ELSEIF tipoOperacion=3 THEN
 UPDATE tbl_informacionMedica1 SET prestacionMedica_informacionMedica1=prestacionMedica, alergias_informacionMedica1=alergias, enfermedades_croncias_informacionMedica1=enfermedadesCronicas,
 fk_informacion_personal_informacionMedica1=fkInfoPersonal WHERE tbl_informacionMedica1=id;
@@ -629,7 +628,7 @@ END//
 DELIMITER ;
 
 
-DELIMITER //
+DELIMITER // 
 CREATE PROCEDURE CRUDInformacionMedica2 (id INT, medicamentos_habituales VARCHAR (5000), nombre_de_contacto VARCHAR (5000), telefono_de_contacto VARCHAR (5000), fkParentesco INT,
 nivel_de_actividad_fisica VARCHAR (5000), es_donante BOOLEAN, es_fumador BOOLEAN, fk_grupoSanguineo INT, fk_inforPersonal INT, tipoOperacion INT)
 BEGIN
@@ -637,7 +636,7 @@ IF tipoOperacion=1 THEN
 INSERT INTO tbl_informacionMedica2 VALUES (NULL, medicamentos_habituales, nombre_de_contacto, telefono_de_contacto, fkParentesco, nivel_de_actividad_fisica, es_donante,
  es_fumador, fk_grupoSanguineo, fk_inforPersonal );
 ELSEIF tipoOperacion=2 THEN
-SELECT * FROM tbl_informacionMedica2 WHERE id_informacionMedica2=id;
+SELECT * FROM tbl_informacionMedica2 WHERE fk_informacion_personal_informacionMedica2=fk_inforPersonal;
 ELSEIF tipoOperacion=3 THEN
 UPDATE tbl_informacionMedica2 SET medicamentos_habituales_informacionMedica2=medicamentos_habituales, nombre_de_contacto_informacionMedica2=nombre_de_contacto, telefono_de_contacto_informacionMedica2=telefono_de_contacto,
 fk_parentesco_del_contacto_informacionMedica2=fkParentesco, nivel_de_actividad_fisica_informacionMedica2=nivel_de_actividad_fisica, es_donante_informacionMedica2=es_donante,
@@ -651,13 +650,13 @@ END//
 DELIMITER ;
 
 
-DELIMITER //
+DELIMITER // 
 CREATE PROCEDURE CRUDInformacionFamiliar (id INT, nombresInfoFlia VARCHAR (5000), fechaDeNacimientoInfoFlia DATE, fk_parentesco INT , fk_inforPersonal INT, tipoOperacion INT)
 BEGIN
 IF tipoOperacion=1 THEN
 INSERT INTO tbl_informacionFamiliar VALUES (NULL, nombresInfoFlia , fechaDeNacimientoInfoFlia, fk_parentesco, fk_inforPersonal);
 ELSEIF tipoOperacion=2 THEN
-SELECT * FROM tbl_informacionFamiliar WHERE id_informacionFamiliar=id;
+SELECT * FROM tbl_informacionFamiliar WHERE fk_informacionPersonal_informacionFamiliar=fk_inforPersonal;
 ELSEIF tipoOperacion=3 THEN
 UPDATE tbl_informacionFamiliar SET nombres_informacionFamiliar=nombresInfoFlia, fecha_de_nacimiento_informacionFamiliar=fechaDeNacimientoInfoFlia,
 fk_parentesco_informacionFamiliar=fk_parentesco, fk_informacionPersonal_informacionFamiliar=fk_inforPersonal WHERE id_informacionFamiliar=id;
@@ -676,7 +675,7 @@ BEGIN
 IF tipoOperacion=1 THEN
 INSERT INTO tbl_informacionAcademica VALUES (NULL, fechaInfoAcademica, actividadInfoAcademica , fk_estadoCurso, fk_infoPersonal);
 ELSEIF tipoOperacion=2 THEN
-SELECT * FROM tbl_informacionAcademica WHERE id_informacionAcademica=id;
+SELECT * FROM tbl_informacionAcademica WHERE fk_informacionPersonal_informacionAcademica=fk_infoPersonal;
 ELSEIF tipoOperacion=3 THEN
 UPDATE tbl_informacionAcademica SET fecha_informacionAcademica=fechaInfoAcademica, actividad_informacionAcademica=actividadInfoAcademica, fk_estado_curso_informacionAcademica=fk_estadoCurso,
 fk_informacionPersonal_informacionAcademica=fk_infoPersonal WHERE id_informacionAcademica=id;
@@ -696,7 +695,7 @@ BEGIN
 IF tipoOperacion=1 THEN
 INSERT INTO tbl_entrenamientoEstandar VALUES (NULL, fechaInfoEntrenamientoEstandar, actividadEntrenamientoEstandar, fk_estadoCurso, fk_inforPersonal );
 ELSEIF tipoOperacion=2 THEN
-SELECT * FROM tbl_entrenamientoEstandar WHERE id_entrenamientoEstandar=id;
+SELECT * FROM tbl_entrenamientoEstandar WHERE fk_informacionPersonal_entrenamientoEstandar=fk_inforPersonal;
 ELSEIF tipoOperacion=3 THEN
 UPDATE tbl_entrenamientoEstandar SET fecha_entrenamientoEstandar=fechaInfoEntrenamientoEstandar, actividad_entrenamientoEstandar=actividadEntrenamientoEstandar,
 fk_estado_curso_entrenamientoEstandar=fk_estadoCurso, fk_informacionPersonal_entrenamientoEstandar=fk_inforPersonal WHERE id_entrenamientoEstandar=id;
@@ -716,7 +715,7 @@ BEGIN
 IF tipoOperacion=1 THEN
 INSERT INTO tbl_informacionHistorica VALUES (NULL, fkRegion, cuerpo, compania, fechaDeCambio, premio, motivo,  detalle, cargo, fkInformacionPersonal);
 ELSEIF tipoOperacion=2 THEN
-SELECT * FROM  tbl_informacionHistorica WHERE id_informacionHistorica=id;
+SELECT * FROM  tbl_informacionHistorica WHERE fk_informacionPersonal_informacionHistorica=fkInformacionPersonal;
 ELSEIF tipoOperacion=3 THEN
 UPDATE tbl_informacionHistorica SET fk_region_informacionHistorica=fkRegion, cuerpo_informacionHistorica=cuerpo, compania_informacionHistorica=compania, fechaDeCambio_informacionHistorica=fechaDeCambio,
  premio_informacionHistorica=premio, motivo_informacionHistorica=motivo, detalle_informacionHistorica=detalle, cargo_informacionHistorica=cargo, fk_informacionPersonal_informacionHistorica=fkInformacionPersonal  WHERE id_informacionHistorica=id;
@@ -1347,7 +1346,6 @@ INSERT INTO tbl_tipo_servicio (codigo_tipo_servicio,nombre_tipo_servicio) VALUES
 -- SELECT * FROM tbl_entrenamientoEstandar;
 -- SELECT * FROM tbl_informacionHistorica;
 -- SELECT * FROM tbl_unidad;
--- SELECT * FROM tbl_entidadACargo WHERE nombre_entidadACargo LIKE '%Compañía%';
 -- SELECT * FROM tbl_permiso;
 -- SELECT * FROM tbl_usuario;
 -- SELECT * FROM tbl_tipoDeMantencion;
@@ -1374,9 +1372,7 @@ tbl_tipo_usuario.id_tipo_usuario=tbl_usuario.fk_tipo_usuario__usuario AND tbl_pe
 
 */
 
-
 /*
-
 Consulta para buscar bomberos por nombre
 
 SELECT tbl_informacionPersonal.rut_informacionPersonal, tbl_informacionPersonal.nombre_informacionPersonal,
@@ -1402,11 +1398,11 @@ CALL CRUDInformacionPersonal (1,'20898088-2','Marcelo', 'Aranda', 'Tatto','1991-
 CALL CRUDFichaInformacionBomberil(1,1,'Machali',2,1,'2001-12-16',1,1,1,1,1);
 CALL CRUDInformacionLaboral (1,'Acquiried','algun lado','598677','empleado','2018-08-12','ciencias','masvida','ingeniero', 1, 1);
 CALL CRUDInformacionMedica1 (1, 'alguna','ninguna', 'no hay', 1,1);
-CALL CRUDInformacionMedica2 (1,'Ninguno', 'Familiar', '96666',3, 'Sin especificar',0,0,1,1,1);
+CALL CRUDInformacionMedica2 (1,'Ninguno', 'Familiar', '96666',3, 'Sin especificar',0,0,6,1,1);
 CALL CRUDInformacionFamiliar (1,'Alguno', '1991-12-05',1,1,1);
 CALL CRUDInformacionAcademica (1,'2019-05-06','Curso',1,1,1);
 CALL CRUDInformacionEntrenamientoEstandar (1,'2018-09-09', 'algo',1,1,1);
-CALL CRUDInformacionHistorica (1,1,'Algun cuerpo',1,'2010-10-10', 'Transferencia', 'Solicitud personal', 'No disponible', 'Algo',1,1);
+CALL CRUDInformacionHistorica (1,1,'Algun cuerpo','Alguna compania','2010-10-10', 'Transferencia', 'Solicitud personal', 'No disponible', 'Algo',1,1);
 */
 
 /*
