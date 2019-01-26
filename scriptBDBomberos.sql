@@ -313,7 +313,6 @@ FOREIGN KEY (fk_entidadACargo) REFERENCES tbl_entidadACargo (id_entidadACargo),
 PRIMARY KEY (id_unidad)
 );
 
-
 CREATE TABLE tbl_tipoDeMantencion (
 id_tipo_de_mantencion INT AUTO_INCREMENT,
 nombre_tipoDeMantencion VARCHAR (5000),

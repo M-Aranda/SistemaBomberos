@@ -190,6 +190,10 @@ if($_SESSION["usuarioIniciado"]!=null){
                         // se hizo una busqueda
                         $listado=$_SESSION["resultadosDeBusquedaDeBomberos"];
 
+
+
+
+
                         foreach ($listado as $o => $objeto) {
                           ?>
                           <tr>
@@ -199,10 +203,9 @@ if($_SESSION["usuarioIniciado"]!=null){
                             <td><?php echo $objeto->getCompania();?></td>
                             <td>
                               <form action="controlador/CargarFicha.php" method="post">
-                                <!-- Ya puse el boton para ver ficha, que redirije a ver ficha, pero no puedo ver si el id esta ahi; no estoy seguro de que este-->
-                                <input type="hidden" name="idBombero" value="<?php echo $objeto->getIdInfoPersonal();?>">
+                                <input type="hidden" id="idBombero" name="idBombero" value="<?php echo $objeto->getIdInfoPersonal();?>">
 
-                              <input type="submit" value="Ver ficha">
+                              <input type="submit" value="Ver ficha" onclick="alterarValor(<?php echo $objeto->getIdInfoPersonal();?>)" >
                               </td>
                           </tr>
                         <?php
@@ -217,15 +220,11 @@ if($_SESSION["usuarioIniciado"]!=null){
 
 
 
-
-
-
                     </tbody>
                   </table>
 
 
       </div>
-
 
 
 
@@ -241,17 +240,41 @@ el valor del ultimo hidden con el numero que necesito en el handler
  -->
 <script src="javascript/JQuery.js"></script>
         <script>
+        
         function porNombre() {
           document.getElementById("tipoDeBusqueda").value = "1";
             }
 
-            function porEstado() {
+        function porEstado() {
               document.getElementById("tipoDeBusqueda").value = "2";
                 }
 
-                function porCompania() {
+        function porCompania() {
                   document.getElementById("tipoDeBusqueda").value = "3";
                     }
+
+          function alterarValor(id) {
+                      document.getElementById("idBombero").value=id;
+                      alert(id);
+
+
+
+ $.ajax({
+  url: "test.php",
+  type: "POST",
+  data:{"myData":id}
+}).done(function(data) {
+     console.log(data);
+});
+
+
+
+
+                        }
+
+
+
+
 
 
 

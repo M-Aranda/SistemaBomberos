@@ -181,7 +181,7 @@
                          }
                          ?>
                          </select>
-                         Dirección: <textarea class="form-control" Type="textarea" name="txtDireccion" ></textarea>
+                         Dirección: <input class="form-control" Type="text" name="txtDireccion" >
                          Teléfonos:  <input class="form-control" type="text" name="txtTelefonos">
                          Email: <input class="form-control" type="text" name="txtemail">
                          Genero:

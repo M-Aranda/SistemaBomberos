@@ -185,7 +185,7 @@
                          }
                          ?>
                          </select>
-                         Dirección: <textarea class="form-control" value="<?php echo $infoPersonal->getDireccionPersonal();?>" Type="textarea" name="txtDireccion" ></textarea>
+                         Dirección: <input class="form-control" value="<?php echo $infoPersonal->getDireccionPersonal();?>" Type="text" name="txtDireccion" disabled>
                          Teléfonos:  <input class="form-control" value="<?php echo $infoPersonal->getTelefonoFijo();?>" type="text" name="txtTelefonos" disabled>
                          Email: <input class="form-control" value="<?php echo $infoPersonal->getEmail();?>" type="text" name="txtemail" disabled>
                          Genero:
@@ -197,6 +197,10 @@
 
                            $generos = $d->readGeneros();
                            foreach($generos as $g => $genero){
+                             if($infoPersonal->getFkGenero()==$genero->getIdGenero()){?>
+                               <option value="<?php echo $genero->getIdGenero(); ?>" selected ><?php echo $genero->getNombreGenero(); ?></option>
+                               <?php
+                             }
                            ?>
                            <option value="<?php echo $genero->getIdGenero(); ?>"><?php echo $genero->getNombreGenero(); ?></option>
                            <?php
@@ -764,6 +768,14 @@
 
    </div>
  </div>
+
+ <?php
+
+unset($_SESSION["infoPersonalSolicitada"]);
+unset($_SESSION["infoMedidasSolicitada"]);
+
+
+ ?>
 
   </body>
 </html>
