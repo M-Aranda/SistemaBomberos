@@ -919,10 +919,18 @@
  </div>
 
  <?php
-
-unset($_SESSION["infoPersonalSolicitada"]);
-unset($_SESSION["infoMedidasSolicitada"]);
-
+/*
+ unset($_SESSION["infoPersonalSolicitada"]);
+ unset($_SESSION["infoMedidasSolicitada"]);
+ unset($_SESSION["infoBomberilSolicitada"]);
+ unset($_SESSION["infoLaboralSolicitada"]);
+ unset($_SESSION["infoMedica1Solicitada"]);
+ unset($_SESSION["infoMedica2Solicitada"]);
+ unset($_SESSION["infoFamiliarSolicitada"]);
+ unset($_SESSION["infoAcademicaSolicitada"]);
+ unset($_SESSION["infoEntrenamientoEstandarSolicitada"]);
+ unset($_SESSION["infoHistoricaSolicitada"]);
+*/
 
  ?>
 

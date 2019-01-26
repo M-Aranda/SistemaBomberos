@@ -179,8 +179,9 @@ if($_SESSION["usuarioIniciado"]!=null){
                         <th>Rut</th>
                         <th>Nombre</th>
                         <th>APP</th>
-                        <th>Compañia</th>
+                        <th>Compañía</th>
                         <th>Ver Ficha</th>
+                        <th>Modificar información</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -206,6 +207,15 @@ if($_SESSION["usuarioIniciado"]!=null){
                                 <input type="hidden" id="idBombero" name="idBombero" value="<?php echo $objeto->getIdInfoPersonal();?>">
 
                               <input type="submit" value="Ver ficha" onclick="alterarValor(<?php echo $objeto->getIdInfoPersonal();?>)" >
+                            </form>
+                              </td>
+                              <td>
+                                <form action="controlador/CargarFichaAModificar.php" method="post">
+                                  <input type="hidden" id="idBomberoAModificar" name="idBomberoAModificar" value="<?php echo $objeto->getIdInfoPersonal();?>">
+
+                                <input type="submit" value="Modificar" onclick="alterarValor2(<?php echo $objeto->getIdInfoPersonal();?>)" >
+
+                                </form>
                               </td>
                           </tr>
                         <?php
@@ -264,6 +274,19 @@ el valor del ultimo hidden con el numero que necesito en el handler
                         console.log(data);
                       });
                         }
+
+
+                        function alterarValor2(id) {
+                                    document.getElementById("idBomberoAModificar").value=id;
+
+                                    $.ajax({
+                                      url: "iniciarFkInfoPersonalParaModificarBomberoEnSesion.php",
+                                      type: "POST",
+                                      data:{"idParaModificar":id}
+                                    }).done(function(data) {
+                                      console.log(data);
+                                    });
+                                      }
 
         </script>
 

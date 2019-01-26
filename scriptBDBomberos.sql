@@ -58,6 +58,8 @@ talla_de_calzado_medida VARCHAR (5000),
 PRIMARY KEY(id_medida)
 );
 
+
+
 /*
 SELECT tbl_medida.id_medida, tbl_medida.talla_de_chaqueta_camisa_medida, tbl_medida.talla_de_pantalon_medida,  tbl_medida.talla_de_buzo_medida,
 tbl_medida.talla_de_calzado_medida FROM tbl_medida, tbl_informacionPersonal WHERE 
@@ -538,6 +540,7 @@ END IF;
 END //
 DELIMITER ;
 
+
 DELIMITER // 
 CREATE PROCEDURE CRUDInformacionPersonal (id INT, rut VARCHAR(12), nombre VARCHAR (5000), apellidoPaterno VARCHAR(5000), apellidoMaterno VARCHAR(5000), fechaDeNacimiento DATE,
 fkEstadoCivil INT, fkMedida INT, altura VARCHAR (5000), peso VARCHAR (5000), email VARCHAR (5000), fkGenero INT, telefonoFijo VARCHAR (5000), telefonoMovil VARCHAR (5000),
@@ -553,9 +556,9 @@ altura, peso, email, fkGenero, telefonoFijo, telefonoMovil, direccionPersonal, p
 ELSEIF tipoOperacion=2 THEN
 SELECT * FROM tbl_informacionPersonal WHERE id_informacionPersonal=id;
 ELSEIF tipoOperacion=3 THEN
-UPDATE tbl_informacionPersonal SET rut_informacionPersonal=rut, nombre_informacionPersonal=nombre, apellidoPaterno_informacionPersonal=apellidoPaterno,
-apellidoMaterno_informacionPersonal=apellidoMaterno, fechaDeNacimiento_informacionPersonal=fechaDeNacimiento, fk_estado_civil_informacionPersonal=fkEstadoCivil,
-fk_medida_informacionPersonal=fkMedida, altura_en_metros_informacionPersonal=altura, peso_en_kg_informacionPersonal=peso, e_mail_informacionPersonal=email,
+UPDATE tbl_informacionPersonal SET rut_informacionPersonal=rut, nombre_informacionPersonal=nombre, apellido_paterno_informacionPersonal=apellidoPaterno,
+apellido_materno_informacionPersonal=apellidoMaterno, fecha_de_nacimiento_informacionPersonal=fechaDeNacimiento, fk_estado_civil_informacionPersonal=fkEstadoCivil,
+fk_medida_informacionPersonal=fkMedidas, altura_en_metros_informacionPersonal=altura, peso_en_kg_informacionPersonal=peso, e_mail_informacionPersonal=email,
 fk_genero_informacionPersonal=fkGenero, telefono_fijo_informacionPersonal=telefonoFijo, telefono_movil_informacionPersonal=telefonoMovil, direccion_personal_informacionPersonal=direccionPersonal,
 pertenecio_a_brigada_juvenil_informacionPersonal=pertenecioABrigadaJuvenil, esInstructor_informacionPersonal=esInstructor WHERE id_informacionPersonal=id;
 ELSEIF tipoOperacion=4 THEN
@@ -564,6 +567,8 @@ END IF;
 END//
 
 DELIMITER ;
+
+
 
 
 DELIMITER //
@@ -1333,6 +1338,10 @@ INSERT INTO tbl_tipo_servicio (codigo_tipo_servicio,nombre_tipo_servicio) VALUES
 ('10-5','Llamado de Materiales Peligrosos'),('10-6','Llamado de emanación de gases'),('10-7','Llamado eléctrico'),('10-8','Llamado no clasificado'),
 ('10-9','Llamado a otros servicios'),('10-10','Llamado a escombros'),('10-11','Llamado a servicio áreo'),('10-12','Llamado a apoyar a otros Cuerpos'),
 ('10-13','Llamado a artefacto explosivo, sobre sospechoso, acto terrorista'),('10-14','Llamado a accidente de aviación'), ('10-15','Simulacro');
+
+
+
+
 -- SELECTs
 
 -- SELECT * FROM tbl_medida;
@@ -1403,6 +1412,30 @@ CALL CRUDInformacionFamiliar (1,'Alguno', '1991-12-05',1,1,1);
 CALL CRUDInformacionAcademica (1,'2019-05-06','Curso',1,1,1);
 CALL CRUDInformacionEntrenamientoEstandar (1,'2018-09-09', 'algo',1,1,1);
 CALL CRUDInformacionHistorica (1,1,'Algun cuerpo','Alguna compania','2010-10-10', 'Transferencia', 'Solicitud personal', 'No disponible', 'Algo',1,1);
+
+CALL CRUDMedida (1,'XX','SS','42','41',1);
+CALL CRUDInformacionPersonal (1,'20898088-3','Marcelo', 'Aranda', 'Tatto','1991-12-16',1,1,'1,70','80,2','cheloz_20@hotmail.com',
+1,'123123123123','958677107','Carretera El Cobre','No sabe', 'Creo que no',1);
+CALL CRUDFichaInformacionBomberil(1,1,'Machali',2,1,'2001-12-16',1,1,1,2,1);
+CALL CRUDInformacionLaboral (1,'Acquiried','algun lado','598677','empleado','2018-08-12','ciencias','masvida','ingeniero', 2, 1);
+CALL CRUDInformacionMedica1 (1, 'alguna','ninguna', 'no hay', 2,1);
+CALL CRUDInformacionMedica2 (1,'Ninguno', 'Familiar', '96666',3, 'Sin especificar',0,0,6,2,1);
+CALL CRUDInformacionFamiliar (1,'Alguno', '1991-12-05',1,2,1);
+CALL CRUDInformacionAcademica (1,'2019-05-06','Curso',1,2,1);
+CALL CRUDInformacionEntrenamientoEstandar (1,'2018-09-09', 'algo',1,2,1);
+CALL CRUDInformacionHistorica (1,1,'Algun cuerpo','Alguna compania','2010-10-10', 'Transferencia', 'Solicitud personal', 'No disponible', 'Algo',2,1);
+
+CALL CRUDMedida (1,'XX','SS','42','41',1);
+CALL CRUDInformacionPersonal (1,'20898088-4','Marcelo', 'Aranda', 'Tatto','1991-12-16',1,1,'1,70','80,2','cheloz_20@hotmail.com',
+1,'123123123123','958677107','Carretera El Cobre','No sabe', 'Creo que no',1);
+CALL CRUDFichaInformacionBomberil(1,1,'Machali',2,1,'2001-12-16',1,1,1,3,1);
+CALL CRUDInformacionLaboral (1,'Acquiried','algun lado','598677','empleado','2018-08-12','ciencias','masvida','ingeniero', 3, 1);
+CALL CRUDInformacionMedica1 (1, 'alguna','ninguna', 'no hay', 3,1);
+CALL CRUDInformacionMedica2 (1,'Ninguno', 'Familiar', '96666',3, 'Sin especificar',0,0,6,3,1);
+CALL CRUDInformacionFamiliar (1,'Alguno', '1991-12-05',1,3,1);
+CALL CRUDInformacionAcademica (1,'2019-05-06','Curso',1,3,1);
+CALL CRUDInformacionEntrenamientoEstandar (1,'2018-09-09', 'algo',1,3,1);
+CALL CRUDInformacionHistorica (1,1,'Algun cuerpo','Alguna compania','2010-10-10', 'Transferencia', 'Solicitud personal', 'No disponible', 'Algo',3,1);
 */
 
 /*

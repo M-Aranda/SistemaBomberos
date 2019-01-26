@@ -795,10 +795,10 @@ while($reg = $rs->fetch_array()){
 }
 
 
-
 public function getInfoMedidas ($idABuscar){
 $this->c->conectar();
-$query="CALL CRUDMedida (".$idABuscar.",'XX','SS','42','41',2);";
+$query="SELECT tbl_medida.id_medida, tbl_medida.talla_de_chaqueta_camisa_medida, tbl_medida.talla_de_pantalon_medida, tbl_medida.talla_de_buzo_medida, tbl_medida.talla_de_calzado_medida FROM tbl_medida, tbl_informacionPersonal WHERE tbl_informacionPersonal.fk_medida_informacionPersonal=tbl_medida.id_medida
+AND tbl_informacionPersonal.id_informacionPersonal=".$idABuscar.";";
 $rs = $this->c->ejecutar($query);
 while($reg = $rs->fetch_array()){
      $info= new Tbl_Medida();
@@ -1031,6 +1031,126 @@ while($reg = $rs->fetch_array()){
  $this->c->desconectar();
  return $info;
 }
+
+
+
+
+
+
+public function actualizarMedida ($medida){
+  $query="CALL CRUDMedida (".$medida->getIdMedida().", '".$medida->getTallaChaquetaCamisa()."', '".$medida->getTallaPantalon()."',
+'".$medida->getTallaBuzo()."', '".$medida->getTallaCalzado()."', 3);";
+
+
+
+  $this->c->conectar();
+  $this->c->ejecutar($query);
+  $this->c->desconectar();
+}
+
+
+public function actualizarInformacionPersonalDeBombero ($infoPersonalBombero){
+
+  $query="CALL CRUDInformacionPersonal (".$infoPersonalBombero->getIdInfoPersonal().",'".$infoPersonalBombero->getRutInformacionPersonal()."','".$infoPersonalBombero->getNombreInformacionPersonal()."', '".$infoPersonalBombero->getApellidoPaterno()."', '".$infoPersonalBombero->getApellidoMaterno()."','".$infoPersonalBombero->getFechaNacimiento()."',".$infoPersonalBombero->getFkEstadoCivil()."
+  ,".$infoPersonalBombero->getFkMedidaInformacionPersonal().",'".$infoPersonalBombero->getAlturaEnMetros()."','".$infoPersonalBombero->getPeso()."','".$infoPersonalBombero->getEmail()."',
+  ".$infoPersonalBombero->getFkGenero().",'".$infoPersonalBombero->getTelefonoFijo()."','".$infoPersonalBombero->getTelefonoMovil()."','".$infoPersonalBombero->getDireccionPersonal()."','".$infoPersonalBombero->getPertenecioABrigadaJuvenil()."', '".$infoPersonalBombero->getEsInstructor()."',3);";
+
+echo $query;
+
+  $this->c->conectar();
+  $this->c->ejecutar($query);
+  $this->c->desconectar();
+}
+
+
+public function actualizarInformacionBomberil($infoBomberil){
+  $query="CALL CRUDFichaInformacionBomberil (".$infoBomberil->getIdInformacionBomberil().",".$infoBomberil->getfkRegioninformacionBomberil().", '".$infoBomberil->getcuerpoInformacionBomberil()."', ".$infoBomberil->getfkCompaniainformacionBomberil().",
+   ".$infoBomberil->getfkCargoinformacionBomberil().",'".$infoBomberil->getfechaIngresoinformacionBomberil()."', '".$infoBomberil->getNRegGeneralinformacionBomberil()."', ".$infoBomberil->getfkEstadoinformacionBomberil().",
+  '".$infoBomberil->getNRegCiainformacionBomberil()."', ".$infoBomberil->getfkInfoPersonalinformacionBomberil().", 3);";
+
+
+  $this->c->conectar();
+  $this->c->ejecutar($query);
+  $this->c->desconectar();
+}
+
+
+public function actualizarInformacionLaboral($infoLaboral){
+  $query="CALL CRUDInformacionLaboral (".$infoLaboral->getIdidInformacionLaboral().", '".$infoLaboral->getnombreEmpresainformacionLaboral()."', '".$infoLaboral->getdireccionEmpresainformacionLaboral()."', '".$infoLaboral->gettelefonoEmpresainformacionLaboral()."',
+   '".$infoLaboral->getcargoEmpresainformacionLaboral()."','".$infoLaboral->getfechaIngresoEmpresainformacionLaboral()."', '".$infoLaboral->getareaDeptoEmpresainformacionLaboral()."', '".$infoLaboral->getafp_informacionLaboral()."',
+  '".$infoLaboral->getprofesion_informacionLaboral()."', ".$infoLaboral->getfkInfoPersonalinformacionLaboral().", 3);";
+
+  $this->c->conectar();
+  $this->c->ejecutar($query);
+  $this->c->desconectar();
+}
+
+
+public function actualizarInformacionMedica1($infoMedica1){
+  $query="CALL CRUDInformacionMedica1 (".$infoMedica1->getidInformacionMedica1().", '".$infoMedica1->getprestacionMedica_informacionMedica1()."', '".$infoMedica1->getalergias_informacionMedica1()."', '".$infoMedica1->getenfermedadesCronicasinformacionMedica1()."',
+   ".$infoMedica1->getfkInfoPersonalinformacionMedica1().", 3);";
+
+  $this->c->conectar();
+  $this->c->ejecutar($query);
+  $this->c->desconectar();
+}
+
+
+public function actualizarInformacionMedica2($infoMedica2){
+  $query="CALL CRUDInformacionMedica2 (".$infoMedica2->getidInformacionMedica2().", '".$infoMedica2->getmedicamentosHabitualesinformacionMedica2()."', '".$infoMedica2->getnombreContactoinformacionMedica2()."', '".$infoMedica2->gettelefonoContactoinformacionMedica2()."',
+   ".$infoMedica2->getfkParentescoContactoinformacionMedica2().", '".$infoMedica2->getnivelActividadFisicainformacionMedica2()."', '".$infoMedica2->getesDonanteinformacionMedica2()."', '".$infoMedica2->getesFumadorinformacionMedica2()."',
+   ".$infoMedica2->getfkGrupoSanguineoinformacionMedica2().", ".$infoMedica2->getfkInfoPersonalinformacionMedica2().", 3);";
+
+  $this->c->conectar();
+  $this->c->ejecutar($query);
+  $this->c->desconectar();
+}
+
+
+public function actualizarInformacionFamiliar($infoFamiliar){
+  $query="CALL CRUDInformacionFamiliar (".$infoFamiliar->getIdInformacionFamiliar().", '".$infoFamiliar->getNombresInformacionFamiliar()."', '".$infoFamiliar->getFechaNacimientoInformacionFamiliar()."', ".$infoFamiliar->getfkParentescoinformacionFamiliar().",
+   ".$infoFamiliar->getfkInfoPersonalinformacionFamiliar().",  3);";
+
+   echo $query;
+
+  $this->c->conectar();
+  $this->c->ejecutar($query);
+  $this->c->desconectar();
+}
+
+
+public function actualizarInformacionAcademica($infoAcademica){
+  $query="CALL CRUDInformacionAcademica (".$infoAcademica->getIdidInformacionAcademica().", '".$infoAcademica->getfechaInformacionAcademica()."', '".$infoAcademica->getactividadInformacionAcademica()."', ".$infoAcademica->getfkEstadoCursoInformacionAcademica().",
+   ".$infoAcademica->getfkInformacionPersonalInformacionAcademica().", 3);";
+
+
+  $this->c->conectar();
+  $this->c->ejecutar($query);
+  $this->c->desconectar();
+}
+
+
+
+public function actualizarInformacionEntrenamientoEstandar($infoEntrenamientoEstandar){
+  $query="CALL CRUDInformacionEntrenamientoEstandar (".$infoEntrenamientoEstandar->getIdEntrenamientoEstandar().", '".$infoEntrenamientoEstandar->getfechaEntrenamientoEstandar()."', '".$infoEntrenamientoEstandar->getactividad()."', ".$infoEntrenamientoEstandar->getFkEstadoCurso().",
+   ".$infoEntrenamientoEstandar->getFkInformacionPersonal().", 3);";
+
+  $this->c->conectar();
+  $this->c->ejecutar($query);
+  $this->c->desconectar();
+}
+
+
+public function actualizarInformacionHistorica($infoHistorica){
+  $query="CALL CRUDInformacionHistorica (".$infoHistorica->getIdInformacionHistorica().", ".$infoHistorica->getfkRegioninformacionHistorica().", '".$infoHistorica->getcuerpo()."', '".$infoHistorica->getcompania()."',
+   '".$infoHistorica->getfechaDeCambio()."', '".$infoHistorica->getPremio()."', '".$infoHistorica->getmotivo()."', '".$infoHistorica->getdetalle()."', '".$infoHistorica->getCargo()."'  , ".$infoHistorica->getfkInfoPersonalinformacionHistorica().", 3);";
+
+
+  $this->c->conectar();
+  $this->c->ejecutar($query);
+  $this->c->desconectar();
+}
+
 
 
 
