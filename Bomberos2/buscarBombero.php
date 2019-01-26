@@ -198,9 +198,9 @@ if($_SESSION["usuarioIniciado"]!=null){
                             <td><?php echo $objeto->getApellidoPaterno();?></td>
                             <td><?php echo $objeto->getCompania();?></td>
                             <td>
-                              <form action="verFicha.php" method="post">
+                              <form action="controlador/CargarFicha.php" method="post">
                                 <!-- Ya puse el boton para ver ficha, que redirije a ver ficha, pero no puedo ver si el id esta ahi; no estoy seguro de que este-->
-                                <input type="hidden" value="<?php echo $objeto->getIdInfoPersonal();?>">
+                                <input type="hidden" name="idBombero" value="<?php echo $objeto->getIdInfoPersonal();?>">
 
                               <input type="submit" value="Ver ficha">
                               </td>

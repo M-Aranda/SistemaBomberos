@@ -16,6 +16,7 @@ require_once("Tbl_Unidad.php");
 require_once("Tbl_tipo_servicio.php");
 require_once("Tbl_InfoPersonal.php");
 require_once("Vista_BusquedaBombero.php");
+require_once("Tbl_Medida.php");
 /*
 require_once("Tbl_EstadoCivil.php");
 require_once("Tbl_Genero.php");
@@ -289,7 +290,7 @@ class Data{
       $query="CALL CRUDInformacionFamiliar (1, '".$infoFamiliar->getNombresInformacionFamiliar()."', '".$infoFamiliar->getFechaNacimientoInformacionFamiliar()."', ".$infoFamiliar->getfkParentescoinformacionFamiliar().",
        ".$infoFamiliar->getfkInfoPersonalinformacionFamiliar().",  1);";
 
-
+       echo $query;
 
       $this->c->conectar();
       $this->c->ejecutar($query);
@@ -727,7 +728,6 @@ public function buscarInformacionDeBomberoParaTabla ($nombre, $id, $tipoDeBusque
   WHERE tbl_informacionBomberil.fk_id_entidadACargo_informacionBomberil=tbl_entidadACargo.id_entidadACargo AND
   tbl_informacionPersonal.id_informacionPersonal=tbl_informacionBomberil.fk_informacion_personal__informacionBomberil ".$anexoAQuery;
 
-  echo $query;
 
   $rs = $this->c->ejecutar($query);
   $listado = array();
@@ -749,6 +749,58 @@ public function buscarInformacionDeBomberoParaTabla ($nombre, $id, $tipoDeBusque
    return $listado;
 }
 
+
+
+
+public function getInfoPersonal ($idABuscar){
+$this->c->conectar();
+$query="CALL CRUDInformacionPersonal (".$idABuscar.",'20898088-2','Marcelo', 'Aranda', 'Tatto','1991-12-16',1,1,'1,70','80,2','cheloz_20@hotmail.com',
+1,'123123123123','958677107','Carretera El Cobre','No sabe', 'Creo que no', 2);";
+$rs = $this->c->ejecutar($query);
+while($reg = $rs->fetch_array()){
+
+     $infoPersonal= new Tbl_InfoPersonal();
+     $infoPersonal->setIdInfoPersonal($reg[0]);
+     $infoPersonal->setRutInformacionPersonal($reg[1]);
+     $infoPersonal->setNombreInformacionPersonal($reg[2]);
+     $infoPersonal->setApellidoPaterno($reg[3]);
+     $infoPersonal->setApellidoMaterno($reg[4]);
+     $infoPersonal->setFechaNacimiento($reg[5]);
+     $infoPersonal->setFkEstadoCivil($reg[6]);
+     $infoPersonal->setFkMedidaInformacionPersonal($reg[7]);
+     $infoPersonal->setAlturaEnMetros($reg[8]);
+     $infoPersonal->setPeso($reg[9]);
+     $infoPersonal->setEmail($reg[10]);
+     $infoPersonal->setFkGenero($reg[11]);
+     $infoPersonal->setTelefonoFijo($reg[12]);
+     $infoPersonal->setTelefonoMovil($reg[13]);
+     $infoPersonal->setDireccionPersonal($reg[14]);
+     $infoPersonal->setPertenecioABrigadaJuvenil($reg[15]);
+     $infoPersonal->setEsInstructor($reg[16]);
+
+ }
+
+ $this->c->desconectar();
+ return $infoPersonal;
+}
+
+
+
+public function getInfoMedidas ($idABuscar){
+$this->c->conectar();
+$query="CALL CRUDMedida (".$idABuscar.",'XX','SS','42','41',2);";
+$rs = $this->c->ejecutar($query);
+while($reg = $rs->fetch_array()){
+     $info= new Tbl_Medida();
+     $info->setIdMedida($reg[0]);
+     $info->setTallaChaquetaCamisa($reg[1]);
+     $info->setTallaPantalon($reg[2]);
+     $info->setTallaBuzo($reg[3]);
+     $info->setTallaCalzado($reg[4]);
+ }
+ $this->c->desconectar();
+ return $info;
+}
 
 
 

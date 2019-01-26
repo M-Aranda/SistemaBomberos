@@ -104,6 +104,15 @@
         require_once("model/Data.php");
         $data = new Data();
 
+        session_start();
+        if($_SESSION["infoPersonalSolicitada"]!=null){
+          $infoPersonal=$_SESSION["infoPersonalSolicitada"];
+        }
+
+        if($_SESSION["infoMedidasSolicitada"]!=null){
+          $infoMedidas=$_SESSION["infoMedidasSolicitada"];
+        }
+
 
     ?>
     <style>
@@ -140,24 +149,24 @@
                            <img src="images/avatar_opt.jpg">
                          </div>
                          <form action="controlador/CrearInfoPersonal.php" method="post">
-                         Talla Chaqueta/camisa : <input class="form-control" type="text" name="txtchaqueta">
-                         Talla Pantalón: <input class="form-control" type="text" name="txtpantalon">
-                         Talla buzo: <input class="form-control" type="text" name="txtbuzo">
-                         talla Calzado: <input class="form-control" type="text" name="txtcalzado">
-                         Altura :<input class="form-control" type="text" name="txtaltura">
-                         Peso: <input class="form-control" type="text" name="txtpeso">
-                         Perteneció a Brigada Juvenil? <input class="form-control" type="text" name="txtbrigada">
-                         Instructor: <input class="form-control" type="text" name="txtinstructor">
+                         Talla Chaqueta/camisa : <input class="form-control" value="<?php echo $infoMedidas->getTallaChaquetaCamisa();?>" type="text" name="txtchaqueta" disabled>
+                         Talla Pantalón: <input class="form-control" value="<?php echo $infoMedidas->getTallaPantalon();?>" type="text" name="txtpantalon" disabled>
+                         Talla buzo: <input class="form-control" value="<?php echo $infoMedidas->getTallaBuzo();?>" type="text" name="txtbuzo" disabled>
+                         talla Calzado: <input class="form-control" value="<?php echo $infoMedidas->getTallaCalzado();?>" type="text" name="txtcalzado" disabled>
+                         Altura :<input class="form-control" value="<?php echo $infoPersonal->getAlturaEnMetros();?>"  type="text" name="txtaltura" disabled>
+                         Peso: <input class="form-control" value="<?php echo $infoPersonal->getPeso();?>"  type="text" name="txtpeso" disabled>
+                         Perteneció a Brigada Juvenil? <input class="form-control" value="<?php echo $infoPersonal->getPertenecioABrigadaJuvenil();?>"  type="text" name="txtbrigada" disabled>
+                         Instructor: <input class="form-control" value="<?php echo $infoPersonal->getEsInstructor();?>"  type="text" name="txtinstructor" disabled>
 
                        </div>
                        <div class="col-md-5" style="margin-left: 50px;">
-                         Rut: <input class="form-control" type="text" name="txtRut">
-                         Nombre: <input class="form-control" type="text" name="txtNombre">
-                         Apellido Paterno: <input class="form-control" type="text" name="txtApePa" >
-                         Apellido Materno: <input class="form-control" name="txtApeMa">
-                         Fecha Nacimiento: <input class="form-control" name="txtFecha" type="date">
+                         Rut: <input class="form-control" value="<?php echo $infoPersonal->getRutInformacionPersonal();?>"  type="text" name="txtRut" disabled>
+                         Nombre: <input class="form-control" value="<?php echo $infoPersonal->getNombreInformacionPersonal();?>" type="text" name="txtNombre" disabled>
+                         Apellido Paterno: <input class="form-control" value="<?php echo $infoPersonal->getApellidoPaterno();?>" type="text" name="txtApePa" disabled>
+                         Apellido Materno: <input class="form-control" value="<?php echo $infoPersonal->getApellidoMaterno();?>" name="txtApeMa" disabled>
+                         Fecha Nacimiento: <input class="form-control" value="<?php echo $infoPersonal->getFechaNacimiento();?>" name="txtFecha" type="date" disabled>
                          Estado Civil:
-                         <select class="form-control" name="cboEstadoCivil">
+                         <select class="form-control" name="cboEstadoCivil" disabled>
                          <?php
 
                          require_once("model/Data.php");
@@ -166,17 +175,21 @@
 
                          $estadosCiviles = $d->readEstadosCiviles();
                          foreach($estadosCiviles as $e => $estado){
+                           if($infoPersonal->getFkEstadoCivil()==$estado->getIdEstadoCivil()){?>
+                             <option value="<?php echo $estado->getIdEstadoCivil(); ?>" selected ><?php echo $estado->getNombreEstadoCivil(); ?></option>
+                           <?php
+                         }
                          ?>
-                         <option value="<?php echo $estado->getIdEstadoCivil(); ?>"><?php echo $estado->getNombreEstadoCivil(); ?></option>
+                         <option value="<?php echo $estado->getIdEstadoCivil(); ?>" ><?php echo $estado->getNombreEstadoCivil(); ?></option>
                          <?php
                          }
                          ?>
                          </select>
-                         Dirección: <textarea class="form-control" Type="textarea" name="txtDireccion" ></textarea>
-                         Teléfonos:  <input class="form-control" type="text" name="txtTelefonos">
-                         Email: <input class="form-control" type="text" name="txtemail">
+                         Dirección: <textarea class="form-control" value="<?php echo $infoPersonal->getDireccionPersonal();?>" Type="textarea" name="txtDireccion" ></textarea>
+                         Teléfonos:  <input class="form-control" value="<?php echo $infoPersonal->getTelefonoFijo();?>" type="text" name="txtTelefonos" disabled>
+                         Email: <input class="form-control" value="<?php echo $infoPersonal->getEmail();?>" type="text" name="txtemail" disabled>
                          Genero:
-                         <select class="form-control" name="cboGenero">
+                         <select class="form-control" name="cboGenero" disabled>
                            <?php
                            require_once("model/Data.php");
                            require_once("model/Tbl_Genero.php");

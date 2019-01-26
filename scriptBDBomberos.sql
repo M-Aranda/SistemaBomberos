@@ -58,6 +58,11 @@ talla_de_calzado_medida VARCHAR (5000),
 PRIMARY KEY(id_medida)
 );
 
+/*
+SELECT tbl_medida.id_medida, tbl_medida.talla_de_chaqueta_camisa_medida, tbl_medida.talla_de_pantalon_medida,  tbl_medida.talla_de_buzo_medida,
+tbl_medida.talla_de_calzado_medida FROM tbl_medida, tbl_informacionPersonal WHERE 
+tbl_informacionPersonal.fk_medida_informacionPersonal=tbl_medida.id_medida AND tbl_informacionPersonal.id_informacionPersonal=1;
+*/
 
 CREATE TABLE tbl_informacionPersonal(
 id_informacionPersonal INT AUTO_INCREMENT,
@@ -220,7 +225,7 @@ fecha_de_nacimiento_informacionFamiliar DATE,
 fk_parentesco_informacionFamiliar INT,
 fk_informacionPersonal_informacionFamiliar INT,
 FOREIGN KEY (fk_informacionPersonal_informacionFamiliar) REFERENCES tbl_informacionPersonal (id_informacionPersonal),
-FOREIGN KEY (fk_parentesco_informacionFamiliar) REFERENCES tbl_informacionPersonal (id_informacionPersonal),
+FOREIGN KEY (fk_parentesco_informacionFamiliar) REFERENCES tbl_parentesco (id_parentesco),
 PRIMARY KEY(id_informacionFamiliar)
 );
 
@@ -536,14 +541,14 @@ END //
 DELIMITER ;
 
 
-DELIMITER //
+DELIMITER // 
 CREATE PROCEDURE CRUDInformacionPersonal (id INT, rut VARCHAR(12), nombre VARCHAR (5000), apellidoPaterno VARCHAR(5000), apellidoMaterno VARCHAR(5000), fechaDeNacimiento DATE,
 fkEstadoCivil INT, fkMedida INT, altura VARCHAR (5000), peso VARCHAR (5000), email VARCHAR (5000), fkGenero INT, telefonoFijo VARCHAR (5000), telefonoMovil VARCHAR (5000),
 direccionPersonal VARCHAR (5000), pertenecioABrigadaJuvenil VARCHAR (5000), esInstructor VARCHAR (5000), tipoOperacion INT ) 
 BEGIN
 
 DECLARE fkMedidas INT;
-SELECT MAX(id_medida) INTO @fkMedidas FROM tbl_medida;
+SELECT MAX(id_medida) INTO fkMedidas FROM tbl_medida;
 
 IF tipoOperacion=1 THEN
 INSERT INTO tbl_informacionPersonal VALUES (NULL, rut, nombre, apellidoPaterno, apellidoMaterno, fechaDeNacimiento, fkEstadoCivil, fkMedidas,
@@ -1331,7 +1336,6 @@ INSERT INTO tbl_tipo_servicio (codigo_tipo_servicio,nombre_tipo_servicio) VALUES
 ('10-5','Llamado de Materiales Peligrosos'),('10-6','Llamado de emanación de gases'),('10-7','Llamado eléctrico'),('10-8','Llamado no clasificado'),
 ('10-9','Llamado a otros servicios'),('10-10','Llamado a escombros'),('10-11','Llamado a servicio áreo'),('10-12','Llamado a apoyar a otros Cuerpos'),
 ('10-13','Llamado a artefacto explosivo, sobre sospechoso, acto terrorista'),('10-14','Llamado a accidente de aviación'), ('10-15','Simulacro');
-
 -- SELECTs
 
 -- SELECT * FROM tbl_medida;
@@ -1351,8 +1355,6 @@ INSERT INTO tbl_tipo_servicio (codigo_tipo_servicio,nombre_tipo_servicio) VALUES
 -- SELECT * FROM tbl_tipoDeMantencion;
 -- SELECT * FROM tbl_mantencion;
 -- SELECT * FROM tbl_cargio_combustible;
-
-
 
 /*Consulta que requiere id de permiso e id de tipo de usuario
 
@@ -1387,7 +1389,6 @@ tbl_informacionPersonal.id_informacionPersonal=tbl_informacionBomberil.fk_inform
 tbl_informacionPersonal.nombre_informacionPersonal LIKE '%Marcelo%';
 
 */
-
 
 -- Lamadas a procedimientos para probar
 /*
