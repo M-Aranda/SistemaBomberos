@@ -6,7 +6,6 @@ require_once("../model/Tbl_InfoPersonal.php");
 require_once("../model/Tbl_Region.php");
 require_once("../model/Tbl_EstadoBombero.php");
 require_once("../model/Tbl_Cargo.php");
-
 /*
 require_once("../model/Tbl_comuna.php");
 require_once("../model/Tbl_EntrenamientoEstandar.php");
@@ -23,6 +22,8 @@ require_once("../model/Parentesco.php");
 require_once("../model/Provincia.php");
 */
 
+
+//Hay que poner un hidden que tenga el id de la informacionBomberil a modificar
 $d= new Data();
 
 $id=1;

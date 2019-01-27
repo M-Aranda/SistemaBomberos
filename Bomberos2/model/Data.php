@@ -827,8 +827,8 @@ while($reg = $rs->fetch_array()){
      $info->setfechaIngresoinformacionBomberil($reg[5]);
      $info->setNRegGeneralinformacionBomberil($reg[6]);
      $info->setfkEstadoinformacionBomberil($reg[7]);
-     $info->setNRegCiainformacionBomberil($reg[6]);
-     $info->setfkInfoPersonalinformacionBomberil($reg[7]);
+     $info->setNRegCiainformacionBomberil($reg[8]);
+     $info->setfkInfoPersonalinformacionBomberil($reg[9]);
  }
  $this->c->desconectar();
  return $info;
@@ -851,8 +851,8 @@ while($reg = $rs->fetch_array()){
      $info->setfechaIngresoEmpresainformacionLaboral($reg[5]);
      $info->setareaDeptoEmpresainformacionLaboral($reg[6]);
      $info->setafp_informacionLaboral($reg[7]);
-     $info->setprofesion_informacionLaboral($reg[6]);
-     $info->setfkInfoPersonalinformacionLaboral($reg[7]);
+     $info->setprofesion_informacionLaboral($reg[8]);
+     $info->setfkInfoPersonalinformacionLaboral($reg[9]);
  }
  $this->c->desconectar();
  return $info;
@@ -882,6 +882,7 @@ $this->c->conectar();
 $query="CALL CRUDInformacionMedica2 (1,'Ninguno', 'Familiar', '96666',3, 'Sin especificar',0,0,1,".$idABuscar.",2);";
 $rs = $this->c->ejecutar($query);
 
+
 while($reg = $rs->fetch_array()){
      $info= new Tbl_InfoMedica2();
      $info->setidInformacionMedica2($reg[0]);
@@ -892,8 +893,8 @@ while($reg = $rs->fetch_array()){
      $info->setnivelActividadFisicainformacionMedica2($reg[5]);
      $info->setesDonanteinformacionMedica2($reg[6]);
      $info->setesFumadorinformacionMedica2($reg[7]);
-     $info->setfkGrupoSanguineoinformacionMedica2($reg[6]);
-     $info->setfkInfoPersonalinformacionMedica2($reg[7]);
+     $info->setfkGrupoSanguineoinformacionMedica2($reg[8]);
+     $info->setfkInfoPersonalinformacionMedica2($reg[9]);
  }
  $this->c->desconectar();
  return $info;
