@@ -201,7 +201,7 @@ if($_SESSION["usuarioIniciado"]!=null){
                             <td><?php echo $objeto->getRut();?></td>
                             <td><?php echo $objeto->getNombre();?></td>
                             <td><?php echo $objeto->getApellidoPaterno();?></td>
-                            <td><?php echo $objeto->getCompania();?></td>
+                            <td><?php echo utf8_encode($objeto->getCompania());?></td>
                             <td>
                               <form action="controlador/CargarFicha.php" method="post">
                                 <input type="hidden" id="idBombero" name="idBombero" value="<?php echo $objeto->getIdInfoPersonal();?>">

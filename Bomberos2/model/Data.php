@@ -1159,8 +1159,6 @@ public function actualizarInformacionHistorica($infoHistorica){
 
 
 
-
-
     //header("location: ../Mantenedor.php");
 
 }

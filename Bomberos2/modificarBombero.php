@@ -574,10 +574,11 @@
 
 
                        <div class="col-sm-6">
-                         Nombre: <input class="form-control" type="text" name="txtnombreFamiliar" >
-                         Fecha de Nacimiento: <input class="form-control" type="date" name="txtfechafamiliar" >
+                         <form action="controlador/ActualizarInformacionFamiliar.php" method="post">
+                         Nombre: <input class="form-control" type="text" id="nomFamiliar" name="txtnombreFamiliar" >
+                         Fecha de Nacimiento: <input class="form-control" type="date" id="fecNFamiliar" name="txtfechafamiliar" >
                          Parentesco:
-                         <select class="form-control" name="cboParentesco2" >
+                         <select class="form-control" name="cboParentesco2" id="cboParentescoFamiliar" >
                            <?php
                            require_once("model/Data.php");
                            require_once("model/Tbl_Parentesco.php");
@@ -591,6 +592,16 @@
                            }
                            ?>
                          </select>
+                         <input class="form-control" value="" type="hidden" id="idFamil" name="idFamil">
+                         <input class="form-control" value="" type="hidden" id="idPersonalFamiliar" name="idPersonalFamiliar">
+                         <center> <input type="submit" name="btninfoFamiliar" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                             <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
+
+                         </center>
+
+                         </form>
+
+
 
 
 
@@ -601,6 +612,7 @@
                                  <th>Nombre</th>
                                  <th>Fecha de Nacimiento</th>
                                  <th>Parentesco</th>
+                                 <th>Modificar</th>
                                </tr>
                              </thead>
                              <tbody>
@@ -615,9 +627,13 @@
 
                                  echo $fechaConvertida;?></td>
                                  <td><?php echo $d->buscarNombreParentescoPorId($datos->getfkParentescoinformacionFamiliar())->getNombreParentesco();?></td>
+                                 <td><input type="submit" value="Cambiar" onclick="cargarIdInfoFamiliar(<?php echo $datos->getIdInformacionFamiliar();?>, <?php echo $datos->getfkInfoPersonalinformacionFamiliar();?>)">
+
+
                             <?php
                              }
                                ?>
+
                                </tr>
 
                              </tbody>
@@ -628,10 +644,8 @@
                       </div>
                       <div class="col-md-6">
                          <br><br><br><br><br><br>
-                          <center> <input type="submit" name="btninfoFamiliar" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
-                              <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
-                          </center>
+
 
                       </div>
 
@@ -979,6 +993,27 @@ unset($_SESSION["infoHistoricaSolicitada"]);
 
 
 ?>
+
+<script src="javascript/JQuery.js"></script>
+<script>
+
+function cargarIdInfoFamiliar(id, fkPersonal) {
+            document.getElementById("idFamil").value=id;
+            document.getElementById("idPersonalFamiliar").value=fkPersonal;
+
+            alert("Utilize los 3 campos de arriba para ingresar la nueva información");
+
+          }
+
+
+
+
+
+
+
+
+</script>
+
 
 
   </body>

@@ -1394,7 +1394,7 @@ tbl_informacionPersonal.nombre_informacionPersonal LIKE '%Marcelo%';
 */
 
 -- Lamadas a procedimientos para probar
-/*
+
 CALL CRUDUsuario (1,'Marcelo',1,'123',1); 
 
 CALL CRUDUnidad (6,'Nombre de Prueba 1','2000','200','300','333','555','3333','YOLO','2000-12-03','2012-06-11',15,2,1,1,1);
@@ -1421,6 +1421,8 @@ CALL CRUDInformacionLaboral (1,'Acquiried','algun lado','598677','empleado','201
 CALL CRUDInformacionMedica1 (1, 'alguna','ninguna', 'no hay', 2,1);
 CALL CRUDInformacionMedica2 (1,'Ninguno', 'Familiar', '96666',3, 'Sin especificar',0,0,6,2,1);
 CALL CRUDInformacionFamiliar (1,'Alguno', '1991-12-05',1,2,1);
+CALL CRUDInformacionFamiliar (1,'Alguno', '1971-12-05',2,2,1);
+CALL CRUDInformacionFamiliar (1,'Alguno', '1311-12-05',3,2,1);
 CALL CRUDInformacionAcademica (1,'2019-05-06','Curso',1,2,1);
 CALL CRUDInformacionEntrenamientoEstandar (1,'2018-09-09', 'algo',1,2,1);
 CALL CRUDInformacionHistorica (1,1,'Algun cuerpo','Alguna compania','2010-10-10', 'Transferencia', 'Solicitud personal', 'No disponible', 'Algo',2,1);
@@ -1436,7 +1438,7 @@ CALL CRUDInformacionFamiliar (1,'Alguno', '1991-12-05',1,3,1);
 CALL CRUDInformacionAcademica (1,'2019-05-06','Curso',1,3,1);
 CALL CRUDInformacionEntrenamientoEstandar (1,'2018-09-09', 'algo',1,3,1);
 CALL CRUDInformacionHistorica (1,1,'Algun cuerpo','Alguna compania','2010-10-10', 'Transferencia', 'Solicitud personal', 'No disponible', 'Algo',3,1);
-*/
+
 
 /*
 DROP DATABASE bomberosBD;

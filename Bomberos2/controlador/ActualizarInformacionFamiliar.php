@@ -25,11 +25,11 @@ require_once("../model/Provincia.php");
 */
 
 
-$idInformacionFamiliar=0;
+$idInformacionFamiliar=$_REQUEST["idFamil"];
 $nombresInformacionFamiliar=$_REQUEST["txtnombreFamiliar"];
 $fechaNacimientoInformacionFamiliar=$_REQUEST["txtfechafamiliar"];
 $fkParentescoinformacionFamiliar=$_REQUEST["cboParentesco2"];
-$fkInfoPersonalinformacionFamiliar=$_REQUEST["cboBomberoInfoFamiliar"];
+$fkInfoPersonalinformacionFamiliar=$_REQUEST["idPersonalFamiliar"];
 
 
 $infoFamiliar=new Tbl_InfoFamiliar();
@@ -42,7 +42,7 @@ $infoFamiliar->setfkInfoPersonalinformacionFamiliar($fkInfoPersonalinformacionFa
 
 $d= new Data();
 
-$d->crearInformacionFamiliar($infoFamiliar);
+$d->actualizarInformacionFamiliar($infoFamiliar);
 
 
  header("location: ../verFicha.php");
