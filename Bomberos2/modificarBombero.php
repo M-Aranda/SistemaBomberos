@@ -286,6 +286,11 @@
                    </div>
                    <div class="panel-body">
                        <div class="col-sm-6">
+
+
+                         <form action="controlador/actualizarInformacionBomberil.php" method="post">
+                        <input class="form-control" value="<?php echo $infoPersonal->getIdInfoPersonal();?>"  type="hidden" name="idPersonal">
+                        <input class="form-control" value="<?php echo $infoBomberil->getIdInformacionBomberil();?>"  type="hidden" name="idBomberil">
                          Región : <!-- <input class="form-control" type="text" name="txtregion"> --><!--Region del libertador bernardo ohggins-->
                          <select class="form-control" name="cboRegion" >
                            <?php
@@ -312,7 +317,7 @@
 
                          Compañía: <!-- <input class="form-control" type="text" name="txtcompania"> --> <!--Combobox-->
                          <!-- <input class="form-control" value="<?php /*echo $infoBomberil->getfkCompaniainformacionBomberil();*/?>" type="text" name="txtcompania" disabled> -->
-                         <select name="txtcompania" style="width:175px; height:30px;" >
+                         <select name="compania" style="width:175px; height:30px;" >
                            <?php
                                $companias = $data->readSoloCompanias();
                                foreach ($companias as $c => $compania) {
@@ -334,7 +339,7 @@
                          Fecha Ingreso:
                          <br>
                          <input class="form-control" value="<?php echo $infoBomberil->getfechaIngresoinformacionBomberil();?>" type="date" name="txtfingreso" >
-                         Nº Reg.General: <input class="form-control" value="<?php echo $infoBomberil->getNRegGeneralinformacionBomberil();?>" type="text" name="txtgeneral" >
+                         Nº Reg.General: <input class="form-control" value="<?php echo $infoBomberil->getNRegGeneralinformacionBomberil();?>" type="number" name="txtgeneral" >
                        </div>
                        <div class="col-md-6">
                          Cuerpo: <input class="form-control" value="<?php echo $infoBomberil->getcuerpoInformacionBomberil();?>" type="text" name="txtcuerpo" >
@@ -388,12 +393,13 @@
                              ?>
                            </select>
 
-                         Nº Reg.Cia: <input class="form-control" value="<?php echo $infoBomberil->getNRegCiainformacionBomberil();?>" name="txtcia" >
+                         Nº Reg.Cia: <input class="form-control" type="number" value="<?php echo $infoBomberil->getNRegCiainformacionBomberil();?>" name="txtcia" >
                          <br>
                          <center> <input type="submit" name="btnInfoBomberil" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
                              <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                          </center>
+                       </form>
 
                        </div>
                    </div>
@@ -416,6 +422,10 @@
                    <div class="panel-body">
                        <div class="col-sm-5">
 
+                         <form action="controlador/ActualizarInformacionLaboral.php" method="post">
+                           <input class="form-control" value="<?php echo $infoPersonal->getIdInfoPersonal();?>"  type="hidden" name="idPersonal">
+                           <input class="form-control" value="<?php echo $infoLaboral->getIdidInformacionLaboral();?>"  type="hidden" name="idLaboral">
+
                          Nombre Empresa : <input class="form-control" value="<?php echo $infoLaboral->getnombreEmpresainformacionLaboral();?>" type="text" name="txtnomempresa" >
                          Dirección Empresa: <input class="form-control" value="<?php echo $infoLaboral->getdireccionEmpresainformacionLaboral();?>" type="text" name="txtdirecempresa" >
                          Teléfono Empresa: <input class="form-control" value="<?php echo $infoLaboral->gettelefonoEmpresainformacionLaboral();?>" type="text" name="txttlfempresa" >
@@ -433,6 +443,8 @@
                              <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                          </center>
+                       </form>
+
 
                        </div>
                    </div>

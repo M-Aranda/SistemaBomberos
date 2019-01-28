@@ -23,7 +23,7 @@ require_once("../model/Provincia.php");
 */
 
 
-$idInformacionLaboral=1;
+$idInformacionLaboral=$_REQUEST["idLaboral"];
 $nombreEmpresainformacionLaboral=$_REQUEST["txtnomempresa"];
 $direccionEmpresainformacionLaboral=$_REQUEST["txtdirecempresa"];
 $telefonoEmpresainformacionLaboral=$_REQUEST["txttlfempresa"];
@@ -32,7 +32,7 @@ $fechaIngresoEmpresainformacionLaboral=$_REQUEST["txfingresoempresa"];
 $areaDeptoEmpresainformacionLaboral=$_REQUEST["txtareatrabajo"];
 $afp_informacionLaboral=$_REQUEST["txtafp"];
 $profesion_informacionLaboral=$_REQUEST["txtprofesion"];
-$fkInfoPersonalinformacionLaboral=$_REQUEST["cboBomberoInfoLaboral"];
+$fkInfoPersonalinformacionLaboral=$_REQUEST["idPersonal"];
 
 $infoLaboral=new Tbl_InfoLaboral();
 
@@ -49,7 +49,7 @@ $infoLaboral->setfkInfoPersonalinformacionLaboral($fkInfoPersonalinformacionLabo
 
 
 $d= new Data();
-$d->crearInformacionLaboral($infoLaboral);
+$d->actualizarInformacionLaboral($infoLaboral);
 
 
 

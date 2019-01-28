@@ -1069,6 +1069,7 @@ public function actualizarInformacionBomberil($infoBomberil){
    ".$infoBomberil->getfkCargoinformacionBomberil().",'".$infoBomberil->getfechaIngresoinformacionBomberil()."', '".$infoBomberil->getNRegGeneralinformacionBomberil()."', ".$infoBomberil->getfkEstadoinformacionBomberil().",
   '".$infoBomberil->getNRegCiainformacionBomberil()."', ".$infoBomberil->getfkInfoPersonalinformacionBomberil().", 3);";
 
+echo $query;
 
   $this->c->conectar();
   $this->c->ejecutar($query);

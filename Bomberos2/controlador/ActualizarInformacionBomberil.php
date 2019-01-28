@@ -26,7 +26,7 @@ require_once("../model/Provincia.php");
 //Hay que poner un hidden que tenga el id de la informacionBomberil a modificar
 $d= new Data();
 
-$id=1;
+$id=$_REQUEST["idBomberil"];;
 $fk_region=$_REQUEST["cboRegion"];
 $cuerpo=$_REQUEST["txtcuerpo"];
 $fk_compania=$_REQUEST["compania"];
@@ -35,7 +35,7 @@ $fecha_ingreso=$_REQUEST["txtfingreso"];
 $nrg=$_REQUEST["txtgeneral"];
 $fk_estado=$_REQUEST["cboEstadoBombero"];
 $nrc=$_REQUEST["txtcia"];
-$fk_infoPersonal=$_REQUEST["cboBombero1"];
+$fk_infoPersonal=$_REQUEST["idPersonal"];
 
 
 $infoBomberil= new Tbl_InfoBomberil();
@@ -51,10 +51,10 @@ $infoBomberil->setfkEstadoinformacionBomberil($fk_estado);
 $infoBomberil->setNRegCiainformacionBomberil($nrc);
 $infoBomberil->setfkInfoPersonalinformacionBomberil($fk_infoPersonal);
 
-$d->crearInformacionBomberil($infoBomberil);
+$d->actualizarInformacionBomberil($infoBomberil);
 
 
-header("location: ../CrearFicha.php");
+header("location: ../buscarBombero.php");
 
 
 ?>
