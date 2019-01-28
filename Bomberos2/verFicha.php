@@ -295,11 +295,11 @@
                            $regiones = $d->readRegiones();
                            foreach($regiones as $r => $region){
                              if($infoBomberil->getfkRegioninformacionBomberil()==$region->getIdRegion()){?>
-                               <option value="<?php echo $region->getIdRegion(); ?>" selected ><?php echo $region->getNombreRegion(); ?></option>
+                               <option value="<?php echo $region->getIdRegion(); ?>" selected ><?php echo utf8_encode($region->getNombreRegion()); ?></option>
                                <?php
                              }else{
                                  ?>
-                                 <option value="<?php echo $region->getIdRegion(); ?>" ><?php echo $region->getNombreRegion(); ?></option>
+                                 <option value="<?php echo $region->getIdRegion(); ?>" ><?php echo utf8_encode($region->getNombreRegion()); ?></option>
                                  <?php
                                }
                              }
@@ -316,11 +316,11 @@
                                $companias = $data->readSoloCompanias();
                                foreach ($companias as $c => $compania) {
                                if($infoBomberil->getfkCompaniainformacionBomberil()==$compania->getIdEntidadACargo()){?>
-                                 <option value="<?php echo $compania->getIdEntidadACargo(); ?>" selected ><?php echo $compania->getNombreEntidadACargo(); ?></option>
+                                 <option value="<?php echo $compania->getIdEntidadACargo(); ?>" selected ><?php echo utf8_encode($compania->getNombreEntidadACargo()); ?></option>
                                  <?php
                                }else{
                                    ?>
-                                   <option value="<?php echo $compania->getIdEntidadACargo(); ?>" ><?php echo $compania->getNombreEntidadACargo(); ?></option>
+                                   <option value="<?php echo $compania->getIdEntidadACargo(); ?>" ><?php echo utf8_encode($compania->getNombreEntidadACargo()); ?></option>
                                    <?php
                                  }
                                }
@@ -373,11 +373,11 @@
                            $estados = $d->readEstadosDeBomberos();
                            foreach($estados as $e => $estado){
                              if($infoBomberil->getfkEstadoinformacionBomberil()==$estado->getIdEstado()){?>
-                               <option value="<?php echo $estado->getIdEstado(); ?>" selected ><?php echo $estado->getNombreEstado(); ?></option>
+                               <option value="<?php echo $estado->getIdEstado(); ?>" selected ><?php echo utf8_encode($estado->getNombreEstado()); ?></option>
                                <?php
                              }else{
                                  ?>
-                                 <option value="<?php echo $estado->getIdEstado(); ?>" ><?php echo $estado->getNombreEstado(); ?></option>
+                                 <option value="<?php echo $estado->getIdEstado(); ?>" ><?php echo utf8_encode($estado->getNombreEstado()); ?></option>
                                  <?php
                                }
                              }
@@ -471,11 +471,11 @@
                            $parentescos = $d->readParentescos();
                            foreach($parentescos as $p => $parentesco){
                              if($infoMedica2->getfkParentescoContactoinformacionMedica2()==$parentesco->getIdParentesco()){?>
-                               <option value="<?php echo $parentesco->getIdParentesco(); ?>" selected ><?php echo $parentesco->getNombreParentesco(); ?></option>
+                               <option value="<?php echo $parentesco->getIdParentesco(); ?>" selected ><?php echo utf8_encode($parentesco->getNombreParentesco()); ?></option>
                                <?php
                              }else{
                                  ?>
-                                 <option value="<?php echo $parentesco->getIdParentesco(); ?>" ><?php echo $parentesco->getNombreParentesco(); ?></option>
+                                 <option value="<?php echo $parentesco->getIdParentesco(); ?>" ><?php echo utf8_encode($parentesco->getNombreParentesco()); ?></option>
                                  <?php
                                }
                              }

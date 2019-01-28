@@ -199,7 +199,7 @@
                                             $entiPropietaria = $data->getEntidadACargo();
                                             foreach ($entiPropietaria as $ep) {
                                                 echo "<option value='".$ep->getIdEntidadACargo()."'>";
-                                                    echo $ep->getNombreEntidadACargo();
+                                                    echo utf8_encode($ep->getNombreEntidadACargo());
                                                 echo"</option>";
                                             }
                                         ?>

@@ -257,7 +257,7 @@
                            $regiones = $d->readRegiones();
                            foreach($regiones as $r => $region){
                            ?>
-                           <option value="<?php echo $region->getIdRegion(); ?>"><?php echo $region->getNombreRegion(); ?></option>
+                           <option value="<?php echo $region->getIdRegion(); ?>"><?php echo utf8_encode($region->getNombreRegion()); ?></option>
                            <?php
                            }
                            ?>
@@ -269,7 +269,7 @@
                                $compania = $data->readSoloCompanias();
                                foreach ($compania as $c) {
                                    echo "<option value='".$c->getIdEntidadACargo()."'>";
-                                       echo $c->getNombreEntidadACargo();
+                                       echo utf8_encode($c->getNombreEntidadACargo());
                                    echo"</option>";
                                }
                            ?>
@@ -308,7 +308,7 @@
                            $estados = $d->readEstadosDeBomberos();
                            foreach($estados as $e => $estado){
                            ?>
-                           <option value="<?php echo $estado->getIdEstado(); ?>"><?php echo $estado->getNombreEstado(); ?></option>
+                           <option value="<?php echo $estado->getIdEstado(); ?>"><?php echo utf8_encode($estado->getNombreEstado()); ?></option>
                            <?php
                            }
                            ?>
@@ -431,7 +431,7 @@
                            $parentescos = $d->readParentescos();
                            foreach($parentescos as $p => $parentesco){
                            ?>
-                           <option value="<?php echo $parentesco->getIdParentesco(); ?>"><?php echo $parentesco->getNombreParentesco(); ?></option>
+                           <option value="<?php echo $parentesco->getIdParentesco(); ?>"><?php echo utf8_encode($parentesco->getNombreParentesco()); ?></option>
                            <?php
                            }
                            ?>
@@ -510,7 +510,7 @@
                            $parentescos = $d->readParentescos();
                            foreach($parentescos as $p => $parentesco){
                            ?>
-                           <option value="<?php echo $parentesco->getIdParentesco(); ?>"><?php echo $parentesco->getNombreParentesco(); ?></option>
+                           <option value="<?php echo $parentesco->getIdParentesco(); ?>"><?php echo utf8_encode($parentesco->getNombreParentesco()); ?></option>
                            <?php
                            }
                            ?>
@@ -598,7 +598,7 @@
                            $estadosDeCursos = $d->readEstadosCurso();
                            foreach($estadosDeCursos as $ec => $estado){
                            ?>
-                           <option value="<?php echo $estado->getIdEstadoCurso(); ?>"><?php echo $estado->getNombreEstadoCurso(); ?></option>
+                           <option value="<?php echo $estado->getIdEstadoCurso(); ?>"><?php echo utf8_encode($estado->getNombreEstadoCurso()); ?></option>
                            <?php
                            }
                            ?>
@@ -680,7 +680,7 @@
                                $estadosDeCursos2 = $d->readEstadosCurso();
                                foreach($estadosDeCursos2 as $ec2 => $estado2){
                                ?>
-                               <option value="<?php echo $estado2->getIdEstadoCurso(); ?>"><?php echo $estado2->getNombreEstadoCurso(); ?></option>
+                               <option value="<?php echo $estado2->getIdEstadoCurso(); ?>"><?php echo utf8_encode($estado2->getNombreEstadoCurso()); ?></option>
                                <?php
                                }
                                ?>
@@ -762,7 +762,7 @@
                                $regiones = $d->readRegiones();
                                foreach($regiones as $r => $region){
                                ?>
-                               <option value="<?php echo $region->getIdRegion(); ?>"><?php echo $region->getNombreRegion(); ?></option>
+                               <option value="<?php echo $region->getIdRegion(); ?>"><?php echo utf8_encode($region->getNombreRegion()); ?></option>
                                <?php
                                }
                                ?>
@@ -779,7 +779,7 @@
                                $companias = $d->readSoloCompanias();
                                foreach($companias as $c => $compania){
                                ?>
-                               <option value="<?php /*echo $compania->getIdEntidadACargo(); ?>"><?php echo $compania->getNombreEntidadACargo();*/ ?></option>
+                               <option value="<?php /*echo $compania->getIdEntidadACargo(); ?>"><?php echo utf8_encode($compania->getNombreEntidadACargo());*/ ?></option>
                                <?php
                                }
                                ?>

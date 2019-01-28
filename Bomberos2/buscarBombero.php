@@ -143,7 +143,7 @@ if($_SESSION["usuarioIniciado"]!=null){
                     $tipoBombero = $data->readEstadosDeBomberos();
                     foreach ($tipoBombero as $tb) {
                         echo "<option value='".$tb->getIdEstado()."'>";
-                            echo $tb->getNombreEstado();
+                            echo utf8_encode($tb->getNombreEstado());
                         echo"</option>";
                     }
                 ?>
@@ -160,7 +160,7 @@ if($_SESSION["usuarioIniciado"]!=null){
                       $compania = $data->readSoloCompanias();
                       foreach ($compania as $c) {
                           echo "<option value='".$c->getIdEntidadACargo()."'>";
-                              echo $c->getNombreEntidadACargo();
+                              echo utf8_encode($c->getNombreEntidadACargo());
                           echo"</option>";
                       }
                   ?>
