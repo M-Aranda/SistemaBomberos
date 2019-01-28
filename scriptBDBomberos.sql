@@ -623,7 +623,7 @@ ELSEIF tipoOperacion=2 THEN
 SELECT *  FROM tbl_informacionMedica1 WHERE fk_informacion_personal_informacionMedica1=fkInfoPersonal;
 ELSEIF tipoOperacion=3 THEN
 UPDATE tbl_informacionMedica1 SET prestacionMedica_informacionMedica1=prestacionMedica, alergias_informacionMedica1=alergias, enfermedades_croncias_informacionMedica1=enfermedadesCronicas,
-fk_informacion_personal_informacionMedica1=fkInfoPersonal WHERE tbl_informacionMedica1=id;
+fk_informacion_personal_informacionMedica1=fkInfoPersonal WHERE tbl_informacionMedica1.id_informacionMedica1=id;
 ELSEIF tipoOperacion=4 THEN
 DELETE FROM tbl_informacionMedica1 WHERE tbl_informacionMedica1=id;
 ELSEIF tipoOperacion=5 THEN
@@ -632,7 +632,9 @@ END IF;
 END//
 DELIMITER ;
 
-DELIMITER // 
+
+
+DELIMITER //
 CREATE PROCEDURE CRUDInformacionMedica2 (id INT, medicamentos_habituales VARCHAR (5000), nombre_de_contacto VARCHAR (5000), telefono_de_contacto VARCHAR (5000), fkParentesco INT,
 nivel_de_actividad_fisica VARCHAR (5000), es_donante BOOLEAN, es_fumador BOOLEAN, fk_grupoSanguineo INT, fk_inforPersonal INT, tipoOperacion INT)
 BEGIN
@@ -640,11 +642,11 @@ IF tipoOperacion=1 THEN
 INSERT INTO tbl_informacionMedica2 VALUES (NULL, medicamentos_habituales, nombre_de_contacto, telefono_de_contacto, fkParentesco, nivel_de_actividad_fisica, es_donante,
  es_fumador, fk_grupoSanguineo, fk_inforPersonal );
 ELSEIF tipoOperacion=2 THEN
-SELECT * FROM tbl_informacionMedica2 WHERE fk_informacion_personal_informacionMedica2=fk_inforPersonal;
+SELECT * FROM tbl_informacionMedica2 WHERE id_informacionMedica2=id;
 ELSEIF tipoOperacion=3 THEN
 UPDATE tbl_informacionMedica2 SET medicamentos_habituales_informacionMedica2=medicamentos_habituales, nombre_de_contacto_informacionMedica2=nombre_de_contacto, telefono_de_contacto_informacionMedica2=telefono_de_contacto,
 fk_parentesco_del_contacto_informacionMedica2=fkParentesco, nivel_de_actividad_fisica_informacionMedica2=nivel_de_actividad_fisica, es_donante_informacionMedica2=es_donante,
-es_fumador_informacionMedica2=es_fumador, fk_grupo_sanguineo_informacionMedica2=fk_grupoSanguineo, fk_informacion_personal_informacionMedica2=fk_inforPersonal WHERE id_informacionMedica2=id;
+es_fumador_informacionMedica2=es_fumador, fk_grupo_sanguineo_informacionMedica2=fk_grupoSanguineo, fk_informacion_personal_informacionMedica2=fk_inforPersonal WHERE tbl_informacionMedica2.id_informacionMedica2=id;
 ELSEIF tipoOperacion=4 THEN
 DELETE FROM tbl_informacionMedica2 WHERE id_informacionMedica2=id;
 ELSEIF tipoOperacion=5 THEN
@@ -652,7 +654,6 @@ SELECT * FROM tbl_informacionMedica2 WHERE fk_informacion_personal_informacionMe
  END IF;
 END//
 DELIMITER ;
-
 
 DELIMITER // 
 CREATE PROCEDURE CRUDInformacionFamiliar (id INT, nombresInfoFlia VARCHAR (5000), fechaDeNacimientoInfoFlia DATE, fk_parentesco INT , fk_inforPersonal INT, tipoOperacion INT)

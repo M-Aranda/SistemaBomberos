@@ -46,5 +46,5 @@ $d= new Data();
 
 $d->crearInformacionHistorica($infoHistorica);
 
-header("location: ../CrearFicha.php");
+header("location: ../verFicha.php");
 ?>

@@ -45,7 +45,7 @@ $d= new Data();
 $d->crearInformacionFamiliar($infoFamiliar);
 
 
- header("location: ../CrearFicha.php");
+ header("location: ../verFicha.php");
 
 
 

@@ -74,6 +74,6 @@ $d->actualizarInformacionPersonalDeBombero($inforPersonal);
 
 
 
-header("location: ../buscarBombero.php");
+header("location: ../verFicha.php");
 
 ?>

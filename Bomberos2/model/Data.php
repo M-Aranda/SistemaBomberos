@@ -1092,6 +1092,8 @@ public function actualizarInformacionMedica1($infoMedica1){
   $query="CALL CRUDInformacionMedica1 (".$infoMedica1->getidInformacionMedica1().", '".$infoMedica1->getprestacionMedica_informacionMedica1()."', '".$infoMedica1->getalergias_informacionMedica1()."', '".$infoMedica1->getenfermedadesCronicasinformacionMedica1()."',
    ".$infoMedica1->getfkInfoPersonalinformacionMedica1().", 3);";
 
+
+
   $this->c->conectar();
   $this->c->ejecutar($query);
   $this->c->desconectar();
@@ -1100,8 +1102,10 @@ public function actualizarInformacionMedica1($infoMedica1){
 
 public function actualizarInformacionMedica2($infoMedica2){
   $query="CALL CRUDInformacionMedica2 (".$infoMedica2->getidInformacionMedica2().", '".$infoMedica2->getmedicamentosHabitualesinformacionMedica2()."', '".$infoMedica2->getnombreContactoinformacionMedica2()."', '".$infoMedica2->gettelefonoContactoinformacionMedica2()."',
-   ".$infoMedica2->getfkParentescoContactoinformacionMedica2().", '".$infoMedica2->getnivelActividadFisicainformacionMedica2()."', '".$infoMedica2->getesDonanteinformacionMedica2()."', '".$infoMedica2->getesFumadorinformacionMedica2()."',
+   ".$infoMedica2->getfkParentescoContactoinformacionMedica2().", '".$infoMedica2->getnivelActividadFisicainformacionMedica2()."', ".$infoMedica2->getesDonanteinformacionMedica2().", ".$infoMedica2->getesFumadorinformacionMedica2().",
    ".$infoMedica2->getfkGrupoSanguineoinformacionMedica2().", ".$infoMedica2->getfkInfoPersonalinformacionMedica2().", 3);";
+
+echo $query;
 
   $this->c->conectar();
   $this->c->ejecutar($query);

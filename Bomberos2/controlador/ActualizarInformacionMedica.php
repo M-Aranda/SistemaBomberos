@@ -9,11 +9,11 @@ require_once("../model/Tbl_InfoPersonal.php");
 
 
 
-$idInformacionMedica1=0;
+$idInformacionMedica1=$_REQUEST["idMedico1"];
 $prestacionMedica_informacionMedica1=$_REQUEST["txtpresmedica"];
 $alergias_informacionMedica1=$_REQUEST["txtalergias"];
 $enfermedadesCronicasinformacionMedica1=$_REQUEST["txtenfermedadescronicas"];
-$fkInfoPersonalinformacionMedica1=$_REQUEST["cboBomberoInfoMedica"];
+$fkInfoPersonalinformacionMedica1=$_REQUEST["idPersonal"];
 
 $infoMedica1=new Tbl_InfoMedica1();
 
@@ -26,12 +26,12 @@ $infoMedica1->setfkInfoPersonalinformacionMedica1($fkInfoPersonalinformacionMedi
 
 $d= new Data();
 
-$d->crearInformacionMedica1($infoMedica1);
+$d->actualizarInformacionMedica1($infoMedica1);
 
 
 
 
- $idInformacionMedica2=0;
+ $idInformacionMedica2=$_REQUEST["idMedico2"];
  $medicamentosHabitualesinformacionMedica2=$_REQUEST["txtmedicamentosHabituales"];
  $nombreContactoinformacionMedica2=$_REQUEST["txtnomContacto"];
  $telefonoContactoinformacionMedica2=$_REQUEST["txttlfcontacto"];
@@ -41,18 +41,18 @@ $d->crearInformacionMedica1($infoMedica1);
 if ($_POST['txtdonante'] == 'seleccionado') {
   $esDonanteinformacionMedica2=TRUE;
 }else {
-  $esDonanteinformacionMedica2=FALSE;
+  $esDonanteinformacionMedica2=0;
 }
 
 if ($_POST['txtfumador'] == 'seleccionado') {
   $esFumadorinformacionMedica2=TRUE;
 }else {
-  $esFumadorinformacionMedica2=FALSE;
+  $esFumadorinformacionMedica2=0;
 }
 
 
  $fkGrupoSanguineoinformacionMedica2=$_REQUEST["cboGrupoSanguineo"];
- $fkInfoPersonalinformacionMedica2=$_REQUEST["cboBomberoInfoMedica"];
+ $fkInfoPersonalinformacionMedica2=$_REQUEST["idPersonal"];
 
 
 $infoMedica2=new Tbl_InfoMedica2();
@@ -69,14 +69,11 @@ $infoMedica2->setfkGrupoSanguineoinformacionMedica2($fkGrupoSanguineoinformacion
 $infoMedica2->setfkInfoPersonalinformacionMedica2($fkInfoPersonalinformacionMedica2);
 
 
-$d->crearInformacionMedica2($infoMedica2);
+$d->actualizarInformacionMedica2($infoMedica2);
 
 
 
-header("location: ../CrearFicha.php");
-
-
-
+header("location: ../verFicha.php");
 
 
 

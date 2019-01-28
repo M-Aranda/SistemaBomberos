@@ -46,7 +46,7 @@ $d= new Data();
 $d->crearInformacionEntrenamientoEstandar($infoEntrenamientoEstandar);
 
 
-header("location: ../CrearFicha.php");
+header("location: ../verFicha.php");
 
 
 

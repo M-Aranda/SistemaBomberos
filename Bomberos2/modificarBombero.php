@@ -466,6 +466,14 @@
                    </div>
                    <div class="panel-body">
                        <div class="col-sm-6">
+
+                         <form action="controlador/actualizarInformacionMedica.php" method="post">
+
+                         <input class="form-control" value="<?php echo $infoPersonal->getIdInfoPersonal();?>"  type="hidden" name="idPersonal">
+                         <input class="form-control" value="<?php echo $infoMedica1->getidInformacionMedica1();?>"  type="hidden" name="idMedico1">
+                         <input class="form-control" value="<?php echo $infoMedica2->getidInformacionMedica2();?>"  type="hidden" name="idMedico2">
+
+
                          Prestación Médica : <input class="form-control"  value="<?php echo $infoMedica1->getprestacionMedica_informacionMedica1();?>" type="text" name="txtpresmedica" >
                          Alergias: <input class="form-control"  value="<?php echo $infoMedica1->getalergias_informacionMedica1();?>" type="text" name="txtalergias" >
                          Enfermedades Crónicas: <input class="form-control"  value="<?php echo $infoMedica1->getenfermedadesCronicasinformacionMedica1();?>" type="text" name="txtenfermedadescronicas" >
@@ -495,24 +503,23 @@
                                }
                              }
                              ?>
-                             <?php
 
-                             ?>
-                         Nivel de Actividad Fisica: <input class="form-control"  value="<?php echo $infoMedica2->getnivelActividadFisicainformacionMedica2();?>" type="text" name="txtactvfisica" >
+                          <input class="form-control"  value="<?php echo $infoMedica2->getnivelActividadFisicainformacionMedica2();?>" type="text" name="txtactvfisica" >
                          <?php
+
                          $donanteChequeado="checked";
                          $fumadorChequeado="checked";
-                        if($infoMedica2->getesDonanteinformacionMedica2()==FALSE){
-                          $donanteChequeado="";
+                        if($infoMedica2->getesDonanteinformacionMedica2()==TRUE){
+                          $donanteChequeado="0";
                         }
-                        if($infoMedica2->getesFumadorinformacionMedica2()==FALSE){
-                          $fumadorChequeado="";
+                        if($infoMedica2->getesFumadorinformacionMedica2()==TRUE){
+                          $fumadorChequeado="0";
                         }
-
 
                          ?>
-                         Donante:  <input class="form-control" type="checkbox" <?php echo $donanteChequeado;?> name="txtdonante" >
-                         Fumador: <input class="form-control" type="checkbox" <?php echo $fumadorChequeado;?> name="txtfumador" >
+
+                         Donante:  <input class="form-control" value="seleccionado" type="checkbox" <?php echo $donanteChequeado;?> name="txtdonante" >
+                         Fumador: <input class="form-control" value="seleccionado" type="checkbox" <?php echo $fumadorChequeado;?> name="txtfumador" >
                          Grupo Sanguineo: <!-- <input class="form-control" type="text" name="txtgruposanguineo"> -->
                          <select class="form-control" name="cboGrupoSanguineo" >
                            <?php
@@ -543,6 +550,7 @@
                                <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                            </center>
+                         </form>
 
                        </div>
                    </div>

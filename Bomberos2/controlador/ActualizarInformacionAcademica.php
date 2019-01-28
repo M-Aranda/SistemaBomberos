@@ -45,7 +45,7 @@ $d= new Data();
 $d->crearInformacionAcademica($infoAcademica);
 
 
-header("location: ../CrearFicha.php");
+header("location: ../verFicha.php");
 
 
 

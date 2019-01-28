@@ -53,11 +53,7 @@ $d->actualizarInformacionLaboral($infoLaboral);
 
 
 
-header("location: ../CrearFicha.php");
-
-
-
-
+header("location: ../verFicha.php");
 
 
 ?>

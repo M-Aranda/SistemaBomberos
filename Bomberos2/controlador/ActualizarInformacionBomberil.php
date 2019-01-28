@@ -54,7 +54,7 @@ $infoBomberil->setfkInfoPersonalinformacionBomberil($fk_infoPersonal);
 $d->actualizarInformacionBomberil($infoBomberil);
 
 
-header("location: ../buscarBombero.php");
+header("location: ../verFicha.php");
 
 
 ?>
