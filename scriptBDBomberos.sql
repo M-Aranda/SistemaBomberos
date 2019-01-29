@@ -1411,6 +1411,8 @@ CALL CRUDInformacionMedica2 (1,'Ninguno', 'Familiar', '96666',3, 'Sin especifica
 CALL CRUDInformacionFamiliar (1,'Alguno', '1991-12-05',1,1,1);
 CALL CRUDInformacionAcademica (1,'2019-05-06','Curso',1,1,1);
 CALL CRUDInformacionEntrenamientoEstandar (1,'2018-09-09', 'algo',1,1,1);
+CALL CRUDInformacionEntrenamientoEstandar (1,'2018-09-09', 'algo',1,1,1);
+CALL CRUDInformacionEntrenamientoEstandar (1,'2018-09-09', 'algo',1,1,1);
 CALL CRUDInformacionHistorica (1,1,'Algun cuerpo','Alguna compania','2010-10-10', 'Transferencia', 'Solicitud personal', 'No disponible', 'Algo',1,1);
 
 CALL CRUDMedida (1,'XX','SS','42','41',1);

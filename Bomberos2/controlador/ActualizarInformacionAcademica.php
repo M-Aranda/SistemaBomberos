@@ -24,11 +24,11 @@ require_once("../model/Provincia.php");
 */
 
 
- $idInformacionAcademica=0;
+ $idInformacionAcademica=$_REQUEST["idAcadem"];
  $fechaInformacionAcademica=$_REQUEST["txtfechaAcademica"];
  $actividadInformacionAcademica=$_REQUEST["txtActivdidadAcademica"];
  $fkEstadoCursoInformacionAcademica=$_REQUEST["cboEstadoCursoAcademico"];
- $fkInformacionPersonalInformacionAcademica=$_REQUEST["cboBomberoInfoAcademica"];
+ $fkInformacionPersonalInformacionAcademica=$_REQUEST["idPersonalAcadem"];
 
 
 $infoAcademica=new Tbl_InfoAcademica();
@@ -42,10 +42,10 @@ $infoAcademica->setfkInformacionPersonalInformacionAcademica($fkInformacionPerso
 
 $d= new Data();
 
-$d->crearInformacionAcademica($infoAcademica);
+$d->actualizarInformacionAcademica($infoAcademica);
 
 
-header("location: ../verFicha.php");
+header("location: ../buscarBombero.php");
 
 
 

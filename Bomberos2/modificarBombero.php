@@ -670,10 +670,11 @@
                    </div>
                    <div class="panel-body">
                        <div class="col-sm-6">
-                         Fecha: <input class="form-control" type="date" name="txtfechaAcademica" disabled>
-                         Actividad: <input class="form-control" type="text" name="txtActivdidadAcademica" disabled>
+                         <form action="controlador/ActualizarInformacionAcademica.php" method="post">
+                         Fecha: <input class="form-control" type="date" name="txtfechaAcademica" >
+                         Actividad: <input class="form-control" type="text" name="txtActivdidadAcademica" >
                          Estado:
-                         <select class="form-control" name="cboEstadoCursoAcademico" disabled>
+                         <select class="form-control" name="cboEstadoCursoAcademico" >
                            <?php
                            require_once("model/Data.php");
                            require_once("model/Tbl_EstadoCurso.php");
@@ -688,12 +689,22 @@
                            }
                            ?>
                            </select>
+
+                           <input class="form-control" value="" type="hidden" id="idAcadem" name="idAcadem">
+                           <input class="form-control" value="" type="hidden" id="idPersonalAcadem" name="idPersonalAcadem">
+                           <center> <input type="submit" name="btninfoAcademica" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+
+                           </form>
+
+
+
                          <table class="table table-striped">
                              <thead>
                                <tr>
-                                 <th>Fecha</th>
                                  <th>Actividad</th>
+                                 <th>Fecha</th>
                                  <th>Estado</th>
+                                 <th>Modificar</th>
                                </tr>
                              </thead>
                              <tbody>
@@ -708,10 +719,13 @@
 
                                  echo $fechaConvertida;?></td>
                                  <td><?php echo $d->buscarEstadoDeCursoPorId($datos->getfkEstadoCursoInformacionAcademica());?></td>
-                            <?php
-                             }
-                               ?>
+
+                               <td><input type="submit" value="Modificar" onclick="cargarIdInfoAcademica(<?php echo $datos->getIdidInformacionAcademica();?>,<?php echo $datos->getfkInformacionPersonalInformacionAcademica();?> )"></td>
+                               <?php
+                                }
+                                  ?>
                                </tr>
+
 
                              </tbody>
                            </table>
@@ -719,7 +733,6 @@
                       </div>
                       <div class="col-md-6">
                          <br><br><br><br><br><br>
-                          <center> <input type="submit" name="btninfoAcademica" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
                               <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                           </center>
@@ -1004,6 +1017,16 @@ function cargarIdInfoFamiliar(id, fkPersonal) {
             alert("Utilize los 3 campos de arriba para ingresar la nueva información");
 
           }
+
+
+
+          function cargarIdInfoAcademica(id, fkPersonal) {
+                      document.getElementById("idAcadem").value=id;
+                      document.getElementById("idPersonalAcadem").value=fkPersonal;
+
+                      alert("Utilize los 3 campos de arriba para ingresar la nueva información");
+
+                    }
 
 
 
