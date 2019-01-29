@@ -150,33 +150,38 @@ if($_SESSION["usuarioIniciado"]!=null){
                         <th>Estado</th>
                         <th>Tipo de vehiículo</th>
                         <th>Entidad a cargo</th>
+                        <th>Modificar</th>
                       </tr>
                     </thead>
                     <tbody>
                       <?php
                       foreach ($listadoDeUnidades as $u => $unidad) { ?>
                         <tr>
-                          <td><?php echo $unidad->getNombreUnidad();?><td>
-                          <td><?php echo $unidad->getaniodeFabricacion();?><td>
-                          <td><?php echo $unidad->getMarca();?><td>
-                          <td><?php echo $unidad->getNmotor();?><td>
-                          <td><?php echo $unidad->getNchasis();?><td>
-                          <td><?php echo $unidad->getNVIN();?><td>
-                          <td><?php echo $unidad->getColor();?><td>
-                          <td><?php echo $unidad->getPPu();?><td>
+                          <td><?php echo $unidad->getNombreUnidad();?></td>
+                          <td><?php echo $unidad->getaniodeFabricacion();?></td>
+                          <td><?php echo $unidad->getMarca();?></td>
+                          <td><?php echo $unidad->getNmotor();?></td>
+                          <td><?php echo $unidad->getNchasis();?></td>
+                          <td><?php echo $unidad->getNVIN();?></td>
+                          <td><?php echo $unidad->getColor();?></td>
+                          <td><?php echo $unidad->getPPu();?></td>
                           <td><?php
                           $fechaSinConvertir = $unidad->getfechaInscripcion();
                           $fechaConvertida = date("d-m-Y", strtotime($fechaSinConvertir));
-                          echo $fechaConvertida;?><td>
+                          echo $fechaConvertida;?></td>
                             <td><?php
                             $fechaSinConvertir = $unidad->getfechaAdquisicion();
                             $fechaConvertida = date("d-m-Y", strtotime($fechaSinConvertir));
-                            echo $fechaConvertida;?><td>
-                          <td><?php echo $unidad->getcapacidadOcupantes();?><td>
-                          <td><?php echo $data->buscarNombreDeEstadoDeUnidadPorId($unidad->getfkEstadoUnidad());?><td>
-                          <td><?php echo $data->buscarNombreDeTipoDeVehiculoDeUnidadPorId($unidad->getfkTipoVehiculo());?><td>
-                          <td><?php echo $data->buscarNombreDeEntidadACargoPorId($unidad->getfkEntidadPropietaria());?><td>
-
+                            echo $fechaConvertida;?></td>
+                          <td><?php echo $unidad->getcapacidadOcupantes();?></td>
+                          <td><?php echo $data->buscarNombreDeEstadoDeUnidadPorId($unidad->getfkEstadoUnidad());?></td>
+                          <td><?php echo $data->buscarNombreDeTipoDeVehiculoDeUnidadPorId($unidad->getfkTipoVehiculo());?></td>
+                          <td><?php echo $data->buscarNombreDeEntidadACargoPorId($unidad->getfkEntidadPropietaria());?></td>
+                          <td>
+                            <form action="controlador/CargarUnidadAModificar.php" method="post">
+                              <input type="hidden" value="<?php echo $unidad->getIdUnidad();?>" name="idDeUnidadAModificar">
+                              <input type="submit" value="Modificar esta unidad">
+                            </form>    </td>
 
                         </tr>
 
@@ -199,53 +204,6 @@ if($_SESSION["usuarioIniciado"]!=null){
    </div>
  </div>
 </div>
-
-<!-- Preciso el javaScript porque tengo 3 hidden con el mismo nombre, lo cual significa que el ultimo es el que se rescata
-en el controlador. Tengo 3 porque la idea era que cada uno mandara un valor distinto, pero se toma solo el ultimo. Asi que use javascript para alterar
-el valor del ultimo hidden con el numero que necesito en el handler
-
- -->
-<script src="javascript/JQuery.js"></script>
-        <script>
-
-        function porNombre() {
-          document.getElementById("tipoDeBusqueda").value = "1";
-            }
-
-        function porEstado() {
-              document.getElementById("tipoDeBusqueda").value = "2";
-                }
-
-        function porCompania() {
-                  document.getElementById("tipoDeBusqueda").value = "3";
-                    }
-
-          function alterarValor(id) {
-                      document.getElementById("idBombero").value=id;
-
-                      $.ajax({
-                        url: "iniciarFKInfoPersonalEnSesion.php",
-                        type: "POST",
-                        data:{"idEnviado":id}
-                      }).done(function(data) {
-                        console.log(data);
-                      });
-                        }
-
-
-                        function alterarValor2(id) {
-                                    document.getElementById("idBomberoAModificar").value=id;
-
-                                    $.ajax({
-                                      url: "iniciarFkInfoPersonalParaModificarBomberoEnSesion.php",
-                                      type: "POST",
-                                      data:{"idParaModificar":id}
-                                    }).done(function(data) {
-                                      console.log(data);
-                                    });
-                                      }
-
-        </script>
 
   </body>
 </html>

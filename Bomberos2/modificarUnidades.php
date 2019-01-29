@@ -26,6 +26,28 @@
      header("location: paginaError.php");
    }
  }
+
+
+if(isset($_SESSION["unidadAModificar"])){
+  $unidadAModificar=$_SESSION["unidadAModificar"];
+}else{
+  $unidadAModificar= new Tbl_Unidad();
+}
+
+
+if(isset($_SESSION["mantenciones"])){
+  $mantenciones=$_SESSION["mantenciones"];
+}else{
+  $mantenciones= array();
+}
+
+if(isset($_SESSION["carguios"])){
+  $carguios=$_SESSION["carguios"];
+}else{
+  $carguios= array();
+}
+
+
  ?>
 
 <body  background="images/fondofichaintranet.jpg">
@@ -140,7 +162,7 @@
                           <div class="col-md-11 collapse" id="unidades" >
                               <div class="panel panel-primary">
                                   <div class="panel-heading panel-title">
-                                      Modificar Unidades
+                                      Modificar Unidade
                                   </div>
                                   <div class="panel-body">
 
@@ -149,37 +171,48 @@
                                           <img src="images/avatar_opt.jpg">
                                         </div>
                                         <form action="controlador/ActualizarUnidad.php" method="post">
-                                          Unidad:
-                                          <select name="cboUnidadAModificar"  class="form-control">
-                                              <?php
+                                        <!--  Modificando unidad:
+                                          <select name="cboUnidadAModificar"  class="form-control" disabled>
+                                              <?php/*
                                                   $unidad = $data->readUnidadesVehiculos();
                                                   foreach ($unidad as $u) {
+                                                    if($u->getIdUnidad()==$unidadAModificar->getIdUnidad()){
+                                                      echo "<option value='".$u->getIdUnidad()."'>";
+                                                          echo $u->getNombreUnidad();
+                                                      echo" selected </option>";
+
+                                                    }else{
                                                       echo "<option value='".$u->getIdUnidad()."'>";
                                                           echo $u->getNombreUnidad();
                                                       echo"</option>";
+
+                                                    }
+
                                                   }
-                                              ?>
+                                          */    ?>
                                           </select>
+                                        -->
+                                          <input type="hidden" name="cboUnidadAModificar" value="<?php echo $unidadAModificar->getIdUnidad();?>">
 
 
 
-                                          Marca:<input id="nombre" type="text" name="txtmarca" class="form-control" required="">
-                                          Nº Motor:<input id="nombre" type="text" name="txtmotor" class="form-control" required="">
-                                          Nº Chasis :<input id="nombre" type="text" name="txtchasis" class="form-control" required="">
-                                          Nº VIN: <input id="nombre" type="text" name="txtvin" class="form-control" required="">
-                                          Color:<br><input id="nombre" type="text" name="txtcolor" class="form-control" required="">
-                                          PPU: <br><input id="nombre" type="text" name="txtppu" class="form-control" required="">
+                                          Marca:<input id="nombre" type="text" value="<?php echo $unidadAModificar->getMarca();?>" name="txtmarca" class="form-control" required="">
+                                          Nº Motor:<input id="nombre" type="text" value="<?php echo $unidadAModificar->getNmotor();?>" name="txtmotor" class="form-control" required="">
+                                          Nº Chasis :<input id="nombre" type="text" value="<?php echo $unidadAModificar->getNchasis();?>" name="txtchasis" class="form-control" required="">
+                                          Nº VIN: <input id="nombre" type="text" value="<?php echo $unidadAModificar->getNVIN();?>" name="txtvin" class="form-control" required="">
+                                          Color:<br><input id="nombre" type="text" value="<?php echo $unidadAModificar->getColor();?>" name="txtcolor" class="form-control" required="">
+                                          PPU: <br><input id="nombre" type="text" value="<?php echo $unidadAModificar->getPPu();?>" name="txtppu" class="form-control" required="">
 
 
 
                                       </div>
                                       <div class="col-sm-6" style="margin-left: 60px;">
 
-                                        Nombre Unidad:<input id="nombre" type="txt" class="form-control" name="txtnombreUnidad"  required="">
-                                        Año de Fabricacion:<input id="nombre" type="text" class="form-control" name="txtanioFabricacion"  required="">
-                                        Fecha de Inscripcion:<input id="nombre" type="date" class="form-control" name="txtfechainscripcion"   required="">
-                                        Fecha de Adquisición:<input id="nombre" type="date" class="form-control" name="txtfechaadquisicion" required="">
-                                        Capacidad Ocupantes :<input id="nombre" type="number" class="form-control" name="txtcapaocupantes"  required="">
+                                        Nombre Unidad:<input id="nombre" type="txt" value="<?php echo $unidadAModificar->getNombreUnidad();?>" class="form-control" name="txtnombreUnidad"  required="">
+                                        Año de Fabricacion:<input id="nombre" type="text" value="<?php echo $unidadAModificar->getaniodeFabricacion();?>" class="form-control" name="txtanioFabricacion"  required="">
+                                        Fecha de Inscripcion:<input id="nombre" type="date" value="<?php echo $unidadAModificar->getfechaInscripcion();?>" class="form-control" name="txtfechainscripcion"   required="">
+                                        Fecha de Adquisición:<input id="nombre" type="date" value="<?php echo $unidadAModificar->getfechaAdquisicion();?>" class="form-control" name="txtfechaadquisicion" required="">
+                                        Capacidad Ocupantes :<input id="nombre" type="number" value="<?php echo $unidadAModificar->getcapacidadOcupantes();?>" class="form-control" name="txtcapaocupantes"  required="">
 
                                         Estado de Unidad:
                                         <select name="unidades"  class="form-control">
@@ -251,21 +284,9 @@
 
                                       <div class="col-sm-4" >
 
-                                        <form action="controlador/CrearMantencion.php" method="post">
 
-                                          Unidad:
-                                          <select name="cboUnidades"  class="form-control">
-                                              <?php
-                                                  $unidad = $data->readUnidadesVehiculos();
-                                                  foreach ($unidad as $u) {
-                                                      echo "<option value='".$u->getIdUnidad()."'>";
-                                                          echo $u->getNombreUnidad();
-                                                      echo"</option>";
-                                                  }
-                                              ?>
-                                          </select>
-
-
+                                        <form action="controlador/ActualizarMantencion.php" method="post">
+                                          <input type="hidden" value="" name="idDeLaMantencionAModificar" id="idDeLaMantencionAModificar">
                                           Tipo Mantención:
                                           <select name="cboTipoMantencion" class="form-control">
                                               <?php
@@ -277,9 +298,9 @@
                                                   }
                                               ?>
                                           </select>
-                                          Fecha de mantención: <input id="nombre" type="date" name="fechaMantencion" class="form-control" required="">
+                                          Fecha de mantención: <input id="nombre" type="date" name="fechaMantencion" class="form-control">
 
-                                          Responsable:<input id="nombre" type="text" name="txtresponsableMantencion" class="form-control" required="">
+                                          Responsable:<input id="responsableDeMantencion" type="text" name="txtresponsableMantencion" class="form-control">
 
 
 
@@ -290,15 +311,53 @@
                                         Comentarios/Observaciones: <textarea class="form-control" Type="textarea" name="txtcomentario" ></textarea>
 
                                           <br><br>
-                                        <center> <input type="submit" name="btncrear" value="Crear mantención" class="btn button-primary" style="width: 150px;"> <span ></span>
+                                        <center> <input type="submit" name="btnModificarMantencion" value="Modificar mantención" class="btn button-primary" style="width: 150px;"> <span ></span>
                                             <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                                         </center>
                                       </form>
+
                                                                 <br>
                                       </div>
                                       <br>
                                       <br>
+
+                                      <table class="table table-striped">
+                                        <thead>
+                                          <tr>
+                                            <td>Tipo de mantención</td>
+                                            <td>Fecha de mantención</td>
+                                            <td>Responsable</td>
+                                            <td>Dirección</td>
+                                            <td>Comentarios/Observaciones</td>
+                                            <td>Modificar</td>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <?php
+                                          foreach ($mantenciones as $my => $mantencion) {?>
+                                            <tr>
+                                              <input type="hidden" value="<?php echo $mantencion->getIdMantencion();?>" name="idMantencion" id="idMantencion">
+                                              <td><?php echo $data->buscarNombreDeTipoDeMantencion($mantencion->getFk_tipo_mantencion());?></td>
+                                              <td><?php $fechaSinConvertir=$mantencion->getFecha_mantencion();
+
+                                              $fechaConvertida = date("d-m-Y", strtotime($fechaSinConvertir));
+                                              echo $fechaConvertida;
+
+                                              ?></td>
+                                              <td><?php echo $mantencion->getResponsable_mantencion();?></td>
+                                              <td><?php echo $mantencion->getDireccion_mantencion();?></td>
+                                              <td><?php echo $mantencion->getComentarios_mantencion();?></td>
+                                              <input type="hidden" value="<?php echo $mantencion->getFk_unidad();?>" name="idUnidadMantencion">
+                                              <td><input type="submit" value="Modificar" onclick="actualizarMantencion(<?php echo $mantencion->getIdMantencion();?>)"></td>
+                                            </tr>
+
+                                        <?php  }
+                                          ?>
+
+                                        </tbody>
+
+                                      </table>
 
 
                                   </div>
@@ -363,7 +422,7 @@
                                         Comentarios/Observaciones: <textarea class="form-control" Type="textarea" name="txtcomentario" ></textarea>
 
                                           <br><br>
-                                        <center> <input type="submit" name="btncrear" value="Crear carga" class="btn button-primary" style="width: 150px;"> <span ></span>
+                                        <center> <input type="submit" name="btncrear" value="Modificar carga" class="btn button-primary" style="width: 150px;"> <span ></span>
                                             <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                                         </center>
@@ -387,6 +446,28 @@
        </div>
    </div>
  </div>
+
+ <script src="javascript/JQuery.js"></script>
+ <script type="text/javascript">
+ function actualizarMantencion(id) {
+             document.getElementById("idDeLaMantencionAModificar").value=id;
+             alert("Utilize las opciones de arriba para seleccionar los nuevos datos");
+
+
+           }
+
+/*
+             $.ajax({
+               url: "iniciarFkInfoPersonalParaModificarBomberoEnSesion.php",
+               type: "POST",
+               data:{"idParaModificar":id}
+             }).done(function(data) {
+               console.log(data);
+             });
+               }
+*/
+</script>
+
 
   </body>
 </html>

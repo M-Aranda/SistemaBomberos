@@ -1451,7 +1451,19 @@ CALL CRUDInformacionHistorica (1,1,'Algun cuerpo','Alguna compania','2010-10-10'
 INSERT INTO tbl_mantencion VALUES (NULL, 1, '2018-11-11', 'Alguien', 'Algun lugar', 'Nada', 1);
 INSERT INTO tbl_mantencion VALUES (NULL, 1, '2018-11-11', 'Alguien', 'Algun lugar', 'Nada', 2);
 INSERT INTO tbl_mantencion VALUES (NULL, 1, '2018-11-11', 'Alguien', 'Algun lugar', 'Nada', 3);
+INSERT INTO tbl_mantencion VALUES (NULL, 1, '2018-11-11', 'Alguien', 'Algun lugar', 'Nada', 1);
+INSERT INTO tbl_mantencion VALUES (NULL, 1, '2018-11-11', 'Alguien', 'Algun lugar', 'Nada', 2);
+INSERT INTO tbl_mantencion VALUES (NULL, 1, '2018-11-11', 'Alguien', 'Algun lugar', 'Nada', 3);
+INSERT INTO tbl_mantencion VALUES (NULL, 1, '2018-11-11', 'Alguien', 'Algun lugar', 'Nada', 1);
+INSERT INTO tbl_mantencion VALUES (NULL, 1, '2018-11-11', 'Alguien', 'Algun lugar', 'Nada', 2);
+INSERT INTO tbl_mantencion VALUES (NULL, 1, '2018-11-11', 'Alguien', 'Algun lugar', 'Nada', 3);
 
+INSERT INTO tbl_cargio_combustible VALUES (NULL, 'Alguien', '2018-11-11', 'Algun lugar', 1, 16.5, 500,'Ninguna',1);
+INSERT INTO tbl_cargio_combustible VALUES (NULL, 'Alguien', '2018-11-11', 'Algun lugar', 1, 16.5, 500,'Ninguna',2);
+INSERT INTO tbl_cargio_combustible VALUES (NULL, 'Alguien', '2018-11-11', 'Algun lugar', 1, 16.5, 500,'Ninguna',3);
+INSERT INTO tbl_cargio_combustible VALUES (NULL, 'Alguien', '2018-11-11', 'Algun lugar', 1, 16.5, 500,'Ninguna',1);
+INSERT INTO tbl_cargio_combustible VALUES (NULL, 'Alguien', '2018-11-11', 'Algun lugar', 1, 16.5, 500,'Ninguna',2);
+INSERT INTO tbl_cargio_combustible VALUES (NULL, 'Alguien', '2018-11-11', 'Algun lugar', 1, 16.5, 500,'Ninguna',3);
 INSERT INTO tbl_cargio_combustible VALUES (NULL, 'Alguien', '2018-11-11', 'Algun lugar', 1, 16.5, 500,'Ninguna',1);
 INSERT INTO tbl_cargio_combustible VALUES (NULL, 'Alguien', '2018-11-11', 'Algun lugar', 1, 16.5, 500,'Ninguna',2);
 INSERT INTO tbl_cargio_combustible VALUES (NULL, 'Alguien', '2018-11-11', 'Algun lugar', 1, 16.5, 500,'Ninguna',3);

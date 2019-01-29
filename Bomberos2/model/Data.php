@@ -25,38 +25,8 @@ require_once("Tbl_InfoFamiliar.php");
 require_once("Tbl_InfoAcademica.php");
 require_once("Tbl_EntrenamientoEstandar.php");
 require_once("Tbl_InfoHistorica.php");
-
-
-/*
-require_once("Tbl_EstadoCivil.php");
-require_once("Tbl_Genero.php");
-require_once("Tbl_InfoPersonal.php");
-require_once("Tbl_Medida.php");
-*/
-
-/*
-require_once("Tbl_Usuario.php");
-require_once("Tbl_Compania"); (innecesario)
-
-
-require_once("Tbl_Region.php");
-require_once("Tbl_Compañia.php");
-require_once("Tbl_EstadoBombero.php");
-require_once("Tbl_Cargo.php");
-require_once("Tbl_comuna.php");
-require_once("Tbl_EntrenamientoEstandar.php");
-require_once("Tbl_EstadoCurso.php");
-require_once("Tbl_GrupoSanguineo.php");
-require_once("Tbl_InfoAcademica.php");
-require_once(".Tbl_InfoBomberil.php");
-require_once("Tbl_InfoFamiliar.php");
-require_once("Tbl_InfoHistorica.php");
-require_once("Tbl_InfoLaboral.php");
-require_once("Tbl_InfoMedica1.php");
-require_once("Tbl_InfoMedica2.php");
-require_once("Parentesco.php");
-require_once("Provincia.php");
-*/
+require_once("Tbl_Mantencion.php");
+require_once("Tbl_carguiCombustible.php");
 
 class Data{
     private $c;
@@ -1171,6 +1141,20 @@ echo $query;
   $this->c->desconectar();
 }
 
+public function actualizarMantencion($infoMantencion){
+  $query="UPDATE tbl_mantencion SET fk_tipo_mantencion=".$infoMantencion->getFk_tipo_mantencion().", fecha_mantencion='".$infoMantencion->getFecha_mantencion()."', responsable_mantencion='".$infoMantencion->getResponsable_mantencion()."',
+direccion_mantencion='".$infoMantencion->getDireccion_mantencion()."', comentarios_mantencion='".$infoMantencion->getComentarios_mantencion()."' WHERE id_mantencion=".$infoMantencion->getIdMantencion().";";
+
+echo $query;
+  $this->c->conectar();
+  $this->c->ejecutar($query);
+  $this->c->desconectar();
+}
+
+
+
+
+
 
 public function buscarNombreDeEstadoDeUnidadPorId ($idABuscar){
 $this->c->conectar();
@@ -1205,6 +1189,110 @@ while($reg = $rs->fetch_array()){
  return $info;
 }
 
+public function buscarNombreDeTipoDeMantencion ($idABuscar){
+$this->c->conectar();
+$query="SELECT nombre_tipoDeMantencion FROM tbl_tipoDeMantencion WHERE id_tipo_de_mantencion=".$idABuscar.";";
+$rs = $this->c->ejecutar($query);
+while($reg = $rs->fetch_array()){
+     $info=($reg[0]);
+ }
+ $this->c->desconectar();
+ return $info;
+}
+
+
+
+public function getUnidadPorId ($idUnidad){
+  $this->c->conectar();
+  $query="SELECT * FROM tbl_unidad WHERE id_unidad=".$idUnidad.";";
+  $rs = $this->c->ejecutar($query);
+
+  while($reg = $rs->fetch_array()){
+       $id=$reg[0];
+       $nombre=$reg[1];
+       $aniodeFabricacion=$reg[2];
+       $marca=$reg[3];
+       $Nmotor=$reg[4];
+       $Nchasis=$reg[5];
+       $NVIN=$reg[6];
+       $Color=$reg[7];
+       $PPu=$reg[8];
+       $fechaInscripcion=$reg[9];
+       $fechaAdquisicion=$reg[10];
+       $capacidadOcupantes=$reg[11];
+       $fkEstadoUnidad=$reg[12];
+       $fkTipoVehiculo=$reg[13];
+       $fkEntidadACargo=$reg[14];
+
+       $obj = new Tbl_Unidad();
+       $obj->setIdUnidad($id);
+       $obj->setNombreUnidad($nombre);
+       $obj->setaniodeFabricacion($aniodeFabricacion);
+       $obj->setMarca($marca);
+       $obj->setNmotor($Nmotor);
+       $obj->setNchasis($Nchasis);
+       $obj->setNVIN($NVIN);
+       $obj->setColor($Color);
+       $obj->setPPu($PPu);
+       $obj->setfechaInscripcion($fechaInscripcion);
+       $obj->setfechaAdquisicion($fechaAdquisicion);
+       $obj->setcapacidadOcupantes($capacidadOcupantes);
+       $obj->setfkEstadoUnidad($fkEstadoUnidad);
+       $obj->setfkTipoVehiculo($fkTipoVehiculo);
+       $obj->setfkEntidadPropietaria($fkEntidadACargo);
+
+   }
+   $this->c->desconectar();
+   return $obj;
+}
+
+
+
+
+public function buscarMantencionesDeUnidad ($idABuscar){
+  $this->c->conectar();
+  $query="SELECT * FROM tbl_mantencion WHERE fk_unidad=".$idABuscar.";";
+  $rs = $this->c->ejecutar($query);
+  $listado = array();
+  while($reg = $rs->fetch_array()){
+
+       $obj = new Tbl_Mantencion();
+       $obj->setIdMantencion($reg[0]);
+       $obj->setFk_tipo_mantencion($reg[1]);
+       $obj->setFecha_mantencion($reg[2]);
+       $obj->setResponsable_mantencion($reg[3]);
+       $obj->setDireccion_mantencion($reg[4]);
+       $obj->setComentarios_mantencion($reg[5]);
+       $obj->setFk_unidad($reg[6]);
+       $listado[]=$obj;
+   }
+   $this->c->desconectar();
+   return $listado;
+}
+
+
+public function buscarCarguiosDeUnidad ($idABuscar){
+  $this->c->conectar();
+  $query="SELECT * FROM tbl_cargio_combustible WHERE fk_unidad=".$idABuscar.";";
+  $rs = $this->c->ejecutar($query);
+  $listado = array();
+  while($reg = $rs->fetch_array()){
+
+       $obj = new Tbl_cargio_combustible();
+       $obj->setId_cargio_combustible($reg[0]);
+       $obj->setResponsable_cargio_combustible($reg[1]);
+       $obj->setFecha_cargio($reg[2]);
+       $obj->setDireccion_cargio($reg[3]);
+       $obj->setFk_tipo_combustible_cargio_combustible($reg[4]);
+       $obj->setCantidad_litros_cargio_combustible($reg[5]);
+       $obj->setPrecio_litro_cargio_combustible($reg[6]);
+       $obj->setObservacion_cargio_combustible($reg[7]);
+       $obj->setFk_unidad($reg[8]);
+       $listado[]=$obj;
+   }
+   $this->c->desconectar();
+   return $listado;
+}
 
 
     //header("location: ../Mantenedor.php");
