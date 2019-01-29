@@ -131,7 +131,7 @@ if($_SESSION["usuarioIniciado"]!=null){
       <div class="form-group" style="margin-left:50px;">
         <span><h5 style="font-weight:bold;">Bitacora de Unidad</h5></span>
 
-        <form action="controlador/crearBitacora.php" method="post" >
+        <form action="controlador/CrearBitacora.php" method="post" >
 
           Tipo de Servicio:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;

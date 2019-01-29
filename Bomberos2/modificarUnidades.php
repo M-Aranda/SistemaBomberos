@@ -133,14 +133,14 @@
 
                           <div class="col-md-20">
                               <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#unidades">
-                                Crear Unidades
+                                Modificar Unidades
                               </button>
                           </div>
 
                           <div class="col-md-11 collapse" id="unidades" >
                               <div class="panel panel-primary">
                                   <div class="panel-heading panel-title">
-                                      Crear Unidades
+                                      Modificar Unidades
                                   </div>
                                   <div class="panel-body">
 
@@ -148,7 +148,19 @@
                                         <div style="margin-left: 0px;">
                                           <img src="images/avatar_opt.jpg">
                                         </div>
-                                        <form action="controlador/CrearUnidades.php" method="post">
+                                        <form action="controlador/ActualizarUnidad.php" method="post">
+                                          Unidad:
+                                          <select name="cboUnidadAModificar"  class="form-control">
+                                              <?php
+                                                  $unidad = $data->readUnidadesVehiculos();
+                                                  foreach ($unidad as $u) {
+                                                      echo "<option value='".$u->getIdUnidad()."'>";
+                                                          echo $u->getNombreUnidad();
+                                                      echo"</option>";
+                                                  }
+                                              ?>
+                                          </select>
+
 
 
                                           Marca:<input id="nombre" type="text" name="txtmarca" class="form-control" required="">
@@ -205,7 +217,7 @@
                                         ?>
                                     </select>
                                           <br><br>
-                                        <center> <input type="submit" name="btncrear" value="Crear Unidad" class="btn button-primary" style="width: 150px;"> <span ></span>
+                                        <center> <input type="submit" name="btncrear" value="Modificar Unidad" class="btn button-primary" style="width: 150px;"> <span ></span>
                                             <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                                         </center>
@@ -226,14 +238,14 @@
 
                           <div class="col-md-20">
                               <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#mantencion">
-                                Mantención
+                                Modificar Mantención
                               </button>
                           </div>
 
                           <div class="col-md-11 collapse" id="mantencion" >
                               <div class="panel panel-primary">
                                   <div class="panel-heading panel-title">
-                                      Mantención
+                                    Modificar Mantención
                                   </div>
                                   <div class="panel-body">
 
@@ -299,14 +311,14 @@
 
                           <div class="col-md-20">
                               <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#combustible">
-                                Carguío de Combustible
+                                Modificar Carguío de Combustible
                               </button>
                           </div>
 
                           <div class="col-md-11 collapse" id="combustible" >
                               <div class="panel panel-primary">
                                   <div class="panel-heading panel-title">
-                                      Carguío de Combustible
+                                      Modificar Carguío de Combustible
                                   </div>
                                   <div class="panel-body">
 

@@ -286,6 +286,7 @@ nombre_tipo_vehiculo VARCHAR (5000),
 PRIMARY KEY(id_tipo_vehiculo)
 );
 
+
 CREATE TABLE tbl_estado_unidad (
 id_estado_unidad INT AUTO_INCREMENT,
 nombre_estado_unidad VARCHAR (5000),
@@ -735,7 +736,7 @@ END//
 DELIMITER ;
 
 
-DELIMITER //
+DELIMITER // 
 CREATE PROCEDURE CRUDUnidad (id INT, nombre VARCHAR (300), anioDeFabricacion VARCHAR (300), marca VARCHAR (300), nMotor VARCHAR (300), nChasis VARCHAR  (300),
 nVIN VARCHAR (300), color VARCHAR (300), ppu VARCHAR (300), fechaInscripcion DATE, fechaAdquisicion DATE,
 capacidadOcupantes INT, fk_estado INT, fk_tipo_vehiculo INT, fk_entidadProp INT, tipoDeOperacion INT)
@@ -749,7 +750,7 @@ SELECT * FROM tbl_unidad WHERE id_unidad=id_unidad;
 ELSEIF tipoDeOperacion= 3 THEN
 UPDATE tbl_unidad SET nombre_unidad=nombre, anioDeFabricacion_unidad=anioDeFabricacion, marca_unidad=marca, nMotor_unidad=nMotor, nChasis_unidad=nChasis,
 nVIN_unidad=nVIN, color_unidad=color, ppu_unidad=ppu, fechaInscripcion_unidad=fechaInscripcion , fechaAdquisicion_unidad=fechaAdquisicion,
-capacidadOcupantes_unidad=capacidadOcupantes , fk_estado_unidad_unidad=fk_estado , fk_tipo_vehiculo_unidad=fk_tipo_vehiculo, fk_entidadPropietaria_unidad=fk_entidadProp WHERE id_unidad=id_unidad ;
+capacidadOcupantes_unidad=capacidadOcupantes , fk_estado_unidad_unidad=fk_estado , fk_tipo_vehiculo_unidad=fk_tipo_vehiculo, fk_entidadACargo=fk_entidadProp WHERE id_unidad=id;
 ELSEIF tipoDeOperacion= 4 THEN
 DELETE FROM tbl_unidad  WHERE id_unidad=id;
 END IF;

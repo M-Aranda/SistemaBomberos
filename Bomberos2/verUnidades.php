@@ -11,22 +11,23 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+   <script src="js/bootstrap.js"></script>
 
   </head>
 
   <?php
- require_once("model/Data.php");
- require_once("model/Tbl_Usuario.php");
- $dataUsuario= new Data();
- session_start();
- if($_SESSION["usuarioIniciado"]!=null){
-   $u=$_SESSION["usuarioIniciado"];
-   if($dataUsuario->verificarSiUsuarioTienePermiso($u,8)==0){
-     header("location: paginaError.php");
-   }
- }
- ?>
+require_once("model/Data.php");
+require_once("model/Tbl_Usuario.php");
+$dataUsuario= new Data();
+session_start();
+if($_SESSION["usuarioIniciado"]!=null){
+  $u=$_SESSION["usuarioIniciado"];
+  if($dataUsuario->verificarSiUsuarioTienePermiso($u,1)==0){
+    header("location: paginaError.php");
+  }
+}
+?>
 
 <body  background="images/fondofichaintranet.jpg">
 
@@ -65,7 +66,6 @@
             <li><a href="verUnidades.php">Ver Unidades</a></li>
             <li><a href="modificarUnidades.php">Modificar</a></li>
             <li><a href="reporteUnidad.php">Reporte</a></li>
-            <li><a href="bitacoraUnidad.php">Bitacora</a></li>
           </ul>
         </li>
       </ul>
@@ -91,11 +91,8 @@
       <br>
       <button class="btn btn-danger" style="width: 150px;" style="margin-top: 400px"> <a href="controlador/CerrarSesion.php" style="text-decoration:none;color:black;">Cerrar Sesion</a> </button>
 
-
-
-
-
     </div><!-- /.navbar-collapse -->
+
   </nav>
 
   <div class = "cuerpo" style="
@@ -108,273 +105,147 @@
     margin-bottom: -1000px;
     ">
 
-    <style>
+<style>
 
-    #transparencia{
-        opacity: .80;
-        -moz-opacity: .80;
-        filter: alpha(opacity=80);
+#transparencia{
+    opacity: .80;
+    -moz-opacity: .80;
+    filter: alpha(opacity=80);
 
-    }
+}
 
-    </style>
-    <?php
-        // unir vista con el modelo sin pasar por un controlador
-        require_once("model/Data.php");
-        $data = new Data();
+</style>
+<?php
+    // unir vista con el modelo sin pasar por un controlador
+    require_once("model/Data.php");
+    $data = new Data();
+    $listadoDeUnidades= $data->readUnidadesVehiculos();
 
-    ?>
+?>
 
-    <div style="width: 800px" style="height: 900px">
-        <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
-          <div class="container">
+<div style="width: 1200px" style="height: 1500px">
+    <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
+      <div class="container">
 
-          <div style="margin-left:100px;">
+      <div class="form-group" style="margin-left:70px;">
 
-                          <div class="col-md-20">
-                              <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#unidades">
-                                Crear Unidades
-                              </button>
-                          </div>
-
-                          <div class="col-md-11 collapse" id="unidades" >
-                              <div class="panel panel-primary">
-                                  <div class="panel-heading panel-title">
-                                      Crear Unidades
-                                  </div>
-                                  <div class="panel-body">
-
-                                      <div class="col-sm-4" >
-                                        <div style="margin-left: 0px;">
-                                          <img src="images/avatar_opt.jpg">
-                                        </div>
-                                        <form action="controlador/CrearUnidades.php" method="post">
-
-
-                                          Marca:<input id="nombre" type="text" name="txtmarca" class="form-control" required="">
-                                          Nº Motor:<input id="nombre" type="text" name="txtmotor" class="form-control" required="">
-                                          Nº Chasis :<input id="nombre" type="text" name="txtchasis" class="form-control" required="">
-                                          Nº VIN: <input id="nombre" type="text" name="txtvin" class="form-control" required="">
-                                          Color:<br><input id="nombre" type="text" name="txtcolor" class="form-control" required="">
-                                          PPU: <br><input id="nombre" type="text" name="txtppu" class="form-control" required="">
+              <!--  <button class="btn btn-default" name="btnBuscarCompania" style="width: 100px; height:30px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Buscar</a> </button> -->
 
 
 
-                                      </div>
-                                      <div class="col-sm-6" style="margin-left: 60px;">
-
-                                        Nombre Unidad:<input id="nombre" type="txt" class="form-control" name="txtnombreUnidad"  required="">
-                                        Año de Fabricacion:<input id="nombre" type="text" class="form-control" name="txtanioFabricacion"  required="">
-                                        Fecha de Inscripcion:<input id="nombre" type="date" class="form-control" name="txtfechainscripcion"   required="">
-                                        Fecha de Adquisición:<input id="nombre" type="date" class="form-control" name="txtfechaadquisicion" required="">
-                                        Capacidad Ocupantes :<input id="nombre" type="number" class="form-control" name="txtcapaocupantes"  required="">
-
-                                        Estado de Unidad:
-                                        <select name="unidades"  class="form-control">
-                                            <?php
-                                                $unidad = $data->getUnidades();
-                                                foreach ($unidad as $u) {
-                                                    echo "<option value='".$u->getIdEstadoUnidad()."'>";
-                                                        echo $u->getNombreEstadoUnidad();
-                                                    echo"</option>";
-                                                }
-                                            ?>
-                                        </select>
-
-                                      Tipo de Vehiculo:
-                                      <select name="vehiculos"  class="form-control">
-                                          <?php
-                                              $vehiculo = $data->getVehiculos();
-                                              foreach ($vehiculo as $v) {
-                                                  echo "<option value='".$v->getIdTipoVehiculo()."'>";
-                                                      echo $v->getNombreTipoVehiculo();
-                                                  echo"</option>";
-                                              }
-                                          ?>
-                                      </select>
-
-                                   Entidad a Cargo:
-                                    <select name="entidad" class="form-control">
-                                        <?php
-                                            $entiPropietaria = $data->getEntidadACargo();
-                                            foreach ($entiPropietaria as $ep) {
-                                                echo "<option value='".$ep->getIdEntidadACargo()."'>";
-                                                    echo $ep->getNombreEntidadACargo();
-                                                echo"</option>";
-                                            }
-                                        ?>
-                                    </select>
-                                          <br><br>
-                                        <center> <input type="submit" name="btncrear" value="Crear Unidad" class="btn button-primary" style="width: 150px;"> <span ></span>
-                                            <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
-
-                                        </center>
-                                      </form>
-                                                                <br>
-                                      </div>
-                                      <br>
-                                      <br>
+                <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>Nombre</th>
+                        <th>Anio de fabricacion</th>
+                        <th>Marca</th>
+                        <th>Número de motor</th>
+                        <th>Número de chasis</th>
+                        <th>NVIN</th>
+                        <th>Color</th>
+                        <th>PPU</th>
+                        <th>Fecha de inscripción</th>
+                        <th>Fecha de adquisición</th>
+                        <th>Cantidad de ocupantes</th>
+                        <th>Estado</th>
+                        <th>Tipo de vehiículo</th>
+                        <th>Entidad a cargo</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php
+                      foreach ($listadoDeUnidades as $u => $unidad) { ?>
+                        <tr>
+                          <td><?php echo $unidad->getNombreUnidad();?><td>
+                          <td><?php echo $unidad->getaniodeFabricacion();?><td>
+                          <td><?php echo $unidad->getMarca();?><td>
+                          <td><?php echo $unidad->getNmotor();?><td>
+                          <td><?php echo $unidad->getNchasis();?><td>
+                          <td><?php echo $unidad->getNVIN();?><td>
+                          <td><?php echo $unidad->getColor();?><td>
+                          <td><?php echo $unidad->getPPu();?><td>
+                          <td><?php
+                          $fechaSinConvertir = $unidad->getfechaInscripcion();
+                          $fechaConvertida = date("d-m-Y", strtotime($fechaSinConvertir));
+                          echo $fechaConvertida;?><td>
+                            <td><?php
+                            $fechaSinConvertir = $unidad->getfechaAdquisicion();
+                            $fechaConvertida = date("d-m-Y", strtotime($fechaSinConvertir));
+                            echo $fechaConvertida;?><td>
+                          <td><?php echo $unidad->getcapacidadOcupantes();?><td>
+                          <td><?php echo $data->buscarNombreDeEstadoDeUnidadPorId($unidad->getfkEstadoUnidad());?><td>
+                          <td><?php echo $data->buscarNombreDeTipoDeVehiculoDeUnidadPorId($unidad->getfkTipoVehiculo());?><td>
+                          <td><?php echo $data->buscarNombreDeEntidadACargoPorId($unidad->getfkEntidadPropietaria());?><td>
 
 
-                                  </div>
-                              </div>
-                          </div>
+                        </tr>
 
 
-                          <br>
-                          <br>
+                    <?php
+                      }
 
-                          <div class="col-md-20">
-                              <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#mantencion">
-                                Mantención
-                              </button>
-                          </div>
-
-                          <div class="col-md-11 collapse" id="mantencion" >
-                              <div class="panel panel-primary">
-                                  <div class="panel-heading panel-title">
-                                      Mantención
-                                  </div>
-                                  <div class="panel-body">
-
-                                      <div class="col-sm-4" >
-
-                                        <form action="controlador/CrearMantencion.php" method="post">
-
-                                          Unidad:
-                                          <select name="cboUnidades"  class="form-control">
-                                              <?php
-                                                  $unidad = $data->readUnidadesVehiculos();
-                                                  foreach ($unidad as $u) {
-                                                      echo "<option value='".$u->getIdUnidad()."'>";
-                                                          echo $u->getNombreUnidad();
-                                                      echo"</option>";
-                                                  }
-                                              ?>
-                                          </select>
+                      ?>
 
 
-                                          Tipo Mantención:
-                                          <select name="cboTipoMantencion" class="form-control">
-                                              <?php
-                                                  $listado = $data->readTiposDeMantencion();
-                                                  foreach ($listado as $o) {
-                                                      echo "<option value='".$o->getId_tipo_de_mantencion()."'>";
-                                                          echo $o->getNombre_tipoDeMantencion();
-                                                      echo"</option>";
-                                                  }
-                                              ?>
-                                          </select>
-                                          Fecha de mantención: <input id="nombre" type="date" name="fechaMantencion" class="form-control" required="">
+                    </tbody>
+                  </table>
 
-                                          Responsable:<input id="nombre" type="text" name="txtresponsableMantencion" class="form-control" required="">
+
+      </div>
 
 
 
-                                      </div>
-                                      <div class="col-sm-6" style="margin-left: 60px;">
-
-                                        Dirección: <textarea class="form-control" Type="textarea" name="txtDireccion" ></textarea>
-                                        Comentarios/Observaciones: <textarea class="form-control" Type="textarea" name="txtcomentario" ></textarea>
-
-                                          <br><br>
-                                        <center> <input type="submit" name="btncrear" value="Crear mantención" class="btn button-primary" style="width: 150px;"> <span ></span>
-                                            <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
-
-                                        </center>
-                                      </form>
-                                                                <br>
-                                      </div>
-                                      <br>
-                                      <br>
-
-
-                                  </div>
-                              </div>
-                          </div>
-
-                          <br>
-                          <br>
-
-
-                          <div class="col-md-20">
-                              <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#combustible">
-                                Carguío de Combustible
-                              </button>
-                          </div>
-
-                          <div class="col-md-11 collapse" id="combustible" >
-                              <div class="panel panel-primary">
-                                  <div class="panel-heading panel-title">
-                                      Carguío de Combustible
-                                  </div>
-                                  <div class="panel-body">
-
-                                      <div class="col-sm-4" >
-
-                                        <form action="controlador/CrearCarguioDeCombustible.php" method="post">
-
-                                          Unidad:
-                                          <select name="cboUnidades2"  class="form-control">
-                                              <?php
-                                                  $unidad = $data->readUnidadesVehiculos();
-                                                  foreach ($unidad as $u) {
-                                                      echo "<option value='".$u->getIdUnidad()."'>";
-                                                          echo $u->getNombreUnidad();
-                                                      echo"</option>";
-                                                  }
-                                              ?>
-                                          </select>
-
-
-                                          Tipo Combustible:
-                                          <select name="cboTipoCombustible" class="form-control">
-                                              <?php
-                                                  $listado = $data->readTiposDeCombustibles();
-                                                  foreach ($listado as $o) {
-                                                      echo "<option value='".$o->getId_tipo_combustible()."'>";
-                                                          echo $o->getNombre_tipo_combustible();
-                                                      echo"</option>";
-                                                  }
-                                              ?>
-                                          </select>
-
-                                          Responsable:<input id="nombre" type="text" name="txtresponsablecombustible" class="form-control" required="">
-                                          Dirección: <textarea class="form-control" Type="textarea" name="txtDireccionCombustible" ></textarea>
-
-
-                                      </div>
-                                      <div class="col-sm-6" style="margin-left: 60px;">
-                                        Fecha:<input id="nombre" type="date" name="txtFechaCombustible" class="form-control" required="">
-                                        Cantidad:<input id="nombre" type="number" name="txtcantidad" class="form-control" required="">
-                                        Precio/Litro:<input id="nombre" type="number" name="txtpreciolitro" class="form-control" required="">
-                                        Comentarios/Observaciones: <textarea class="form-control" Type="textarea" name="txtcomentario" ></textarea>
-
-                                          <br><br>
-                                        <center> <input type="submit" name="btncrear" value="Crear carga" class="btn button-primary" style="width: 150px;"> <span ></span>
-                                            <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
-
-                                        </center>
-                                      </form>
-                                                                <br>
-                                      </div>
-                                      <br>
-                                      <br>
-
-
-                                  </div>
-                              </div>
-                          </div>
-
-
-
-
-
-
-          </div>
-       </div>
+     </div>
    </div>
  </div>
+</div>
+
+<!-- Preciso el javaScript porque tengo 3 hidden con el mismo nombre, lo cual significa que el ultimo es el que se rescata
+en el controlador. Tengo 3 porque la idea era que cada uno mandara un valor distinto, pero se toma solo el ultimo. Asi que use javascript para alterar
+el valor del ultimo hidden con el numero que necesito en el handler
+
+ -->
+<script src="javascript/JQuery.js"></script>
+        <script>
+
+        function porNombre() {
+          document.getElementById("tipoDeBusqueda").value = "1";
+            }
+
+        function porEstado() {
+              document.getElementById("tipoDeBusqueda").value = "2";
+                }
+
+        function porCompania() {
+                  document.getElementById("tipoDeBusqueda").value = "3";
+                    }
+
+          function alterarValor(id) {
+                      document.getElementById("idBombero").value=id;
+
+                      $.ajax({
+                        url: "iniciarFKInfoPersonalEnSesion.php",
+                        type: "POST",
+                        data:{"idEnviado":id}
+                      }).done(function(data) {
+                        console.log(data);
+                      });
+                        }
+
+
+                        function alterarValor2(id) {
+                                    document.getElementById("idBomberoAModificar").value=id;
+
+                                    $.ajax({
+                                      url: "iniciarFkInfoPersonalParaModificarBomberoEnSesion.php",
+                                      type: "POST",
+                                      data:{"idParaModificar":id}
+                                    }).done(function(data) {
+                                      console.log(data);
+                                    });
+                                      }
+
+        </script>
 
   </body>
 </html>

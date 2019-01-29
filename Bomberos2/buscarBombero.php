@@ -63,8 +63,8 @@ if($_SESSION["usuarioIniciado"]!=null){
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Unidades <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="crearUnidades.php">Crear</a></li>
-            <li><a href="#">Ver Unidades</a></li>
-            <li><a href="#">Modificar</a></li>
+            <li><a href="verUnidades.php">Ver Unidades</a></li>
+            <li><a href="modificarUnidades.php">Modificar</a></li>
             <li><a href="reporteUnidad.php">Reporte</a></li>
           </ul>
         </li>

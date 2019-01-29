@@ -1158,6 +1158,53 @@ public function actualizarInformacionHistorica($infoHistorica){
   $this->c->desconectar();
 }
 
+public function actualizarUnidad($infoUnidad){
+  $query="CALL CRUDUnidad (".$infoUnidad->getIdUnidad().",'".$infoUnidad->getNombreUnidad()."',
+  '".$infoUnidad->getaniodeFabricacion()."','".$infoUnidad->getMarca()."','".$infoUnidad->getNmotor()."','".$infoUnidad->getNchasis()."','".$infoUnidad->getNVIN()."',
+  '".$infoUnidad->getColor()."','".$infoUnidad->getPPu()."','".$infoUnidad->getfechaInscripcion()."','".$infoUnidad->getfechaAdquisicion()."',".$infoUnidad->getcapacidadOcupantes().",
+  ".$infoUnidad->getfkEstadoUnidad().",".$infoUnidad->getfkTipoVehiculo().",".$infoUnidad->getfkEntidadPropietaria().",3);
+";
+
+echo $query;
+  $this->c->conectar();
+  $this->c->ejecutar($query);
+  $this->c->desconectar();
+}
+
+
+public function buscarNombreDeEstadoDeUnidadPorId ($idABuscar){
+$this->c->conectar();
+$query="SELECT nombre_estado_unidad FROM tbl_estado_unidad WHERE id_estado_unidad=".$idABuscar.";";
+$rs = $this->c->ejecutar($query);
+while($reg = $rs->fetch_array()){
+     $info=($reg[0]);
+ }
+ $this->c->desconectar();
+ return $info;
+}
+
+public function buscarNombreDeTipoDeVehiculoDeUnidadPorId ($idABuscar){
+$this->c->conectar();
+$query="SELECT nombre_tipo_vehiculo FROM tbl_tipo_vehiculo WHERE id_tipo_vehiculo=".$idABuscar.";";
+$rs = $this->c->ejecutar($query);
+while($reg = $rs->fetch_array()){
+     $info=($reg[0]);
+ }
+ $this->c->desconectar();
+ return $info;
+}
+
+public function buscarNombreDeEntidadACargoPorId ($idABuscar){
+$this->c->conectar();
+$query="SELECT nombre_entidadACargo FROM tbl_entidadACargo WHERE id_entidadACargo=".$idABuscar.";";
+$rs = $this->c->ejecutar($query);
+while($reg = $rs->fetch_array()){
+     $info=($reg[0]);
+ }
+ $this->c->desconectar();
+ return $info;
+}
+
 
 
     //header("location: ../Mantenedor.php");
