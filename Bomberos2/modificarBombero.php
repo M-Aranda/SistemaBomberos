@@ -102,9 +102,21 @@
     <?php
         // unir vista con el modelo sin pasar por un controlador
         require_once("model/Data.php");
+        require_once("model/Tbl_Usuario.php");
         $data = new Data();
 
         session_start();
+
+
+        if($_SESSION["usuarioIniciado"]!=null){
+          $u=$_SESSION["usuarioIniciado"];
+          if($data->verificarSiUsuarioTienePermiso($u,3)==0){
+            header("location: paginaError.php");
+          }
+        }
+
+
+
         if($_SESSION["infoPersonalSolicitada"]!=null){
           $infoPersonal=$_SESSION["infoPersonalSolicitada"];
         }
@@ -759,10 +771,11 @@
                        </div>
                        <div class="panel-body">
                            <div class="col-sm-6">
-                             Fecha: <input class="form-control" type="date" name="txtfechaEstandar" disabled>
-                             Actividad: <input class="form-control" type="text" name="txtActividadEntrenamientoEstandar" disabled>
+                             <form action="controlador/ActualizarInfoEntrenamientoEstandar.php" method="post">
+                             Fecha: <input class="form-control" type="date" name="txtfechaEstandar" >
+                             Actividad: <input class="form-control" type="text" name="txtActividadEntrenamientoEstandar" >
                              Estado:
-                             <select class="form-control" name="cboEstadoCursoEstandar" disabled>
+                             <select class="form-control" name="cboEstadoCursoEstandar" >
                                <?php
                                require_once("model/Data.php");
                                require_once("model/Tbl_EstadoCurso.php");
@@ -776,15 +789,20 @@
                                }
                                ?>
                                </select>
+                               <input class="form-control" value="" type="hidden" id="idEntrenEstandar" name="idEntrenEstandar">
+                               <input class="form-control" value="" type="hidden" id="idPersonalEntrenamientoEstandar" name="idPersonalEntrenamientoEstandar">
+                               <center> <input type="submit" name="btninfoEstandar" value="Guardar" class="btn button-primary" style="display: none; "> <span ></span>
 
+                             </form>
 
 
                              <table class="table table-striped">
                                  <thead>
                                    <tr>
-                                     <th>Fecha</th>
                                      <th>Actividad</th>
+                                     <th>Fecha</th>
                                      <th>Estado</th>
+                                     <th>Modificar</th>
                                    </tr>
                                  </thead>
                                  <tbody>
@@ -799,6 +817,8 @@
 
                                      echo $fechaConvertida;?></td>
                                      <td><?php echo $d->buscarEstadoDeCursoPorId($datos->getFkEstadoCurso());?></td>
+                                     <td><input type="submit" value="Modificar" onclick="cargarIdInfoEntrenamientoEstandar(<?php echo $datos->getIdEntrenamientoEstandar();?>,<?php echo $datos->getFkInformacionPersonal();?> )"></td>
+
                                 <?php
                                  }
                                    ?>
@@ -810,7 +830,6 @@
                           </div>
                           <div class="col-md-6">
                              <br><br><br><br><br><br>
-                              <center> <input type="submit" name="btninfoEstandar" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
                                   <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                               </center>
@@ -838,9 +857,10 @@
                        </div>
                        <div class="panel-body" style="margin-left: -20px;">
                            <div class="col-sm-6">
+                             <form action="controlador/ActualizarInformacionHistorica.php" method="post">
 
                              Región:
-                             <select class="form-control" name="cboRegion" disabled>
+                             <select class="form-control" name="cboRegion" >
                                <?php
                                require_once("model/Data.php");
                                require_once("model/Tbl_Region.php");
@@ -849,18 +869,26 @@
                                $regiones = $d->readRegiones();
                                foreach($regiones as $r => $region){
                                ?>
-                               <option value="<?php echo $region->getIdRegion(); ?>"><?php echo $region->getNombreRegion(); ?></option>
+                               <option value="<?php echo $region->getIdRegion(); ?>"><?php echo utf8_encode($region->getNombreRegion()); ?></option>
                                <?php
                                }
                                ?>
                                </select>
 
-                             Cuerpo: <input type="text" name="txtcuerpoHistorica" class="form-control" disabled>
-                             Compañia:<input type="text" name="txtCompaniaHistorica" class="form-control" disabled>
-                             Fecha: <input type="date" name="txtfechaHistorica" class="form-control" disabled>
-                             Cargo: <input type="text" name="txtcargoHistorica" class="form-control" disabled>
-                             Motivo: <input type="text" name="txtmotivo" class="form-control" disabled>
-                             Detalle: <input type="text" name="txtdetalleHistorica" class="form-control" disabled>
+                             Cuerpo: <input type="text" name="txtcuerpoHistorico" class="form-control" >
+                             Compañia:<input type="text" name="txtCompaniaHistorica" class="form-control" >
+                             Fecha: <input type="date" name="txtfechaHistorica" class="form-control" >
+                             Premio: <input type="text" name="txtPremioInforHistorica" class="form-control" >
+                             Cargo: <input type="text" name="txtcargoHistorica" class="form-control" >
+                             Motivo: <input type="text" name="txtmotivoHistorico" class="form-control" >
+                             Detalle: <input type="text" name="txtdetalleHistorico" class="form-control" >
+
+                             <input type="hidden" name="idHistorica" id="idHistorica" class="form-control" >
+                             <input type="hidden" name="idPersonalHistorica" id="idPersonalHistorica" class="form-control" >
+
+                             <center> <input type="submit" name="btninfohistorica" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+
+                             </form>
 
 
                              <table class="table table-striped">
@@ -874,6 +902,7 @@
                                      <th>Motivo</th>
                                      <th>Detalle</th>
                                      <th>Cargo</th>
+                                     <th>Modificar</th>
                                    </tr>
                                  </thead>
                                  <tbody>
@@ -893,6 +922,7 @@
                                   <td><?php echo $info->getmotivo();   ?></td>
                                   <td><?php echo $info->getdetalle();   ?></td>
                                   <td><?php echo $info->getCargo();   ?></td>
+                                  <td><input type="submit" value="Modificar" onclick="cargarIdInfoHistorica(<?php echo $info->getIdInformacionHistorica();?>, <?php echo $info->getfkInfoPersonalinformacionHistorica();?> )"></td>
                                 </tr>
 
 
@@ -908,7 +938,6 @@
 
                           <div class="col-md-6">
                              <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-                              <center> <input type="submit" name="btninfohistorica" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
                                   <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                               </center>
@@ -1024,9 +1053,22 @@ function cargarIdInfoFamiliar(id, fkPersonal) {
                       document.getElementById("idAcadem").value=id;
                       document.getElementById("idPersonalAcadem").value=fkPersonal;
 
-                      alert("Utilize los 3 campos de arriba para ingresar la nueva información");
 
                     }
+
+
+                    function cargarIdInfoEntrenamientoEstandar(id, fkPersonal) {
+                                document.getElementById("idEntrenEstandar").value=id;
+                                document.getElementById("idPersonalEntrenamientoEstandar").value=fkPersonal;
+
+
+                              }
+
+                      function cargarIdInfoHistorica(id, fkPersonal) {
+                            document.getElementById("idHistorica").value=id;
+                            document.getElementById("idPersonalHistorica").value=fkPersonal;
+
+                              }
 
 
 

@@ -335,6 +335,7 @@ class Data{
        '".$infoHistorica->getfechaDeCambio()."', '".$infoHistorica->getPremio()."', '".$infoHistorica->getmotivo()."', '".$infoHistorica->getdetalle()."', '".$infoHistorica->getCargo()."'  , ".$infoHistorica->getfkInfoPersonalinformacionHistorica().", 1);";
 
 
+
       $this->c->conectar();
       $this->c->ejecutar($query);
       $this->c->desconectar();

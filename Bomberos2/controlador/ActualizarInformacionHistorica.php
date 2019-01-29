@@ -18,16 +18,16 @@ require_once("../model/Tbl_InfoMedica2.php");
 require_once("../model/Parentesco.php");
 require_once("../model/Provincia.php");
 */
- $idInformacionHistorica=1;
- $fkRegioninformacionHistorica=$_REQUEST["cboxRegion"];
+ $idInformacionHistorica=$_REQUEST["idHistorica"];
+ $fkRegioninformacionHistorica=$_REQUEST["cboRegion"];
  $cuerpo=$_REQUEST["txtcuerpoHistorico"];
- $compania=$_REQUEST["txtCompania"];
- $fechaDeCambio=$_REQUEST["txtfechaCambioInfoHistorica"];
+ $compania=$_REQUEST["txtCompaniaHistorica"];
+ $fechaDeCambio=$_REQUEST["txtfechaHistorica"];
  $premio=$_REQUEST["txtPremioInforHistorica"];
- $motivo=$_REQUEST["txtMotivo"];
- $detalle=$_REQUEST["txtDetalleHistorico"];
- $cargo=$_REQUEST["cboxCargo"];
- $fkInfoPersonalinformacionHistorica=$_REQUEST["cboBombero"];
+ $motivo=$_REQUEST["txtmotivoHistorico"];
+ $detalle=$_REQUEST["txtdetalleHistorico"];
+ $cargo=$_REQUEST["txtdetalleHistorico"];
+ $fkInfoPersonalinformacionHistorica=$_REQUEST["idPersonalHistorica"];
 
 $infoHistorica=new Tbl_InfoHistorica();
 
@@ -44,7 +44,7 @@ $infoHistorica->setfkInfoPersonalinformacionHistorica($fkInfoPersonalinformacion
 
 $d= new Data();
 
-$d->crearInformacionHistorica($infoHistorica);
+$d->actualizarInformacionHistorica($infoHistorica);
 
-header("location: ../verFicha.php");
+header("location: ../buscarBombero.php");
 ?>

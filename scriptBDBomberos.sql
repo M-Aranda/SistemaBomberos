@@ -334,6 +334,7 @@ FOREIGN KEY (fk_tipo_mantencion) REFERENCES tbl_tipoDeMantencion (id_tipo_de_man
 PRIMARY KEY (id_mantencion)
 );
 
+ 
 
 CREATE TABLE tbl_tipo_combustible (
 id_tipo_combustible INT AUTO_INCREMENT,
@@ -356,6 +357,7 @@ FOREIGN KEY (fk_tipo_combustible_cargio_combustible) REFERENCES tbl_tipo_combust
 FOREIGN KEY (fk_unidad) REFERENCES tbl_unidad (id_unidad),
 PRIMARY KEY (id_cargio_combustible)
 );
+
 
 CREATE TABLE tbl_tipo_servicio(
 id_tipo_servicio INT AUTO_INCREMENT,
@@ -1414,6 +1416,10 @@ CALL CRUDInformacionEntrenamientoEstandar (1,'2018-09-09', 'algo',1,1,1);
 CALL CRUDInformacionEntrenamientoEstandar (1,'2018-09-09', 'algo',1,1,1);
 CALL CRUDInformacionEntrenamientoEstandar (1,'2018-09-09', 'algo',1,1,1);
 CALL CRUDInformacionHistorica (1,1,'Algun cuerpo','Alguna compania','2010-10-10', 'Transferencia', 'Solicitud personal', 'No disponible', 'Algo',1,1);
+CALL CRUDInformacionHistorica (1,1,'Algun cuerpo','Alguna compania','2010-10-10', 'Transferencia', 'Solicitud personal', 'No disponible', 'Algo',1,1);
+CALL CRUDInformacionHistorica (1,1,'Algun cuerpo','Alguna compania','2010-10-10', 'Transferencia', 'Solicitud personal', 'No disponible', 'Algo',1,1);
+
+
 
 CALL CRUDMedida (1,'XX','SS','42','41',1);
 CALL CRUDInformacionPersonal (1,'20898088-3','Marcelo', 'Aranda', 'Tatto','1991-12-16',1,1,'1,70','80,2','cheloz_20@hotmail.com',
@@ -1440,6 +1446,14 @@ CALL CRUDInformacionFamiliar (1,'Alguno', '1991-12-05',1,3,1);
 CALL CRUDInformacionAcademica (1,'2019-05-06','Curso',1,3,1);
 CALL CRUDInformacionEntrenamientoEstandar (1,'2018-09-09', 'algo',1,3,1);
 CALL CRUDInformacionHistorica (1,1,'Algun cuerpo','Alguna compania','2010-10-10', 'Transferencia', 'Solicitud personal', 'No disponible', 'Algo',3,1);
+
+INSERT INTO tbl_mantencion VALUES (NULL, 1, '2018-11-11', 'Alguien', 'Algun lugar', 'Nada', 1);
+INSERT INTO tbl_mantencion VALUES (NULL, 1, '2018-11-11', 'Alguien', 'Algun lugar', 'Nada', 2);
+INSERT INTO tbl_mantencion VALUES (NULL, 1, '2018-11-11', 'Alguien', 'Algun lugar', 'Nada', 3);
+
+INSERT INTO tbl_cargio_combustible VALUES (NULL, 'Alguien', '2018-11-11', 'Algun lugar', 1, 16.5, 500,'Ninguna',1);
+INSERT INTO tbl_cargio_combustible VALUES (NULL, 'Alguien', '2018-11-11', 'Algun lugar', 1, 16.5, 500,'Ninguna',2);
+INSERT INTO tbl_cargio_combustible VALUES (NULL, 'Alguien', '2018-11-11', 'Algun lugar', 1, 16.5, 500,'Ninguna',3);
 
 
 /*
