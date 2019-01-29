@@ -359,12 +359,29 @@ FOREIGN KEY (fk_unidad) REFERENCES tbl_unidad (id_unidad),
 PRIMARY KEY (id_cargio_combustible)
 );
 
-
 CREATE TABLE tbl_tipo_servicio(
 id_tipo_servicio INT AUTO_INCREMENT,
 codigo_tipo_servicio VARCHAR (5000),
 nombre_tipo_servicio VARCHAR (5000),
 PRIMARY KEY (id_tipo_servicio)
+);
+
+CREATE TABLE tbl_bitacora (
+id_bitacora INT AUTO_INCREMENT,
+fecha_bitacora DATE,
+fk_tipo_de_servicio_bitacora INT,
+direccion_bitacora VARCHAR (5000),
+oficial_a_cargo_bitacora VARCHAR (5000),
+maquinista_bitacora VARCHAR (5000),
+cantidad_de_voluntarios_bitacora VARCHAR (5000),
+hora_de_salida_bitacora TIME,
+hora_de_llegada_bitacora TIME,
+kilometros_bitacora INT,
+hora_de_motor_bitacora TIME,
+fk_combustible_bitacora INT,
+hora_bomba_bitacora TIME,
+observaciones_bitacora INT,
+PRIMARY KEY (id_bitacora)
 );
 
 

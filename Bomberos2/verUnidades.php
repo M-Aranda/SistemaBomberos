@@ -23,7 +23,7 @@ $dataUsuario= new Data();
 session_start();
 if($_SESSION["usuarioIniciado"]!=null){
   $u=$_SESSION["usuarioIniciado"];
-  if($dataUsuario->verificarSiUsuarioTienePermiso($u,1)==0){
+  if($dataUsuario->verificarSiUsuarioTienePermiso($u,11)==0){
     header("location: paginaError.php");
   }
 }
@@ -66,6 +66,7 @@ if($_SESSION["usuarioIniciado"]!=null){
             <li><a href="verUnidades.php">Ver Unidades</a></li>
             <li><a href="modificarUnidades.php">Modificar</a></li>
             <li><a href="reporteUnidad.php">Reporte</a></li>
+            <li><a href="bitacoraUnidad.php">Bitacora</a></li>
           </ul>
         </li>
       </ul>

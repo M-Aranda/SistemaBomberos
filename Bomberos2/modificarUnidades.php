@@ -162,7 +162,7 @@ if(isset($_SESSION["carguios"])){
                           <div class="col-md-11 collapse" id="unidades" >
                               <div class="panel panel-primary">
                                   <div class="panel-heading panel-title">
-                                      Modificar Unidade
+                                      Modificar Unidad
                                   </div>
                                   <div class="panel-body">
 
@@ -383,19 +383,9 @@ if(isset($_SESSION["carguios"])){
 
                                       <div class="col-sm-4" >
 
-                                        <form action="controlador/CrearCarguioDeCombustible.php" method="post">
+                                        <form action="controlador/ActualizarCarguio.php" method="post">
 
-                                          Unidad:
-                                          <select name="cboUnidades2"  class="form-control">
-                                              <?php
-                                                  $unidad = $data->readUnidadesVehiculos();
-                                                  foreach ($unidad as $u) {
-                                                      echo "<option value='".$u->getIdUnidad()."'>";
-                                                          echo $u->getNombreUnidad();
-                                                      echo"</option>";
-                                                  }
-                                              ?>
-                                          </select>
+                                          <input type="hidden" name="idCarguioAModificar" id="idCarguioAModificar">
 
 
                                           Tipo Combustible:
@@ -410,15 +400,15 @@ if(isset($_SESSION["carguios"])){
                                               ?>
                                           </select>
 
-                                          Responsable:<input id="nombre" type="text" name="txtresponsablecombustible" class="form-control" required="">
+                                          Responsable:<input id="nombre" type="text" name="txtresponsablecombustible" class="form-control" >
                                           Dirección: <textarea class="form-control" Type="textarea" name="txtDireccionCombustible" ></textarea>
 
 
                                       </div>
                                       <div class="col-sm-6" style="margin-left: 60px;">
-                                        Fecha:<input id="nombre" type="date" name="txtFechaCombustible" class="form-control" required="">
-                                        Cantidad:<input id="nombre" type="number" name="txtcantidad" class="form-control" required="">
-                                        Precio/Litro:<input id="nombre" type="number" name="txtpreciolitro" class="form-control" required="">
+                                        Fecha:<input id="nombre" type="date" name="txtFechaCombustible" class="form-control" >
+                                        Cantidad:<input id="nombre" type="number" name="txtcantidad" class="form-control" >
+                                        Precio/Litro:<input id="nombre" type="number" name="txtpreciolitro" class="form-control" >
                                         Comentarios/Observaciones: <textarea class="form-control" Type="textarea" name="txtcomentario" ></textarea>
 
                                           <br><br>
@@ -428,9 +418,54 @@ if(isset($_SESSION["carguios"])){
                                         </center>
                                       </form>
                                                                 <br>
+
+
                                       </div>
                                       <br>
                                       <br>
+                                      <table class="table table-striped">
+                                        <thead>
+                                          <tr>
+                                            <td>Responsable de carguio</td>
+                                            <td>Fecha de carguio</td>
+                                            <td>Dirección de carguio</td>
+                                            <td>Tipo de combustible</td>
+                                            <td>Cantidad de litros</td>
+                                            <td>Modificar</td>
+                                            <td>Precio por litro</td>
+                                            <td>Observacion</td>
+                                            <td>Modificar</td>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <?php
+                                          foreach ($carguios as $ca => $carguio) {?>
+                                            <tr>
+                                              <input type="hidden" value="<?php echo $carguio->getId_cargio_combustible();?>" name="idCarguio" id="idCarguio">
+                                              <td><?php echo $carguio->getResponsable_cargio_combustible();?></td>
+                                              <td><?php $fechaSinConvertir=$carguio->getFecha_cargio();
+
+                                              $fechaConvertida = date("d-m-Y", strtotime($fechaSinConvertir));
+                                              echo $fechaConvertida;
+
+                                              ?></td>
+                                              <td><?php echo $carguio->getDireccion_cargio();?></td>
+                                              <td><?php echo $carguio->getFk_tipo_combustible_cargio_combustible();?></td>
+                                              <td><?php echo $carguio->getCantidad_litros_cargio_combustible();?></td>
+                                              <td><?php echo $carguio->getPrecio_litro_cargio_combustible();?></td>
+                                              <td><?php echo $carguio->getCantidad_litros_cargio_combustible();?></td>
+                                              <td><?php echo $carguio->getObservacion_cargio_combustible();?></td>
+                                              <input type="hidden" value="<?php echo $carguio->getFk_unidad();?>" name="idUnidadCarguio">
+                                              <td><input type="submit" value="Modificar" onclick="actualizarCarguio(<?php echo $carguio->getId_cargio_combustible();?>)"></td>
+                                            </tr>
+
+                                        <?php  }
+                                          ?>
+
+                                        </tbody>
+
+                                      </table>
+
 
 
                                   </div>
@@ -455,6 +490,14 @@ if(isset($_SESSION["carguios"])){
 
 
            }
+
+
+           function actualizarCarguio(id) {
+                       document.getElementById("idCarguioAModificar").value=id;
+                       alert("Utilize las opciones de arriba para seleccionar los nuevos datos");
+
+
+                     }
 
 /*
              $.ajax({

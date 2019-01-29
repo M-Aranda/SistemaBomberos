@@ -66,6 +66,7 @@
             <li><a href="verUnidades.php">Ver Unidades</a></li>
             <li><a href="modificarUnidades.php">Modificar</a></li>
             <li><a href="reporteUnidad.php">Reporte</a></li>
+            <li><a href="bitacoraUnidad.php">Bitacora</a></li>
           </ul>
         </li>
       </ul>

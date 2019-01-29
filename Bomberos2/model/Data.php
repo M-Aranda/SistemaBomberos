@@ -1152,7 +1152,16 @@ echo $query;
 }
 
 
+public function actualizarCarguio($infoCarguio){
+  $query="UPDATE tbl_cargio_combustible SET responsable_cargio_combustible='".$infoCarguio->getResponsable_cargio_combustible()."', fecha_cargio='".$infoCarguio->getFecha_cargio()."', direccion_cargio='".$infoCarguio->getDireccion_cargio()."',
+fk_tipo_combustible_cargio_combustible=".$infoCarguio->getFk_tipo_combustible_cargio_combustible().", cantidad_litros_cargio_combustible=".$infoCarguio->getCantidad_litros_cargio_combustible().", precio_litro_cargio_combustible=".$infoCarguio->getPrecio_litro_cargio_combustible().",
+ observacion_cargio_combustible='".$infoCarguio->getObservacion_cargio_combustible()."' WHERE id_cargio_combustible=".$infoCarguio->getId_cargio_combustible().";";
 
+  echo $query;
+  $this->c->conectar();
+  $this->c->ejecutar($query);
+  $this->c->desconectar();
+}
 
 
 
