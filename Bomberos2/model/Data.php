@@ -6,6 +6,7 @@ require_once("Tbl_EstadoUnidad.php");
 require_once("Tbl_TipoVehiculo.php");
 require_once("Tbl_TipoUsuario.php");
 require_once("Tbl_EntidadACargo.php");
+require_once("tbl_EntidadPropietaria.php");
 require_once("Tbl_Estado.php");
 require_once("Tbl_EstadoBombero.php");
 require_once("Tbl_Genero.php");
@@ -162,12 +163,13 @@ class Data{
     public function readSoloCompanias(){
         $lista = array();
         $this->c->conectar();
-        $select = "SELECT * FROM tbl_entidadACargo WHERE nombre_entidadACargo LIKE '%Compa%';";
+        $select = "SELECT * FROM tbl_entidadPropietaria WHERE nombre_entidadPropietaria LIKE '%Compa%';";
         $rs = $this->c->ejecutar($select);
+
         while($obj = $rs->fetch_object()){
-            $eu = new Tbl_EntidadACargo();
-            $eu->setIdEntidadACargo($obj->id_entidadACargo);
-            $eu->setNombreEntidadACargo($obj->nombre_entidadACargo);
+            $eu = new tbl_EntidadPropietaria();
+            $eu->setIdEntidadPropietaria($obj->id_entidadPropietaria);
+            $eu->setNombreEntidadPropietaria($obj->nombre_entidadPropietaria);
             array_push($lista,$eu);
         }
         $this->c->desconectar();

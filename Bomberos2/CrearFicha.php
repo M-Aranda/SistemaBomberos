@@ -14,6 +14,13 @@
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
    <script src="js/bootstrap.js"></script>
 
+
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/css/inputmask.min.css" rel="stylesheet"/>
+
+
   </head>
 
   <?php
@@ -28,6 +35,8 @@
     }
   }
   ?>
+
+
 
 <body  background="images/fondofichaintranet.jpg">
 
@@ -51,9 +60,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bomberos <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="CrearFicha.php">Crear</a></li>
-            <li><a href="verFicha.php">Ver Ficha</a></li>
             <li><a href="buscarBombero.php">Buscar</a></li>
-            <li><a href="modificarBombero.php">Modificar</a></li>
           </ul>
         </li>
       </ul>
@@ -150,22 +157,22 @@
                            <img src="images/avatar_opt.jpg">
                          </div>
                          <form action="controlador/CrearInfoPersonal.php" method="post">
-                         Talla Chaqueta/camisa : <input class="form-control" type="text" name="txtchaqueta">
-                         Talla Pantalón: <input class="form-control" type="text" name="txtpantalon">
-                         Talla buzo: <input class="form-control" type="text" name="txtbuzo">
-                         talla Calzado: <input class="form-control" type="text" name="txtcalzado">
-                         Altura :<input class="form-control" type="text" name="txtaltura">
-                         Peso: <input class="form-control" type="text" name="txtpeso">
-                         Perteneció a Brigada Juvenil? <input class="form-control" type="text" name="txtbrigada">
-                         Instructor: <input class="form-control" type="text" name="txtinstructor">
+                         Talla Chaqueta/camisa : <input class="form-control" type="text" name="txtchaqueta" required>
+                         Talla Pantalón: <input class="form-control" type="text" name="txtpantalon" required>
+                         Talla buzo: <input class="form-control" type="text" name="txtbuzo" required>
+                         talla Calzado: <input class="form-control" type="text" name="txtcalzado" required>
+                         Altura :<input class="form-control" type="text" name="txtaltura" required>
+                         Peso: <input class="form-control" type="text" name="txtpeso" required>
+                         Perteneció a Brigada Juvenil? <input class="form-control" type="text" name="txtbrigada" required>
+                         Instructor: <input class="form-control" type="text" name="txtinstructor" required>
 
                        </div>
                        <div class="col-md-5" style="margin-left: 50px;">
-                         Rut: <input class="form-control" type="text" name="txtRut">
-                         Nombre: <input class="form-control" type="text" name="txtNombre">
-                         Apellido Paterno: <input class="form-control" type="text" name="txtApePa" >
-                         Apellido Materno: <input class="form-control" name="txtApeMa">
-                         Fecha Nacimiento: <input class="form-control" name="txtFecha" type="date">
+                         Rut: <input class="form-control" type="text" name="txtRut" required onblur= "this.value = this.value.replace( /^(\d{2})(\d{3})(\d{3})(\w{1})$/, '$1.$2.$3-$4')">
+                         Nombre: <input class="form-control" type="text" name="txtNombre" required>
+                         Apellido Paterno: <input class="form-control" type="text" name="txtApePa" required>
+                         Apellido Materno: <input class="form-control" name="txtApeMa" required>
+                         Fecha Nacimiento: <input class="form-control" name="txtFecha" type="date" required>
                          Estado Civil:
                          <select class="form-control" name="cboEstadoCivil">
                          <?php
@@ -182,9 +189,9 @@
                          }
                          ?>
                          </select>
-                         Dirección: <input class="form-control" Type="text" name="txtDireccion" >
-                         Teléfonos:  <input class="form-control" type="text" name="txtTelefonos">
-                         Email: <input class="form-control" type="text" name="txtemail">
+                         Dirección: <input class="form-control" Type="text" name="txtDireccion" required>
+                         Teléfonos:  <input class="form-control" type="text" name="txtTelefonos" required>
+                         Email: <input class="form-control" type="text" name="txtemail" required>
                          Genero:
                          <select class="form-control" name="cboGenero">
                            <?php
@@ -269,19 +276,19 @@
                            <?php
                                $compania = $data->readSoloCompanias();
                                foreach ($compania as $c) {
-                                   echo "<option value='".$c->getIdEntidadACargo()."'>";
-                                       echo utf8_encode($c->getNombreEntidadACargo());
+                                   echo "<option value='".$c->getIdEntidadPropietaria()."'>";
+                                       echo utf8_encode($c->getNombreEntidadPropietaria());
                                    echo"</option>";
                                }
                            ?>
 
                          </select>
                          <br>
-                         Fecha Ingreso: <input class="form-control" type="date" name="txtfingreso">
-                         Nº Reg.General: <input class="form-control" type="number" name="txtgeneral">
+                         Fecha Ingreso: <input class="form-control" type="date" name="txtfingreso" required>
+                         Nº Reg.General: <input class="form-control" type="number" name="txtgeneral" required>
                        </div>
                        <div class="col-md-6">
-                         Cuerpo: <input class="form-control" type="text" name="txtcuerpo"> <!-- Machali-->
+                         Cuerpo: <input class="form-control" type="text" name="txtcuerpo" required> <!-- Machali-->
                          Cargo: <!-- <input class="form-control" type="text" name="txtcargo"> -->
                          <select class="form-control" name="cboCargo">
                            <?php
@@ -314,7 +321,7 @@
                            }
                            ?>
                            </select>
-                         Nº Reg.Cia: <input class="form-control" type="number" name="txtcia">
+                         Nº Reg.Cia: <input class="form-control" type="number" name="txtcia" required>
                          <br>
                          <center> <input type="submit" name="btnInfoBomberil" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
                              <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
@@ -358,18 +365,18 @@
                            }
                            ?>
                            </select>
-                         Nombre Empresa : <input class="form-control" type="text" name="txtnomempresa">
-                         Dirección Empresa: <input class="form-control" type="text" name="txtdirecempresa">
-                         Teléfono Empresa: <input class="form-control" type="text" name="txttlfempresa">
-                         Fecha Ingreso: <input class="form-control" type="date" name="txfingresoempresa">
-                         cargo : <input class="form-control" type="text" name="txtcargo">
+                         Nombre Empresa : <input class="form-control" type="text" name="txtnomempresa" required>
+                         Dirección Empresa: <input class="form-control" type="text" name="txtdirecempresa" required>
+                         Teléfono Empresa: <input class="form-control" type="text" name="txttlfempresa" required>
+                         Fecha Ingreso: <input class="form-control" type="date" name="txfingresoempresa" required>
+                         cargo : <input class="form-control" type="text" name="txtcargo" required>
 
                        </div>
                        <div class="col-md-5">
 
-                         Area/Depto de trabajo: <input class="form-control" type="text" name="txtareatrabajo">
-                         AFP: <input class="form-control" type="text" name="txtafp" >
-                         Profesión: <input class="form-control" name="txtprofesion">
+                         Area/Depto de trabajo: <input class="form-control" type="text" name="txtareatrabajo" required>
+                         AFP: <input class="form-control" type="text" name="txtafp" required>
+                         Profesión: <input class="form-control" name="txtprofesion" required>
                          <br>
                          <center> <input type="submit" name="btnInfoLaboral" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
                              <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
@@ -412,12 +419,12 @@
                            }
                            ?>
                            </select>
-                         Prestación Médica : <input class="form-control" type="text" name="txtpresmedica">
-                         Alergias: <input class="form-control" type="text" name="txtalergias">
-                         Enfermedades Crónicas: <input class="form-control" type="text" name="txtenfermedadescronicas">
-                         Medicamentos Habituales: <input class="form-control" type="text" name="txtmedicamentosHabituales">
-                         Nombre del Contacto: <input class="form-control" type="text" name="txtnomContacto">
-                         Teléfono del Contacto : <input class="form-control" type="text" name="txttlfcontacto">
+                         Prestación Médica : <input class="form-control" type="text" name="txtpresmedica" required>
+                         Alergias: <input class="form-control" type="text" name="txtalergias" required>
+                         Enfermedades Crónicas: <input class="form-control" type="text" name="txtenfermedadescronicas" required>
+                         Medicamentos Habituales: <input class="form-control" type="text" name="txtmedicamentosHabituales" required>
+                         Nombre del Contacto: <input class="form-control" type="text" name="txtnomContacto" required>
+                         Teléfono del Contacto : <input class="form-control" type="text" name="txttlfcontacto" required>
 
                        </div>
                        <div class="col-md-6">
@@ -437,9 +444,9 @@
                            }
                            ?>
                            </select>
-                         Nivel de Actividad Fisica: <input class="form-control" type="text" name="txtactvfisica">
-                         Donante: <input class="form-control" value="seleccionado" type="checkbox" name="txtdonante">
-                         Fumador: <input class="form-control" value="seleccionado" type="checkbox" name="txtfumador">
+                         Nivel de Actividad Fisica: <input class="form-control" type="text" name="txtactvfisica" required>
+                         Donante: <input class="form-control" value="seleccionado" type="checkbox" name="txtdonante" required>
+                         Fumador: <input class="form-control" value="seleccionado" type="checkbox" name="txtfumador" required>
                          Grupo Sanguineo: <!-- <input class="form-control" type="text" name="txtgruposanguineo"> -->
                          <select class="form-control" name="cboGrupoSanguineo">
                            <?php
@@ -499,8 +506,8 @@
                            }
                            ?>
                            </select>
-                         Nombre: <input class="form-control" type="text" name="txtnombreFamiliar">
-                         Fecha de Nacimiento: <input class="form-control" type="date" name="txtfechafamiliar">
+                         Nombre: <input class="form-control" type="text" name="txtnombreFamiliar" required>
+                         Fecha de Nacimiento: <input class="form-control" type="date" name="txtfechafamiliar" required>
                          Parentesco:
                          <select class="form-control" name="cboParentesco2">
                            <?php
@@ -587,8 +594,8 @@
                            }
                            ?>
                            </select>
-                         Fecha: <input class="form-control" type="date" name="txtfechaAcademica">
-                         Actividad: <input class="form-control" type="text" name="txtActivdidadAcademica">
+                         Fecha: <input class="form-control" type="date" name="txtfechaAcademica" required>
+                         Actividad: <input class="form-control" type="text" name="txtActivdidadAcademica" required>
                          Estado:
                          <select class="form-control" name="cboEstadoCursoAcademico">
                            <?php
@@ -669,8 +676,8 @@
                                }
                                ?>
                                </select>
-                             Fecha: <input class="form-control" type="date" name="txtfechaEstandar">
-                             Actividad: <input class="form-control" type="text" name="txtActividadEntrenamientoEstandar">
+                             Fecha: <input class="form-control" type="date" name="txtfechaEstandar" required>
+                             Actividad: <input class="form-control" type="text" name="txtActividadEntrenamientoEstandar" required>
                              Estado:
                              <select class="form-control" name="cboEstadoCursoEstandar">
                                <?php
@@ -769,8 +776,8 @@
                                ?>
                              </select>
 
-                             Cuerpo: <input type="text" name="txtcuerpoHistorico" class="form-control">
-                             Compañia:<input type="text" name="txtCompania" class="form-control">
+                             Cuerpo: <input type="text" name="txtcuerpoHistorico" class="form-control" required>
+                             Compañia:<input type="text" name="txtCompania" class="form-control" required>
                           <!--   <select name="cboxCompania" class="form-control">
                                <?php
                                require_once("model/Data.php");
@@ -786,7 +793,7 @@
                                ?>
                              </select>
                            -->
-                             Fecha: <input type="date" name="txtfechaCambioInfoHistorica" class="form-control">
+                             Fecha: <input type="date" name="txtfechaCambioInfoHistorica" class="form-control" required>
                              Cargo:
                              <select name="cboxCargo" class="form-control">
                                <?php
@@ -802,9 +809,9 @@
                                }
                                ?>
                              </select>
-                             Premio: <input type="text" name="txtPremioInforHistorica" class="form-control">
-                             Motivo: <input type="text" name="txtMotivo" class="form-control">
-                             Detalle: <input type="text" name="txtDetalleHistorico" class="form-control">
+                             Premio: <input type="text" name="txtPremioInforHistorica" class="form-control" required>
+                             Motivo: <input type="text" name="txtMotivo" class="form-control" required>
+                             Detalle: <input type="text" name="txtDetalleHistorico" class="form-control" required>
 
                             <!--
                              <table class="table table-striped">
