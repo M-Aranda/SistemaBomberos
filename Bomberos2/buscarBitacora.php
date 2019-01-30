@@ -125,54 +125,33 @@ if($_SESSION["usuarioIniciado"]!=null){
     <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
       <div class="container">
 
-              <span><h4 style="font-weight:bold;margin-left:300px;">Buscar Bombero</h4></span>
+              <span><h4 style="font-weight:bold;margin-left:300px;">Buscar Bitacora</h4></span>
 
       <div class="form-group" style="margin-left:50px;">
-        <span><h5 style="font-weight:bold;">Buscar por Nombre</h5></span>
+        <span><h5 style="font-weight:bold;">Buscar por Fecha</h5></span>
         <form action="controlador/BuscarBomberoPorAlgunParametro.php" method="post">
-        <form>
-        <input type="text" name="txtBuscar"  placeholder="Buscar por nombre" style="height:30px;">
+
+        <input type="date" name="txtBuscar"  placeholder="Buscar por fecha" style="height:30px;width: 175px;" >
         <input type="hidden" name="tipoDeBusqueda" value="1">
         <input class="btn btn-default" type="submit" name="btnInfoPersonal" value="Buscar" class="btn button-primary" style="width: 100px; height:30px;" style="margin-top: 400px;" onclick="porNombre()">
       <!--  <button class="btn btn-default" name="btnBuscar" style="width: 100px; height:30px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Buscar</a> </button> -->
-        <form>
+    </form>
 
         <form action="controlador/BuscarBomberoPorAlgunParametro.php" method="post">
-        <span><h5 style="font-weight:bold;">Estado de Bombero</h5></span>
-              <select name="estadoBombero" style="width:175px; height:30px;">
+        <span><h5 style="font-weight:bold;">Tipo de Servicio</h5></span>
+              <select name="tipoServicio" style="width:175px; height:30px;">
                 <?php
-                    $tipoBombero = $data->readEstadosDeBomberos();
+                    $tipoBombero = $data->readTiposDeServicios();
                     foreach ($tipoBombero as $tb) {
-                        echo "<option value='".$tb->getIdEstado()."'>";
-                            echo utf8_encode($tb->getNombreEstado());
+                        echo "<option value='".$tb->getId_tipo_servicio()."'>";
+                            echo utf8_encode($tb->getNombre_tipo_servicio());
                         echo"</option>";
                     }
                 ?>
               </select>
               <input type="hidden" name="tipoDeBusqueda" value="2">
               <input class="btn btn-default" type="submit" name="btnInfoPersonal" value="Buscar" class="btn button-primary" style="width: 100px; height:30px;" style="margin-top: 400px;" onclick="porEstado()">
-              <form>
-              <!-- <button class="btn btn-default" name="btnBuscarTipo" style="width: 100px; height:30px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Buscar</a> </button> -->
-
-              <form action="controlador/BuscarBomberoPorAlgunParametro.php" method="post">
-              <span><h5 style="font-weight:bold;">Compañia</h5></span>
-                <select name="compania" style="width:175px; height:30px;">
-                  <?php
-                      $compania = $data->readSoloCompanias();
-                      foreach ($compania as $c) {
-                          echo "<option value='".$c->getIdEntidadPropietaria()."'>";
-                              echo utf8_encode($c->getNombreEntidadPropietaria());
-                          echo"</option>";
-                      }
-                  ?>
-
-                </select>
-                <input type="hidden" id="tipoDeBusqueda" name="tipoDeBusqueda" value="3">
-                <input class="btn btn-default" type="submit" name="btnInfoPersonal" value="Buscar" class="btn button-primary" style="width: 100px; height:30px;" style="margin-top: 400px;"  onclick="porCompania()">
-              </form>
-              <!--  <button class="btn btn-default" name="btnBuscarCompania" style="width: 100px; height:30px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Buscar</a> </button> -->
-
-
+            </form>
 
                 <table class="table table-striped">
                     <thead>

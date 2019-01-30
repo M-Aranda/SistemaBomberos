@@ -62,7 +62,7 @@ if(isset($_SESSION["carguios"])){
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Sistema Bomberos</a>
+      <a href="Mantenedor.php" class="navbar-brand" href="#">Sistema Bomberos</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -82,10 +82,10 @@ if(isset($_SESSION["carguios"])){
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Unidades <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="crearUnidades.php">Crear</a></li>
-            <li><a href="verUnidades.php">Ver Unidades</a></li>
-            <li><a href="modificarUnidades.php">Modificar</a></li>
+            <li><a href="buscarUnidades.php">Buscar Unidades</a></li>
             <li><a href="reporteUnidad.php">Reporte</a></li>
             <li><a href="bitacoraUnidad.php">Bitacora</a></li>
+            <li><a href="buscarBitacora.php">Buscar Bitacora</a></li>
           </ul>
         </li>
       </ul>
@@ -131,9 +131,9 @@ if(isset($_SESSION["carguios"])){
     <style>
 
     #transparencia{
-        opacity: .80;
-        -moz-opacity: .80;
-        filter: alpha(opacity=80);
+        opacity: .85;
+        -moz-opacity: .85;
+        filter: alpha(opacity=85);
 
     }
 

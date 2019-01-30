@@ -41,7 +41,7 @@ if($_SESSION["usuarioIniciado"]!=null){
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-        <a href="Mantenedor.php" class="navbar-brand" href="#">Sistema Bomberos</a>
+      <a href="Mantenedor.php" class="navbar-brand" href="#">Sistema Bomberos</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -125,36 +125,36 @@ if($_SESSION["usuarioIniciado"]!=null){
     <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
       <div class="container">
 
-              <span><h4 style="font-weight:bold;margin-left:300px;">Buscar Bombero</h4></span>
+              <span><h4 style="font-weight:bold;margin-left:300px;">Buscar Unidades</h4></span>
 
       <div class="form-group" style="margin-left:50px;">
         <span><h5 style="font-weight:bold;">Buscar por Nombre</h5></span>
-        <form action="controlador/BuscarBomberoPorAlgunParametro.php" method="post">
+        <form action="controlador/BuscarUnidadPorAlgunParametro.php" method="post">
         <form>
         <input type="text" name="txtBuscar"  placeholder="Buscar por nombre" style="height:30px;">
         <input type="hidden" name="tipoDeBusqueda" value="1">
-        <input class="btn btn-default" type="submit" name="btnInfoPersonal" value="Buscar" class="btn button-primary" style="width: 100px; height:30px;" style="margin-top: 400px;" onclick="porNombre()">
+        <input class="btn btn-default" type="submit" name="btnbuscar" value="Buscar" class="btn button-primary" style="width: 100px; height:30px;" style="margin-top: 400px;" onclick="porNombre()">
       <!--  <button class="btn btn-default" name="btnBuscar" style="width: 100px; height:30px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Buscar</a> </button> -->
         <form>
 
-        <form action="controlador/BuscarBomberoPorAlgunParametro.php" method="post">
-        <span><h5 style="font-weight:bold;">Estado de Bombero</h5></span>
+        <form action="controlador/BuscarUnidadPorAlgunParametro.php" method="post">
+        <span><h5 style="font-weight:bold;">Estado de Unidad</h5></span>
               <select name="estadoBombero" style="width:175px; height:30px;">
                 <?php
-                    $tipoBombero = $data->readEstadosDeBomberos();
+                    $tipoBombero = $data->getUnidades();
                     foreach ($tipoBombero as $tb) {
-                        echo "<option value='".$tb->getIdEstado()."'>";
-                            echo utf8_encode($tb->getNombreEstado());
+                        echo "<option value='".$tb->getIdEstadoUnidad()."'>";
+                            echo utf8_encode($tb->getNombreEstadoUnidad());
                         echo"</option>";
                     }
                 ?>
               </select>
               <input type="hidden" name="tipoDeBusqueda" value="2">
-              <input class="btn btn-default" type="submit" name="btnInfoPersonal" value="Buscar" class="btn button-primary" style="width: 100px; height:30px;" style="margin-top: 400px;" onclick="porEstado()">
+              <input class="btn btn-default" type="submit" name="btnbuscar" value="Buscar" class="btn button-primary" style="width: 100px; height:30px;" style="margin-top: 400px;" onclick="porEstado()">
               <form>
               <!-- <button class="btn btn-default" name="btnBuscarTipo" style="width: 100px; height:30px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Buscar</a> </button> -->
 
-              <form action="controlador/BuscarBomberoPorAlgunParametro.php" method="post">
+              <form action="controlador/BuscarUnidadPorAlgunParametro.php" method="post">
               <span><h5 style="font-weight:bold;">Compañia</h5></span>
                 <select name="compania" style="width:175px; height:30px;">
                   <?php
@@ -177,11 +177,11 @@ if($_SESSION["usuarioIniciado"]!=null){
                 <table class="table table-striped">
                     <thead>
                       <tr>
-                        <th>Rut</th>
                         <th>Nombre</th>
-                        <th>APP</th>
-                        <th>Compañía</th>
-                        <th>Ver Ficha</th>
+                        <th>Estado Unidad</th>
+                        <th>Tipo Vehiculo</th>
+                        <th>Entidad a Cargo</th>
+                        <th>Ver Unidades</th>
                         <th>Modificar información</th>
                       </tr>
                     </thead>

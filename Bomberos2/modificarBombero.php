@@ -32,7 +32,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Sistema Bomberos</a>
+      <a href="Mantenedor.php" class="navbar-brand" href="#">Sistema Bomberos</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -52,10 +52,10 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Unidades <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="crearUnidades.php">Crear</a></li>
-            <li><a href="verUnidades.php">Ver Unidades</a></li>
-            <li><a href="modificarUnidades.php">Modificar</a></li>
+            <li><a href="buscarUnidades.php">Buscar Unidades</a></li>
             <li><a href="reporteUnidad.php">Reporte</a></li>
             <li><a href="bitacoraUnidad.php">Bitacora</a></li>
+            <li><a href="buscarBitacora.php">Buscar Bitacora</a></li>
           </ul>
         </li>
       </ul>
@@ -168,9 +168,9 @@
     <style>
 
     #transparencia{
-        opacity: .80;
-        -moz-opacity: .80;
-        filter: alpha(opacity=80);
+        opacity: .85;
+        -moz-opacity: .85;
+        filter: alpha(opacity=85);
 
     }
 
@@ -267,7 +267,7 @@
                              ?>
                            </select>
                            <br>
-                         <center> <input type="submit" name="btnInfoPersonal" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                         <center> <input type="submit" name="btnInfoPersonal" value="Modificar" class="btn button-primary" style="width: 150px;"> <span ></span>
                              <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                          </center>
@@ -406,7 +406,7 @@
 
                          Nº Reg.Cia: <input class="form-control" type="number" value="<?php echo $infoBomberil->getNRegCiainformacionBomberil();?>" name="txtcia" >
                          <br>
-                         <center> <input type="submit" name="btnInfoBomberil" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                         <center> <input type="submit" name="btnInfoBomberil" value="Modificar" class="btn button-primary" style="width: 150px;"> <span ></span>
                              <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                          </center>
@@ -450,7 +450,7 @@
                          AFP: <input class="form-control" value="<?php echo $infoLaboral->getafp_informacionLaboral();?>" type="text" name="txtafp" >
                          Profesión: <input class="form-control" value="<?php echo $infoLaboral->getprofesion_informacionLaboral();?>" name="txtprofesion" >
                          <br>
-                         <center> <input type="submit" name="btnInfoLaboral" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                         <center> <input type="submit" name="btnInfoLaboral" value="Modificar" class="btn button-primary" style="width: 150px;"> <span ></span>
                              <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                          </center>
@@ -557,7 +557,7 @@
                            </select>
 
                            <br>
-                           <center> <input type="submit" name="btninfoMedica" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                           <center> <input type="submit" name="btninfoMedica" value="Modificar" class="btn button-primary" style="width: 150px;"> <span ></span>
                                <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                            </center>
@@ -605,7 +605,7 @@
                          </select>
                          <input class="form-control" value="" type="hidden" id="idFamil" name="idFamil">
                          <input class="form-control" value="" type="hidden" id="idPersonalFamiliar" name="idPersonalFamiliar">
-                         <center> <input type="submit" name="btninfoFamiliar" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                         <center> <input type="submit" name="btninfoFamiliar" value="Modificar" class="btn button-primary" style="width: 150px;"> <span ></span>
                              <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                          </center>
@@ -703,7 +703,7 @@
 
                            <input class="form-control" value="" type="hidden" id="idAcadem" name="idAcadem">
                            <input class="form-control" value="" type="hidden" id="idPersonalAcadem" name="idPersonalAcadem">
-                           <center> <input type="submit" name="btninfoAcademica" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                           <center> <input type="submit" name="btninfoAcademica" value="Modificar" class="btn button-primary" style="width: 150px;"> <span ></span>
 
                            </form>
 
@@ -790,7 +790,7 @@
                                </select>
                                <input class="form-control" value="" type="hidden" id="idEntrenEstandar" name="idEntrenEstandar">
                                <input class="form-control" value="" type="hidden" id="idPersonalEntrenamientoEstandar" name="idPersonalEntrenamientoEstandar">
-                               <center> <input type="submit" name="btninfoEstandar" value="Guardar" class="btn button-primary" style="display: none; "> <span ></span>
+                               <center> <input type="submit" name="btninfoEstandar" value="Modificar" class="btn button-primary" style="display: none; "> <span ></span>
 
                              </form>
 
@@ -885,7 +885,7 @@
                              <input type="hidden" name="idHistorica" id="idHistorica" class="form-control" >
                              <input type="hidden" name="idPersonalHistorica" id="idPersonalHistorica" class="form-control" >
 
-                             <center> <input type="submit" name="btninfohistorica" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                             <center> <input type="submit" name="btninfohistorica" value="Modificar" class="btn button-primary" style="width: 150px;"> <span ></span>
 
                              </form>
 

@@ -52,10 +52,10 @@
 
                          <br>
                          <br>
-                         &nbsp;&nbsp;Contraseña: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   <input id="pass" type="password" name="usu_password" placeholder="******" required="" class="form-control" style="width: 250px; text-align: center">
+                         &nbsp;&nbsp;Contraseña: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   <input id="pass" type="password" name="usu_password" placeholder="********" max="8" required="" class="form-control" style="width: 250px; text-align: center">
                          <br>
                          <br>
-                         &nbsp; Repita Contraseña:    <input id="pass" type="password" name="usu_confirm" placeholder="******" required="" class="form-control" style="width: 250px; text-align: center">
+                         &nbsp; Repita Contraseña:    <input id="pass" type="password" name="usu_confirm" placeholder="********" max="8" required class="form-control" style="width: 250px; text-align: center">
 
                          <br>
                          <br>
@@ -71,7 +71,7 @@
                            ?>
                          </select>
                            <input type="submit" value="Crear"  name="btnAceptar"class="btn button-primary" style="width: 55px;">
-                           <button class="btn button-primary" style="width: 57px;"> <a href="Mantenedor.html" style="text-decoration:none;color:black;">Volver</a> </button>
+                           <button class="btn button-primary" style="width: 57px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>
                      </div>
 
                     </form>

@@ -147,12 +147,12 @@ class Data{
     public function getEntidadACargo(){
         $lista = array();
         $this->c->conectar();
-        $select = "SELECT * from tbl_entidadACargo;";
+        $select = "SELECT * from tbl_entidadPropietaria;";
         $rs = $this->c->ejecutar($select);
         while($obj = $rs->fetch_object()){
-            $eu = new Tbl_EntidadACargo();
-            $eu->setIdEntidadACargo($obj->id_entidadACargo);
-            $eu->setNombreEntidadACargo($obj->nombre_entidadACargo);
+            $eu = new tbl_EntidadPropietaria();
+            $eu->setIdEntidadPropietaria($obj->id_entidadPropietaria);
+            $eu->setNombreEntidadPropietaria($obj->nombre_entidadPropietaria);
             array_push($lista,$eu);
         }
         $this->c->desconectar();
@@ -580,7 +580,7 @@ class Data{
            $capacidadOcupantes=$reg[11];
            $fkEstadoUnidad=$reg[12];
            $fkTipoVehiculo=$reg[13];
-           $fkEntidadACargo=$reg[14];
+           $fkEntidadPropietaria=$reg[14];
 
            $obj = new Tbl_Unidad();
            $obj->setIdUnidad($id);
@@ -597,7 +597,7 @@ class Data{
            $obj->setcapacidadOcupantes($capacidadOcupantes);
            $obj->setfkEstadoUnidad($fkEstadoUnidad);
            $obj->setfkTipoVehiculo($fkTipoVehiculo);
-           $obj->setfkEntidadPropietaria($fkEntidadACargo);
+           $obj->setfkEntidadPropietaria($fkEntidadPropietaria);
            $listado[]=$obj;
        }
        $this->c->desconectar();
@@ -714,6 +714,7 @@ public function buscarInformacionDeBomberoParaTabla ($nombre, $id, $tipoDeBusque
 
   $rs = $this->c->ejecutar($query);
   $listado = array();
+  
   while($reg = $rs->fetch_array()){
        $rut=$reg[0];
        $nombre=$reg[1];
@@ -1191,7 +1192,7 @@ while($reg = $rs->fetch_array()){
 
 public function buscarNombreDeEntidadACargoPorId ($idABuscar){
 $this->c->conectar();
-$query="SELECT nombre_entidadACargo FROM tbl_entidadACargo WHERE id_entidadACargo=".$idABuscar.";";
+$query="SELECT nombre_entidadPropietaria FROM tbl_entidadPropietaria WHERE id_entidadPropietaria=".$idABuscar.";";
 $rs = $this->c->ejecutar($query);
 while($reg = $rs->fetch_array()){
      $info=($reg[0]);

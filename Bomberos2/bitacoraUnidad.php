@@ -42,7 +42,7 @@ if($_SESSION["usuarioIniciado"]!=null){
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Sistema Bomberos</a>
+        <a href="Mantenedor.php" class="navbar-brand" href="#">Sistema Bomberos</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -62,10 +62,10 @@ if($_SESSION["usuarioIniciado"]!=null){
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Unidades <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="crearUnidades.php">Crear</a></li>
-            <li><a href="verUnidades.php">Ver Unidades</a></li>
-            <li><a href="modificarUnidades.php">Modificar</a></li>
+            <li><a href="buscarUnidades.php">Buscar Unidades</a></li>
             <li><a href="reporteUnidad.php">Reporte</a></li>
             <li><a href="bitacoraUnidad.php">Bitacora</a></li>
+            <li><a href="buscarBitacora.php">Buscar Bitacora</a></li>
           </ul>
         </li>
       </ul>
@@ -108,9 +108,9 @@ if($_SESSION["usuarioIniciado"]!=null){
 <style>
 
 #transparencia{
-    opacity: .80;
-    -moz-opacity: .80;
-    filter: alpha(opacity=80);
+    opacity: .85;
+    -moz-opacity: .85;
+    filter: alpha(opacity=85);
 
 }
 
@@ -147,44 +147,44 @@ if($_SESSION["usuarioIniciado"]!=null){
           </select>
 
         &nbsp;&nbsp;&nbsp;Fecha:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-         <input type="date" name="txtFechaServicio" ><br><br>
+         <input type="date" name="txtFechaServicio" required><br><br>
 
           Direccion:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-           <input Type="textarea" name="txtDireccionServicio" ><br><br>
+           <input Type="textarea" name="txtDireccionServicio" required ><br><br>
 
           Oficial a Cargo:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;
-          <input type="text" name="txtoficialCargo" >
+          <input type="text" name="txtoficialCargo" required>
 
         &nbsp;&nbsp;&nbsp;Maquinista: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="txtmaquinista" > <br><br>
 
           Nº Voluntarios:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;&nbsp;
-          <input type="text" name="txtvoluntarios" ><br><br>
+          <input type="text" name="txtvoluntarios" required><br><br>
 
           Hora de Salida:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;
-          <input type="text" name="txtsalida" >&nbsp; /&nbsp;
+          <input type="text" name="txtsalida"required >&nbsp; /&nbsp;
 
-          Hora de Llegada: <input type="text" name="txtsalida" > <br><br>
+          Hora de Llegada: <input type="text" name="txtLlegada"required > <br><br>
 
           Kilometros:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-           <input type="text" name="txtkilometros" >
+           <input type="text" name="txtkilometros" required >
 
-        &nbsp;&nbsp;&nbsp;Hora de Motor: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="txthoramotor" ><br><br>
+        &nbsp;&nbsp;&nbsp;Hora de Motor: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="txthoramotor" required><br><br>
 
           Combustible:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-           <input type="text" name="txtCombustibleServicio">
+           <input type="text" name="txtCombustibleServicio" required>
 
-        &nbsp;&nbsp;&nbsp;Hora Bomba:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="txtBomba" ><br><br>
+        &nbsp;&nbsp;&nbsp;Hora Bomba:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="txtBomba" required ><br><br>
 
-          Carga de Combustible(Litros): <input type="text" name="txtcargaCombustible"><br><br>
+          Carga de Combustible(Litros): <input type="text" name="txtcargaCombustible" required><br><br>
 
           Observaciones:<br>
-           <textarea  Type="textarea" name="txtObservaciones" style="width:175px; height:30px;"></textarea>
+           <textarea  Type="textarea" name="txtObservaciones" style="width:670px; height:30px;"></textarea>
 
           <center> <input type="submit" name="btncrear" value="Crear Servicio" class="btn button-primary" style="width: 150px;"> <span ></span>
               <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->

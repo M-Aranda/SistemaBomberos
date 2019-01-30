@@ -40,7 +40,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Sistema Bomberos</a>
+      <a href="Mantenedor.php" class="navbar-brand" href="#">Sistema Bomberos</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -60,10 +60,10 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Unidades <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="crearUnidades.php">Crear</a></li>
-            <li><a href="verUnidades.php">Ver Unidades</a></li>
-            <li><a href="modificarUnidades.php">Modificar</a></li>
+            <li><a href="buscarUnidades.php">Buscar Unidades</a></li>
             <li><a href="reporteUnidad.php">Reporte</a></li>
             <li><a href="bitacoraUnidad.php">Bitacora</a></li>
+            <li><a href="buscarBitacora.php">Buscar Bitacora</a></li>
           </ul>
         </li>
       </ul>
@@ -109,9 +109,9 @@
     <style>
 
     #transparencia{
-        opacity: .80;
-        -moz-opacity: .80;
-        filter: alpha(opacity=80);
+        opacity: .85;
+        -moz-opacity: .85;
+        filter: alpha(opacity=85);
 
     }
 
@@ -165,7 +165,7 @@
                                         Año de Fabricacion:<input id="nombre" type="text" class="form-control" name="txtanioFabricacion"  required="">
                                         Fecha de Inscripcion:<input id="nombre" type="date" class="form-control" name="txtfechainscripcion"   required="">
                                         Fecha de Adquisición:<input id="nombre" type="date" class="form-control" name="txtfechaadquisicion" required="">
-                                        Capacidad Ocupantes :<input id="nombre" type="number" class="form-control" name="txtcapaocupantes"  required="">
+                                        Capacidad Ocupantes :<input id="nombre" type="number" class="form-control" name="txtcapaocupantes"  required="" min="1" pattern="^[0-9]+" onkeydown="javascript: return event.keyCode == 69 ? false : true">
 
                                         Estado de Unidad:
                                         <select name="unidades"  class="form-control">
@@ -196,8 +196,8 @@
                                         <?php
                                             $entiPropietaria = $data->getEntidadACargo();
                                             foreach ($entiPropietaria as $ep) {
-                                                echo "<option value='".$ep->getIdEntidadACargo()."'>";
-                                                    echo utf8_encode($ep->getNombreEntidadACargo());
+                                                echo "<option value='".$ep->getIdEntidadPropietaria()."'>";
+                                                    echo utf8_encode($ep->getNombreEntidadPropietaria());
                                                 echo"</option>";
                                             }
                                         ?>
@@ -344,8 +344,8 @@
                                       </div>
                                       <div class="col-sm-6" style="margin-left: 60px;">
                                         Fecha:<input id="nombre" type="date" name="txtFechaCombustible" class="form-control" required="">
-                                        Cantidad:<input id="nombre" type="number" name="txtcantidad" class="form-control" required="">
-                                        Precio/Litro:<input id="nombre" type="number" name="txtpreciolitro" class="form-control" required="">
+                                        Cantidad:<input id="nombre" type="number" name="txtcantidad" class="form-control" required="" min="1" pattern="^[0-9]+" onkeydown="javascript: return event.keyCode == 69 ? false : true">
+                                        Precio/Litro:<input id="nombre" type="number" name="txtpreciolitro" class="form-control" required="" min="1" pattern="^[0-9]+" onkeydown="javascript: return event.keyCode == 69 ? false : true">
                                         Comentarios/Observaciones: <textarea class="form-control" Type="textarea" name="txtcomentario" ></textarea>
 
                                           <br><br>

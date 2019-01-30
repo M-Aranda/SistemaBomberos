@@ -32,7 +32,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Sistema Bomberos</a>
+      <a href="Mantenedor.php" class="navbar-brand" href="#">Sistema Bomberos</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -52,10 +52,11 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Unidades <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="crearUnidades.php">Crear</a></li>
-            <li><a href="verUnidades.php">Ver Unidades</a></li>
-            <li><a href="modificarUnidades.php">Modificar</a></li>
+            <li><a href="buscarUnidades.php">Buscar Unidades</a></li>
             <li><a href="reporteUnidad.php">Reporte</a></li>
             <li><a href="bitacoraUnidad.php">Bitacora</a></li>
+            <li><a href="buscarBitacora.php">Buscar Bitacora</a></li>
+
           </ul>
         </li>
       </ul>
@@ -88,6 +89,49 @@
     </div><!-- /.navbar-collapse -->
   </nav>
 
-  </div>
+  <div class = "cuerpo" style="
+    margin-left: 20%;
+    float: left;
+    width: 75%;
+    padding-left: 5%;
+    padding-top: -100%;
+    margin-top: -600px;
+    margin-bottom: -1000px;
+    ">
+
+<style>
+
+#transparencia{
+    opacity: .85;
+    -moz-opacity: .85;
+    filter: alpha(opacity=85);
+
+}
+
+</style>
+<?php
+    // unir vista con el modelo sin pasar por un controlador
+    require_once("model/Data.php");
+    $data = new Data();
+
+?>
+
+<div style="width: 800px" style="height: 900px">
+    <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
+      <div class="container">
+
+      <div class="form-group" style="margin-left:50px;">
+
+        Sistema de bomberos<br>
+        "Primera Compañia de Machali"
+
+      </div>
+
+     </div>
+   </div>
+ </div>
+</div>
+
+
   </body>
 </html>
