@@ -117,8 +117,8 @@
 
         <span><h5 style="font-weight:bold;">Reporte Unidades</h5></span>
 
-        Unidad:
-        <select name="cboUnidades"  class="form-control">
+        Unidad:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <select name="cboUnidades" style="width: 180px;" >
             <?php
                 $unidad = $data->readUnidadesVehiculos();
                 foreach ($unidad as $u) {
@@ -128,12 +128,12 @@
                 }
             ?>
         </select>
-        <br>
-        Fecha Inicio:<input type="date"  name="txtfechainicio">  /
-        Fecha Final: <input type="date"  name="txtfechafinal">
-        <br>
+        <br><br>
+        Fecha Inicio:&nbsp;&nbsp;<input type="date"  name="txtfechainicio" style="width: 180px;">  /
+        Fecha Final: <input type="date"  name="txtfechafinal" style="width: 180px;">
+        <br><br>
         Tipo Servicio:
-        <select class="form-control" name="cboTiposDeServicios">
+        <select  name="cboTiposDeServicios" style="width: 180px;">
         <?php
 
 
@@ -146,6 +146,7 @@
         ?>
         </select>
         <br><br>
+
 
         <table class="table table-striped">
             <thead>
