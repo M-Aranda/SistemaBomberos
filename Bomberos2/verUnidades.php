@@ -64,7 +64,6 @@ if($_SESSION["usuarioIniciado"]!=null){
             <li><a href="buscarUnidades.php">Buscar Unidades</a></li>
             <li><a href="reporteUnidad.php">Reporte</a></li>
             <li><a href="bitacoraUnidad.php">Bitacora</a></li>
-
             <li><a href="buscarBitacora.php">Buscar Bitacora</a></li>
           </ul>
         </li>

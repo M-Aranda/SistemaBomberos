@@ -3,10 +3,13 @@
 require_once("Conexion.php");
 require_once("Tbl_Usuario.php");
 require_once("Tbl_EstadoUnidad.php");
+require_once("Tbl_UnidadMedida.php");
+require_once("Tbl_TipoBodega.php");
+require_once("Tbl_UbicacionFisica.php");
+require_once("Tbl_MaterialMenor.php");
 require_once("Tbl_TipoVehiculo.php");
 require_once("Tbl_TipoUsuario.php");
 require_once("Tbl_EntidadACargo.php");
-require_once("tbl_EntidadPropietaria.php");
 require_once("Tbl_Estado.php");
 require_once("Tbl_EstadoBombero.php");
 require_once("Tbl_Genero.php");
@@ -147,12 +150,12 @@ class Data{
     public function getEntidadACargo(){
         $lista = array();
         $this->c->conectar();
-        $select = "SELECT * from tbl_entidadPropietaria;";
+        $select = "SELECT * from tbl_entidadACargo;";
         $rs = $this->c->ejecutar($select);
         while($obj = $rs->fetch_object()){
-            $eu = new tbl_EntidadPropietaria();
-            $eu->setIdEntidadPropietaria($obj->id_entidadPropietaria);
-            $eu->setNombreEntidadPropietaria($obj->nombre_entidadPropietaria);
+            $eu = new Tbl_EntidadACargo();
+            $eu->setIdEntidadACargo($obj->id_entidadACargo);
+            $eu->setNombreEntidadACargo($obj->nombre_entidadACargo);
             array_push($lista,$eu);
         }
         $this->c->desconectar();
@@ -163,13 +166,13 @@ class Data{
     public function readSoloCompanias(){
         $lista = array();
         $this->c->conectar();
-        $select = "SELECT * FROM tbl_entidadPropietaria WHERE nombre_entidadPropietaria LIKE '%Compa%';";
+        $select = "SELECT * FROM tbl_entidadACargo WHERE nombre_entidadACargo LIKE '%Compa%';";
         $rs = $this->c->ejecutar($select);
 
         while($obj = $rs->fetch_object()){
-            $eu = new tbl_EntidadPropietaria();
-            $eu->setIdEntidadPropietaria($obj->id_entidadPropietaria);
-            $eu->setNombreEntidadPropietaria($obj->nombre_entidadPropietaria);
+            $eu = new Tbl_EntidadACargo();
+            $eu->setIdEntidadACargo($obj->id_entidadACargo);
+            $eu->setNombreEntidadACargo($obj->nombre_entidadACargo);
             array_push($lista,$eu);
         }
         $this->c->desconectar();
@@ -714,7 +717,7 @@ public function buscarInformacionDeBomberoParaTabla ($nombre, $id, $tipoDeBusque
 
   $rs = $this->c->ejecutar($query);
   $listado = array();
-  
+
   while($reg = $rs->fetch_array()){
        $rut=$reg[0];
        $nombre=$reg[1];
@@ -1306,8 +1309,80 @@ public function buscarCarguiosDeUnidad ($idABuscar){
    return $listado;
 }
 
+public function getMedidas(){
 
-    //header("location: ../Mantenedor.php");
+  $lista = array();
+  $this->c->conectar();
+
+  $select = "SELECT * from tbl_unidad_de_medida;";
+
+  $rs = $this->c->ejecutar($select);
+  while($obj = $rs->fetch_object()){
+
+      $tu = new Tbl_UnidadMedida();
+
+      $tu->setidUnidadMedida($obj->id_unidad_de_medida);
+      $tu->setnombreUnidadMedida($obj->nombre_unidad_de_medida);
+
+
+      array_push($lista,$tu);
+  }
+
+  $this->c->desconectar();
+  return $lista;
+
+
+}
+
+public function getUbicacionFisica(){
+
+  $lista = array();
+  $this->c->conectar();
+
+  $select = "SELECT * from tbl_ubicacion_fisica;";
+
+  $rs = $this->c->ejecutar($select);
+  while($obj = $rs->fetch_object()){
+
+      $tu = new Tbl_UbicacionFisica();
+
+      $tu->setidUbicacionFisica($obj->id_ubicacion_fisica);
+      $tu->setnombreUbicacionFisica($obj->nombre_ubicacion_fisica);
+
+
+      array_push($lista,$tu);
+  }
+
+  $this->c->desconectar();
+  return $lista;
+
+
+}
+
+public function getTipoBodega(){
+
+  $lista = array();
+  $this->c->conectar();
+
+  $select = "SELECT * from tbl_tipo_de_bodega;";
+
+  $rs = $this->c->ejecutar($select);
+  while($obj = $rs->fetch_object()){
+
+      $tu = new Tbl_TipoBodega();
+
+      $tu->setidTipoBodega($obj->id_tipo_de_bodega);
+      $tu->setnombreTipoBodega($obj->nombre_tipo_de_bodega);
+
+
+      array_push($lista,$tu);
+  }
+
+  $this->c->desconectar();
+  return $lista;
+
+
+}
 
 }
 

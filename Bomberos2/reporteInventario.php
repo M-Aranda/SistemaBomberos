@@ -16,20 +16,6 @@
 
   </head>
 
-  <?php
-/*
-require_once("model/Data.php");
-require_once("model/Tbl_Usuario.php");
-$dataUsuario= new Data();
-session_start();
-if($_SESSION["usuarioIniciado"]!=null){
-  $u=$_SESSION["usuarioIniciado"];
-  if($dataUsuario->verificarSiUsuarioTienePermiso($u,1)==0){
-    header("location: paginaError.php");
-  }
-}*/
-?>
-
 <body  background="images/fondofichaintranet.jpg">
 
     <br>
@@ -107,13 +93,14 @@ if($_SESSION["usuarioIniciado"]!=null){
 
       </div><!-- /.navbar-collapse -->
     </nav>
+
   <div class = "cuerpo" style="
     margin-left: 20%;
     float: left;
     width: 75%;
     padding-left: 5%;
     padding-top: -100%;
-    margin-top: -650px;
+    margin-top: -600px;
     margin-bottom: -1000px;
     ">
 
@@ -134,86 +121,82 @@ if($_SESSION["usuarioIniciado"]!=null){
 
 ?>
 
-<div style="width: 800px" style="height: 400px">
+<div style="width: 800px" style="height: 900px">
     <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
       <div class="container">
 
       <div class="form-group" style="margin-left:50px;">
-        <span><h5 style="font-weight:bold;">Bitacora de Unidad</h5></span>
 
-        <form action="controlador/CrearBitacora.php" method="post" >
+        <span><h5 style="font-weight:bold;">Reporte Unidades</h5></span>
 
-          Tipo de Servicio:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;
-          <select  name="cboTiposDeServicios" style="width:175px; height:30px;">
-          <?php
+        Nombre: &nbsp;&nbsp;<input type="text"  name="txtnombre" style="width: 180px;">
 
+        Compañia:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <select name="cboUnidades" style="width: 180px;" >
+            <?php
+                $unidad = $data->readUnidadesVehiculos();
+                foreach ($unidad as $u) {
+                    echo "<option value='".$u->getIdUnidad()."'>";
+                        echo $u->getNombreUnidad();
+                    echo"</option>";
+                }
+            ?>
+        </select>
+        <br><br>
 
-          $listado = $data->readTiposDeServicios();
-          foreach($listado as $o => $objeto){
-          ?>
-          <option value="<?php echo $objeto->getId_tipo_servicio(); ?>"><?php echo $objeto->getCodigo_tipo_servicio(); ?></option>
-          <?php
-          }
-          ?>
-          </select>
-
-        &nbsp;&nbsp;&nbsp;Fecha:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-         <input type="date" name="txtFechaServicio" required><br><br>
-
-          Direccion:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-           <input Type="textarea" name="txtDireccionServicio" required ><br><br>
-
-          Oficial a Cargo:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;
-          <input type="text" name="txtoficialCargo" required>
-
-        &nbsp;&nbsp;&nbsp;Maquinista: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="txtmaquinista" > <br><br>
-
-          Nº Voluntarios:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;
-          <input type="text" name="txtvoluntarios" required><br><br>
-
-          Hora de Salida:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;
-          <input type="text" name="txtsalida"required >&nbsp; /&nbsp;
-
-          Hora de Llegada: <input type="text" name="txtLlegada"required > <br><br>
-
-          Kilometros:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-           <input type="text" name="txtkilometros" required >
-
-        &nbsp;&nbsp;&nbsp;Hora de Motor: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="txthoramotor" required><br><br>
-
-          Combustible:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-           <input type="text" name="txtCombustibleServicio" required>
-
-        &nbsp;&nbsp;&nbsp;Hora Bomba:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="txtBomba" required ><br><br>
-
-          Carga de Combustible(Litros): <input type="text" name="txtcargaCombustible" required><br><br>
-
-          Observaciones:<br>
-           <textarea  Type="textarea" name="txtObservaciones" style="width:670px; height:30px;"></textarea>
-
-          <center> <input type="submit" name="btncrear" value="Crear Servicio" class="btn button-primary" style="width: 150px;"> <span ></span>
-              <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
-
-          </center>
+        Tipo Bodega:
+        <select name="cboxBodega" style="width: 180px;" >
+        </select>
 
 
-        </form>
+        <br><br>
+    <!--    Tipo Servicio:
+        <select  name="cboTiposDeServicios" style="width: 180px;">
+       <?php
+/*
+
+        $listado = $data->readTiposDeServicios();
+        foreach($listado as $o => $objeto){
+        ?>
+        <option value="<?php echo $objeto->getId_tipo_servicio(); ?>"><?php echo $objeto->getCodigo_tipo_servicio(); ?></option>
+        <?php
+      }*/
+        ?>
+      </select> -->
+        <br><br>
 
 
-      </div>
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Compañia</th>
+                <th>Tipo bodega</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>john@example.com</td>
+                
+              </tr>
+
+            </tbody>
+          </table>
+
+
+
+
+
+
 
 
 
      </div>
    </div>
  </div>
+</div>
 </div>
 
   </body>

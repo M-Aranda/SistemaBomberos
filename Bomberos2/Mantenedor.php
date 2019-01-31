@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-
-
-
-
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -60,12 +56,21 @@
           </ul>
         </li>
       </ul>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br><br>
+
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Inventario <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="crearInventario.php">Crear</a></li>
+            <li><a href="buscarInventario.php">Buscar </a></li>
+            <li><a href="reporteInventario.php">Reporte </a></li>
+
+
+          </ul>
+        </li>
+      </ul>
+<br>
+<br>
       <br>
       <br>
       <br>

@@ -397,6 +397,8 @@ nombre_unidad_de_medida VARCHAR (5000),
 PRIMARY KEY (id_unidad_de_medida)
 );
 
+select * from tbl_unidad_de_medida;
+
 CREATE TABLE tbl_tipo_de_bodega (
 id_tipo_de_bodega INT AUTO_INCREMENT,
 nombre_tipo_de_bodega VARCHAR (5000),

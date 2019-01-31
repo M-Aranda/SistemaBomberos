@@ -139,66 +139,58 @@ if($_SESSION["usuarioIniciado"]!=null){
       <div class="container">
 
       <div class="form-group" style="margin-left:50px;">
-        <span><h5 style="font-weight:bold;">Bitacora de Unidad</h5></span>
+        <span><h5 style="font-weight:bold;">Inventario</h5></span>
 
         <form action="controlador/CrearBitacora.php" method="post" >
 
-          Tipo de Servicio:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;
-          <select  name="cboTiposDeServicios" style="width:175px; height:30px;">
-          <?php
 
 
-          $listado = $data->readTiposDeServicios();
-          foreach($listado as $o => $objeto){
-          ?>
-          <option value="<?php echo $objeto->getId_tipo_servicio(); ?>"><?php echo $objeto->getCodigo_tipo_servicio(); ?></option>
-          <?php
-          }
-          ?>
+          Nombre Material: <input type="text" name="txtnombreMaterial" required>
+
+          Entidad a Cargo:
+           <select name="entidad" >
+               <?php
+                   $entiPropietaria = $data->getEntidadACargo();
+                   foreach ($entiPropietaria as $ep) {
+                       echo "<option value='".$ep->getIdEntidadACargo()."'>";
+                           echo utf8_encode($ep->getNombreEntidadACargo());
+                       echo"</option>";
+                   }
+               ?>
+           </select>
+
+           <br><br>
+
+          Color: <input type="text" name="txtcolorMaterial" required>
+
+          Cantidad:
+           <input Type="text" name="txtcantidadMaterial" required ><br><br>
+
+          Unidad de Medida:
+          <select name="cboxMedida">
+
+
+
           </select>
 
-        &nbsp;&nbsp;&nbsp;Fecha:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-         <input type="date" name="txtFechaServicio" required><br><br>
+          Ubicacion Fisica:
+          <select name="cboxUbicacion">
+          </select>
+          <br><br>
+          Fabricante:
+          <input type="text" name="txtFabricante" required>
 
-          Direccion:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-           <input Type="textarea" name="txtDireccionServicio" required ><br><br>
+          Fecha de Caducidad:
+          <input type="date" name="txtCaducidad"required >
+          <br><br>
 
-          Oficial a Cargo:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;
-          <input type="text" name="txtoficialCargo" required>
+          Proveedor: <input type="text" name="txtLlegada"required >
 
-        &nbsp;&nbsp;&nbsp;Maquinista: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="txtmaquinista" > <br><br>
-
-          Nº Voluntarios:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;
-          <input type="text" name="txtvoluntarios" required><br><br>
-
-          Hora de Salida:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;
-          <input type="text" name="txtsalida"required >&nbsp; /&nbsp;
-
-          Hora de Llegada: <input type="text" name="txtLlegada"required > <br><br>
-
-          Kilometros:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          Tipo de Bodega:
            <input type="text" name="txtkilometros" required >
+           <br><br>
 
-        &nbsp;&nbsp;&nbsp;Hora de Motor: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="txthoramotor" required><br><br>
-
-          Combustible:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-           <input type="text" name="txtCombustibleServicio" required>
-
-        &nbsp;&nbsp;&nbsp;Hora Bomba:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="txtBomba" required ><br><br>
-
-          Carga de Combustible(Litros): <input type="text" name="txtcargaCombustible" required><br><br>
-
-          Observaciones:<br>
-           <textarea  Type="textarea" name="txtObservaciones" style="width:670px; height:30px;"></textarea>
-
-          <center> <input type="submit" name="btncrear" value="Crear Servicio" class="btn button-primary" style="width: 150px;"> <span ></span>
+          <center> <input type="submit" name="btncrear" value="Guardar Inventario" class="btn button-primary" style="width: 150px;"> <span ></span>
               <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
           </center>

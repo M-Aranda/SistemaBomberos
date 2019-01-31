@@ -138,7 +138,7 @@ if($_SESSION["usuarioIniciado"]!=null){
     <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
       <div class="container">
 
-              <span><h4 style="font-weight:bold;margin-left:300px;">Buscar Bombero</h4></span>
+              <span><h4 style="font-weight:bold;margin-left:300px;">Buscar Inventario</h4></span>
 
       <div class="form-group" style="margin-left:50px;">
         <span><h5 style="font-weight:bold;">Buscar por Nombre</h5></span>
@@ -151,16 +151,9 @@ if($_SESSION["usuarioIniciado"]!=null){
         <form>
 
         <form action="controlador/BuscarBomberoPorAlgunParametro.php" method="post">
-        <span><h5 style="font-weight:bold;">Estado de Bombero</h5></span>
-              <select name="estadoBombero" style="width:175px; height:30px;">
-                <?php
-                    $tipoBombero = $data->readEstadosDeBomberos();
-                    foreach ($tipoBombero as $tb) {
-                        echo "<option value='".$tb->getIdEstado()."'>";
-                            echo utf8_encode($tb->getNombreEstado());
-                        echo"</option>";
-                    }
-                ?>
+        <span><h5 style="font-weight:bold;">Tipo de Bodega</h5></span>
+              <select name="tipoBodega" style="width:175px; height:30px;">
+
               </select>
               <input type="hidden" name="tipoDeBusqueda" value="2">
               <input class="btn btn-default" type="submit" name="btnInfoPersonal" value="Buscar" class="btn button-primary" style="width: 100px; height:30px;" style="margin-top: 400px;" onclick="porEstado()">
@@ -190,11 +183,11 @@ if($_SESSION["usuarioIniciado"]!=null){
                 <table class="table table-striped">
                     <thead>
                       <tr>
-                        <th>Rut</th>
                         <th>Nombre</th>
-                        <th>APP</th>
+                        <th>Cantidad</th>
+                        <th>Fecha Caducidad</th>
                         <th>Compañía</th>
-                        <th>Ver Ficha</th>
+                        <th>Ver Inventario</th>
                         <th>Modificar información</th>
                       </tr>
                     </thead>
@@ -212,10 +205,10 @@ if($_SESSION["usuarioIniciado"]!=null){
                         foreach ($listado as $o => $objeto) {
                           ?>
                           <tr>
-                            <td><?php echo $objeto->getRut();?></td>
-                            <td><?php echo $objeto->getNombre();?></td>
-                            <td><?php echo $objeto->getApellidoPaterno();?></td>
-                            <td><?php echo utf8_encode($objeto->getCompania());?></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                             <td>
                               <form action="controlador/CargarFicha.php" method="post">
                                 <input type="hidden" id="idBombero" name="idBombero" value="<?php echo $objeto->getIdInfoPersonal();?>">
