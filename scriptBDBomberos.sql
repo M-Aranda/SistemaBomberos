@@ -385,6 +385,44 @@ PRIMARY KEY (id_bitacora)
 );
 
 
+CREATE TABLE tbl_ubicacion_fisica (
+id_ubicacion_fisica INT AUTO_INCREMENT,
+nombre_ubicacion_fisica VARCHAR (5000),
+PRIMARY KEY (id_ubicacion_fisica)
+);
+
+CREATE TABLE tbl_unidad_de_medida (
+id_unidad_de_medida INT AUTO_INCREMENT,
+nombre_unidad_de_medida VARCHAR (5000),
+PRIMARY KEY (id_unidad_de_medida)
+);
+
+CREATE TABLE tbl_tipo_de_bodega (
+id_tipo_de_bodega INT AUTO_INCREMENT,
+nombre_tipo_de_bodega VARCHAR (5000),
+PRIMARY KEY (id_tipo_de_bodega)
+);
+
+CREATE TABLE tbl_material_menor (
+id_material_menor INT AUTO_INCREMENT,
+nombre_material_menor VARCHAR (300),
+fk_entidad_a_cargo_material_menor INT,
+color_material_menor VARCHAR (300),
+cantidad_material_menor INT,
+fk_unidad_de_medida_material_menor INT,
+fk_ubicacion_fisica_material_menor INT,
+fabricante_material_menor VARCHAR (300),
+fecha_de_caducidad_material_menor DATE,
+proveedor_material_menor VARCHAR (300),
+fk_tipo_de_bodega_material_menor INT,
+FOREIGN KEY (fk_entidad_a_cargo_material_menor) REFERENCES tbl_entidadACargo (id_entidadACargo),
+FOREIGN KEY (fk_unidad_de_medida_material_menor) REFERENCES tbl_unidad_de_medida (id_unidad_de_medida),
+FOREIGN KEY (fk_ubicacion_fisica_material_menor) REFERENCES tbl_ubicacion_fisica (id_ubicacion_fisica),
+FOREIGN KEY (fk_tipo_de_bodega_material_menor) REFERENCES tbl_tipo_de_bodega (id_tipo_de_bodega),
+PRIMARY KEY (id_material_menor)
+);
+
+
 -- Procedimientos
 
 DELIMITER //
