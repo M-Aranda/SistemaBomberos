@@ -31,6 +31,7 @@ require_once("Tbl_EntrenamientoEstandar.php");
 require_once("Tbl_InfoHistorica.php");
 require_once("Tbl_Mantencion.php");
 require_once("Tbl_carguiCombustible.php");
+require_once("Tbl_MaterialMenor.php");
 
 class Data{
     private $c;
@@ -1322,6 +1323,7 @@ public function getMedidas(){
       $tu = new Tbl_UnidadMedida();
 
       $tu->setidUnidadMedida($obj->id_unidad_de_medida);
+      $tu->setTipoDeMedida($obj->fk_tipo_de_medida_unidad_de_medida);
       $tu->setnombreUnidadMedida($obj->nombre_unidad_de_medida);
 
 
@@ -1380,8 +1382,25 @@ public function getTipoBodega(){
 
   $this->c->desconectar();
   return $lista;
+}
 
 
+
+
+
+public function crerMaterialMenor($materialMenor){
+
+
+    $query="INSERT INTO tbl_material_menor VALUES (NULL, ".$materialMenor->getNombre_material_menor().", ".$materialMenor->getFk_entidad_a_cargo_material_menor().",
+  '".$materialMenor->getColor_material_menor()."' , '".$materialMenor->getColor_material_menor()."' , ".$materialMenor->getCantidad_material_menor().",
+  ".$materialMenor->getMedida_material_menor().", ".$materialMenor->getFk_unidad_de_medida_material_menor().", ".$materialMenor->getFk_ubicacion_fisica_material_menor()."," '".$materialMenor.->getFabricante_material_menor()."',
+  '".$materialMenor->getFecha_de_caducidad_material_menor()."', '".$materialMenor->getProveedor_material_menor()."', ".$materialMenor->getFk_tipo_de_bodega_material_menor().");";
+
+  echo $query;
+
+  $this->c->conectar();
+  $this->c->ejecutar($query);
+  $this->c->desconectar();
 }
 
 }

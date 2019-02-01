@@ -3,6 +3,7 @@
 Class Tbl_UnidadMedida{
 
   private $idUnidadMedida;
+  private $tipoDeMedida;
   private $nombreUnidadMedida;
 
   public function __construct(){
@@ -16,9 +17,16 @@ Class Tbl_UnidadMedida{
       $this->idUnidadMedida = $idUnidadMedida;
   }
 
+  public function getTipoDeMedida(){
+      return $this->tipoDeMedida;
+  }
+
+  public function setTipoDeMedida($tipoDeMedida){
+      $this->tipoDeMedida = $tipoDeMedida;
+  }
 
   public function getNombreUnidadMedida(){
-    return $this->nombreCargo;
+    return $this->nombreUnidadMedida;
   }
 
   public function setNombreUnidadMedida($nombreUnidadMedida){

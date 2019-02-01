@@ -96,6 +96,8 @@ nombre_entidadACargo VARCHAR (5000),
 PRIMARY KEY(id_entidadACargo)
 );
 
+
+
 CREATE TABLE tbl_region (
   id_region INT AUTO_INCREMENT,
   nombre_region VARCHAR(64) ,
@@ -391,13 +393,19 @@ nombre_ubicacion_fisica VARCHAR (5000),
 PRIMARY KEY (id_ubicacion_fisica)
 );
 
-CREATE TABLE tbl_unidad_de_medida (
-id_unidad_de_medida INT AUTO_INCREMENT,
-nombre_unidad_de_medida VARCHAR (5000),
-PRIMARY KEY (id_unidad_de_medida)
+CREATE TABLE tbl_tipo_de_medida (
+id_tipo_de_medida INT AUTO_INCREMENT,
+nombre_tipo_de_medida VARCHAR (5000),
+PRIMARY KEY (id_tipo_de_medida)
 );
 
-select * from tbl_unidad_de_medida;
+CREATE TABLE tbl_unidad_de_medida (
+id_unidad_de_medida INT AUTO_INCREMENT,
+fk_tipo_de_medida_unidad_de_medida INT,
+nombre_unidad_de_medida VARCHAR (5000),
+FOREIGN KEY (fk_tipo_de_medida_unidad_de_medida) REFERENCES tbl_tipo_de_medida (id_tipo_de_medida),
+PRIMARY KEY (id_unidad_de_medida)
+);
 
 CREATE TABLE tbl_tipo_de_bodega (
 id_tipo_de_bodega INT AUTO_INCREMENT,
@@ -411,6 +419,7 @@ nombre_material_menor VARCHAR (300),
 fk_entidad_a_cargo_material_menor INT,
 color_material_menor VARCHAR (300),
 cantidad_material_menor INT,
+medida_material_menor INT,
 fk_unidad_de_medida_material_menor INT,
 fk_ubicacion_fisica_material_menor INT,
 fabricante_material_menor VARCHAR (300),
@@ -1399,6 +1408,15 @@ INSERT INTO tbl_tipo_servicio (codigo_tipo_servicio,nombre_tipo_servicio) VALUES
 ('10-9','Llamado a otros servicios'),('10-10','Llamado a escombros'),('10-11','Llamado a servicio áreo'),('10-12','Llamado a apoyar a otros Cuerpos'),
 ('10-13','Llamado a artefacto explosivo, sobre sospechoso, acto terrorista'),('10-14','Llamado a accidente de aviación'), ('10-15','Simulacro');
 
+INSERT INTO tbl_tipo_de_medida (nombre_tipo_de_medida) VALUES ('Distancia'),('Masa'),('Capacidad'),('Tiempo'),('Espacio de datos');
+INSERT INTO tbl_ubicacion_fisica  (nombre_ubicacion_fisica) VALUES ('Unidad B-1'),('Unidad 2-2'),('Bodega'),('Cuartel');
+INSERT INTO tbl_tipo_de_bodega  (nombre_tipo_de_bodega) VALUES ('Bodega tipo 1'),('Bodega tipo 2'),('Bodega tipo 3'),('Bodega tipo 4');
+INSERT INTO tbl_unidad_de_medida  (nombre_unidad_de_medida,fk_tipo_de_medida_unidad_de_medida) VALUES ('Milimetros', 1), ('Centimetros', 1), ('Decimetros', 1), ('Metros', 1), ('Decámetros', 1), ('Hectómetros', 1), ('Kilometros', 1),
+('Miligramos',2 ), ('Centigramos', 2),('Decigramos', 2), ('Gramos', 2), ('Decagramos',2),('Hectogramos',2),('Kilogramos',2),('Toneladas',2),
+('Mililitros',3),('Centilitros',3),('Decilitros',3),('Litros',3),('Decalitros',3),('Hectolitros',3),('Kilolitros',3),
+('Milisegundos',4),('Segundos',4),('Minutos',4),('Horas',4),('Días',4),('Semanas',4),('Meses',4),('Años',4),
+('Byte',5),('Kilobyte',5),('Megabyte',5),('Gigabyte',5),('Terabyte',5),('Petabyte',5),('Meses',5),('Años',5),('Petabyte',5),('Exabyte',5),('Zetabyte',5),('Yottabyte',5),('Brontobyte',5),('Geopbyte',5);
+
 
 
 
@@ -1420,6 +1438,21 @@ INSERT INTO tbl_tipo_servicio (codigo_tipo_servicio,nombre_tipo_servicio) VALUES
 -- SELECT * FROM tbl_tipoDeMantencion;
 -- SELECT * FROM tbl_mantencion;
 -- SELECT * FROM tbl_cargio_combustible;
+-- SELECT * FROM tbl_entidadACargo;
+
+/*
+Select para el inventario
+
+SELECT tbl_material_menor.nombre_material_menor, tbl_entidadACargo.nombre_entidadACargo, tbl_material_menor.color_material_menor, tbl_material_menor.cantidad_material_menor, tbl_material_menor.medida_material_menor,
+tbl_unidad_de_medida.nombre_unidad_de_medida, tbl_ubicacion_fisica.nombre_ubicacion_fisica, tbl_material_menor.fabricante_material_menor, tbl_material_menor.fecha_de_caducidad_material_menor,
+tbl_material_menor.proveedor_material_menor, tbl_tipo_de_bodega.nombre_tipo_de_bodega FROM tbl_material_menor, tbl_tipo_de_bodega, tbl_unidad_de_medida, tbl_ubicacion_fisica, tbl_entidadACargo
+WHERE tbl_material_menor.fk_entidad_a_cargo_material_menor=tbl_entidadACargo.id_entidadACargo AND  tbl_material_menor.fk_unidad_de_medida_material_menor=tbl_unidad_de_medida.id_unidad_de_medida AND
+tbl_material_menor.fk_ubicacion_fisica_material_menor=tbl_ubicacion_fisica.id_ubicacion_fisica AND tbl_material_menor.fk_tipo_de_bodega_material_menor=tbl_tipo_de_bodega.id_tipo_de_bodega;
+
+*/
+
+
+
 
 /*Consulta que requiere id de permiso e id de tipo de usuario
 
@@ -1442,6 +1475,10 @@ tbl_tipo_usuario.id_tipo_usuario=tbl_usuario.fk_tipo_usuario__usuario AND tbl_pe
 */
 
 /*
+-- Usar la siguiente consulta primero para ver si no es nulo. Si es nulo, usar la primera consulta  despues de esta, cambiar el valor de entidad a cargo por 'Sin asignar', 
+sino, usar la segunda, despues de esta
+SELECT id_informacionPersonal FROM tbl_informacionPersonal WHERE nombre_informacionPersonal LIKE '%Juanito%';
+
 Consulta para buscar bomberos por nombre
 
 SELECT tbl_informacionPersonal.rut_informacionPersonal, tbl_informacionPersonal.nombre_informacionPersonal,
@@ -1450,6 +1487,14 @@ tbl_informacionPersonal.id_informacionPersonal FROM tbl_informacionPersonal, tbl
 WHERE tbl_informacionBomberil.fk_id_entidadACargo_informacionBomberil=tbl_entidadACargo.id_entidadACargo AND 
 tbl_informacionPersonal.id_informacionPersonal=tbl_informacionBomberil.fk_informacion_personal__informacionBomberil AND
 tbl_informacionPersonal.nombre_informacionPersonal LIKE '%Marcelo%';
+
+
+SELECT tbl_informacionPersonal.rut_informacionPersonal, tbl_informacionPersonal.nombre_informacionPersonal,
+tbl_informacionPersonal.apellido_paterno_informacionPersonal, tbl_entidadACargo.nombre_entidadACargo,
+tbl_informacionPersonal.id_informacionPersonal FROM tbl_informacionPersonal, tbl_informacionBomberil, tbl_entidadACargo
+WHERE 
+tbl_informacionPersonal.nombre_informacionPersonal LIKE '%Juanito%' GROUP BY tbl_informacionPersonal.rut_informacionPersonal;
+
 
 */
 
@@ -1462,9 +1507,13 @@ CALL CRUDUnidad (6,'Nombre de Prueba 2','2000','200','300','333','555','3333','B
 CALL CRUDUnidad (6,'Nombre de Prueba 3','2000','200','300','333','555','3333','jaja','2000-12-03','2012-06-11',15,2,1,1,1);
 
 CALL CRUDMedida (1,'XX','SS','42','41',1);
+CALL CRUDInformacionPersonal (1,'20333088-2','Juanito', 'Pérez', 'Tatto','1991-12-16',1,1,'1,70','80,2','cheloz_20@hotmail.com',
+1,'123123123123','958677107','Carretera El Cobre','No sabe', 'Creo que no',1);
+
+CALL CRUDMedida (1,'XX','SS','42','41',1);
 CALL CRUDInformacionPersonal (1,'20898088-2','Marcelo', 'Aranda', 'Tatto','1991-12-16',1,1,'1,70','80,2','cheloz_20@hotmail.com',
 1,'123123123123','958677107','Carretera El Cobre','No sabe', 'Creo que no',1);
-CALL CRUDFichaInformacionBomberil(1,1,'Machali',2,1,'2001-12-16',1,1,1,1,1);
+CALL CRUDFichaInformacionBomberil(1,1,'Machali',1,1,'2001-12-16',1,1,1,1,1);
 CALL CRUDInformacionLaboral (1,'Acquiried','algun lado','598677','empleado','2018-08-12','ciencias','masvida','ingeniero', 1, 1);
 CALL CRUDInformacionMedica1 (1, 'alguna','ninguna', 'no hay', 1,1);
 CALL CRUDInformacionMedica2 (1,'Ninguno', 'Familiar', '96666',3, 'Sin especificar',0,0,6,1,1);
@@ -1496,7 +1545,7 @@ CALL CRUDInformacionHistorica (1,1,'Algun cuerpo','Alguna compania','2010-10-10'
 CALL CRUDMedida (1,'XX','SS','42','41',1);
 CALL CRUDInformacionPersonal (1,'20898088-4','Marcelo', 'Aranda', 'Tatto','1991-12-16',1,1,'1,70','80,2','cheloz_20@hotmail.com',
 1,'123123123123','958677107','Carretera El Cobre','No sabe', 'Creo que no',1);
-CALL CRUDFichaInformacionBomberil(1,1,'Machali',2,1,'2001-12-16',1,1,1,3,1);
+CALL CRUDFichaInformacionBomberil(1,1,'Machali',3,1,'2001-12-16',1,1,1,3,1);
 CALL CRUDInformacionLaboral (1,'Acquiried','algun lado','598677','empleado','2018-08-12','ciencias','masvida','ingeniero', 3, 1);
 CALL CRUDInformacionMedica1 (1, 'alguna','ninguna', 'no hay', 3,1);
 CALL CRUDInformacionMedica2 (1,'Ninguno', 'Familiar', '96666',3, 'Sin especificar',0,0,6,3,1);
@@ -1505,6 +1554,19 @@ CALL CRUDInformacionAcademica (1,'2019-05-06','Curso',1,3,1);
 CALL CRUDInformacionEntrenamientoEstandar (1,'2018-09-09', 'algo',1,3,1);
 CALL CRUDInformacionHistorica (1,1,'Algun cuerpo','Alguna compania','2010-10-10', 'Transferencia', 'Solicitud personal', 'No disponible', 'Algo',3,1);
 
+CALL CRUDMedida (1,'XX','SS','42','41',1);
+CALL CRUDInformacionPersonal (1,'12398608-4','Marcelo', 'Aranda', 'Tatto','1991-12-16',1,1,'1,70','80,2','cheloz_20@hotmail.com',
+1,'123123123123','958677107','Carretera El Cobre','No sabe', 'Creo que no',1);
+CALL CRUDFichaInformacionBomberil(1,1,'Machali',4,1,'2001-12-16',1,1,1,4,1);
+CALL CRUDInformacionLaboral (1,'Acquiried','algun lado','598677','empleado','2018-08-12','ciencias','masvida','ingeniero', 4, 1);
+CALL CRUDInformacionMedica1 (1, 'alguna','ninguna', 'no hay', 4,1);
+CALL CRUDInformacionMedica2 (1,'Ninguno', 'Familiar', '96666',3, 'Sin especificar',0,0,6,4,1);
+CALL CRUDInformacionFamiliar (1,'Alguno', '1991-12-05',1,4,1);
+CALL CRUDInformacionAcademica (1,'2019-05-06','Curso',1,4,1);
+CALL CRUDInformacionEntrenamientoEstandar (1,'2018-09-09', 'algo',1,4,1);
+CALL CRUDInformacionHistorica (1,1,'Algun cuerpo','Alguna compania','2010-10-10', 'Transferencia', 'Solicitud personal', 'No disponible', 'Algo',4,1);
+
+
 INSERT INTO tbl_mantencion VALUES (NULL, 1, '2018-11-11', 'Alguien', 'Algun lugar', 'Nada', 1);
 INSERT INTO tbl_mantencion VALUES (NULL, 1, '2018-11-11', 'Alguien', 'Algun lugar', 'Nada', 2);
 INSERT INTO tbl_mantencion VALUES (NULL, 1, '2018-11-11', 'Alguien', 'Algun lugar', 'Nada', 3);
@@ -1524,6 +1586,16 @@ INSERT INTO tbl_cargio_combustible VALUES (NULL, 'Alguien', '2018-11-11', 'Algun
 INSERT INTO tbl_cargio_combustible VALUES (NULL, 'Alguien', '2018-11-11', 'Algun lugar', 1, 16.5, 500,'Ninguna',1);
 INSERT INTO tbl_cargio_combustible VALUES (NULL, 'Alguien', '2018-11-11', 'Algun lugar', 1, 16.5, 500,'Ninguna',2);
 INSERT INTO tbl_cargio_combustible VALUES (NULL, 'Alguien', '2018-11-11', 'Algun lugar', 1, 16.5, 500,'Ninguna',3);
+
+
+
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Roja',3,20,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',3);
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Azul',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',3);
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Verde',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',3);
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Plomo',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',3);
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Morada',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',3);
+
+
 
 
 /*

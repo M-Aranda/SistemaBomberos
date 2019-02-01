@@ -12,7 +12,7 @@ Class Tbl_TipoBodega{
       return $this->idTipoBodega;
   }
 
-  public function setIdidTipoBodega($idTipoBodega){
+  public function setidTipoBodega($idTipoBodega){
       $this->idTipoBodega = $idTipoBodega;
   }
 

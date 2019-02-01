@@ -141,7 +141,7 @@ if($_SESSION["usuarioIniciado"]!=null){
       <div class="form-group" style="margin-left:50px;">
         <span><h5 style="font-weight:bold;">Inventario</h5></span>
 
-        <form action="controlador/CrearBitacora.php" method="post" >
+        <form action="controlador/CrearMaterialMenor.php" method="post" >
 
 
 
@@ -164,10 +164,20 @@ if($_SESSION["usuarioIniciado"]!=null){
           Color: <input type="text" name="txtcolorMaterial" required>
 
           Cantidad:
-           <input Type="text" name="txtcantidadMaterial" required ><br><br>
+           <input Type="number" name="txtcantidadMaterial" required ><br><br>
+
+           Medida: <input type="number" name="numMedida" required>
 
           Unidad de Medida:
           <select name="cboxMedida">
+            <?php
+             $medidas = $data->getMedidas();
+             foreach ($medidas as $me) {
+                 echo "<option value='".$me->getIdUnidadMedida()."'>";
+                     echo utf8_encode($me->getNombreUnidadMedida());
+                 echo"</option>";
+             }
+            ?>
 
 
 
@@ -175,6 +185,16 @@ if($_SESSION["usuarioIniciado"]!=null){
 
           Ubicacion Fisica:
           <select name="cboxUbicacion">
+            <?php
+            $ubicacionesFisicas = $data->getUbicacionFisica();
+            foreach ($ubicacionesFisicas as $ubi) {
+                echo "<option value='".$ubi->getIdUbicacionFisica()."'>";
+                    echo utf8_encode($ubi->getNombreUbicacionFisica());
+                echo"</option>";
+            }
+
+
+            ?>
           </select>
           <br><br>
           Fabricante:
@@ -184,10 +204,21 @@ if($_SESSION["usuarioIniciado"]!=null){
           <input type="date" name="txtCaducidad"required >
           <br><br>
 
-          Proveedor: <input type="text" name="txtLlegada"required >
+          Proveedor: <input type="text" name="txtProveedor"required >
 
           Tipo de Bodega:
-           <input type="text" name="txtkilometros" required >
+           <select name="cboTipoDeBodega">
+           <?php
+           $tiposDeBodega = $data->getTipoBodega();
+           foreach ($tiposDeBodega as $bod) {
+               echo "<option value='".$bod->getIdidTipoBodega()."'>";
+                   echo utf8_encode($bod->getNombreTipoBodega());
+               echo"</option>";
+           }
+
+
+           ?>
+         </select>
            <br><br>
 
           <center> <input type="submit" name="btncrear" value="Guardar Inventario" class="btn button-primary" style="width: 150px;"> <span ></span>
