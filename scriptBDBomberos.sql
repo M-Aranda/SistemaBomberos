@@ -295,6 +295,7 @@ nombre_estado_unidad VARCHAR (5000),
 PRIMARY KEY(id_estado_unidad)
 );
 
+
 CREATE TABLE tbl_unidad (
 id_unidad INT AUTO_INCREMENT,
 nombre_unidad VARCHAR (300),
@@ -1496,8 +1497,21 @@ tbl_informacionPersonal.id_informacionPersonal FROM tbl_informacionPersonal, tbl
 WHERE 
 tbl_informacionPersonal.nombre_informacionPersonal LIKE '%Juanito%' GROUP BY tbl_informacionPersonal.rut_informacionPersonal;
 
+*/
+
+
+/*
+Select para ver datos en la busqueda de buscar
+
+SELECT tbl_unidad.nombre_unidad, tbl_estado_unidad.nombre_estado_unidad, tbl_tipo_vehiculo.nombre_tipo_vehiculo, tbl_entidadACargo.nombre_entidadACargo, tbl_unidad.id_unidad FROM tbl_unidad,
+tbl_estado_unidad, tbl_tipo_vehiculo, tbl_entidadACargo WHERE tbl_unidad.fk_estado_unidad_unidad=tbl_estado_unidad.id_estado_unidad AND
+tbl_unidad.fk_tipo_vehiculo_unidad=tbl_tipo_vehiculo.id_tipo_vehiculo AND tbl_unidad.fk_entidadACargo=tbl_entidadACargo.id_entidadACargo 
+AND tbl_unidad.nombre_unidad LIKE '%Nombre de Prueba 1%';
+AND tbl_estado_unidad.id_estado_unidad=2;
+AND tbl_entidadACargo.id_entidadACargo=1;
 
 */
+
 
 -- Lamadas a procedimientos para probar
 

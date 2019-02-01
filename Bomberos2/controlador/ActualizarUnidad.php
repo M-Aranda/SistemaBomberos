@@ -54,7 +54,7 @@ echo "despues del click";
     echo "<br>";
     echo "<br>";
 
-  header("location: ../verUnidades.php");
+  header("location: ../buscarUnidades.php");
 }
 
  ?>

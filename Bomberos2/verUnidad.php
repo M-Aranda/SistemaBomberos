@@ -130,7 +130,13 @@
         // unir vista con el modelo sin pasar por un controlador
         require_once("model/Data.php");
         $data = new Data();
-        $listadoDeUnidades= $data->readUnidadesVehiculos();
+
+
+        if(isset($_SESSION["unidadAVerSolicitada"])){
+          $unidad=$_SESSION["unidadAVerSolicitada"];
+        }
+
+
 
     ?>
 
@@ -142,14 +148,14 @@
 
                           <div class="col-md-20">
                               <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#unidades">
-                                Crear Unidades
+                                Ver Unidad
                               </button>
                           </div>
 
                           <div class="col-md-11 collapse" id="unidades" >
                               <div class="panel panel-primary">
                                   <div class="panel-heading panel-title">
-                                      Crear Unidades
+                                      Ver Unidad
                                   </div>
                                   <div class="panel-body">
 
@@ -157,47 +163,33 @@
                                         <div style="margin-left: 0px;">
                                           <img src="images/avatar_opt.jpg">
                                         </div>
-                                        <form action="controlador/CrearUnidades.php" method="post">
 
-                                          <?php
-                                          foreach ($listadoDeUnidades as $u => $unidad) { ?>
 
-                                          Marca:<input id="nombre" type="text" name="txtmarca" class="form-control" required="" value="<?php echo $unidad->getMarca();?>">
-                                          Nº Motor:<input id="nombre" type="text" name="txtmotor" class="form-control" required="" value="<?php echo $unidad->getNmotor();?>">
-                                          Nº Chasis :<input id="nombre" type="text" name="txtchasis" class="form-control" required="" value="<?php echo $unidad->getNchasis();?>">
-                                          Nº VIN: <input id="nombre" type="text" name="txtvin" class="form-control" required="" value="<?php echo $unidad->getNVIN();?>">
-                                          Color:<br><input id="nombre" type="text" name="txtcolor" class="form-control" required="" value="<?php echo $unidad->getColor();?>">
-                                          PPU: <br><input id="nombre" type="text" name="txtppu" class="form-control" required="" value="<?php echo $unidad->getPPu();?>">
+
+                                          Marca:<input id="nombre" type="text" name="txtmarca" class="form-control" disabled value="<?php echo $unidad->getMarca();?>">
+                                          Nº Motor:<input id="nombre" type="text" name="txtmotor" class="form-control" disabled value="<?php echo $unidad->getNmotor();?>">
+                                          Nº Chasis :<input id="nombre" type="text" name="txtchasis" class="form-control" disabled value="<?php echo $unidad->getNchasis();?>">
+                                          Nº VIN: <input id="nombre" type="text" name="txtvin" class="form-control" disabled value="<?php echo $unidad->getNVIN();?>">
+                                          Color:<br><input id="nombre" type="text" name="txtcolor" class="form-control" disabled value="<?php echo $unidad->getColor();?>">
+                                          PPU: <br><input id="nombre" type="text" name="txtppu" class="form-control" disabled value="<?php echo $unidad->getPPu();?>">
 
 
 
                                       </div>
                                       <div class="col-sm-6" style="margin-left: 60px;">
 
-                                        <?php
-                                        $fechaSinConvertir = $unidad->getfechaInscripcion();
-                                        $fechaConvertida = date("d-m-Y", strtotime($fechaSinConvertir));
-                                        echo $fechaConvertida;?>
 
-                                        <?php
-                                          $fechaSinConvertir = $unidad->getfechaAdquisicion();
-                                          $fechaConvertida = date("d-m-Y", strtotime($fechaSinConvertir));
-                                          echo $fechaConvertida;?>
 
-                                        Nombre Unidad:<input id="nombre" type="txt" class="form-control" name="txtnombreUnidad"  required="" value="<?php echo $unidad->getNombreUnidad();?>">
-                                        Año de Fabricacion:<input id="nombre" type="text" class="form-control" name="txtanioFabricacion"  required="" value="<?php echo $unidad->getaniodeFabricacion();?>">
-                                        Fecha de Inscripcion:<input id="nombre" type="date" class="form-control" name="txtfechainscripcion"   required="" value="<?php
-                                        $fechaSinConvertir = $unidad->getfechaInscripcion();
-                                        $fechaConvertida = date("d-m-Y", strtotime($fechaSinConvertir));
-                                        echo $fechaConvertida;?>">
-                                        Fecha de Adquisición:<input id="nombre" type="date" class="form-control" name="txtfechaadquisicion" required="" value="<?php
-                                          $fechaSinConvertir = $unidad->getfechaAdquisicion();
-                                          $fechaConvertida = date("d-m-Y", strtotime($fechaSinConvertir));
-                                          echo $fechaConvertida;?>">
-                                        Capacidad Ocupantes :<input id="nombre" type="number" class="form-control"  value="<?php echo $unidad->getcapacidadOcupantes();?>" name="txtcapaocupantes"  required="" min="1" pattern="^[0-9]+" onkeydown="javascript: return event.keyCode == 69 ? false : true">
+                                        Nombre Unidad:<input id="nombre" type="txt" class="form-control" name="txtnombreUnidad"   value="<?php echo $unidad->getNombreUnidad();?>" disabled>
+                                        Año de Fabricacion:<input id="nombre" type="text" class="form-control" name="txtanioFabricacion" disabled value="<?php echo $unidad->getaniodeFabricacion();?>" >
+                                        Fecha de Inscripcion:<input id="nombre" type="date" class="form-control" name="txtfechainscripcion"  disabled  value="<?php
+                                         echo $unidad->getfechaInscripcion();?>">
+                                        Fecha de Adquisición:<input disabled id="nombre" type="date" class="form-control" name="txtfechaadquisicion" required="" value="<?php
+                                       echo $unidad->getfechaAdquisicion();?>">
+                                        Capacidad Ocupantes :<input id="nombre" type="number" class="form-control"  value="<?php echo $unidad->getcapacidadOcupantes();?>" name="txtcapaocupantes"  required="" min="1" pattern="^[0-9]+" onkeydown="javascript: return event.keyCode == 69 ? false : true" disabled>
 
                                         Estado de Unidad:
-                                        <select name="unidades"  class="form-control" value="<?php echo $data->buscarNombreDeEstadoDeUnidadPorId($unidad->getfkEstadoUnidad());?>">
+                                        <select name="unidades"  class="form-control" disabled>
                                             <?php
                                                 $unidad = $data->getUnidades();
                                                 foreach ($unidad as $u) {
@@ -209,7 +201,7 @@
                                         </select>
 
                                       Tipo de Vehiculo:
-                                      <select name="vehiculos"  class="form-control" value="<?php echo $data->buscarNombreDeTipoDeVehiculoDeUnidadPorId($unidad->getfkTipoVehiculo());?>">
+                                      <select name="vehiculos"  class="form-control" disabled>
                                           <?php
                                               $vehiculo = $data->getVehiculos();
                                               foreach ($vehiculo as $v) {
@@ -221,19 +213,19 @@
                                       </select>
 
                                    Entidad a Cargo:
-                                    <select name="entidad" class="form-control" value="<?php echo $data->buscarNombreDeEntidadACargoPorId($unidad->getfkEntidadPropietaria());?>">
+                                    <select name="entidad" class="form-control" disabled>
                                         <?php
                                             $entiPropietaria = $data->getEntidadACargo();
                                             foreach ($entiPropietaria as $ep) {
-                                                echo "<option value='".$ep->getIdEntidadPropietaria()."'>";
-                                                    echo utf8_encode($ep->getNombreEntidadPropietaria());
+                                                echo "<option value='".$ep->getIdEntidadACargo()."'>";
+                                                    echo utf8_encode($ep->getNombreEntidadACargo());
                                                 echo"</option>";
                                             }
                                         ?>
                                     </select>
                                           <br><br>
 
-                                      </form>
+
                                                                 <br>
                                       </div>
                                       <br>
@@ -263,7 +255,7 @@
 
                                       <div class="col-sm-4" >
 
-                                        <form action="controlador/CrearMantencion.php" method="post">
+
 
                                           Unidad:
                                           <select name="cboUnidades"  class="form-control">
@@ -306,7 +298,7 @@
                                             <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                                         </center>
-                                      </form>
+
                                                                 <br>
                                       </div>
                                       <br>
@@ -336,7 +328,6 @@
 
                                       <div class="col-sm-4" >
 
-                                        <form action="controlador/CrearCarguioDeCombustible.php" method="post">
 
                                           Unidad:
                                           <select name="cboUnidades2"  class="form-control">
@@ -379,7 +370,7 @@
                                             <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                                         </center>
-                                      </form>
+
                                                                 <br>
                                       </div>
                                       <br>

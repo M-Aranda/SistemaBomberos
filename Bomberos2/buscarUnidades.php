@@ -144,7 +144,7 @@ if($_SESSION["usuarioIniciado"]!=null){
         <span><h5 style="font-weight:bold;">Buscar por Nombre</h5></span>
         <form action="controlador/BuscarUnidadPorAlgunParametro.php" method="post">
         <form>
-        <input type="text" name="txtBuscar"  placeholder="Buscar por nombre" style="height:30px;">
+        <input type="text" name="txtBuscarNombreUnidad"  placeholder="Buscar por nombre" style="height:30px;">
         <input type="hidden" name="tipoDeBusqueda" value="1">
         <input class="btn btn-default" type="submit" name="btnbuscar" value="Buscar" class="btn button-primary" style="width: 100px; height:30px;" style="margin-top: 400px;" onclick="porNombre()">
       <!--  <button class="btn btn-default" name="btnBuscar" style="width: 100px; height:30px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Buscar</a> </button> -->
@@ -152,7 +152,7 @@ if($_SESSION["usuarioIniciado"]!=null){
 
         <form action="controlador/BuscarUnidadPorAlgunParametro.php" method="post">
         <span><h5 style="font-weight:bold;">Estado de Unidad</h5></span>
-              <select name="estadoBombero" style="width:175px; height:30px;">
+              <select name="estadoUnidad" style="width:175px; height:30px;">
                 <?php
                     $tipoBombero = $data->getUnidades();
                     foreach ($tipoBombero as $tb) {
@@ -171,7 +171,7 @@ if($_SESSION["usuarioIniciado"]!=null){
               <span><h5 style="font-weight:bold;">Compañia</h5></span>
                 <select name="compania" style="width:175px; height:30px;">
                   <?php
-                      $compania = $data->readSoloCompanias();
+                      $compania = $data->getEntidadACargo();
                       foreach ($compania as $c) {
                           echo "<option value='".$c->getIdEntidadACargo()."'>";
                               echo utf8_encode($c->getNombreEntidadACargo());
@@ -201,9 +201,9 @@ if($_SESSION["usuarioIniciado"]!=null){
                     <tbody>
                       <?php
 
-                      if(isset($_SESSION["resultadosDeBusquedaDeBomberos"])){
+                      if(isset($_SESSION["resultadosDeBusquedaDeUnidad"])){
                         // se hizo una busqueda
-                        $listado=$_SESSION["resultadosDeBusquedaDeBomberos"];
+                        $listado=$_SESSION["resultadosDeBusquedaDeUnidad"];
 
 
 
@@ -212,22 +212,22 @@ if($_SESSION["usuarioIniciado"]!=null){
                         foreach ($listado as $o => $objeto) {
                           ?>
                           <tr>
-                            <td><?php echo $objeto->getRut();?></td>
-                            <td><?php echo $objeto->getNombre();?></td>
-                            <td><?php echo $objeto->getApellidoPaterno();?></td>
-                            <td><?php echo utf8_encode($objeto->getCompania());?></td>
+                            <td><?php echo $objeto->getNombreUnidad();?></td>
+                            <td><?php echo $objeto->getEstado();?></td>
+                            <td><?php echo $objeto->getTipoVehiculo();?></td>
+                            <td><?php echo utf8_encode($objeto->getEntidadACargo());?></td>
                             <td>
-                              <form action="controlador/CargarFicha.php" method="post">
-                                <input type="hidden" id="idBombero" name="idBombero" value="<?php echo $objeto->getIdInfoPersonal();?>">
+                              <form action="controlador/CargarFichaUnidad.php" method="post">
+                                <input type="hidden" id="idUnidad" name="idUnidad" value="<?php echo $objeto->getIdUnidad();?>">
 
-                              <input type="submit" value="Ver ficha" onclick="alterarValor(<?php echo $objeto->getIdInfoPersonal();?>)" >
+                              <input type="submit" value="Ver ficha" onclick="alterarValor(<?php echo $objeto->getIdUnidad();?>)" >
                             </form>
                               </td>
                               <td>
-                                <form action="controlador/CargarFichaAModificar.php" method="post">
-                                  <input type="hidden" id="idBomberoAModificar" name="idBomberoAModificar" value="<?php echo $objeto->getIdInfoPersonal();?>">
+                                <form action="controlador/CargarFichaUnidadAModificar.php" method="post">
+                                  <input type="hidden" id="idUnidadAModificar" name="idUnidadAModificar" value="<?php echo $objeto->getIdUnidad();?>">
 
-                                <input type="submit" value="Modificar" onclick="alterarValor2(<?php echo $objeto->getIdInfoPersonal();?>)" >
+                                <input type="submit" value="Modificar" onclick="alterarValor2(<?php echo $objeto->getIdUnidad();?>)" >
 
                                 </form>
                               </td>
@@ -235,7 +235,7 @@ if($_SESSION["usuarioIniciado"]!=null){
                         <?php
                       }
 
-                    unset($_SESSION["resultadosDeBusquedaDeBomberos"]);
+                    unset($_SESSION["resultadosDeBusquedaDeUnidad"]);
 
 
                     }
@@ -257,11 +257,7 @@ if($_SESSION["usuarioIniciado"]!=null){
  </div>
 </div>
 
-<!-- Preciso el javaScript porque tengo 3 hidden con el mismo nombre, lo cual significa que el ultimo es el que se rescata
-en el controlador. Tengo 3 porque la idea era que cada uno mandara un valor distinto, pero se toma solo el ultimo. Asi que use javascript para alterar
-el valor del ultimo hidden con el numero que necesito en el handler
 
- -->
 <script src="javascript/JQuery.js"></script>
         <script>
 
@@ -278,10 +274,10 @@ el valor del ultimo hidden con el numero que necesito en el handler
                     }
 
           function alterarValor(id) {
-                      document.getElementById("idBombero").value=id;
+                      document.getElementById("idUnidad").value=id;
 
                       $.ajax({
-                        url: "iniciarFKInfoPersonalEnSesion.php",
+                        url: "iniciarIdUnidadAVerEnSesion.php",
                         type: "POST",
                         data:{"idEnviado":id}
                       }).done(function(data) {
@@ -291,10 +287,10 @@ el valor del ultimo hidden con el numero que necesito en el handler
 
 
                         function alterarValor2(id) {
-                                    document.getElementById("idBomberoAModificar").value=id;
+                                    document.getElementById("idUnidadAModificar").value=id;
 
                                     $.ajax({
-                                      url: "iniciarFkInfoPersonalParaModificarBomberoEnSesion.php",
+                                      url: "iniciarIdUnidadAModificarEnSesion.php",
                                       type: "POST",
                                       data:{"idParaModificar":id}
                                     }).done(function(data) {

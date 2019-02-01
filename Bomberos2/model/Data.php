@@ -33,6 +33,10 @@ require_once("Tbl_Mantencion.php");
 require_once("Tbl_carguiCombustible.php");
 require_once("Tbl_MaterialMenor.php");
 require_once("Vista_BuscarMaterialMenor.php");
+require_once("VistaBusquedaDeUnidad.php");
+
+
+
 
 class Data{
     private $c;
@@ -608,6 +612,55 @@ class Data{
        $this->c->desconectar();
        return $listado;
     }
+
+
+
+    public function getUnidadVehiculoPorId ($id){
+      $this->c->conectar();
+      $query="SELECT * FROM tbl_unidad WHERE id_unidad=".$id.";";
+      $rs = $this->c->ejecutar($query);
+      echo $query;
+
+      while($reg = $rs->fetch_array()){
+           $id=$reg[0];
+           $nombre=$reg[1];
+           $aniodeFabricacion=$reg[2];
+           $marca=$reg[3];
+           $Nmotor=$reg[4];
+           $Nchasis=$reg[5];
+           $NVIN=$reg[6];
+           $Color=$reg[7];
+           $PPu=$reg[8];
+           $fechaInscripcion=$reg[9];
+           $fechaAdquisicion=$reg[10];
+           $capacidadOcupantes=$reg[11];
+           $fkEstadoUnidad=$reg[12];
+           $fkTipoVehiculo=$reg[13];
+           $fkEntidadPropietaria=$reg[14];
+
+           $obj = new Tbl_Unidad();
+           $obj->setIdUnidad($id);
+           $obj->setNombreUnidad($nombre);
+           $obj->setaniodeFabricacion($aniodeFabricacion);
+           $obj->setMarca($marca);
+           $obj->setNmotor($Nmotor);
+           $obj->setNchasis($Nchasis);
+           $obj->setNVIN($NVIN);
+           $obj->setColor($Color);
+           $obj->setPPu($PPu);
+           $obj->setfechaInscripcion($fechaInscripcion);
+           $obj->setfechaAdquisicion($fechaAdquisicion);
+           $obj->setcapacidadOcupantes($capacidadOcupantes);
+           $obj->setfkEstadoUnidad($fkEstadoUnidad);
+           $obj->setfkTipoVehiculo($fkTipoVehiculo);
+           $obj->setfkEntidadPropietaria($fkEntidadPropietaria);
+
+       }
+       $this->c->desconectar();
+       return $obj;
+    }
+
+
 
 
 
@@ -1488,6 +1541,43 @@ $query="UPDATE tbl_material_menor SET nombre_material_menor='".$materialMenor->g
 }
 
 
+
+public function buscarUnidadPorNombreEstadoOCompania($nombre, $id, $tipoDeBusqueda){
+  $this->c->conectar();
+
+  $query="SELECT tbl_unidad.nombre_unidad, tbl_estado_unidad.nombre_estado_unidad, tbl_tipo_vehiculo.nombre_tipo_vehiculo, tbl_entidadACargo.nombre_entidadACargo, tbl_unidad.id_unidad FROM tbl_unidad,
+tbl_estado_unidad, tbl_tipo_vehiculo, tbl_entidadACargo WHERE tbl_unidad.fk_estado_unidad_unidad=tbl_estado_unidad.id_estado_unidad AND
+tbl_unidad.fk_tipo_vehiculo_unidad=tbl_tipo_vehiculo.id_tipo_vehiculo AND tbl_unidad.fk_entidadACargo=tbl_entidadACargo.id_entidadACargo ";
+
+  if($tipoDeBusqueda==1){
+    $anexoQuery="AND tbl_unidad.nombre_unidad LIKE '%".$nombre."%';";
+
+  }else if($tipoDeBusqueda==2){
+    $anexoQuery="AND tbl_estado_unidad.id_estado_unidad=".$id.";";
+
+  }else if($tipoDeBusqueda==3){
+    $anexoQuery="AND tbl_entidadACargo.id_entidadACargo=".$id.";";
+  }
+
+  $query=$query.$anexoQuery;
+
+ echo $query;
+
+  $rs = $this->c->ejecutar($query);
+  $listado = array();
+  while($reg = $rs->fetch_array()){
+       $obj = new VistaBusquedaDeUnidad();
+       $obj->setNombreUnidad($reg[0]);
+       $obj->setEstado($reg[1]);
+       $obj->setTipoVehiculo($reg[2]);
+       $obj->setEntidadACargo($reg[3]);
+       $obj->setIdUnidad($reg[4]);
+
+       $listado[]=$obj;
+   }
+   $this->c->desconectar();
+   return $listado;
+}
 
 
 

@@ -28,8 +28,8 @@
  }
 
 
-if(isset($_SESSION["unidadAModificar"])){
-  $unidadAModificar=$_SESSION["unidadAModificar"];
+if(isset($_SESSION["unidadAModificarSolicitada"])){
+  $unidadAModificar=$_SESSION["unidadAModificarSolicitada"];
 }else{
   $unidadAModificar= new Tbl_Unidad();
 }
