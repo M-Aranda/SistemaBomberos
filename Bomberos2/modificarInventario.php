@@ -17,7 +17,7 @@
   </head>
 
   <?php
-/*
+
 require_once("model/Data.php");
 require_once("model/Tbl_Usuario.php");
 $dataUsuario= new Data();
@@ -27,7 +27,16 @@ if($_SESSION["usuarioIniciado"]!=null){
   if($dataUsuario->verificarSiUsuarioTienePermiso($u,1)==0){
     header("location: paginaError.php");
   }
-}*/
+}
+
+
+$data= new Data();
+
+if(isset($_SESSION["materialMenorAModificarSolicitado"])){
+  $material=$_SESSION["materialMenorAModificarSolicitado"];
+}
+
+
 ?>
 
 <body  background="images/fondofichaintranet.jpg">
@@ -127,12 +136,7 @@ if($_SESSION["usuarioIniciado"]!=null){
 }
 
 </style>
-<?php
-    // unir vista con el modelo sin pasar por un controlador
-    require_once("model/Data.php");
-    $data = new Data();
 
-?>
 
 <div style="width: 800px" style="height: 400px">
     <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
@@ -141,93 +145,107 @@ if($_SESSION["usuarioIniciado"]!=null){
       <div class="form-group" style="margin-left:50px;">
         <span><h5 style="font-weight:bold;">Inventario</h5></span>
 
-        <form action="controlador/CrearMaterialMenor.php" method="post" >
+        <form action="controlador/ActualizarMaterialMenor.php" method="post" >
 
 
 
-          Nombre Material: <input type="text" name="txtnombreMaterial" required>
+          Nombre Material: <input type="text" name="txtnombreMaterial" value="<?php echo $material->getNombre_material_menor(); ?>" >
 
           Entidad a Cargo:
            <select name="entidad" >
                <?php
                    $entiPropietaria = $data->getEntidadACargo();
                    foreach ($entiPropietaria as $ep) {
-                       echo "<option value='".$ep->getIdEntidadACargo()."'>";
-                           echo utf8_encode($ep->getNombreEntidadACargo());
-                       echo"</option>";
-                   }
+                     if($material->getFk_entidad_a_cargo_material_menor()==$ep->getIdEntidadACargo()){?>
+                       <option value="<?php echo $ep->getIdEntidadACargo(); ?>" selected ><?php echo utf8_encode($ep->getNombreEntidadACargo()); ?></option>
+                       <?php
+                     }else{
+                         ?>
+                         <option value="<?php echo $ep->getIdEntidadACargo(); ?>" ><?php echo utf8_encode($ep->getNombreEntidadACargo()); ?></option>
+                         <?php
+                       }
+                     }
                ?>
            </select>
 
            <br><br>
 
-          Color: <input type="text" name="txtcolorMaterial" required>
+          Color: <input type="text" name="txtcolorMaterial" value="<?php echo $material->getColor_material_menor(); ?>" >
 
           Cantidad:
-           <input Type="number" name="txtcantidadMaterial" required ><br><br>
+           <input Type="number" name="txtcantidadMaterial" value="<?php echo $material->getCantidad_material_menor(); ?>"  ><br><br>
 
-           Medida: <input type="number" name="numMedida" required>
+           Medida: <input type="number" name="numMedida" value="<?php echo $material->getMedida_material_menor(); ?>" >
 
           Unidad de Medida:
-          <select name="cboxMedida">
+          <select name="cboxMedida" >
             <?php
              $medidas = $data->getMedidas();
              foreach ($medidas as $me) {
-                 echo "<option value='".$me->getIdUnidadMedida()."'>";
-                     echo utf8_encode($me->getNombreUnidadMedida());
-                 echo"</option>";
-             }
-            ?>
+               if($material->getFk_unidad_de_medida_material_menor()==$me->getIdUnidadMedida()){?>
+                 <option value="<?php echo $me->getIdUnidadMedida(); ?>" selected ><?php echo  utf8_encode($me->getNombreUnidadMedida()); ?></option>
+                 <?php
+               }else{
+                   ?>
+                   <option value="<?php echo $me->getIdUnidadMedida(); ?>" ><?php echo utf8_encode($me->getNombreUnidadMedida()); ?></option>
+                   <?php
+                 }
+               }
+         ?>
 
 
 
           </select>
 
           Ubicacion Fisica:
-          <select name="cboxUbicacion">
+          <select name="cboxUbicacion" >
             <?php
             $ubicacionesFisicas = $data->getUbicacionFisica();
             foreach ($ubicacionesFisicas as $ubi) {
-                echo "<option value='".$ubi->getIdUbicacionFisica()."'>";
-                    echo utf8_encode($ubi->getNombreUbicacionFisica());
-                echo"</option>";
-            }
-
-
-            ?>
+              if($material->getFk_ubicacion_fisica_material_menor()==$ubi->getIdUbicacionFisica()){?>
+                <option value="<?php echo $ubi->getIdUbicacionFisica(); ?>" selected ><?php echo utf8_encode($ubi->getNombreUbicacionFisica()); ?></option>
+                <?php
+              }else{
+                  ?>
+                  <option value="<?php echo $ubi->getIdUbicacionFisica(); ?>" ><?php echo utf8_encode($ubi->getNombreUbicacionFisica()); ?></option>
+                  <?php
+                }
+              }
+        ?>
           </select>
           <br><br>
           Fabricante:
-          <input type="text" name="txtFabricante" required>
+          <input type="text" name="txtFabricante" value="<?php echo $material->getFabricante_material_menor(); ?>" >
 
           Fecha de Caducidad:
-          <input type="date" name="txtCaducidad"required >
+          <input type="date" name="txtCaducidad" value="<?php echo $material->getFecha_de_caducidad_material_menor(); ?>"  >
           <br><br>
 
-          Proveedor: <input type="text" name="txtProveedor"required >
+          Proveedor: <input type="text" value="<?php echo $material->getProveedor_material_menor(); ?>" name="txtProveedor" >
 
           Tipo de Bodega:
-           <select name="cboTipoDeBodega">
+           <select name="cboTipoDeBodega" >
            <?php
            $tiposDeBodega = $data->getTipoBodega();
            foreach ($tiposDeBodega as $bod) {
-               echo "<option value='".$bod->getIdidTipoBodega()."'>";
-                   echo utf8_encode($bod->getNombreTipoBodega());
-               echo"</option>";
-           }
-
-
-           ?>
+             if($material->getFk_tipo_de_bodega_material_menor()==$bod->getIdidTipoBodega()){?>
+               <option value="<?php echo $bod->getIdidTipoBodega(); ?>" selected ><?php echo utf8_encode($bod->getNombreTipoBodega()); ?></option>
+               <?php
+             }else{
+                 ?>
+                 <option value="<?php echo $bod->getIdidTipoBodega(); ?>" ><?php echo utf8_encode($bod->getNombreTipoBodega()); ?></option>
+                 <?php
+               }
+             }
+       ?>
          </select>
+         <input type="hidden" name="idMaterialMenor" value="<?php echo $material->getId_material_menor();?>">
            <br><br>
-
-          <center> <input type="submit" name="btncrear" value="Crear Material" class="btn button-primary" style="width: 150px;" onsubmit="avisoDeExito()"> <span ></span>
-              <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
-
-          </center>
+             <center> <input type="submit" name="btncrear" value="Modificar Material" class="btn button-primary" style="width: 150px;" > <span ></span>
 
 
-        </form>
+             </form>
+
 
 
       </div>
@@ -238,15 +256,6 @@ if($_SESSION["usuarioIniciado"]!=null){
    </div>
  </div>
 </div>
-
-
-<script type="text/javascript">
-
-function avisoDeExito() {
-        alert("Operación exitosa");
-                      }
-
-</script>
 
   </body>
 </html>

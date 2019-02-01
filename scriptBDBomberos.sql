@@ -1439,9 +1439,10 @@ INSERT INTO tbl_unidad_de_medida  (nombre_unidad_de_medida,fk_tipo_de_medida_uni
 -- SELECT * FROM tbl_mantencion;
 -- SELECT * FROM tbl_cargio_combustible;
 -- SELECT * FROM tbl_entidadACargo;
+-- SELECT * FROM tbl_material_menor;
 
 /*
-Select para el inventario
+Select para todo el inventario
 
 SELECT tbl_material_menor.nombre_material_menor, tbl_entidadACargo.nombre_entidadACargo, tbl_material_menor.color_material_menor, tbl_material_menor.cantidad_material_menor, tbl_material_menor.medida_material_menor,
 tbl_unidad_de_medida.nombre_unidad_de_medida, tbl_ubicacion_fisica.nombre_ubicacion_fisica, tbl_material_menor.fabricante_material_menor, tbl_material_menor.fecha_de_caducidad_material_menor,

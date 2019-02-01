@@ -32,6 +32,7 @@ require_once("Tbl_InfoHistorica.php");
 require_once("Tbl_Mantencion.php");
 require_once("Tbl_carguiCombustible.php");
 require_once("Tbl_MaterialMenor.php");
+require_once("Vista_BuscarMaterialMenor.php");
 
 class Data{
     private $c;
@@ -1390,11 +1391,10 @@ public function getTipoBodega(){
 
 public function crerMaterialMenor($materialMenor){
 
-
-    $query="INSERT INTO tbl_material_menor VALUES (NULL, ".$materialMenor->getNombre_material_menor().", ".$materialMenor->getFk_entidad_a_cargo_material_menor().",
-  '".$materialMenor->getColor_material_menor()."' , '".$materialMenor->getColor_material_menor()."' , ".$materialMenor->getCantidad_material_menor().",
-  ".$materialMenor->getMedida_material_menor().", ".$materialMenor->getFk_unidad_de_medida_material_menor().", ".$materialMenor->getFk_ubicacion_fisica_material_menor()."," '".$materialMenor.->getFabricante_material_menor()."',
-  '".$materialMenor->getFecha_de_caducidad_material_menor()."', '".$materialMenor->getProveedor_material_menor()."', ".$materialMenor->getFk_tipo_de_bodega_material_menor().");";
+$query="INSERT INTO tbl_material_menor VALUES (NULL, '".$materialMenor->getNombre_material_menor()."', ".$materialMenor->getFk_entidad_a_cargo_material_menor().",
+'".$materialMenor->getColor_material_menor()."' , ".$materialMenor->getCantidad_material_menor().",
+".$materialMenor->getMedida_material_menor().", ".$materialMenor->getFk_unidad_de_medida_material_menor().", ".$materialMenor->getFk_ubicacion_fisica_material_menor().", '".$materialMenor->getFabricante_material_menor()."',
+'".$materialMenor->getFecha_de_caducidad_material_menor()."', '".$materialMenor->getProveedor_material_menor()."', ".$materialMenor->getFk_tipo_de_bodega_material_menor().");";
 
   echo $query;
 
@@ -1402,6 +1402,94 @@ public function crerMaterialMenor($materialMenor){
   $this->c->ejecutar($query);
   $this->c->desconectar();
 }
+
+
+public function buscarMaterialMenorPorId($idABuscar){
+  $this->c->conectar();
+  $query="SELECT * FROM tbl_material_menor WHERE id_material_menor=".$idABuscar." ;";
+  $rs = $this->c->ejecutar($query);
+
+  while($reg = $rs->fetch_array()){
+
+       $obj = new Tbl_MaterialMenor();
+       $obj->setId_material_menor($reg[0]);
+       $obj->setNombre_material_menor($reg[1]);
+       $obj->setFk_entidad_a_cargo_material_menor($reg[2]);
+       $obj->setColor_material_menor($reg[3]);
+       $obj->setCantidad_material_menor($reg[4]);
+       $obj->setMedida_material_menor($reg[5]);
+       $obj->setFk_unidad_de_medida_material_menor($reg[6]);
+       $obj->setFk_ubicacion_fisica_material_menor($reg[7]);
+       $obj->setFabricante_material_menor($reg[8]);
+       $obj->setFecha_de_caducidad_material_menor($reg[9]);
+       $obj->setProveedor_material_menor($reg[10]);
+       $obj->setFk_tipo_de_bodega_material_menor($reg[11]);
+
+
+   }
+   $this->c->desconectar();
+   return $obj;
+}
+
+
+public function buscarMaterialMenorPorNombreCompaniaOBodega($nombre, $id, $tipoDeBusqueda){
+  $this->c->conectar();
+
+  $query="";
+
+  if($tipoDeBusqueda==1){
+    $query="SELECT tbl_material_menor.nombre_material_menor, tbl_material_menor.cantidad_material_menor, tbl_material_menor.fecha_de_caducidad_material_menor, tbl_entidadACargo.nombre_entidadACargo,
+tbl_material_menor.id_material_menor FROM tbl_material_menor, tbl_entidadACargo WHERE tbl_material_menor.fk_entidad_a_cargo_material_menor=tbl_entidadACargo.id_entidadACargo
+AND tbl_material_menor.nombre_material_menor LIKE '%".$nombre."%';";
+  }else if($tipoDeBusqueda==2){
+    $query="SELECT tbl_material_menor.nombre_material_menor, tbl_material_menor.cantidad_material_menor, tbl_material_menor.fecha_de_caducidad_material_menor, tbl_entidadACargo.nombre_entidadACargo,
+tbl_material_menor.id_material_menor FROM tbl_material_menor, tbl_entidadACargo, tbl_tipo_de_bodega WHERE tbl_material_menor.fk_entidad_a_cargo_material_menor=tbl_entidadACargo.id_entidadACargo
+AND tbl_material_menor.fk_tipo_de_bodega_material_menor=tbl_tipo_de_bodega.id_tipo_de_bodega AND tbl_tipo_de_bodega.id_tipo_de_bodega=".$id.";";
+  }else if($tipoDeBusqueda==3){
+    $query="SELECT tbl_material_menor.nombre_material_menor, tbl_material_menor.cantidad_material_menor, tbl_material_menor.fecha_de_caducidad_material_menor, tbl_entidadACargo.nombre_entidadACargo,
+tbl_material_menor.id_material_menor FROM tbl_material_menor, tbl_entidadACargo WHERE tbl_material_menor.fk_entidad_a_cargo_material_menor=tbl_entidadACargo.id_entidadACargo
+AND tbl_entidadACargo.id_entidadACargo=".$id.";";
+  }
+  /*
+  $query="SELECT tbl_material_menor.nombre_material_menor, tbl_material_menor.cantidad_material_menor, tbl_material_menor.fecha_de_caducidad_material_menor, tbl_entidadACargo.nombre_entidadACargo,
+tbl_material_menor.id_material_menor FROM tbl_material_menor, tbl_entidadACargo WHERE tbl_material_menor.fk_entidad_a_cargo_material_menor=tbl_entidadACargo.id_entidadACargo;";
+*/
+
+  $rs = $this->c->ejecutar($query);
+  $listado = array();
+  while($reg = $rs->fetch_array()){
+       $obj = new Vista_BuscarMaterialMenor();
+       $obj->setNombre($reg[0]);
+       $obj->setCantidad($reg[1]);
+       $obj->setFechaDeCaducidad($reg[2]);
+       $obj->setNombreEntidad($reg[3]);
+       $obj->setIdMaterialMenor($reg[4]);
+
+       $listado[]=$obj;
+   }
+   $this->c->desconectar();
+   return $listado;
+}
+
+
+
+public function actualizarMaterialMenor($materialMenor){
+
+$query="UPDATE tbl_material_menor SET nombre_material_menor='".$materialMenor->getNombre_material_menor()."', fk_entidad_a_cargo_material_menor=".$materialMenor->getFk_entidad_a_cargo_material_menor().", color_material_menor=
+ '".$materialMenor->getColor_material_menor()."' , cantidad_material_menor= ".$materialMenor->getCantidad_material_menor().", medida_material_menor=
+".$materialMenor->getMedida_material_menor().", fk_unidad_de_medida_material_menor=".$materialMenor->getFk_unidad_de_medida_material_menor().",  fk_ubicacion_fisica_material_menor=".$materialMenor->getFk_ubicacion_fisica_material_menor().", fabricante_material_menor='".$materialMenor->getFabricante_material_menor()."',
+ fecha_de_caducidad_material_menor='".$materialMenor->getFecha_de_caducidad_material_menor()."', proveedor_material_menor= '".$materialMenor->getProveedor_material_menor()."', fk_tipo_de_bodega_material_menor=".$materialMenor->getFk_tipo_de_bodega_material_menor()." WHERE id_material_menor=".$materialMenor->getId_material_menor()." ;";
+
+  echo $query;
+
+  $this->c->conectar();
+  $this->c->ejecutar($query);
+  $this->c->desconectar();
+}
+
+
+
+
 
 }
 

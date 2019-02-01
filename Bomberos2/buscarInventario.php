@@ -142,29 +142,37 @@ if($_SESSION["usuarioIniciado"]!=null){
 
       <div class="form-group" style="margin-left:50px;">
         <span><h5 style="font-weight:bold;">Buscar por Nombre</h5></span>
-        <form action="controlador/BuscarBomberoPorAlgunParametro.php" method="post">
+        <form action="controlador/BuscarMaterialMenorPorAlgunParametro.php" method="post">
         <form>
-        <input type="text" name="txtBuscar"  placeholder="Buscar por nombre" style="height:30px;">
+        <input type="text" name="txtBuscaNombre"  placeholder="Buscar por nombre" style="height:30px;">
         <input type="hidden" name="tipoDeBusqueda" value="1">
-        <input class="btn btn-default" type="submit" name="btnInfoPersonal" value="Buscar" class="btn button-primary" style="width: 100px; height:30px;" style="margin-top: 400px;" onclick="porNombre()">
+        <input class="btn btn-default" type="submit" name="btnBusqueda" value="Buscar" class="btn button-primary" style="width: 100px; height:30px;" style="margin-top: 400px;" onclick="porNombre()">
       <!--  <button class="btn btn-default" name="btnBuscar" style="width: 100px; height:30px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Buscar</a> </button> -->
         <form>
 
-        <form action="controlador/BuscarBomberoPorAlgunParametro.php" method="post">
+        <form action="controlador/BuscarMaterialMenorPorAlgunParametro.php" method="post">
         <span><h5 style="font-weight:bold;">Tipo de Bodega</h5></span>
               <select name="tipoBodega" style="width:175px; height:30px;">
+                <?php
+                    $bodegas = $data->getTipoBodega();
+                    foreach ($bodegas as $b) {
+                        echo "<option value='".$b->getIdidTipoBodega()."'>";
+                            echo utf8_encode($b->getnombreTipoBodega());
+                        echo"</option>";
+                    }
+                ?>
 
               </select>
               <input type="hidden" name="tipoDeBusqueda" value="2">
-              <input class="btn btn-default" type="submit" name="btnInfoPersonal" value="Buscar" class="btn button-primary" style="width: 100px; height:30px;" style="margin-top: 400px;" onclick="porEstado()">
+              <input class="btn btn-default" type="submit" name="btnBusqueda" value="Buscar" class="btn button-primary" style="width: 100px; height:30px;" style="margin-top: 400px;"  onclick="porBodega()" >
               <form>
               <!-- <button class="btn btn-default" name="btnBuscarTipo" style="width: 100px; height:30px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Buscar</a> </button> -->
 
-              <form action="controlador/BuscarBomberoPorAlgunParametro.php" method="post">
+              <form action="controlador/BuscarMaterialMenorPorAlgunParametro.php" method="post">
               <span><h5 style="font-weight:bold;">Compañia</h5></span>
                 <select name="compania" style="width:175px; height:30px;">
                   <?php
-                      $compania = $data->readSoloCompanias();
+                      $compania = $data->getEntidadACargo();
                       foreach ($compania as $c) {
                           echo "<option value='".$c->getIdEntidadACargo()."'>";
                               echo utf8_encode($c->getNombreEntidadACargo());
@@ -174,7 +182,7 @@ if($_SESSION["usuarioIniciado"]!=null){
 
                 </select>
                 <input type="hidden" id="tipoDeBusqueda" name="tipoDeBusqueda" value="3">
-                <input class="btn btn-default" type="submit" name="btnInfoPersonal" value="Buscar" class="btn button-primary" style="width: 100px; height:30px;" style="margin-top: 400px;"  onclick="porCompania()">
+                <input class="btn btn-default" type="submit" name="btnBusqueda" value="Buscar" class="btn button-primary" style="width: 100px; height:30px;" style="margin-top: 400px;" onclick="porCompania()" >
               </form>
               <!--  <button class="btn btn-default" name="btnBuscarCompania" style="width: 100px; height:30px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Buscar</a> </button> -->
 
@@ -186,56 +194,61 @@ if($_SESSION["usuarioIniciado"]!=null){
                         <th>Nombre</th>
                         <th>Cantidad</th>
                         <th>Fecha Caducidad</th>
-                        <th>Compañía</th>
+                        <th>Entidad asignada</th>
                         <th>Ver Inventario</th>
                         <th>Modificar información</th>
                       </tr>
                     </thead>
                     <tbody>
+
+
                       <?php
 
-                      if(isset($_SESSION["resultadosDeBusquedaDeBomberos"])){
+                      if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
                         // se hizo una busqueda
-                        $listado=$_SESSION["resultadosDeBusquedaDeBomberos"];
-
-
-
+                        $listado=$_SESSION["resultadosDeBusquedaDeMaterialMenor"];
 
 
                         foreach ($listado as $o => $objeto) {
                           ?>
                           <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                              <form action="controlador/CargarFicha.php" method="post">
-                                <input type="hidden" id="idBombero" name="idBombero" value="<?php echo $objeto->getIdInfoPersonal();?>">
+                            <td><?php echo $objeto->getNombre();?></td>
+                            <td><?php echo $objeto->getCantidad();?></td>
+                            <td><?php
 
-                              <input type="submit" value="Ver ficha" onclick="alterarValor(<?php echo $objeto->getIdInfoPersonal();?>)" >
+                            $fechaSinConvertir = $objeto->getFechaDeCaducidad();
+                            $fechaConvertida = date("d-m-Y", strtotime($fechaSinConvertir));
+
+                            echo $fechaConvertida;
+                          ?>  </td>
+                            <td><?php echo utf8_encode($objeto->getNombreEntidad());?></td>
+
+
+
+                            <td>
+                              <form action="controlador/CargarFichaInventario.php" method="post">
+                                <input type="hidden" id="idMaterial" name="idMaterial" value="<?php echo $objeto->getIdMaterialMenor();?>">
+
+                              <input type="submit" value="Ver ficha" onclick="alterarValor(<?php echo $objeto->getIdMaterialMenor();?>)" >
                             </form>
                               </td>
                               <td>
-                                <form action="controlador/CargarFichaAModificar.php" method="post">
-                                  <input type="hidden" id="idBomberoAModificar" name="idBomberoAModificar" value="<?php echo $objeto->getIdInfoPersonal();?>">
+                                <form action="controlador/CargarFichaInventarioAModificar.php" method="post">
+                                  <input type="hidden" id="idMaterialAModificar" name="idMaterialAModificar" value="<?php echo $objeto->getIdMaterialMenor();?>">
 
-                                <input type="submit" value="Modificar" onclick="alterarValor2(<?php echo $objeto->getIdInfoPersonal();?>)" >
+                                <input type="submit" value="Modificar" onclick="alterarValor2(<?php echo $objeto->getIdMaterialMenor();?>)" >
 
                                 </form>
                               </td>
                           </tr>
-                        <?php
-                      }
+                          <?php
+                           }
+                           }
 
-                    unset($_SESSION["resultadosDeBusquedaDeBomberos"]);
-
-
-                    }
-                      ?>
+                           unset($_SESSION["resultadosDeBusquedaDeMaterialMenor"]);
 
 
-
+                          ?>
 
                     </tbody>
                   </table>
@@ -243,18 +256,11 @@ if($_SESSION["usuarioIniciado"]!=null){
 
       </div>
 
-
-
      </div>
    </div>
  </div>
 </div>
 
-<!-- Preciso el javaScript porque tengo 3 hidden con el mismo nombre, lo cual significa que el ultimo es el que se rescata
-en el controlador. Tengo 3 porque la idea era que cada uno mandara un valor distinto, pero se toma solo el ultimo. Asi que use javascript para alterar
-el valor del ultimo hidden con el numero que necesito en el handler
-
- -->
 <script src="javascript/JQuery.js"></script>
         <script>
 
@@ -262,7 +268,7 @@ el valor del ultimo hidden con el numero que necesito en el handler
           document.getElementById("tipoDeBusqueda").value = "1";
             }
 
-        function porEstado() {
+        function porBodega() {
               document.getElementById("tipoDeBusqueda").value = "2";
                 }
 
@@ -270,11 +276,12 @@ el valor del ultimo hidden con el numero que necesito en el handler
                   document.getElementById("tipoDeBusqueda").value = "3";
                     }
 
+
           function alterarValor(id) {
-                      document.getElementById("idBombero").value=id;
+                      document.getElementById("idMaterial").value=id;
 
                       $.ajax({
-                        url: "iniciarFKInfoPersonalEnSesion.php",
+                        url: "iniciarIdDeMaterialAVerEnSesion.php",
                         type: "POST",
                         data:{"idEnviado":id}
                       }).done(function(data) {
@@ -282,18 +289,20 @@ el valor del ultimo hidden con el numero que necesito en el handler
                       });
                         }
 
-
                         function alterarValor2(id) {
-                                    document.getElementById("idBomberoAModificar").value=id;
+                                    document.getElementById("idMaterialAModificar").value=id;
 
                                     $.ajax({
-                                      url: "iniciarFkInfoPersonalParaModificarBomberoEnSesion.php",
+                                      url: "iniciarIdDeMaterialAModificarEnSesion.php",
                                       type: "POST",
-                                      data:{"idParaModificar":id}
+                                      data:{"idEnviado":id}
                                     }).done(function(data) {
                                       console.log(data);
                                     });
                                       }
+
+
+
 
         </script>
 

@@ -6,7 +6,7 @@ $data = new Data();
 
 $materialMenor= new Tbl_MaterialMenor();
 
-$materialMenor->setId_material_menor(1);
+$materialMenor->setId_material_menor($_REQUEST["idMaterialMenor"]);
 $materialMenor->setNombre_material_menor($_REQUEST["txtnombreMaterial"]);
 $materialMenor->setFk_entidad_a_cargo_material_menor($_REQUEST["entidad"]);
 $materialMenor->setColor_material_menor($_REQUEST["txtcolorMaterial"]);
@@ -20,8 +20,8 @@ $materialMenor->setProveedor_material_menor($_REQUEST["txtProveedor"]);
 $materialMenor->setFk_tipo_de_bodega_material_menor($_REQUEST["cboTipoDeBodega"]);
 
 
-$data->crerMaterialMenor($materialMenor);
+$data->actualizarMaterialMenor($materialMenor);
 
-header("location: ../crearInventario.php");
+header("location: ../buscarInventario.php");
 
 ?>
