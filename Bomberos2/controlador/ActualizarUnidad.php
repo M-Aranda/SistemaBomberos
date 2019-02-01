@@ -7,7 +7,7 @@ echo "despues del click";
   require_once("../model/Tbl_Unidad.php");
   require_once("../model/Tbl_EstadoUnidad.php");
   require_once("../model/Tbl_TipoVehiculo.php");
-  require_once("../model/Tbl_EntidadPropietaria.php");
+
 
     $id=$_REQUEST["cboUnidadAModificar"];
     $nombre=$_REQUEST["txtnombreUnidad"];

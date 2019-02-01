@@ -191,37 +191,55 @@
                                         Estado de Unidad:
                                         <select name="unidades"  class="form-control" disabled>
                                             <?php
-                                                $unidad = $data->getUnidades();
-                                                foreach ($unidad as $u) {
-                                                    echo "<option value='".$u->getIdEstadoUnidad()."'>";
-                                                        echo $u->getNombreEstadoUnidad();
-                                                    echo"</option>";
-                                                }
+                                                $unidades = $data->getUnidades();
+                                                foreach ($unidades as $u) {
+                                                  if($unidad->getfkEstadoUnidad()==$u->getIdEstadoUnidad()){?>
+                                                    <option value="<?php echo $u->getIdEstadoUnidad(); ?>" selected ><?php echo $u->getNombreEstadoUnidad(); ?></option>
+                                                    <?php
+                                                  }else{
+                                                      ?>
+                                                      <option value="<?php echo $u->getIdEstadoUnidad(); ?>" ><?php echo $u->getNombreEstadoUnidad(); ?></option>
+                                                      <?php
+                                                    }
+                                                  }
                                             ?>
                                         </select>
 
                                       Tipo de Vehiculo:
                                       <select name="vehiculos"  class="form-control" disabled>
                                           <?php
-                                              $vehiculo = $data->getVehiculos();
-                                              foreach ($vehiculo as $v) {
-                                                  echo "<option value='".$v->getIdTipoVehiculo()."'>";
-                                                      echo $v->getNombreTipoVehiculo();
-                                                  echo"</option>";
-                                              }
+                                              $vehiculos = $data->getVehiculos();
+                                              foreach ($vehiculos as $v) {
+                                                if($unidad->getfkTipoVehiculo()==$v->getIdTipoVehiculo()){?>
+                                                  <option value="<?php echo $v->getIdTipoVehiculo(); ?>" selected ><?php echo $v->getNombreTipoVehiculo(); ?></option>
+                                                  <?php
+                                                }else{
+                                                    ?>
+                                                    <option value="<?php echo $v->getIdTipoVehiculo(); ?>" ><?php echo $v->getNombreTipoVehiculo(); ?></option>
+                                                    <?php
+                                                  }
+                                                }
                                           ?>
+
+
                                       </select>
 
                                    Entidad a Cargo:
                                     <select name="entidad" class="form-control" disabled>
                                         <?php
-                                            $entiPropietaria = $data->getEntidadACargo();
-                                            foreach ($entiPropietaria as $ep) {
-                                                echo "<option value='".$ep->getIdEntidadACargo()."'>";
-                                                    echo utf8_encode($ep->getNombreEntidadACargo());
-                                                echo"</option>";
-                                            }
+                                            $entidadesPropietarias = $data->getEntidadACargo();
+                                            foreach ($entidadesPropietarias as $ep) {
+                                              if($unidad->getfkEntidadPropietaria()==$ep->getIdEntidadACargo()){?>
+                                                <option value="<?php echo $ep->getIdEntidadACargo(); ?>" selected ><?php echo utf8_encode($ep->getNombreEntidadACargo()); ?></option>
+                                                <?php
+                                              }else{
+                                                  ?>
+                                                  <option value="<?php echo $ep->getIdEntidadACargo(); ?>" ><?php echo utf8_encode($ep->getNombreEntidadACargo()); ?></option>
+                                                  <?php
+                                                }
+                                              }
                                         ?>
+
                                     </select>
                                           <br><br>
 
@@ -239,6 +257,8 @@
 
                           <br>
                           <br>
+
+<br><br><br><br><br>
 
                           <div class="col-md-20">
                               <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#mantencion">
@@ -382,7 +402,7 @@
                           </div>
 
 
-
+<br><br><br><br><br>
 
 
 
