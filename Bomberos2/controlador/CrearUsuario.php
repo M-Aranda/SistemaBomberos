@@ -25,7 +25,11 @@ if(isset($_POST["btnAceptar"])){//if usuario presiona boton
       header("location: ../Mantenedor.php");
 
       }else{
-     header("location: ../crearUsuario.php");
+
+
+        header("location: ../crearUsuario.php");
+        echo "Contraseñas no coinciden";
+
       }
 
 }

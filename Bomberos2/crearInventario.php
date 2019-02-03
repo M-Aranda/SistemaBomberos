@@ -145,7 +145,7 @@ if($_SESSION["usuarioIniciado"]!=null){
 
 
 
-          Nombre Material: <input type="text" name="txtnombreMaterial" required>
+          Nombre Material: <input type="text" name="txtnombreMaterial" required><br><br>
 
           Entidad a Cargo:
            <select name="entidad" >
@@ -159,16 +159,50 @@ if($_SESSION["usuarioIniciado"]!=null){
                ?>
            </select>
 
+           Ubicacion Fisica:
+           <select name="cboxUbicacion">
+             <?php
+             $ubicacionesFisicas = $data->getUbicacionFisica();
+             foreach ($ubicacionesFisicas as $ubi) {
+                 echo "<option value='".$ubi->getIdUbicacionFisica()."'>";
+                     echo utf8_encode($ubi->getNombreUbicacionFisica());
+                 echo"</option>";
+             }
+
+
+             ?>
+           </select>
            <br><br>
 
-          Color: <input type="text" name="txtcolorMaterial" required>
 
-          Cantidad:
-           <input Type="number" name="txtcantidadMaterial" required ><br><br>
 
-           Medida: <input type="number" name="numMedida" required>
+          Marca: <input type="text" name="txtmarca" required>
 
-          Unidad de Medida:
+          Color:
+           <input Type="number" name="txtColor" required ><br><br>
+
+           Proveedor: <input type="text" name="txtProveedor"required >
+
+           Estado:
+           <select>
+           </select>
+
+           <br><br>
+
+           Fecha de Caducidad:
+           <input type="date" name="txtCaducidad"required >
+
+           No aplica:
+           <input type="checkbox" name="checknoaplica">
+
+           <br><br>
+
+
+           Cantidad:
+           <input type="number" name="txtcantidad" >
+
+           Medida: <input type="number" name="numMedida" required> /
+
           <select name="cboxMedida">
             <?php
              $medidas = $data->getMedidas();
@@ -183,42 +217,7 @@ if($_SESSION["usuarioIniciado"]!=null){
 
           </select>
 
-          Ubicacion Fisica:
-          <select name="cboxUbicacion">
-            <?php
-            $ubicacionesFisicas = $data->getUbicacionFisica();
-            foreach ($ubicacionesFisicas as $ubi) {
-                echo "<option value='".$ubi->getIdUbicacionFisica()."'>";
-                    echo utf8_encode($ubi->getNombreUbicacionFisica());
-                echo"</option>";
-            }
 
-
-            ?>
-          </select>
-          <br><br>
-          Fabricante:
-          <input type="text" name="txtFabricante" required>
-
-          Fecha de Caducidad:
-          <input type="date" name="txtCaducidad"required >
-          <br><br>
-
-          Proveedor: <input type="text" name="txtProveedor"required >
-
-          Tipo de Bodega:
-           <select name="cboTipoDeBodega">
-           <?php
-           $tiposDeBodega = $data->getTipoBodega();
-           foreach ($tiposDeBodega as $bod) {
-               echo "<option value='".$bod->getIdidTipoBodega()."'>";
-                   echo utf8_encode($bod->getNombreTipoBodega());
-               echo"</option>";
-           }
-
-
-           ?>
-         </select>
            <br><br>
 
           <center> <input type="submit" name="btncrear" value="Crear Material" class="btn button-primary" style="width: 150px;" onsubmit="avisoDeExito()"> <span ></span>
