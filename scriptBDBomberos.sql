@@ -3,6 +3,7 @@ CREATE DATABASE bomberosBD;
 USE bomberosBD;
 SET lc_time_names = 'es_CL';
 
+
 CREATE TABLE tbl_permiso (
 id_permiso INT AUTO_INCREMENT,
 nombre_permiso VARCHAR (5000),
@@ -90,6 +91,7 @@ FOREIGN KEY (fk_genero_informacionPersonal) REFERENCES tbl_genero (id_genero),
 PRIMARY KEY (id_informacionPersonal)
 );
 
+
 CREATE TABLE tbl_entidadACargo (
 id_entidadACargo INT AUTO_INCREMENT,
 nombre_entidadACargo VARCHAR (5000),
@@ -158,6 +160,8 @@ FOREIGN KEY (fk_cargo_informacionBomberil) REFERENCEs tbl_cargo (id_cargo),
 FOREIGN KEY (fk_estado_informacionBomberil) REFERENCEs tbl_estadoBombero (id_estado),
 PRIMARY KEY (id_informacionBomberil)
 );
+
+
 
 
 CREATE TABLE tbl_informacionLaboral (
@@ -279,6 +283,18 @@ fk_informacionPersonal_informacionHistorica INT,
 FOREIGN KEY (fk_informacionPersonal_informacionHistorica) REFERENCES tbl_informacionPersonal (id_informacionPersonal), 
 FOREIGN KEY (fk_region_informacionHistorica) REFERENCES tbl_region (id_region), 
 PRIMARY KEY (id_informacionHistorica)
+);
+
+CREATE TABLE tbl_informacionDeCargos (
+id_informacionDeCargos INT AUTO_INCREMENT,
+nombre_informacionDeCargos VARCHAR (500),
+marca_informacionDeCargos VARCHAR (500),
+talla_informacionDeCargos VARCHAR (500),
+serie_informacionDeCargos VARCHAR (500),
+fecha_informacionDeCargos VARCHAR (500),
+fk_personal_informacionDeCargos INT,
+FOREIGN KEY (fk_personal_informacionDeCargos) REFERENCES tbl_informacionPersonal (id_informacionPersonal),
+PRIMARY KEY (id_informacionDeCargos)
 );
 
 
@@ -408,11 +424,12 @@ FOREIGN KEY (fk_tipo_de_medida_unidad_de_medida) REFERENCES tbl_tipo_de_medida (
 PRIMARY KEY (id_unidad_de_medida)
 );
 
-CREATE TABLE tbl_tipo_de_bodega (
-id_tipo_de_bodega INT AUTO_INCREMENT,
-nombre_tipo_de_bodega VARCHAR (5000),
-PRIMARY KEY (id_tipo_de_bodega)
+CREATE TABLE tbl_estado_material_menor (
+id_estado_material_menor INT AUTO_INCREMENT,
+nombre_estado_material_menor VARCHAR (300),
+PRIMARY KEY(id_estado_material_menor)
 );
+
 
 CREATE TABLE tbl_material_menor (
 id_material_menor INT AUTO_INCREMENT,
@@ -426,11 +443,9 @@ fk_ubicacion_fisica_material_menor INT,
 fabricante_material_menor VARCHAR (300),
 fecha_de_caducidad_material_menor DATE,
 proveedor_material_menor VARCHAR (300),
-fk_tipo_de_bodega_material_menor INT,
 FOREIGN KEY (fk_entidad_a_cargo_material_menor) REFERENCES tbl_entidadACargo (id_entidadACargo),
 FOREIGN KEY (fk_unidad_de_medida_material_menor) REFERENCES tbl_unidad_de_medida (id_unidad_de_medida),
 FOREIGN KEY (fk_ubicacion_fisica_material_menor) REFERENCES tbl_ubicacion_fisica (id_ubicacion_fisica),
-FOREIGN KEY (fk_tipo_de_bodega_material_menor) REFERENCES tbl_tipo_de_bodega (id_tipo_de_bodega),
 PRIMARY KEY (id_material_menor)
 );
 
@@ -1411,7 +1426,9 @@ INSERT INTO tbl_tipo_servicio (codigo_tipo_servicio,nombre_tipo_servicio) VALUES
 
 INSERT INTO tbl_tipo_de_medida (nombre_tipo_de_medida) VALUES ('Distancia'),('Masa'),('Capacidad'),('Tiempo'),('Espacio de datos');
 INSERT INTO tbl_ubicacion_fisica  (nombre_ubicacion_fisica) VALUES ('Unidad B-1'),('Unidad 2-2'),('Bodega'),('Cuartel');
-INSERT INTO tbl_tipo_de_bodega  (nombre_tipo_de_bodega) VALUES ('Bodega tipo 1'),('Bodega tipo 2'),('Bodega tipo 3'),('Bodega tipo 4');
+
+INSERT INTO tbl_estado_material_menor (nombre_estado_material_menor) VALUES ('Operativo'),('Almacenado'),('En mantención'),('Caducado'),('Fuera de servicio');
+
 INSERT INTO tbl_unidad_de_medida  (nombre_unidad_de_medida,fk_tipo_de_medida_unidad_de_medida) VALUES ('Milimetros', 1), ('Centimetros', 1), ('Decimetros', 1), ('Metros', 1), ('Decámetros', 1), ('Hectómetros', 1), ('Kilometros', 1),
 ('Miligramos',2 ), ('Centigramos', 2),('Decigramos', 2), ('Gramos', 2), ('Decagramos',2),('Hectogramos',2),('Kilogramos',2),('Toneladas',2),
 ('Mililitros',3),('Centilitros',3),('Decilitros',3),('Litros',3),('Decalitros',3),('Hectolitros',3),('Kilolitros',3),
@@ -1521,6 +1538,7 @@ CALL CRUDUnidad (6,'Nombre de Prueba 1','2000','200','300','333','555','3333','Y
 CALL CRUDUnidad (6,'Nombre de Prueba 2','2000','200','300','333','555','3333','BIEN','2000-12-03','2012-06-11',15,2,1,1,1);
 CALL CRUDUnidad (6,'Nombre de Prueba 3','2000','200','300','333','555','3333','jaja','2000-12-03','2012-06-11',15,2,1,1,1);
 
+
 CALL CRUDMedida (1,'XX','SS','42','41',1);
 CALL CRUDInformacionPersonal (1,'20333088-2','Juanito', 'Pérez', 'Tatto','1991-12-16',1,1,'1,70','80,2','cheloz_20@hotmail.com',
 1,'123123123123','958677107','Carretera El Cobre','No sabe', 'Creo que no',1);
@@ -1603,12 +1621,13 @@ INSERT INTO tbl_cargio_combustible VALUES (NULL, 'Alguien', '2018-11-11', 'Algun
 INSERT INTO tbl_cargio_combustible VALUES (NULL, 'Alguien', '2018-11-11', 'Algun lugar', 1, 16.5, 500,'Ninguna',3);
 
 
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Roja',3,20,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.');
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Roja',3,20,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.');
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Azul',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.');
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Verde',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.');
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Plomo',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.');
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Morada',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.');
 
-INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Roja',3,20,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',3);
-INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Azul',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',3);
-INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Verde',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',3);
-INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Plomo',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',3);
-INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Morada',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',3);
 
 
 
