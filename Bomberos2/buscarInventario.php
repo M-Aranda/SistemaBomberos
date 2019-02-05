@@ -185,6 +185,26 @@ if($_SESSION["usuarioIniciado"]!=null){
               <input class="btn btn-default" type="submit" name="btnBusqueda" value="Buscar" class="btn button-primary" style="width: 100px; height:30px;" style="margin-top: 400px;"  onclick="porBodega()" >
               <form>
 
+                <?php
+                if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
+                  $resultadosDeBusquedaHecha=$_SESSION["resultadosDeBusquedaDeMaterialMenor"];
+                  if(count($resultadosDeBusquedaHecha)>1){?>
+                    <br>
+                    Mostrando <?php echo count($resultadosDeBusquedaHecha);?> resultados
+                    <br>
+                <?php  }else if(count($resultadosDeBusquedaHecha)==1){  ?>
+                <br>
+                Mostrando <?php echo count($resultadosDeBusquedaHecha);?> resultado
+                <br>
+              <?php }else if(count($resultadosDeBusquedaHecha)==0){  ?>
+                <br>
+                No hay resultados
+                <br>
+              <?php
+              }
+              }
+               ?>
+
 
                 <table class="table table-striped">
                     <thead>
@@ -224,18 +244,12 @@ if($_SESSION["usuarioIniciado"]!=null){
 
 
                             <td>
-
                                 <input type="hidden" id="idMaterial" name="idMaterial" value="<?php echo $objeto->getIdMaterialMenor();?>">
                                 <input type="button" onclick="location.href='controlador/CargarFichaInventario.php',alterarValor(<?php echo $objeto->getIdMaterialMenor();?>);" value="Ver Ficha" />
-
                               </td>
-
                               <td>
-
                                 <input type="hidden" id="idMaterialAModificar" name="idMaterialAModificar" value="<?php echo $objeto->getIdMaterialMenor();?>">
                                 <input type="button" onclick="location.href='controlador/CargarFichaInventarioAModificar.php',alterarValor2(<?php echo $objeto->getIdMaterialMenor();?>);" value="Modificar" />
-
-
                               </td>
                           </tr>
                           <?php

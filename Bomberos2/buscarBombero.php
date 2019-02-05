@@ -183,7 +183,27 @@ if($_SESSION["usuarioIniciado"]!=null){
                 <input type="hidden" id="tipoDeBusqueda" name="tipoDeBusqueda" value="3">
                 <input class="btn btn-default" type="submit" name="btnInfoPersonal" value="Buscar" class="btn button-primary" style="width: 100px; height:30px;" style="margin-top: 400px;"  onclick="porCompania()">
               </form>
-              <!--  <button class="btn btn-default" name="btnBuscarCompania" style="width: 100px; height:30px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Buscar</a> </button> -->
+
+
+              <?php
+              if(isset($_SESSION["resultadosDeBusquedaDeBomberos"])){
+                $resultadosDeBusquedaHecha=$_SESSION["resultadosDeBusquedaDeBomberos"];
+                if(count($resultadosDeBusquedaHecha)>1){?>
+                  <br>
+                  Mostrando <?php echo count($resultadosDeBusquedaHecha);?> resultados
+                  <br>
+              <?php  }else if(count($resultadosDeBusquedaHecha)==1){  ?>
+              <br>
+              Mostrando <?php echo count($resultadosDeBusquedaHecha);?> resultado
+              <br>
+            <?php }else if(count($resultadosDeBusquedaHecha)==0){  ?>
+              <br>
+              No hay resultados
+              <br>
+            <?php
+            }
+            }
+             ?>
 
 
 
