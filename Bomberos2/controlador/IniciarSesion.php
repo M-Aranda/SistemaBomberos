@@ -13,7 +13,10 @@ if (isset($_POST['btnIniciarSesion'])) {
 
       if ($usuario == null) {
 
+
+
          header("location: ../inicio.html");
+
 
        } else {
 

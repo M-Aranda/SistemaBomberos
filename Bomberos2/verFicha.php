@@ -809,6 +809,70 @@
                <br>
                <br>
 
+               <div class="col-md-20">
+                   <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#cargos">
+                       Información de Cargos
+                   </button>
+               </div>
+               <div class="col-md-11 collapse" id="cargos">
+                   <div class="panel panel-primary">
+                       <div class="panel-heading panel-title">
+                         <form action="controlador/CrearInformacionHistorica.php" method="post">
+                           Información de Cargos
+                       </div>
+                       <div class="panel-body" style="margin-left: -20px;">
+                           <div class="col-sm-6">
+                             <table class="table table-striped">
+                                 <thead>
+                                   <tr>
+                                     <th>Nombre</th>
+                                     <th>Marca</th>
+                                     <th>Talla</th>
+                                     <th>Serie</th>
+                                     <th>Fecha</th>
+                                   </tr>
+                                 </thead>
+                                 <tbody>
+                                   <?php
+                                   foreach ($infoAcademica as $iAcademica => $datos) {
+                                   ?>
+                                   <tr>
+                                     <td><?php echo $datos->getactividadInformacionAcademica();?></td>
+                                     <td><?php
+                                     $fechaSinConvertir = $datos->getfechaInformacionAcademica();
+                                     $fechaConvertida = date("d-m-Y", strtotime($fechaSinConvertir));
+
+                                     echo $fechaConvertida;?></td>
+                                     <td><?php echo $d->buscarEstadoDeCursoPorId($datos->getfkEstadoCursoInformacionAcademica());?></td>
+                                <?php
+                                 }
+                                   ?>
+                                   </tr>
+
+                                 </tbody>
+                               </table>
+                          </div>
+
+
+
+                          <div class="col-md-6">
+                             <br><br><br><br><br><br><br><br><br><br><br>
+                              <center> <input type="submit" name="btninfohistorica" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                                  <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
+
+                              </center>
+
+                            </form>
+
+                          </div>
+
+
+
+                       </div>
+
+                   </div>
+               </div>
+
 
 
 </div>

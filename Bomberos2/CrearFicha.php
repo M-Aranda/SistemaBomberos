@@ -703,25 +703,7 @@
                                }
                                ?>
                                </select>
-                               <!--
-                             <table class="table table-striped">
-                                 <thead>
-                                   <tr>
-                                     <th>Fecha</th>
-                                     <th>Actividad</th>
-                                     <th>Estado</th>
-                                   </tr>
-                                 </thead>
-                                 <tbody>
-                                   <tr>
-                                     <td>John</td>
-                                     <td>Doe</td>
-                                     <td>john@example.com</td>
-                                   </tr>
 
-                                 </tbody>
-                               </table>
-                                      -->
                           </div>
                           <div class="col-md-6">
                              <br><br><br><br><br><br>
@@ -823,33 +805,6 @@
                              Motivo: <input type="text" name="txtMotivo" class="form-control" required>
                              Detalle: <input type="text" name="txtDetalleHistorico" class="form-control" required>
 
-                            <!--
-                             <table class="table table-striped">
-                                 <thead>
-                                   <tr>
-                                     <th>Región</th>
-                                     <th>Cuerpo</th>
-                                     <th>Compañía</th>
-                                     <th>Fecha</th>
-                                     <th>Cargo</th>
-                                     <th>Motivo</th>
-                                     <th>Detalle</th>
-                                   </tr>
-                                 </thead>
-                                 <tbody>
-                                   <tr>
-                                     <td>John</td>
-                                     <td>Doe</td>
-                                     <td>john@example.com</td>
-                                     <td>dfds</td>
-                                     <td>fsdfsd</td>
-                                     <td>fdsfds</td>
-                                     <td>fsfsdfs</td>
-                                   </tr>
-
-                                 </tbody>
-                               </table>
-                                -->
                           </div>
 
                           <div class="col-md-6">
@@ -874,61 +829,61 @@
                <br>
                <br>
 
-      <!--       <div class="col-md-13">
-                   <button type="button" class="btn btn-default col-md-7" data-toggle="collapse" data-target="#servicio">
-                       Asistencia Actos de Servicio
-                   </button>
-               </div>
-               <div class="col-md-7 collapse" id="servicio">
-                   <div class="panel panel-primary">
-                       <div class="panel-heading panel-title">
-                         Asistencia Actos de Servicio
-                       </div>
-                       <div class="panel-body">
-                           <div class="col-sm-6">
+                      <div class="col-md-20">
+                          <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#cargos">
+                              Información de Cargos
+                          </button>
+                      </div>
+                      <div class="col-md-11 collapse" id="cargos">
+                          <div class="panel panel-primary">
+                              <div class="panel-heading panel-title">
+                                <form action="controlador/CrearInformacionHistorica.php" method="post">
+                                  Información de Cargos
+                              </div>
+                              <div class="panel-body" style="margin-left: -20px;">
+                                  <div class="col-sm-6">
+                                    Creando ficha para:
+                                    <select class="form-control" name="cboBombero">
+                                      <?php
+                                      require_once("model/Data.php");
+                                      $d= new Data();
+                                      $listado = $d->readInformacionPersonalBomberos();
+                                      foreach($listado as $o => $objeto){
+                                      ?>
+                                      <option value="<?php echo $objeto->getIdInfoPersonal(); ?>"><?php echo $objeto->getRutInformacionPersonal()."  ";
+                                     echo $objeto->getNombreInformacionPersonal(); ?></option>
+                                      <?php
+                                      }
+                                      ?>
+                                      </select>
 
-                             Cuerpo: <input class="form-control" type="text" name="txtcuerpo">
-                             Año: <input class="form-control" type="date" name="txtanio">
-                             Mes: <input class="form-control" type="text" name="txtmes">
-                             Cantidad Mensual: <input class="form-control" type="date" name="txtCantmensual">
+                                      Nombre: <input type="text" class="form-control" name="txtnombrecargo">
+                                      Marca: <input type="text" class="form-control" name="txtmarcacargo">
+                                      Talla: <input type="text" class="form-control" name="txttalla">
+                                      Serie: <input type="text" class="form-control" name="txtserie">
+                                      Fecha: <input type="date" class="form-control" name="txtfechacargo">
 
-                             <table class="table table-striped">
-                                 <thead>
-                                   <tr>
-                                     <th>Cuerpo</th>
-                                     <th>Año</th>
-                                     <th>Mes</th>
-                                     <th>Cantidad Mensual</th>
-                                   </tr>
-                                 </thead>
-                                 <tbody>
-                                   <tr>
-                                     <td>John</td>
-                                     <td>Doe</td>
-                                     <td>john@example.com</td>
-                                     <td>sadsda</td>
-                                   </tr>
+                                 </div>
 
-                                 </tbody>
-                               </table>
+
+
+                                 <div class="col-md-6">
+                                    <br><br><br><br><br><br><br><br><br><br><br>
+                                     <center> <input type="submit" name="btninfohistorica" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                                         <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
+
+                                     </center>
+
+                                   </form>
+
+                                 </div>
+
+
+
+                              </div>
 
                           </div>
-                          <div class="col-md-6">
-                             <br><br><br><br><br><br><br><br><br>
-                              <center> <input type="submit" name="btninfoServicio" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
-
-                              </center>
-
-                          </div>
-                       </div>
-
-                   </div>
-               </div>  -->
-
-                 <!-- INFORMACION servicio -->
-
-
-<!--  </div>-->
+                      </div>
 
 </div>
 

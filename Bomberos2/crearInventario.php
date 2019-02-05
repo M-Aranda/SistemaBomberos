@@ -272,9 +272,9 @@ if($_SESSION["usuarioIniciado"]!=null){
 
 
 
-    $("form").submit(function(){
-      alert("Operación exitosa");
-      });
+                  $("form").submit(function(){
+                    alert("Operación exitosa");
+                    });
 
 
 

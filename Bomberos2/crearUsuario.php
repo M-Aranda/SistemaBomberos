@@ -48,7 +48,8 @@
                       ?>
                         <div class="form-group">
                          &nbsp;&nbsp;Nombre: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input id="nombre" type="text" name="txtnombre" placeholder="EJ: nombre" required="" class="form-control" style="width: 250px; text-align: center">
+                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                         <input id="inputid" type="text" name="txtnombre" placeholder="EJ: nombre" required="" class="form-control" style="width: 250px; text-align: center">
 
                          <br>
                          <br>
@@ -70,7 +71,7 @@
                                }
                            ?>
                          </select>
-                           <input type="submit" value="Crear"  name="btnAceptar"class="btn button-primary" style="width: 55px;" onclick="popup()">
+                           <input type="submit" value="Crear"  name="btnAceptar" class="btn button-primary" style="width: 55px;" onclick="validarcontrasenia()">
 
 
                            <button class="btn button-primary" style="width: 57px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>
@@ -82,6 +83,35 @@
             </div>
 
         </div>
+
+        <script src="javascript/JQuery.js"></script>
+
+        <script type="text/javascript">
+
+          /*  $("form").submit(function(){
+              alert("Operación exitosa");
+            });*/
+
+              function validarcontrasenia(){
+
+                  if("usu_confirm" != "usu_password"){
+
+                    $("form").submit(function(){
+                      alert("Las contraseñas no coinciden");
+                      });
+
+                    $("#inputid").focus();
+
+                  }
+
+              }
+
+
+
+
+        </script>
+
+
 
 
   </body>
