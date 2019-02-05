@@ -29,6 +29,6 @@ if (isset($_POST['checknoaplica'])) {
 
 $data->actualizarMaterialMenor($materialMenor);
 
-//header("location: ../buscarInventario.php");
+header("location: ../buscarInventario.php");
 
 ?>

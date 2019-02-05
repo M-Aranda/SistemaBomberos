@@ -224,19 +224,18 @@ if($_SESSION["usuarioIniciado"]!=null){
 
 
                             <td>
-                              <form action="controlador/CargarFichaInventario.php" method="post">
+
                                 <input type="hidden" id="idMaterial" name="idMaterial" value="<?php echo $objeto->getIdMaterialMenor();?>">
+                                <input type="button" onclick="location.href='controlador/CargarFichaInventario.php',alterarValor(<?php echo $objeto->getIdMaterialMenor();?>);" value="Ver Ficha" />
 
-                              <input type="submit" value="Ver ficha" onclick="alterarValor(<?php echo $objeto->getIdMaterialMenor();?>)" >
-                            </form>
                               </td>
+
                               <td>
-                                <form action="controlador/CargarFichaInventarioAModificar.php" method="post">
-                                  <input type="hidden" id="idMaterialAModificar" name="idMaterialAModificar" value="<?php echo $objeto->getIdMaterialMenor();?>">
 
-                                <input type="submit" value="Modificar" onclick="alterarValor2(<?php echo $objeto->getIdMaterialMenor();?>)" >
+                                <input type="hidden" id="idMaterialAModificar" name="idMaterialAModificar" value="<?php echo $objeto->getIdMaterialMenor();?>">
+                                <input type="button" onclick="location.href='controlador/CargarFichaInventarioAModificar.php',alterarValor2(<?php echo $objeto->getIdMaterialMenor();?>);" value="Modificar" />
 
-                                </form>
+
                               </td>
                           </tr>
                           <?php
