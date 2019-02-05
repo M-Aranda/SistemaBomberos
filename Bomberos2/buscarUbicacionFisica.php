@@ -1,11 +1,9 @@
 <?php
 require_once("model/Data.php");
-require_once("model/Data.php");
+
 $data = new Data();
 
-$id = isset($_REQUEST['idEntidadEnviado'])?$_REQUEST['idEntidadEnviado']:"";
-
-
+$id = isset($_REQUEST['datos'])?$_REQUEST['datos']:"";
 
 
 
@@ -15,7 +13,6 @@ foreach ($ubicacionesFisicas as $ubi) {
         echo utf8_encode($ubi->getNombreUbicacionFisica());
     echo"</option>";
 }
-
 
 
 

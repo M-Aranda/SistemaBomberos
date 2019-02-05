@@ -148,7 +148,7 @@ if($_SESSION["usuarioIniciado"]!=null){
           Nombre Material: <input type="text" name="txtnombreMaterial" required><br><br>
 
           Entidad a Cargo:
-           <select name="cboEntidadACargo" id="cboEntidadACargo">
+           <select name="cboEntidadACargo" id="cboEntidadACargo" onchange="callAjax()">
                <?php
                    $entiPropietaria = $data->getEntidadACargo();
                    foreach ($entiPropietaria as $ep) {
@@ -164,6 +164,7 @@ if($_SESSION["usuarioIniciado"]!=null){
              <div id="divUbicaciones">
 
              </div>
+
            </select>
            <br><br>
 
@@ -243,22 +244,24 @@ if($_SESSION["usuarioIniciado"]!=null){
 
 <script type="text/javascript">
 
+function buscar() {
+var val= document.getElementById("cboEntidadACargo").value;
+$('#divUbicaciones').html(val);
+      }
 
 
-$(document).on('change','#cboEntidadACargo',function(){
-      var val = $(this).val();
-      $.ajax({
-            url: 'buscarUbicacionFisica.php',
-            data: {idEntidadEnviado:val},
-            type: 'POST',
-            dataType: 'html',
-            success: function(result){
-                 $('#divUbicaciones').html();
-                 $('#divUbicaciones').html(result);
-            }
-       });
-});
 
+                      function callAjax(){
+                           var val= document.getElementById("cboEntidadACargo").value;
+
+                           $.ajax({
+                             url: "buscarUbicacionFisica.php",
+                             type: "POST",
+                             data:{"datos":val}
+                           }).done(function(data) {
+                             console.log(data);
+                           });
+                         }
 
 
 function avisoDeExito() {
