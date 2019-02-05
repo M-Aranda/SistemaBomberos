@@ -197,7 +197,7 @@ if($_SESSION["usuarioIniciado"]!=null){
            <br><br>
 
            Fecha de Caducidad:
-           <input type="date" name="txtCaducidad"required >
+           <input type="date" name="txtCaducidad"  >
 
            No aplica:
            <input type="checkbox" name="checknoaplica">
