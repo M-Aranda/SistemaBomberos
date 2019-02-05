@@ -17,27 +17,21 @@
   </head>
 
   <?php
-
-require_once("model/Data.php");
-require_once("model/Tbl_Usuario.php");
-$dataUsuario= new Data();
-session_start();
-if($_SESSION["usuarioIniciado"]!=null){
-  $u=$_SESSION["usuarioIniciado"];
-  if($dataUsuario->verificarSiUsuarioTienePermiso($u,1)==0){
-    header("location: paginaError.php");
+  require_once("model/Data.php");
+  require_once("model/Tbl_Usuario.php");
+  $dataUsuario= new Data();
+  session_start();
+  if($_SESSION["usuarioIniciado"]!=null){
+    $u=$_SESSION["usuarioIniciado"];
+    if($dataUsuario->verificarSiUsuarioTienePermiso($u,1)==0){
+      header("location: paginaError.php");
+    }
   }
-}
-
-
-$data= new Data();
-
-if(isset($_SESSION["materialMenorAVerSolicitado"])){
-  $material=$_SESSION["materialMenorAVerSolicitado"];
-}
-
-
-?>
+  $data= new Data();
+  if(isset($_SESSION["materialMenorAVerSolicitado"])){
+    $material=$_SESSION["materialMenorAVerSolicitado"];
+  }
+  ?>
 
 <body  background="images/fondofichaintranet.jpg">
 
@@ -136,7 +130,12 @@ if(isset($_SESSION["materialMenorAVerSolicitado"])){
 }
 
 </style>
+<?php
+    // unir vista con el modelo sin pasar por un controlador
+    require_once("model/Data.php");
+    $data = new Data();
 
+?>
 
 <div style="width: 800px" style="height: 400px">
     <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
@@ -145,14 +144,13 @@ if(isset($_SESSION["materialMenorAVerSolicitado"])){
       <div class="form-group" style="margin-left:50px;">
         <span><h5 style="font-weight:bold;">Inventario</h5></span>
 
-      
+        <form action="controlador/ActualizarMaterialMenor.php" method="post">
 
 
-
-          Nombre Material: <input type="text" name="txtnombreMaterial" value="<?php echo $material->getNombre_material_menor(); ?>" disabled>
+          Nombre Material: <input type="text" name="txtnombreMaterial" id="txtnombreMaterial" value="<?php echo $material->getNombre_material_menor();?>" disabled><br><br>
 
           Entidad a Cargo:
-           <select name="entidad" disabled>
+           <select name="cboEntidadACargoModificar" id="cboEntidadACargoModificar" disabled>
                <?php
                    $entiPropietaria = $data->getEntidadACargo();
                    foreach ($entiPropietaria as $ep) {
@@ -161,29 +159,91 @@ if(isset($_SESSION["materialMenorAVerSolicitado"])){
                        <?php
                      }else{
                          ?>
-                         <option value="<?php echo $ep->getIdEntidadACargo(); ?>" ><?php echo utf8_encode($ep->getNombreEntidadACargo()); ?></option>
+                         <option  value="<?php echo $ep->getIdEntidadACargo(); ?>" ><?php echo utf8_encode($ep->getNombreEntidadACargo()); ?></option>
                          <?php
                        }
                      }
+
                ?>
+           </select>
+
+           Ubicacion Fisica:
+           <select name="cboxUbicacionModificar" id="cboxUbicacionModificar" disabled >
+             <?php
+             $ubicacionesFisicas = $data->getUbicacionFisica($material->getFk_entidad_a_cargo_material_menor());
+             foreach ($ubicacionesFisicas as $ubi) {
+               if($material->getFk_ubicacion_fisica_material_menor()==$ubi->getIdUbicacionFisica()){?>
+                 <option  value="<?php echo $ubi->getIdUbicacionFisica(); ?>" selected ><?php echo utf8_encode($ubi->getNombreUbicacionFisica()); ?></option>
+                 <?php
+               }else{
+                   ?>
+                   <option value="<?php echo $ubi->getIdUbicacionFisica(); ?>" ><?php echo utf8_encode($ubi->getNombreUbicacionFisica()); ?></option>
+                   <?php
+                 }
+               }
+             ?>
+
+           </select>
+           <br><br>
+
+
+
+          Marca: <input type="text" name="txtmarca" value="<?php echo utf8_encode($material->getFabricante_material_menor());?>" disabled>
+
+          Color:
+           <input Type="text" name="txtColor" value="<?php echo $material->getColor_material_menor();?>" disabled ><br><br>
+
+           Proveedor: <input type="text" name="txtProveedor" value="<?php echo $material->getProveedor_material_menor();?>" disabled >
+
+           Estado:
+           <select name="cboEstadoMaterial" id="cboEstadoMaterial" disabled>
+             <?php
+               $estados = $data->getEstadosInventario();
+             foreach ($estados as $e) {
+               if($material->getFkEstadoMaterialMenor()==$e->getId_estado_material_menor()){?>
+                 <option  value="<?php echo $e->getId_estado_material_menor(); ?>" selected ><?php echo utf8_encode($e->getNombre_estado_material_menor()); ?></option>
+                 <?php
+               }else{
+                   ?>
+                   <option  value="<?php echo $e->getId_estado_material_menor(); ?>" ><?php echo utf8_encode($e->getNombre_estado_material_menor()); ?></option>
+                   <?php
+                 }
+               }
+
+             ?>
            </select>
 
            <br><br>
 
-          Color: <input type="text" name="txtcolorMaterial" value="<?php echo $material->getColor_material_menor(); ?>" disabled>
+           Fecha de Caducidad:
+           <input type="date" name="txtCaducidad"  value="<?php echo $material->getFecha_de_caducidad_material_menor();?>" disabled>
 
-          Cantidad:
-           <input Type="number" name="txtcantidadMaterial" value="<?php echo $material->getCantidad_material_menor(); ?>" disabled ><br><br>
+           No aplica:
+           <?php
+           if ($material->getFecha_de_caducidad_material_menor()=='0000-00-00'){?>
+              <input type="checkbox" checked name="checknoaplica" disabled>
+              <?php
+           }else{ ?>
+             <input type="checkbox" name="checknoaplica" disabled>
+          <?php
+         }
+           ?>
 
-           Medida: <input type="number" name="numMedida" value="<?php echo $material->getMedida_material_menor(); ?>" disabled>
 
-          Unidad de Medida:
+           <br><br>
+
+
+           Cantidad:
+           <input type="number" name="txtcantidadMaterial" value="<?php echo $material->getCantidad_material_menor();?>" disabled >
+
+           Medida: <input type="number" name="numMedida" value="<?php echo $material->getMedida_material_menor();?>" disabled> /
+
           <select name="cboxMedida" disabled>
             <?php
              $medidas = $data->getMedidas();
              foreach ($medidas as $me) {
                if($material->getFk_unidad_de_medida_material_menor()==$me->getIdUnidadMedida()){?>
-                 <option value="<?php echo $me->getIdUnidadMedida(); ?>" selected ><?php echo  utf8_encode($me->getNombreUnidadMedida()); ?></option>
+                 <option value="<?php echo $me->getIdUnidadMedida(); ?>" selected ><?php echo utf8_encode($me->getNombreUnidadMedida()); ?></option>
                  <?php
                }else{
                    ?>
@@ -191,58 +251,20 @@ if(isset($_SESSION["materialMenorAVerSolicitado"])){
                    <?php
                  }
                }
-         ?>
+
+            ?>
 
 
 
           </select>
 
-          Ubicacion Fisica:
-          <select name="cboxUbicacion" disabled>
-            <?php
-            $ubicacionesFisicas = $data->getUbicacionFisica();
-            foreach ($ubicacionesFisicas as $ubi) {
-              if($material->getFk_ubicacion_fisica_material_menor()==$ubi->getIdUbicacionFisica()){?>
-                <option value="<?php echo $ubi->getIdUbicacionFisica(); ?>" selected ><?php echo utf8_encode($ubi->getNombreUbicacionFisica()); ?></option>
-                <?php
-              }else{
-                  ?>
-                  <option value="<?php echo $ubi->getIdUbicacionFisica(); ?>" ><?php echo utf8_encode($ubi->getNombreUbicacionFisica()); ?></option>
-                  <?php
-                }
-              }
-        ?>
-          </select>
-          <br><br>
-          Fabricante:
-          <input type="text" name="txtFabricante" value="<?php echo $material->getFabricante_material_menor(); ?>" disabled>
 
-          Fecha de Caducidad:
-          <input type="date" name="txtCaducidad" value="<?php echo $material->getFecha_de_caducidad_material_menor(); ?>" disabled >
-          <br><br>
-
-          Proveedor: <input type="text" value="<?php echo $material->getProveedor_material_menor(); ?>" name="txtProveedor"disabled >
-
-          Tipo de Bodega:
-           <select name="cboTipoDeBodega" disabled>
-           <?php
-           $tiposDeBodega = $data->getTipoBodega();
-           foreach ($tiposDeBodega as $bod) {
-             if($material->getFk_tipo_de_bodega_material_menor()==$bod->getIdidTipoBodega()){?>
-               <option value="<?php echo $bod->getIdidTipoBodega(); ?>" selected ><?php echo utf8_encode($bod->getNombreTipoBodega()); ?></option>
-               <?php
-             }else{
-                 ?>
-                 <option value="<?php echo $bod->getIdidTipoBodega(); ?>" ><?php echo utf8_encode($bod->getNombreTipoBodega()); ?></option>
-                 <?php
-               }
-             }
-       ?>
-         </select>
            <br><br>
 
 
 
+
+        </form>
 
 
       </div>
@@ -253,6 +275,8 @@ if(isset($_SESSION["materialMenorAVerSolicitado"])){
    </div>
  </div>
 </div>
+
+
 
   </body>
 </html>

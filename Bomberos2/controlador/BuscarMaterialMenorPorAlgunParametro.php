@@ -7,18 +7,18 @@ $tipoDeBusqueda=$_REQUEST["tipoDeBusqueda"];
 
 if($tipoDeBusqueda==1)
 {
-  //busqueda por nombre
+
   $nombreABuscar=$_REQUEST["txtBuscaNombre"];
   $id=1;
 }else if($tipoDeBusqueda==2){
-  //busqueda por estado de bombero
-  $nombreABuscar="";
-  $id=$_REQUEST["tipoBodega"];
 
-}else if($tipoDeBusqueda==3){
-  //busqueda por compania
   $nombreABuscar="";
   $id=$_REQUEST["compania"];
+
+}else if($tipoDeBusqueda==3){
+
+  $nombreABuscar="";
+  $id=$_REQUEST["estadoMaterial"];
 
 }
 

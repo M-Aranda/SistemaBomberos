@@ -164,30 +164,26 @@ if($_SESSION["usuarioIniciado"]!=null){
                             ?>
 
                           </select>
-                          <input type="hidden" id="tipoDeBusqueda" name="tipoDeBusqueda" value="3">
+                          <input type="hidden" id="tipoDeBusqueda" name="tipoDeBusqueda" value="2">
                           <input class="btn btn-default" type="submit" name="btnBusqueda" value="Buscar" class="btn button-primary" style="width: 100px; height:30px;" style="margin-top: 400px;" onclick="porCompania()" >
                         </form>
 
         <form action="controlador/BuscarMaterialMenorPorAlgunParametro.php" method="post">
-        <span><h5 style="font-weight:bold;">Tipo de Bodega</h5></span>
-              <select name="tipoBodega" style="width:230px; height:30px;">
+        <span><h5 style="font-weight:bold;">Estado de material</h5></span>
+              <select name="estadoMaterial" style="width:230px; height:30px;">
                 <?php
-                    $bodegas = $data->getTipoBodega();
-                    foreach ($bodegas as $b) {
-                        echo "<option value='".$b->getIdidTipoBodega()."'>";
-                            echo utf8_encode($b->getnombreTipoBodega());
+                    $estados = $data->getEstadosInventario();
+                    foreach ($estados as $e) {
+                        echo "<option value='".$e->getId_estado_material_menor()."'>";
+                            echo utf8_encode($e->getNombre_estado_material_menor());
                         echo"</option>";
                     }
                 ?>
 
               </select>
-              <input type="hidden" name="tipoDeBusqueda" value="2">
+              <input type="hidden" name="tipoDeBusqueda" value="3">
               <input class="btn btn-default" type="submit" name="btnBusqueda" value="Buscar" class="btn button-primary" style="width: 100px; height:30px;" style="margin-top: 400px;"  onclick="porBodega()" >
               <form>
-              <!-- <button class="btn btn-default" name="btnBuscarTipo" style="width: 100px; height:30px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Buscar</a> </button> -->
-
-              <!--  <button class="btn btn-default" name="btnBuscarCompania" style="width: 100px; height:30px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Buscar</a> </button> -->
-
 
 
                 <table class="table table-striped">
@@ -271,11 +267,11 @@ if($_SESSION["usuarioIniciado"]!=null){
             }
 
         function porBodega() {
-              document.getElementById("tipoDeBusqueda").value = "2";
+              document.getElementById("tipoDeBusqueda").value = "3";
                 }
 
         function porCompania() {
-                  document.getElementById("tipoDeBusqueda").value = "3";
+                  document.getElementById("tipoDeBusqueda").value = "2";
                     }
 
 

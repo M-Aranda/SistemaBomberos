@@ -6,22 +6,29 @@ $data = new Data();
 
 $materialMenor= new Tbl_MaterialMenor();
 
-$materialMenor->setId_material_menor($_REQUEST["idMaterialMenor"]);
+$materialMenor->setId_material_menor($_REQUEST["idMaterialAModificar"]);
 $materialMenor->setNombre_material_menor($_REQUEST["txtnombreMaterial"]);
-$materialMenor->setFk_entidad_a_cargo_material_menor($_REQUEST["entidad"]);
-$materialMenor->setColor_material_menor($_REQUEST["txtcolorMaterial"]);
+$materialMenor->setFk_entidad_a_cargo_material_menor($_REQUEST["cboEntidadACargoModificar"]);
+$materialMenor->setColor_material_menor($_REQUEST["txtColor"]);
 $materialMenor->setCantidad_material_menor($_REQUEST["txtcantidadMaterial"]);
 $materialMenor->setMedida_material_menor($_REQUEST["numMedida"]);
 $materialMenor->setFk_unidad_de_medida_material_menor($_REQUEST["cboxMedida"]);
-$materialMenor->setFk_ubicacion_fisica_material_menor($_REQUEST["cboxUbicacion"]);
-$materialMenor->setFabricante_material_menor($_REQUEST["txtFabricante"]);
-$materialMenor->setFecha_de_caducidad_material_menor($_REQUEST["txtCaducidad"]);
+$materialMenor->setFk_ubicacion_fisica_material_menor($_REQUEST["cboxUbicacionModificar"]);
+$materialMenor->setFabricante_material_menor($_REQUEST["txtmarca"]);
 $materialMenor->setProveedor_material_menor($_REQUEST["txtProveedor"]);
-$materialMenor->setFk_tipo_de_bodega_material_menor($_REQUEST["cboTipoDeBodega"]);
+$materialMenor->setFkEstadoMaterialMenor($_REQUEST["cboEstadoMaterial"]);
+
+
+
+$materialMenor->setFecha_de_caducidad_material_menor($_REQUEST["txtCaducidad"]);
+
+if (isset($_POST['checknoaplica'])) {
+  $materialMenor->setFecha_de_caducidad_material_menor('0000-00-00');
+}
 
 
 $data->actualizarMaterialMenor($materialMenor);
 
-header("location: ../buscarInventario.php");
+//header("location: ../buscarInventario.php");
 
 ?>

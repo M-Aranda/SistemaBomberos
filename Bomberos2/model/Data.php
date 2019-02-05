@@ -1490,11 +1490,12 @@ public function buscarMaterialMenorPorNombreCompaniaOBodega($nombre, $id, $tipoD
     $query="SELECT tbl_material_menor.nombre_material_menor, tbl_material_menor.cantidad_material_menor, tbl_material_menor.fecha_de_caducidad_material_menor, tbl_entidadACargo.nombre_entidadACargo,
 tbl_material_menor.id_material_menor FROM tbl_material_menor, tbl_entidadACargo WHERE tbl_material_menor.fk_entidad_a_cargo_material_menor=tbl_entidadACargo.id_entidadACargo
 AND tbl_material_menor.nombre_material_menor LIKE '%".$nombre."%';";
-  }else if($tipoDeBusqueda==2){
-    $query="SELECT tbl_material_menor.nombre_material_menor, tbl_material_menor.cantidad_material_menor, tbl_material_menor.fecha_de_caducidad_material_menor, tbl_entidadACargo.nombre_entidadACargo,
-tbl_material_menor.id_material_menor FROM tbl_material_menor, tbl_entidadACargo, tbl_tipo_de_bodega WHERE tbl_material_menor.fk_entidad_a_cargo_material_menor=tbl_entidadACargo.id_entidadACargo
-AND tbl_material_menor.fk_tipo_de_bodega_material_menor=tbl_tipo_de_bodega.id_tipo_de_bodega AND tbl_tipo_de_bodega.id_tipo_de_bodega=".$id.";";
-  }else if($tipoDeBusqueda==3){
+}else if($tipoDeBusqueda==3){
+    $query="SELECT tbl_material_menor.nombre_material_menor, tbl_material_menor.cantidad_material_menor, tbl_material_menor.fecha_de_caducidad_material_menor,
+ tbl_entidadACargo.nombre_entidadACargo, tbl_material_menor.id_material_menor FROM tbl_material_menor, tbl_entidadACargo, tbl_estado_material_menor
+ WHERE tbl_material_menor.fk_entidad_a_cargo_material_menor=tbl_entidadACargo.id_entidadACargo AND tbl_material_menor.fk_estado_material_menor=tbl_estado_material_menor.id_estado_material_menor
+ AND tbl_estado_material_menor.id_estado_material_menor=".$id.";";
+}else if($tipoDeBusqueda==2){
     $query="SELECT tbl_material_menor.nombre_material_menor, tbl_material_menor.cantidad_material_menor, tbl_material_menor.fecha_de_caducidad_material_menor, tbl_entidadACargo.nombre_entidadACargo,
 tbl_material_menor.id_material_menor FROM tbl_material_menor, tbl_entidadACargo WHERE tbl_material_menor.fk_entidad_a_cargo_material_menor=tbl_entidadACargo.id_entidadACargo
 AND tbl_entidadACargo.id_entidadACargo=".$id.";";
@@ -1503,6 +1504,8 @@ AND tbl_entidadACargo.id_entidadACargo=".$id.";";
   $query="SELECT tbl_material_menor.nombre_material_menor, tbl_material_menor.cantidad_material_menor, tbl_material_menor.fecha_de_caducidad_material_menor, tbl_entidadACargo.nombre_entidadACargo,
 tbl_material_menor.id_material_menor FROM tbl_material_menor, tbl_entidadACargo WHERE tbl_material_menor.fk_entidad_a_cargo_material_menor=tbl_entidadACargo.id_entidadACargo;";
 */
+
+echo $query;
 
   $rs = $this->c->ejecutar($query);
   $listado = array();
@@ -1527,7 +1530,7 @@ public function actualizarMaterialMenor($materialMenor){
 $query="UPDATE tbl_material_menor SET nombre_material_menor='".$materialMenor->getNombre_material_menor()."', fk_entidad_a_cargo_material_menor=".$materialMenor->getFk_entidad_a_cargo_material_menor().", color_material_menor=
  '".$materialMenor->getColor_material_menor()."' , cantidad_material_menor= ".$materialMenor->getCantidad_material_menor().", medida_material_menor=
 ".$materialMenor->getMedida_material_menor().", fk_unidad_de_medida_material_menor=".$materialMenor->getFk_unidad_de_medida_material_menor().",  fk_ubicacion_fisica_material_menor=".$materialMenor->getFk_ubicacion_fisica_material_menor().", fabricante_material_menor='".$materialMenor->getFabricante_material_menor()."',
- fecha_de_caducidad_material_menor='".$materialMenor->getFecha_de_caducidad_material_menor()."', proveedor_material_menor= '".$materialMenor->getProveedor_material_menor()."', fk_tipo_de_bodega_material_menor=".$materialMenor->getFk_tipo_de_bodega_material_menor()." WHERE id_material_menor=".$materialMenor->getId_material_menor()." ;";
+ fecha_de_caducidad_material_menor='".$materialMenor->getFecha_de_caducidad_material_menor()."', proveedor_material_menor= '".$materialMenor->getProveedor_material_menor()."', fk_estado_material_menor=".$materialMenor->getFkEstadoMaterialMenor()." WHERE id_material_menor=".$materialMenor->getId_material_menor()." ;";
 
   echo $query;
 

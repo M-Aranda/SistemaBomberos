@@ -455,6 +455,8 @@ PRIMARY KEY (id_material_menor)
 );
 
 
+
+
 -- Procedimientos
 
 DELIMITER //

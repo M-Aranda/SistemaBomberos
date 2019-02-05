@@ -17,27 +17,21 @@
   </head>
 
   <?php
-
-require_once("model/Data.php");
-require_once("model/Tbl_Usuario.php");
-$dataUsuario= new Data();
-session_start();
-if($_SESSION["usuarioIniciado"]!=null){
-  $u=$_SESSION["usuarioIniciado"];
-  if($dataUsuario->verificarSiUsuarioTienePermiso($u,1)==0){
-    header("location: paginaError.php");
+  require_once("model/Data.php");
+  require_once("model/Tbl_Usuario.php");
+  $dataUsuario= new Data();
+  session_start();
+  if($_SESSION["usuarioIniciado"]!=null){
+    $u=$_SESSION["usuarioIniciado"];
+    if($dataUsuario->verificarSiUsuarioTienePermiso($u,1)==0){
+      header("location: paginaError.php");
+    }
   }
-}
-
-
-$data= new Data();
-
-if(isset($_SESSION["materialMenorAModificarSolicitado"])){
-  $material=$_SESSION["materialMenorAModificarSolicitado"];
-}
-
-
-?>
+  $data= new Data();
+  if(isset($_SESSION["materialMenorAModificarSolicitado"])){
+    $material=$_SESSION["materialMenorAModificarSolicitado"];
+  }
+  ?>
 
 <body  background="images/fondofichaintranet.jpg">
 
@@ -136,7 +130,12 @@ if(isset($_SESSION["materialMenorAModificarSolicitado"])){
 }
 
 </style>
+<?php
+    // unir vista con el modelo sin pasar por un controlador
+    require_once("model/Data.php");
+    $data = new Data();
 
+?>
 
 <div style="width: 800px" style="height: 400px">
     <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
@@ -145,14 +144,14 @@ if(isset($_SESSION["materialMenorAModificarSolicitado"])){
       <div class="form-group" style="margin-left:50px;">
         <span><h5 style="font-weight:bold;">Inventario</h5></span>
 
-        <form action="controlador/ActualizarMaterialMenor.php" method="post" >
+        <form action="controlador/ActualizarMaterialMenor.php" method="post">
 
 
-
-          Nombre Material: <input type="text" name="txtnombreMaterial" value="<?php echo $material->getNombre_material_menor(); ?>" >
+          <input type="hidden" name="idMaterialAModificar" value="<?php echo $material->getId_material_menor();?>">
+          Nombre Material: <input type="text" name="txtnombreMaterial" id="txtnombreMaterial" value="<?php echo $material->getNombre_material_menor();?>" required><br><br>
 
           Entidad a Cargo:
-           <select name="entidad" >
+           <select name="cboEntidadACargoModificar" id="cboEntidadACargoModificar" onchange="actualizarComboBox()">
                <?php
                    $entiPropietaria = $data->getEntidadACargo();
                    foreach ($entiPropietaria as $ep) {
@@ -165,25 +164,87 @@ if(isset($_SESSION["materialMenorAModificarSolicitado"])){
                          <?php
                        }
                      }
+
                ?>
+           </select>
+
+           Ubicacion Fisica:
+           <select name="cboxUbicacionModificar" id="cboxUbicacionModificar" >
+             <?php
+             $ubicacionesFisicas = $data->getUbicacionFisica($material->getFk_entidad_a_cargo_material_menor());
+             foreach ($ubicacionesFisicas as $ubi) {
+               if($material->getFk_ubicacion_fisica_material_menor()==$ubi->getIdUbicacionFisica()){?>
+                 <option value="<?php echo $ubi->getIdUbicacionFisica(); ?>" selected ><?php echo utf8_encode($ubi->getNombreUbicacionFisica()); ?></option>
+                 <?php
+               }else{
+                   ?>
+                   <option value="<?php echo $ubi->getIdUbicacionFisica(); ?>" ><?php echo utf8_encode($ubi->getNombreUbicacionFisica()); ?></option>
+                   <?php
+                 }
+               }
+             ?>
+
+           </select>
+           <br><br>
+
+
+
+          Marca: <input type="text" name="txtmarca" value="<?php echo utf8_encode($material->getFabricante_material_menor());?>" required>
+
+          Color:
+           <input Type="text" name="txtColor" value="<?php echo $material->getColor_material_menor();?>" required ><br><br>
+
+           Proveedor: <input type="text" name="txtProveedor" value="<?php echo $material->getProveedor_material_menor();?>" required >
+
+           Estado:
+           <select name="cboEstadoMaterial" id="cboEstadoMaterial">
+             <?php
+               $estados = $data->getEstadosInventario();
+             foreach ($estados as $e) {
+               if($material->getFkEstadoMaterialMenor()==$e->getId_estado_material_menor()){?>
+                 <option value="<?php echo $e->getId_estado_material_menor(); ?>" selected ><?php echo utf8_encode($e->getNombre_estado_material_menor()); ?></option>
+                 <?php
+               }else{
+                   ?>
+                   <option value="<?php echo $e->getId_estado_material_menor(); ?>" ><?php echo utf8_encode($e->getNombre_estado_material_menor()); ?></option>
+                   <?php
+                 }
+               }
+
+             ?>
            </select>
 
            <br><br>
 
-          Color: <input type="text" name="txtcolorMaterial" value="<?php echo $material->getColor_material_menor(); ?>" >
+           Fecha de Caducidad:
+           <input type="date" name="txtCaducidad"  value="<?php echo $material->getFecha_de_caducidad_material_menor();?>">
 
-          Cantidad:
-           <input Type="number" name="txtcantidadMaterial" value="<?php echo $material->getCantidad_material_menor(); ?>"  ><br><br>
+           No aplica:
+           <?php
+           if ($material->getFecha_de_caducidad_material_menor()=='0000-00-00'){?>
+              <input type="checkbox" checked name="checknoaplica">
+              <?php
+           }else{ ?>
+             <input type="checkbox" name="checknoaplica">
+          <?php
+         }
+           ?>
 
-           Medida: <input type="number" name="numMedida" value="<?php echo $material->getMedida_material_menor(); ?>" >
 
-          Unidad de Medida:
-          <select name="cboxMedida" >
+           <br><br>
+
+
+           Cantidad:
+           <input type="number" name="txtcantidadMaterial" value="<?php echo $material->getCantidad_material_menor();?>" required >
+
+           Medida: <input type="number" name="numMedida" value="<?php echo $material->getMedida_material_menor();?>" required> /
+
+          <select name="cboxMedida">
             <?php
              $medidas = $data->getMedidas();
              foreach ($medidas as $me) {
                if($material->getFk_unidad_de_medida_material_menor()==$me->getIdUnidadMedida()){?>
-                 <option value="<?php echo $me->getIdUnidadMedida(); ?>" selected ><?php echo  utf8_encode($me->getNombreUnidadMedida()); ?></option>
+                 <option value="<?php echo $me->getIdUnidadMedida(); ?>" selected ><?php echo utf8_encode($me->getNombreUnidadMedida()); ?></option>
                  <?php
                }else{
                    ?>
@@ -191,61 +252,23 @@ if(isset($_SESSION["materialMenorAModificarSolicitado"])){
                    <?php
                  }
                }
-         ?>
+
+            ?>
 
 
 
           </select>
 
-          Ubicacion Fisica:
-          <select name="cboxUbicacion" >
-            <?php
-            $ubicacionesFisicas = $data->getUbicacionFisica();
-            foreach ($ubicacionesFisicas as $ubi) {
-              if($material->getFk_ubicacion_fisica_material_menor()==$ubi->getIdUbicacionFisica()){?>
-                <option value="<?php echo $ubi->getIdUbicacionFisica(); ?>" selected ><?php echo utf8_encode($ubi->getNombreUbicacionFisica()); ?></option>
-                <?php
-              }else{
-                  ?>
-                  <option value="<?php echo $ubi->getIdUbicacionFisica(); ?>" ><?php echo utf8_encode($ubi->getNombreUbicacionFisica()); ?></option>
-                  <?php
-                }
-              }
-        ?>
-          </select>
-          <br><br>
-          Fabricante:
-          <input type="text" name="txtFabricante" value="<?php echo $material->getFabricante_material_menor(); ?>" >
 
-          Fecha de Caducidad:
-          <input type="date" name="txtCaducidad" value="<?php echo $material->getFecha_de_caducidad_material_menor(); ?>"  >
-          <br><br>
-
-          Proveedor: <input type="text" value="<?php echo $material->getProveedor_material_menor(); ?>" name="txtProveedor" >
-
-          Tipo de Bodega:
-           <select name="cboTipoDeBodega" >
-           <?php
-           $tiposDeBodega = $data->getTipoBodega();
-           foreach ($tiposDeBodega as $bod) {
-             if($material->getFk_tipo_de_bodega_material_menor()==$bod->getIdidTipoBodega()){?>
-               <option value="<?php echo $bod->getIdidTipoBodega(); ?>" selected ><?php echo utf8_encode($bod->getNombreTipoBodega()); ?></option>
-               <?php
-             }else{
-                 ?>
-                 <option value="<?php echo $bod->getIdidTipoBodega(); ?>" ><?php echo utf8_encode($bod->getNombreTipoBodega()); ?></option>
-                 <?php
-               }
-             }
-       ?>
-         </select>
-         <input type="hidden" name="idMaterialMenor" value="<?php echo $material->getId_material_menor();?>">
            <br><br>
-             <center> <input type="submit" name="btncrear" value="Modificar Material" class="btn button-primary" style="width: 150px;" > <span ></span>
+
+          <center> <input type="submit" name="btncrear" value="Modificar Material" class="btn button-primary" style="width: 150px;"> <span ></span>
+              <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
+
+          </center>
 
 
-             </form>
-
+        </form>
 
 
       </div>
@@ -256,6 +279,43 @@ if(isset($_SESSION["materialMenorAModificarSolicitado"])){
    </div>
  </div>
 </div>
+
+<script src="javascript/JQuery.js"></script>
+
+<script type="text/javascript">
+
+
+                      function actualizarComboBox(){
+                           var val= document.getElementById("cboEntidadACargoModificar").value;
+
+                           $.ajax({
+                             url: "buscarUbicacionFisica.php",
+                             type: "POST",
+                             data:{"datos":val}
+                           }).done(function(data) {
+                             console.log(data);
+                             $('#cboxUbicacionModificar')
+                             .find('option')
+                             .remove()
+                             .end();
+                             $('#cboxUbicacionModificar').append(data);
+
+                           });
+
+
+                         }
+
+
+
+    $("form").submit(function(){
+      alert("Operación exitosa");
+      });
+
+
+
+
+
+</script>
 
   </body>
 </html>
