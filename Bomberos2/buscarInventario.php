@@ -132,6 +132,22 @@ if($_SESSION["usuarioIniciado"]!=null){
     require_once("model/Data.php");
     $data = new Data();
 
+    if(isset($_SESSION["nombreMaterialSeleccionado"])){
+      $nombreSeleccionado=$_SESSION["nombreMaterialSeleccionado"];
+    }
+
+    if(isset($_SESSION["companiaMaterialSeleccionado"])){
+      $companiaSeleccionada=$_SESSION["companiaMaterialSeleccionado"];
+    }
+
+    if(isset($_SESSION["estadoMaterialSeleccionado"])){
+      $estadoSeleccionado=$_SESSION["estadoMaterialSeleccionado"];
+    }
+
+
+
+
+
 ?>
 
 <div style="width: 800px" style="height: 900px">
@@ -144,7 +160,11 @@ if($_SESSION["usuarioIniciado"]!=null){
         <span><h5 style="font-weight:bold;">Buscar por Nombre</h5></span>
         <form action="controlador/BuscarMaterialMenorPorAlgunParametro.php" method="post">
         <form>
-        <input type="text" name="txtBuscaNombre"  placeholder="Buscar por nombre" style="height:30px;width: 230px;">
+        <input type="text" name="txtBuscaNombre"  value="<?php
+        if(isset($nombreSeleccionado)){
+          echo $nombreSeleccionado;
+        }
+        ?>" placeholder="Buscar por nombre" style="height:30px;width: 230px;">
         <input type="hidden" name="tipoDeBusqueda" value="1">
         <input class="btn btn-default" type="submit" name="btnBusqueda" value="Buscar" class="btn button-primary" style="width: 100px; height:30px;" style="margin-top: 400px;" onclick="porNombre()">
       <!--  <button class="btn btn-default" name="btnBuscar" style="width: 100px; height:30px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Buscar</a> </button> -->
@@ -157,9 +177,19 @@ if($_SESSION["usuarioIniciado"]!=null){
                             <?php
                                 $compania = $data->getEntidadACargo();
                                 foreach ($compania as $c) {
+
+
+                                  if(isset($companiaSeleccionada)&& ($companiaSeleccionada)==$c->getIdEntidadACargo()){
+                                    echo "<option selected value='".$c->getIdEntidadACargo()."'>";
+                                        echo utf8_encode($c->getNombreEntidadACargo());
+                                    echo"</option>";
+                                  }else{
                                     echo "<option value='".$c->getIdEntidadACargo()."'>";
                                         echo utf8_encode($c->getNombreEntidadACargo());
                                     echo"</option>";
+
+                                  }
+
                                 }
                             ?>
 
@@ -174,16 +204,26 @@ if($_SESSION["usuarioIniciado"]!=null){
                 <?php
                     $estados = $data->getEstadosInventario();
                     foreach ($estados as $e) {
+                      if(isset($estadoSeleccionado)&& ($estadoSeleccionado)==$e->getId_estado_material_menor()){
+                        echo "<option selected value='".$e->getId_estado_material_menor()."'>";
+                            echo utf8_encode($e->getNombre_estado_material_menor());
+                        echo"</option>";
+                      }else{
                         echo "<option value='".$e->getId_estado_material_menor()."'>";
                             echo utf8_encode($e->getNombre_estado_material_menor());
                         echo"</option>";
                     }
+                  }
                 ?>
 
               </select>
               <input type="hidden" name="tipoDeBusqueda" value="3">
               <input class="btn btn-default" type="submit" name="btnBusqueda" value="Buscar" class="btn button-primary" style="width: 100px; height:30px;" style="margin-top: 400px;"  onclick="porBodega()" >
               <form>
+
+                <br>
+                <input class="btn btn-default" type="button" name="btnLimpiar" value="Limpiar" class="btn button-primary" style="width: 100px; height:30px;" style="margin-top: 400px;" onclick="location.href='controlador/LimpiarBusquedaInventario.php'" >
+                <br>
 
                 <?php
                 if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
@@ -255,10 +295,6 @@ if($_SESSION["usuarioIniciado"]!=null){
                           <?php
                            }
                            }
-
-                           unset($_SESSION["resultadosDeBusquedaDeMaterialMenor"]);
-
-
                           ?>
 
                     </tbody>

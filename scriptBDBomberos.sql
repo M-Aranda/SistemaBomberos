@@ -1372,7 +1372,8 @@ INSERT INTO tbl_cargo (nombre_cargo) VALUES
 ('Comandante Primero'),
 ('Comandante Segundo'),
 ('Tesorero General'),
-('Secretario General');
+('Secretario General'),
+('Voluntario');
 
 INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'A Negativo');
 INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'B Negativo');
@@ -1406,7 +1407,7 @@ INSERT INTO tbl_entidadACargo (nombre_entidadACargo) VALUES ('Cuerpo de Bomberos
 
 INSERT INTO tbl_tipo_vehiculo (nombre_tipo_vehiculo) VALUES  ('Carro bomba'), ('Transporte'), ('Vehiculo menor');
 
-INSERT INTO tbl_estado_unidad (nombre_estado_unidad) VALUES  ('Activa'), ('Inactiva'), ('Dada de baja'), ('Vendida');
+INSERT INTO tbl_estado_unidad (nombre_estado_unidad) VALUES  ('Activo'), ('Inactivo'), ('Dado de baja'), ('Vendido');
 
 INSERT INTO tbl_usuario VALUES (NULL, 'Johnny', 1,'123');
 INSERT INTO tbl_usuario VALUES (NULL, 'Secretaria', 2,'123');
@@ -1431,16 +1432,17 @@ INSERT INTO tbl_tipo_servicio (codigo_tipo_servicio,nombre_tipo_servicio) VALUES
 ('10-9','Llamado a otros servicios'),('10-10','Llamado a escombros'),('10-11','Llamado a servicio áreo'),('10-12','Llamado a apoyar a otros Cuerpos'),
 ('10-13','Llamado a artefacto explosivo, sobre sospechoso, acto terrorista'),('10-14','Llamado a accidente de aviación'), ('10-15','Simulacro');
 
-INSERT INTO tbl_tipo_de_medida (nombre_tipo_de_medida) VALUES ('Distancia'),('Masa'),('Capacidad'),('Tiempo'),('Espacio de datos');
+INSERT INTO tbl_tipo_de_medida (nombre_tipo_de_medida) VALUES ('Distancia'),('Masa'),('Capacidad'),('Tiempo'),('Espacio de datos'), ('Volumen');
 
 
-INSERT INTO tbl_estado_material_menor (nombre_estado_material_menor) VALUES ('Operativo'),('Almacenado'),('En mantención'),('Caducado'),('Fuera de servicio');
+INSERT INTO tbl_estado_material_menor (nombre_estado_material_menor) VALUES ('Operativo'),('Almacenado'),('En mantención'),('Caducado'),('Fuera de servicio'),('Dado de baja');
 
-INSERT INTO tbl_unidad_de_medida  (nombre_unidad_de_medida,fk_tipo_de_medida_unidad_de_medida) VALUES ('Milimetros', 1), ('Centimetros', 1), ('Decimetros', 1), ('Metros', 1), ('Decámetros', 1), ('Hectómetros', 1), ('Kilometros', 1),
+INSERT INTO tbl_unidad_de_medida  (nombre_unidad_de_medida,fk_tipo_de_medida_unidad_de_medida) VALUES ('Otros', 1),('Milimetros', 1), ('Centimetros', 1), ('Decimetros', 1), ('Metros', 1), ('Decámetros', 1), ('Hectómetros', 1), ('Kilometros', 1),
 ('Miligramos',2 ), ('Centigramos', 2),('Decigramos', 2), ('Gramos', 2), ('Decagramos',2),('Hectogramos',2),('Kilogramos',2),('Toneladas',2),
 ('Mililitros',3),('Centilitros',3),('Decilitros',3),('Litros',3),('Decalitros',3),('Hectolitros',3),('Kilolitros',3),
 ('Milisegundos',4),('Segundos',4),('Minutos',4),('Horas',4),('Días',4),('Semanas',4),('Meses',4),('Años',4),
-('Byte',5),('Kilobyte',5),('Megabyte',5),('Gigabyte',5),('Terabyte',5),('Petabyte',5),('Meses',5),('Años',5),('Petabyte',5),('Exabyte',5),('Zetabyte',5),('Yottabyte',5),('Brontobyte',5),('Geopbyte',5);
+('Byte',5),('Kilobyte',5),('Megabyte',5),('Gigabyte',5),('Terabyte',5),('Petabyte',5),('Meses',5),('Años',5),('Petabyte',5),('Exabyte',5),('Zetabyte',5),('Yottabyte',5),('Brontobyte',5),('Geopbyte',5),
+('Milímetro cúbico',6),('Centímetro cúbico',6),('Decímetro cúbico',6),('Metro cúbico',6),('Decámetro cúbico',6),('Hectómetro cúbico',6),('Kilómetro cúbico',6);
 
 
 

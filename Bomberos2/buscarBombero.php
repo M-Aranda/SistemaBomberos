@@ -234,7 +234,7 @@ if($_SESSION["usuarioIniciado"]!=null){
                           <tr>
                             <td><?php echo $objeto->getRut();?></td>
                             <td><?php echo $objeto->getNombre();?></td>
-                            <td><?php echo $objeto->getApellidoPaterno();?></td>
+                            <td><?php echo utf8_encode($objeto->getApellidoPaterno());?></td>
                             <td><?php echo utf8_encode($objeto->getCompania());?></td>
                             <td>
                               <form action="controlador/CargarFicha.php" method="post">

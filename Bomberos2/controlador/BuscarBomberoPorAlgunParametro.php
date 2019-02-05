@@ -8,7 +8,7 @@ $tipoDeBusqueda=$_REQUEST["tipoDeBusqueda"];
 if($tipoDeBusqueda==1)
 {
   //busqueda por nombre
-  $nombreABuscar=$_REQUEST["txtBuscar"];
+  $nombreABuscar=trim($_REQUEST["txtBuscar"]);
   $id=1;
 }else if($tipoDeBusqueda==2){
   //busqueda por estado de bombero
