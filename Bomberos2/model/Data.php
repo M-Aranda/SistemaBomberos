@@ -1443,7 +1443,7 @@ public function crerMaterialMenor($materialMenor){
 $query="INSERT INTO tbl_material_menor VALUES (NULL, '".$materialMenor->getNombre_material_menor()."', ".$materialMenor->getFk_entidad_a_cargo_material_menor().",
 '".$materialMenor->getColor_material_menor()."' , ".$materialMenor->getCantidad_material_menor().",
 ".$materialMenor->getMedida_material_menor().", ".$materialMenor->getFk_unidad_de_medida_material_menor().", ".$materialMenor->getFk_ubicacion_fisica_material_menor().", '".$materialMenor->getFabricante_material_menor()."',
-'".$materialMenor->getFecha_de_caducidad_material_menor()."', '".$materialMenor->getProveedor_material_menor()."', ".$materialMenor->getFk_tipo_de_bodega_material_menor().");";
+'".$materialMenor->getFecha_de_caducidad_material_menor()."', '".$materialMenor->getProveedor_material_menor()."', ".$materialMenor->getFkEstadoMaterialMenor().");";
 
   echo $query;
 

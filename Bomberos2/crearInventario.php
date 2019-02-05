@@ -141,14 +141,14 @@ if($_SESSION["usuarioIniciado"]!=null){
       <div class="form-group" style="margin-left:50px;">
         <span><h5 style="font-weight:bold;">Inventario</h5></span>
 
-        <form action="controlador/CrearMaterialMenor.php" method="post" >
+        <form action="controlador/CrearMaterialMenor.php" method="post">
 
 
 
-          Nombre Material: <input type="text" name="txtnombreMaterial" required><br><br>
+          Nombre Material: <input type="text" name="txtnombreMaterial" id="txtnombreMaterial" required><br><br>
 
           Entidad a Cargo:
-           <select name="cboEntidadACargo" id="cboEntidadACargo" onchange="callAjax()">
+           <select name="cboEntidadACargo" id="cboEntidadACargo" onchange="actualizarComboBox()">
                <?php
                    $entiPropietaria = $data->getEntidadACargo();
                    foreach ($entiPropietaria as $ep) {
@@ -160,10 +160,15 @@ if($_SESSION["usuarioIniciado"]!=null){
            </select>
 
            Ubicacion Fisica:
-           <select name="cboxUbicacion">
-             <div id="divUbicaciones">
-
-             </div>
+           <select name="cboxUbicacion" id="cboxUbicacion" >
+             <?php
+             $ubicacionesFisicas = $data->getUbicacionFisica(1);
+             foreach ($ubicacionesFisicas as $ubi) {
+               echo "<option value='".$ubi->getIdUbicacionFisica()."'>";
+               echo utf8_encode($ubi->getNombreUbicacionFisica());
+               echo"</option>";
+             }
+             ?>
 
            </select>
            <br><br>
@@ -173,12 +178,12 @@ if($_SESSION["usuarioIniciado"]!=null){
           Marca: <input type="text" name="txtmarca" required>
 
           Color:
-           <input Type="number" name="txtColor" required ><br><br>
+           <input Type="text" name="txtColor" required ><br><br>
 
            Proveedor: <input type="text" name="txtProveedor"required >
 
            Estado:
-           <select>
+           <select name="cboEstadoMaterial" id="cboEstadoMaterial">
              <?php
               $estados = $data->getEstadosInventario();
               foreach ($estados as $e) {
@@ -201,7 +206,7 @@ if($_SESSION["usuarioIniciado"]!=null){
 
 
            Cantidad:
-           <input type="number" name="txtcantidad" >
+           <input type="number" name="txtcantidadMaterial" >
 
            Medida: <input type="number" name="numMedida" required> /
 
@@ -222,7 +227,7 @@ if($_SESSION["usuarioIniciado"]!=null){
 
            <br><br>
 
-          <center> <input type="submit" name="btncrear" value="Crear Material" class="btn button-primary" style="width: 150px;" onsubmit="avisoDeExito()"> <span ></span>
+          <center> <input type="submit" name="btncrear" value="Crear Material" class="btn button-primary" style="width: 150px;"> <span ></span>
               <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
           </center>
@@ -244,14 +249,8 @@ if($_SESSION["usuarioIniciado"]!=null){
 
 <script type="text/javascript">
 
-function buscar() {
-var val= document.getElementById("cboEntidadACargo").value;
-$('#divUbicaciones').html(val);
-      }
 
-
-
-                      function callAjax(){
+                      function actualizarComboBox(){
                            var val= document.getElementById("cboEntidadACargo").value;
 
                            $.ajax({
@@ -260,13 +259,26 @@ $('#divUbicaciones').html(val);
                              data:{"datos":val}
                            }).done(function(data) {
                              console.log(data);
+                             $('#cboxUbicacion')
+                             .find('option')
+                             .remove()
+                             .end();
+                             $('#cboxUbicacion').append(data);
+
                            });
+
+
                          }
 
 
-function avisoDeExito() {
-        alert("Operación exitosa");
-                      }
+
+    $("form").submit(function(){
+      alert("Operación exitosa");
+      });
+
+
+
+
 
 </script>
 
