@@ -34,6 +34,8 @@ require_once("Tbl_carguiCombustible.php");
 require_once("Tbl_MaterialMenor.php");
 require_once("Vista_BuscarMaterialMenor.php");
 require_once("VistaBusquedaDeUnidad.php");
+require_once("Tbl_EstadoMaterialMenor.php");
+
 
 
 
@@ -1390,25 +1392,19 @@ public function getMedidas(){
 
 }
 
-public function getUbicacionFisica(){
+public function getUbicacionFisica($fk_entidadACargo){
 
   $lista = array();
   $this->c->conectar();
-
-  $select = "SELECT * from tbl_ubicacion_fisica;";
-
+  $select = "SELECT * from tbl_ubicacion_fisica WHERE fk_entidad_a_cargo=".$fk_entidadACargo.";";
   $rs = $this->c->ejecutar($select);
   while($obj = $rs->fetch_object()){
-
       $tu = new Tbl_UbicacionFisica();
 
       $tu->setidUbicacionFisica($obj->id_ubicacion_fisica);
       $tu->setnombreUbicacionFisica($obj->nombre_ubicacion_fisica);
-
-
       array_push($lista,$tu);
   }
-
   $this->c->desconectar();
   return $lista;
 
@@ -1476,7 +1472,7 @@ public function buscarMaterialMenorPorId($idABuscar){
        $obj->setFabricante_material_menor($reg[8]);
        $obj->setFecha_de_caducidad_material_menor($reg[9]);
        $obj->setProveedor_material_menor($reg[10]);
-       $obj->setFk_tipo_de_bodega_material_menor($reg[11]);
+       $obj->setFkEstadoMaterialMenor($reg[11]);
 
 
    }
@@ -1572,6 +1568,25 @@ tbl_unidad.fk_tipo_vehiculo_unidad=tbl_tipo_vehiculo.id_tipo_vehiculo AND tbl_un
        $obj->setTipoVehiculo($reg[2]);
        $obj->setEntidadACargo($reg[3]);
        $obj->setIdUnidad($reg[4]);
+
+       $listado[]=$obj;
+   }
+   $this->c->desconectar();
+   return $listado;
+}
+
+
+
+public function getEstadosInventario (){
+  $this->c->conectar();
+  $query="SELECT * FROM tbl_estado_material_menor;";
+  $rs = $this->c->ejecutar($query);
+  $listado = array();
+  while($reg = $rs->fetch_array()){
+
+       $obj = new Tbl_EstadoMaterialMenor();
+       $obj->setId_estado_material_menor($reg[0]);
+       $obj->setNombre_estado_material_menor($reg[1]);
 
        $listado[]=$obj;
    }

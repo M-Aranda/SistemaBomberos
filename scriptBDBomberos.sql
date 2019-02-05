@@ -407,8 +407,11 @@ PRIMARY KEY (id_bitacora)
 CREATE TABLE tbl_ubicacion_fisica (
 id_ubicacion_fisica INT AUTO_INCREMENT,
 nombre_ubicacion_fisica VARCHAR (5000),
+fk_entidad_a_cargo INT,
+FOREIGN KEY (fk_entidad_a_cargo) REFERENCES tbl_entidadACargo (id_entidadACargo),
 PRIMARY KEY (id_ubicacion_fisica)
 );
+
 
 CREATE TABLE tbl_tipo_de_medida (
 id_tipo_de_medida INT AUTO_INCREMENT,
@@ -443,6 +446,8 @@ fk_ubicacion_fisica_material_menor INT,
 fabricante_material_menor VARCHAR (300),
 fecha_de_caducidad_material_menor DATE,
 proveedor_material_menor VARCHAR (300),
+fk_estado_material_menor INT,
+FOREIGN KEY (fk_estado_material_menor) REFERENCES tbl_estado_material_menor (id_estado_material_menor),
 FOREIGN KEY (fk_entidad_a_cargo_material_menor) REFERENCES tbl_entidadACargo (id_entidadACargo),
 FOREIGN KEY (fk_unidad_de_medida_material_menor) REFERENCES tbl_unidad_de_medida (id_unidad_de_medida),
 FOREIGN KEY (fk_ubicacion_fisica_material_menor) REFERENCES tbl_ubicacion_fisica (id_ubicacion_fisica),
@@ -1425,7 +1430,7 @@ INSERT INTO tbl_tipo_servicio (codigo_tipo_servicio,nombre_tipo_servicio) VALUES
 ('10-13','Llamado a artefacto explosivo, sobre sospechoso, acto terrorista'),('10-14','Llamado a accidente de aviación'), ('10-15','Simulacro');
 
 INSERT INTO tbl_tipo_de_medida (nombre_tipo_de_medida) VALUES ('Distancia'),('Masa'),('Capacidad'),('Tiempo'),('Espacio de datos');
-INSERT INTO tbl_ubicacion_fisica  (nombre_ubicacion_fisica) VALUES ('Unidad B-1'),('Unidad 2-2'),('Bodega'),('Cuartel');
+
 
 INSERT INTO tbl_estado_material_menor (nombre_estado_material_menor) VALUES ('Operativo'),('Almacenado'),('En mantención'),('Caducado'),('Fuera de servicio');
 
@@ -1621,13 +1626,15 @@ INSERT INTO tbl_cargio_combustible VALUES (NULL, 'Alguien', '2018-11-11', 'Algun
 INSERT INTO tbl_cargio_combustible VALUES (NULL, 'Alguien', '2018-11-11', 'Algun lugar', 1, 16.5, 500,'Ninguna',3);
 
 
-INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Roja',3,20,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.');
-INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Roja',3,20,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.');
-INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Azul',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.');
-INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Verde',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.');
-INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Plomo',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.');
-INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Morada',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.');
+INSERT INTO tbl_ubicacion_fisica  (nombre_ubicacion_fisica, fk_entidad_a_cargo) VALUES ('Unidad B-0',1),('Bodega Cuerpo',1),('Cuartel cuerpo',1),
+('Unidad B-1',2),('Bodega Primera',2),('Cuartel Primera',2), ('Unidad B-2',3),('Bodega Segunda',3),('Cuartel Segunda',3) , ('Unidad B-3',4),('Bodega Tercera',4),('Cuartel Tercera',4);
 
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Roja',3,20,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Roja',3,20,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Azul',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Verde',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Plomo',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Morada',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
 
 
 

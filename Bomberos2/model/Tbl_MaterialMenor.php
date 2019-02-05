@@ -13,7 +13,7 @@ private $fk_ubicacion_fisica_material_menor;
 private $fabricante_material_menor;
 private $fecha_de_caducidad_material_menor;
 private $proveedor_material_menor;
-private $fk_tipo_de_bodega_material_menor;
+private $fkEstadoMaterialMenor;
 
 public function __construct(){
 }
@@ -112,12 +112,12 @@ public function setProveedor_material_menor($proveedor_material_menor){
 }
 
 
-public function getFk_tipo_de_bodega_material_menor(){
-    return $this->fk_tipo_de_bodega_material_menor;
+public function getFkEstadoMaterialMenor(){
+    return $this->fkEstadoMaterialMenor;
 }
 
-public function setFk_tipo_de_bodega_material_menor($fk_tipo_de_bodega_material_menor){
-    $this->fk_tipo_de_bodega_material_menor = $fk_tipo_de_bodega_material_menor;
+public function setFkEstadoMaterialMenor($fkEstadoMaterialMenor){
+    $this->fkEstadoMaterialMenor = $fkEstadoMaterialMenor;
 }
 
 

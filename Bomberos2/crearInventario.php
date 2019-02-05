@@ -148,7 +148,7 @@ if($_SESSION["usuarioIniciado"]!=null){
           Nombre Material: <input type="text" name="txtnombreMaterial" required><br><br>
 
           Entidad a Cargo:
-           <select name="entidad" >
+           <select name="cboEntidadACargo" id="cboEntidadACargo">
                <?php
                    $entiPropietaria = $data->getEntidadACargo();
                    foreach ($entiPropietaria as $ep) {
@@ -161,16 +161,9 @@ if($_SESSION["usuarioIniciado"]!=null){
 
            Ubicacion Fisica:
            <select name="cboxUbicacion">
-             <?php
-             $ubicacionesFisicas = $data->getUbicacionFisica();
-             foreach ($ubicacionesFisicas as $ubi) {
-                 echo "<option value='".$ubi->getIdUbicacionFisica()."'>";
-                     echo utf8_encode($ubi->getNombreUbicacionFisica());
-                 echo"</option>";
-             }
+             <div id="divUbicaciones">
 
-
-             ?>
+             </div>
            </select>
            <br><br>
 
@@ -185,6 +178,14 @@ if($_SESSION["usuarioIniciado"]!=null){
 
            Estado:
            <select>
+             <?php
+              $estados = $data->getEstadosInventario();
+              foreach ($estados as $e) {
+                  echo "<option value='".$e->getId_estado_material_menor()."'>";
+                      echo utf8_encode($e->getNombre_estado_material_menor());
+                  echo"</option>";
+              }
+             ?>
            </select>
 
            <br><br>
@@ -238,8 +239,27 @@ if($_SESSION["usuarioIniciado"]!=null){
  </div>
 </div>
 
+<script src="javascript/JQuery.js"></script>
 
 <script type="text/javascript">
+
+
+
+$(document).on('change','#cboEntidadACargo',function(){
+      var val = $(this).val();
+      $.ajax({
+            url: 'buscarUbicacionFisica.php',
+            data: {idEntidadEnviado:val},
+            type: 'POST',
+            dataType: 'html',
+            success: function(result){
+                 $('#divUbicaciones').html();
+                 $('#divUbicaciones').html(result);
+            }
+       });
+});
+
+
 
 function avisoDeExito() {
         alert("Operación exitosa");
