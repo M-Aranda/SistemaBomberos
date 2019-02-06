@@ -693,7 +693,6 @@ if(isset($_SESSION['idDeBomberoMasReciente'])){
 
                           </div>
                        </div>
-
                    </div>
                </div>
                  <!-- INFORMACION historica -->

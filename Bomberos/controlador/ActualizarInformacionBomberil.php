@@ -6,21 +6,6 @@ require_once("../model/Tbl_InfoPersonal.php");
 require_once("../model/Tbl_Region.php");
 require_once("../model/Tbl_EstadoBombero.php");
 require_once("../model/Tbl_Cargo.php");
-/*
-require_once("../model/Tbl_comuna.php");
-require_once("../model/Tbl_EntrenamientoEstandar.php");
-require_once("../model/Tbl_EstadoCurso.php");
-require_once("../model/Tbl_GrupoSanguineo.php");
-require_once("../model/Tbl_InfoAcademica.php");
-require_once("../model/Tbl_InfoBomberil.php");
-require_once("../model/Tbl_InfoFamiliar.php");
-require_once("../model/Tbl_InfoHistorica.php");
-require_once("../model/Tbl_InfoLaboral.php");
-require_once("../model/Tbl_InfoMedica1.php");
-require_once("../model/Tbl_InfoMedica2.php");
-require_once("../model/Parentesco.php");
-require_once("../model/Provincia.php");
-*/
 
 
 //Hay que poner un hidden que tenga el id de la informacionBomberil a modificar

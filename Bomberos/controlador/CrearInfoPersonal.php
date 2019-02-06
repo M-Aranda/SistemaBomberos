@@ -69,6 +69,58 @@ $inforPersonal->setEsInstructor($esInstructor);
 $d->crearInformacionPersonalDeBombero($inforPersonal);
 $idBomberoMasReciente=$d->getIdBomberoMasReciente();
 
+/* Crear registros de informacion bomberil, laboral y medica, con datos vacíos, para propositos de busquda*/
+
+$infoBomberil= new Tbl_InfoBomberil();
+$infoBomberil->setIdInformacionBomberil(1);
+$infoBomberil->setfkRegioninformacionBomberil(1);
+$infoBomberil->setcuerpoInformacionBomberil("");
+$infoBomberil->setfkCompaniainformacionBomberil(2);
+$infoBomberil->setfkCargoinformacionBomberil(7);
+$infoBomberil->setfechaIngresoinformacionBomberil('0000-00-00');
+$infoBomberil->setNRegGeneralinformacionBomberil(0);
+$infoBomberil->setfkEstadoinformacionBomberil(1);
+$infoBomberil->setNRegCiainformacionBomberil(0);
+$infoBomberil->setfkInfoPersonalinformacionBomberil($idBomberoMasReciente);
+
+$infoLaboral=new Tbl_InfoLaboral();
+$infoLaboral->setIdidInformacionLaboral(1);
+$infoLaboral->setnombreEmpresainformacionLaboral("");
+$infoLaboral->setdireccionEmpresainformacionLaboral("");
+$infoLaboral->settelefonoEmpresainformacionLaboral("");
+$infoLaboral->setcargoEmpresainformacionLaboral("");
+$infoLaboral->setfechaIngresoEmpresainformacionLaboral('0000-00-00');
+$infoLaboral->setareaDeptoEmpresainformacionLaboral("");
+$infoLaboral->setafp_informacionLaboral("");
+$infoLaboral->setprofesion_informacionLaboral("");
+$infoLaboral->setfkInfoPersonalinformacionLaboral($idBomberoMasReciente);
+
+$infoMedica1=new Tbl_InfoMedica1();
+$infoMedica1->setidInformacionMedica1(1);
+$infoMedica1->setprestacionMedica_informacionMedica1("");
+$infoMedica1->setalergias_informacionMedica1("");
+$infoMedica1->setenfermedadesCronicasinformacionMedica1("");
+$infoMedica1->setfkInfoPersonalinformacionMedica1($idBomberoMasReciente);
+
+
+$infoMedica2=new Tbl_InfoMedica2();
+$infoMedica2->setidInformacionMedica2(1);
+$infoMedica2->setmedicamentosHabitualesinformacionMedica2("");
+$infoMedica2->setnombreContactoinformacionMedica2("");
+$infoMedica2->settelefonoContactoinformacionMedica2("");
+$infoMedica2->setfkParentescoContactoinformacionMedica2(1);
+$infoMedica2->setnivelActividadFisicainformacionMedica2("");
+$infoMedica2->setesDonanteinformacionMedica2(FALSE);
+$infoMedica2->setesFumadorinformacionMedica2(FALSE);
+$infoMedica2->setfkGrupoSanguineoinformacionMedica2(1);
+$infoMedica2->setfkInfoPersonalinformacionMedica2($idBomberoMasReciente);
+
+
+$d->crearInformacionBomberil($infoBomberil);
+$d->crearInformacionLaboral($infoLaboral);
+$d->crearInformacionMedica1($infoMedica1);
+$d->crearInformacionMedica2($infoMedica2);
+
 
 $_SESSION['idDeBomberoMasReciente']=$idBomberoMasReciente;
 

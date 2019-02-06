@@ -7,6 +7,8 @@ require_once("../model/Tbl_GrupoSanguineo.php");
 require_once("../model/Tbl_Parentesco.php");
 require_once("../model/Tbl_InfoPersonal.php");
 
+$d= new Data();
+
 session_start();
 
 $idInformacionMedica1=0;
@@ -24,9 +26,6 @@ $infoMedica1->setenfermedadesCronicasinformacionMedica1($enfermedadesCronicasinf
 $infoMedica1->setfkInfoPersonalinformacionMedica1($fkInfoPersonalinformacionMedica1);
 
 
-$d= new Data();
-
-$d->crearInformacionMedica1($infoMedica1);
 
  $idInformacionMedica2=0;
  $medicamentosHabitualesinformacionMedica2=$_REQUEST["txtmedicamentosHabituales"];
@@ -66,6 +65,10 @@ $infoMedica2->setfkGrupoSanguineoinformacionMedica2($fkGrupoSanguineoinformacion
 $infoMedica2->setfkInfoPersonalinformacionMedica2($fkInfoPersonalinformacionMedica2);
 
 
+$d->borrarRegistrosMedicos1SegunFkPersonal($fkInfoPersonalinformacionMedica1);
+$d->borrarRegistrosMedicos2SegunFkPersonal($fkInfoPersonalinformacionMedica2);
+
+$d->crearInformacionMedica1($infoMedica1);
 $d->crearInformacionMedica2($infoMedica2);
 
 

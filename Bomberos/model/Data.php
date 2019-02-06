@@ -1603,6 +1603,49 @@ public function getEstadosInventario (){
 
 
 
+public function borrarRegistrosBomberilesSegunFkPersonal($fkPersonal){
+  $query="DELETE FROM tbl_informacionBomberil WHERE fk_informacion_personal__informacionBomberil=".$fkPersonal.";";
+
+  echo $query;
+  $this->c->conectar();
+  $this->c->ejecutar($query);
+  $this->c->desconectar();
+}
+
+public function borrarRegistrosLaboralesSegunFkPersonal($fkPersonal){
+  $query="DELETE FROM tbl_informacionLaboral WHERE fk_informacion_personal_informacionLaboral=".$fkPersonal.";";
+
+  echo $query;
+  $this->c->conectar();
+  $this->c->ejecutar($query);
+  $this->c->desconectar();
+}
+
+public function borrarRegistrosMedicos1SegunFkPersonal($fkPersonal){
+  $query="DELETE FROM tbl_informacionMedica1 WHERE fk_informacion_personal_informacionMedica1=".$fkPersonal.";";
+
+  echo $query;
+  $this->c->conectar();
+  $this->c->ejecutar($query);
+  $this->c->desconectar();
+}
+
+public function borrarRegistrosMedicos2SegunFkPersonal($fkPersonal){
+  $query="DELETE FROM tbl_informacionMedica2 WHERE fk_informacion_personal_informacionMedica2=".$fkPersonal.";";
+
+  echo $query;
+  $this->c->conectar();
+  $this->c->ejecutar($query);
+  $this->c->desconectar();
+}
+
+
+
+
+
+
+
+
 }
 
 

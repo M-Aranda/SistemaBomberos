@@ -171,7 +171,7 @@
                                       </div>
                                       <div class="col-sm-6" style="margin-left: 60px;">
 
-                                        Nombre Unidad:<input id="nombre" type="txt" class="form-control" name="txtnombreUnidad"  required="">
+                                        Nombre Unidad:<input id="nombreDeLaUnidadACrear" type="txt" class="form-control" name="txtnombreUnidad"  required="">
                                         Año de Fabricacion:<input id="nombre" type="text" class="form-control" name="txtanioFabricacion"  required="">
                                         Fecha de Inscripcion:<input id="nombre" type="date" class="form-control" name="txtfechainscripcion"   required="">
                                         Fecha de Adquisición:<input id="nombre" type="date" class="form-control" name="txtfechaadquisicion" required="">
@@ -213,7 +213,7 @@
                                         ?>
                                     </select>
                                           <br><br>
-                                        <center> <input type="submit" name="btncrear" value="Crear Unidad" class="btn button-primary" style="width: 150px;"> <span ></span>
+                                        <center> <input type="submit" name="btncrear" value="Crear Unidad" class="btn button-primary" style="width: 150px;" onclick="msg()"> <span ></span>
                                             <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                                         </center>
@@ -386,6 +386,11 @@
 
  <script src="javascript/JQuery.js"></script>
  <script>
+
+ function msg(){
+   var message = document.getElementById("nombreDeLaUnidadACrear").value;
+   alert("Creando unidad: "+ message);
+ }
 
      $("form").submit(function(){
        alert("Operación exitosa");

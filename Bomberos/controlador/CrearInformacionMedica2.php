@@ -39,6 +39,7 @@ $infoMedica2->setfkInfoPersonalinformacionMedica2($fkInfoPersonalinformacionMedi
 
 $d= new Data();
 
+$d->borrarRegistrosMedicos2SegunFkPersonal($fkInfoPersonalinformacionMedica2);
 $d->crearInformacionMedica2($infoMedica2);
 
 

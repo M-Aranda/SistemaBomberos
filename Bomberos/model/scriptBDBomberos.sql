@@ -164,6 +164,7 @@ PRIMARY KEY (id_informacionBomberil)
 
 
 
+
 CREATE TABLE tbl_informacionLaboral (
 id_informacionLaboral INT AUTO_INCREMENT,
 nombre_de_empresa_informacionLaboral VARCHAR (5000),
@@ -1635,7 +1636,6 @@ INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Azul',3,30,1,1,'Alg
 INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Verde',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
 INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Plomo',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
 INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Morada',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
-
 
 /*
 DROP DATABASE bomberosBD;

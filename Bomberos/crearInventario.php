@@ -237,7 +237,7 @@ if($_SESSION["usuarioIniciado"]!=null){
 
            <br><br>
 
-          <center> <input type="submit" name="btncrear" value="Crear Material" class="btn button-primary" style="width: 150px;"> <span ></span>
+          <center> <input type="submit" name="btncrear" value="Crear Material" class="btn button-primary" style="width: 150px;" onclick="msg()"> <span ></span>
               <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
           </center>
@@ -278,6 +278,13 @@ if($_SESSION["usuarioIniciado"]!=null){
                            });
 
 
+                         }
+
+
+
+                         function msg(){
+                           var message = document.getElementById("txtnombreMaterial").value;
+                           alert("Creando material menor: "+ message);
                          }
 
 
