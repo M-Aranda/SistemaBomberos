@@ -209,9 +209,9 @@
                        </div>
                        <div class="col-md-5" style="margin-left: 50px;">
                          Rut: <input class="form-control" value="<?php echo $infoPersonal->getRutInformacionPersonal();?>"  type="text" name="txtRut" disabled>
-                         Nombre: <input class="form-control" value="<?php echo $infoPersonal->getNombreInformacionPersonal();?>" type="text" name="txtNombre" disabled>
-                         Apellido Paterno: <input class="form-control" value="<?php echo $infoPersonal->getApellidoPaterno();?>" type="text" name="txtApePa" disabled>
-                         Apellido Materno: <input class="form-control" value="<?php echo $infoPersonal->getApellidoMaterno();?>" name="txtApeMa" disabled>
+                         Nombre: <input class="form-control" value="<?php echo utf8_encode($infoPersonal->getNombreInformacionPersonal());?>" type="text" name="txtNombre" disabled>
+                         Apellido Paterno: <input class="form-control" value="<?php echo utf8_encode($infoPersonal->getApellidoPaterno());?>" type="text" name="txtApePa" disabled>
+                         Apellido Materno: <input class="form-control" value="<?php echo utf8_encode($infoPersonal->getApellidoMaterno());?>" name="txtApeMa" disabled>
                          Fecha Nacimiento: <input class="form-control" value="<?php echo $infoPersonal->getFechaNacimiento();?>" name="txtFecha" type="date" disabled>
                          Estado Civil:
                          <select class="form-control" name="cboEstadoCivil" disabled>

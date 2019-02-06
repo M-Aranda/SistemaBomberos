@@ -274,10 +274,6 @@ if(isset($_SESSION["carguios"])){
                           </div>
 
 
-                          <br>
-                          <br>
-
-<br><br><br><br><br>
 
                           <div class="col-md-20">
                               <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#mantencion">
@@ -508,6 +504,12 @@ if(isset($_SESSION["carguios"])){
 
 
                      }
+
+
+                         $("form").submit(function(){
+                           alert("Operación exitosa");
+                           });
+
 
 /*
              $.ajax({

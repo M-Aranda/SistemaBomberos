@@ -132,6 +132,18 @@ if($_SESSION["usuarioIniciado"]!=null){
     require_once("model/Data.php");
     $data = new Data();
 
+    if(isset($_SESSION["nombreBomberoSeleccionado"])){
+      $nombreSeleccionado=$_SESSION["nombreBomberoSeleccionado"];
+    }
+
+    if(isset($_SESSION["companiaBomberoSeleccionado"])){
+      $companiaSeleccionada=$_SESSION["companiaBomberoSeleccionado"];
+    }
+
+    if(isset($_SESSION["estadoBomberoSeleccionado"])){
+      $estadoSeleccionado=$_SESSION["estadoBomberoSeleccionado"];
+    }
+
 ?>
 
 <div style="width: 800px" style="height: 900px">
@@ -144,7 +156,11 @@ if($_SESSION["usuarioIniciado"]!=null){
         <span><h5 style="font-weight:bold;">Buscar por Nombre</h5></span>
         <form action="controlador/BuscarBomberoPorAlgunParametro.php" method="post">
         <form>
-        <input type="text" name="txtBuscar"  placeholder="Buscar por nombre" style="height:30px;">
+        <input type="text" name="txtBuscar" value="<?php
+        if(isset($nombreSeleccionado)){
+          echo utf8_encode($nombreSeleccionado);
+        }
+        ?>" placeholder="Buscar por nombre" style="height:30px;">
         <input type="hidden" name="tipoDeBusqueda" value="1">
         <input class="btn btn-default" type="submit" name="btnInfoPersonal" value="Buscar" class="btn button-primary" style="width: 100px; height:30px;" style="margin-top: 400px;" onclick="porNombre()">
       <!--  <button class="btn btn-default" name="btnBuscar" style="width: 100px; height:30px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Buscar</a> </button> -->
@@ -156,9 +172,15 @@ if($_SESSION["usuarioIniciado"]!=null){
                 <?php
                     $tipoBombero = $data->readEstadosDeBomberos();
                     foreach ($tipoBombero as $tb) {
+                      if(isset($estadoSeleccionado) && ($estadoSeleccionado==$tb->getIdEstado())){
+                        echo "<option selected value='".$tb->getIdEstado()."'>";
+                            echo utf8_encode($tb->getNombreEstado());
+                        echo"</option>";
+                      }else {
                         echo "<option value='".$tb->getIdEstado()."'>";
                             echo utf8_encode($tb->getNombreEstado());
                         echo"</option>";
+                      }
                     }
                 ?>
               </select>
@@ -173,9 +195,15 @@ if($_SESSION["usuarioIniciado"]!=null){
                   <?php
                       $compania = $data->readSoloCompanias();
                       foreach ($compania as $c) {
+                        if(isset($companiaSeleccionada) && ($companiaSeleccionada==$c->getIdEntidadACargo())){
+                          echo "<option selected value='".$c->getIdEntidadACargo()."'>";
+                              echo utf8_encode($c->getNombreEntidadACargo());
+                          echo"</option>";
+                        }else{
                           echo "<option value='".$c->getIdEntidadACargo()."'>";
                               echo utf8_encode($c->getNombreEntidadACargo());
                           echo"</option>";
+                        }
                       }
                   ?>
 
@@ -183,6 +211,10 @@ if($_SESSION["usuarioIniciado"]!=null){
                 <input type="hidden" id="tipoDeBusqueda" name="tipoDeBusqueda" value="3">
                 <input class="btn btn-default" type="submit" name="btnInfoPersonal" value="Buscar" class="btn button-primary" style="width: 100px; height:30px;" style="margin-top: 400px;"  onclick="porCompania()">
               </form>
+
+              <br>
+              <input class="btn btn-default" type="button" name="btnLimpiar" value="Limpiar" class="btn button-primary" style="width: 100px; height:30px;" style="margin-top: 400px;" onclick="location.href='controlador/LimpiarBusquedaBomberos.php'" >
+              <br>
 
 
               <?php
@@ -225,10 +257,6 @@ if($_SESSION["usuarioIniciado"]!=null){
                         // se hizo una busqueda
                         $listado=$_SESSION["resultadosDeBusquedaDeBomberos"];
 
-
-
-
-
                         foreach ($listado as $o => $objeto) {
                           ?>
                           <tr>
@@ -253,12 +281,9 @@ if($_SESSION["usuarioIniciado"]!=null){
                               </td>
                           </tr>
                         <?php
-                      }
-
-                    unset($_SESSION["resultadosDeBusquedaDeBomberos"]);
-
 
                     }
+                  }
                       ?>
 
 

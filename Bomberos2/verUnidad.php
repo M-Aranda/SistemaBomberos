@@ -304,7 +304,6 @@
                                                 <td><?php echo utf8_encode($mantencion->getComentarios_mantencion());?></td>
                                               </tr>
 
-
                                         <?php    }
 
                                             ?>
@@ -315,7 +314,6 @@
                                       </div>
                                       <div class="col-sm-6" style="margin-left: 60px;">
                                           <br><br>
-
                                                                 <br>
                                       </div>
                                       <br>
@@ -342,6 +340,7 @@
                                   </div>
                                   <div class="panel-body">
                                       <div class="col-sm-4">
+
                                         <table class="table table-striped">
                                           <thead>
                                             <tr>
@@ -378,11 +377,7 @@
                                       </div>
                                       <div class="col-sm-6" style="margin-left: 60px;">
 
-                                          <br><br>
 
-
-
-                                                                <br>
                                       </div>
                                       <br>
                                       <br>

@@ -222,9 +222,9 @@
                        <div class="col-md-5" style="margin-left: 50px;">
                          <input class="form-control" value="<?php echo $infoPersonal->getIdInfoPersonal();?>"  type="hidden" name="idPersonal">
                          Rut: <input class="form-control" value="<?php echo $infoPersonal->getRutInformacionPersonal();?>"  type="text" name="txtRut" >
-                         Nombre: <input class="form-control" value="<?php echo $infoPersonal->getNombreInformacionPersonal();?>" type="text" name="txtNombre" >
-                         Apellido Paterno: <input class="form-control" value="<?php echo $infoPersonal->getApellidoPaterno();?>" type="text" name="txtApePa" >
-                         Apellido Materno: <input class="form-control" value="<?php echo $infoPersonal->getApellidoMaterno();?>" name="txtApeMa" >
+                         Nombre: <input class="form-control" value="<?php echo utf8_encode($infoPersonal->getNombreInformacionPersonal());?>" type="text" name="txtNombre" >
+                         Apellido Paterno: <input class="form-control" value="<?php echo utf8_encode($infoPersonal->getApellidoPaterno());?>" type="text" name="txtApePa" >
+                         Apellido Materno: <input class="form-control" value="<?php echo utf8_encode($infoPersonal->getApellidoMaterno());?>" name="txtApeMa" >
                          Fecha Nacimiento: <input class="form-control" value="<?php echo $infoPersonal->getFechaNacimiento();?>" name="txtFecha" type="date" >
                          Estado Civil:
                          <select class="form-control" name="cboEstadoCivil" >
@@ -839,7 +839,6 @@
                           </div>
                           <div class="col-md-6">
                              <br><br><br><br><br><br>
-                                  <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                               </center>
 
@@ -964,61 +963,7 @@
                <br>
                <br>
 
-      <!--       <div class="col-md-13">
-                   <button type="button" class="btn btn-default col-md-7" data-toggle="collapse" data-target="#servicio">
-                       Asistencia Actos de Servicio
-                   </button>
-               </div>
-               <div class="col-md-7 collapse" id="servicio">
-                   <div class="panel panel-primary">
-                       <div class="panel-heading panel-title">
-                         Asistencia Actos de Servicio
-                       </div>
-                       <div class="panel-body">
-                           <div class="col-sm-6">
 
-                             Cuerpo: <input class="form-control" type="text" name="txtcuerpo">
-                             Año: <input class="form-control" type="date" name="txtanio">
-                             Mes: <input class="form-control" type="text" name="txtmes">
-                             Cantidad Mensual: <input class="form-control" type="date" name="txtCantmensual">
-
-                             <table class="table table-striped">
-                                 <thead>
-                                   <tr>
-                                     <th>Cuerpo</th>
-                                     <th>Año</th>
-                                     <th>Mes</th>
-                                     <th>Cantidad Mensual</th>
-                                   </tr>
-                                 </thead>
-                                 <tbody>
-                                   <tr>
-                                     <td>John</td>
-                                     <td>Doe</td>
-                                     <td>john@example.com</td>
-                                     <td>sadsda</td>
-                                   </tr>
-
-                                 </tbody>
-                               </table>
-
-                          </div>
-                          <div class="col-md-6">
-                             <br><br><br><br><br><br><br><br><br>
-                              <center> <input type="submit" name="btninfoServicio" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
-
-                              </center>
-
-                          </div>
-                       </div>
-
-                   </div>
-               </div>  -->
-
-                 <!-- INFORMACION servicio -->
-
-
-<!--  </div>-->
 
 </div>
 
@@ -1080,6 +1025,12 @@ function cargarIdInfoFamiliar(id, fkPersonal) {
                               }
 
 
+/*
+                                  $("form").submit(function(){
+                                    alert("Operación exitosa");
+                                    });
+
+*/
 
 
 

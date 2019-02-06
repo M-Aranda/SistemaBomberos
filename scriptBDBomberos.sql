@@ -362,7 +362,6 @@ nombre_tipo_combustible VARCHAR (5000),
 PRIMARY KEY (id_tipo_combustible)
 );
 
-
 CREATE TABLE tbl_cargio_combustible (
 id_cargio_combustible INT AUTO_INCREMENT,
 responsable_cargio_combustible VARCHAR (5000),
