@@ -20,6 +20,7 @@ $infoFamiliar=$d->readInfoFamiliar($idABuscar);
 $infoAcademica=$d->readInfoAcademica($idABuscar);
 $infoEntrenamientoEstandar=$d->readInfoEntrenamientoEstandar($idABuscar);
 $infoHistorica=$d->readInfoHistorica($idABuscar);
+$infoCargos=$d->getInfoCargos($idABuscar);
 
 $_SESSION["infoPersonalSolicitada"] = $infoPersonal;
 $_SESSION["infoMedidasSolicitada"] = $infoMedidas;
@@ -31,6 +32,7 @@ $_SESSION["infoFamiliarSolicitada"] = $infoFamiliar;
 $_SESSION["infoAcademicaSolicitada"] = $infoAcademica;
 $_SESSION["infoEntrenamientoEstandarSolicitada"] = $infoEntrenamientoEstandar;
 $_SESSION["infoHistoricaSolicitada"] = $infoHistorica;
+$_SESSION["infoCargosSolicitada"] = $infoCargos;
 
 header("location:../modificarBombero.php ");
 

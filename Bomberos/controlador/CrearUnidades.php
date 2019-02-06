@@ -26,8 +26,6 @@ echo "despues del click";
 
     //Construir un objeto con esos datos
 
-
-
     $unidad = new Tbl_Unidad();
     //"seteo" los datos
     $unidad->setNombreUnidad($nombre);

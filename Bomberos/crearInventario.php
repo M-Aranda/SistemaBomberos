@@ -277,10 +277,7 @@ if($_SESSION["usuarioIniciado"]!=null){
 
                            });
 
-
                          }
-
-
 
                          function msg(){
                            var message = document.getElementById("txtnombreMaterial").value;
@@ -288,14 +285,9 @@ if($_SESSION["usuarioIniciado"]!=null){
                          }
 
 
-
                   $("form").submit(function(){
                     alert("Operación exitosa");
                     });
-
-
-
-
 
 </script>
 

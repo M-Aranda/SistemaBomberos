@@ -820,7 +820,7 @@
                    </div>
                </div>
                  <!-- INFORMACION historica -->
-                   <!-- INFORMACION servicio -->
+                   <!-- INFORMACION de cargos -->
                <br>
                <br>
 

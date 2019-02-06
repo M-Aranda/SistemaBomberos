@@ -150,27 +150,25 @@
           $infoMedica2=$_SESSION["infoMedica2Solicitada"];
         }
 
-        if($_SESSION["infoFamiliarSolicitada"]!=null){
+        if(isset($_SESSION["infoFamiliarSolicitada"])){
           $infoFamiliar=$_SESSION["infoFamiliarSolicitada"];
         }
 
-        if($_SESSION["infoAcademicaSolicitada"]!=null){
+        if(isset($_SESSION["infoAcademicaSolicitada"])){
           $infoAcademica=$_SESSION["infoAcademicaSolicitada"];
         }
 
-        if($_SESSION["infoEntrenamientoEstandarSolicitada"]!=null){
+        if(isset($_SESSION["infoEntrenamientoEstandarSolicitada"])){
           $infoEntrenamientoEstandar=$_SESSION["infoEntrenamientoEstandarSolicitada"];
         }
 
-        if($_SESSION["infoHistoricaSolicitada"]!=null){
+        if(isset($_SESSION["infoHistoricaSolicitada"])){
           $infoHistorica=$_SESSION["infoHistoricaSolicitada"];
         }
 
-
-
-
-
-
+        if(isset($_SESSION["infoCargosSolicitada"])){
+          $infoCargos=$_SESSION["infoCargosSolicitada"];
+        }
 
 
 
@@ -638,6 +636,9 @@
                              </thead>
                              <tbody>
                                <?php
+                               if(isset($infoFamiliar)){
+
+
                                foreach ($infoFamiliar as $iFamiliar => $datos) {
                                ?>
                                <tr>
@@ -652,6 +653,7 @@
 
 
                             <?php
+                             }
                              }
                                ?>
 
@@ -730,6 +732,9 @@
                              </thead>
                              <tbody>
                                <?php
+
+                               if(isset($infoAcademica)){
+
                                foreach ($infoAcademica as $iAcademica => $datos) {
                                ?>
                                <tr>
@@ -743,6 +748,7 @@
 
                                <td><input type="submit" value="Modificar" onclick="cargarIdInfoAcademica(<?php echo $datos->getIdidInformacionAcademica();?>,<?php echo $datos->getfkInformacionPersonalInformacionAcademica();?> )"></td>
                                <?php
+                                }
                                 }
                                   ?>
                                </tr>
@@ -816,6 +822,7 @@
                                  </thead>
                                  <tbody>
                                    <?php
+                                   if(isset($infoEntrenamientoEstandar)){
                                    foreach ($infoEntrenamientoEstandar as $iEstandar => $datos) {
                                    ?>
                                    <tr>
@@ -829,6 +836,7 @@
                                      <td><input type="submit" value="Modificar" onclick="cargarIdInfoEntrenamientoEstandar(<?php echo $datos->getIdEntrenamientoEstandar();?>,<?php echo $datos->getFkInformacionPersonal();?> )"></td>
 
                                 <?php
+                                 }
                                  }
                                    ?>
                                    </tr>
@@ -915,7 +923,7 @@
                                  </thead>
                                  <tbody>
                                    <?php
-
+                                   if(isset($infoHistorica)){
                                    foreach ($infoHistorica as $iHistorica => $info) {
                                 ?>
                                 <tr>
@@ -935,6 +943,7 @@
 
 
                                    <?php
+                                 }
                                  }
                                      ?>
 
@@ -960,6 +969,63 @@
                </div>
                  <!-- INFORMACION historica -->
                    <!-- INFORMACION servicio -->
+                   <div class="col-md-20">
+                       <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#cargos">
+                           Información de Cargos
+                       </button>
+                   </div>
+                   <div class="col-md-11 collapse" id="cargos">
+                       <div class="panel panel-primary">
+                           <div class="panel-heading panel-title">
+                             <form action="controlador/CrearInformacionHistorica.php" method="post">
+                               Información de Cargos
+                           </div>
+                           <div class="panel-body" style="margin-left: -20px;">
+                               <div class="col-sm-6">
+                                 <table class="table table-striped">
+                                     <thead>
+                                       <tr>
+                                         <th>Nombre</th>
+                                         <th>Marca</th>
+                                         <th>Talla</th>
+                                         <th>Serie</th>
+                                         <th>Fecha</th>
+                                       </tr>
+                                     </thead>
+                                     <tbody>
+                                       <?php
+                                       if(isset($infoCargos)){
+
+                                       foreach ($infoCargos as $icargos => $datos) {
+                                       ?>
+                                       <tr>
+                                         <td><?php echo $datos->getNombre_informacionDeCargos();?></td>
+                                         <td><?php echo $datos->getMarca_informacionDeCargos();?></td>
+                                         <td><?php echo $datos->getTalla_informacionDeCargos();?></td>
+                                         <td><?php echo $datos->getSerie_informacionDeCargos();?></td>
+                                         <td><?php
+                                         $fechaSinConvertir = $datos->getFecha_informacionDeCargos();
+                                         $fechaConvertida = date("d-m-Y", strtotime($fechaSinConvertir));
+                                         echo $fechaConvertida;?></td>
+                                    <?php
+                                     }
+                                     }
+                                       ?>
+                                       </tr>
+
+                                     </tbody>
+                                   </table>
+                              </div>
+                              <div class="col-md-6">
+                                 <br><br><br><br><br><br><br><br><br><br><br>
+
+                                </form>
+
+                              </div>
+                           </div>
+
+                       </div>
+                   </div>
                <br>
                <br>
 
