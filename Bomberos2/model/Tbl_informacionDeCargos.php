@@ -55,7 +55,6 @@ Class Tbl_informacionDeCargos{
       $this->serie_informacionDeCargos = $serie_informacionDeCargos;
   }
 
-
   public function getFecha_informacionDeCargos(){
     return $this->fecha_informacionDeCargos;
   }

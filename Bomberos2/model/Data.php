@@ -35,9 +35,7 @@ require_once("Tbl_MaterialMenor.php");
 require_once("Vista_BuscarMaterialMenor.php");
 require_once("VistaBusquedaDeUnidad.php");
 require_once("Tbl_EstadoMaterialMenor.php");
-
-
-
+require_once("Tbl_informacionDeCargos.php");
 
 
 class Data{
@@ -48,7 +46,6 @@ class Data{
             "bomberosBD",
             "root",
             "");
-
     }
 
     public function crearUsuario($usuario){
@@ -59,18 +56,12 @@ class Data{
         $this->c->conectar();
         $this->c->ejecutar($insert);
         $this->c->desconectar();
-
     }
 
     public function getUsuario($nombre,$pass) {
         $this->c->conectar();
-
-
         $query = "SELECT * from tbl_usuario where nombre_usuario_usuario = '$nombre' and contrasenia_usuario_usuario = '$pass' ";
-
         $rs = $this->c->ejecutar($query);
-
-
         if($obj = $rs->fetch_object()){#por cada vuelta, pongo el registro en un objeto y el objeto en una lista
             $u = new Tbl_Usuario();
 
@@ -109,9 +100,6 @@ class Data{
         $this->c->conectar();
 
         $select = "SELECT * from tbl_estado_unidad;";
-
-
-
         $rs = $this->c->ejecutar($select);
         while($obj = $rs->fetch_object()){
 
@@ -129,14 +117,9 @@ class Data{
     }
 
     public function getVehiculos(){
-
         $lista = array();
         $this->c->conectar();
-
         $select = "SELECT * from tbl_tipo_vehiculo;";
-
-
-
         $rs = $this->c->ejecutar($select);
         while($obj = $rs->fetch_object()){
 
@@ -189,12 +172,9 @@ class Data{
 
 
     public function getPerfiles(){
-
         $lista = array();
         $this->c->conectar();
-
         $select = "SELECT * from tbl_tipo_usuario;";
-
         $rs = $this->c->ejecutar($select);
         while($obj = $rs->fetch_object()){
 
@@ -203,10 +183,8 @@ class Data{
             $tu->setidTipoUsuario($obj->id_tipo_usuario);
             $tu->setnombreTipoUsuario($obj->nombre_tipo_usuario);
 
-
             array_push($lista,$tu);
         }
-
         $this->c->desconectar();
         return $lista;
     }
@@ -317,7 +295,17 @@ class Data{
       $query="CALL CRUDInformacionHistorica (1, ".$infoHistorica->getfkRegioninformacionHistorica().", '".$infoHistorica->getcuerpo()."', '".$infoHistorica->getcompania()."',
        '".$infoHistorica->getfechaDeCambio()."', '".$infoHistorica->getPremio()."', '".$infoHistorica->getmotivo()."', '".$infoHistorica->getdetalle()."', '".$infoHistorica->getCargo()."'  , ".$infoHistorica->getfkInfoPersonalinformacionHistorica().", 1);";
 
+      $this->c->conectar();
+      $this->c->ejecutar($query);
+      $this->c->desconectar();
+    }
 
+
+    public function crearInformacionCargos($infoCargos){
+      $query="INSERT INTO tbl_informacionDeCargos VALUES (NULL, '".$infoCargos->getNombre_informacionDeCargos()."', '".$infoCargos->getMarca_informacionDeCargos()."',
+      '".$infoCargos->getTalla_informacionDeCargos()."', '".$infoCargos->getSerie_informacionDeCargos()."', '".$infoCargos->getFecha_informacionDeCargos()."',".$infoCargos->getFk_personal_informacionDeCargos().");";
+
+      echo $query;
 
       $this->c->conectar();
       $this->c->ejecutar($query);
@@ -345,9 +333,7 @@ class Data{
         $this->c->ejecutar($query);
         $this->c->desconectar();
         echo "insertBD".$query;
-
     }
-
 
 
     public function crearMantencion($mantencion){
@@ -407,14 +393,10 @@ class Data{
 
     public function readGeneros (){
       $this->c->conectar();
-
       $query="SELECT * FROM tbl_genero;";
       $rs = $this->c->ejecutar($query);
-
       $listadoGeneros = array();
-
       while($reg = $rs->fetch_array()){
-
            $id=$reg[0];
            $nombre=$reg[1];
            $genero = new Tbl_Genero();
@@ -422,14 +404,9 @@ class Data{
            $genero->setNombreGenero($nombre);
            $listadoGeneros[]=$genero;
        }
-
        $this->c->desconectar();
        return $listadoGeneros;
-
     }
-
-
-
 
     public function readCargos (){
       $this->c->conectar();
@@ -532,7 +509,6 @@ class Data{
        $this->c->desconectar();
        return $listado;
     }
-
 
 
     public function readTiposDeMantencion (){
@@ -663,10 +639,6 @@ class Data{
     }
 
 
-
-
-
-
     public function readTiposDeServicios (){
       $this->c->conectar();
       $query="SELECT * FROM tbl_tipo_servicio;";
@@ -738,15 +710,38 @@ class Data{
     }
 
 
-  public function getIdBomberoMasReciente (){
+  public function getIdBomberoMasReciente(){
   $this->c->conectar();
-  $query="SELECT MAX(id_informacionPersonal ) FROM tbl_informacionPersonal;";
+  $query="SELECT MAX(id_informacionPersonal) FROM tbl_informacionPersonal;";
   $rs = $this->c->ejecutar($query);
   while($reg = $rs->fetch_array()){
        $id=$reg[0];
    }
    $this->c->desconectar();
    return $id;
+}
+
+public function getNombreBomberoPorId($id){
+$this->c->conectar();
+$query="SELECT nombre_informacionPersonal FROM tbl_informacionPersonal WHERE id_informacionPersonal=".$id.";";
+$rs = $this->c->ejecutar($query);
+while($reg = $rs->fetch_array()){
+     $id=$reg[0];
+ }
+ $this->c->desconectar();
+ return $id;
+}
+
+
+public function getNombreCargoPorId($id){
+$this->c->conectar();
+$query="SELECT nombre_cargo FROM tbl_cargo WHERE id_cargo=".$id.";";
+$rs = $this->c->ejecutar($query);
+while($reg = $rs->fetch_array()){
+     $id=$reg[0];
+ }
+ $this->c->desconectar();
+ return $id;
 }
 
 
@@ -763,7 +758,6 @@ public function buscarInformacionDeBomberoParaTabla ($nombre, $id, $tipoDeBusque
         $anexoAQuery="AND
         tbl_entidadACargo.id_entidadACargo =".$id." ;";
     }
-
 
   $query="SELECT tbl_informacionPersonal.rut_informacionPersonal, tbl_informacionPersonal.nombre_informacionPersonal,
   tbl_informacionPersonal.apellido_paterno_informacionPersonal, tbl_entidadACargo.nombre_entidadACargo,
@@ -821,9 +815,7 @@ while($reg = $rs->fetch_array()){
      $infoPersonal->setDireccionPersonal($reg[14]);
      $infoPersonal->setPertenecioABrigadaJuvenil($reg[15]);
      $infoPersonal->setEsInstructor($reg[16]);
-
  }
-
  $this->c->desconectar();
  return $infoPersonal;
 }
@@ -867,7 +859,6 @@ while($reg = $rs->fetch_array()){
  $this->c->desconectar();
  return $info;
 }
-
 
 
 public function getInfoLaboral ($idABuscar){
@@ -915,7 +906,7 @@ public function getInfoMedica2 ($idABuscar){
 $this->c->conectar();
 $query="CALL CRUDInformacionMedica2 (1,'Ninguno', 'Familiar', '96666',3, 'Sin especificar',0,0,1,".$idABuscar.",2);";
 $rs = $this->c->ejecutar($query);
-
+echo $query;
 
 while($reg = $rs->fetch_array()){
      $info= new Tbl_InfoMedica2();
@@ -955,6 +946,28 @@ public function readInfoFamiliar ($idABuscar){
    }
    $this->c->desconectar();
    return $listado;
+}
+
+
+public function getInfoCargos($idABuscar){
+$this->c->conectar();
+$query="SELECT * FROM tbl_informacionDeCargos WHERE fk_personal_informacionDeCargos=".$idABuscar.";";
+$listado= array();
+$rs = $this->c->ejecutar($query);
+while($reg = $rs->fetch_array()){
+     $info= new Tbl_informacionDeCargos();
+     $info->setId_informacionDeCargos($reg[0]);
+     $info->setNombre_informacionDeCargos($reg[1]);
+     $info->setMarca_informacionDeCargos($reg[2]);
+     $info->setTalla_informacionDeCargos($reg[3]);
+     $info->setSerie_informacionDeCargos($reg[4]);
+     $info->setFecha_informacionDeCargos($reg[6]);
+     $info->setFk_personal_informacionDeCargos($reg[7]);
+
+     $listado[]=$info;
+ }
+ $this->c->desconectar();
+ return $listado;
 }
 
 
@@ -1392,8 +1405,6 @@ public function buscarNombreDeCombustiblePorId ($idABuscar){
 
 
 
-
-
 public function getMedidas(){
   $lista = array();
   $this->c->conectar();
@@ -1429,32 +1440,6 @@ public function getUbicacionFisica($fk_entidadACargo){
 
 
 }
-
-public function getTipoBodega(){
-
-  $lista = array();
-  $this->c->conectar();
-
-  $select = "SELECT * from tbl_tipo_de_bodega;";
-
-  $rs = $this->c->ejecutar($select);
-  while($obj = $rs->fetch_object()){
-
-      $tu = new Tbl_TipoBodega();
-
-      $tu->setidTipoBodega($obj->id_tipo_de_bodega);
-      $tu->setnombreTipoBodega($obj->nombre_tipo_de_bodega);
-
-
-      array_push($lista,$tu);
-  }
-
-  $this->c->desconectar();
-  return $lista;
-}
-
-
-
 
 
 public function crerMaterialMenor($materialMenor){

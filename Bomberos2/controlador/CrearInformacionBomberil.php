@@ -1,5 +1,4 @@
 <?php
-
 require_once("../model/Data.php");
 require_once("../model/Tbl_InfoBomberil.php");
 require_once("../model/Tbl_InfoPersonal.php");
@@ -7,21 +6,7 @@ require_once("../model/Tbl_Region.php");
 require_once("../model/Tbl_EstadoBombero.php");
 require_once("../model/Tbl_Cargo.php");
 
-/*
-require_once("../model/Tbl_comuna.php");
-require_once("../model/Tbl_EntrenamientoEstandar.php");
-require_once("../model/Tbl_EstadoCurso.php");
-require_once("../model/Tbl_GrupoSanguineo.php");
-require_once("../model/Tbl_InfoAcademica.php");
-require_once("../model/Tbl_InfoBomberil.php");
-require_once("../model/Tbl_InfoFamiliar.php");
-require_once("../model/Tbl_InfoHistorica.php");
-require_once("../model/Tbl_InfoLaboral.php");
-require_once("../model/Tbl_InfoMedica1.php");
-require_once("../model/Tbl_InfoMedica2.php");
-require_once("../model/Parentesco.php");
-require_once("../model/Provincia.php");
-*/
+session_start();
 
 $d= new Data();
 
@@ -34,8 +19,7 @@ $fecha_ingreso=$_REQUEST["txtfingreso"];
 $nrg=$_REQUEST["txtgeneral"];
 $fk_estado=$_REQUEST["cboEstadoBombero"];
 $nrc=$_REQUEST["txtcia"];
-$fk_infoPersonal=$_REQUEST["cboBombero1"];
-
+$fk_infoPersonal=$_SESSION['idDeBomberoMasReciente'];
 
 $infoBomberil= new Tbl_InfoBomberil();
 
@@ -51,7 +35,6 @@ $infoBomberil->setNRegCiainformacionBomberil($nrc);
 $infoBomberil->setfkInfoPersonalinformacionBomberil($fk_infoPersonal);
 
 $d->crearInformacionBomberil($infoBomberil);
-
 
 header("location: ../CrearFicha.php");
 

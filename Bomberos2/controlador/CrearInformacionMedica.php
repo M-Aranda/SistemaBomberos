@@ -7,13 +7,13 @@ require_once("../model/Tbl_GrupoSanguineo.php");
 require_once("../model/Tbl_Parentesco.php");
 require_once("../model/Tbl_InfoPersonal.php");
 
-
+session_start();
 
 $idInformacionMedica1=0;
 $prestacionMedica_informacionMedica1=$_REQUEST["txtpresmedica"];
 $alergias_informacionMedica1=$_REQUEST["txtalergias"];
 $enfermedadesCronicasinformacionMedica1=$_REQUEST["txtenfermedadescronicas"];
-$fkInfoPersonalinformacionMedica1=$_REQUEST["cboBomberoInfoMedica"];
+$fkInfoPersonalinformacionMedica1=$_SESSION['idDeBomberoMasReciente'];
 
 $infoMedica1=new Tbl_InfoMedica1();
 
@@ -27,9 +27,6 @@ $infoMedica1->setfkInfoPersonalinformacionMedica1($fkInfoPersonalinformacionMedi
 $d= new Data();
 
 $d->crearInformacionMedica1($infoMedica1);
-
-
-
 
  $idInformacionMedica2=0;
  $medicamentosHabitualesinformacionMedica2=$_REQUEST["txtmedicamentosHabituales"];
@@ -52,7 +49,7 @@ if ($_POST['txtfumador'] == 'seleccionado') {
 
 
  $fkGrupoSanguineoinformacionMedica2=$_REQUEST["cboGrupoSanguineo"];
- $fkInfoPersonalinformacionMedica2=$_REQUEST["cboBomberoInfoMedica"];
+ $fkInfoPersonalinformacionMedica2=$_SESSION['idDeBomberoMasReciente'];
 
 
 $infoMedica2=new Tbl_InfoMedica2();
@@ -70,7 +67,6 @@ $infoMedica2->setfkInfoPersonalinformacionMedica2($fkInfoPersonalinformacionMedi
 
 
 $d->crearInformacionMedica2($infoMedica2);
-
 
 
 header("location: ../CrearFicha.php");

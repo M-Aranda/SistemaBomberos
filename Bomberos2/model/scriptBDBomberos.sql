@@ -3,12 +3,12 @@ CREATE DATABASE bomberosBD;
 USE bomberosBD;
 SET lc_time_names = 'es_CL';
 
+
 CREATE TABLE tbl_permiso (
 id_permiso INT AUTO_INCREMENT,
 nombre_permiso VARCHAR (5000),
 PRIMARY KEY (id_permiso)
 );
-
 
 CREATE TABLE tbl_tipo_usuario(
 id_tipo_usuario INT AUTO_INCREMENT,
@@ -26,7 +26,6 @@ FOREIGN KEY (fk_tipo_usuario_tipo_usuario_permisos) REFERENCES tbl_tipo_usuario 
 FOREIGN KEY (fk_permiso_tipo_usuario_permisos) REFERENCES tbl_permiso (id_permiso),
 PRIMARY KEY (id_tipo_usuario_permisos)
 );
-
 
 CREATE TABLE tbl_usuario(
 id_usuario_usuario INT AUTO_INCREMENT,
@@ -61,6 +60,13 @@ PRIMARY KEY(id_medida)
 );
 
 
+
+/*
+SELECT tbl_medida.id_medida, tbl_medida.talla_de_chaqueta_camisa_medida, tbl_medida.talla_de_pantalon_medida,  tbl_medida.talla_de_buzo_medida,
+tbl_medida.talla_de_calzado_medida FROM tbl_medida, tbl_informacionPersonal WHERE 
+tbl_informacionPersonal.fk_medida_informacionPersonal=tbl_medida.id_medida AND tbl_informacionPersonal.id_informacionPersonal=1;
+*/
+
 CREATE TABLE tbl_informacionPersonal(
 id_informacionPersonal INT AUTO_INCREMENT,
 rut_informacionPersonal VARCHAR (12) UNIQUE,
@@ -86,6 +92,14 @@ PRIMARY KEY (id_informacionPersonal)
 );
 
 
+CREATE TABLE tbl_entidadACargo (
+id_entidadACargo INT AUTO_INCREMENT,
+nombre_entidadACargo VARCHAR (5000),
+PRIMARY KEY(id_entidadACargo)
+);
+
+
+
 CREATE TABLE tbl_region (
   id_region INT AUTO_INCREMENT,
   nombre_region VARCHAR(64) ,
@@ -100,7 +114,7 @@ CREATE TABLE tbl_provincia (
   fk_region_provincia INT,
   FOREIGN KEY (fk_region_provincia) REFERENCES tbl_region (id_region),
   PRIMARY KEY (id_provincia)
-);
+); 
 
 
 CREATE TABLE tbl_comuna (
@@ -118,38 +132,36 @@ nombre_estado VARCHAR (20000),
 PRIMARY KEY (id_estado)
 );
 
+
+
 CREATE TABLE tbl_cargo (
 id_cargo INT AUTO_INCREMENT,
 nombre_cargo VARCHAR (5000),
 PRIMARY KEY (id_cargo)
 );
 
-
-CREATE TABLE tbl_compania (
-id_compania INT AUTO_INCREMENT,
-nombre_compania VARCHAR (5000),
-PRIMARY KEY (id_compania)
-);
-
-
+-- fk_id_entidadACargo_informacionBomberil INT,
+-- FOREIGN KEY (fk_id_entidadACargo_informacionBomberil) REFERENCEs tbl_entidadACargo (id_entidadACargo),
 CREATE TABLE tbl_informacionBomberil (
 id_informacionBomberil INT AUTO_INCREMENT,
 fk_region_informacionBomberil INT,
 cuerpo_informacionBomberil VARCHAR (20000),
-fk_compania_informacionBomberil INT,
+fk_id_entidadACargo_informacionBomberil INT,
 fk_cargo_informacionBomberil INT,
 fecha_de_ingreso_informacionBomberil DATE,
 N_Reg_General_informacionBomberil INT,
 fk_estado_informacionBomberil INT,
 N_Reg_Cia_informacionBomberil INT,
 fk_informacion_personal__informacionBomberil INT,
+FOREIGN KEY (fk_id_entidadACargo_informacionBomberil) REFERENCEs tbl_entidadACargo (id_entidadACargo),
 FOREIGN KEY (fk_informacion_personal__informacionBomberil) REFERENCES tbl_informacionPersonal (id_informacionPersonal),
 FOREIGN KEY (fk_region_informacionBomberil) REFERENCES tbl_region (id_region),
 FOREIGN KEY (fk_cargo_informacionBomberil) REFERENCEs tbl_cargo (id_cargo),
 FOREIGN KEY (fk_estado_informacionBomberil) REFERENCEs tbl_estadoBombero (id_estado),
-FOREIGN KEY (fk_compania_informacionBomberil) REFERENCEs tbl_compania (id_compania),
 PRIMARY KEY (id_informacionBomberil)
 );
+
+
 
 
 CREATE TABLE tbl_informacionLaboral (
@@ -170,11 +182,9 @@ PRIMARY KEY (id_informacionLaboral)
 
 CREATE TABLE tbl_grupo_sanguineo (
 id_grupo_sanguineo INT AUTO_INCREMENT,
-nombre_grupo_sanguineo VARCHAR (30),
-factorRHPositivo_grupo_sanguineo BOOLEAN,
+nombre_grupo_sanguineo VARCHAR (30), 
 PRIMARY KEY (id_grupo_sanguineo)
 );
-
 
 CREATE TABLE tbl_parentesco (
 id_parentesco INT AUTO_INCREMENT,
@@ -222,11 +232,9 @@ fecha_de_nacimiento_informacionFamiliar DATE,
 fk_parentesco_informacionFamiliar INT,
 fk_informacionPersonal_informacionFamiliar INT,
 FOREIGN KEY (fk_informacionPersonal_informacionFamiliar) REFERENCES tbl_informacionPersonal (id_informacionPersonal),
-FOREIGN KEY (fk_parentesco_informacionFamiliar) REFERENCES tbl_informacionPersonal (id_informacionPersonal),
+FOREIGN KEY (fk_parentesco_informacionFamiliar) REFERENCES tbl_parentesco (id_parentesco),
 PRIMARY KEY(id_informacionFamiliar)
 );
-
-
 
 
 CREATE TABLE tbl_estado_curso(
@@ -236,18 +244,16 @@ PRIMARY KEY(id_estado_curso)
 );
 
 
-
 CREATE TABLE tbl_informacionAcademica(
 id_informacionAcademica INT AUTO_INCREMENT,
 fecha_informacionAcademica DATE,
 actividad_informacionAcademica VARCHAR (300),
 fk_estado_curso_informacionAcademica INT,
 fk_informacionPersonal_informacionAcademica INT,
-FOREIGN KEY (fk_informacionPersonal_informacionAcademica) REFERENCES tbl_informacionPersonal (id_informacionPersonal),
-FOREIGN KEY (fk_estado_curso_informacionAcademica) REFERENCES tbl_estado_curso (id_estado_curso),
+FOREIGN KEY (fk_informacionPersonal_informacionAcademica) REFERENCES tbl_informacionPersonal (id_informacionPersonal), 
+FOREIGN KEY (fk_estado_curso_informacionAcademica) REFERENCES tbl_estado_curso (id_estado_curso), 
 PRIMARY KEY (id_informacionAcademica)
 );
-
 
 
 CREATE TABLE tbl_entrenamientoEstandar(
@@ -256,8 +262,8 @@ fecha_entrenamientoEstandar DATE,
 actividad_entrenamientoEstandar VARCHAR (300),
 fk_estado_curso_entrenamientoEstandar INT,
 fk_informacionPersonal_entrenamientoEstandar INT,
-FOREIGN KEY (fk_informacionPersonal_entrenamientoEstandar) REFERENCES tbl_informacionPersonal (id_informacionPersonal),
-FOREIGN KEY (fk_estado_curso_entrenamientoEstandar) REFERENCES tbl_estado_curso (id_estado_curso),
+FOREIGN KEY (fk_informacionPersonal_entrenamientoEstandar) REFERENCES tbl_informacionPersonal (id_informacionPersonal), 
+FOREIGN KEY (fk_estado_curso_entrenamientoEstandar) REFERENCES tbl_estado_curso (id_estado_curso), 
 PRIMARY KEY (id_entrenamientoEstandar)
 );
 
@@ -267,23 +273,28 @@ CREATE TABLE tbl_informacionHistorica(
 id_informacionHistorica INT AUTO_INCREMENT,
 fk_region_informacionHistorica INT,
 cuerpo_informacionHistorica VARCHAR (5000),
-fk_compania_informacionHistorica INT,
+compania_informacionHistorica VARCHAR (5000),
 fechaDeCambio_informacionHistorica DATE,
-tipoDeCambio_informacionHistorica VARCHAR (20000),
+premio_informacionHistorica VARCHAR (20000),
 motivo_informacionHistorica TEXT (2000),
 detalle_informacionHistorica VARCHAR (20000),
+cargo_informacionHistorica VARCHAR (5000),
 fk_informacionPersonal_informacionHistorica INT,
-FOREIGN KEY (fk_compania_informacionHistorica) REFERENCES tbl_compania(id_compania),
-FOREIGN KEY (fk_informacionPersonal_informacionHistorica) REFERENCES tbl_informacionPersonal (id_informacionPersonal),
-FOREIGN KEY (fk_region_informacionHistorica) REFERENCES tbl_region (id_region),
+FOREIGN KEY (fk_informacionPersonal_informacionHistorica) REFERENCES tbl_informacionPersonal (id_informacionPersonal), 
+FOREIGN KEY (fk_region_informacionHistorica) REFERENCES tbl_region (id_region), 
 PRIMARY KEY (id_informacionHistorica)
 );
 
-
-CREATE TABLE tbl_entidadPropietaria (
-id_entidadPropietaria INT AUTO_INCREMENT,
-nombre_entidadPropietaria VARCHAR (5000),
-PRIMARY KEY(id_entidadPropietaria)
+CREATE TABLE tbl_informacionDeCargos (
+id_informacionDeCargos INT AUTO_INCREMENT,
+nombre_informacionDeCargos VARCHAR (500),
+marca_informacionDeCargos VARCHAR (500),
+talla_informacionDeCargos VARCHAR (500),
+serie_informacionDeCargos VARCHAR (500),
+fecha_informacionDeCargos VARCHAR (500),
+fk_personal_informacionDeCargos INT,
+FOREIGN KEY (fk_personal_informacionDeCargos) REFERENCES tbl_informacionPersonal (id_informacionPersonal),
+PRIMARY KEY (id_informacionDeCargos)
 );
 
 CREATE TABLE tbl_tipo_vehiculo (
@@ -292,14 +303,17 @@ nombre_tipo_vehiculo VARCHAR (5000),
 PRIMARY KEY(id_tipo_vehiculo)
 );
 
+
 CREATE TABLE tbl_estado_unidad (
 id_estado_unidad INT AUTO_INCREMENT,
 nombre_estado_unidad VARCHAR (5000),
 PRIMARY KEY(id_estado_unidad)
 );
 
+
 CREATE TABLE tbl_unidad (
 id_unidad INT AUTO_INCREMENT,
+nombre_unidad VARCHAR (300),
 anioDeFabricacion_unidad VARCHAR (300),
 marca_unidad VARCHAR (300),
 nMotor_unidad VARCHAR (300),
@@ -312,10 +326,10 @@ fechaAdquisicion_unidad DATE,
 capacidadOcupantes_unidad INT,
 fk_estado_unidad_unidad INT,
 fk_tipo_vehiculo_unidad INT,
-fk_entidadPropietaria_unidad INT,
+fk_entidadACargo INT,
 FOREIGN KEY (fk_estado_unidad_unidad) REFERENCES tbl_estado_unidad (id_estado_unidad),
 FOREIGN KEY (fk_tipo_vehiculo_unidad) REFERENCES tbl_tipo_vehiculo (id_tipo_vehiculo),
-FOREIGN KEY (fk_entidadPropietaria_unidad) REFERENCES tbl_entidadPropietaria (id_entidadPropietaria),
+FOREIGN KEY (fk_entidadACargo) REFERENCES tbl_entidadACargo (id_entidadACargo),
 PRIMARY KEY (id_unidad)
 );
 
@@ -335,6 +349,7 @@ direccion_mantencion VARCHAR (5000),
 comentarios_mantencion VARCHAR (5000),
 fk_unidad INT,
 FOREIGN KEY (fk_unidad) REFERENCES tbl_unidad (id_unidad),
+FOREIGN KEY (fk_tipo_mantencion) REFERENCES tbl_tipoDeMantencion (id_tipo_de_mantencion),
 PRIMARY KEY (id_mantencion)
 );
 
@@ -344,7 +359,6 @@ id_tipo_combustible INT AUTO_INCREMENT,
 nombre_tipo_combustible VARCHAR (5000),
 PRIMARY KEY (id_tipo_combustible)
 );
-
 
 CREATE TABLE tbl_cargio_combustible (
 id_cargio_combustible INT AUTO_INCREMENT,
@@ -367,6 +381,77 @@ codigo_tipo_servicio VARCHAR (5000),
 nombre_tipo_servicio VARCHAR (5000),
 PRIMARY KEY (id_tipo_servicio)
 );
+
+CREATE TABLE tbl_bitacora (
+id_bitacora INT AUTO_INCREMENT,
+fecha_bitacora DATE,
+fk_tipo_de_servicio_bitacora INT,
+direccion_bitacora VARCHAR (5000),
+oficial_a_cargo_bitacora VARCHAR (5000),
+maquinista_bitacora VARCHAR (5000),
+cantidad_de_voluntarios_bitacora VARCHAR (5000),
+hora_de_salida_bitacora TIME,
+hora_de_llegada_bitacora TIME,
+kilometros_bitacora INT,
+hora_de_motor_bitacora TIME,
+fk_combustible_bitacora INT,
+hora_bomba_bitacora TIME,
+observaciones_bitacora INT,
+PRIMARY KEY (id_bitacora)
+);
+
+
+CREATE TABLE tbl_ubicacion_fisica (
+id_ubicacion_fisica INT AUTO_INCREMENT,
+nombre_ubicacion_fisica VARCHAR (5000),
+fk_entidad_a_cargo INT,
+FOREIGN KEY (fk_entidad_a_cargo) REFERENCES tbl_entidadACargo (id_entidadACargo),
+PRIMARY KEY (id_ubicacion_fisica)
+);
+
+
+CREATE TABLE tbl_tipo_de_medida (
+id_tipo_de_medida INT AUTO_INCREMENT,
+nombre_tipo_de_medida VARCHAR (5000),
+PRIMARY KEY (id_tipo_de_medida)
+);
+
+CREATE TABLE tbl_unidad_de_medida (
+id_unidad_de_medida INT AUTO_INCREMENT,
+fk_tipo_de_medida_unidad_de_medida INT,
+nombre_unidad_de_medida VARCHAR (5000),
+FOREIGN KEY (fk_tipo_de_medida_unidad_de_medida) REFERENCES tbl_tipo_de_medida (id_tipo_de_medida),
+PRIMARY KEY (id_unidad_de_medida)
+);
+
+CREATE TABLE tbl_estado_material_menor (
+id_estado_material_menor INT AUTO_INCREMENT,
+nombre_estado_material_menor VARCHAR (300),
+PRIMARY KEY(id_estado_material_menor)
+);
+
+
+CREATE TABLE tbl_material_menor (
+id_material_menor INT AUTO_INCREMENT,
+nombre_material_menor VARCHAR (300),
+fk_entidad_a_cargo_material_menor INT,
+color_material_menor VARCHAR (300),
+cantidad_material_menor INT,
+medida_material_menor INT,
+fk_unidad_de_medida_material_menor INT,
+fk_ubicacion_fisica_material_menor INT,
+fabricante_material_menor VARCHAR (300),
+fecha_de_caducidad_material_menor DATE,
+proveedor_material_menor VARCHAR (300),
+fk_estado_material_menor INT,
+FOREIGN KEY (fk_estado_material_menor) REFERENCES tbl_estado_material_menor (id_estado_material_menor),
+FOREIGN KEY (fk_entidad_a_cargo_material_menor) REFERENCES tbl_entidadACargo (id_entidadACargo),
+FOREIGN KEY (fk_unidad_de_medida_material_menor) REFERENCES tbl_unidad_de_medida (id_unidad_de_medida),
+FOREIGN KEY (fk_ubicacion_fisica_material_menor) REFERENCES tbl_ubicacion_fisica (id_ubicacion_fisica),
+PRIMARY KEY (id_material_menor)
+);
+
+
 
 
 -- Procedimientos
@@ -526,20 +611,6 @@ END IF;
 END//
 DELIMITER ;
 
-DELIMITER //
-CREATE PROCEDURE CRUDCompania (id INT, nombre VARCHAR (5000), tipoOperacion INT)
-BEGIN
-IF tipoOperacion=1 THEN
-INSERT INTO tbl_compania VALUES (NULL, nombre);
-ELSEIF tipoOperacion=2 THEN
-SELECT * FROM tbl_compania WHERE id_compania=id;
-ELSEIF tipoOperacion=3 THEN
-UPDATE tbl_compania SET nombre_compania=nombre WHERE id_compania=id;
-ELSEIF tipoOperacion=4 THEN
-DELETE FROM tbl_compania WHERE id_compania=id;
-END IF;
-END//
-DELIMITER ;
 
 
 DELIMITER //
@@ -559,14 +630,14 @@ END //
 DELIMITER ;
 
 
-DELIMITER //
+DELIMITER // 
 CREATE PROCEDURE CRUDInformacionPersonal (id INT, rut VARCHAR(12), nombre VARCHAR (5000), apellidoPaterno VARCHAR(5000), apellidoMaterno VARCHAR(5000), fechaDeNacimiento DATE,
 fkEstadoCivil INT, fkMedida INT, altura VARCHAR (5000), peso VARCHAR (5000), email VARCHAR (5000), fkGenero INT, telefonoFijo VARCHAR (5000), telefonoMovil VARCHAR (5000),
-direccionPersonal VARCHAR (5000), pertenecioABrigadaJuvenil VARCHAR (5000), esInstructor VARCHAR (5000), tipoOperacion INT )
+direccionPersonal VARCHAR (5000), pertenecioABrigadaJuvenil VARCHAR (5000), esInstructor VARCHAR (5000), tipoOperacion INT ) 
 BEGIN
 
 DECLARE fkMedidas INT;
-SELECT MAX(id_medida) INTO @fkMedidas FROM tbl_medida;
+SELECT MAX(id_medida) INTO fkMedidas FROM tbl_medida;
 
 IF tipoOperacion=1 THEN
 INSERT INTO tbl_informacionPersonal VALUES (NULL, rut, nombre, apellidoPaterno, apellidoMaterno, fechaDeNacimiento, fkEstadoCivil, fkMedidas,
@@ -574,9 +645,9 @@ altura, peso, email, fkGenero, telefonoFijo, telefonoMovil, direccionPersonal, p
 ELSEIF tipoOperacion=2 THEN
 SELECT * FROM tbl_informacionPersonal WHERE id_informacionPersonal=id;
 ELSEIF tipoOperacion=3 THEN
-UPDATE tbl_informacionPersonal SET rut_informacionPersonal=rut, nombre_informacionPersonal=nombre, apellidoPaterno_informacionPersonal=apellidoPaterno,
-apellidoMaterno_informacionPersonal=apellidoMaterno, fechaDeNacimiento_informacionPersonal=fechaDeNacimiento, fk_estado_civil_informacionPersonal=fkEstadoCivil,
-fk_medida_informacionPersonal=fkMedida, altura_en_metros_informacionPersonal=altura, peso_en_kg_informacionPersonal=peso, e_mail_informacionPersonal=email,
+UPDATE tbl_informacionPersonal SET rut_informacionPersonal=rut, nombre_informacionPersonal=nombre, apellido_paterno_informacionPersonal=apellidoPaterno,
+apellido_materno_informacionPersonal=apellidoMaterno, fecha_de_nacimiento_informacionPersonal=fechaDeNacimiento, fk_estado_civil_informacionPersonal=fkEstadoCivil,
+fk_medida_informacionPersonal=fkMedidas, altura_en_metros_informacionPersonal=altura, peso_en_kg_informacionPersonal=peso, e_mail_informacionPersonal=email,
 fk_genero_informacionPersonal=fkGenero, telefono_fijo_informacionPersonal=telefonoFijo, telefono_movil_informacionPersonal=telefonoMovil, direccion_personal_informacionPersonal=direccionPersonal,
 pertenecio_a_brigada_juvenil_informacionPersonal=pertenecioABrigadaJuvenil, esInstructor_informacionPersonal=esInstructor WHERE id_informacionPersonal=id;
 ELSEIF tipoOperacion=4 THEN
@@ -587,16 +658,18 @@ END//
 DELIMITER ;
 
 
+
+
 DELIMITER //
-CREATE PROCEDURE CRUDFichaInformacionBomberil (id INT,fkRegion INT, cuerpo VARCHAR (2000), fkCompania INT, fkCargo INT,
+CREATE PROCEDURE CRUDFichaInformacionBomberil (id INT, fkRegion INT, cuerpo VARCHAR (2000), fkCompania INT, fkCargo INT, 
 fechaIngreso DATE, NRG INT, fkEstado INT, NRC INT, fkInformacionPersonal INT, tipoOperacion INT)
 BEGIN
 IF tipoOperacion=1 THEN
 INSERT INTO tbl_informacionBomberil VALUES (NULL, fkRegion, cuerpo, fkCompania, fkCargo, fechaIngreso, NRG, fkEstado, NRC, fkInformacionPersonal);
 ELSEIF tipoOperacion=2 THEN
-SELECT * FROM tbl_informacionBomberil WHERE id_informacionBomberil=id;
+SELECT * FROM tbl_informacionBomberil WHERE fk_informacion_personal__informacionBomberil=fkInformacionPersonal;
 ELSEIF tipoOperacion=3 THEN
-UPDATE tbl_informacionBomberil SET fk_region_informacionBomberil=fkRegion,cuerpo_informacionBomberil=cuerpo,fk_compania_informacionBomberil=fkCompania,
+UPDATE tbl_informacionBomberil SET fk_region_informacionBomberil=fkRegion,cuerpo_informacionBomberil=cuerpo, fk_id_entidadACargo_informacionBomberil=fkCompania,
 fk_cargo_informacionBomberil=fkCargo, fecha_de_ingreso_informacionBomberil=fechaIngreso, N_Reg_General_informacionBomberil=NRG, fk_estado_informacionBomberil=fkEstado,
  N_Reg_Cia_informacionBomberil=NRC, fk_informacion_personal__informacionBomberil=fkInformacionPersonal  WHERE id_informacionBomberil=id;
 ELSEIF tipoOperacion=4 THEN
@@ -608,7 +681,7 @@ END//
 DELIMITER ;
 
 
-DELIMITER //
+DELIMITER // 
 CREATE PROCEDURE CRUDInformacionLaboral (id INT, nombreEmpresa VARCHAR (5000), direccionEmpresa VARCHAR (5000), telefonoEmpresa VARCHAR (5000), cargoEmpresa VARCHAR (5000),
 fechaDeIngresoALaEmpresa DATE, dptoEnEmpresa VARCHAR (5000), afp VARCHAR (5000), profesion VARCHAR (5000), fkInfoPersonal INT, tipoOperacion INT)
 BEGIN
@@ -616,7 +689,7 @@ IF tipoOperacion=1 THEN
 INSERT INTO tbl_informacionLaboral VALUES (NULL, nombreEmpresa, direccionEmpresa, telefonoEmpresa, cargoEmpresa, fechaDeIngresoALaEmpresa,
 dptoEnEmpresa, afp, profesion,fkInfoPersonal);
 ELSEIF tipoOperacion=2 THEN
-SELECT * FROM tbl_informacionLaboral WHERE id_informacionLaboral=id;
+SELECT * FROM tbl_informacionLaboral WHERE fk_informacion_personal_informacionLaboral=fkInfoPersonal;
 ELSEIF tipoOperacion=3 THEN
 UPDATE tbl_informacionLaboral SET nombre_de_empresa_informacionLaboral=nombreEmpresa, direccion_de_empresa_informacionLaboral=direccionEmpresa, telefono_de_empresa_informacionLaboral=telefonoEmpresa,
 cargo_en_la_empresa_informacionLaboral=cargoEmpresa, fecha_de_ingreso_a_la_empresa_informacionLaboral=fechaDeIngresoALaEmpresa, area_o_departamento_en_la_empresa_informacionLaboral= dptoEnEmpresa,
@@ -630,16 +703,16 @@ END//
 DELIMITER ;
 
 
-DELIMITER //
+DELIMITER // 
 CREATE PROCEDURE CRUDInformacionMedica1 (id INT, prestacionMedica VARCHAR (5000), alergias VARCHAR (5000), enfermedadesCronicas VARCHAR (5000), fkInfoPersonal INT, tipoOperacion INT)
 BEGIN
 IF tipoOperacion=1 THEN
 INSERT INTO tbl_informacionMedica1 VALUES (NULL, prestacionMedica, alergias, enfermedadesCronicas, fkInfoPersonal);
 ELSEIF tipoOperacion=2 THEN
-SELECT *  FROM tbl_informacionMedica1 WHERE tbl_informacionMedica1=id;
+SELECT *  FROM tbl_informacionMedica1 WHERE fk_informacion_personal_informacionMedica1=fkInfoPersonal;
 ELSEIF tipoOperacion=3 THEN
 UPDATE tbl_informacionMedica1 SET prestacionMedica_informacionMedica1=prestacionMedica, alergias_informacionMedica1=alergias, enfermedades_croncias_informacionMedica1=enfermedadesCronicas,
-fk_informacion_personal_informacionMedica1=fkInfoPersonal WHERE tbl_informacionMedica1=id;
+fk_informacion_personal_informacionMedica1=fkInfoPersonal WHERE tbl_informacionMedica1.id_informacionMedica1=id;
 ELSEIF tipoOperacion=4 THEN
 DELETE FROM tbl_informacionMedica1 WHERE tbl_informacionMedica1=id;
 ELSEIF tipoOperacion=5 THEN
@@ -647,6 +720,7 @@ SELECT *  FROM tbl_informacionMedica1 WHERE fk_informacion_personal_informacionM
 END IF;
 END//
 DELIMITER ;
+
 
 
 DELIMITER //
@@ -657,11 +731,11 @@ IF tipoOperacion=1 THEN
 INSERT INTO tbl_informacionMedica2 VALUES (NULL, medicamentos_habituales, nombre_de_contacto, telefono_de_contacto, fkParentesco, nivel_de_actividad_fisica, es_donante,
  es_fumador, fk_grupoSanguineo, fk_inforPersonal );
 ELSEIF tipoOperacion=2 THEN
-SELECT * FROM tbl_informacionMedica2 WHERE id_informacionMedica2=id;
+SELECT * FROM tbl_informacionMedica2 WHERE fk_informacion_personal_informacionMedica2=fk_inforPersonal;
 ELSEIF tipoOperacion=3 THEN
 UPDATE tbl_informacionMedica2 SET medicamentos_habituales_informacionMedica2=medicamentos_habituales, nombre_de_contacto_informacionMedica2=nombre_de_contacto, telefono_de_contacto_informacionMedica2=telefono_de_contacto,
 fk_parentesco_del_contacto_informacionMedica2=fkParentesco, nivel_de_actividad_fisica_informacionMedica2=nivel_de_actividad_fisica, es_donante_informacionMedica2=es_donante,
-es_fumador_informacionMedica2=es_fumador, fk_grupo_sanguineo_informacionMedica2=fk_grupoSanguineo, fk_informacion_personal_informacionMedica2=fk_inforPersonal WHERE id_informacionMedica2=id;
+es_fumador_informacionMedica2=es_fumador, fk_grupo_sanguineo_informacionMedica2=fk_grupoSanguineo, fk_informacion_personal_informacionMedica2=fk_inforPersonal WHERE tbl_informacionMedica2.id_informacionMedica2=id;
 ELSEIF tipoOperacion=4 THEN
 DELETE FROM tbl_informacionMedica2 WHERE id_informacionMedica2=id;
 ELSEIF tipoOperacion=5 THEN
@@ -670,14 +744,13 @@ SELECT * FROM tbl_informacionMedica2 WHERE fk_informacion_personal_informacionMe
 END//
 DELIMITER ;
 
-
-DELIMITER //
+DELIMITER // 
 CREATE PROCEDURE CRUDInformacionFamiliar (id INT, nombresInfoFlia VARCHAR (5000), fechaDeNacimientoInfoFlia DATE, fk_parentesco INT , fk_inforPersonal INT, tipoOperacion INT)
 BEGIN
 IF tipoOperacion=1 THEN
 INSERT INTO tbl_informacionFamiliar VALUES (NULL, nombresInfoFlia , fechaDeNacimientoInfoFlia, fk_parentesco, fk_inforPersonal);
 ELSEIF tipoOperacion=2 THEN
-SELECT * FROM tbl_informacionFamiliar WHERE id_informacionFamiliar=id;
+SELECT * FROM tbl_informacionFamiliar WHERE fk_informacionPersonal_informacionFamiliar=fk_inforPersonal;
 ELSEIF tipoOperacion=3 THEN
 UPDATE tbl_informacionFamiliar SET nombres_informacionFamiliar=nombresInfoFlia, fecha_de_nacimiento_informacionFamiliar=fechaDeNacimientoInfoFlia,
 fk_parentesco_informacionFamiliar=fk_parentesco, fk_informacionPersonal_informacionFamiliar=fk_inforPersonal WHERE id_informacionFamiliar=id;
@@ -696,7 +769,7 @@ BEGIN
 IF tipoOperacion=1 THEN
 INSERT INTO tbl_informacionAcademica VALUES (NULL, fechaInfoAcademica, actividadInfoAcademica , fk_estadoCurso, fk_infoPersonal);
 ELSEIF tipoOperacion=2 THEN
-SELECT * FROM tbl_informacionAcademica WHERE id_informacionAcademica=id;
+SELECT * FROM tbl_informacionAcademica WHERE fk_informacionPersonal_informacionAcademica=fk_infoPersonal;
 ELSEIF tipoOperacion=3 THEN
 UPDATE tbl_informacionAcademica SET fecha_informacionAcademica=fechaInfoAcademica, actividad_informacionAcademica=actividadInfoAcademica, fk_estado_curso_informacionAcademica=fk_estadoCurso,
 fk_informacionPersonal_informacionAcademica=fk_infoPersonal WHERE id_informacionAcademica=id;
@@ -709,14 +782,13 @@ END//
 DELIMITER ;
 
 
-
 DELIMITER //
 CREATE PROCEDURE CRUDInformacionEntrenamientoEstandar (id INT, fechaInfoEntrenamientoEstandar DATE, actividadEntrenamientoEstandar VARCHAR (300) , fk_estadoCurso INT, fk_inforPersonal INT, tipoOperacion INT)
 BEGIN
 IF tipoOperacion=1 THEN
 INSERT INTO tbl_entrenamientoEstandar VALUES (NULL, fechaInfoEntrenamientoEstandar, actividadEntrenamientoEstandar, fk_estadoCurso, fk_inforPersonal );
 ELSEIF tipoOperacion=2 THEN
-SELECT * FROM tbl_entrenamientoEstandar WHERE id_entrenamientoEstandar=id;
+SELECT * FROM tbl_entrenamientoEstandar WHERE fk_informacionPersonal_entrenamientoEstandar=fk_inforPersonal;
 ELSEIF tipoOperacion=3 THEN
 UPDATE tbl_entrenamientoEstandar SET fecha_entrenamientoEstandar=fechaInfoEntrenamientoEstandar, actividad_entrenamientoEstandar=actividadEntrenamientoEstandar,
 fk_estado_curso_entrenamientoEstandar=fk_estadoCurso, fk_informacionPersonal_entrenamientoEstandar=fk_inforPersonal WHERE id_entrenamientoEstandar=id;
@@ -730,16 +802,16 @@ DELIMITER ;
 
 
 DELIMITER //
-CREATE PROCEDURE CRUDInformacionHistorica (id INT, fkRegion INT, cuerpo VARCHAR (5000) , fk_compania INT, fechaDeCambio DATE, tipoDeCambio VARCHAR (20000),
-motivo TEXT (20000), detalle VARCHAR (20000), fkInformacionPersonal INT, tipoOperacion INT)
+CREATE PROCEDURE CRUDInformacionHistorica (id INT, fkRegion INT, cuerpo VARCHAR (5000) , compania VARCHAR (5000), fechaDeCambio DATE, premio VARCHAR (20000),
+motivo TEXT (20000), detalle VARCHAR (20000), cargo VARCHAR (5000), fkInformacionPersonal INT, tipoOperacion INT)
 BEGIN
 IF tipoOperacion=1 THEN
-INSERT INTO tbl_informacionHistorica VALUES (NULL, fkRegion, cuerpo, fk_compania, fechaDeCambio, tipoDeCambio, motivo,  detalle, fkInformacionPersonal);
+INSERT INTO tbl_informacionHistorica VALUES (NULL, fkRegion, cuerpo, compania, fechaDeCambio, premio, motivo,  detalle, cargo, fkInformacionPersonal);
 ELSEIF tipoOperacion=2 THEN
-SELECT * FROM  tbl_informacionHistorica WHERE id_informacionHistorica=id;
+SELECT * FROM  tbl_informacionHistorica WHERE fk_informacionPersonal_informacionHistorica=fkInformacionPersonal;
 ELSEIF tipoOperacion=3 THEN
-UPDATE tbl_informacionHistorica SET fk_region_informacionHistorica=fkRegion, cuerpo_informacionHistorica=cuerpo, fk_compania_informacionHistorica=fk_compania, fechaDeCambio_informacionHistorica=fechaDeCambio,
- tipoDeCambio_informacionHistorica=tipoDeCambio, motivo_informacionHistorica=motivo, detalle_informacionHistorica=detalle, fk_informacionPersonal_informacionHistorica=fkInformacionPersonal  WHERE id_informacionHistorica=id;
+UPDATE tbl_informacionHistorica SET fk_region_informacionHistorica=fkRegion, cuerpo_informacionHistorica=cuerpo, compania_informacionHistorica=compania, fechaDeCambio_informacionHistorica=fechaDeCambio,
+ premio_informacionHistorica=premio, motivo_informacionHistorica=motivo, detalle_informacionHistorica=detalle, cargo_informacionHistorica=cargo, fk_informacionPersonal_informacionHistorica=fkInformacionPersonal  WHERE id_informacionHistorica=id;
 ELSEIF tipoOperacion=4 THEN
 DELETE FROM  tbl_informacionHistorica WHERE id_informacionHistorica=id;
 ELSEIF tipoOperacion=5 THEN
@@ -749,21 +821,21 @@ END//
 DELIMITER ;
 
 
-DELIMITER //
-CREATE PROCEDURE CRUDUnidad (id INT, anioDeFabricacion VARCHAR (300), marca VARCHAR (300), nMotor VARCHAR (300), nChasis VARCHAR  (300),
+DELIMITER // 
+CREATE PROCEDURE CRUDUnidad (id INT, nombre VARCHAR (300), anioDeFabricacion VARCHAR (300), marca VARCHAR (300), nMotor VARCHAR (300), nChasis VARCHAR  (300),
 nVIN VARCHAR (300), color VARCHAR (300), ppu VARCHAR (300), fechaInscripcion DATE, fechaAdquisicion DATE,
 capacidadOcupantes INT, fk_estado INT, fk_tipo_vehiculo INT, fk_entidadProp INT, tipoDeOperacion INT)
 
 BEGIN
 IF tipoDeOperacion= 1 THEN
-INSERT INTO tbl_unidad VALUES (NULL , anioDeFabricacion, marca , nMotor, nChasis ,
+INSERT INTO tbl_unidad VALUES (NULL ,nombre, anioDeFabricacion, marca , nMotor, nChasis ,
 nVIN  , color , ppu , fechaInscripcion , fechaAdquisicion ,capacidadOcupantes , fk_estado, fk_tipo_vehiculo , fk_entidadProp );
 ELSEIF tipoDeOperacion= 2 THEN
 SELECT * FROM tbl_unidad WHERE id_unidad=id_unidad;
 ELSEIF tipoDeOperacion= 3 THEN
-UPDATE tbl_unidad SET anioDeFabricacion_unidad=anioDeFabricacion, marca_unidad=marca, nMotor_unidad=nMotor, nChasis_unidad=nChasis,
+UPDATE tbl_unidad SET nombre_unidad=nombre, anioDeFabricacion_unidad=anioDeFabricacion, marca_unidad=marca, nMotor_unidad=nMotor, nChasis_unidad=nChasis,
 nVIN_unidad=nVIN, color_unidad=color, ppu_unidad=ppu, fechaInscripcion_unidad=fechaInscripcion , fechaAdquisicion_unidad=fechaAdquisicion,
-capacidadOcupantes_unidad=capacidadOcupantes , fk_estado_unidad_unidad=fk_estado , fk_tipo_vehiculo_unidad=fk_tipo_vehiculo, fk_entidadPropietaria_unidad=fk_entidadProp WHERE id_unidad=id_unidad ;
+capacidadOcupantes_unidad=capacidadOcupantes , fk_estado_unidad_unidad=fk_estado , fk_tipo_vehiculo_unidad=fk_tipo_vehiculo, fk_entidadACargo=fk_entidadProp WHERE id_unidad=id;
 ELSEIF tipoDeOperacion= 4 THEN
 DELETE FROM tbl_unidad  WHERE id_unidad=id;
 END IF;
@@ -774,7 +846,7 @@ DELIMITER ;
 
 -- INSERTS simples
 
-INSERT INTO tbl_permiso (nombre_permiso) VALUES
+INSERT INTO tbl_permiso (nombre_permiso) VALUES 
 ('Ficha Bomberos - Buscar Bomberos'),
 ('Ficha Bomberos - Crear Bombero'),
 ('Ficha Bomberos - Modificar'),
@@ -821,7 +893,7 @@ INSERT INTO tbl_tipo_usuario VALUES (NULL,'Ayudante General');
 INSERT INTO tbl_tipo_usuario VALUES (NULL,'Ayudante Maquinista');
 INSERT INTO tbl_tipo_usuario VALUES (NULL,'Secretario General');
 
-INSERT INTO tbl_tipo_usuario_permisos (fk_tipo_usuario_tipo_usuario_permisos,fk_permiso_tipo_usuario_permisos,otorgado_tipo_usuario_permisos) VALUES
+INSERT INTO tbl_tipo_usuario_permisos (fk_tipo_usuario_tipo_usuario_permisos,fk_permiso_tipo_usuario_permisos,otorgado_tipo_usuario_permisos) VALUES 
 (1,1,1),(1,2,1),(1,3,1),(1,4,1),(1,5,1),(1,6,1),(1,7,1),(1,8,1),(1,9,1),(1,10,1),(1,11,1),(1,12,1),(1,13,1),(1,14,1),(1,15,1),(1,16,1),(1,17,1),(1,18,1),(1,19,1),(1,20,1),(1,21,1),(1,22,1),(1,23,1),(1,24,1),(1,25,1),(1,26,1),(1,27,1),
 
 (2,1,1),(2,2,1),(2,3,1),(2,4,1),(2,5,1),(2,6,1),(2,7,1),(2,8,1),(2,9,1),(2,10,1),(2,11,1),(2,12,1),(2,13,1),(2,14,1),(2,15,1),(2,16,1),(2,17,1),(2,18,1),(2,19,0),(2,20,0),(2,21,0),(2,22,0),(2,23,0),(2,24,0),(2,25,0),(2,26,0),(2,27,0),
@@ -877,8 +949,8 @@ VALUES
 	(13,'Los Lagos','X'),
 	(14,'Aisén del General Carlos Ibáñez del Campo','XI'),
 	(15,'Magallanes y de la Antártica Chilena','XII');
-
-
+    
+    
     INSERT INTO tbl_provincia (id_provincia,nombre_provincia,fk_region_provincia)
 VALUES
 	(1,'Arica',1),
@@ -934,7 +1006,7 @@ VALUES
 	(51,'Magallanes',15),
 	(52,'Tierra del Fuego',15),
 	(53,'Última Esperanza',15);
-
+    
     INSERT INTO tbl_comuna (id_comuna,nombre_comuna,fk_provincia_comuna)
 VALUES
 	(1,'Arica',1),
@@ -1283,7 +1355,7 @@ VALUES
 	(344,'Natales',53),
 	(345,'Torres del Paine',53);
 
-
+   
 INSERT INTO tbl_estadoBombero VALUES (NULL, 'Activo');
 INSERT INTO tbl_estadoBombero VALUES (NULL, 'Suspendido');
 INSERT INTO tbl_estadoBombero VALUES (NULL, 'Separado');
@@ -1296,24 +1368,17 @@ INSERT INTO tbl_cargo (nombre_cargo) VALUES
 ('Comandante Primero'),
 ('Comandante Segundo'),
 ('Tesorero General'),
-('Secretario General')
-;
+('Secretario General'),
+('Voluntario');
 
-INSERT INTO tbl_compania (nombre_compania) VALUES
-('Primera'),
-('Segunda'),
-('Tercera')
-;
-
-
-INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'A',0);
-INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'B',0);
-INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'AB',0);
-INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'0',0);
-INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'A',1);
-INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'B',1);
-INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'AB',1);
-INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'0',1);
+INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'A Negativo');
+INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'B Negativo');
+INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'AB Negativo');
+INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'0 Negativo');
+INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'A Positivo');
+INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'B Positivo');
+INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'AB Positivo');
+INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'0 Positivo');
 
 INSERT INTO tbl_parentesco VALUES (NULL, 'Padre');
 INSERT INTO tbl_parentesco VALUES (NULL, 'Madre');
@@ -1327,13 +1392,14 @@ INSERT INTO tbl_parentesco VALUES (NULL, 'Primo');
 INSERT INTO tbl_parentesco VALUES (NULL, 'Prima');
 INSERT INTO tbl_parentesco VALUES (NULL, 'Tío');
 INSERT INTO tbl_parentesco VALUES (NULL, 'Tía');
+INSERT INTO tbl_parentesco VALUES (NULL, 'Otro');
 
 INSERT INTO tbl_estado_curso VALUES (NULL, 'Aprobado');
 INSERT INTO tbl_estado_curso VALUES (NULL, 'Rechazado');
 INSERT INTO tbl_estado_curso VALUES (NULL, 'En curso');
 INSERT INTO tbl_estado_curso VALUES (NULL, 'Congelado');
 
-INSERT INTO tbl_entidadPropietaria (nombre_entidadPropietaria) VALUES ('Cuerpo de Bomberos de Machali'), ('1° Compañía'),('2° Compañía'),('3° Compañía');
+INSERT INTO tbl_entidadACargo (nombre_entidadACargo) VALUES ('Cuerpo de Bomberos de Machali'), ('1° Compañía'),('2° Compañía'),('3° Compañía');
 
 INSERT INTO tbl_tipo_vehiculo (nombre_tipo_vehiculo) VALUES  ('Carro bomba'), ('Transporte'), ('Vehiculo menor');
 
@@ -1352,7 +1418,6 @@ INSERT INTO tbl_usuario VALUES (NULL, 'Ayudante General', 10,'123');
 INSERT INTO tbl_usuario VALUES (NULL, 'Ayudante Maquinista', 11,'123');
 INSERT INTO tbl_usuario VALUES (NULL, 'Secretario General', 12,'123');
 
-
 INSERT INTO tbl_tipoDeMantencion (nombre_tipoDeMantencion) VALUES ('Preventiva'),('Correctiva'),('Pauta'),('Otra');
 
 INSERT INTO tbl_tipo_combustible (nombre_tipo_combustible) VALUES ('Diesel'),('93 bencina'),('97 bencina'),('95 bencina');
@@ -1361,18 +1426,128 @@ INSERT INTO tbl_tipo_servicio (codigo_tipo_servicio,nombre_tipo_servicio) VALUES
 ('10-2','Llamado de pastizales y/o basura'),('10-3','Llamado de rescate de personas atrapadas'),('10-4','Llamado de Rescate vehicular'),
 ('10-5','Llamado de Materiales Peligrosos'),('10-6','Llamado de emanación de gases'),('10-7','Llamado eléctrico'),('10-8','Llamado no clasificado'),
 ('10-9','Llamado a otros servicios'),('10-10','Llamado a escombros'),('10-11','Llamado a servicio áreo'),('10-12','Llamado a apoyar a otros Cuerpos'),
-('10-13','Llamado a artefacto explosivo, sobre sospechoso, acto terrorista'),('10-14','Llamado a accidente de aviación');
+('10-13','Llamado a artefacto explosivo, sobre sospechoso, acto terrorista'),('10-14','Llamado a accidente de aviación'), ('10-15','Simulacro');
+
+INSERT INTO tbl_tipo_de_medida (nombre_tipo_de_medida) VALUES ('Distancia'),('Masa'),('Capacidad'),('Tiempo'),('Espacio de datos'), ('Volumen');
+
+
+INSERT INTO tbl_estado_material_menor (nombre_estado_material_menor) VALUES ('Operativo'),('Almacenado'),('En mantención'),('Caducado'),('Fuera de servicio'),('Dado de baja');
+
+INSERT INTO tbl_unidad_de_medida  (nombre_unidad_de_medida,fk_tipo_de_medida_unidad_de_medida) VALUES ('Otros', 1),('Milimetros', 1), ('Centimetros', 1), ('Decimetros', 1), ('Metros', 1), ('Decámetros', 1), ('Hectómetros', 1), ('Kilometros', 1),
+('Miligramos',2 ), ('Centigramos', 2),('Decigramos', 2), ('Gramos', 2), ('Decagramos',2),('Hectogramos',2),('Kilogramos',2),('Toneladas',2),
+('Mililitros',3),('Centilitros',3),('Decilitros',3),('Litros',3),('Decalitros',3),('Hectolitros',3),('Kilolitros',3),
+('Milisegundos',4),('Segundos',4),('Minutos',4),('Horas',4),('Días',4),('Semanas',4),('Meses',4),('Años',4),
+('Byte',5),('Kilobyte',5),('Megabyte',5),('Gigabyte',5),('Terabyte',5),('Petabyte',5),('Meses',5),('Años',5),('Petabyte',5),('Exabyte',5),('Zetabyte',5),('Yottabyte',5),('Brontobyte',5),('Geopbyte',5),
+('Milímetro cúbico',6),('Centímetro cúbico',6),('Decímetro cúbico',6),('Metro cúbico',6),('Decámetro cúbico',6),('Hectómetro cúbico',6),('Kilómetro cúbico',6);
+
+
+
+
+-- SELECTs
+
+-- SELECT * FROM tbl_medida;
+-- SELECT * FROM tbl_informacionPersonal;
+-- SELECT * FROM tbl_informacionBomberil;
+-- SELECT * FROM tbl_informacionLaboral;
+-- SELECT * FROM tbl_informacionMedica1;
+-- SELECT * FROM tbl_informacionMedica2;
+-- SELECT * FROM tbl_informacionFamiliar;
+-- SELECT * FROM tbl_informacionAcademica;
+-- SELECT * FROM tbl_entrenamientoEstandar;
+-- SELECT * FROM tbl_informacionHistorica;
+-- SELECT * FROM tbl_informacionDeCargos;
+-- SELECT * FROM tbl_unidad;
+-- SELECT * FROM tbl_permiso;
+-- SELECT * FROM tbl_usuario;
+-- SELECT * FROM tbl_tipoDeMantencion;
+-- SELECT * FROM tbl_mantencion;
+-- SELECT * FROM tbl_cargio_combustible;
+-- SELECT * FROM tbl_entidadACargo;
+-- SELECT * FROM tbl_material_menor;
+
+/*
+Select para todo el inventario
+
+SELECT tbl_material_menor.nombre_material_menor, tbl_entidadACargo.nombre_entidadACargo, tbl_material_menor.color_material_menor, tbl_material_menor.cantidad_material_menor, tbl_material_menor.medida_material_menor,
+tbl_unidad_de_medida.nombre_unidad_de_medida, tbl_ubicacion_fisica.nombre_ubicacion_fisica, tbl_material_menor.fabricante_material_menor, tbl_material_menor.fecha_de_caducidad_material_menor,
+tbl_material_menor.proveedor_material_menor, tbl_tipo_de_bodega.nombre_tipo_de_bodega FROM tbl_material_menor, tbl_tipo_de_bodega, tbl_unidad_de_medida, tbl_ubicacion_fisica, tbl_entidadACargo
+WHERE tbl_material_menor.fk_entidad_a_cargo_material_menor=tbl_entidadACargo.id_entidadACargo AND  tbl_material_menor.fk_unidad_de_medida_material_menor=tbl_unidad_de_medida.id_unidad_de_medida AND
+tbl_material_menor.fk_ubicacion_fisica_material_menor=tbl_ubicacion_fisica.id_ubicacion_fisica AND tbl_material_menor.fk_tipo_de_bodega_material_menor=tbl_tipo_de_bodega.id_tipo_de_bodega;
+
+*/
+
+
+
+
+/*Consulta que requiere id de permiso e id de tipo de usuario
+
+SELECT tbl_tipo_usuario_permisos.otorgado_tipo_usuario_permisos FROM tbl_tipo_usuario_permisos, tbl_permiso, tbl_tipo_usuario
+WHERE 
+tbl_tipo_usuario_permisos.fk_tipo_usuario_tipo_usuario_permisos=tbl_tipo_usuario.id_tipo_usuario AND
+tbl_tipo_usuario_permisos.fk_permiso_tipo_usuario_permisos=tbl_permiso.id_permiso AND
+tbl_permiso.id_permiso=1 AND tbl_tipo_usuario.id_tipo_usuario=1;
+*/
+
+/*
+Consulta que requiere id de usuario e id de permiso
+
+SELECT tbl_tipo_usuario_permisos.otorgado_tipo_usuario_permisos FROM tbl_tipo_usuario_permisos, tbl_permiso, tbl_tipo_usuario, tbl_usuario
+WHERE 
+tbl_tipo_usuario_permisos.fk_tipo_usuario_tipo_usuario_permisos=tbl_tipo_usuario.id_tipo_usuario AND
+tbl_tipo_usuario_permisos.fk_permiso_tipo_usuario_permisos=tbl_permiso.id_permiso AND 
+tbl_tipo_usuario.id_tipo_usuario=tbl_usuario.fk_tipo_usuario__usuario AND tbl_permiso.id_permiso=27 AND tbl_usuario.id_usuario_usuario=2;
+
+*/
+
+/*
+-- Usar la siguiente consulta primero para ver si no es nulo. Si es nulo, usar la primera consulta  despues de esta, cambiar el valor de entidad a cargo por 'Sin asignar', 
+sino, usar la segunda, despues de esta
+SELECT id_informacionPersonal FROM tbl_informacionPersonal WHERE nombre_informacionPersonal LIKE '%Juanito%';
+
+Consulta para buscar bomberos por nombre
+
+SELECT tbl_informacionPersonal.rut_informacionPersonal, tbl_informacionPersonal.nombre_informacionPersonal,
+tbl_informacionPersonal.apellido_paterno_informacionPersonal, tbl_entidadACargo.nombre_entidadACargo,
+tbl_informacionPersonal.id_informacionPersonal FROM tbl_informacionPersonal, tbl_informacionBomberil, tbl_entidadACargo
+WHERE tbl_informacionBomberil.fk_id_entidadACargo_informacionBomberil=tbl_entidadACargo.id_entidadACargo AND 
+tbl_informacionPersonal.id_informacionPersonal=tbl_informacionBomberil.fk_informacion_personal__informacionBomberil AND
+tbl_informacionPersonal.nombre_informacionPersonal LIKE '%Marcelo%';
+
+
+SELECT tbl_informacionPersonal.rut_informacionPersonal, tbl_informacionPersonal.nombre_informacionPersonal,
+tbl_informacionPersonal.apellido_paterno_informacionPersonal, tbl_entidadACargo.nombre_entidadACargo,
+tbl_informacionPersonal.id_informacionPersonal FROM tbl_informacionPersonal, tbl_informacionBomberil, tbl_entidadACargo
+WHERE 
+tbl_informacionPersonal.nombre_informacionPersonal LIKE '%Juanito%' GROUP BY tbl_informacionPersonal.rut_informacionPersonal;
+
+*/
+
+
+/*
+Select para ver datos en la busqueda de buscar
+
+SELECT tbl_unidad.nombre_unidad, tbl_estado_unidad.nombre_estado_unidad, tbl_tipo_vehiculo.nombre_tipo_vehiculo, tbl_entidadACargo.nombre_entidadACargo, tbl_unidad.id_unidad FROM tbl_unidad,
+tbl_estado_unidad, tbl_tipo_vehiculo, tbl_entidadACargo WHERE tbl_unidad.fk_estado_unidad_unidad=tbl_estado_unidad.id_estado_unidad AND
+tbl_unidad.fk_tipo_vehiculo_unidad=tbl_tipo_vehiculo.id_tipo_vehiculo AND tbl_unidad.fk_entidadACargo=tbl_entidadACargo.id_entidadACargo 
+AND tbl_unidad.nombre_unidad LIKE '%Nombre de Prueba 1%';
+AND tbl_estado_unidad.id_estado_unidad=2;
+AND tbl_entidadACargo.id_entidadACargo=1;
+
+*/
 
 
 -- Lamadas a procedimientos para probar
 
--- SELECT * FROM tbl_medida;
--- SELECT * FROM tbl_informacionPersonal;
-/*
-CALL CRUDUsuario (1,'Marcelo',1,'123',1);
+CALL CRUDUsuario (1,'Marcelo',1,'123',1); 
 
-CALL CRUDUnidad (6,'2000','200','300','333','555','3333','YOLO','2000-12-03','2012-06-11',15,2,1,1,1);
+CALL CRUDUnidad (6,'Nombre de Prueba 1','2000','200','300','333','555','3333','YOLO','2000-12-03','2012-06-11',15,2,1,1,1);
+CALL CRUDUnidad (6,'Nombre de Prueba 2','2000','200','300','333','555','3333','BIEN','2000-12-03','2012-06-11',15,2,1,1,1);
+CALL CRUDUnidad (6,'Nombre de Prueba 3','2000','200','300','333','555','3333','jaja','2000-12-03','2012-06-11',15,2,1,1,1);
 
+
+CALL CRUDMedida (1,'XX','SS','42','41',1);
+CALL CRUDInformacionPersonal (1,'20333088-2','Juanito', 'Pérez', 'Tatto','1991-12-16',1,1,'1,70','80,2','cheloz_20@hotmail.com',
+1,'123123123123','958677107','Carretera El Cobre','No sabe', 'Creo que no',1);
 
 CALL CRUDMedida (1,'XX','SS','42','41',1);
 CALL CRUDInformacionPersonal (1,'20898088-2','Marcelo', 'Aranda', 'Tatto','1991-12-16',1,1,'1,70','80,2','cheloz_20@hotmail.com',
@@ -1380,20 +1555,90 @@ CALL CRUDInformacionPersonal (1,'20898088-2','Marcelo', 'Aranda', 'Tatto','1991-
 CALL CRUDFichaInformacionBomberil(1,1,'Machali',1,1,'2001-12-16',1,1,1,1,1);
 CALL CRUDInformacionLaboral (1,'Acquiried','algun lado','598677','empleado','2018-08-12','ciencias','masvida','ingeniero', 1, 1);
 CALL CRUDInformacionMedica1 (1, 'alguna','ninguna', 'no hay', 1,1);
-CALL CRUDInformacionMedica2 (1,'Ninguno', 'Familiar', '96666',3, 'Sin especificar',0,0,1,1,1);
+CALL CRUDInformacionMedica2 (1,'Ninguno', 'Familiar', '96666',3, 'Sin especificar',0,0,6,1,1);
 CALL CRUDInformacionFamiliar (1,'Alguno', '1991-12-05',1,1,1);
 CALL CRUDInformacionAcademica (1,'2019-05-06','Curso',1,1,1);
 CALL CRUDInformacionEntrenamientoEstandar (1,'2018-09-09', 'algo',1,1,1);
-CALL CRUDInformacionHistorica (1,1,'Algun cuerpo',1,'2010-10-10', 'Transferencia', 'Solicitud personal', 'No disponible',1,1);
+CALL CRUDInformacionEntrenamientoEstandar (1,'2018-09-09', 'algo',1,1,1);
+CALL CRUDInformacionEntrenamientoEstandar (1,'2018-09-09', 'algo',1,1,1);
+CALL CRUDInformacionHistorica (1,1,'Algun cuerpo','Alguna compania','2010-10-10', 'Transferencia', 'Solicitud personal', 'No disponible', 'Algo',1,1);
+CALL CRUDInformacionHistorica (1,1,'Algun cuerpo','Alguna compania','2010-10-10', 'Transferencia', 'Solicitud personal', 'No disponible', 'Algo',1,1);
+CALL CRUDInformacionHistorica (1,1,'Algun cuerpo','Alguna compania','2010-10-10', 'Transferencia', 'Solicitud personal', 'No disponible', 'Algo',1,1);
 
 
-*/
+
+CALL CRUDMedida (1,'XX','SS','42','41',1);
+CALL CRUDInformacionPersonal (1,'20898088-3','Marcelo', 'Aranda', 'Tatto','1991-12-16',1,1,'1,70','80,2','cheloz_20@hotmail.com',
+1,'123123123123','958677107','Carretera El Cobre','No sabe', 'Creo que no',1);
+CALL CRUDFichaInformacionBomberil(1,1,'Machali',2,1,'2001-12-16',1,1,1,2,1);
+CALL CRUDInformacionLaboral (1,'Acquiried','algun lado','598677','empleado','2018-08-12','ciencias','masvida','ingeniero', 2, 1);
+CALL CRUDInformacionMedica1 (1, 'alguna','ninguna', 'no hay', 2,1);
+CALL CRUDInformacionMedica2 (1,'Ninguno', 'Familiar', '96666',3, 'Sin especificar',0,0,6,2,1);
+CALL CRUDInformacionFamiliar (1,'Alguno', '1991-12-05',1,2,1);
+CALL CRUDInformacionFamiliar (1,'Alguno', '1971-12-05',2,2,1);
+CALL CRUDInformacionFamiliar (1,'Alguno', '1311-12-05',3,2,1);
+CALL CRUDInformacionAcademica (1,'2019-05-06','Curso',1,2,1);
+CALL CRUDInformacionEntrenamientoEstandar (1,'2018-09-09', 'algo',1,2,1);
+CALL CRUDInformacionHistorica (1,1,'Algun cuerpo','Alguna compania','2010-10-10', 'Transferencia', 'Solicitud personal', 'No disponible', 'Algo',2,1);
+INSERT INTO tbl_informacionDeCargos VALUES (NULL, 'Algo', 'Una marca', 'Una talla', 'Una serie', '2018-03-08',1);
+
+CALL CRUDMedida (1,'XX','SS','42','41',1);
+CALL CRUDInformacionPersonal (1,'20898088-4','Marcelo', 'Aranda', 'Tatto','1991-12-16',1,1,'1,70','80,2','cheloz_20@hotmail.com',
+1,'123123123123','958677107','Carretera El Cobre','No sabe', 'Creo que no',1);
+CALL CRUDFichaInformacionBomberil(1,1,'Machali',3,1,'2001-12-16',1,1,1,3,1);
+CALL CRUDInformacionLaboral (1,'Acquiried','algun lado','598677','empleado','2018-08-12','ciencias','masvida','ingeniero', 3, 1);
+CALL CRUDInformacionMedica1 (1, 'alguna','ninguna', 'no hay', 3,1);
+CALL CRUDInformacionMedica2 (1,'Ninguno', 'Familiar', '96666',3, 'Sin especificar',0,0,6,3,1);
+CALL CRUDInformacionFamiliar (1,'Alguno', '1991-12-05',1,3,1);
+CALL CRUDInformacionAcademica (1,'2019-05-06','Curso',1,3,1);
+CALL CRUDInformacionEntrenamientoEstandar (1,'2018-09-09', 'algo',1,3,1);
+CALL CRUDInformacionHistorica (1,1,'Algun cuerpo','Alguna compania','2010-10-10', 'Transferencia', 'Solicitud personal', 'No disponible', 'Algo',3,1);
+
+CALL CRUDMedida (1,'XX','SS','42','41',1);
+CALL CRUDInformacionPersonal (1,'12398608-4','Marcelo', 'Aranda', 'Tatto','1991-12-16',1,1,'1,70','80,2','cheloz_20@hotmail.com',
+1,'123123123123','958677107','Carretera El Cobre','No sabe', 'Creo que no',1);
+CALL CRUDFichaInformacionBomberil(1,1,'Machali',4,1,'2001-12-16',1,1,1,4,1);
+CALL CRUDInformacionLaboral (1,'Acquiried','algun lado','598677','empleado','2018-08-12','ciencias','masvida','ingeniero', 4, 1);
+CALL CRUDInformacionMedica1 (1, 'alguna','ninguna', 'no hay', 4,1);
+CALL CRUDInformacionMedica2 (1,'Ninguno', 'Familiar', '96666',3, 'Sin especificar',0,0,6,4,1);
+CALL CRUDInformacionFamiliar (1,'Alguno', '1991-12-05',1,4,1);
+CALL CRUDInformacionAcademica (1,'2019-05-06','Curso',1,4,1);
+CALL CRUDInformacionEntrenamientoEstandar (1,'2018-09-09', 'algo',1,4,1);
+CALL CRUDInformacionHistorica (1,1,'Algun cuerpo','Alguna compania','2010-10-10', 'Transferencia', 'Solicitud personal', 'No disponible', 'Algo',4,1);
+
+
+INSERT INTO tbl_mantencion VALUES (NULL, 1, '2018-11-11', 'Alguien', 'Algun lugar', 'Nada', 1);
+INSERT INTO tbl_mantencion VALUES (NULL, 1, '2018-11-11', 'Alguien', 'Algun lugar', 'Nada', 2);
+INSERT INTO tbl_mantencion VALUES (NULL, 1, '2018-11-11', 'Alguien', 'Algun lugar', 'Nada', 3);
+INSERT INTO tbl_mantencion VALUES (NULL, 1, '2018-11-11', 'Alguien', 'Algun lugar', 'Nada', 1);
+INSERT INTO tbl_mantencion VALUES (NULL, 1, '2018-11-11', 'Alguien', 'Algun lugar', 'Nada', 2);
+INSERT INTO tbl_mantencion VALUES (NULL, 1, '2018-11-11', 'Alguien', 'Algun lugar', 'Nada', 3);
+INSERT INTO tbl_mantencion VALUES (NULL, 1, '2018-11-11', 'Alguien', 'Algun lugar', 'Nada', 1);
+INSERT INTO tbl_mantencion VALUES (NULL, 1, '2018-11-11', 'Alguien', 'Algun lugar', 'Nada', 2);
+INSERT INTO tbl_mantencion VALUES (NULL, 1, '2018-11-11', 'Alguien', 'Algun lugar', 'Nada', 3);
+
+INSERT INTO tbl_cargio_combustible VALUES (NULL, 'Alguien', '2018-11-11', 'Algun lugar', 1, 16.5, 500,'Ninguna',1);
+INSERT INTO tbl_cargio_combustible VALUES (NULL, 'Alguien', '2018-11-11', 'Algun lugar', 1, 16.5, 500,'Ninguna',2);
+INSERT INTO tbl_cargio_combustible VALUES (NULL, 'Alguien', '2018-11-11', 'Algun lugar', 1, 16.5, 500,'Ninguna',3);
+INSERT INTO tbl_cargio_combustible VALUES (NULL, 'Alguien', '2018-11-11', 'Algun lugar', 1, 16.5, 500,'Ninguna',1);
+INSERT INTO tbl_cargio_combustible VALUES (NULL, 'Alguien', '2018-11-11', 'Algun lugar', 1, 16.5, 500,'Ninguna',2);
+INSERT INTO tbl_cargio_combustible VALUES (NULL, 'Alguien', '2018-11-11', 'Algun lugar', 1, 16.5, 500,'Ninguna',3);
+INSERT INTO tbl_cargio_combustible VALUES (NULL, 'Alguien', '2018-11-11', 'Algun lugar', 1, 16.5, 500,'Ninguna',1);
+INSERT INTO tbl_cargio_combustible VALUES (NULL, 'Alguien', '2018-11-11', 'Algun lugar', 1, 16.5, 500,'Ninguna',2);
+INSERT INTO tbl_cargio_combustible VALUES (NULL, 'Alguien', '2018-11-11', 'Algun lugar', 1, 16.5, 500,'Ninguna',3);
+
+
+INSERT INTO tbl_ubicacion_fisica  (nombre_ubicacion_fisica, fk_entidad_a_cargo) VALUES ('Unidad B-0',1),('Bodega Cuerpo',1),('Cuartel cuerpo',1),
+('Unidad B-1',2),('Bodega Primera',2),('Cuartel Primera',2), ('Unidad B-2',3),('Bodega Segunda',3),('Cuartel Segunda',3) , ('Unidad B-3',4),('Bodega Tercera',4),('Cuartel Tercera',4);
+
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Roja',3,20,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Roja',3,20,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Azul',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Verde',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Plomo',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Morada',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
 
 
 /*
-
-
 DROP DATABASE bomberosBD;
-
-
 */

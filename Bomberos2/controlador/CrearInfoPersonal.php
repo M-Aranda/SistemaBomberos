@@ -7,17 +7,14 @@ require_once("../model/Tbl_Medida.php");
 require_once("../model/Tbl_EstadoCivil.php");
 require_once("../model/Tbl_Genero.php");
 
-
-
 $d= new Data();
+session_start();
 
 
 $talla_chaqueta = $_REQUEST["txtchaqueta"];
 $talla_pantalon = $_REQUEST["txtpantalon"];
 $talla_buzo = $_REQUEST["txtbuzo"];
 $talla_calzado = $_REQUEST["txtcalzado"];
-
-
 
 
 $medida = new Tbl_Medida();
@@ -70,8 +67,10 @@ $inforPersonal->setPertenecioABrigadaJuvenil($pertenecioABrigadaJuvenil);
 $inforPersonal->setEsInstructor($esInstructor);
 
 $d->crearInformacionPersonalDeBombero($inforPersonal);
+$idBomberoMasReciente=$d->getIdBomberoMasReciente();
 
 
+$_SESSION['idDeBomberoMasReciente']=$idBomberoMasReciente;
 
 
 header("location: ../CrearFicha.php");

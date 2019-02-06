@@ -114,52 +114,49 @@
         $data = new Data();
 
         session_start();
-        if($_SESSION["infoPersonalSolicitada"]!=null){
+        if(isset($_SESSION["infoPersonalSolicitada"])){
           $infoPersonal=$_SESSION["infoPersonalSolicitada"];
         }
 
-        if($_SESSION["infoMedidasSolicitada"]!=null){
+        if(isset($_SESSION["infoMedidasSolicitada"])){
           $infoMedidas=$_SESSION["infoMedidasSolicitada"];
         }
 
-        if($_SESSION["infoBomberilSolicitada"]!=null){
+        if(isset($_SESSION["infoBomberilSolicitada"])){
           $infoBomberil=$_SESSION["infoBomberilSolicitada"];
         }
 
-        if($_SESSION["infoLaboralSolicitada"]!=null){
+        if(isset($_SESSION["infoLaboralSolicitada"])){
           $infoLaboral=$_SESSION["infoLaboralSolicitada"];
         }
 
-        if($_SESSION["infoMedica1Solicitada"]!=null){
+        if(isset($_SESSION["infoMedica1Solicitada"])){
           $infoMedica1=$_SESSION["infoMedica1Solicitada"];
         }
 
-        if($_SESSION["infoMedica2Solicitada"]!=null){
+        if(isset($_SESSION["infoMedica2Solicitada"])){
           $infoMedica2=$_SESSION["infoMedica2Solicitada"];
         }
 
-        if($_SESSION["infoFamiliarSolicitada"]!=null){
+        if(isset($_SESSION["infoFamiliarSolicitada"])){
           $infoFamiliar=$_SESSION["infoFamiliarSolicitada"];
         }
 
-        if($_SESSION["infoAcademicaSolicitada"]!=null){
+        if(isset($_SESSION["infoAcademicaSolicitada"])){
           $infoAcademica=$_SESSION["infoAcademicaSolicitada"];
         }
 
-        if($_SESSION["infoEntrenamientoEstandarSolicitada"]!=null){
+        if(isset($_SESSION["infoEntrenamientoEstandarSolicitada"])){
           $infoEntrenamientoEstandar=$_SESSION["infoEntrenamientoEstandarSolicitada"];
         }
 
-        if($_SESSION["infoHistoricaSolicitada"]!=null){
+        if(isset($_SESSION["infoHistoricaSolicitada"])){
           $infoHistorica=$_SESSION["infoHistoricaSolicitada"];
         }
 
-
-
-
-
-
-
+        if(isset($_SESSION["infoCargosSolicitada"])){
+          $infoCargos=$_SESSION["infoCargosSolicitada"];
+        }
 
 
     ?>
@@ -423,18 +420,50 @@
                    <div class="panel-body">
                        <div class="col-sm-5">
 
-                         Nombre Empresa : <input class="form-control" value="<?php echo $infoLaboral->getnombreEmpresainformacionLaboral();?>" type="text" name="txtnomempresa" disabled>
-                         Dirección Empresa: <input class="form-control" value="<?php echo $infoLaboral->getdireccionEmpresainformacionLaboral();?>" type="text" name="txtdirecempresa" disabled>
-                         Teléfono Empresa: <input class="form-control" value="<?php echo $infoLaboral->gettelefonoEmpresainformacionLaboral();?>" type="text" name="txttlfempresa" disabled>
-                         Fecha Ingreso: <input class="form-control" value="<?php echo $infoLaboral->getfechaIngresoEmpresainformacionLaboral();?>" type="date" name="txfingresoempresa" disabled>
-                         cargo : <input class="form-control" value="<?php echo $infoLaboral->getcargoEmpresainformacionLaboral();?>" type="text" name="txtcargo" disabled>
+                         Nombre Empresa : <input class="form-control" value="<?php
+                         if(isset($infoLaboral)){
+                           echo $infoLaboral->getnombreEmpresainformacionLaboral();
+                         }
+                         ?>" type="text" name="txtnomempresa" disabled>
+                         Dirección Empresa: <input class="form-control" value="<?php
+                         if(isset($infoLaboral)){
+                          echo $infoLaboral->getdireccionEmpresainformacionLaboral();
+                         }
+                         ?>" type="text" name="txtdirecempresa" disabled>
+                         Teléfono Empresa: <input class="form-control" value="<?php
+                         if(isset($infoLaboral)){
+                              echo $infoLaboral->gettelefonoEmpresainformacionLaboral();
+                         }
+                      ?>" type="text" name="txttlfempresa" disabled>
+                         Fecha Ingreso: <input class="form-control" value="<?php
+                         if(isset($infoLaboral)){
+                               echo $infoLaboral->getfechaIngresoEmpresainformacionLaboral();
+                         }
+                        ?>" type="date" name="txfingresoempresa" disabled>
+                         cargo : <input class="form-control" value="<?php
+                         if(isset($infoLaboral)){
+                                echo $infoLaboral->getcargoEmpresainformacionLaboral();
+                         }
+                        ?>" type="text" name="txtcargo" disabled>
 
                        </div>
                        <div class="col-md-5">
 
-                         Area/Depto de trabajo: <input class="form-control" value="<?php echo $infoLaboral->getareaDeptoEmpresainformacionLaboral();?>" type="text" name="txtareatrabajo" disabled>
-                         AFP: <input class="form-control" value="<?php echo $infoLaboral->getafp_informacionLaboral();?>" type="text" name="txtafp" disabled>
-                         Profesión: <input class="form-control" value="<?php echo $infoLaboral->getprofesion_informacionLaboral();?>" name="txtprofesion" disabled>
+                         Area/Depto de trabajo: <input class="form-control" value="<?php
+                         if(isset($infoLaboral)){
+                              echo $infoLaboral->getareaDeptoEmpresainformacionLaboral();
+                         }
+                        ?>" type="text" name="txtareatrabajo" disabled>
+                         AFP: <input class="form-control" value="<?php
+                         if(isset($infoLaboral)){
+                               echo $infoLaboral->getafp_informacionLaboral();
+                         }
+                        ?>" type="text" name="txtafp" disabled>
+                         Profesión: <input class="form-control" value="<?php
+                         if(isset($infoLaboral)){
+                              echo $infoLaboral->getprofesion_informacionLaboral();
+                         }
+                         ?>" name="txtprofesion" disabled>
                          <br>
                              <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
@@ -561,9 +590,6 @@
 
                        <div class="col-sm-6">
 
-
-
-
                          <!-- Nivel de actividad fisica: <input class="form-control" type="text" name="txtactvfisica"> -->
                          <table class="table table-striped">
                              <thead>
@@ -584,7 +610,7 @@
                                  $fechaConvertida = date("d-m-Y", strtotime($fechaSinConvertir));
 
                                  echo $fechaConvertida;?></td>
-                                 <td><?php echo $d->buscarNombreParentescoPorId($datos->getfkParentescoinformacionFamiliar())->getNombreParentesco();?></td>
+                                 <td><?php echo utf8_encode($d->buscarNombreParentescoPorId($datos->getfkParentescoinformacionFamiliar())->getNombreParentesco());?></td>
                             <?php
                              }
                                ?>
@@ -598,8 +624,6 @@
                       </div>
                       <div class="col-md-6">
                          <br><br><br><br><br><br>
-                              <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
-
                           </center>
 
                       </div>
@@ -643,7 +667,6 @@
                                  <td><?php
                                  $fechaSinConvertir = $datos->getfechaInformacionAcademica();
                                  $fechaConvertida = date("d-m-Y", strtotime($fechaSinConvertir));
-
                                  echo $fechaConvertida;?></td>
                                  <td><?php echo $d->buscarEstadoDeCursoPorId($datos->getfkEstadoCursoInformacionAcademica());?></td>
                             <?php
@@ -657,8 +680,6 @@
                       </div>
                       <div class="col-md-6">
                          <br><br><br><br><br><br>
-                              <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
-
                           </center>
 
                       </div>
@@ -683,9 +704,6 @@
                        </div>
                        <div class="panel-body">
                            <div class="col-sm-6">
-
-
-
                              <table class="table table-striped">
                                  <thead>
                                    <tr>
@@ -717,8 +735,6 @@
                           </div>
                           <div class="col-md-6">
                              <br><br><br><br><br><br>
-                                  <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
-
                               </center>
 
                           </div>
@@ -762,12 +778,11 @@
                                  </thead>
                                  <tbody>
                                    <?php
-
                                    foreach ($infoHistorica as $iHistorica => $info) {
                                 ?>
                                 <tr>
-                                  <td><?php echo $d->buscarNombreDeRegionPorId($info->getfkRegioninformacionHistorica());   ?></td>
-                                  <td><?php echo $info->getcuerpo();   ?></td>
+                                  <td><?php echo utf8_encode($d->buscarNombreDeRegionPorId($info->getfkRegioninformacionHistorica()));   ?></td>
+                                  <td><?php echo utf8_encode($info->getcuerpo());   ?></td>
                                   <td><?php echo $info->getcompania();  ?></td>
                                   <td><?php
                                   $fechaSinConvertir = $info->getfechaDeCambio();
@@ -776,7 +791,7 @@
                                   <td><?php echo $info->getPremio();   ?></td>
                                   <td><?php echo $info->getmotivo();   ?></td>
                                   <td><?php echo $info->getdetalle();   ?></td>
-                                  <td><?php echo $info->getCargo();   ?></td>
+                                  <td><?php echo utf8_encode($info->getCargo());   ?></td>
                                 </tr>
 
 
@@ -834,16 +849,18 @@
                                  </thead>
                                  <tbody>
                                    <?php
-                                   foreach ($infoAcademica as $iAcademica => $datos) {
+                                   foreach ($infoCargos as $icargos => $datos) {
                                    ?>
                                    <tr>
-                                     <td><?php echo $datos->getactividadInformacionAcademica();?></td>
+                                     <td><?php echo $datos->getNombre_informacionDeCargos();?></td>
+                                     <td><?php echo $datos->getMarca_informacionDeCargos();?></td>
+                                     <td><?php echo $datos->getTalla_informacionDeCargos();?></td>
+                                     <td><?php echo $datos->getSerie_informacionDeCargos();?></td>
                                      <td><?php
-                                     $fechaSinConvertir = $datos->getfechaInformacionAcademica();
+                                     $fechaSinConvertir = $datos->getFecha_informacionDeCargos();
                                      $fechaConvertida = date("d-m-Y", strtotime($fechaSinConvertir));
 
                                      echo $fechaConvertida;?></td>
-                                     <td><?php echo $d->buscarEstadoDeCursoPorId($datos->getfkEstadoCursoInformacionAcademica());?></td>
                                 <?php
                                  }
                                    ?>
@@ -852,28 +869,16 @@
                                  </tbody>
                                </table>
                           </div>
-
-
-
                           <div class="col-md-6">
                              <br><br><br><br><br><br><br><br><br><br><br>
-                              <center> <input type="submit" name="btninfohistorica" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
-                                  <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
-
-                              </center>
 
                             </form>
 
                           </div>
-
-
-
                        </div>
 
                    </div>
                </div>
-
-
 
 </div>
 
