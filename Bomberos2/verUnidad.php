@@ -137,6 +137,14 @@
         }
 
 
+        if(isset($_SESSION["mantencionesAVerSolicitada"])){
+          $mantenciones=$_SESSION["mantencionesAVerSolicitada"];
+        }
+
+        if(isset($_SESSION["carguiosAVerSolicitada"])){
+          $carguios=$_SESSION["carguiosAVerSolicitada"];
+        }
+
 
     ?>
 
@@ -255,69 +263,58 @@
                           </div>
 
 
-                          <br>
-                          <br>
-
-<br><br><br><br><br>
-
                           <div class="col-md-20">
                               <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#mantencion">
-                                Mantención
+                                Mantenciones
                               </button>
                           </div>
 
                           <div class="col-md-11 collapse" id="mantencion" >
                               <div class="panel panel-primary">
                                   <div class="panel-heading panel-title">
-                                      Mantención
+                                      Mantenciones
                                   </div>
                                   <div class="panel-body">
 
-                                      <div class="col-sm-4" >
+                                      <div class="col-sm-4">
+
+                                        <table class="table table-striped">
+                                          <thead>
+                                            <tr>
+                                              <td>Tipo de mantención</td>
+                                              <td>Fecha de Mantención</td>
+                                              <td>Responsable</td>
+                                              <td>Dirección</td>
+                                              <td>Comentarios/Observaciones</td>
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                            <?php
+                                            foreach ($mantenciones as $m => $mantencion) { ?>
+                                              <tr>
+                                                <td><?php echo utf8_encode($data->buscarNombreDeMantencionPorId($mantencion->getFk_tipo_mantencion()));?></td>
+                                                <td><?php
+                                                  $fechaSinConvertir = $mantencion->getFecha_mantencion();
+                                                  $fechaConvertida = date("d-m-Y", strtotime($fechaSinConvertir));
+
+                                                  echo $fechaConvertida; ?>
+                                                </td>
+                                                <td><?php echo utf8_encode($mantencion->getResponsable_mantencion());?></td>
+                                                <td><?php echo utf8_encode($mantencion->getDireccion_mantencion());?></td>
+                                                <td><?php echo utf8_encode($mantencion->getComentarios_mantencion());?></td>
+                                              </tr>
 
 
+                                        <?php    }
 
-                                          Unidad:
-                                          <select name="cboUnidades"  class="form-control">
-                                              <?php
-                                                  $unidad = $data->readUnidadesVehiculos();
-                                                  foreach ($unidad as $u) {
-                                                      echo "<option value='".$u->getIdUnidad()."'>";
-                                                          echo $u->getNombreUnidad();
-                                                      echo"</option>";
-                                                  }
-                                              ?>
-                                          </select>
+                                            ?>
+                                          </tbody>
 
-
-                                          Tipo Mantención:
-                                          <select name="cboTipoMantencion" class="form-control">
-                                              <?php
-                                                  $listado = $data->readTiposDeMantencion();
-                                                  foreach ($listado as $o) {
-                                                      echo "<option value='".$o->getId_tipo_de_mantencion()."'>";
-                                                          echo $o->getNombre_tipoDeMantencion();
-                                                      echo"</option>";
-                                                  }
-                                              ?>
-                                          </select>
-                                          Fecha de mantención: <input id="nombre" type="date" name="fechaMantencion" class="form-control" required="">
-
-                                          Responsable:<input id="nombre" type="text" name="txtresponsableMantencion" class="form-control" required="">
-
-
+                                        </table>
 
                                       </div>
                                       <div class="col-sm-6" style="margin-left: 60px;">
-
-                                        Dirección: <textarea class="form-control" Type="textarea" name="txtDireccion" ></textarea>
-                                        Comentarios/Observaciones: <textarea class="form-control" Type="textarea" name="txtcomentario" ></textarea>
-
                                           <br><br>
-                                        <center> <input type="submit" name="btncrear" value="Crear mantención" class="btn button-primary" style="width: 150px;"> <span ></span>
-                                            <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
-
-                                        </center>
 
                                                                 <br>
                                       </div>
@@ -335,61 +332,55 @@
 
                           <div class="col-md-20">
                               <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#combustible">
-                                Carguío de Combustible
+                                Carguíos de Combustible
                               </button>
                           </div>
-
                           <div class="col-md-11 collapse" id="combustible" >
                               <div class="panel panel-primary">
                                   <div class="panel-heading panel-title">
-                                      Carguío de Combustible
+                                      Carguíos de Combustible
                                   </div>
                                   <div class="panel-body">
+                                      <div class="col-sm-4">
+                                        <table class="table table-striped">
+                                          <thead>
+                                            <tr>
+                                              <td>Responsable</td>
+                                              <td>Fecha de Carguio</td>
+                                              <td>Direccion</td>
+                                              <td>Tipo de combustible</td>
+                                              <td>Cantidad de litros</td>
+                                              <td>Precio por litro</td>s
+                                              <td>Observaciones</td>
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                            <?php
+                                            foreach ($carguios as $c => $carguio) { ?>
+                                              <tr>
+                                                <td><?php echo utf8_encode($carguio->getResponsable_cargio_combustible());?></td>
+                                                <td><?php
+                                                  $fechaSinConvertir = $carguio->getFecha_cargio();
+                                                  $fechaConvertida = date("d-m-Y", strtotime($fechaSinConvertir));
 
-                                      <div class="col-sm-4" >
-
-
-                                          Unidad:
-                                          <select name="cboUnidades2"  class="form-control">
-                                              <?php
-                                                  $unidad = $data->readUnidadesVehiculos();
-                                                  foreach ($unidad as $u) {
-                                                      echo "<option value='".$u->getIdUnidad()."'>";
-                                                          echo $u->getNombreUnidad();
-                                                      echo"</option>";
-                                                  }
-                                              ?>
-                                          </select>
-
-
-                                          Tipo Combustible:
-                                          <select name="cboTipoCombustible" class="form-control">
-                                              <?php
-                                                  $listado = $data->readTiposDeCombustibles();
-                                                  foreach ($listado as $o) {
-                                                      echo "<option value='".$o->getId_tipo_combustible()."'>";
-                                                          echo $o->getNombre_tipo_combustible();
-                                                      echo"</option>";
-                                                  }
-                                              ?>
-                                          </select>
-
-                                          Responsable:<input id="nombre" type="text" name="txtresponsablecombustible" class="form-control" required="">
-                                          Dirección: <textarea class="form-control" Type="textarea" name="txtDireccionCombustible" ></textarea>
-
+                                                  echo $fechaConvertida; ?>
+                                                </td>
+                                                <td><?php echo utf8_encode($carguio->getDireccion_cargio());?></td>
+                                                <td><?php echo utf8_encode($data->buscarNombreDeCombustiblePorId($carguio->getFk_tipo_combustible_cargio_combustible()));?></td>
+                                                <td><?php echo utf8_encode($carguio->getCantidad_litros_cargio_combustible());?></td>
+                                                <td><?php echo utf8_encode($carguio->getPrecio_litro_cargio_combustible());?></td>
+                                                <td><?php echo utf8_encode($carguio->getObservacion_cargio_combustible());?></td>
+                                              </tr>
+                                          <?php  } ?>
+                                        </tbody>
+                                      </table>
 
                                       </div>
                                       <div class="col-sm-6" style="margin-left: 60px;">
-                                        Fecha:<input id="nombre" type="date" name="txtFechaCombustible" class="form-control" required="">
-                                        Cantidad:<input id="nombre" type="number" name="txtcantidad" class="form-control" required="" min="1" pattern="^[0-9]+" onkeydown="javascript: return event.keyCode == 69 ? false : true">
-                                        Precio/Litro:<input id="nombre" type="number" name="txtpreciolitro" class="form-control" required="" min="1" pattern="^[0-9]+" onkeydown="javascript: return event.keyCode == 69 ? false : true">
-                                        Comentarios/Observaciones: <textarea class="form-control" Type="textarea" name="txtcomentario" ></textarea>
 
                                           <br><br>
-                                        <center> <input type="submit" name="btncrear" value="Crear carga" class="btn button-primary" style="width: 150px;"> <span ></span>
-                                            <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
-                                        </center>
+
 
                                                                 <br>
                                       </div>

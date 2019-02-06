@@ -193,7 +193,7 @@
           Color:
            <input Type="text" name="txtColor" value="<?php echo $material->getColor_material_menor();?>" disabled ><br><br>
 
-           Proveedor: <input type="text" name="txtProveedor" value="<?php echo $material->getProveedor_material_menor();?>" disabled >
+           Proveedor: <input type="text" name="txtProveedor" value="<?php echo utf8_encode($material->getProveedor_material_menor());?>" disabled >
 
            Estado:
            <select name="cboEstadoMaterial" id="cboEstadoMaterial" disabled>

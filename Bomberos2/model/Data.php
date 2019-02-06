@@ -1343,6 +1343,18 @@ public function buscarMantencionesDeUnidad ($idABuscar){
 }
 
 
+public function buscarNombreDeMantencionPorId ($idABuscar){
+  $this->c->conectar();
+  $query="SELECT nombre_tipoDeMantencion FROM tbl_tipoDeMantencion WHERE id_tipo_de_mantencion=".$idABuscar.";";
+  $rs = $this->c->ejecutar($query);
+  while($reg = $rs->fetch_array()){
+       $obj=$reg[0];
+   }
+   $this->c->desconectar();
+   return $obj;
+}
+
+
 public function buscarCarguiosDeUnidad ($idABuscar){
   $this->c->conectar();
   $query="SELECT * FROM tbl_cargio_combustible WHERE fk_unidad=".$idABuscar.";";
@@ -1366,30 +1378,37 @@ public function buscarCarguiosDeUnidad ($idABuscar){
    return $listado;
 }
 
-public function getMedidas(){
 
+public function buscarNombreDeCombustiblePorId ($idABuscar){
+  $this->c->conectar();
+  $query="SELECT nombre_tipo_combustible FROM tbl_tipo_combustible WHERE id_tipo_combustible=".$idABuscar.";";
+  $rs = $this->c->ejecutar($query);
+  while($reg = $rs->fetch_array()){
+       $obj=$reg[0];
+   }
+   $this->c->desconectar();
+   return $obj;
+}
+
+
+
+
+
+public function getMedidas(){
   $lista = array();
   $this->c->conectar();
-
   $select = "SELECT * from tbl_unidad_de_medida;";
-
   $rs = $this->c->ejecutar($select);
   while($obj = $rs->fetch_object()){
-
       $tu = new Tbl_UnidadMedida();
 
       $tu->setidUnidadMedida($obj->id_unidad_de_medida);
       $tu->setTipoDeMedida($obj->fk_tipo_de_medida_unidad_de_medida);
       $tu->setnombreUnidadMedida($obj->nombre_unidad_de_medida);
-
-
       array_push($lista,$tu);
   }
-
   $this->c->desconectar();
   return $lista;
-
-
 }
 
 public function getUbicacionFisica($fk_entidadACargo){

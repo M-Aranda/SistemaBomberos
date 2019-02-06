@@ -14,9 +14,14 @@ echo $idABuscar;
 $d= new Data();
 
 $unidad=$d->getUnidadVehiculoPorId($idABuscar);
+$mantenciones=$d->buscarMantencionesDeUnidad($idABuscar);
+$carguios=$d->buscarCarguiosDeUnidad($idABuscar);
+
 
 
 $_SESSION["unidadAVerSolicitada"] = $unidad;
+$_SESSION["mantencionesAVerSolicitada"] = $mantenciones;
+$_SESSION["carguiosAVerSolicitada"] = $carguios;
 header("location:../verUnidad.php ");
 
 
