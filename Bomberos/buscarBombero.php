@@ -28,7 +28,6 @@ if($_SESSION["usuarioIniciado"]!=null){
   }
 }
 ?>
-
 <body  background="images/fondofichaintranet.jpg">
 
     <br>

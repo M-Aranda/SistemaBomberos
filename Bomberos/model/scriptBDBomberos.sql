@@ -781,7 +781,6 @@ END IF;
 END//
 DELIMITER ;
 
-
 DELIMITER //
 CREATE PROCEDURE CRUDInformacionEntrenamientoEstandar (id INT, fechaInfoEntrenamientoEstandar DATE, actividadEntrenamientoEstandar VARCHAR (300) , fk_estadoCurso INT, fk_inforPersonal INT, tipoOperacion INT)
 BEGIN
@@ -799,7 +798,6 @@ SELECT * FROM tbl_entrenamientoEstandar WHERE fk_informacionPersonal_entrenamien
 END IF;
 END//
 DELIMITER ;
-
 
 DELIMITER //
 CREATE PROCEDURE CRUDInformacionHistorica (id INT, fkRegion INT, cuerpo VARCHAR (5000) , compania VARCHAR (5000), fechaDeCambio DATE, premio VARCHAR (20000),

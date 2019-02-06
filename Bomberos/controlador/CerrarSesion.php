@@ -4,6 +4,6 @@ session_start();
   unset($_SESSION["txtNombre"]);
   unset($_SESSION["txtNombre"]);
   unset($_SESSION["usuarioIniciado"]);
-  header("location: ../inicio.html");
+  header("location: ../index.html");
 
 ?>

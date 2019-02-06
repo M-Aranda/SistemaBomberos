@@ -180,7 +180,7 @@ if(isset($_SESSION['idDeBomberoMasReciente'])){
                        </div>
                        <div class="col-md-5" style="margin-left: 50px;">
                          Rut: <input class="form-control" type="text" name="txtRut" required onblur= "this.value = this.value.replace( /^(\d{2})(\d{3})(\d{3})(\w{1})$/, '$1.$2.$3-$4')">
-                         Nombre: <input class="form-control" type="text" name="txtNombre" required>
+                         Nombre: <input class="form-control" type="text" id="nombreDeBomberoACrear" name="txtNombre" required>
                          Apellido Paterno: <input class="form-control" type="text" name="txtApePa" required>
                          Apellido Materno: <input class="form-control" name="txtApeMa" required>
                          Fecha Nacimiento: <input class="form-control" name="txtFecha" type="date" required>
@@ -219,7 +219,7 @@ if(isset($_SESSION['idDeBomberoMasReciente'])){
                            ?>
                            </select>
                            <br>
-                         <center> <input type="submit" name="btnInfoPersonal" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                         <center> <input type="submit" name="btnInfoPersonal" value="Guardar" class="btn button-primary" style="width: 150px;" onclick="msg()"> <span ></span>
 
                          </center>
                        </form>
@@ -744,7 +744,7 @@ if(isset($_SESSION['idDeBomberoMasReciente'])){
                               </div>
                           </div>
                       </div>
-</div>
+                </div>
           </div>
 
    </div>
@@ -752,10 +752,17 @@ if(isset($_SESSION['idDeBomberoMasReciente'])){
 
  <script src="javascript/JQuery.js"></script>
  <script>
+/*La siguiente funcion se activa al clickear el boton de guardar en la ficha de info personal, y puede mostrar un mensaje con una variable string.
+Sin embargo, aún no estoy seguro de como implementar esto para que sea al enviar el submit. De todas formas, se muestra el mensaje de que se
+intenta crear al bombero, llamandolo por su nombre, pero el mensaje de exito solo aparece si de verdad se enviaron los datos*/
+ function msg(){
+   var message = document.getElementById("nombreDeBomberoACrear").value;
+   alert("Creando a "+ message);
+ }
 
      $("form").submit(function(){
        alert("Operación exitosa");
-       });
+     });
        </script>
 
 
