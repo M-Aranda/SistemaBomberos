@@ -145,10 +145,11 @@ if($_SESSION["usuarioIniciado"]!=null){
 
 
 
-          Nombre Material: <input type="text" name="txtnombreMaterial" id="txtnombreMaterial" required><br><br>
+          Nombre Material: &nbsp;&nbsp;&nbsp;&nbsp;
+          <input type="text" name="txtnombreMaterial" id="txtnombreMaterial" required style="width:575px;"><br><br>
 
-          Entidad a Cargo:
-           <select name="cboEntidadACargo" id="cboEntidadACargo" onchange="actualizarComboBox()">
+          Entidad a Cargo:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           <select name="cboEntidadACargo" id="cboEntidadACargo" onchange="actualizarComboBox()" style="width:230px;">
                <?php
                    $entiPropietaria = $data->getEntidadACargo();
                    foreach ($entiPropietaria as $ep) {
@@ -159,8 +160,8 @@ if($_SESSION["usuarioIniciado"]!=null){
                ?>
            </select>
 
-           Ubicacion Fisica:
-           <select name="cboxUbicacion" id="cboxUbicacion" >
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Ubicacion Fisica:
+           <select name="cboxUbicacion" id="cboxUbicacion" style="width:195px;">
              <?php
              $ubicacionesFisicas = $data->getUbicacionFisica(1);
              foreach ($ubicacionesFisicas as $ubi) {
@@ -175,15 +176,21 @@ if($_SESSION["usuarioIniciado"]!=null){
 
 
 
-          Marca: <input type="text" name="txtmarca" required>
+          Marca: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <input type="text" name="txtmarca" required style="width:230px;">
 
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           Color:
-           <input Type="text" name="txtColor" required ><br><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           <input Type="text" name="txtColor" required style="width:195px;"><br><br>
 
-           Proveedor: <input type="text" name="txtProveedor"required >
+           Proveedor: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           <input type="text" name="txtProveedor"required style="width:230px;">
 
+           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
            Estado:
-           <select name="cboEstadoMaterial" id="cboEstadoMaterial">
+           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           <select name="cboEstadoMaterial" id="cboEstadoMaterial" style="width:195px;">
              <?php
               $estados = $data->getEstadosInventario();
               foreach ($estados as $e) {
@@ -197,18 +204,21 @@ if($_SESSION["usuarioIniciado"]!=null){
            <br><br>
 
            Fecha de Caducidad:
-           <input type="date" name="txtCaducidad"  >
+           <input type="date" name="txtCaducidad" style="width:230px;" >
 
+           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
            No aplica:
-           <input type="checkbox" name="checknoaplica">
+           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           <input type="checkbox" name="checknoaplica" style="width:100px;height:25px;">
 
            <br><br>
 
 
-           Cantidad:
-           <input type="number" name="txtcantidadMaterial" >
+           Cantidad:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           <input type="number" name="txtcantidadMaterial" style="width:150px;">
 
-           Medida: <input type="number" name="numMedida" required> /
+           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           Medida: <input type="number" name="numMedida" required style="width:100px;"> /
 
           <select name="cboxMedida">
             <?php
