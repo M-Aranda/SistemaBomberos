@@ -38,8 +38,5 @@ $infoBomberil->setfkInfoPersonalinformacionBomberil($fk_infoPersonal);
 
 $d->actualizarInformacionBomberil($infoBomberil);
 
-
-header("location: ../verFicha.php");
-
-
+header("location: CargarFichaAModificar.php");
 ?>

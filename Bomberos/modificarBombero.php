@@ -51,11 +51,11 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Unidades <b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li><a href="crearUnidades.php">Crear</a></li>
+              <li><a href="crearUnidades.php" >Crear</a></li>
               <li><a href="buscarUnidades.php">Buscar Unidades</a></li>
-              <li><a href="reporteUnidad.php">Reporte</a></li>
-              <li><a href="bitacoraUnidad.php">Bitacora</a></li>
-              <li><a href="buscarBitacora.php">Buscar Bitacora</a></li>
+              <li><a href="reporteUnidad.php" >Reporte</a></li>
+              <li><a href="bitacoraUnidad.php" >Bitacora</a></li>
+              <li><a href="buscarBitacora.php" >Buscar Bitacora</a></li>
 
             </ul>
           </li>
@@ -66,9 +66,8 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Inventario <b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li><a href="crearInventario.php">Crear</a></li>
-              <li><a href="buscarInventario.php">Buscar </a></li>
-              <li><a href="reporteInventario.php">Reporte </a></li>
-
+              <li><a href="buscarInventario.php" >Buscar </a></li>
+              <li><a href="reporteInventario.php" >Reporte </a></li>
 
             </ul>
           </li>
@@ -170,7 +169,7 @@
           $infoCargos=$_SESSION["infoCargosSolicitada"];
         }
 
-
+        $_SESSION['seEstaModificandoUBombero']=1;
 
     ?>
     <style>
@@ -486,7 +485,7 @@
                    <div class="panel-body">
                        <div class="col-sm-6">
 
-                         <form action="controlador/actualizarInformacionMedica.php" method="post">
+                         <form action="controlador/CrearInformacionMedica.php" method="post">
 
                          <input class="form-control" value="<?php echo $infoPersonal->getIdInfoPersonal();?>"  type="hidden" name="idPersonal">
                          <input class="form-control" value="<?php echo $infoMedica1->getidInformacionMedica1();?>"  type="hidden" name="idMedico1">
@@ -502,6 +501,8 @@
 
                        </div>
                        <div class="col-md-6">
+
+
 
                          Parentesco del Contacto: <!-- <input class="form-control" type="text" name="txtparentesco"> -->
                          <select class="form-control" name="cboParentesco1" >
@@ -522,19 +523,19 @@
                                }
                              }
                              ?>
-
-                          <input class="form-control"  value="<?php echo $infoMedica2->getnivelActividadFisicainformacionMedica2();?>" type="text" name="txtactvfisica" >
+                           </select>
+                             Nivel de actividiad física:
+                              <input class="form-control"  value="<?php echo $infoMedica2->getnivelActividadFisicainformacionMedica2();?>" type="text" name="txtactvfisica" >
+                             <br>
                          <?php
-
                          $donanteChequeado="checked";
                          $fumadorChequeado="checked";
-                        if($infoMedica2->getesDonanteinformacionMedica2()==TRUE){
+                        if($infoMedica2->getesDonanteinformacionMedica2()==FALSE){
                           $donanteChequeado="0";
                         }
-                        if($infoMedica2->getesFumadorinformacionMedica2()==TRUE){
+                        if($infoMedica2->getesFumadorinformacionMedica2()==FALSE){
                           $fumadorChequeado="0";
                         }
-
                          ?>
 
                          Donante:  <input class="form-control" value="seleccionado" type="checkbox" <?php echo $donanteChequeado;?> name="txtdonante" >
@@ -593,7 +594,7 @@
 
 
                        <div class="col-sm-6">
-                         <form action="controlador/ActualizarInformacionFamiliar.php" method="post">
+                         <form action="controlador/CrearInformacionFamiliar.php" method="post">
                          Nombre: <input class="form-control" type="text" id="nomFamiliar" name="txtnombreFamiliar" >
                          Fecha de Nacimiento: <input class="form-control" type="date" id="fecNFamiliar" name="txtfechafamiliar" >
                          Parentesco:
@@ -611,9 +612,9 @@
                            }
                            ?>
                          </select>
-                         <input class="form-control" value="" type="hidden" id="idFamil" name="idFamil">
+                         <br>
                          <input class="form-control" value="" type="hidden" id="idPersonalFamiliar" name="idPersonalFamiliar">
-                         <center> <input type="submit" name="btninfoFamiliar" value="Modificar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                         <center> <input type="submit" name="btninfoFamiliar" value="Crear" class="btn button-primary" style="width: 150px;"> <span ></span>
                              <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                          </center>
@@ -631,7 +632,6 @@
                                  <th>Nombre</th>
                                  <th>Fecha de Nacimiento</th>
                                  <th>Parentesco</th>
-                                 <th>Modificar</th>
                                </tr>
                              </thead>
                              <tbody>
@@ -649,8 +649,6 @@
 
                                  echo $fechaConvertida;?></td>
                                  <td><?php echo $d->buscarNombreParentescoPorId($datos->getfkParentescoinformacionFamiliar())->getNombreParentesco();?></td>
-                                 <td><input type="submit" value="Cambiar" onclick="cargarIdInfoFamiliar(<?php echo $datos->getIdInformacionFamiliar();?>, <?php echo $datos->getfkInfoPersonalinformacionFamiliar();?>)">
-
 
                             <?php
                              }
@@ -661,15 +659,9 @@
 
                              </tbody>
                            </table>
-
-
-
                       </div>
                       <div class="col-md-6">
                          <br><br><br><br><br><br>
-
-
-
                       </div>
 
                    </div>
@@ -693,7 +685,7 @@
                    </div>
                    <div class="panel-body">
                        <div class="col-sm-6">
-                         <form action="controlador/ActualizarInformacionAcademica.php" method="post">
+                         <form action="controlador/CrearInformacionAcademica.php" method="post">
                          Fecha: <input class="form-control" type="date" name="txtfechaAcademica" >
                          Actividad: <input class="form-control" type="text" name="txtActivdidadAcademica" >
                          Estado:
@@ -713,9 +705,10 @@
                            ?>
                            </select>
 
-                           <input class="form-control" value="" type="hidden" id="idAcadem" name="idAcadem">
+
                            <input class="form-control" value="" type="hidden" id="idPersonalAcadem" name="idPersonalAcadem">
-                           <center> <input type="submit" name="btninfoAcademica" value="Modificar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                           <br>
+                           <center> <input type="submit" name="btninfoAcademica" value="Crear" class="btn button-primary" style="width: 150px;"> <span ></span></center>
 
                            </form>
 
@@ -727,7 +720,7 @@
                                  <th>Actividad</th>
                                  <th>Fecha</th>
                                  <th>Estado</th>
-                                 <th>Modificar</th>
+
                                </tr>
                              </thead>
                              <tbody>
@@ -745,8 +738,6 @@
 
                                  echo $fechaConvertida;?></td>
                                  <td><?php echo $d->buscarEstadoDeCursoPorId($datos->getfkEstadoCursoInformacionAcademica());?></td>
-
-                               <td><input type="submit" value="Modificar" onclick="cargarIdInfoAcademica(<?php echo $datos->getIdidInformacionAcademica();?>,<?php echo $datos->getfkInformacionPersonalInformacionAcademica();?> )"></td>
                                <?php
                                 }
                                 }
@@ -783,10 +774,11 @@
                    <div class="panel panel-primary">
                        <div class="panel-heading panel-title">
                            Información Estandar
+
                        </div>
                        <div class="panel-body">
                            <div class="col-sm-6">
-                             <form action="controlador/ActualizarInfoEntrenamientoEstandar.php" method="post">
+                             <form action="controlador/CrearInfoEntrenamientoEstandar.php" method="post">
                              Fecha: <input class="form-control" type="date" name="txtfechaEstandar" >
                              Actividad: <input class="form-control" type="text" name="txtActividadEntrenamientoEstandar" >
                              Estado:
@@ -804,9 +796,8 @@
                                }
                                ?>
                                </select>
-                               <input class="form-control" value="" type="hidden" id="idEntrenEstandar" name="idEntrenEstandar">
-                               <input class="form-control" value="" type="hidden" id="idPersonalEntrenamientoEstandar" name="idPersonalEntrenamientoEstandar">
-                               <center> <input type="submit" name="btninfoEstandar" value="Modificar" class="btn button-primary" style="display: none; "> <span ></span>
+                               <br>
+                               <center> <input type="submit" name="btninfoEstandar" value="Crear" class="btn button-primary" style="width: 150px;"> <span ></span></center>
 
                              </form>
 
@@ -817,8 +808,7 @@
                                      <th>Actividad</th>
                                      <th>Fecha</th>
                                      <th>Estado</th>
-                                     <th>Modificar</th>
-                                   </tr>
+                                  </tr>
                                  </thead>
                                  <tbody>
                                    <?php
@@ -833,8 +823,6 @@
 
                                      echo $fechaConvertida;?></td>
                                      <td><?php echo $d->buscarEstadoDeCursoPorId($datos->getFkEstadoCurso());?></td>
-                                     <td><input type="submit" value="Modificar" onclick="cargarIdInfoEntrenamientoEstandar(<?php echo $datos->getIdEntrenamientoEstandar();?>,<?php echo $datos->getFkInformacionPersonal();?> )"></td>
-
                                 <?php
                                  }
                                  }
@@ -873,10 +861,10 @@
                        </div>
                        <div class="panel-body" style="margin-left: -20px;">
                            <div class="col-sm-6">
-                             <form action="controlador/ActualizarInformacionHistorica.php" method="post">
+                             <form action="controlador/CrearInformacionHistorica.php" method="post">
 
                              Región:
-                             <select class="form-control" name="cboRegion" >
+                             <select class="form-control" name="cboxRegion" >
                                <?php
                                require_once("model/Data.php");
                                require_once("model/Tbl_Region.php");
@@ -892,17 +880,15 @@
                                </select>
 
                              Cuerpo: <input type="text" name="txtcuerpoHistorico" class="form-control" >
-                             Compañia:<input type="text" name="txtCompaniaHistorica" class="form-control" >
-                             Fecha: <input type="date" name="txtfechaHistorica" class="form-control" >
+                             Compañia:<input type="text" name="txtCompania" class="form-control" >
+                             Fecha: <input type="date" name="txtfechaCambioInfoHistorica" class="form-control" >
                              Premio: <input type="text" name="txtPremioInforHistorica" class="form-control" >
-                             Cargo: <input type="text" name="txtcargoHistorica" class="form-control" >
-                             Motivo: <input type="text" name="txtmotivoHistorico" class="form-control" >
-                             Detalle: <input type="text" name="txtdetalleHistorico" class="form-control" >
+                             Cargo: <input type="text" name="cboxCargo" class="form-control" >
+                             Motivo: <input type="text" name="txtMotivo" class="form-control" >
+                             Detalle: <input type="text" name="txtDetalleHistorico" class="form-control" >
 
-                             <input type="hidden" name="idHistorica" id="idHistorica" class="form-control" >
-                             <input type="hidden" name="idPersonalHistorica" id="idPersonalHistorica" class="form-control" >
 
-                             <center> <input type="submit" name="btninfohistorica" value="Modificar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                             <center> <input type="submit" name="btninfohistorica" value="Crear" class="btn button-primary" style="width: 150px;"> <span ></span>
 
                              </form>
 
@@ -918,8 +904,7 @@
                                      <th>Motivo</th>
                                      <th>Detalle</th>
                                      <th>Cargo</th>
-                                     <th>Modificar</th>
-                                   </tr>
+                                  </tr>
                                  </thead>
                                  <tbody>
                                    <?php
@@ -927,7 +912,7 @@
                                    foreach ($infoHistorica as $iHistorica => $info) {
                                 ?>
                                 <tr>
-                                  <td><?php echo $d->buscarNombreDeRegionPorId($info->getfkRegioninformacionHistorica());   ?></td>
+                                  <td><?php echo utf8_encode($d->buscarNombreDeRegionPorId($info->getfkRegioninformacionHistorica()));   ?></td>
                                   <td><?php echo $info->getcuerpo();   ?></td>
                                   <td><?php echo $info->getcompania();  ?></td>
                                   <td><?php
@@ -938,7 +923,6 @@
                                   <td><?php echo $info->getmotivo();   ?></td>
                                   <td><?php echo $info->getdetalle();   ?></td>
                                   <td><?php echo $info->getCargo();   ?></td>
-                                  <td><input type="submit" value="Modificar" onclick="cargarIdInfoHistorica(<?php echo $info->getIdInformacionHistorica();?>, <?php echo $info->getfkInfoPersonalinformacionHistorica();?> )"></td>
                                 </tr>
 
 
@@ -969,6 +953,9 @@
                </div>
                  <!-- INFORMACION historica -->
                    <!-- INFORMACION servicio -->
+                   <br>
+                   <br>
+
                    <div class="col-md-20">
                        <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#cargos">
                            Información de Cargos
@@ -977,61 +964,35 @@
                    <div class="col-md-11 collapse" id="cargos">
                        <div class="panel panel-primary">
                            <div class="panel-heading panel-title">
-                             <form action="controlador/CrearInformacionHistorica.php" method="post">
+                             <form action="controlador/CrearInformacionDeCargos.php" method="post">
                                Información de Cargos
                            </div>
                            <div class="panel-body" style="margin-left: -20px;">
                                <div class="col-sm-6">
-                                 <table class="table table-striped">
-                                     <thead>
-                                       <tr>
-                                         <th>Nombre</th>
-                                         <th>Marca</th>
-                                         <th>Talla</th>
-                                         <th>Serie</th>
-                                         <th>Fecha</th>
-                                       </tr>
-                                     </thead>
-                                     <tbody>
-                                       <?php
-                                       if(isset($infoCargos)){
+                                 Creando ficha para: <?php
+                                 if(isset($idDeBomberoMasReciente)){
+                                   echo utf8_encode($d->getNombreBomberoPorId($idDeBomberoMasReciente));
+                                 }
+                                  ?>
+                                  <br>
+                                   Nombre: <input type="text" class="form-control" name="txtnombrecargo">
+                                   Marca: <input type="text" class="form-control" name="txtmarcacargo">
+                                   Talla: <input type="text" class="form-control" name="txttalla">
+                                   Serie: <input type="text" class="form-control" name="txtserie">
+                                   Fecha: <input type="date" class="form-control" name="txtfechacargo">
 
-                                       foreach ($infoCargos as $icargos => $datos) {
-                                       ?>
-                                       <tr>
-                                         <td><?php echo $datos->getNombre_informacionDeCargos();?></td>
-                                         <td><?php echo $datos->getMarca_informacionDeCargos();?></td>
-                                         <td><?php echo $datos->getTalla_informacionDeCargos();?></td>
-                                         <td><?php echo $datos->getSerie_informacionDeCargos();?></td>
-                                         <td><?php
-                                         $fechaSinConvertir = $datos->getFecha_informacionDeCargos();
-                                         $fechaConvertida = date("d-m-Y", strtotime($fechaSinConvertir));
-                                         echo $fechaConvertida;?></td>
-                                    <?php
-                                     }
-                                     }
-                                       ?>
-                                       </tr>
-
-                                     </tbody>
-                                   </table>
                               </div>
+
+
+
                               <div class="col-md-6">
                                  <br><br><br><br><br><br><br><br><br><br><br>
-
+                                  <center> <input type="submit" name="btninfohistorica" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span></center>
                                 </form>
 
                               </div>
+
                            </div>
-
-                       </div>
-                   </div>
-               <br>
-               <br>
-
-
-
-</div>
 
 
           </div>
@@ -1040,55 +1001,12 @@
  </div>
 
 <?php
-/*
-unset($_SESSION["infoPersonalSolicitada"]);
-unset($_SESSION["infoMedidasSolicitada"]);
-unset($_SESSION["infoBomberilSolicitada"]);
-unset($_SESSION["infoLaboralSolicitada"]);
-unset($_SESSION["infoMedica1Solicitada"]);
-unset($_SESSION["infoMedica2Solicitada"]);
-unset($_SESSION["infoFamiliarSolicitada"]);
-unset($_SESSION["infoAcademicaSolicitada"]);
-unset($_SESSION["infoEntrenamientoEstandarSolicitada"]);
-unset($_SESSION["infoHistoricaSolicitada"]);
-*/
 
 
 ?>
 
 <script src="javascript/JQuery.js"></script>
 <script>
-
-function cargarIdInfoFamiliar(id, fkPersonal) {
-            document.getElementById("idFamil").value=id;
-            document.getElementById("idPersonalFamiliar").value=fkPersonal;
-
-            alert("Utilize los 3 campos de arriba para ingresar la nueva información");
-
-          }
-
-
-
-          function cargarIdInfoAcademica(id, fkPersonal) {
-                      document.getElementById("idAcadem").value=id;
-                      document.getElementById("idPersonalAcadem").value=fkPersonal;
-
-
-                    }
-
-
-                    function cargarIdInfoEntrenamientoEstandar(id, fkPersonal) {
-                                document.getElementById("idEntrenEstandar").value=id;
-                                document.getElementById("idPersonalEntrenamientoEstandar").value=fkPersonal;
-
-
-                              }
-
-                      function cargarIdInfoHistorica(id, fkPersonal) {
-                            document.getElementById("idHistorica").value=id;
-                            document.getElementById("idPersonalHistorica").value=fkPersonal;
-
-                              }
 
 
 /*
@@ -1097,11 +1015,6 @@ function cargarIdInfoFamiliar(id, fkPersonal) {
                                     });
 
 */
-
-
-
-
-
 
 </script>
 

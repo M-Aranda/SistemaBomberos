@@ -72,8 +72,6 @@ $inforPersonal->setEsInstructor($esInstructor);
 $d->actualizarInformacionPersonalDeBombero($inforPersonal);
 
 
-
-
-header("location: ../verFicha.php");
+header("location: CargarFichaAModificar.php");
 
 ?>

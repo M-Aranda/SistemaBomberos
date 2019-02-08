@@ -282,6 +282,7 @@ el valor del ultimo hidden con el numero que necesito en el handler
                                       }
 
         </script>
+        <script src="javascript/borrarVariablesEnSesionAlCargarPagina.js"></script>
 
   </body>
 </html>

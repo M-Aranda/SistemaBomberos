@@ -765,6 +765,7 @@ public function buscarInformacionDeBomberoParaTabla ($nombre, $id, $tipoDeBusque
   WHERE tbl_informacionBomberil.fk_id_entidadACargo_informacionBomberil=tbl_entidadACargo.id_entidadACargo AND
   tbl_informacionPersonal.id_informacionPersonal=tbl_informacionBomberil.fk_informacion_personal__informacionBomberil ".$anexoAQuery;
 
+  echo $query;
 
   $rs = $this->c->ejecutar($query);
   $listado = array();
@@ -1134,18 +1135,14 @@ public function actualizarInformacionLaboral($infoLaboral){
   $this->c->desconectar();
 }
 
-
 public function actualizarInformacionMedica1($infoMedica1){
   $query="CALL CRUDInformacionMedica1 (".$infoMedica1->getidInformacionMedica1().", '".$infoMedica1->getprestacionMedica_informacionMedica1()."', '".$infoMedica1->getalergias_informacionMedica1()."', '".$infoMedica1->getenfermedadesCronicasinformacionMedica1()."',
    ".$infoMedica1->getfkInfoPersonalinformacionMedica1().", 3);";
-
-
 
   $this->c->conectar();
   $this->c->ejecutar($query);
   $this->c->desconectar();
 }
-
 
 public function actualizarInformacionMedica2($infoMedica2){
   $query="CALL CRUDInformacionMedica2 (".$infoMedica2->getidInformacionMedica2().", '".$infoMedica2->getmedicamentosHabitualesinformacionMedica2()."', '".$infoMedica2->getnombreContactoinformacionMedica2()."', '".$infoMedica2->gettelefonoContactoinformacionMedica2()."',

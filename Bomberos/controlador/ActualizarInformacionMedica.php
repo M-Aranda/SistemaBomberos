@@ -71,10 +71,6 @@ $infoMedica2->setfkInfoPersonalinformacionMedica2($fkInfoPersonalinformacionMedi
 
 $d->actualizarInformacionMedica2($infoMedica2);
 
-
-
-header("location: ../verFicha.php");
-
-
+header("location: CargarFichaAModificar.php");
 
 ?>

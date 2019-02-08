@@ -523,6 +523,8 @@ if(isset($_SESSION["carguios"])){
 */
 </script>
 
+<script src="javascript/borrarVariablesEnSesionAlCargarPagina.js"></script>
+
 
   </body>
 </html>

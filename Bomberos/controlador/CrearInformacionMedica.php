@@ -25,8 +25,6 @@ $infoMedica1->setalergias_informacionMedica1($alergias_informacionMedica1);
 $infoMedica1->setenfermedadesCronicasinformacionMedica1($enfermedadesCronicasinformacionMedica1);
 $infoMedica1->setfkInfoPersonalinformacionMedica1($fkInfoPersonalinformacionMedica1);
 
-
-
  $idInformacionMedica2=0;
  $medicamentosHabitualesinformacionMedica2=$_REQUEST["txtmedicamentosHabituales"];
  $nombreContactoinformacionMedica2=$_REQUEST["txtnomContacto"];
@@ -34,22 +32,19 @@ $infoMedica1->setfkInfoPersonalinformacionMedica1($fkInfoPersonalinformacionMedi
  $fkParentescoContactoinformacionMedica2=$_REQUEST["cboParentesco1"];
  $nivelActividadFisicainformacionMedica2=$_REQUEST["txtactvfisica"];
 
-if ($_POST['txtdonante'] == 'seleccionado') {
+  $esDonanteinformacionMedica2=0;
+  $esFumadorinformacionMedica2=0;
+
+if (isset($_POST['txtdonante'])) {
   $esDonanteinformacionMedica2=TRUE;
-}else {
-  $esDonanteinformacionMedica2=FALSE;
 }
 
-if ($_POST['txtfumador'] == 'seleccionado') {
+if (isset($_POST['txtfumador'])) {
   $esFumadorinformacionMedica2=TRUE;
-}else {
-  $esFumadorinformacionMedica2=FALSE;
 }
-
 
  $fkGrupoSanguineoinformacionMedica2=$_REQUEST["cboGrupoSanguineo"];
  $fkInfoPersonalinformacionMedica2=$_SESSION['idDeBomberoMasReciente'];
-
 
 $infoMedica2=new Tbl_InfoMedica2();
 
@@ -64,19 +59,13 @@ $infoMedica2->setesFumadorinformacionMedica2($esFumadorinformacionMedica2);
 $infoMedica2->setfkGrupoSanguineoinformacionMedica2($fkGrupoSanguineoinformacionMedica2);
 $infoMedica2->setfkInfoPersonalinformacionMedica2($fkInfoPersonalinformacionMedica2);
 
-
-$d->borrarRegistrosMedicos1SegunFkPersonal($fkInfoPersonalinformacionMedica1);
-$d->borrarRegistrosMedicos2SegunFkPersonal($fkInfoPersonalinformacionMedica2);
-
-$d->crearInformacionMedica1($infoMedica1);
-$d->crearInformacionMedica2($infoMedica2);
-
-
-header("location: ../CrearFicha.php");
-
-
-
-
-
-
+if(isset($_SESSION['seEstaModificandoUBombero'])){
+  $d->actualizarInformacionMedica1($infoMedica1);
+  $d->actualizarInformacionMedica2($infoMedica2);
+  header("location: CargarFichaAModificar.php");
+}else{
+  $d->actualizarInformacionMedica1($infoMedica1);
+  $d->actualizarInformacionMedica2($infoMedica2);
+    header("location: ../CrearFicha.php");
+}
 ?>

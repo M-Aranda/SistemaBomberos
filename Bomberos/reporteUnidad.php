@@ -195,5 +195,7 @@
 </div>
 </div>
 
+<script src="javascript/borrarVariablesEnSesionAlCargarPagina.js"></script>
+
   </body>
 </html>

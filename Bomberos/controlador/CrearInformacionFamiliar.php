@@ -25,7 +25,12 @@ $d= new Data();
 
 $d->crearInformacionFamiliar($infoFamiliar);
 
- header("location: ../CrearFicha.php");
+if(isset($_SESSION['seEstaModificandoUBombero'])){
+  header("location: CargarFichaAModificar.php");
+}else{
+    header("location: ../CrearFicha.php");
+}
+
 
 
 

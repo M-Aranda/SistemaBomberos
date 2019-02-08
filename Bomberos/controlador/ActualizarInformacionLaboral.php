@@ -28,12 +28,7 @@ $infoLaboral->setafp_informacionLaboral($afp_informacionLaboral);
 $infoLaboral->setprofesion_informacionLaboral($profesion_informacionLaboral);
 $infoLaboral->setfkInfoPersonalinformacionLaboral($fkInfoPersonalinformacionLaboral);
 
-
+$d=new Data();
 $d->actualizarInformacionLaboral($infoLaboral);
 
-
-
-header("location: ../verFicha.php");
-
-
-?>
+header("location: CargarFichaAModificar.php");?>

@@ -384,7 +384,9 @@
    </div>
  </div>
 
- <script src="javascript/JQuery.js"></script>
+<script src="javascript/JQuery.js"></script>
+<script src="javascript/borrarVariablesEnSesionAlCargarPagina.js"></script>
+
  <script>
 
  function msg(){
@@ -395,6 +397,7 @@
      $("form").submit(function(){
        alert("Operación exitosa");
        });
+
        </script>
 
   </body>

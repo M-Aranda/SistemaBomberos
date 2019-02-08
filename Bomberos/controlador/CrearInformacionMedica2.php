@@ -42,12 +42,8 @@ $d= new Data();
 $d->borrarRegistrosMedicos2SegunFkPersonal($fkInfoPersonalinformacionMedica2);
 $d->crearInformacionMedica2($infoMedica2);
 
-
+if(isset($_SESSION['seEstaModificandoUBombero'])){
+  header("location: ../modificarBombero.php");
+}
 header("location: ../index.php");
-
-
-
-
-
-
 ?>

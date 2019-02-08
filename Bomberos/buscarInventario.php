@@ -351,6 +351,7 @@ if($_SESSION["usuarioIniciado"]!=null){
 
 
         </script>
+        <script src="javascript/borrarVariablesEnSesionAlCargarPagina.js"></script>
 
   </body>
 </html>

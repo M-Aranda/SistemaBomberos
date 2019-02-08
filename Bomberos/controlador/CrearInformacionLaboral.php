@@ -29,9 +29,13 @@ $infoLaboral->setprofesion_informacionLaboral($profesion_informacionLaboral);
 $infoLaboral->setfkInfoPersonalinformacionLaboral($fkInfoPersonalinformacionLaboral);
 
 $d= new Data();
-$d->borrarRegistrosLaboralesSegunFkPersonal($fkInfoPersonalinformacionLaboral);
-$d->crearInformacionLaboral($infoLaboral);
 
-header("location: ../CrearFicha.php");
+if(isset($_SESSION['seEstaModificandoUBombero'])){
+  $d->actualizarInformacionLaboral($infoLaboral);
+  header("location: ../modificarBombero.php");
+}else{
+  $d->actualizarInformacionLaboral($infoLaboral);
+    header("location: ../CrearFicha.php");
+}
 
 ?>

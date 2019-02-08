@@ -15,6 +15,11 @@ $infoCargos->setFk_personal_informacionDeCargos($_SESSION['idDeBomberoMasRecient
 $d= new Data();
 
 $d->crearInformacionCargos($infoCargos);
-header("location: ../CrearFicha.php");
+
+if(isset($_SESSION['seEstaModificandoUBombero'])){
+  header("location: CargarFichaAModificar.php");
+}else{
+    header("location: ../CrearFicha.php");
+}
 
 ?>

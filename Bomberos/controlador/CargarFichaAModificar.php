@@ -34,6 +34,8 @@ $_SESSION["infoEntrenamientoEstandarSolicitada"] = $infoEntrenamientoEstandar;
 $_SESSION["infoHistoricaSolicitada"] = $infoHistorica;
 $_SESSION["infoCargosSolicitada"] = $infoCargos;
 
+$_SESSION['idDeBomberoMasReciente']=$infoPersonal->getIdInfoPersonal();
+
 header("location:../modificarBombero.php ");
 
 

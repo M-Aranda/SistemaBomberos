@@ -179,7 +179,7 @@
                 <td>John</td>
                 <td>Doe</td>
                 <td>john@example.com</td>
-                
+
               </tr>
 
             </tbody>
@@ -198,6 +198,8 @@
  </div>
 </div>
 </div>
+
+<script src="javascript/borrarVariablesEnSesionAlCargarPagina.js"></script>
 
   </body>
 </html>

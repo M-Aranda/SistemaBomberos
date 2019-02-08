@@ -354,7 +354,6 @@ FOREIGN KEY (fk_tipo_mantencion) REFERENCES tbl_tipoDeMantencion (id_tipo_de_man
 PRIMARY KEY (id_mantencion)
 );
 
-
 CREATE TABLE tbl_tipo_combustible (
 id_tipo_combustible INT AUTO_INCREMENT,
 nombre_tipo_combustible VARCHAR (5000),
@@ -672,7 +671,7 @@ SELECT * FROM tbl_informacionBomberil WHERE fk_informacion_personal__informacion
 ELSEIF tipoOperacion=3 THEN
 UPDATE tbl_informacionBomberil SET fk_region_informacionBomberil=fkRegion,cuerpo_informacionBomberil=cuerpo, fk_id_entidadACargo_informacionBomberil=fkCompania,
 fk_cargo_informacionBomberil=fkCargo, fecha_de_ingreso_informacionBomberil=fechaIngreso, N_Reg_General_informacionBomberil=NRG, fk_estado_informacionBomberil=fkEstado,
- N_Reg_Cia_informacionBomberil=NRC, fk_informacion_personal__informacionBomberil=fkInformacionPersonal  WHERE id_informacionBomberil=id;
+ N_Reg_Cia_informacionBomberil=NRC, fk_informacion_personal__informacionBomberil=fkInformacionPersonal  WHERE fk_informacion_personal__informacionBomberil=fkInformacionPersonal;
 ELSEIF tipoOperacion=4 THEN
 DELETE FROM tbl_informacionBomberil WHERE id_informacionBomberil=id;
 ELSEIF tipoOperacion=5 THEN
@@ -694,7 +693,7 @@ SELECT * FROM tbl_informacionLaboral WHERE fk_informacion_personal_informacionLa
 ELSEIF tipoOperacion=3 THEN
 UPDATE tbl_informacionLaboral SET nombre_de_empresa_informacionLaboral=nombreEmpresa, direccion_de_empresa_informacionLaboral=direccionEmpresa, telefono_de_empresa_informacionLaboral=telefonoEmpresa,
 cargo_en_la_empresa_informacionLaboral=cargoEmpresa, fecha_de_ingreso_a_la_empresa_informacionLaboral=fechaDeIngresoALaEmpresa, area_o_departamento_en_la_empresa_informacionLaboral= dptoEnEmpresa,
-afp_informacionLaboral=afp, profesion_informacionLaboral=profesion, fk_informacion_personal_informacionLaboral=fkInfoPersonal   WHERE id_informacionLaboral=id;
+afp_informacionLaboral=afp, profesion_informacionLaboral=profesion, fk_informacion_personal_informacionLaboral=fkInfoPersonal   WHERE fk_informacion_personal_informacionLaboral=fkInfoPersonal;
 ELSEIF tipoOperacion=4 THEN
 DELETE FROM tbl_informacionLaboral WHERE id_informacionLaboral=id;
 ELSEIF tipoOperacion=5 THEN
@@ -713,7 +712,7 @@ ELSEIF tipoOperacion=2 THEN
 SELECT *  FROM tbl_informacionMedica1 WHERE fk_informacion_personal_informacionMedica1=fkInfoPersonal;
 ELSEIF tipoOperacion=3 THEN
 UPDATE tbl_informacionMedica1 SET prestacionMedica_informacionMedica1=prestacionMedica, alergias_informacionMedica1=alergias, enfermedades_croncias_informacionMedica1=enfermedadesCronicas,
-fk_informacion_personal_informacionMedica1=fkInfoPersonal WHERE tbl_informacionMedica1.id_informacionMedica1=id;
+fk_informacion_personal_informacionMedica1=fkInfoPersonal WHERE tbl_informacionMedica1.fk_informacion_personal_informacionMedica1=fkInfoPersonal;
 ELSEIF tipoOperacion=4 THEN
 DELETE FROM tbl_informacionMedica1 WHERE tbl_informacionMedica1=id;
 ELSEIF tipoOperacion=5 THEN
@@ -722,9 +721,7 @@ END IF;
 END//
 DELIMITER ;
 
-
-
-DELIMITER //
+DELIMITER // 
 CREATE PROCEDURE CRUDInformacionMedica2 (id INT, medicamentos_habituales VARCHAR (5000), nombre_de_contacto VARCHAR (5000), telefono_de_contacto VARCHAR (5000), fkParentesco INT,
 nivel_de_actividad_fisica VARCHAR (5000), es_donante BOOLEAN, es_fumador BOOLEAN, fk_grupoSanguineo INT, fk_inforPersonal INT, tipoOperacion INT)
 BEGIN
@@ -736,7 +733,7 @@ SELECT * FROM tbl_informacionMedica2 WHERE fk_informacion_personal_informacionMe
 ELSEIF tipoOperacion=3 THEN
 UPDATE tbl_informacionMedica2 SET medicamentos_habituales_informacionMedica2=medicamentos_habituales, nombre_de_contacto_informacionMedica2=nombre_de_contacto, telefono_de_contacto_informacionMedica2=telefono_de_contacto,
 fk_parentesco_del_contacto_informacionMedica2=fkParentesco, nivel_de_actividad_fisica_informacionMedica2=nivel_de_actividad_fisica, es_donante_informacionMedica2=es_donante,
-es_fumador_informacionMedica2=es_fumador, fk_grupo_sanguineo_informacionMedica2=fk_grupoSanguineo, fk_informacion_personal_informacionMedica2=fk_inforPersonal WHERE tbl_informacionMedica2.id_informacionMedica2=id;
+es_fumador_informacionMedica2=es_fumador, fk_grupo_sanguineo_informacionMedica2=fk_grupoSanguineo, fk_informacion_personal_informacionMedica2=fk_inforPersonal WHERE fk_informacion_personal_informacionMedica2=fk_inforPersonal;
 ELSEIF tipoOperacion=4 THEN
 DELETE FROM tbl_informacionMedica2 WHERE id_informacionMedica2=id;
 ELSEIF tipoOperacion=5 THEN
@@ -1443,7 +1440,6 @@ INSERT INTO tbl_unidad_de_medida  (nombre_unidad_de_medida,fk_tipo_de_medida_uni
 
 
 -- SELECTs
-
 -- SELECT * FROM tbl_medida;
 -- SELECT * FROM tbl_informacionPersonal;
 -- SELECT * FROM tbl_informacionBomberil;

@@ -199,22 +199,18 @@ if($_SESSION["usuarioIniciado"]!=null){
            <textarea  Type="textarea" name="txtObservaciones" style="width:670px; height:30px;"></textarea>
 
           <center> <input type="submit" name="btncrear" value="Crear Servicio" class="btn button-primary" style="width: 150px;"> <span ></span>
-              <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
-
           </center>
-
 
         </form>
 
-
       </div>
-
-
 
      </div>
    </div>
  </div>
 </div>
+
+<script src="javascript/borrarVariablesEnSesionAlCargarPagina.js"></script>
 
   </body>
 </html>

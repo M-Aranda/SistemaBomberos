@@ -40,6 +40,10 @@ if(isset($_SESSION['idDeBomberoMasReciente'])){
   $idDeBomberoMasReciente=$_SESSION['idDeBomberoMasReciente'];
 }
 
+if(isset($_SESSION['seEstaModificandoUBombero'])){
+  unset($_SESSION['seEstaModificandoUBombero']);
+}
+
 
   ?>
 
@@ -760,8 +764,10 @@ intenta crear al bombero, llamandolo por su nombre, pero el mensaje de exito sol
  }
 
      $("form").submit(function(){
-       alert("Operación exitosa");
+       alert("Operación exitosa")
      });
+
+
        </script>
 
 

@@ -301,8 +301,6 @@
                              $('#cboxUbicacionModificar').append(data);
 
                            });
-
-
                          }
 
 
@@ -312,10 +310,8 @@
       });
 
 
-
-
-
 </script>
+<script src="javascript/borrarVariablesEnSesionAlCargarPagina.js"></script>
 
   </body>
 </html>

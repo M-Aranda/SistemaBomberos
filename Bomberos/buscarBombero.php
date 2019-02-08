@@ -59,8 +59,8 @@ if($_SESSION["usuarioIniciado"]!=null){
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Unidades <b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li><a href="crearUnidades.php">Crear</a></li>
-              <li><a href="buscarUnidades.php">Buscar Unidades</a></li>
+              <li><a href="crearUnidades.php" >Crear</a></li>
+              <li><a href="buscarUnidades.php" >Buscar Unidades</a></li>
               <li><a href="reporteUnidad.php">Reporte</a></li>
               <li><a href="bitacoraUnidad.php">Bitacora</a></li>
               <li><a href="buscarBitacora.php">Buscar Bitacora</a></li>
@@ -73,7 +73,7 @@ if($_SESSION["usuarioIniciado"]!=null){
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Inventario <b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li><a href="crearInventario.php">Crear</a></li>
+              <li><a href="crearInventario.php" >Crear</a></li>
               <li><a href="buscarInventario.php">Buscar </a></li>
               <li><a href="reporteInventario.php">Reporte </a></li>
 
