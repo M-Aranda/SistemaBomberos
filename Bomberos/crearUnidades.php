@@ -81,8 +81,17 @@
             </ul>
           </li>
         </ul>
-  <br>
-  <br>
+
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Despacho <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="centraldeAlarma.php">Central de Alarma</a></li>
+
+            </ul>
+          </li>
+        </ul>
+
         <br>
         <br>
         <br>
@@ -245,7 +254,7 @@
                                   </div>
                                   <div class="panel-body">
 
-                                      <div class="col-sm-4" >
+                                      <div class="col-sm-5" >
 
                                         <form action="controlador/CrearMantencion.php" method="post">
 
@@ -280,7 +289,7 @@
 
 
                                       </div>
-                                      <div class="col-sm-6" style="margin-left: 60px;">
+                                      <div class="col-sm-6" >
 
                                         Dirección: <textarea class="form-control" Type="textarea" name="txtDireccion" ></textarea>
                                         Comentarios/Observaciones: <textarea class="form-control" Type="textarea" name="txtcomentario" ></textarea>
@@ -318,7 +327,7 @@
                                   </div>
                                   <div class="panel-body">
 
-                                      <div class="col-sm-4" >
+                                      <div class="col-sm-5" >
 
                                         <form action="controlador/CrearCarguioDeCombustible.php" method="post">
 
@@ -352,7 +361,7 @@
 
 
                                       </div>
-                                      <div class="col-sm-6" style="margin-left: 60px;">
+                                      <div class="col-sm-6" >
                                         Fecha:<input id="nombre" type="date" name="txtFechaCombustible" class="form-control" required="">
                                         Cantidad:<input id="nombre" type="number" name="txtcantidad" class="form-control" required="" min="1" pattern="^[0-9]+" onkeydown="javascript: return event.keyCode == 69 ? false : true">
                                         Precio/Litro:<input id="nombre" type="number" name="txtpreciolitro" class="form-control" required="" min="1" pattern="^[0-9]+" onkeydown="javascript: return event.keyCode == 69 ? false : true">

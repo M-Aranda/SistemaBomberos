@@ -103,8 +103,18 @@ if(isset($_SESSION["carguios"])){
             </ul>
           </li>
         </ul>
-  <br>
-  <br>
+
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Despacho <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="centraldeAlarma.php">Central de Alarma</a></li>
+
+            </ul>
+          </li>
+        </ul>
+
+
         <br>
         <br>
         <br>
@@ -159,15 +169,15 @@ if(isset($_SESSION["carguios"])){
         <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
           <div class="container">
 
-          <div style="margin-left:100px;">
+          <div style="margin-left:52px;">
 
-                          <div class="col-md-20">
-                              <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#unidades">
+                          <div class="col-md-24">
+                              <button type="button" class="btn btn-default col-md-12" data-toggle="collapse" data-target="#unidades">
                                 Modificar Unidades
                               </button>
                           </div>
 
-                          <div class="col-md-11 collapse" id="unidades" >
+                          <div class="col-md-12 collapse" id="unidades" >
                               <div class="panel panel-primary">
                                   <div class="panel-heading panel-title">
                                       Modificar Unidad
@@ -273,15 +283,15 @@ if(isset($_SESSION["carguios"])){
                               </div>
                           </div>
 
+                          <br><br>
 
-
-                          <div class="col-md-20">
-                              <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#mantencion">
+                          <div class="col-md-24">
+                              <button type="button" class="btn btn-default col-md-12" data-toggle="collapse" data-target="#mantencion">
                                 Modificar Mantención
                               </button>
                           </div>
 
-                          <div class="col-md-11 collapse" id="mantencion" >
+                          <div class="col-md-12 collapse" id="mantencion" >
                               <div class="panel panel-primary">
                                   <div class="panel-heading panel-title">
                                     Modificar Mantención
@@ -331,12 +341,12 @@ if(isset($_SESSION["carguios"])){
                                       <table class="table table-striped">
                                         <thead>
                                           <tr>
-                                            <td>Tipo de mantención</td>
-                                            <td>Fecha de mantención</td>
-                                            <td>Responsable</td>
-                                            <td>Dirección</td>
-                                            <td>Comentarios/Observaciones</td>
-                                            <td>Modificar</td>
+                                            <th>Tipo de mantención</th>
+                                            <th>Fecha de mantención</th>
+                                            <th>Responsable</th>
+                                            <th>Dirección</th>
+                                            <th>Comentarios/Observaciones</th>
+                                            <th>Modificar</th>
                                           </tr>
                                         </thead>
                                         <tbody>
@@ -374,13 +384,13 @@ if(isset($_SESSION["carguios"])){
                           <br>
 
 
-                          <div class="col-md-20">
-                              <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#combustible">
+                          <div class="col-md-24">
+                              <button type="button" class="btn btn-default col-md-12" data-toggle="collapse" data-target="#combustible">
                                 Modificar Carguío de Combustible
                               </button>
                           </div>
 
-                          <div class="col-md-11 collapse" id="combustible" >
+                          <div class="col-md-12 collapse" id="combustible" >
                               <div class="panel panel-primary">
                                   <div class="panel-heading panel-title">
                                       Modificar Carguío de Combustible
@@ -408,16 +418,16 @@ if(isset($_SESSION["carguios"])){
 
                                           Responsable:<input id="nombre" type="text" name="txtresponsablecombustible" class="form-control" >
                                           Dirección: <textarea class="form-control" Type="textarea" name="txtDireccionCombustible" ></textarea>
-
+                                          Fecha:<input id="nombre" type="date" name="txtFechaCombustible" class="form-control" >
 
                                       </div>
                                       <div class="col-sm-6" style="margin-left: 60px;">
-                                        Fecha:<input id="nombre" type="date" name="txtFechaCombustible" class="form-control" >
+
                                         Cantidad:<input id="nombre" type="number" name="txtcantidad" class="form-control" >
                                         Precio/Litro:<input id="nombre" type="number" name="txtpreciolitro" class="form-control" >
                                         Comentarios/Observaciones: <textarea class="form-control" Type="textarea" name="txtcomentario" ></textarea>
 
-                                          <br><br>
+                                          <br>
                                         <center> <input type="submit" name="btncrear" value="Modificar carga" class="btn button-primary" style="width: 150px;"> <span ></span>
                                             <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
@@ -432,15 +442,14 @@ if(isset($_SESSION["carguios"])){
                                       <table class="table table-striped">
                                         <thead>
                                           <tr>
-                                            <td>Responsable de carguio</td>
-                                            <td>Fecha de carguio</td>
-                                            <td>Dirección de carguio</td>
-                                            <td>Tipo de combustible</td>
-                                            <td>Cantidad de litros</td>
-                                            <td>Modificar</td>
-                                            <td>Precio por litro</td>
-                                            <td>Observacion</td>
-                                            <td>Modificar</td>
+                                            <th>Responsable de carguio</th>
+                                            <th>Fecha de carguio</th>
+                                            <th>Dirección de carguio</th>
+                                            <th>Tipo de combustible</th>
+                                            <th>Cantidad de litros</th>
+                                            <th>Precio por litro</th>
+                                            <th>Observacion</th>
+                                            <th>Modificar</th>
                                           </tr>
                                         </thead>
                                         <tbody>

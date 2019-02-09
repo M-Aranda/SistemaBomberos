@@ -86,8 +86,17 @@
             </ul>
           </li>
         </ul>
-  <br>
-  <br>
+
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Despacho <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="centraldeAlarma.php">Central de Alarma</a></li>
+
+            </ul>
+          </li>
+        </ul>
+
         <br>
         <br>
         <br>
@@ -147,10 +156,11 @@
         <form action="controlador/ActualizarMaterialMenor.php" method="post">
 
 
-          Nombre Material: <input type="text" name="txtnombreMaterial" id="txtnombreMaterial" value="<?php echo $material->getNombre_material_menor();?>" disabled><br><br>
+          Nombre Material: &nbsp;&nbsp;&nbsp;&nbsp;
+          <input type="text" name="txtnombreMaterial" id="txtnombreMaterial" style="width:575px;" value="<?php echo $material->getNombre_material_menor();?>" disabled><br><br>
 
-          Entidad a Cargo:
-           <select name="cboEntidadACargoModificar" id="cboEntidadACargoModificar" disabled>
+          Entidad a Cargo:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           <select name="cboEntidadACargoModificar" id="cboEntidadACargoModificar" style="width:230px;" disabled>
                <?php
                    $entiPropietaria = $data->getEntidadACargo();
                    foreach ($entiPropietaria as $ep) {
@@ -167,8 +177,8 @@
                ?>
            </select>
 
-           Ubicacion Fisica:
-           <select name="cboxUbicacionModificar" id="cboxUbicacionModificar" disabled >
+             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Ubicacion Fisica:
+           <select name="cboxUbicacionModificar" id="cboxUbicacionModificar" disabled style="width:195px;" >
              <?php
              $ubicacionesFisicas = $data->getUbicacionFisica($material->getFk_entidad_a_cargo_material_menor());
              foreach ($ubicacionesFisicas as $ubi) {
@@ -188,14 +198,22 @@
 
 
 
-          Marca: <input type="text" name="txtmarca" value="<?php echo utf8_encode($material->getFabricante_material_menor());?>" disabled>
+          Marca: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <input type="text" name="txtmarca" value="<?php echo utf8_encode($material->getFabricante_material_menor());?>" disabled style="width:230px;">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
 
           Color:
-           <input Type="text" name="txtColor" value="<?php echo $material->getColor_material_menor();?>" disabled ><br><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           <input Type="text" name="txtColor" value="<?php echo $material->getColor_material_menor();?>" disabled  style="width:195px;"><br><br>
 
-           Proveedor: <input type="text" name="txtProveedor" value="<?php echo utf8_encode($material->getProveedor_material_menor());?>" disabled >
+           Proveedor: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           <input type="text" name="txtProveedor" value="<?php echo utf8_encode($material->getProveedor_material_menor());?>" disabled  style="width:230px;">
+           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
 
            Estado:
+           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
            <select name="cboEstadoMaterial" id="cboEstadoMaterial" disabled>
              <?php
                $estados = $data->getEstadosInventario();
@@ -216,15 +234,17 @@
            <br><br>
 
            Fecha de Caducidad:
-           <input type="date" name="txtCaducidad"  value="<?php echo $material->getFecha_de_caducidad_material_menor();?>" disabled>
+           <input type="date" name="txtCaducidad"  value="<?php echo $material->getFecha_de_caducidad_material_menor();?>" disabled style="width:230px;" >
 
+           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
            No aplica:
+           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
            <?php
            if ($material->getFecha_de_caducidad_material_menor()=='0000-00-00'){?>
-              <input type="checkbox" checked name="checknoaplica" disabled>
+              <input type="checkbox" checked name="checknoaplica" disabled style="width:100px;height:25px;">
               <?php
            }else{ ?>
-             <input type="checkbox" name="checknoaplica" disabled>
+             <input type="checkbox" name="checknoaplica" disabled style="width:100px;height:25px;">
           <?php
          }
            ?>
@@ -233,10 +253,11 @@
            <br><br>
 
 
-           Cantidad:
-           <input type="number" name="txtcantidadMaterial" value="<?php echo $material->getCantidad_material_menor();?>" disabled >
+           Cantidad:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           <input type="number" name="txtcantidadMaterial" value="<?php echo $material->getCantidad_material_menor();?>" disabled style="width:150px;" >
 
-           Medida: <input type="number" name="numMedida" value="<?php echo $material->getMedida_material_menor();?>" disabled> /
+           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           Medida: <input type="number" name="numMedida" value="<?php echo $material->getMedida_material_menor();?>" disabled style="width:100px;"> /
 
           <select name="cboxMedida" disabled>
             <?php

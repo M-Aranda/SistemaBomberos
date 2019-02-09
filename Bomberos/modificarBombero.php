@@ -1,8 +1,5 @@
 <!DOCTYPE html>
 
-
-
-
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -72,8 +69,17 @@
             </ul>
           </li>
         </ul>
-  <br>
-  <br>
+
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Despacho <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="centraldeAlarma.php">Central de Alarma</a></li>
+
+            </ul>
+          </li>
+        </ul>
+
         <br>
         <br>
         <br>
@@ -187,14 +193,14 @@
           <div class="container">
 
 
-          <div style="margin-left:100px;">
-             <div class="col-md-20">
-               <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#antecedentes">
+          <div style="margin-left: 52px;">
+             <div class="col-md-24">
+               <button type="button" class="btn btn-default col-md-12" data-toggle="collapse" data-target="#antecedentes">
                    Información Personal
                </button>
-           </div>
+            </div>
 
-           <div class="col-md-11 collapse" id="antecedentes">
+           <div class="col-md-12 collapse" id="antecedentes">
                <div class="panel panel-primary">
                    <div class="panel-heading panel-title">
                        Información Personal
@@ -292,12 +298,12 @@
            <!-- INFORMACION PERSONAL -->
            <!-- INFORMACION bomberilL -->
            <br><br>
-           <div class="col-md-20">
-               <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#bomberil">
+           <div class="col-md-24">
+               <button type="button" class="btn btn-default col-md-12" data-toggle="collapse" data-target="#bomberil">
                    Información Bomberil
                </button>
            </div>
-           <div class="col-md-11 collapse" id="bomberil">
+           <div class="col-md-12 collapse" id="bomberil">
                <div class="panel panel-primary">
                    <div class="panel-heading panel-title">
                        Información Bomberil
@@ -335,7 +341,7 @@
 
                          Compañía: <!-- <input class="form-control" type="text" name="txtcompania"> --> <!--Combobox-->
                          <!-- <input class="form-control" value="<?php /*echo $infoBomberil->getfkCompaniainformacionBomberil();*/?>" type="text" name="txtcompania" disabled> -->
-                         <select name="compania" style="width:175px; height:30px;" >
+                         <select name="compania" class="form-control"  >
                            <?php
                                $companias = $data->readSoloCompanias();
                                foreach ($companias as $c => $compania) {
@@ -353,9 +359,9 @@
 
                                ?>
                              </select>
-                         <br>
+
                          Fecha Ingreso:
-                         <br>
+
                          <input class="form-control" value="<?php echo $infoBomberil->getfechaIngresoinformacionBomberil();?>" type="date" name="txtfingreso" >
                          Nº Reg.General: <input class="form-control" value="<?php echo $infoBomberil->getNRegGeneralinformacionBomberil();?>" type="number" name="txtgeneral" >
                        </div>
@@ -427,12 +433,12 @@
            <!-- INFORMACION laboral -->
            <br>
            <br>
-           <div class="col-md-20">
-               <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#laboral">
+           <div class="col-md-24">
+               <button type="button" class="btn btn-default col-md-12" data-toggle="collapse" data-target="#laboral">
                    Información Laboral
                </button>
            </div>
-           <div class="col-md-11 collapse" id="laboral">
+           <div class="col-md-12 collapse" id="laboral">
                <div class="panel panel-primary">
                    <div class="panel-heading panel-title">
                        Información Laboral
@@ -472,12 +478,12 @@
            <!-- INFORMACION medica -->
            <br>
            <br>
-           <div class="col-md-20">
-               <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#medica">
+           <div class="col-md-24">
+               <button type="button" class="btn btn-default col-md-12" data-toggle="collapse" data-target="#medica">
                    Informacion Médica
                </button>
            </div>
-           <div class="col-md-11 collapse" id="medica">
+           <div class="col-md-12 collapse" id="medica">
                <div class="panel panel-primary">
                    <div class="panel-heading panel-title">
                        Informacion Médica
@@ -580,12 +586,12 @@
            <!-- INFORMACION Familiar -->
            <br>
            <br>
-           <div class="col-md-20">
-               <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#familiar">
+           <div class="col-md-24">
+               <button type="button" class="btn btn-default col-md-12" data-toggle="collapse" data-target="#familiar">
                    Información Familiar
                </button>
            </div>
-           <div class="col-md-11 collapse" id="familiar">
+           <div class="col-md-12 collapse" id="familiar">
                <div class="panel panel-primary">
                    <div class="panel-heading panel-title">
                        Información Familiar
@@ -613,17 +619,13 @@
                            ?>
                          </select>
                          <br>
-                         <input class="form-control" value="" type="hidden" id="idPersonalFamiliar" name="idPersonalFamiliar">
+                    <!--     <input class="form-control" value="" type="hidden" id="idPersonalFamiliar" name="idPersonalFamiliar">
                          <center> <input type="submit" name="btninfoFamiliar" value="Crear" class="btn button-primary" style="width: 150px;"> <span ></span>
-                             <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
-
+                     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>
+                            -->
                          </center>
 
                          </form>
-
-
-
-
 
                          <!-- Nivel de actividad fisica: <input class="form-control" type="text" name="txtactvfisica"> -->
                          <table class="table table-striped">
@@ -662,6 +664,12 @@
                       </div>
                       <div class="col-md-6">
                          <br><br><br><br><br><br>
+                         <input class="form-control" value="" type="hidden" id="idPersonalFamiliar" name="idPersonalFamiliar">
+                         <input type="submit" name="btninfoFamiliar" value="Crear" class="btn button-primary" style="width: 150px;"> <span ></span>
+                             <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
+
+
+
                       </div>
 
                    </div>
@@ -673,12 +681,12 @@
            <br>
            <br>
 
-           <div class="col-md-20">
-               <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#academica">
+           <div class="col-md-24">
+               <button type="button" class="btn btn-default col-md-12" data-toggle="collapse" data-target="#academica">
                    Informacion Académica
                </button>
            </div>
-           <div class="col-md-11 collapse" id="academica">
+           <div class="col-md-12 collapse" id="academica">
                <div class="panel panel-primary">
                    <div class="panel-heading panel-title">
                        Informacion Académica
@@ -706,10 +714,10 @@
                            </select>
 
 
-                           <input class="form-control" value="" type="hidden" id="idPersonalAcadem" name="idPersonalAcadem">
+                        <!--   <input class="form-control" value="" type="hidden" id="idPersonalAcadem" name="idPersonalAcadem">
                            <br>
                            <center> <input type="submit" name="btninfoAcademica" value="Crear" class="btn button-primary" style="width: 150px;"> <span ></span></center>
-
+                         -->
                            </form>
 
 
@@ -750,10 +758,11 @@
 
                       </div>
                       <div class="col-md-6">
-                         <br><br><br><br><br><br>
-                              <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
+                         <br><br><br><br><br>
+                         <input class="form-control" value="" type="hidden" id="idPersonalAcadem" name="idPersonalAcadem">
+                         <br>
+                         <input type="submit" name="btninfoAcademica" value="Crear" class="btn button-primary" style="width: 150px;"> <span ></span></center>
 
-                          </center>
 
                       </div>
                    </div>
@@ -765,12 +774,12 @@
                <br>
                <br>
 
-               <div class="col-md-20">
-                   <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#estandar">
+               <div class="col-md-24">
+                   <button type="button" class="btn btn-default col-md-12" data-toggle="collapse" data-target="#estandar">
                        Información Entrenamiento Estandar
                    </button>
                </div>
-               <div class="col-md-11 collapse" id="estandar">
+               <div class="col-md-12 collapse" id="estandar">
                    <div class="panel panel-primary">
                        <div class="panel-heading panel-title">
                            Información Estandar
@@ -797,8 +806,8 @@
                                ?>
                                </select>
                                <br>
-                               <center> <input type="submit" name="btninfoEstandar" value="Crear" class="btn button-primary" style="width: 150px;"> <span ></span></center>
-
+                            <!--   <center> <input type="submit" name="btninfoEstandar" value="Crear" class="btn button-primary" style="width: 150px;"> <span ></span></center>
+                            -->
                              </form>
 
 
@@ -834,7 +843,8 @@
 
                           </div>
                           <div class="col-md-6">
-                             <br><br><br><br><br><br>
+                             <br><br><br><br><br>
+                                <center> <input type="submit" name="btninfoEstandar" value="Crear" class="btn button-primary" style="width: 150px;"> <span ></span></center>
 
                               </center>
 
@@ -849,17 +859,17 @@
                <br>
                <br>
 
-               <div class="col-md-20">
-                   <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#historica">
+               <div class="col-md-24">
+                   <button type="button" class="btn btn-default col-md-12" data-toggle="collapse" data-target="#historica">
                        Información Histórica
                    </button>
                </div>
-               <div class="col-md-11 collapse" id="historica">
+               <div class="col-md-12 collapse" id="historica">
                    <div class="panel panel-primary">
                        <div class="panel-heading panel-title">
                            Información Histórica
                        </div>
-                       <div class="panel-body" style="margin-left: -20px;">
+                       <div class="panel-body" style="margin-left: -10px;">
                            <div class="col-sm-6">
                              <form action="controlador/CrearInformacionHistorica.php" method="post">
 
@@ -882,10 +892,19 @@
                              Cuerpo: <input type="text" name="txtcuerpoHistorico" class="form-control" >
                              Compañia:<input type="text" name="txtCompania" class="form-control" >
                              Fecha: <input type="date" name="txtfechaCambioInfoHistorica" class="form-control" >
-                             Premio: <input type="text" name="txtPremioInforHistorica" class="form-control" >
-                             Cargo: <input type="text" name="cboxCargo" class="form-control" >
-                             Motivo: <input type="text" name="txtMotivo" class="form-control" >
-                             Detalle: <input type="text" name="txtDetalleHistorico" class="form-control" >
+
+                           </div>
+
+                             <div class="col-md-6">
+
+
+                               Premio: <input type="text" name="txtPremioInforHistorica" class="form-control" >
+                               Cargo: <input type="text" name="cboxCargo" class="form-control" >
+                               Motivo: <input type="text" name="txtMotivo" class="form-control" >
+                               Detalle: <input type="text" name="txtDetalleHistorico" class="form-control" >
+
+                               <br><br>
+                             </div>
 
 
                              <center> <input type="submit" name="btninfohistorica" value="Crear" class="btn button-primary" style="width: 150px;"> <span ></span>
@@ -937,31 +956,24 @@
 
                           </div>
 
-                          <div class="col-md-6">
-                             <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-                                  <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
-                              </center>
-
-                          </div>
 
 
 
                        </div>
 
                    </div>
-               </div>
                  <!-- INFORMACION historica -->
                    <!-- INFORMACION servicio -->
                    <br>
                    <br>
 
-                   <div class="col-md-20">
-                       <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#cargos">
+                   <div class="col-md-24">
+                       <button type="button" class="btn btn-default col-md-12" data-toggle="collapse" data-target="#cargos">
                            Información de Cargos
                        </button>
                    </div>
-                   <div class="col-md-11 collapse" id="cargos">
+                   <div class="col-md-12 collapse" id="cargos">
                        <div class="panel panel-primary">
                            <div class="panel-heading panel-title">
                              <form action="controlador/CrearInformacionDeCargos.php" method="post">
@@ -978,15 +990,54 @@
                                    Nombre: <input type="text" class="form-control" name="txtnombrecargo">
                                    Marca: <input type="text" class="form-control" name="txtmarcacargo">
                                    Talla: <input type="text" class="form-control" name="txttalla">
-                                   Serie: <input type="text" class="form-control" name="txtserie">
-                                   Fecha: <input type="date" class="form-control" name="txtfechacargo">
+
+                                   <br><br><br>
+                                   <table class="table table-striped">
+                                       <thead>
+                                         <tr>
+                                           <th>Nombre</th>
+                                           <th>Marca</th>
+                                           <th>Serie</th>
+                                           <th>Talla</th>
+                                           <th>Fecha</th>
+                                        </tr>
+                                       </thead>
+                                       <tbody>
+                                         <?php
+                                         if(isset($infoHistorica)){
+                                         foreach ($infoHistorica as $iHistorica => $info) {
+                                      ?>
+                                      <tr>
+                                        <td><?php echo utf8_encode($d->buscarNombreDeRegionPorId($info->getfkRegioninformacionHistorica()));   ?></td>
+                                        <td><?php echo $info->getcuerpo();   ?></td>
+                                        <td><?php echo $info->getcompania();  ?></td>
+                                        <td><?php
+                                        $fechaSinConvertir = $info->getfechaDeCambio();
+                                        $fechaConvertida = date("d-m-Y", strtotime($fechaSinConvertir));
+                                        echo $fechaConvertida;   ?></td>
+                                        <td><?php echo $info->getPremio();   ?></td>
+                                      </tr>
+
+
+                                         <?php
+                                       }
+                                       }
+                                           ?>
+
+
+                                       </tbody>
+                                     </table>
+
 
                               </div>
 
 
 
                               <div class="col-md-6">
-                                 <br><br><br><br><br><br><br><br><br><br><br>
+                                <br>
+                                Serie: <input type="text" class="form-control" name="txtserie">
+                                Fecha: <input type="date" class="form-control" name="txtfechacargo">
+                                 <br>
                                   <center> <input type="submit" name="btninfohistorica" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span></center>
                                 </form>
 

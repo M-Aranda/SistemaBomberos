@@ -16,6 +16,20 @@
 
   </head>
 
+  <?php
+/*
+require_once("model/Data.php");
+require_once("model/Tbl_Usuario.php");
+$dataUsuario= new Data();
+session_start();
+if($_SESSION["usuarioIniciado"]!=null){
+  $u=$_SESSION["usuarioIniciado"];
+  if($dataUsuario->verificarSiUsuarioTienePermiso($u,1)==0){
+    header("location: paginaError.php");
+  }
+}*/
+?>
+
 <body  background="images/fondofichaintranet.jpg">
 
     <br>
@@ -80,7 +94,6 @@
           </li>
         </ul>
 
-
         <br>
         <br>
         <br>
@@ -110,18 +123,59 @@
     width: 75%;
     padding-left: 5%;
     padding-top: -100%;
-    margin-top: -600px;
+    margin-top: -589px;
     margin-bottom: -1000px;
+    width: 900px;
+    height: 550px;
     ">
 
 <style>
 
-#transparencia{
-    opacity: .85;
-    -moz-opacity: .85;
-    filter: alpha(opacity=85);
+
+#cuadro1{
+
+  width: 400px;
+  height: 120px;
+  border: 5px black outset;
+  margin-top: 0px;
+  border-radius: 80px 80px 80px 80px
 
 }
+
+
+#cuadro2{
+
+  width: 350px;
+  height: 120px;
+  margin-top: -120px;
+  margin-left: 450px;
+  border: 5px black outset;
+  border-radius: 80px 80px 80px 80px
+
+}
+
+#cuadro3{
+
+  width: 800px;
+  height: 120px;
+  margin-top: 10px;
+  border: 5px black outset;
+  border-radius: 80px 80px 80px 80px
+
+
+}
+
+#cuadro4{
+
+  width: 800px;
+  height: 120px;
+  margin-top: 20px;
+  border: 5px black outset;
+  border-radius: 80px 80px 80px 80px
+
+
+}
+
 
 </style>
 <?php
@@ -131,22 +185,66 @@
 
 ?>
 
-<div style="width: 800px" style="height: 900px">
+
+<div id="cuadro1">
     <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
       <div class="container">
 
-      <div class="form-group" style="margin-left:50px;">
 
-        Usted no posee los permisos necesarios para acceder!!
+      <div class="form-group" style="margin-left:0px;">
 
       </div>
 
      </div>
    </div>
- </div>
+
 </div>
 
-<script src="javascript/borrarVariablesEnSesionAlCargarPagina.js"></script>
+
+ <div id="cuadro2" >
+     <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
+       <div class="container">
+
+       <div class="form-group" style="margin-left:0px;">
+
+
+
+       </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="cuadro3">
+      <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
+        <div class="container">
+
+        <div class="form-group" style="margin-left:0px;">
+
+
+
+        </div>
+
+       </div>
+     </div>
+   </div>
+
+
+   <div id="cuadro4">
+       <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
+         <div class="container">
+
+         <div class="form-group" style="margin-left:0px;">
+
+
+
+         </div>
+
+        </div>
+      </div>
+    </div>
+
+
 
   </body>
 </html>

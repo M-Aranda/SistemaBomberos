@@ -69,8 +69,17 @@
             </ul>
           </li>
         </ul>
-  <br>
-  <br>
+
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Despacho <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="centraldeAlarma.php">Central de Alarma</a></li>
+
+            </ul>
+          </li>
+        </ul>
+
         <br>
         <br>
         <br>
@@ -144,6 +153,12 @@
         Fecha Inicio:&nbsp;&nbsp;<input type="date"  name="txtfechainicio" style="width: 180px;">  /
         Fecha Termino: <input type="date"  name="txtfechafinal" style="width: 180px;">
         <br><br>
+
+
+        <input type="submit" name="btnbuscar" value="Buscar Reporte" class="btn button-primary" style="width: 150px;"> <span ></span>
+
+
+
     <!--    Tipo Servicio:
         <select  name="cboTiposDeServicios" style="width: 180px;">
        <?php

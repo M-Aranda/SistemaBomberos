@@ -73,8 +73,18 @@
             </ul>
           </li>
         </ul>
-  <br>
-  <br>
+
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Despacho <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="centraldeAlarma.php">Central de Alarma</a></li>
+
+            </ul>
+          </li>
+        </ul>
+
+  
         <br>
         <br>
         <br>
@@ -175,14 +185,14 @@
           <div class="container">
 
 
-          <div style="margin-left:100px;">
-             <div class="col-md-20">
-               <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#antecedentes">
+          <div style="margin-left:52px;">
+             <div class="col-md-24">
+               <button type="button" class="btn btn-default col-md-12" data-toggle="collapse" data-target="#antecedentes">
                    Información Personal
                </button>
            </div>
 
-           <div class="col-md-11 collapse" id="antecedentes">
+           <div class="col-md-12 collapse" id="antecedentes">
                <div class="panel panel-primary">
                    <div class="panel-heading panel-title">
                        Información Personal
@@ -279,12 +289,12 @@
            <!-- INFORMACION PERSONAL -->
            <!-- INFORMACION bomberilL -->
            <br><br>
-           <div class="col-md-20">
-               <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#bomberil">
+           <div class="col-md-24">
+               <button type="button" class="btn btn-default col-md-12" data-toggle="collapse" data-target="#bomberil">
                    Información Bomberil
                </button>
            </div>
-           <div class="col-md-11 collapse" id="bomberil">
+           <div class="col-md-12 collapse" id="bomberil">
                <div class="panel panel-primary">
                    <div class="panel-heading panel-title">
                        Información Bomberil
@@ -317,7 +327,7 @@
 
                          Compañía: <!-- <input class="form-control" type="text" name="txtcompania"> --> <!--Combobox-->
                          <!-- <input class="form-control" value="<?php /*echo $infoBomberil->getfkCompaniainformacionBomberil();*/?>" type="text" name="txtcompania" disabled> -->
-                         <select name="txtcompania" style="width:175px; height:30px;" disabled>
+                         <select name="txtcompania" class="form-control"  disabled>
                            <?php
                                $companias = $data->readSoloCompanias();
                                foreach ($companias as $c => $compania) {
@@ -407,12 +417,12 @@
            <!-- INFORMACION laboral -->
            <br>
            <br>
-           <div class="col-md-20">
-               <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#laboral">
+           <div class="col-md-24">
+               <button type="button" class="btn btn-default col-md-12" data-toggle="collapse" data-target="#laboral">
                    Información Laboral
                </button>
            </div>
-           <div class="col-md-11 collapse" id="laboral">
+           <div class="col-md-12 collapse" id="laboral">
                <div class="panel panel-primary">
                    <div class="panel-heading panel-title">
                        Información Laboral
@@ -477,12 +487,12 @@
            <!-- INFORMACION medica -->
            <br>
            <br>
-           <div class="col-md-20">
-               <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#medica">
+           <div class="col-md-24">
+               <button type="button" class="btn btn-default col-md-12" data-toggle="collapse" data-target="#medica">
                    Informacion Médica
                </button>
            </div>
-           <div class="col-md-11 collapse" id="medica">
+           <div class="col-md-12 collapse" id="medica">
                <div class="panel panel-primary">
                    <div class="panel-heading panel-title">
                        Informacion Médica
@@ -575,12 +585,12 @@
            <!-- INFORMACION Familiar -->
            <br>
            <br>
-           <div class="col-md-20">
-               <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#familiar">
+           <div class="col-md-24">
+               <button type="button" class="btn btn-default col-md-12" data-toggle="collapse" data-target="#familiar">
                    Información Familiar
                </button>
            </div>
-           <div class="col-md-11 collapse" id="familiar">
+           <div class="col-md-12 collapse" id="familiar">
                <div class="panel panel-primary">
                    <div class="panel-heading panel-title">
                        Información Familiar
@@ -637,12 +647,12 @@
            <br>
            <br>
 
-           <div class="col-md-20">
-               <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#academica">
+           <div class="col-md-24">
+               <button type="button" class="btn btn-default col-md-12" data-toggle="collapse" data-target="#academica">
                    Informacion Académica
                </button>
            </div>
-           <div class="col-md-11 collapse" id="academica">
+           <div class="col-md-12 collapse" id="academica">
                <div class="panel panel-primary">
                    <div class="panel-heading panel-title">
                        Informacion Académica
@@ -692,12 +702,12 @@
                <br>
                <br>
 
-               <div class="col-md-20">
-                   <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#estandar">
+               <div class="col-md-24">
+                   <button type="button" class="btn btn-default col-md-12" data-toggle="collapse" data-target="#estandar">
                        Información Entrenamiento Estandar
                    </button>
                </div>
-               <div class="col-md-11 collapse" id="estandar">
+               <div class="col-md-12 collapse" id="estandar">
                    <div class="panel panel-primary">
                        <div class="panel-heading panel-title">
                            Información Estandar
@@ -748,12 +758,12 @@
                <br>
                <br>
 
-               <div class="col-md-20">
-                   <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#historica">
+               <div class="col-md-24">
+                   <button type="button" class="btn btn-default col-md-12" data-toggle="collapse" data-target="#historica">
                        Información Histórica
                    </button>
                </div>
-               <div class="col-md-11 collapse" id="historica">
+               <div class="col-md-12 collapse" id="historica">
                    <div class="panel panel-primary">
                        <div class="panel-heading panel-title">
                            Información Histórica
@@ -824,12 +834,12 @@
                <br>
                <br>
 
-               <div class="col-md-20">
-                   <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#cargos">
+               <div class="col-md-24">
+                   <button type="button" class="btn btn-default col-md-12" data-toggle="collapse" data-target="#cargos">
                        Información de Cargos
                    </button>
                </div>
-               <div class="col-md-11 collapse" id="cargos">
+               <div class="col-md-12 collapse" id="cargos">
                    <div class="panel panel-primary">
                        <div class="panel-heading panel-title">
                          <form action="controlador/CrearInformacionHistorica.php" method="post">

@@ -69,8 +69,18 @@
             </ul>
           </li>
         </ul>
-  <br>
-  <br>
+
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Despacho <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="centraldeAlarma.php">Central de Alarma</a></li>
+
+            </ul>
+          </li>
+        </ul>
+
+
         <br>
         <br>
         <br>
@@ -163,7 +173,8 @@
       }*/
         ?>
       </select> -->
-        <br><br>
+
+        <input type="submit" name="btnbuscar" value="Buscar Reporte" class="btn button-primary" style="width: 150px;" onclick="msg()"> <span ></span>
 
 
         <table class="table table-striped">
@@ -176,9 +187,9 @@
             </thead>
             <tbody>
               <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>john@example.com</td>
+                <td></td>
+                <td></td>
+                <td></td>
 
               </tr>
 

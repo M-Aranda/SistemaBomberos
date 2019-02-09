@@ -81,8 +81,17 @@
             </ul>
           </li>
         </ul>
-  <br>
-  <br>
+
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Despacho <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="centraldeAlarma.php">Central de Alarma</a></li>
+
+            </ul>
+          </li>
+        </ul>
+
         <br>
         <br>
         <br>
@@ -152,15 +161,15 @@
         <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
           <div class="container">
 
-          <div style="margin-left:100px;">
+          <div style="margin-left:52px;">
 
-                          <div class="col-md-20">
-                              <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#unidades">
+                          <div class="col-md-24">
+                              <button type="button" class="btn btn-default col-md-12" data-toggle="collapse" data-target="#unidades">
                                 Ver Unidad
                               </button>
                           </div>
 
-                          <div class="col-md-11 collapse" id="unidades" >
+                          <div class="col-md-12 collapse" id="unidades" >
                               <div class="panel panel-primary">
                                   <div class="panel-heading panel-title">
                                       Ver Unidad
@@ -249,27 +258,22 @@
                                         ?>
 
                                     </select>
-                                          <br><br>
-
-
-                                                                <br>
                                       </div>
-                                      <br>
-                                      <br>
-
-
                                   </div>
                               </div>
                           </div>
 
+                          <br>
+                          <br>
 
-                          <div class="col-md-20">
-                              <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#mantencion">
+                          <!--  Mantencion -->
+                          <div class="col-md-24">
+                              <button type="button" class="btn btn-default col-md-12" data-toggle="collapse" data-target="#mantencion">
                                 Mantenciones
                               </button>
                           </div>
 
-                          <div class="col-md-11 collapse" id="mantencion" >
+                          <div class="col-md-12 collapse" id="mantencion" >
                               <div class="panel panel-primary">
                                   <div class="panel-heading panel-title">
                                       Mantenciones
@@ -281,11 +285,11 @@
                                         <table class="table table-striped">
                                           <thead>
                                             <tr>
-                                              <td>Tipo de mantención</td>
-                                              <td>Fecha de Mantención</td>
-                                              <td>Responsable</td>
-                                              <td>Dirección</td>
-                                              <td>Comentarios/Observaciones</td>
+                                              <th>Tipo de mantención</th>
+                                              <th>Fecha de Mantención</th>
+                                              <th>Responsable</th>
+                                              <th>Dirección</th>
+                                              <th>Comentarios/Observaciones</th>
                                             </tr>
                                           </thead>
                                           <tbody>
@@ -312,28 +316,20 @@
                                         </table>
 
                                       </div>
-                                      <div class="col-sm-6" style="margin-left: 60px;">
-                                          <br><br>
-                                                                <br>
-                                      </div>
-                                      <br>
-                                      <br>
-
-
-                                  </div>
+                                    </div>
                               </div>
                           </div>
 
                           <br>
                           <br>
-
-
-                          <div class="col-md-20">
-                              <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#combustible">
+                            <!--  Mantencion -->
+                          <!--  Cargio de Combustible -->
+                          <div class="col-md-24">
+                              <button type="button" class="btn btn-default col-md-12" data-toggle="collapse" data-target="#combustible">
                                 Carguíos de Combustible
                               </button>
                           </div>
-                          <div class="col-md-11 collapse" id="combustible" >
+                          <div class="col-md-12 collapse" id="combustible" >
                               <div class="panel panel-primary">
                                   <div class="panel-heading panel-title">
                                       Carguíos de Combustible
@@ -344,13 +340,13 @@
                                         <table class="table table-striped">
                                           <thead>
                                             <tr>
-                                              <td>Responsable</td>
-                                              <td>Fecha de Carguio</td>
-                                              <td>Direccion</td>
-                                              <td>Tipo de combustible</td>
-                                              <td>Cantidad de litros</td>
-                                              <td>Precio por litro</td>s
-                                              <td>Observaciones</td>
+                                              <th>Responsable</th>
+                                              <th>Fecha de Carguio</th>
+                                              <th>Direccion</th>
+                                              <th>Tipo de combustible</th>
+                                              <th>Cantidad de litros</th>
+                                              <th>Precio por litro</th>
+                                              <th>Observaciones</th>
                                             </tr>
                                           </thead>
                                           <tbody>
@@ -375,20 +371,16 @@
                                       </table>
 
                                       </div>
-                                      <div class="col-sm-6" style="margin-left: 60px;">
-
-
-                                      </div>
-                                      <br>
-                                      <br>
-
-
                                   </div>
                               </div>
                           </div>
 
+                            <!--  Cargio de Combustible -->
 
-<br><br><br><br><br>
+
+<br><br>
+
+
 
 
 
@@ -396,6 +388,7 @@
        </div>
    </div>
  </div>
+</div>
  <script src="javascript/borrarVariablesEnSesionAlCargarPagina.js"></script>
 
   </body>
