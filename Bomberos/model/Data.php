@@ -1069,6 +1069,34 @@ public function readInfoHistorica ($idABuscar){
 }
 
 
+public function getMaterialesMenoresPorFkUbicacionFisica($fkUbicacionFisica){
+  $this->c->conectar();
+  $query="SELECT * FROM tbl_material_menor WHERE fk_ubicacion_fisica_material_menor=".$fkUbicacionFisica.";";
+  $rs = $this->c->ejecutar($query);
+  $listado = array();
+  while($reg = $rs->fetch_array()){
+
+       $obj = new Tbl_MaterialMenor();
+       $obj->setId_material_menor($reg[0]);
+       $obj->setNombre_material_menor($reg[1]);
+       $obj->setFk_entidad_a_cargo_material_menor($reg[2]);
+       $obj->setColor_material_menor($reg[3]);
+       $obj->setCantidad_material_menor($reg[4]);
+       $obj->setMedida_material_menor($reg[5]);
+       $obj->setFk_unidad_de_medida_material_menor($reg[6]);
+       $obj->setFk_ubicacion_fisica_material_menor($reg[7]);
+       $obj->setFabricante_material_menor($reg[8]);
+       $obj->setFecha_de_caducidad_material_menor($reg[9]);
+       $obj->setProveedor_material_menor($reg[10]);
+       $obj->setFkEstadoMaterialMenor($reg[11]);
+
+       $listado[]=$obj;
+   }
+   $this->c->desconectar();
+   return $listado;
+}
+
+
 
 public function buscarNombreDeRegionPorId ($idABuscar){
 $this->c->conectar();

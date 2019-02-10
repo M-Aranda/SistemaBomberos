@@ -15,10 +15,4 @@ foreach ($ubicacionesFisicas as $ubi) {
 }
 
 
-
-
-
-
-
-
 ?>

@@ -112,7 +112,7 @@ if(isset($_SESSION['seEstaModificandoUBombero'])){
             </ul>
           </li>
         </ul>
-        
+
         <br>
         <br>
         <br>
@@ -738,10 +738,49 @@ if(isset($_SESSION['seEstaModificandoUBombero'])){
                                       Talla: <input type="text" class="form-control" name="txttalla">
                                       Serie: <input type="text" class="form-control" name="txtserie">
                                       Fecha: <input type="date" class="form-control" name="txtfechacargo">
+                                      <br>
+
+                                      Entidad a Cargo:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                       <select name="cboEntidadACargo" id="cboEntidadACargo" onchange="actualizarComboBox()" style="width:230px;">
+                                           <?php
+                                               $entiPropietaria = $data->getEntidadACargo();
+                                               foreach ($entiPropietaria as $ep) {
+                                                   echo "<option value='".$ep->getIdEntidadACargo()."'>";
+                                                       echo utf8_encode($ep->getNombreEntidadACargo());
+                                                   echo"</option>";
+                                               }
+                                           ?>
+                                       </select>
+
+                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Ubicacion Fisica:
+                                       <select name="cboxUbicacion" id="cboxUbicacion" onchange="actualizarComboBoxDeMateriales()" style="width:195px;">
+                                         <?php
+                                         $ubicacionesFisicas = $data->getUbicacionFisica(1);
+                                         foreach ($ubicacionesFisicas as $ubi) {
+                                           echo "<option value='".$ubi->getIdUbicacionFisica()."'>";
+                                           echo utf8_encode($ubi->getNombreUbicacionFisica());
+                                           echo"</option>";
+                                         }
+                                         ?>
+
+                                       </select>
+                                       <br>
+                                       Material menor a asignar:
+                                       <select name="cboMaterialesDisponibles" id="cboMaterialesDisponibles" style="width:195px;">
+                                         <?php
+                                         $materialesDisponibles = $data->getMaterialesMenoresPorFkUbicacionFisica(1);
+                                         foreach ($materialesDisponibles as $mat) {
+                                           echo "<option value='".$mat->getId_material_menor()."'>";
+                                           echo utf8_encode($mat->getNombre_material_menor());
+                                           echo"</option>";
+                                         }
+                                         ?>
+                                       </select>
+                                       <br>
+
+                                       Cantidad asignada: <input type="number" name="cantidadDeMaterialesAsignados">
 
                                  </div>
-
-
 
                                  <div class="col-md-6">
                                     <br><br><br><br><br><br><br><br><br><br><br>
@@ -771,6 +810,46 @@ intenta crear al bombero, llamandolo por su nombre, pero el mensaje de exito sol
    var message = document.getElementById("nombreDeBomberoACrear").value;
    alert("Creando a "+ message);
  }
+
+ function actualizarComboBox(){
+      var val= document.getElementById("cboEntidadACargo").value;
+
+      $.ajax({
+        url: "buscarUbicacionFisica.php",
+        type: "POST",
+        data:{"datos":val}
+      }).done(function(data) {
+        console.log(data);
+        $('#cboxUbicacion')
+        .find('option')
+        .remove()
+        .end();
+        $('#cboxUbicacion').append(data);
+
+      });
+
+    }
+
+
+
+    function actualizarComboBoxDeMateriales(){
+         var val= document.getElementById("cboxUbicacion").value;
+
+         $.ajax({
+           url: "buscarMaterialMenorPorFkDeUbicacionFisica.php",
+           type: "POST",
+           data:{"datos":val}
+         }).done(function(data) {
+           console.log(data);
+           $('#cboMaterialesDisponibles')
+           .find('option')
+           .remove()
+           .end();
+           $('#cboMaterialesDisponibles').append(data);
+
+         });
+
+       }
 
      $("form").submit(function(){
        alert("Operación exitosa")
