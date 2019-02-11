@@ -963,7 +963,8 @@ while($reg = $rs->fetch_array()){
      $info->setTalla_informacionDeCargos($reg[3]);
      $info->setSerie_informacionDeCargos($reg[4]);
      $info->setFecha_informacionDeCargos($reg[6]);
-     $info->setFk_personal_informacionDeCargos($reg[7]);
+     $info->setCantidadAsignada_informacionDeCargos($reg[7]);
+     $info->setFk_personal_informacionDeCargos($reg[8]);
 
      $listado[]=$info;
  }
@@ -1071,7 +1072,7 @@ public function readInfoHistorica ($idABuscar){
 
 public function getMaterialesMenoresPorFkUbicacionFisica($fkUbicacionFisica){
   $this->c->conectar();
-  $query="SELECT * FROM tbl_material_menor WHERE fk_ubicacion_fisica_material_menor=".$fkUbicacionFisica.";";
+  $query="SELECT * FROM tbl_material_menor WHERE fk_ubicacion_fisica_material_menor=".$fkUbicacionFisica." AND cantidad_material_menor>0;";
   $rs = $this->c->ejecutar($query);
   $listado = array();
   while($reg = $rs->fetch_array()){
@@ -1627,6 +1628,26 @@ public function getEstadosInventario (){
 }
 
 
+public function actualizarStockDeMaterialMenor($idMaterial, $cantidadNueva ){
+$query="UPDATE tbl_material_menor SET cantidad_material_menor=".$cantidadNueva." WHERE id_material_menor=".$idMaterial."; ";
+  echo $query;
+  $this->c->conectar();
+  $this->c->ejecutar($query);
+  $this->c->desconectar();
+}
+
+public function getStockDeMaterial ($idDeMaterial){
+  $this->c->conectar();
+  $query="SELECT cantidad_material_menor FROM tbl_material_menor WHERE id_material_menor=".$idDeMaterial.";";
+  $rs = $this->c->ejecutar($query);
+  while($reg = $rs->fetch_array()){
+       $obj=$reg[0];
+   }
+   $this->c->desconectar();
+   return $obj;
+}
+
+/*
 
 public function borrarRegistrosBomberilesSegunFkPersonal($fkPersonal){
   $query="DELETE FROM tbl_informacionBomberil WHERE fk_informacion_personal__informacionBomberil=".$fkPersonal.";";
@@ -1664,7 +1685,7 @@ public function borrarRegistrosMedicos2SegunFkPersonal($fkPersonal){
   $this->c->desconectar();
 }
 
-
+*/
 
 
 

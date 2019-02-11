@@ -293,6 +293,7 @@ marca_informacionDeCargos VARCHAR (500),
 talla_informacionDeCargos VARCHAR (500),
 serie_informacionDeCargos VARCHAR (500),
 fecha_informacionDeCargos VARCHAR (500),
+cantidadAsignada_informacionDeCargos INT,
 fk_personal_informacionDeCargos INT,
 FOREIGN KEY (fk_personal_informacionDeCargos) REFERENCES tbl_informacionPersonal (id_informacionPersonal),
 PRIMARY KEY (id_informacionDeCargos)

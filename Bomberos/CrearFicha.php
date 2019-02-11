@@ -766,7 +766,7 @@ if(isset($_SESSION['seEstaModificandoUBombero'])){
                                        </select>
                                        <br>
                                        Material menor a asignar:
-                                       <select name="cboMaterialesDisponibles" id="cboMaterialesDisponibles" style="width:195px;">
+                                       <select name="cboMaterialesDisponibles" id="cboMaterialesDisponibles" style="width:195px;" onchange="actualizarStockVisible()">
                                          <?php
                                          $materialesDisponibles = $data->getMaterialesMenoresPorFkUbicacionFisica(1);
                                          foreach ($materialesDisponibles as $mat) {
@@ -778,13 +778,13 @@ if(isset($_SESSION['seEstaModificandoUBombero'])){
                                        </select>
                                        <br>
 
-                                       Cantidad asignada: <input type="number" name="cantidadDeMaterialesAsignados">
+                                       Cantidad a asignar: <input type="number" id="cantidadDeMaterialesAsignados" name="cantidadDeMaterialesAsignados" min="1" max="10">
 
                                  </div>
 
                                  <div class="col-md-6">
                                     <br><br><br><br><br><br><br><br><br><br><br>
-                                     <center> <input type="submit" name="btninfohistorica" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                                     <center> <input type="submit" name="btnInfoCargos" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
 
                                      </center>
 
@@ -848,8 +848,16 @@ intenta crear al bombero, llamandolo por su nombre, pero el mensaje de exito sol
            $('#cboMaterialesDisponibles').append(data);
 
          });
+       }
+
+       function actualizarStockVisible(){
+
+         var valorMaximo = document.getElementById("cantidadDeMaterialesAsignados");
+         valorMaximo.setAttribute("max",2);
 
        }
+
+
 
      $("form").submit(function(){
        alert("Operación exitosa")

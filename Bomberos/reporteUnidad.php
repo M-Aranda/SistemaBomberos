@@ -150,8 +150,8 @@
             ?>
         </select>
         <br><br>
-        Fecha Inicio:&nbsp;&nbsp;<input type="date"  name="txtfechainicio" style="width: 180px;">  /
-        Fecha Termino: <input type="date"  name="txtfechafinal" style="width: 180px;">
+        Fecha Inicio:&nbsp;&nbsp;<input type="date" value="<?php echo date('Y-m-d'); ?>" name="txtfechainicio" style="width: 180px;">  /
+        Fecha Termino: <input type="date" value="<?php echo date('Y-m-d');?>" name="txtfechafinal" style="width: 180px;">
         <br><br>
 
 

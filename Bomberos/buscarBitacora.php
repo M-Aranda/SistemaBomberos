@@ -92,7 +92,7 @@ if($_SESSION["usuarioIniciado"]!=null){
             </ul>
           </li>
         </ul>
-  
+
         <br>
         <br>
         <br>
@@ -153,7 +153,8 @@ if($_SESSION["usuarioIniciado"]!=null){
         <span><h5 style="font-weight:bold;">Buscar por Fecha</h5></span>
         <form action="controlador/BuscarBomberoPorAlgunParametro.php" method="post">
 
-        <input type="date" name="txtBuscar"  placeholder="Buscar por fecha" style="height:30px;width: 175px;" >
+        <input type="date" name="txtBuscar"  value="<?php echo date('Y-m-d'); ?>"placeholder="Buscar por fecha" style="height:30px;width: 175px;" >
+
         <input type="hidden" name="tipoDeBusqueda" value="1">
         <input class="btn btn-default" type="submit" name="btnInfoPersonal" value="Buscar" class="btn button-primary" style="width: 100px; height:30px;" style="margin-top: 400px;" onclick="porNombre()">
       <!--  <button class="btn btn-default" name="btnBuscar" style="width: 100px; height:30px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Buscar</a> </button> -->
@@ -289,6 +290,8 @@ el valor del ultimo hidden con el numero que necesito en el handler
                                       console.log(data);
                                     });
                                       }
+
+
 
         </script>
         <script src="javascript/borrarVariablesEnSesionAlCargarPagina.js"></script>

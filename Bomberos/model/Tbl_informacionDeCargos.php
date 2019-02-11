@@ -8,6 +8,7 @@ Class Tbl_informacionDeCargos{
   private $talla_informacionDeCargos;
   private $serie_informacionDeCargos;
   private $fecha_informacionDeCargos;
+  private $cantidadAsignada_informacionDeCargos;
   private $fk_personal_informacionDeCargos;
 
   public function __construct(){
@@ -63,6 +64,15 @@ Class Tbl_informacionDeCargos{
       $this->fecha_informacionDeCargos = $fecha_informacionDeCargos;
   }
 
+
+  public function getCantidadAsignada_informacionDeCargos(){
+      return $this->cantidadAsignada_informacionDeCargos;
+  }
+
+  public function setCantidadAsignada_informacionDeCargos($cantidadAsignada_informacionDeCargos){
+      $this->cantidadAsignada_informacionDeCargos = $cantidadAsignada_informacionDeCargos;
+  }
+
   public function getFk_personal_informacionDeCargos(){
       return $this->fk_personal_informacionDeCargos;
   }
@@ -70,9 +80,6 @@ Class Tbl_informacionDeCargos{
   public function setFk_personal_informacionDeCargos($fk_personal_informacionDeCargos){
       $this->fk_personal_informacionDeCargos = $fk_personal_informacionDeCargos;
   }
-
-
-
 
 
 }
