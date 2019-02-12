@@ -766,7 +766,7 @@ if(isset($_SESSION['seEstaModificandoUBombero'])){
                                        </select>
                                        <br>
                                        Material menor a asignar:
-                                       <select name="cboMaterialesDisponibles" id="cboMaterialesDisponibles" style="width:195px;" onchange="actualizarStockVisible()">
+                                       <select name="cboMaterialesDisponibles" id="cboMaterialesDisponibles" style="width:195px;" onchange="actualizarStockDisponible()">
                                          <?php
                                          $materialesDisponibles = $data->getMaterialesMenoresPorFkUbicacionFisica(1);
                                          foreach ($materialesDisponibles as $mat) {
@@ -778,7 +778,7 @@ if(isset($_SESSION['seEstaModificandoUBombero'])){
                                        </select>
                                        <br>
 
-                                       Cantidad a asignar: <input type="number" id="cantidadDeMaterialesAsignados" name="cantidadDeMaterialesAsignados" min="1" max="10">
+                                       Cantidad a asignar: <input type="number" value="1" id="cantidadDeMaterialesAsignados" name="cantidadDeMaterialesAsignados" min="1" max="10">
 
                                  </div>
 
@@ -850,13 +850,20 @@ intenta crear al bombero, llamandolo por su nombre, pero el mensaje de exito sol
          });
        }
 
-       function actualizarStockVisible(){
 
-         var valorMaximo = document.getElementById("cantidadDeMaterialesAsignados");
-         valorMaximo.setAttribute("max",2);
 
+       function actualizarStockDisponible(){
+         var id = document.getElementById("cboMaterialesDisponibles").value;
+         $.ajax({
+             type: "POST",
+             url: 'obtenerStockDeUnMaterialPorId.php',
+             data: {"datos": id},
+             success: function(data){
+               var valorMaximo = document.getElementById("cantidadDeMaterialesAsignados");
+               valorMaximo.setAttribute("max",data);
+             }
+         });
        }
-
 
 
      $("form").submit(function(){

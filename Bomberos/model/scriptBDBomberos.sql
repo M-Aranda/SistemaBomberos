@@ -1576,7 +1576,7 @@ CALL CRUDInformacionFamiliar (1,'Alguno', '1311-12-05',3,2,1);
 CALL CRUDInformacionAcademica (1,'2019-05-06','Curso',1,2,1);
 CALL CRUDInformacionEntrenamientoEstandar (1,'2018-09-09', 'algo',1,2,1);
 CALL CRUDInformacionHistorica (1,1,'Algun cuerpo','Alguna compania','2010-10-10', 'Transferencia', 'Solicitud personal', 'No disponible', 'Algo',2,1);
-INSERT INTO tbl_informacionDeCargos VALUES (NULL, 'Algo', 'Una marca', 'Una talla', 'Una serie', '2018-03-08',1);
+INSERT INTO tbl_informacionDeCargos VALUES (NULL, 'Algo', 'Una marca', 'Una talla', 'Una serie', '2018-03-08',1,1);
 
 CALL CRUDMedida (1,'XX','SS','42','41',1);
 CALL CRUDInformacionPersonal (1,'20898088-4','Marcelo', 'Aranda', 'Tatto','1991-12-16',1,1,'1,70','80,2','cheloz_20@hotmail.com',
