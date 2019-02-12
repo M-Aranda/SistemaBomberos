@@ -224,7 +224,7 @@
                        </div>
                        <div class="col-md-5" style="margin-left: 50px;">
                          <input class="form-control" value="<?php echo $infoPersonal->getIdInfoPersonal();?>"  type="hidden" name="idPersonal">
-                         Rut: <input class="form-control" value="<?php echo $infoPersonal->getRutInformacionPersonal();?>"  type="text" name="txtRut" >
+                         Rut: <input class="form-control" value="<?php echo $infoPersonal->getRutInformacionPersonal();?>"  type="text" name="txtRut" onblur= "this.value = this.value.replace( /^(\d{2})(\d{3})(\d{3})(\w{1})$/, '$1.$2.$3-$4')">
                          Nombre: <input class="form-control" value="<?php echo utf8_encode($infoPersonal->getNombreInformacionPersonal());?>" type="text" name="txtNombre" >
                          Apellido Paterno: <input class="form-control" value="<?php echo utf8_encode($infoPersonal->getApellidoPaterno());?>" type="text" name="txtApePa" >
                          Apellido Materno: <input class="form-control" value="<?php echo utf8_encode($infoPersonal->getApellidoMaterno());?>" name="txtApeMa" >

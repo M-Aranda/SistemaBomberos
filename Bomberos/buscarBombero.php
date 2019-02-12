@@ -146,10 +146,12 @@ if($_SESSION["usuarioIniciado"]!=null){
 
     if(isset($_SESSION["companiaBomberoSeleccionado"])){
       $companiaSeleccionada=$_SESSION["companiaBomberoSeleccionado"];
+
     }
 
     if(isset($_SESSION["estadoBomberoSeleccionado"])){
       $estadoSeleccionado=$_SESSION["estadoBomberoSeleccionado"];
+
     }
 
 ?>

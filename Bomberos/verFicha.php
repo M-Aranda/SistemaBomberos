@@ -1,6 +1,57 @@
 <!DOCTYPE html>
 
+<?php
+    // unir vista con el modelo sin pasar por un controlador
+    require_once("model/Data.php");
+    $data = new Data();
 
+    session_start();
+    if(isset($_SESSION["infoPersonalSolicitada"])){
+      $infoPersonal=$_SESSION["infoPersonalSolicitada"];
+    }
+
+    if(isset($_SESSION["infoMedidasSolicitada"])){
+      $infoMedidas=$_SESSION["infoMedidasSolicitada"];
+    }
+
+    if(isset($_SESSION["infoBomberilSolicitada"])){
+      $infoBomberil=$_SESSION["infoBomberilSolicitada"];
+    }
+
+    if(isset($_SESSION["infoLaboralSolicitada"])){
+      $infoLaboral=$_SESSION["infoLaboralSolicitada"];
+    }
+
+    if(isset($_SESSION["infoMedica1Solicitada"])){
+      $infoMedica1=$_SESSION["infoMedica1Solicitada"];
+    }
+
+    if(isset($_SESSION["infoMedica2Solicitada"])){
+      $infoMedica2=$_SESSION["infoMedica2Solicitada"];
+    }
+
+    if(isset($_SESSION["infoFamiliarSolicitada"])){
+      $infoFamiliar=$_SESSION["infoFamiliarSolicitada"];
+    }
+
+    if(isset($_SESSION["infoAcademicaSolicitada"])){
+      $infoAcademica=$_SESSION["infoAcademicaSolicitada"];
+    }
+
+    if(isset($_SESSION["infoEntrenamientoEstandarSolicitada"])){
+      $infoEntrenamientoEstandar=$_SESSION["infoEntrenamientoEstandarSolicitada"];
+    }
+
+    if(isset($_SESSION["infoHistoricaSolicitada"])){
+      $infoHistorica=$_SESSION["infoHistoricaSolicitada"];
+    }
+
+    if(isset($_SESSION["infoCargosSolicitada"])){
+      $infoCargos=$_SESSION["infoCargosSolicitada"];
+    }
+
+
+?>
 
 
 <html lang="en" dir="ltr">
@@ -84,7 +135,7 @@
           </li>
         </ul>
 
-  
+
         <br>
         <br>
         <br>
@@ -118,58 +169,7 @@
     margin-top: -600px;
     margin-bottom: -1000px;
     ">
-    <?php
-        // unir vista con el modelo sin pasar por un controlador
-        require_once("model/Data.php");
-        $data = new Data();
 
-        session_start();
-        if(isset($_SESSION["infoPersonalSolicitada"])){
-          $infoPersonal=$_SESSION["infoPersonalSolicitada"];
-        }
-
-        if(isset($_SESSION["infoMedidasSolicitada"])){
-          $infoMedidas=$_SESSION["infoMedidasSolicitada"];
-        }
-
-        if(isset($_SESSION["infoBomberilSolicitada"])){
-          $infoBomberil=$_SESSION["infoBomberilSolicitada"];
-        }
-
-        if(isset($_SESSION["infoLaboralSolicitada"])){
-          $infoLaboral=$_SESSION["infoLaboralSolicitada"];
-        }
-
-        if(isset($_SESSION["infoMedica1Solicitada"])){
-          $infoMedica1=$_SESSION["infoMedica1Solicitada"];
-        }
-
-        if(isset($_SESSION["infoMedica2Solicitada"])){
-          $infoMedica2=$_SESSION["infoMedica2Solicitada"];
-        }
-
-        if(isset($_SESSION["infoFamiliarSolicitada"])){
-          $infoFamiliar=$_SESSION["infoFamiliarSolicitada"];
-        }
-
-        if(isset($_SESSION["infoAcademicaSolicitada"])){
-          $infoAcademica=$_SESSION["infoAcademicaSolicitada"];
-        }
-
-        if(isset($_SESSION["infoEntrenamientoEstandarSolicitada"])){
-          $infoEntrenamientoEstandar=$_SESSION["infoEntrenamientoEstandarSolicitada"];
-        }
-
-        if(isset($_SESSION["infoHistoricaSolicitada"])){
-          $infoHistorica=$_SESSION["infoHistoricaSolicitada"];
-        }
-
-        if(isset($_SESSION["infoCargosSolicitada"])){
-          $infoCargos=$_SESSION["infoCargosSolicitada"];
-        }
-
-
-    ?>
     <style>
 
     #transparencia{

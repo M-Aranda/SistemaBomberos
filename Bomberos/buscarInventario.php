@@ -228,7 +228,7 @@ if($_SESSION["usuarioIniciado"]!=null){
               <input type="hidden" name="tipoDeBusqueda" value="3">
               <input class="btn btn-default" type="submit" name="btnBusqueda" value="Buscar" class="btn button-primary" style="width: 100px; height:30px;" style="margin-top: 400px;"  onclick="porBodega()" >
               <form>
-
+                <br>
                 <br>
                 <input class="btn btn-default" type="button" name="btnLimpiar" value="Limpiar" class="btn button-primary" style="width: 100px; height:30px;" style="margin-top: 400px;" onclick="location.href='controlador/LimpiarBusquedaInventario.php'" >
                 <br>
@@ -252,7 +252,6 @@ if($_SESSION["usuarioIniciado"]!=null){
               }
               }
                ?>
-
 
                 <table class="table table-striped">
                     <thead>
