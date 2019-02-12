@@ -252,7 +252,6 @@ if($_SESSION["usuarioIniciado"]!=null){
               }
               }
                ?>
-
                 <table class="table table-striped">
                     <thead>
                       <tr>

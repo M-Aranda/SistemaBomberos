@@ -71,9 +71,7 @@ function checkRutGenerico(campo, isEmpresa, svalor){
     else
       invertido = invertido + drut.charAt(i);
   }
-  //VALIDACION PARA ASIGNAR FORMATO A CAJA DE TEXTO DE RUT ACTIVO
-  //J.A.R.H
-  //23-06-2016
+
   switch(svalor) {
     case 1:
       document.getElementById("CustPermIDAux").value = invertido;
@@ -151,14 +149,12 @@ function checkCDV(dvr){
 function soloRUT(e){
   var tecla = (document.all) ? event.keyCode : e.which;
   if(tecla==8) return true;
-  var patron =/^[0-9kK]+$/;  //acepta valores alfanumericos
+  var patron =/^[0-9kK]+$/;
   var te = String.fromCharCode(tecla);
   if(!patron.test(te) && tecla==0){
     return true;
   }
-  //VALIDA LA TECLA ENTER Y ACCIONA EL FOCUS A LA PROXIMA CAJA DE TEXTO.
-  //J.A.R.H
-  //22-06-2016
+
   if (tecla == 13){
     if(document.getElementById("chkEmpresas").checked){
       if(!document.getElementById("CustPermIDAux").value == ""){
@@ -178,14 +174,12 @@ function soloRUT(e){
 function soloLetrasYNum(e){
   var tecla = (document.all) ? event.keyCode : e.which;
   if(tecla==8) return true;
-  var patron =/^[0-9A-Za-z]+$/;  //acepta valores alfanumericos
+  var patron =/^[0-9A-Za-z]+$/;
   var te = String.fromCharCode(tecla);
   if(!patron.test(te) && tecla==0){
     return true;
   }
-  //VALIDACION AL PRESIONAR TECLA ENTER EN CAMPO PASSWORD, REALIZA EL INGRESO.
-  //J.A.R.H
-  //22-06-2016
+
   if (tecla == 13){
     if(document.getElementById("chkEmpresas").checked){
       if(!document.getElementById("CustPermIDAux").value == ""
@@ -203,11 +197,6 @@ function soloLetrasYNum(e){
   return patron.test(te);
 }
 
-//QUITA EL FORMATO DE RUT A LA CAJA DE TEXTO EN LA CUAL SE HACE CLICK, ESTO PARA PERMITIR SU MODIFICACION
-//EN CASO DE INGRESAR UN RUT ERRONEO.
-//PARAMETRO "svalor" INDICA SI ES RUT EMPRESA O PERSONA NATURAL.
-//J.A.R.H
-//11-08-2016
 function limpiaPuntoGuion(svalor) {
   var valCheck;
   var obj;
@@ -236,4 +225,4 @@ function limpiaPuntoGuion(svalor) {
     obj = obj.replace(/-/,"");
     document.getElementById("txtRutACrear").value = obj;
   }
-}//FIN INSTRUCCION
+}

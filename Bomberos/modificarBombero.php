@@ -206,7 +206,6 @@
                        Información Personal
                    </div>
                    <div class="panel-body">
-
                        <div class="col-sm-5" >
                          <div style="margin-left: 0px;">
                            <img src="images/avatar_opt.jpg">
