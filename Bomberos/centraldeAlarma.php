@@ -134,10 +134,10 @@ if($_SESSION["usuarioIniciado"]!=null){
 
 #cuadro1{
 
-  width: 400px;
-  height: 120px;
+  width: 350px;
+  height: 354px;
   border: 5px black outset;
-  margin-top: 0px;
+  margin-top: -50px;
   border-radius: 80px 80px 80px 80px
 
 }
@@ -145,9 +145,9 @@ if($_SESSION["usuarioIniciado"]!=null){
 
 #cuadro2{
 
-  width: 350px;
-  height: 120px;
-  margin-top: -120px;
+  width: 320px;
+  height: 369px;
+  margin-top: -350px;
   margin-left: 450px;
   border: 5px black outset;
   border-radius: 80px 80px 80px 80px
@@ -168,8 +168,8 @@ if($_SESSION["usuarioIniciado"]!=null){
 #cuadro4{
 
   width: 800px;
-  height: 120px;
-  margin-top: 20px;
+  height: 198px;
+  margin-top: 5px;
   border: 5px black outset;
   border-radius: 80px 80px 80px 80px
 
@@ -189,23 +189,72 @@ if($_SESSION["usuarioIniciado"]!=null){
 <div id="cuadro1">
     <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
       <div class="container">
+        <center>  Oficiales en Servicio</center><br>
+        <div class="form-group" style="margin-left:10px;">
+<center>
+          &nbsp;
+        CB &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        3 &nbsp;&nbsp; <br><br>
+
+        1 <input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;&nbsp;
+        71 &nbsp;<input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;&nbsp;
+        72 <input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;&nbsp;
+        73 <input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;
+                  <br><br>
 
 
-      <div class="form-group" style="margin-left:0px;">
+        2  <input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;&nbsp;
+        41 &nbsp;<input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;&nbsp;
+        42   <input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;&nbsp;&nbsp;
+        43   <input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;
+        <br><br>
 
-      </div>
+        6  <input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;
+        104  <input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;
+        204  <input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;
+        304   <input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;
 
-     </div>
+        <br><br>
+
+        7   <input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;
+        105  <input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;
+        205  <input type="button" value="1" style="width:20px;height:20px;" >  &nbsp;&nbsp;
+        305 <input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;
+      </center>
+          </div>
+        </div>
    </div>
-
 </div>
 
 
  <div id="cuadro2" >
      <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
        <div class="container">
+         <center style="margin-top:-30px;"> Unidades</center><br>
+       <div class="form-group" style="margin-left:10px;">
 
-       <div class="form-group" style="margin-left:0px;">
+
+       b-1 <input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;&nbsp;
+       b-2 &nbsp;<input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;&nbsp;
+       b-3 <input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;
+       <br><br>
+
+       bx-1  <input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;&nbsp;
+       bx-2 &nbsp;<input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;&nbsp;
+
+       <br><br>
+
+       Q-1  <input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;
+       R-2  <input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;
+
+       <br><br>
+
+       R-1   <input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;<br><br>
+       X-1  <input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp; <br><br>
+       K-1  <input type="button" value="1" style="width:20px;height:20px;" >  &nbsp;&nbsp;
+
 
 
 
@@ -214,6 +263,8 @@ if($_SESSION["usuarioIniciado"]!=null){
       </div>
     </div>
   </div>
+
+  <!--
 
   <div id="cuadro3">
       <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
@@ -229,12 +280,31 @@ if($_SESSION["usuarioIniciado"]!=null){
      </div>
    </div>
 
-
+-->
    <div id="cuadro4">
        <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
          <div class="container">
 
          <div class="form-group" style="margin-left:0px;">
+
+           Nombre: <input type="text" name="txtnombre"> Rut: <input type="text" name="txtrut">
+           Telefono: <input type="number" name="txtTF"><br><br>
+           Direccion: <input type="text" name="txtdireccion">
+           Tipo de Emergencia:
+           <select  name="cboTiposDeServicios" style="width:175px; height:30px;">
+           <?php
+
+
+           $listado = $data->readTiposDeServicios();
+           foreach($listado as $o => $objeto){
+           ?>
+           <option value="<?php echo $objeto->getId_tipo_servicio(); ?>"><?php echo $objeto->getCodigo_tipo_servicio(); ?></option>
+           <?php
+           }
+           ?>
+           </select>
+
+           <input type="submit" value="Despachar">
 
 
 
@@ -243,7 +313,6 @@ if($_SESSION["usuarioIniciado"]!=null){
         </div>
       </div>
     </div>
-
 
 
   </body>
