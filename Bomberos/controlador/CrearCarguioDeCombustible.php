@@ -1,6 +1,7 @@
 <?php
 require_once("../model/Data.php");
 require_once("../model/Tbl_carguiCombustible.php");
+session_start();
 
 $d= new Data();
 
@@ -12,7 +13,7 @@ $d= new Data();
  $cantidad_litros_cargio_combustible=$_REQUEST["txtcantidad"];
  $precio_litro_cargio_combustible=$_REQUEST["txtpreciolitro"];
  $observacion_cargio_combustible=$_REQUEST["txtcomentario"];
- $fk_unidad=$_REQUEST["cboUnidades2"];
+ $fk_unidad=$_REQUEST["idUnidadAModificar"];
 
 $carga=new Tbl_cargio_combustible();
 
@@ -29,5 +30,10 @@ $carga->setFk_unidad($fk_unidad);
 
 $d->crearCargaDeCombustible($carga);
 
- header("location: ../CrearUnidades.php");
+if(isset($_SESSION['seEstaModificandoUnaUnidad'])){
+  header("location: CargarFichaUnidadAModificar.php");
+}else{
+  header("location: ../CrearUnidades.php");
+}
+
 ?>

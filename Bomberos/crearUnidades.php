@@ -140,6 +140,10 @@
         require_once("model/Data.php");
         $data = new Data();
 
+        if(isset($_SESSION['seEstaModificandoUnaUnidad'])){
+          unset($_SESSION['seEstaModificandoUnaUnidad']);
+        }
+
     ?>
 
     <div style="width: 800px" style="height: 900px">

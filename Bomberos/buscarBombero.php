@@ -10,9 +10,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
    <script src="js/bootstrap.js"></script>
+
+   <link rel="stylesheet" href="javascript/iziToast.min.css">
+   <script src="javascript/iziToast.min.js" type="text/javascript"></script>
 
   </head>
 
@@ -49,7 +51,7 @@ if($_SESSION["usuarioIniciado"]!=null){
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bomberos <b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li><a href="CrearFicha.php">Crear</a></li>
+              <li><a href="CrearFicha.php" >Crear</a></li>
               <li><a href="buscarBombero.php">Buscar</a></li>
             </ul>
           </li>
@@ -318,7 +320,9 @@ el valor del ultimo hidden con el numero que necesito en el handler
 
  -->
 <script src="javascript/JQuery.js"></script>
+
         <script>
+
 
         function porNombre() {
           document.getElementById("tipoDeBusqueda").value = "1";
@@ -356,6 +360,11 @@ el valor del ultimo hidden con el numero que necesito en el handler
                                       console.log(data);
                                     });
                                       }
+
+
+
+
+                        
 
         </script>
 

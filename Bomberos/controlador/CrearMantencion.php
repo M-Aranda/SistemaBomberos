@@ -3,6 +3,7 @@
 
 require_once("../model/Data.php");
 require_once("../model/Tbl_Mantencion.php");
+session_start();
 
 $d= new Data();
 
@@ -28,5 +29,12 @@ $mantencion->setFk_unidad($fk_unidad);
 
 $d->crearMantencion($mantencion);
 
- header("location: ../CrearUnidades.php");
+
+if(isset($_SESSION['seEstaModificandoUnaUnidad'])){
+  header("location: CargarFichaUnidadAModificar.php");
+}else{
+   header("location: ../CrearUnidades.php");
+}
+
+
 ?>

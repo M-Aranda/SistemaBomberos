@@ -11,8 +11,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-
-
   </head>
 
   <?php
@@ -27,6 +25,7 @@
    }
  }
 
+$_SESSION['seEstaModificandoUnaUnidad']=TRUE;;
 
 if(isset($_SESSION["unidadAModificarSolicitada"])){
   $unidadAModificar=$_SESSION["unidadAModificarSolicitada"];
@@ -287,22 +286,22 @@ if(isset($_SESSION["carguios"])){
 
                           <div class="col-md-24">
                               <button type="button" class="btn btn-default col-md-12" data-toggle="collapse" data-target="#mantencion">
-                                Modificar Mantención
+                                Crear Mantención
                               </button>
                           </div>
 
                           <div class="col-md-12 collapse" id="mantencion" >
                               <div class="panel panel-primary">
                                   <div class="panel-heading panel-title">
-                                    Modificar Mantención
+                                    Crear Mantención
                                   </div>
                                   <div class="panel-body">
 
                                       <div class="col-sm-4" >
 
 
-                                        <form action="controlador/ActualizarMantencion.php" method="post">
-                                          <input type="hidden" value="" name="idDeLaMantencionAModificar" id="idDeLaMantencionAModificar">
+                                        <form action="controlador/CrearMantencion.php" method="post">
+                                          <input type="hidden" name="cboUnidades" value="<?php echo $unidadAModificar->getIdUnidad();?>">
                                           Tipo Mantención:
                                           <select name="cboTipoMantencion" class="form-control">
                                               <?php
@@ -327,7 +326,7 @@ if(isset($_SESSION["carguios"])){
                                         Comentarios/Observaciones: <textarea class="form-control" Type="textarea" name="txtcomentario" ></textarea>
 
                                           <br><br>
-                                        <center> <input type="submit" name="btnModificarMantencion" value="Modificar mantención" class="btn button-primary" style="width: 150px;"> <span ></span>
+                                        <center> <input type="submit" name="btnModificarMantencion" value="Crear mantención" class="btn button-primary" style="width: 150px;"> <span ></span>
                                             <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                                         </center>
@@ -346,7 +345,6 @@ if(isset($_SESSION["carguios"])){
                                             <th>Responsable</th>
                                             <th>Dirección</th>
                                             <th>Comentarios/Observaciones</th>
-                                            <th>Modificar</th>
                                           </tr>
                                         </thead>
                                         <tbody>
@@ -364,8 +362,6 @@ if(isset($_SESSION["carguios"])){
                                               <td><?php echo $mantencion->getResponsable_mantencion();?></td>
                                               <td><?php echo $mantencion->getDireccion_mantencion();?></td>
                                               <td><?php echo $mantencion->getComentarios_mantencion();?></td>
-                                              <input type="hidden" value="<?php echo $mantencion->getFk_unidad();?>" name="idUnidadMantencion">
-                                              <td><input type="submit" value="Modificar" onclick="actualizarMantencion(<?php echo $mantencion->getIdMantencion();?>)"></td>
                                             </tr>
 
                                         <?php  }
@@ -386,22 +382,22 @@ if(isset($_SESSION["carguios"])){
 
                           <div class="col-md-24">
                               <button type="button" class="btn btn-default col-md-12" data-toggle="collapse" data-target="#combustible">
-                                Modificar Carguío de Combustible
+                                Crear Carguío de Combustible
                               </button>
                           </div>
 
                           <div class="col-md-12 collapse" id="combustible" >
                               <div class="panel panel-primary">
                                   <div class="panel-heading panel-title">
-                                      Modificar Carguío de Combustible
+                                      Crear Carguío de Combustible
                                   </div>
                                   <div class="panel-body">
 
                                       <div class="col-sm-4" >
 
-                                        <form action="controlador/ActualizarCarguio.php" method="post">
+                                        <form action="controlador/CrearCarguioDeCombustible.php" method="post">
 
-                                          <input type="hidden" name="idCarguioAModificar" id="idCarguioAModificar">
+                                          <input type="hidden" name="idUnidadAModificar" value="<?php echo $unidadAModificar->getIdUnidad();?>">
 
 
                                           Tipo Combustible:
@@ -428,7 +424,7 @@ if(isset($_SESSION["carguios"])){
                                         Comentarios/Observaciones: <textarea class="form-control" Type="textarea" name="txtcomentario" ></textarea>
 
                                           <br>
-                                        <center> <input type="submit" name="btncrear" value="Modificar carga" class="btn button-primary" style="width: 150px;"> <span ></span>
+                                        <center> <input type="submit" name="btncrear" value="Crear carga" class="btn button-primary" style="width: 150px;"> <span ></span>
                                             <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                                         </center>
@@ -449,7 +445,6 @@ if(isset($_SESSION["carguios"])){
                                             <th>Cantidad de litros</th>
                                             <th>Precio por litro</th>
                                             <th>Observacion</th>
-                                            <th>Modificar</th>
                                           </tr>
                                         </thead>
                                         <tbody>
@@ -470,8 +465,6 @@ if(isset($_SESSION["carguios"])){
                                               <td><?php echo $carguio->getPrecio_litro_cargio_combustible();?></td>
                                               <td><?php echo $carguio->getCantidad_litros_cargio_combustible();?></td>
                                               <td><?php echo $carguio->getObservacion_cargio_combustible();?></td>
-                                              <input type="hidden" value="<?php echo $carguio->getFk_unidad();?>" name="idUnidadCarguio">
-                                              <td><input type="submit" value="Modificar" onclick="actualizarCarguio(<?php echo $carguio->getId_cargio_combustible();?>)"></td>
                                             </tr>
 
                                         <?php  }

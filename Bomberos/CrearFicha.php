@@ -20,6 +20,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/css/inputmask.min.css" rel="stylesheet"/>
 
+<link rel="stylesheet" href="javascript/iziToast.min.css">
+<script src="javascript/iziToast.min.js" type="text/javascript"></script>
+
+<script src="javascript/verificarRutv2.js"></script>
+<!-- Necesario poner estas 3 lineas aqui. Todas hacen referencia a un js dentro del directorio del programa, excepto el ultimo. Lo tengo
+dentro del directorio, pero no cacho bien como referenciarlo -->
+<script src="javascript/JQuery.js"></script>
+<script type="text/javascript" src="javascript/sweetAlertMin.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
 
   </head>
 
@@ -94,7 +103,7 @@ if(isset($_SESSION['seEstaModificandoUBombero'])){
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Inventario <b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li><a href="crearInventario.php">Crear</a></li>
+              <li><a href="crearInventario.php" >Crear</a></li>
               <li><a href="buscarInventario.php">Buscar </a></li>
               <li><a href="reporteInventario.php">Reporte </a></li>
 
@@ -180,7 +189,7 @@ if(isset($_SESSION['seEstaModificandoUBombero'])){
                          <div style="margin-left: 0px;">
                            <img src="images/avatar_opt.jpg">
                          </div>
-                         <form action="controlador/CrearInfoPersonal.php" method="post">
+                         <form id="formPersonal" action="controlador/CrearInfoPersonal.php" method="post">
                          Talla Chaqueta/camisa : <input class="form-control" type="text" name="txtchaqueta" required>
                          Talla Pantalón: <input class="form-control" type="text" name="txtpantalon" required>
                          Talla buzo: <input class="form-control" type="text" name="txtbuzo" required>
@@ -232,7 +241,7 @@ if(isset($_SESSION['seEstaModificandoUBombero'])){
                            ?>
                            </select>
                            <br>
-                         <center> <input type="submit" name="btnInfoPersonal" value="Guardar" class="btn button-primary" style="width: 150px;" onclick="msg()"> <span ></span>
+                         <center> <input type="submit" name="btnInfoPersonal" id="btn_crearInfoPersonal" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
 
                          </center>
                        </form>
@@ -256,7 +265,7 @@ if(isset($_SESSION['seEstaModificandoUBombero'])){
            <div class="col-md-11 collapse" id="bomberil">
                <div class="panel panel-primary">
                    <div class="panel-heading panel-title">
-                     <form action="controlador/CrearInformacionBomberil.php" method="post">
+                     <form id="formBomberil" action="controlador/CrearInformacionBomberil.php" method="post">
                        Información Bomberil
                    </div>
                    <div class="panel-body">
@@ -334,7 +343,7 @@ if(isset($_SESSION['seEstaModificandoUBombero'])){
                            </select>
                          Nº Reg.Cia: <input class="form-control" type="number" name="txtcia" required min="1" pattern="^[0-9]+" onkeydown="javascript: return event.keyCode == 69 ? false : true">
                          <br>
-                         <center> <input type="submit" name="btnInfoBomberil" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                         <center> <input type="submit" id="btn_crearBomberil" name="btnInfoBomberil" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
                          </center>
                        </form>
 
@@ -801,18 +810,15 @@ if(isset($_SESSION['seEstaModificandoUBombero'])){
    </div>
  </div>
 
- <script src="javascript/JQuery.js"></script>
- <script src="javascript/verificarRutv2.js"></script>
+
+
 
  <script>
 
 /*La siguiente funcion se activa al clickear el boton de guardar en la ficha de info personal, y puede mostrar un mensaje con una variable string.
 Sin embargo, aún no estoy seguro de como implementar esto para que sea al enviar el submit. De todas formas, se muestra el mensaje de que se
 intenta crear al bombero, llamandolo por su nombre, pero el mensaje de exito solo aparece si de verdad se enviaron los datos*/
- function msg(){
-   var message = document.getElementById("nombreDeBomberoACrear").value;
-   alert("Creando a "+ message);
- }
+
 
  function actualizarComboBox(){
       var val= document.getElementById("cboEntidadACargo").value;
@@ -869,12 +875,47 @@ intenta crear al bombero, llamandolo por su nombre, pero el mensaje de exito sol
        }
 
 
-     $("form").submit(function(){
-       alert("Operación exitosa")
-     });
+
+
+// Hay que darle un id a cada forma, y hacer una estructura parecida para cada forma (APLICAR A TODAS LAS FORM)
+    $('#btn_crearInfoPersonal').on('click',function(e){
+    e.preventDefault();
+    var form = $(this).parents('form');
+    swal({
+        title: "Sistema de bomberos dice:",
+        text: "Operación exitosa",
+        type: "success",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Ok",
+        closeOnConfirm: true,
+    }, function(isConfirm){
+        if (isConfirm)  document.getElementById("formPersonal").submit();
+        //form.submit();
+    });
+    });
+
+
+    $('#btn_crearBomberil').on('click',function(e){
+    e.preventDefault();
+    var form = $(this).parents('form');
+    swal({
+        title: "Sistema de bomberos dice:",
+        text: "Operación exitosa",
+        type: "success",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Ok",
+        closeOnConfirm: true,
+    }, function(isConfirm){
+        if (isConfirm)  document.getElementById("formBomberil").submit();
+        //form.submit();
+    });
+    });
 
 
        </script>
+
 
 
   </body>

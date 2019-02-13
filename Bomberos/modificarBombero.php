@@ -1058,13 +1058,9 @@
 <script src="javascript/JQuery.js"></script>
 <script>
 
-
-/*
-                                  $("form").submit(function(){
-                                    alert("Operación exitosa");
-                                    });
-
-*/
+      $("form").submit(function(){
+        alert("Operación exitosa");
+          });
 
 </script>
 

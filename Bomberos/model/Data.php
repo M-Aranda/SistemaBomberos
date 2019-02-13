@@ -345,6 +345,8 @@ class Data{
                 '".$mantencion->getComentarios_mantencion()."',
                 ".$mantencion->getFk_unidad().");";
 
+                echo $query;
+
       $this->c->conectar();
       $this->c->ejecutar($query);
       $this->c->desconectar();
@@ -360,6 +362,8 @@ class Data{
                 ".$carga->getPrecio_litro_cargio_combustible().",
                 '".$carga->getObservacion_cargio_combustible()."',
                 ".$carga->getFk_unidad().");";
+
+                echo $query;
 
       $this->c->conectar();
       $this->c->ejecutar($query);

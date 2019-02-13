@@ -305,8 +305,6 @@
 <script src="javascript/JQuery.js"></script>
 
 <script type="text/javascript">
-
-
                       function actualizarComboBox(){
                            var val= document.getElementById("cboEntidadACargoModificar").value;
 
@@ -324,7 +322,6 @@
 
                            });
                          }
-
 
 
     $("form").submit(function(){
