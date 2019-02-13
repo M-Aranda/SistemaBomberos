@@ -125,14 +125,11 @@ CREATE TABLE tbl_comuna (
   PRIMARY KEY (id_comuna)
 );
 
-
 CREATE TABLE tbl_estadoBombero (
 id_estado INT AUTO_INCREMENT,
 nombre_estado VARCHAR (20000),
 PRIMARY KEY (id_estado)
 );
-
-
 
 CREATE TABLE tbl_cargo (
 id_cargo INT AUTO_INCREMENT,

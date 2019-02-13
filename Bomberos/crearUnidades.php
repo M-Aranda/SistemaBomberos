@@ -11,6 +11,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+    <script src="javascript/JQuery.js"></script>
+    <script type="text/javascript" src="javascript/sweetAlertMin.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
 
 
   </head>
@@ -169,7 +172,7 @@
                                         <div style="margin-left: 0px;">
                                           <img src="images/avatar_opt.jpg">
                                         </div>
-                                        <form action="controlador/CrearUnidades.php" method="post">
+                                        <form  id="formCrearUnidad" action="controlador/CrearUnidades.php" method="post">
 
 
                                           Marca:<input id="nombre" type="text" name="txtmarca" class="form-control" required="">
@@ -226,7 +229,7 @@
                                         ?>
                                     </select>
                                           <br><br>
-                                        <center> <input type="submit" name="btncrear" value="Crear Unidad" class="btn button-primary" style="width: 150px;" onclick="msg()"> <span ></span>
+                                        <center> <input id="btn_CrearUnidad" type="submit" name="btncrear" value="Crear Unidad" class="btn button-primary" style="width: 150px;" onclick="msg()"> <span ></span>
                                             <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                                         </center>
@@ -260,7 +263,7 @@
 
                                       <div class="col-sm-5" >
 
-                                        <form action="controlador/CrearMantencion.php" method="post">
+                                        <form id="formCrearMantencion" action="controlador/CrearMantencion.php" method="post">
 
                                           Unidad:
                                           <select name="cboUnidades"  class="form-control">
@@ -299,7 +302,7 @@
                                         Comentarios/Observaciones: <textarea class="form-control" Type="textarea" name="txtcomentario" ></textarea>
 
                                           <br><br>
-                                        <center> <input type="submit" name="btncrear" value="Crear mantención" class="btn button-primary" style="width: 150px;"> <span ></span>
+                                        <center> <input id="btn_CrearMantencion" type="submit" name="btncrear" value="Crear mantención" class="btn button-primary" style="width: 150px;"> <span ></span>
                                             <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                                         </center>
@@ -333,7 +336,7 @@
 
                                       <div class="col-sm-5" >
 
-                                        <form action="controlador/CrearCarguioDeCombustible.php" method="post">
+                                        <form id="formCrearCarguio" action="controlador/CrearCarguioDeCombustible.php" method="post">
 
                                           Unidad:
                                           <select name="cboUnidades2"  class="form-control">
@@ -372,15 +375,15 @@
                                         Comentarios/Observaciones: <textarea class="form-control" Type="textarea" name="txtcomentario" ></textarea>
 
                                           <br><br>
-                                        <center> <input type="submit" name="btncrear" value="Crear carga" class="btn button-primary" style="width: 150px;"> <span ></span>
+                                        <center> <input id="btn_Crearcarguio" type="submit" name="btncrear" value="Crear carga" class="btn button-primary" style="width: 150px;"> <span ></span>
                                             <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
-
                                         </center>
                                       </form>
                                                                 <br>
                                       </div>
                                       <br>
                                       <br>
+
 
 
                                   </div>
@@ -397,11 +400,14 @@
    </div>
  </div>
 
-<script src="javascript/JQuery.js"></script>
 <script src="javascript/borrarVariablesEnSesionAlCargarPagina.js"></script>
 
  <script>
 
+ function msg(){
+
+ }
+/*
  function msg(){
    var message = document.getElementById("nombreDeLaUnidadACrear").value;
    alert("Creando unidad: "+ message);
@@ -410,8 +416,59 @@
      $("form").submit(function(){
        alert("Operación exitosa");
        });
+*/
+$('#btn_CrearUnidad').on('click',function(e){
+e.preventDefault();
+var form = $(this).parents('form');
+swal({
+    title: "Sistema de bomberos dice:",
+    text: "Operación exitosa",
+    type: "success",
+    showCancelButton: true,
+    confirmButtonColor: "#DD6B55",
+    confirmButtonText: "Ok",
+    closeOnConfirm: true,
+}, function(isConfirm){
+    if (isConfirm)  document.getElementById("formCrearUnidad").submit();
+    //form.submit();
+});
+});
 
-       </script>
+$('#btn_CrearMantencion').on('click',function(e){
+e.preventDefault();
+var form = $(this).parents('form');
+swal({
+    title: "Sistema de bomberos dice:",
+    text: "Operación exitosa",
+    type: "success",
+    showCancelButton: true,
+    confirmButtonColor: "#DD6B55",
+    confirmButtonText: "Ok",
+    closeOnConfirm: true,
+}, function(isConfirm){
+    if (isConfirm)  document.getElementById("formCrearMantencion").submit();
+    //form.submit();
+});
+});
+
+$('#btn_Crearcarguio').on('click',function(e){
+e.preventDefault();
+var form = $(this).parents('form');
+swal({
+    title: "Sistema de bomberos dice:",
+    text: "Operación exitosa",
+    type: "success",
+    showCancelButton: true,
+    confirmButtonColor: "#DD6B55",
+    confirmButtonText: "Ok",
+    closeOnConfirm: true,
+}, function(isConfirm){
+    if (isConfirm)  document.getElementById("formCrearCarguio").submit();
+    //form.submit();
+});
+});
+
+ </script>
 
   </body>
 </html>

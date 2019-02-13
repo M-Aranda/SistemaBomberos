@@ -14,6 +14,10 @@
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
    <script src="js/bootstrap.js"></script>
 
+   <script src="javascript/JQuery.js"></script>
+   <script type="text/javascript" src="javascript/sweetAlertMin.js"></script>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+
   </head>
 
   <?php
@@ -153,7 +157,7 @@
       <div class="form-group" style="margin-left:50px;">
         <span><h5 style="font-weight:bold;">Inventario</h5></span>
 
-        <form action="controlador/ActualizarMaterialMenor.php" method="post">
+        <form id="formModificarMaterial" action="controlador/ActualizarMaterialMenor.php" method="post">
 
 
           <input type="hidden" name="idMaterialAModificar" value="<?php echo $material->getId_material_menor();?>">
@@ -284,7 +288,7 @@
 
            <br><br>
 
-          <center> <input type="submit" name="btncrear" value="Modificar Material" class="btn button-primary" style="width: 150px;"> <span ></span>
+          <center> <input id="btnModificarMaterial" type="submit" name="btncrear" value="Modificar Material" class="btn button-primary" style="width: 150px;"> <span ></span>
               <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
           </center>
@@ -301,8 +305,6 @@
    </div>
  </div>
 </div>
-
-<script src="javascript/JQuery.js"></script>
 
 <script type="text/javascript">
                       function actualizarComboBox(){
@@ -322,12 +324,29 @@
 
                            });
                          }
-
+/*
 
     $("form").submit(function(){
       alert("Operación exitosa");
       });
+*/
 
+$('#btnModificarMaterial').on('click',function(e){
+e.preventDefault();
+var form = $(this).parents('form');
+swal({
+    title: "Sistema de bomberos dice:",
+    text: "Operación exitosa",
+    type: "success",
+    showCancelButton: true,
+    confirmButtonColor: "#DD6B55",
+    confirmButtonText: "Ok",
+    closeOnConfirm: true,
+}, function(isConfirm){
+    if (isConfirm)  document.getElementById("formModificarMaterial").submit();
+    //form.submit();
+});
+});
 
 </script>
 <script src="javascript/borrarVariablesEnSesionAlCargarPagina.js"></script>

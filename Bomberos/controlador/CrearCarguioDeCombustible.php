@@ -27,13 +27,10 @@ $carga->setPrecio_litro_cargio_combustible($precio_litro_cargio_combustible);
 $carga->setObservacion_cargio_combustible($observacion_cargio_combustible);
 $carga->setFk_unidad($fk_unidad);
 
-
 $d->crearCargaDeCombustible($carga);
 
 if(isset($_SESSION['seEstaModificandoUnaUnidad'])){
   header("location: CargarFichaUnidadAModificar.php");
 }else{
   header("location: ../CrearUnidades.php");
-}
-
 ?>

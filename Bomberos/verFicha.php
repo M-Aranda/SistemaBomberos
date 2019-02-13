@@ -854,6 +854,7 @@
                                      <th>Marca</th>
                                      <th>Talla</th>
                                      <th>Serie</th>
+                                     <th>Cantidad asignada</th>
                                      <th>Fecha</th>
                                    </tr>
                                  </thead>
@@ -866,6 +867,7 @@
                                      <td><?php echo $datos->getMarca_informacionDeCargos();?></td>
                                      <td><?php echo $datos->getTalla_informacionDeCargos();?></td>
                                      <td><?php echo $datos->getSerie_informacionDeCargos();?></td>
+                                     <td><?php echo $datos->getCantidadAsignada_informacionDeCargos();?></td>
                                      <td><?php
                                      $fechaSinConvertir = $datos->getFecha_informacionDeCargos();
                                      $fechaConvertida = date("d-m-Y", strtotime($fechaSinConvertir));

@@ -1,5 +1,71 @@
 <!DOCTYPE html>
 
+<?php
+    // unir vista con el modelo sin pasar por un controlador
+    require_once("model/Data.php");
+    require_once("model/Tbl_Usuario.php");
+    $data = new Data();
+
+    session_start();
+
+
+    if($_SESSION["usuarioIniciado"]!=null){
+      $u=$_SESSION["usuarioIniciado"];
+      if($data->verificarSiUsuarioTienePermiso($u,3)==0){
+        header("location: paginaError.php");
+      }
+    }
+
+
+
+    if($_SESSION["infoPersonalSolicitada"]!=null){
+      $infoPersonal=$_SESSION["infoPersonalSolicitada"];
+    }
+
+    if($_SESSION["infoMedidasSolicitada"]!=null){
+      $infoMedidas=$_SESSION["infoMedidasSolicitada"];
+    }
+
+    if($_SESSION["infoBomberilSolicitada"]!=null){
+      $infoBomberil=$_SESSION["infoBomberilSolicitada"];
+    }
+
+    if($_SESSION["infoLaboralSolicitada"]!=null){
+      $infoLaboral=$_SESSION["infoLaboralSolicitada"];
+    }
+
+    if($_SESSION["infoMedica1Solicitada"]!=null){
+      $infoMedica1=$_SESSION["infoMedica1Solicitada"];
+    }
+
+    if($_SESSION["infoMedica2Solicitada"]!=null){
+      $infoMedica2=$_SESSION["infoMedica2Solicitada"];
+    }
+
+    if(isset($_SESSION["infoFamiliarSolicitada"])){
+      $infoFamiliar=$_SESSION["infoFamiliarSolicitada"];
+    }
+
+    if(isset($_SESSION["infoAcademicaSolicitada"])){
+      $infoAcademica=$_SESSION["infoAcademicaSolicitada"];
+    }
+
+    if(isset($_SESSION["infoEntrenamientoEstandarSolicitada"])){
+      $infoEntrenamientoEstandar=$_SESSION["infoEntrenamientoEstandarSolicitada"];
+    }
+
+    if(isset($_SESSION["infoHistoricaSolicitada"])){
+      $infoHistorica=$_SESSION["infoHistoricaSolicitada"];
+    }
+
+    if(isset($_SESSION["infoCargosSolicitada"])){
+      $infoCargos=$_SESSION["infoCargosSolicitada"];
+    }
+
+    $_SESSION['seEstaModificandoUBombero']=1;
+
+?>
+
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -14,6 +80,13 @@
 
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
    <script src="js/bootstrap.js"></script>
+
+   <script src="javascript/verificarRutv2.js"></script>
+   <!-- Necesario poner estas 3 lineas aqui. Todas hacen referencia a un js dentro del directorio del programa, excepto el ultimo. Lo tengo
+   dentro del directorio, pero no cacho bien como referenciarlo -->
+   <script src="javascript/JQuery.js"></script>
+   <script type="text/javascript" src="javascript/sweetAlertMin.js"></script>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
 
   </head>
 
@@ -113,71 +186,7 @@
     margin-top: -600px;
     margin-bottom: -1000px;
     ">
-    <?php
-        // unir vista con el modelo sin pasar por un controlador
-        require_once("model/Data.php");
-        require_once("model/Tbl_Usuario.php");
-        $data = new Data();
 
-        session_start();
-
-
-        if($_SESSION["usuarioIniciado"]!=null){
-          $u=$_SESSION["usuarioIniciado"];
-          if($data->verificarSiUsuarioTienePermiso($u,3)==0){
-            header("location: paginaError.php");
-          }
-        }
-
-
-
-        if($_SESSION["infoPersonalSolicitada"]!=null){
-          $infoPersonal=$_SESSION["infoPersonalSolicitada"];
-        }
-
-        if($_SESSION["infoMedidasSolicitada"]!=null){
-          $infoMedidas=$_SESSION["infoMedidasSolicitada"];
-        }
-
-        if($_SESSION["infoBomberilSolicitada"]!=null){
-          $infoBomberil=$_SESSION["infoBomberilSolicitada"];
-        }
-
-        if($_SESSION["infoLaboralSolicitada"]!=null){
-          $infoLaboral=$_SESSION["infoLaboralSolicitada"];
-        }
-
-        if($_SESSION["infoMedica1Solicitada"]!=null){
-          $infoMedica1=$_SESSION["infoMedica1Solicitada"];
-        }
-
-        if($_SESSION["infoMedica2Solicitada"]!=null){
-          $infoMedica2=$_SESSION["infoMedica2Solicitada"];
-        }
-
-        if(isset($_SESSION["infoFamiliarSolicitada"])){
-          $infoFamiliar=$_SESSION["infoFamiliarSolicitada"];
-        }
-
-        if(isset($_SESSION["infoAcademicaSolicitada"])){
-          $infoAcademica=$_SESSION["infoAcademicaSolicitada"];
-        }
-
-        if(isset($_SESSION["infoEntrenamientoEstandarSolicitada"])){
-          $infoEntrenamientoEstandar=$_SESSION["infoEntrenamientoEstandarSolicitada"];
-        }
-
-        if(isset($_SESSION["infoHistoricaSolicitada"])){
-          $infoHistorica=$_SESSION["infoHistoricaSolicitada"];
-        }
-
-        if(isset($_SESSION["infoCargosSolicitada"])){
-          $infoCargos=$_SESSION["infoCargosSolicitada"];
-        }
-
-        $_SESSION['seEstaModificandoUBombero']=1;
-
-    ?>
     <style>
 
     #transparencia{
@@ -210,7 +219,7 @@
                          <div style="margin-left: 0px;">
                            <img src="images/avatar_opt.jpg">
                          </div>
-                         <form action="controlador/ActualizarInfoPersonal.php" method="post">
+                         <form  id="formactualizarPersonal" action="controlador/ActualizarInfoPersonal.php" method="post">
                          Talla Chaqueta/camisa : <input class="form-control" value="<?php echo $infoMedidas->getTallaChaquetaCamisa();?>" type="text" name="txtchaqueta" >
                          Talla Pantalón: <input class="form-control" value="<?php echo $infoMedidas->getTallaPantalon();?>" type="text" name="txtpantalon" >
                          Talla buzo: <input class="form-control" value="<?php echo $infoMedidas->getTallaBuzo();?>" type="text" name="txtbuzo" >
@@ -279,13 +288,12 @@
                              ?>
                            </select>
                            <br>
-                         <center> <input type="submit" name="btnInfoPersonal" value="Modificar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                         <center> <input type="submit" id="btn_actualizarInfoPersonal" name="btnInfoPersonal" value="Modificar" class="btn button-primary" style="width: 150px;"> <span ></span>
                              <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                          </center>
                        </form>
-
-                                                     <br>
+                       <br>
                        </div>
                        <br>
                        <br>
@@ -310,8 +318,7 @@
                    <div class="panel-body">
                        <div class="col-sm-6">
 
-
-                         <form action="controlador/actualizarInformacionBomberil.php" method="post">
+                         <form id="formactualizarBomberil" action="controlador/actualizarInformacionBomberil.php" method="post">
                         <input class="form-control" value="<?php echo $infoPersonal->getIdInfoPersonal();?>"  type="hidden" name="idPersonal">
                         <input class="form-control" value="<?php echo $infoBomberil->getIdInformacionBomberil();?>"  type="hidden" name="idBomberil">
                          Región : <!-- <input class="form-control" type="text" name="txtregion"> --><!--Region del libertador bernardo ohggins-->
@@ -418,12 +425,11 @@
 
                          Nº Reg.Cia: <input class="form-control" type="number" value="<?php echo $infoBomberil->getNRegCiainformacionBomberil();?>" name="txtcia" >
                          <br>
-                         <center> <input type="submit" name="btnInfoBomberil" value="Modificar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                         <center> <input type="submit" id="btn_actualizarBomberil" name="btnInfoBomberil" value="Modificar" class="btn button-primary" style="width: 150px;"> <span ></span>
                              <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                          </center>
                        </form>
-
                        </div>
                    </div>
                </div>
@@ -445,7 +451,7 @@
                    <div class="panel-body">
                        <div class="col-sm-5">
 
-                         <form action="controlador/ActualizarInformacionLaboral.php" method="post">
+                         <form id="formactualizarInfoLaboral" action="controlador/ActualizarInformacionLaboral.php" method="post">
                            <input class="form-control" value="<?php echo $infoPersonal->getIdInfoPersonal();?>"  type="hidden" name="idPersonal">
                            <input class="form-control" value="<?php echo $infoLaboral->getIdidInformacionLaboral();?>"  type="hidden" name="idLaboral">
 
@@ -462,13 +468,11 @@
                          AFP: <input class="form-control" value="<?php echo $infoLaboral->getafp_informacionLaboral();?>" type="text" name="txtafp" >
                          Profesión: <input class="form-control" value="<?php echo $infoLaboral->getprofesion_informacionLaboral();?>" name="txtprofesion" >
                          <br>
-                         <center> <input type="submit" name="btnInfoLaboral" value="Modificar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                         <center> <input type="submit" id="btn_actualizarInfoLaboral" name="btnInfoLaboral" value="Modificar" class="btn button-primary" style="width: 150px;"> <span ></span>
                              <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                          </center>
                        </form>
-
-
                        </div>
                    </div>
                </div>
@@ -490,7 +494,7 @@
                    <div class="panel-body">
                        <div class="col-sm-6">
 
-                         <form action="controlador/CrearInformacionMedica.php" method="post">
+                         <form id="formactualizarInfoMedica" action="controlador/CrearInformacionMedica.php" method="post">
 
                          <input class="form-control" value="<?php echo $infoPersonal->getIdInfoPersonal();?>"  type="hidden" name="idPersonal">
                          <input class="form-control" value="<?php echo $infoMedica1->getidInformacionMedica1();?>"  type="hidden" name="idMedico1">
@@ -571,7 +575,7 @@
                            </select>
 
                            <br>
-                           <center> <input type="submit" name="btninfoMedica" value="Modificar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                           <center> <input type="submit" id="btn_actualizarInfoMedica" name="btninfoMedica" value="Modificar" class="btn button-primary" style="width: 150px;"> <span ></span>
                                <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                            </center>
@@ -597,9 +601,8 @@
                    </div>
                    <div class="panel-body">
 
-
                        <div class="col-sm-6">
-                         <form action="controlador/CrearInformacionFamiliar.php" method="post">
+                         <form id="formCrearInfoFamiliarEnModificar" action="controlador/CrearInformacionFamiliar.php" method="post">
                          Nombre: <input class="form-control" type="text" id="nomFamiliar" name="txtnombreFamiliar" >
                          Fecha de Nacimiento: <input class="form-control" type="date" id="fecNFamiliar" name="txtfechafamiliar" >
                          Parentesco:
@@ -622,6 +625,9 @@
                          <center> <input type="submit" name="btninfoFamiliar" value="Crear" class="btn button-primary" style="width: 150px;"> <span ></span>
                      <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>
                             -->
+                            <center>
+                              <input type="submit" id="btn_crearInfoFamiliarEnModificar" name="btninfoFamiliar" value="Crear" class="btn button-primary" style="width: 150px;"> <span ></span>
+
                          </center>
 
                          </form>
@@ -662,13 +668,10 @@
                            </table>
                       </div>
                       <div class="col-md-6">
+
                          <br><br><br><br><br><br>
                          <input class="form-control" value="" type="hidden" id="idPersonalFamiliar" name="idPersonalFamiliar">
-                         <input type="submit" name="btninfoFamiliar" value="Crear" class="btn button-primary" style="width: 150px;"> <span ></span>
                              <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
-
-
-
                       </div>
 
                    </div>
@@ -692,7 +695,7 @@
                    </div>
                    <div class="panel-body">
                        <div class="col-sm-6">
-                         <form action="controlador/CrearInformacionAcademica.php" method="post">
+                         <form id="formCrearInfoAcademicaEnModificar" action="controlador/CrearInformacionAcademica.php" method="post">
                          Fecha: <input class="form-control" type="date" name="txtfechaAcademica" >
                          Actividad: <input class="form-control" type="text" name="txtActivdidadAcademica" >
                          Estado:
@@ -712,14 +715,12 @@
                            ?>
                            </select>
 
-
+                           <center><input type="submit" id="btn_crearInfoAcademicaEnModificar" name="btninfoAcademica" value="Crear" class="btn button-primary" style="width: 150px;"> <span ></span></center></center>
                         <!--   <input class="form-control" value="" type="hidden" id="idPersonalAcadem" name="idPersonalAcadem">
                            <br>
                            <center> <input type="submit" name="btninfoAcademica" value="Crear" class="btn button-primary" style="width: 150px;"> <span ></span></center>
                          -->
                            </form>
-
-
 
                          <table class="table table-striped">
                              <thead>
@@ -760,8 +761,6 @@
                          <br><br><br><br><br>
                          <input class="form-control" value="" type="hidden" id="idPersonalAcadem" name="idPersonalAcadem">
                          <br>
-                         <input type="submit" name="btninfoAcademica" value="Crear" class="btn button-primary" style="width: 150px;"> <span ></span></center>
-
 
                       </div>
                    </div>
@@ -786,7 +785,7 @@
                        </div>
                        <div class="panel-body">
                            <div class="col-sm-6">
-                             <form action="controlador/CrearInfoEntrenamientoEstandar.php" method="post">
+                             <form id="formCrearInfoEntrenamientoEstandarEnModificar" action="controlador/CrearInfoEntrenamientoEstandar.php" method="post">
                              Fecha: <input class="form-control" type="date" name="txtfechaEstandar" >
                              Actividad: <input class="form-control" type="text" name="txtActividadEntrenamientoEstandar" >
                              Estado:
@@ -805,10 +804,9 @@
                                ?>
                                </select>
                                <br>
-                            <!--   <center> <input type="submit" name="btninfoEstandar" value="Crear" class="btn button-primary" style="width: 150px;"> <span ></span></center>
-                            -->
-                             </form>
+                               <center> <input type="submit" id="btn_crearInfoEntrenEstandarEnModificar" name="btninfoEstandar" value="Crear" class="btn button-primary" style="width: 150px;"> <span ></span></center>
 
+                             </form>
 
                              <table class="table table-striped">
                                  <thead>
@@ -843,8 +841,6 @@
                           </div>
                           <div class="col-md-6">
                              <br><br><br><br><br>
-                                <center> <input type="submit" name="btninfoEstandar" value="Crear" class="btn button-primary" style="width: 150px;"> <span ></span></center>
-
                               </center>
 
                           </div>
@@ -870,7 +866,7 @@
                        </div>
                        <div class="panel-body" style="margin-left: -10px;">
                            <div class="col-sm-6">
-                             <form action="controlador/CrearInformacionHistorica.php" method="post">
+                             <form id="formCrearInfoHistoricaEnModificar" action="controlador/CrearInformacionHistorica.php" method="post">
 
                              Región:
                              <select class="form-control" name="cboxRegion" >
@@ -905,8 +901,7 @@
                                <br><br>
                              </div>
 
-
-                             <center> <input type="submit" name="btninfohistorica" value="Crear" class="btn button-primary" style="width: 150px;"> <span ></span>
+                             <center> <input type="submit" id="btn_crearInfoHistoricaEnModificar" name="btninfohistorica" value="Crear" class="btn button-primary" style="width: 150px;"> <span ></span>
 
                              </form>
 
@@ -975,7 +970,7 @@
                    <div class="col-md-12 collapse" id="cargos">
                        <div class="panel panel-primary">
                            <div class="panel-heading panel-title">
-                             <form action="controlador/CrearInformacionDeCargos.php" method="post">
+                             <form id="formCrearInfoCargosEnModificar" action="controlador/CrearInformacionDeCargos.php" method="post">
                                Información de Cargos
                            </div>
                            <div class="panel-body" style="margin-left: -20px;">
@@ -986,66 +981,108 @@
                                  }
                                   ?>
                                   <br>
+
                                    Nombre: <input type="text" class="form-control" name="txtnombrecargo">
                                    Marca: <input type="text" class="form-control" name="txtmarcacargo">
                                    Talla: <input type="text" class="form-control" name="txttalla">
+                                   Serie: <input type="text" class="form-control" name="txtserie">
+                                   Fecha: <input type="date" class="form-control" name="txtfechacargo">
+                                   <br>
 
-                                   <br><br><br>
-                                   <table class="table table-striped">
-                                       <thead>
-                                         <tr>
-                                           <th>Nombre</th>
-                                           <th>Marca</th>
-                                           <th>Serie</th>
-                                           <th>Talla</th>
-                                           <th>Fecha</th>
-                                        </tr>
-                                       </thead>
-                                       <tbody>
-                                         <?php
-                                         if(isset($infoHistorica)){
-                                         foreach ($infoHistorica as $iHistorica => $info) {
+                                   Entidad a Cargo:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <select name="cboEntidadACargo" id="cboEntidadACargo" onchange="actualizarComboBox()" style="width:230px;">
+                                        <?php
+                                            $entiPropietaria = $data->getEntidadACargo();
+                                            foreach ($entiPropietaria as $ep) {
+                                                echo "<option value='".$ep->getIdEntidadACargo()."'>";
+                                                    echo utf8_encode($ep->getNombreEntidadACargo());
+                                                echo"</option>";
+                                            }
+                                        ?>
+                                    </select>
+
+                                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Ubicacion Fisica:
+                                    <select name="cboxUbicacion" id="cboxUbicacion" onchange="actualizarComboBoxDeMateriales()" style="width:195px;">
+                                      <?php
+                                      $ubicacionesFisicas = $data->getUbicacionFisica(1);
+                                      foreach ($ubicacionesFisicas as $ubi) {
+                                        echo "<option value='".$ubi->getIdUbicacionFisica()."'>";
+                                        echo utf8_encode($ubi->getNombreUbicacionFisica());
+                                        echo"</option>";
+                                      }
                                       ?>
-                                      <tr>
-                                        <td><?php echo utf8_encode($d->buscarNombreDeRegionPorId($info->getfkRegioninformacionHistorica()));   ?></td>
-                                        <td><?php echo $info->getcuerpo();   ?></td>
-                                        <td><?php echo $info->getcompania();  ?></td>
-                                        <td><?php
-                                        $fechaSinConvertir = $info->getfechaDeCambio();
-                                        $fechaConvertida = date("d-m-Y", strtotime($fechaSinConvertir));
-                                        echo $fechaConvertida;   ?></td>
-                                        <td><?php echo $info->getPremio();   ?></td>
-                                      </tr>
 
+                                    </select>
+                                    <br>
+                                    Material menor a asignar:
+                                    <select name="cboMaterialesDisponibles" id="cboMaterialesDisponibles" style="width:195px;" onchange="actualizarStockDisponible()">
+                                      <?php
+                                      $materialesDisponibles = $data->getMaterialesMenoresPorFkUbicacionFisica(1);
+                                      foreach ($materialesDisponibles as $mat) {
+                                        echo "<option value='".$mat->getId_material_menor()."'>";
+                                        echo utf8_encode($mat->getNombre_material_menor());
+                                        echo"</option>";
+                                      }
+                                      ?>
+                                    </select>
+                                    <br>
 
-                                         <?php
-                                       }
-                                       }
-                                           ?>
-
-
-                                       </tbody>
-                                     </table>
-
+                                    Cantidad a asignar: <input type="number" value="1" id="cantidadDeMaterialesAsignados" name="cantidadDeMaterialesAsignados" min="1" max="10">
 
                               </div>
-
-
 
                               <div class="col-md-6">
-                                <br>
-                                Serie: <input type="text" class="form-control" name="txtserie">
-                                Fecha: <input type="date" class="form-control" name="txtfechacargo">
-                                 <br>
-                                  <center> <input type="submit" name="btninfohistorica" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span></center>
+                                 <br><br><br><br><br><br><br><br><br><br><br>
+                                  <center> <input type="submit" name="btnInfoCargos" id="btn_crearCargoEnModificar" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+
+                                  </center>
+
                                 </form>
 
-                              </div>
-
                            </div>
+                           <br>
+                           <br>
+                           <br>
 
+                           <div class="col-sm-6">
+                             <table class="table table-striped">
+                                 <thead>
+                                   <tr>
+                                     <th>Nombre</th>
+                                     <th>Marca</th>
+                                     <th>Talla</th>
+                                     <th>Serie</th>
+                                     <th>Cantidad asignada</th>
+                                     <th>Fecha</th>
+                                   </tr>
+                                 </thead>
+                                 <tbody>
+                                   <?php
+                                   foreach ($infoCargos as $icargos => $datos) {
+                                   ?>
+                                   <tr>
+                                     <td><?php echo $datos->getNombre_informacionDeCargos();?></td>
+                                     <td><?php echo $datos->getMarca_informacionDeCargos();?></td>
+                                     <td><?php echo $datos->getTalla_informacionDeCargos();?></td>
+                                     <td><?php echo $datos->getSerie_informacionDeCargos();?></td>
+                                     <td><?php echo $datos->getCantidadAsignada_informacionDeCargos();?></td>
+                                     <td><?php
+                                     $fechaSinConvertir = $datos->getFecha_informacionDeCargos();
+                                     $fechaConvertida = date("d-m-Y", strtotime($fechaSinConvertir));
+
+                                     echo $fechaConvertida;?></td>
+                                <?php
+                                 }
+                                   ?>
+                                   </tr>
+
+                                 </tbody>
+                               </table>
+                          </div>
 
           </div>
+
+
 
    </div>
  </div>
@@ -1055,11 +1092,221 @@
 
 ?>
 
-<script src="javascript/JQuery.js"></script>
 <script>
 
+function actualizarComboBox(){
+     var val= document.getElementById("cboEntidadACargo").value;
+
+     $.ajax({
+       url: "buscarUbicacionFisica.php",
+       type: "POST",
+       data:{"datos":val}
+     }).done(function(data) {
+       console.log(data);
+       $('#cboxUbicacion')
+       .find('option')
+       .remove()
+       .end();
+       $('#cboxUbicacion').append(data);
+
+     });
+
+   }
+
+
+
+   function actualizarComboBoxDeMateriales(){
+        var val= document.getElementById("cboxUbicacion").value;
+
+        $.ajax({
+          url: "buscarMaterialMenorPorFkDeUbicacionFisica.php",
+          type: "POST",
+          data:{"datos":val}
+        }).done(function(data) {
+          console.log(data);
+          $('#cboMaterialesDisponibles')
+          .find('option')
+          .remove()
+          .end();
+          $('#cboMaterialesDisponibles').append(data);
+
+        });
+      }
+
+
+
+      function actualizarStockDisponible(){
+        var id = document.getElementById("cboMaterialesDisponibles").value;
+        $.ajax({
+            type: "POST",
+            url: 'obtenerStockDeUnMaterialPorId.php',
+            data: {"datos": id},
+            success: function(data){
+              var valorMaximo = document.getElementById("cantidadDeMaterialesAsignados");
+              valorMaximo.setAttribute("max",data);
+            }
+        });
+      }
+/*
       $("form").submit(function(){
         alert("Operación exitosa");
+          });
+          */
+
+
+          $('#btn_actualizarInfoPersonal').on('click',function(e){
+          e.preventDefault();
+          var form = $(this).parents('form');
+          swal({
+              title: "Sistema de bomberos dice:",
+              text: "Operación exitosa",
+              type: "success",
+              showCancelButton: true,
+              confirmButtonColor: "#DD6B55",
+              confirmButtonText: "Ok",
+              closeOnConfirm: true,
+          }, function(isConfirm){
+              if (isConfirm)  document.getElementById("formactualizarPersonal").submit();
+              //form.submit();
+          });
+          });
+
+          $('#btn_actualizarBomberil').on('click',function(e){
+          e.preventDefault();
+          var form = $(this).parents('form');
+          swal({
+              title: "Sistema de bomberos dice:",
+              text: "Operación exitosa",
+              type: "success",
+              showCancelButton: true,
+              confirmButtonColor: "#DD6B55",
+              confirmButtonText: "Ok",
+              closeOnConfirm: true,
+          }, function(isConfirm){
+              if (isConfirm)  document.getElementById("formactualizarBomberil").submit();
+              //form.submit();
+          });
+          });
+
+          $('#btn_actualizarInfoLaboral').on('click',function(e){
+          e.preventDefault();
+          var form = $(this).parents('form');
+          swal({
+              title: "Sistema de bomberos dice:",
+              text: "Operación exitosa",
+              type: "success",
+              showCancelButton: true,
+              confirmButtonColor: "#DD6B55",
+              confirmButtonText: "Ok",
+              closeOnConfirm: true,
+          }, function(isConfirm){
+              if (isConfirm)  document.getElementById("formactualizarInfoLaboral").submit();
+              //form.submit();
+          });
+          });
+
+          $('#btn_actualizarInfoMedica').on('click',function(e){
+          e.preventDefault();
+          var form = $(this).parents('form');
+          swal({
+              title: "Sistema de bomberos dice:",
+              text: "Operación exitosa",
+              type: "success",
+              showCancelButton: true,
+              confirmButtonColor: "#DD6B55",
+              confirmButtonText: "Ok",
+              closeOnConfirm: true,
+          }, function(isConfirm){
+              if (isConfirm)  document.getElementById("formactualizarInfoMedica").submit();
+              //form.submit();
+          });
+          });
+
+
+          $('#btn_crearInfoFamiliarEnModificar').on('click',function(e){
+          e.preventDefault();
+          var form = $(this).parents('form');
+          swal({
+              title: "Sistema de bomberos dice:",
+              text: "Operación exitosa",
+              type: "success",
+              showCancelButton: true,
+              confirmButtonColor: "#DD6B55",
+              confirmButtonText: "Ok",
+              closeOnConfirm: true,
+          }, function(isConfirm){
+              if (isConfirm)  document.getElementById("formCrearInfoFamiliarEnModificar").submit();
+              //form.submit();
+          });
+          });
+
+          $('#btn_crearInfoAcademicaEnModificar').on('click',function(e){
+          e.preventDefault();
+          var form = $(this).parents('form');
+          swal({
+              title: "Sistema de bomberos dice:",
+              text: "Operación exitosa",
+              type: "success",
+              showCancelButton: true,
+              confirmButtonColor: "#DD6B55",
+              confirmButtonText: "Ok",
+              closeOnConfirm: true,
+          }, function(isConfirm){
+              if (isConfirm)  document.getElementById("formCrearInfoAcademicaEnModificar").submit();
+              //form.submit();
+          });
+          });
+
+
+          $('#btn_crearInfoEntrenEstandarEnModificar').on('click',function(e){
+          e.preventDefault();
+          var form = $(this).parents('form');
+          swal({
+              title: "Sistema de bomberos dice:",
+              text: "Operación exitosa",
+              type: "success",
+              showCancelButton: true,
+              confirmButtonColor: "#DD6B55",
+              confirmButtonText: "Ok",
+              closeOnConfirm: true,
+          }, function(isConfirm){
+              if (isConfirm)  document.getElementById("formCrearInfoEntrenamientoEstandarEnModificar").submit();
+              //form.submit();
+          });
+          });
+
+          $('#btn_crearInfoHistoricaEnModificar').on('click',function(e){
+          e.preventDefault();
+          var form = $(this).parents('form');
+          swal({
+              title: "Sistema de bomberos dice:",
+              text: "Operación exitosa",
+              type: "success",
+              showCancelButton: true,
+              confirmButtonColor: "#DD6B55",
+              confirmButtonText: "Ok",
+              closeOnConfirm: true,
+          }, function(isConfirm){
+              if (isConfirm)  document.getElementById("formCrearInfoHistoricaEnModificar").submit();
+              //form.submit();
+          });
+          });
+
+          $('#btn_crearCargoEnModificar').on('click',function(e){
+          e.preventDefault();
+          var form = $(this).parents('form');
+          swal({
+              title: "Sistema de bomberos dice:",
+              text: "Operación exitosa",
+              type: "success",
+              showCancelButton: true,
+              confirmButtonColor: "#DD6B55",
+              confirmButtonText: "Ok",
+              closeOnConfirm: true,
+          }, function(isConfirm){
+              if (isConfirm)  document.getElementById("formCrearInfoCargosEnModificar").submit();
+              //form.submit();
+          });
           });
 
 </script>

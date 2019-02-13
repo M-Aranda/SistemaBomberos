@@ -11,6 +11,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+    <script src="javascript/JQuery.js"></script>
+    <script type="text/javascript" src="javascript/sweetAlertMin.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+
   </head>
 
   <?php
@@ -187,7 +191,7 @@ if(isset($_SESSION["carguios"])){
                                         <div style="margin-left: 0px;">
                                           <img src="images/avatar_opt.jpg">
                                         </div>
-                                        <form action="controlador/ActualizarUnidad.php" method="post">
+                                        <form id="formActualizarUnidad" action="controlador/ActualizarUnidad.php" method="post">
                                         <!--  Modificando unidad:
                                           <select name="cboUnidadAModificar"  class="form-control" disabled>
                                               <?php/*
@@ -267,17 +271,15 @@ if(isset($_SESSION["carguios"])){
                                         ?>
                                     </select>
                                           <br><br>
-                                        <center> <input type="submit" name="btncrear" value="Modificar Unidad" class="btn button-primary" style="width: 150px;"> <span ></span>
+                                        <center> <input type="submit" id="btn_modificarUnidad" name="btncrear" value="Modificar Unidad" class="btn button-primary" style="width: 150px;"> <span ></span>
                                             <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                                         </center>
                                       </form>
-                                                                <br>
+                                        <br>
                                       </div>
                                       <br>
                                       <br>
-
-
                                   </div>
                               </div>
                           </div>
@@ -299,8 +301,7 @@ if(isset($_SESSION["carguios"])){
 
                                       <div class="col-sm-4" >
 
-
-                                        <form action="controlador/CrearMantencion.php" method="post">
+                                        <form id="formCrearMantencionEnModificarUnidad" action="controlador/CrearMantencion.php" method="post">
                                           <input type="hidden" name="cboUnidades" value="<?php echo $unidadAModificar->getIdUnidad();?>">
                                           Tipo Mantención:
                                           <select name="cboTipoMantencion" class="form-control">
@@ -326,7 +327,7 @@ if(isset($_SESSION["carguios"])){
                                         Comentarios/Observaciones: <textarea class="form-control" Type="textarea" name="txtcomentario" ></textarea>
 
                                           <br><br>
-                                        <center> <input type="submit" name="btnModificarMantencion" value="Crear mantención" class="btn button-primary" style="width: 150px;"> <span ></span>
+                                        <center> <input type="submit" id="btn_crearMantencionEnModificar" name="btnModificarMantencion" value="Crear mantención" class="btn button-primary" style="width: 150px;"> <span ></span>
                                             <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                                         </center>
@@ -378,8 +379,6 @@ if(isset($_SESSION["carguios"])){
 
                           <br>
                           <br>
-
-
                           <div class="col-md-24">
                               <button type="button" class="btn btn-default col-md-12" data-toggle="collapse" data-target="#combustible">
                                 Crear Carguío de Combustible
@@ -395,7 +394,7 @@ if(isset($_SESSION["carguios"])){
 
                                       <div class="col-sm-4" >
 
-                                        <form action="controlador/CrearCarguioDeCombustible.php" method="post">
+                                        <form id="formCrearCarguioEnModificar" action="controlador/CrearCarguioDeCombustible.php" method="post">
 
                                           <input type="hidden" name="idUnidadAModificar" value="<?php echo $unidadAModificar->getIdUnidad();?>">
 
@@ -424,13 +423,12 @@ if(isset($_SESSION["carguios"])){
                                         Comentarios/Observaciones: <textarea class="form-control" Type="textarea" name="txtcomentario" ></textarea>
 
                                           <br>
-                                        <center> <input type="submit" name="btncrear" value="Crear carga" class="btn button-primary" style="width: 150px;"> <span ></span>
+                                        <center> <input type="submit" id="btn_crearCarguioEnModificar" name="btncrear" value="Crear carga" class="btn button-primary" style="width: 150px;"> <span ></span>
                                             <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                                         </center>
                                       </form>
-                                                                <br>
-
+                                      <br>
 
                                       </div>
                                       <br>
@@ -490,39 +488,59 @@ if(isset($_SESSION["carguios"])){
    </div>
  </div>
 
- <script src="javascript/JQuery.js"></script>
+
  <script type="text/javascript">
- function actualizarMantencion(id) {
-             document.getElementById("idDeLaMantencionAModificar").value=id;
-             alert("Utilize las opciones de arriba para seleccionar los nuevos datos");
 
+ $('#btn_modificarUnidad').on('click',function(e){
+ e.preventDefault();
+ var form = $(this).parents('form');
+ swal({
+     title: "Sistema de bomberos dice:",
+     text: "Operación exitosa",
+     type: "success",
+     showCancelButton: true,
+     confirmButtonColor: "#DD6B55",
+     confirmButtonText: "Ok",
+     closeOnConfirm: true,
+ }, function(isConfirm){
+     if (isConfirm)  document.getElementById("formActualizarUnidad").submit();
+     //form.submit();
+ });
+ });
 
-           }
+ $('#btn_crearMantencionEnModificar').on('click',function(e){
+ e.preventDefault();
+ var form = $(this).parents('form');
+ swal({
+     title: "Sistema de bomberos dice:",
+     text: "Operación exitosa",
+     type: "success",
+     showCancelButton: true,
+     confirmButtonColor: "#DD6B55",
+     confirmButtonText: "Ok",
+     closeOnConfirm: true,
+ }, function(isConfirm){
+     if (isConfirm)  document.getElementById("formCrearMantencionEnModificarUnidad").submit();
+     //form.submit();
+ });
+ });
 
-
-           function actualizarCarguio(id) {
-                       document.getElementById("idCarguioAModificar").value=id;
-                       alert("Utilize las opciones de arriba para seleccionar los nuevos datos");
-
-
-                     }
-
-
-                         $("form").submit(function(){
-                           alert("Operación exitosa");
-                           });
-
-
-/*
-             $.ajax({
-               url: "iniciarFkInfoPersonalParaModificarBomberoEnSesion.php",
-               type: "POST",
-               data:{"idParaModificar":id}
-             }).done(function(data) {
-               console.log(data);
-             });
-               }
-*/
+ $('#btn_crearCarguioEnModificar').on('click',function(e){
+ e.preventDefault();
+ var form = $(this).parents('form');
+ swal({
+     title: "Sistema de bomberos dice:",
+     text: "Operación exitosa",
+     type: "success",
+     showCancelButton: true,
+     confirmButtonColor: "#DD6B55",
+     confirmButtonText: "Ok",
+     closeOnConfirm: true,
+ }, function(isConfirm){
+     if (isConfirm)  document.getElementById("formCrearCarguioEnModificar").submit();
+     //form.submit();
+ });
+ });
 </script>
 
 <script src="javascript/borrarVariablesEnSesionAlCargarPagina.js"></script>

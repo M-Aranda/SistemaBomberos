@@ -414,7 +414,7 @@ class Data{
 
     public function readCargos (){
       $this->c->conectar();
-      $query="SELECT * FROM tbl_cargo;";
+      $query="SELECT * FROM tbl_cargo ORDER BY id_cargo DESC;";
       $rs = $this->c->ejecutar($query);
       $listado = array();
       while($reg = $rs->fetch_array()){

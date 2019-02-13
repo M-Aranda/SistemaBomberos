@@ -363,7 +363,7 @@ if(isset($_SESSION['seEstaModificandoUBombero'])){
            <div class="col-md-11 collapse" id="laboral">
                <div class="panel panel-primary">
                    <div class="panel-heading panel-title">
-                     <form action="controlador/CrearInformacionLaboral.php" method="post">
+                     <form id="formCrearInfoLaboral" action="controlador/CrearInformacionLaboral.php" method="post">
                        Información Laboral
                    </div>
                    <div class="panel-body">
@@ -387,7 +387,7 @@ if(isset($_SESSION['seEstaModificandoUBombero'])){
                          AFP: <input class="form-control" type="text" name="txtafp" required>
                          Profesión: <input class="form-control" name="txtprofesion" required>
                          <br>
-                         <center> <input type="submit" name="btnInfoLaboral" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                         <center> <input type="submit" id="btn_crearInfoLaboral" name="btnInfoLaboral" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
                          </center>
                        </form>
 
@@ -407,7 +407,7 @@ if(isset($_SESSION['seEstaModificandoUBombero'])){
            <div class="col-md-11 collapse" id="medica">
                <div class="panel panel-primary">
                    <div class="panel-heading panel-title">
-                     <form action="controlador/CrearInformacionMedica.php" method="post">
+                     <form id="formCrearInfoMedica" action="controlador/CrearInformacionMedica.php" method="post">
                        Informacion Médica
                    </div>
                    <div class="panel-body">
@@ -462,7 +462,7 @@ if(isset($_SESSION['seEstaModificandoUBombero'])){
                            ?>
                            </select>
                            <br>
-                           <center> <input type="submit" name="btninfoMedica" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                           <center> <input type="submit" id="btn_crearInfoMedica" name="btninfoMedica" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
 
                            </center>
                          </form>
@@ -483,7 +483,7 @@ if(isset($_SESSION['seEstaModificandoUBombero'])){
            <div class="col-md-11 collapse" id="familiar">
                <div class="panel panel-primary">
                    <div class="panel-heading panel-title">
-                     <form action="controlador/CrearInformacionFamiliar.php" method="post">
+                     <form id="formCrearInfoFamiliar" action="controlador/CrearInformacionFamiliar.php" method="post">
                        Información Familiar
                    </div>
                    <div class="panel-body">
@@ -517,7 +517,7 @@ if(isset($_SESSION['seEstaModificandoUBombero'])){
                       </div>
                       <div class="col-md-6">
                          <br><br><br><br><br><br>
-                          <center> <input type="submit" name="btninfoFamiliar" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                          <center> <input type="submit" id="btn_crearInfoFamiliar" name="btninfoFamiliar" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
                               <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                           </center>
@@ -542,7 +542,7 @@ if(isset($_SESSION['seEstaModificandoUBombero'])){
            <div class="col-md-11 collapse" id="academica">
                <div class="panel panel-primary">
                    <div class="panel-heading panel-title">
-                     <form action="controlador/CrearInformacionAcademica.php" method="post">
+                     <form id="formCrearInfoAcademica" action="controlador/CrearInformacionAcademica.php" method="post">
                        Informacion Académica
                    </div>
                    <div class="panel-body">
@@ -573,7 +573,7 @@ if(isset($_SESSION['seEstaModificandoUBombero'])){
                       </div>
                       <div class="col-md-6">
                          <br><br><br><br><br><br>
-                          <center> <input type="submit" name="btninfoAcademica" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                          <center> <input type="submit" id="btn_crearInfoAcademica" name="btninfoAcademica" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
                               <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                           </center>
@@ -597,7 +597,7 @@ if(isset($_SESSION['seEstaModificandoUBombero'])){
                <div class="col-md-11 collapse" id="estandar">
                    <div class="panel panel-primary">
                        <div class="panel-heading panel-title">
-                         <form action="controlador/CrearInfoEntrenamientoEstandar.php" method="post">
+                         <form id="formCrearInfoEntrenamientoEstandar" action="controlador/CrearInfoEntrenamientoEstandar.php" method="post">
                            Información Estandar
                        </div>
                        <div class="panel-body">
@@ -629,7 +629,7 @@ if(isset($_SESSION['seEstaModificandoUBombero'])){
                           </div>
                           <div class="col-md-6">
                              <br><br><br><br><br><br>
-                              <center> <input type="submit" name="btninfoEstandar" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                              <center> <input type="submit" id="btn_crearInfoEntrenEstandar" name="btninfoEstandar" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
                                   <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
                               </center>
@@ -654,7 +654,7 @@ if(isset($_SESSION['seEstaModificandoUBombero'])){
                <div class="col-md-11 collapse" id="historica">
                    <div class="panel panel-primary">
                        <div class="panel-heading panel-title">
-                         <form action="controlador/CrearInformacionHistorica.php" method="post">
+                         <form id="formCrearInfoHistorica" action="controlador/CrearInformacionHistorica.php" method="post">
                            Información Histórica
                        </div>
                        <div class="panel-body" style="margin-left: -20px;">
@@ -709,9 +709,10 @@ if(isset($_SESSION['seEstaModificandoUBombero'])){
 
                           <div class="col-md-6">
                              <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-                              <center> <input type="submit" name="btninfohistorica" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                              <center> <input type="submit" id="btn_crearInfoHistorica" name="btninfohistorica" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
                               </center>
                             </form>
+
 
                           </div>
                        </div>
@@ -730,7 +731,7 @@ if(isset($_SESSION['seEstaModificandoUBombero'])){
                       <div class="col-md-11 collapse" id="cargos">
                           <div class="panel panel-primary">
                               <div class="panel-heading panel-title">
-                                <form action="controlador/CrearInformacionDeCargos.php" method="post">
+                                <form id="formCrearInfoCargos" action="controlador/CrearInformacionDeCargos.php" method="post">
                                   Información de Cargos
                               </div>
                               <div class="panel-body" style="margin-left: -20px;">
@@ -793,11 +794,12 @@ if(isset($_SESSION['seEstaModificandoUBombero'])){
 
                                  <div class="col-md-6">
                                     <br><br><br><br><br><br><br><br><br><br><br>
-                                     <center> <input type="submit" name="btnInfoCargos" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                                     <center> <input type="submit" name="btnInfoCargos" id="btn_crearCargo" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
 
                                      </center>
 
                                    </form>
+
 
                                  </div>
 
@@ -877,7 +879,7 @@ intenta crear al bombero, llamandolo por su nombre, pero el mensaje de exito sol
 
 
 
-// Hay que darle un id a cada forma, y hacer una estructura parecida para cada forma (APLICAR A TODAS LAS FORM)
+// Hay que darle un id a cada forma, y hacer una estructura parecida para cada forma (APLICAR A TODAS LAS FORM QUE CREEN O ACTUALIZEN COSAS)
     $('#btn_crearInfoPersonal').on('click',function(e){
     e.preventDefault();
     var form = $(this).parents('form');
@@ -913,6 +915,127 @@ intenta crear al bombero, llamandolo por su nombre, pero el mensaje de exito sol
     });
     });
 
+    $('#btn_crearInfoLaboral').on('click',function(e){
+    e.preventDefault();
+    var form = $(this).parents('form');
+    swal({
+        title: "Sistema de bomberos dice:",
+        text: "Operación exitosa",
+        type: "success",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Ok",
+        closeOnConfirm: true,
+    }, function(isConfirm){
+        if (isConfirm)  document.getElementById("formCrearInfoLaboral").submit();
+        //form.submit();
+    });
+    });
+
+    $('#btn_crearInfoMedica').on('click',function(e){
+    e.preventDefault();
+    var form = $(this).parents('form');
+    swal({
+        title: "Sistema de bomberos dice:",
+        text: "Operación exitosa",
+        type: "success",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Ok",
+        closeOnConfirm: true,
+    }, function(isConfirm){
+        if (isConfirm)  document.getElementById("formCrearInfoMedica").submit();
+        //form.submit();
+    });
+    });
+
+
+
+    $('#btn_crearInfoFamiliar').on('click',function(e){
+    e.preventDefault();
+    var form = $(this).parents('form');
+    swal({
+        title: "Sistema de bomberos dice:",
+        text: "Operación exitosa",
+        type: "success",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Ok",
+        closeOnConfirm: true,
+    }, function(isConfirm){
+        if (isConfirm)  document.getElementById("formCrearInfoFamiliar").submit();
+        //form.submit();
+    });
+    });
+
+    $('#btn_crearInfoAcademica').on('click',function(e){
+    e.preventDefault();
+    var form = $(this).parents('form');
+    swal({
+        title: "Sistema de bomberos dice:",
+        text: "Operación exitosa",
+        type: "success",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Ok",
+        closeOnConfirm: true,
+    }, function(isConfirm){
+        if (isConfirm)  document.getElementById("formCrearInfoAcademica").submit();
+        //form.submit();
+    });
+    });
+
+    $('#btn_crearInfoEntrenEstandar').on('click',function(e){
+    e.preventDefault();
+    var form = $(this).parents('form');
+    swal({
+        title: "Sistema de bomberos dice:",
+        text: "Operación exitosa",
+        type: "success",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Ok",
+        closeOnConfirm: true,
+    }, function(isConfirm){
+        if (isConfirm)  document.getElementById("formCrearInfoEntrenamientoEstandar").submit();
+        //form.submit();
+    });
+    });
+
+
+    $('#btn_crearInfoHistorica').on('click',function(e){
+    e.preventDefault();
+    var form = $(this).parents('form');
+    swal({
+        title: "Sistema de bomberos dice:",
+        text: "Operación exitosa",
+        type: "success",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Ok",
+        closeOnConfirm: true,
+    }, function(isConfirm){
+        if (isConfirm)  document.getElementById("formCrearInfoHistorica").submit();
+        //form.submit();
+    });
+    });
+
+    $('#btn_crearCargo').on('click',function(e){
+    e.preventDefault();
+    var form = $(this).parents('form');
+    swal({
+        title: "Sistema de bomberos dice:",
+        text: "Operación exitosa",
+        type: "success",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Ok",
+        closeOnConfirm: true,
+    }, function(isConfirm){
+        if (isConfirm)  document.getElementById("formCrearInfoCargos").submit();
+        //form.submit();
+    });
+    });
 
        </script>
 
