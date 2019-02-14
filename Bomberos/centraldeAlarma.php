@@ -199,29 +199,29 @@ if($_SESSION["usuarioIniciado"]!=null){
         3 &nbsp;&nbsp; <br><br>
 
         1 <input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;&nbsp;
-        71 &nbsp;<input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;&nbsp;
-        72 <input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;&nbsp;
-        73 <input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;
+        71 &nbsp;<input type="button" value="71" style="width:20px;height:20px;" > &nbsp;&nbsp;&nbsp;
+        72 <input type="button" value="72" style="width:20px;height:20px;" > &nbsp;&nbsp;&nbsp;
+        73 <input type="button" value="73" style="width:20px;height:20px;" > &nbsp;&nbsp;
                   <br><br>
 
 
-        2  <input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;&nbsp;
-        41 &nbsp;<input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;&nbsp;
-        42   <input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;&nbsp;&nbsp;
-        43   <input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;
+        2  <input type="button" value="2" style="width:20px;height:20px;" > &nbsp;&nbsp;&nbsp;
+        41 &nbsp;<input type="button" value="41" style="width:20px;height:20px;" > &nbsp;&nbsp;&nbsp;
+        42   <input type="button" value="42" style="width:20px;height:20px;" > &nbsp;&nbsp;&nbsp;&nbsp;
+        43   <input type="button" value="43" style="width:20px;height:20px;" > &nbsp;&nbsp;
         <br><br>
 
-        6  <input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;
-        104  <input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;
-        204  <input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;
-        304   <input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;
+        6  <input type="button" value="6" style="width:20px;height:20px;" > &nbsp;&nbsp;
+        104  <input type="button" value="104" style="width:20px;height:20px;" > &nbsp;&nbsp;
+        204  <input type="button" value="205" style="width:20px;height:20px;" > &nbsp;&nbsp;
+        304   <input type="button" value="304" style="width:20px;height:20px;" > &nbsp;&nbsp;
 
         <br><br>
 
-        7   <input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;
-        105  <input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;
-        205  <input type="button" value="1" style="width:20px;height:20px;" >  &nbsp;&nbsp;
-        305 <input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;
+        7   <input type="button" value="7" style="width:20px;height:20px;" > &nbsp;&nbsp;
+        105  <input type="button" value="105" style="width:20px;height:20px;" > &nbsp;&nbsp;
+        205  <input type="button" value="205" style="width:20px;height:20px;" >  &nbsp;&nbsp;
+        305 <input type="button" value="305" style="width:20px;height:20px;" > &nbsp;&nbsp;
       </center>
           </div>
         </div>
@@ -285,9 +285,9 @@ if($_SESSION["usuarioIniciado"]!=null){
        <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
          <div class="container">
 
-         <div class="form-group" style="margin-left:0px;">
+         <div class="form-group" style="margin-left:20px;">
 
-           Nombre: <input type="text" name="txtnombre"> Rut: <input type="text" name="txtrut">
+           Nombre: &nbsp;&nbsp;<input type="text" name="txtnombre"> Rut: <input type="text" name="txtrut">
            Telefono: <input type="number" name="txtTF"><br><br>
            Direccion: <input type="text" name="txtdireccion">
            Tipo de Emergencia:

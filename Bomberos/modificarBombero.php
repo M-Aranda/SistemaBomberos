@@ -949,11 +949,6 @@
                                </table>
 
                           </div>
-
-
-
-
-
                        </div>
 
                    </div>
@@ -988,51 +983,51 @@
                                    Serie: <input type="text" class="form-control" name="txtserie">
                                    Fecha: <input type="date" class="form-control" name="txtfechacargo">
                                    <br>
-
-                                   Entidad a Cargo:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <select name="cboEntidadACargo" id="cboEntidadACargo" onchange="actualizarComboBox()" style="width:230px;">
-                                        <?php
-                                            $entiPropietaria = $data->getEntidadACargo();
-                                            foreach ($entiPropietaria as $ep) {
-                                                echo "<option value='".$ep->getIdEntidadACargo()."'>";
-                                                    echo utf8_encode($ep->getNombreEntidadACargo());
-                                                echo"</option>";
-                                            }
-                                        ?>
-                                    </select>
-
-                                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Ubicacion Fisica:
-                                    <select name="cboxUbicacion" id="cboxUbicacion" onchange="actualizarComboBoxDeMateriales()" style="width:195px;">
-                                      <?php
-                                      $ubicacionesFisicas = $data->getUbicacionFisica(1);
-                                      foreach ($ubicacionesFisicas as $ubi) {
-                                        echo "<option value='".$ubi->getIdUbicacionFisica()."'>";
-                                        echo utf8_encode($ubi->getNombreUbicacionFisica());
-                                        echo"</option>";
-                                      }
-                                      ?>
-
-                                    </select>
-                                    <br>
-                                    Material menor a asignar:
-                                    <select name="cboMaterialesDisponibles" id="cboMaterialesDisponibles" style="width:195px;" onchange="actualizarStockDisponible()">
-                                      <?php
-                                      $materialesDisponibles = $data->getMaterialesMenoresPorFkUbicacionFisica(1);
-                                      foreach ($materialesDisponibles as $mat) {
-                                        echo "<option value='".$mat->getId_material_menor()."'>";
-                                        echo utf8_encode($mat->getNombre_material_menor());
-                                        echo"</option>";
-                                      }
-                                      ?>
-                                    </select>
-                                    <br>
-
-                                    Cantidad a asignar: <input type="number" value="1" id="cantidadDeMaterialesAsignados" name="cantidadDeMaterialesAsignados" min="1" max="10">
-
                               </div>
 
                               <div class="col-md-6">
-                                 <br><br><br><br><br><br><br><br><br><br><br>
+                                <br>
+
+                                Entidad a Cargo:
+                                 <select name="cboEntidadACargo" id="cboEntidadACargo" class="form-control" onchange="actualizarComboBox()" >
+                                     <?php
+                                         $entiPropietaria = $data->getEntidadACargo();
+                                         foreach ($entiPropietaria as $ep) {
+                                             echo "<option value='".$ep->getIdEntidadACargo()."'>";
+                                                 echo utf8_encode($ep->getNombreEntidadACargo());
+                                             echo"</option>";
+                                         }
+                                     ?>
+                                 </select>
+
+                                Ubicacion Fisica:
+                                 <select name="cboxUbicacion" id="cboxUbicacion" class="form-control" onchange="actualizarComboBoxDeMateriales()">
+                                   <?php
+                                   $ubicacionesFisicas = $data->getUbicacionFisica(1);
+                                   foreach ($ubicacionesFisicas as $ubi) {
+                                     echo "<option value='".$ubi->getIdUbicacionFisica()."'>";
+                                     echo utf8_encode($ubi->getNombreUbicacionFisica());
+                                     echo"</option>";
+                                   }
+                                   ?>
+
+                                 </select>
+
+                                 Material menor a asignar:
+                                 <select name="cboMaterialesDisponibles" id="cboMaterialesDisponibles" class="form-control" onchange="actualizarStockDisponible()">
+                                   <?php
+                                   $materialesDisponibles = $data->getMaterialesMenoresPorFkUbicacionFisica(1);
+                                   foreach ($materialesDisponibles as $mat) {
+                                     echo "<option value='".$mat->getId_material_menor()."'>";
+                                     echo utf8_encode($mat->getNombre_material_menor());
+                                     echo"</option>";
+                                   }
+                                   ?>
+                                 </select>
+
+                                 Cantidad a asignar:
+                                 <input type="number" class="form-control" value="1" id="cantidadDeMaterialesAsignados" name="cantidadDeMaterialesAsignados" min="1" max="10">
+                                  <br>
                                   <center> <input type="submit" name="btnInfoCargos" id="btn_crearCargoEnModificar" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
 
                                   </center>
@@ -1040,12 +1035,8 @@
                                 </form>
 
                            </div>
-                           <br>
-                           <br>
-                           <br>
 
-                           <div class="col-sm-6">
-                             <table class="table table-striped">
+                             <table class="table table-striped" style="margin-left: 10px;">
                                  <thead>
                                    <tr>
                                      <th>Nombre</th>
@@ -1078,13 +1069,8 @@
 
                                  </tbody>
                                </table>
-                          </div>
-
-          </div>
-
-
-
-   </div>
+        </div>
+</div>
  </div>
 
 <?php
