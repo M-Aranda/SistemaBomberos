@@ -329,10 +329,12 @@ class Data{
                 ".$unidad->getfkTipoVehiculo().",
                 ".$unidad->getfkEntidadPropietaria().");";
 
+                echo $query;
+
         $this->c->conectar();
         $this->c->ejecutar($query);
         $this->c->desconectar();
-        echo "insertBD".$query;
+
     }
 
 
@@ -966,9 +968,9 @@ while($reg = $rs->fetch_array()){
      $info->setMarca_informacionDeCargos($reg[2]);
      $info->setTalla_informacionDeCargos($reg[3]);
      $info->setSerie_informacionDeCargos($reg[4]);
-     $info->setFecha_informacionDeCargos($reg[6]);
-     $info->setCantidadAsignada_informacionDeCargos($reg[7]);
-     $info->setFk_personal_informacionDeCargos($reg[8]);
+     $info->setFecha_informacionDeCargos($reg[5]);
+     $info->setCantidadAsignada_informacionDeCargos($reg[6]);
+     $info->setFk_personal_informacionDeCargos($reg[7]);
 
      $listado[]=$info;
  }

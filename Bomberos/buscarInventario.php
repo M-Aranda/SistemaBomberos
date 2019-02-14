@@ -283,7 +283,12 @@ if($_SESSION["usuarioIniciado"]!=null){
                             $fechaSinConvertir = $objeto->getFechaDeCaducidad();
                             $fechaConvertida = date("d-m-Y", strtotime($fechaSinConvertir));
 
-                            echo $fechaConvertida;
+                            if($fechaConvertida=='01-01-1970'){
+                              echo "No aplica";
+                            }else {
+                              echo $fechaConvertida;
+                            }
+
                           ?>  </td>
                             <td><?php echo utf8_encode($objeto->getNombreEntidad());?></td>
 

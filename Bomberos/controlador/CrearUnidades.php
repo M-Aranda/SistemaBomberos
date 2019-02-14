@@ -1,7 +1,5 @@
 <?php
-echo "antes del click";
-if (isset($_POST["btncrear"])) {
-echo "despues del click";
+
   require_once("../model/Conexion.php");
   require_once("../model/Data.php");
   require_once("../model/Tbl_Unidad.php");
@@ -46,11 +44,9 @@ echo "despues del click";
 
     $data = new Data();
     $data->crearUnidades($unidad);
-    echo "<br>";
-    echo "<br>";
-    echo "<br>";
+
 
   header("location: ../crearUnidades.php");
-}
+
 
  ?>

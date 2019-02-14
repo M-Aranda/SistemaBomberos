@@ -3,7 +3,6 @@ require_once("../model/Data.php");
 require_once("../model/Tbl_MaterialMenor.php");
 $data = new Data();
 
-
 $materialMenor= new Tbl_MaterialMenor();
 
 $materialMenor->setId_material_menor(1);
@@ -27,7 +26,6 @@ if ($_POST['checknoaplica'] == 'seleccionado') {
 }else {
   $noAplica=FALSE;
 }
-
 
 $data->crerMaterialMenor($materialMenor);
 

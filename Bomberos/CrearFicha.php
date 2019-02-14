@@ -789,7 +789,7 @@ if(isset($_SESSION['seEstaModificandoUBombero'])){
                                       }
                                       ?>
                                     </select>
-                                    
+
 
                                     Cantidad a asignar: <input type="number" class="form-control" value="1" id="cantidadDeMaterialesAsignados" name="cantidadDeMaterialesAsignados" min="1" max="10">
                                     <br>
@@ -837,7 +837,6 @@ intenta crear al bombero, llamandolo por su nombre, pero el mensaje de exito sol
         $('#cboxUbicacion').append(data);
 
       });
-
     }
 
 
@@ -875,6 +874,8 @@ intenta crear al bombero, llamandolo por su nombre, pero el mensaje de exito sol
          });
        }
 
+      window.onload = actualizarStockDisponible();
+
 
 
 
@@ -888,10 +889,11 @@ intenta crear al bombero, llamandolo por su nombre, pero el mensaje de exito sol
         type: "success",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
-        confirmButtonText: "Ok",
-        closeOnConfirm: true,
+        confirmButtonText: "true",
+        closeOnConfirm: false,
     }, function(isConfirm){
         if (isConfirm)  document.getElementById("formPersonal").submit();
+
         //form.submit();
     });
     });

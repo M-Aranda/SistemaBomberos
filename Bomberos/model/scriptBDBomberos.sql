@@ -1533,9 +1533,33 @@ AND tbl_entidadACargo.id_entidadACargo=1;
 
 CALL CRUDUsuario (1,'Marcelo',1,'123',1); 
 
-CALL CRUDUnidad (6,'Nombre de Prueba 1','2000','200','300','333','555','3333','YOLO','2000-12-03','2012-06-11',15,2,1,1,1);
-CALL CRUDUnidad (6,'Nombre de Prueba 2','2000','200','300','333','555','3333','BIEN','2000-12-03','2012-06-11',15,2,1,1,1);
-CALL CRUDUnidad (6,'Nombre de Prueba 3','2000','200','300','333','555','3333','jaja','2000-12-03','2012-06-11',15,2,1,1,1);
+CALL CRUDUnidad (6,'B-0','2000','200','300','333','555','3333','YOLO','2000-12-03','2012-06-11',15,2,1,1,1);
+CALL CRUDUnidad (6,'BX-0','2000','200','300','333','555','3333','BIEN','2000-12-03','2012-06-11',15,2,1,1,1);
+CALL CRUDUnidad (6,'Q-0','2000','200','300','333','555','3333','jaja','2000-12-03','2012-06-11',15,2,1,1,1);
+CALL CRUDUnidad (6,'R-0','2000','200','300','333','555','3333','juejue','2000-12-03','2012-06-11',15,2,1,1,1);
+CALL CRUDUnidad (6,'X-0','2000','200','300','333','555','3333','buzz','2000-12-03','2012-06-11',15,2,1,1,1);
+CALL CRUDUnidad (6,'K-0','2000','200','300','333','555','3333','bloom','2000-12-03','2012-06-11',15,2,1,1,1);
+
+CALL CRUDUnidad (6,'B-1','2000','200','300','333','555','3333','uno','2000-12-03','2012-06-11',15,2,1,2,1);
+CALL CRUDUnidad (6,'BX-1','2000','200','300','333','555','3333','dos','2000-12-03','2012-06-11',15,2,1,2,1);
+CALL CRUDUnidad (6,'Q-1','2000','200','300','333','555','3333','tres','2000-12-03','2012-06-11',15,2,1,2,1);
+CALL CRUDUnidad (6,'R-1','2000','200','300','333','555','3333','cuatro','2000-12-03','2012-06-11',15,2,1,2,1);
+CALL CRUDUnidad (6,'X-1','2000','200','300','333','555','3333','cinco','2000-12-03','2012-06-11',15,2,1,2,1);
+CALL CRUDUnidad (6,'K-1','2000','200','300','333','555','3333','seis','2000-12-03','2012-06-11',15,2,1,2,1);
+
+CALL CRUDUnidad (6,'B-2','2000','200','300','333','555','3333','siete','2000-12-03','2012-06-11',15,2,1,3,1);
+CALL CRUDUnidad (6,'BX-2','2000','200','300','333','555','3333','ocho','2000-12-03','2012-06-11',15,2,1,3,1);
+CALL CRUDUnidad (6,'Q-2','2000','200','300','333','555','3333','nueve','2000-12-03','2012-06-11',15,2,1,3,1);
+CALL CRUDUnidad (6,'R-2','2000','200','300','333','555','3333','decimo','2000-12-03','2012-06-11',15,2,1,3,1);
+CALL CRUDUnidad (6,'X-2','2000','200','300','333','555','3333','once','2000-12-03','2012-06-11',15,2,1,3,1);
+CALL CRUDUnidad (6,'K-2','2000','200','300','333','555','3333','doce','2000-12-03','2012-06-11',15,2,1,3,1);
+
+CALL CRUDUnidad (6,'B-3','2000','200','300','333','555','3333','trece','2000-12-03','2012-06-11',15,2,1,4,1);
+CALL CRUDUnidad (6,'BX-3','2000','200','300','333','555','3333','caotorce','2000-12-03','2012-06-11',15,2,1,4,1);
+CALL CRUDUnidad (6,'Q-3','2000','200','300','333','555','3333','quince','2000-12-03','2012-06-11',15,2,1,4,1);
+CALL CRUDUnidad (6,'R-3','2000','200','300','333','555','3333','dieciseis','2000-12-03','2012-06-11',15,2,1,4,1);
+CALL CRUDUnidad (6,'X-3','2000','200','300','333','555','3333','diecisiete','2000-12-03','2012-06-11',15,2,1,4,1);
+CALL CRUDUnidad (6,'K-3','2000','200','300','333','555','3333','dieciocho','2000-12-03','2012-06-11',15,2,1,4,1);
 
 
 CALL CRUDMedida (1,'XX','SS','42','41',1);
@@ -1629,6 +1653,34 @@ INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Azul',3,30,1,1,'Alg
 INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Verde',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
 INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Plomo',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
 INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Morada',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
+
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 2, 'Roja',3,20,1,2,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 2, 'Roja',3,20,1,2,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 2, 'Azul',3,30,1,2,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 2, 'Verde',3,30,1,2,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 2, 'Plomo',3,30,1,2,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 2, 'Morada',3,30,1,2,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
+
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 3, 'Roja',3,20,1,3,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 3, 'Roja',3,20,1,3,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 3, 'Azul',3,30,1,3,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 3, 'Verde',3,30,1,3,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 3, 'Plomo',3,30,1,3,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 3, 'Morada',3,30,1,3,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
+
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 4, 'Roja',3,20,1,4,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 4, 'Roja',3,20,1,4,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 4, 'Azul',3,30,1,4,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 4, 'Verde',3,30,1,4,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 4, 'Plomo',3,30,1,4,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 4, 'Morada',3,30,1,4,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
+
+INSERT INTO tbl_material_menor VALUES (NULL, 'Casco', 2, 'Rojo',3,20,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
+INSERT INTO tbl_material_menor VALUES (NULL, 'Hacha', 2, 'Roja',3,20,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
+INSERT INTO tbl_material_menor VALUES (NULL, 'Hacha', 2, 'Azul',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
+INSERT INTO tbl_material_menor VALUES (NULL, 'Hacha', 2, 'Verde',3,30,1,2,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
+INSERT INTO tbl_material_menor VALUES (NULL, 'Hacha', 2, 'Plomo',3,30,1,3,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
+INSERT INTO tbl_material_menor VALUES (NULL, 'Hacha', 2, 'Morada',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
 
 /*
 DROP DATABASE bomberosBD;

@@ -211,10 +211,10 @@
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           Color:
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-           <input Type="text" name="txtColor" style="width:195px;" value="<?php echo $material->getColor_material_menor();?>" required ><br><br>
+           <input Type="text" name="txtColor" style="width:195px;" value="<?php echo utf8_encode($material->getColor_material_menor());?>" required ><br><br>
 
            Proveedor: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="text" name="txtProveedor" style="width:230px;" value="<?php echo $material->getProveedor_material_menor();?>" required >
+            <input type="text" name="txtProveedor" style="width:230px;" value="<?php echo utf8_encode($material->getProveedor_material_menor());?>" required >
 
 
            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -330,7 +330,6 @@
       alert("Operación exitosa");
       });
 */
-
 $('#btnModificarMaterial').on('click',function(e){
 e.preventDefault();
 var form = $(this).parents('form');
@@ -343,10 +342,45 @@ swal({
     confirmButtonText: "Ok",
     closeOnConfirm: true,
 }, function(isConfirm){
-    if (isConfirm)  document.getElementById("formModificarMaterial").submit();
+    if (isConfirm)
+    swal({
+        title: "Sistema de bomberos dice:",
+        text: "Registro exitos",
+        type: "success",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Ok",
+        closeOnConfirm: true,
+    });
+    document.getElementById("formModificarMaterial").submit();
     //form.submit();
 });
 });
+
+/*
+$('#btnModificarMaterial').click(function(e, params) {
+    var localParams = params || {};
+    if (!localParams.send) {
+      e.preventDefault();
+    }
+    swal({
+        title: "Desea continuar?",
+        text: "Se creara un nuevo articulo con la informacion proporcionada.",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#6A9944",
+        confirmButtonText: "Confirmar",
+        cancelButtonText: "Cancelar",
+        closeOnConfirm: true
+      },
+      function(isConfirm) {
+        if (isConfirm) {
+          $(e.currentTarget).trigger(e.type, {'send': true});
+        }
+      }
+    );
+  });
+*/
 
 </script>
 <script src="javascript/borrarVariablesEnSesionAlCargarPagina.js"></script>
