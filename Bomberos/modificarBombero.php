@@ -88,7 +88,6 @@
    <script type="text/javascript" src="javascript/sweetAlertMin.js"></script>
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
 
-   <script src="javascript/borrarResultadosDeBusqueda.js"></script>
 
   </head>
 

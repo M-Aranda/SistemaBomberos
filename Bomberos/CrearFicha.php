@@ -30,7 +30,6 @@ dentro del directorio, pero no cacho bien como referenciarlo -->
 <script type="text/javascript" src="javascript/sweetAlertMin.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
 
-<script src="javascript/borrarResultadosDeBusqueda.js"></script>
   </head>
 
   <?php
@@ -871,9 +870,6 @@ intenta crear al bombero, llamandolo por su nombre, pero el mensaje de exito sol
              }
          });
        }
-
-      window.onload = actualizarStockDisponible();
-
 
 
 
