@@ -5,7 +5,6 @@ $data = new Data();
 
 $id = isset($_REQUEST['datos'])?$_REQUEST['datos']:"";
 
-
 $materialesDisponibles = $data->getMaterialesMenoresPorFkUbicacionFisica($id);
 foreach ($materialesDisponibles as $mat) {
   echo "<option value='".$mat->getId_material_menor()."'>";

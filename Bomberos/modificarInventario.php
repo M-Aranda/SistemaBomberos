@@ -18,6 +18,8 @@
    <script type="text/javascript" src="javascript/sweetAlertMin.js"></script>
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
 
+   <script src="javascript/borrarResultadosDeBusqueda.js"></script>
+
   </head>
 
   <?php
@@ -334,7 +336,7 @@ $('#btnModificarMaterial').on('click',function(e){
 e.preventDefault();
 var form = $(this).parents('form');
 swal({
-    title: "Sistema de bomberos dice:",
+    title: "Sistema de bomberos",
     text: "Operación exitosa",
     type: "success",
     showCancelButton: true,
@@ -344,7 +346,7 @@ swal({
 }, function(isConfirm){
     if (isConfirm)
     swal({
-        title: "Sistema de bomberos dice:",
+        title: "Sistema de bomberos",
         text: "Registro exitos",
         type: "success",
         showCancelButton: true,

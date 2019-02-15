@@ -16,6 +16,7 @@
    <link rel="stylesheet" href="javascript/iziToast.min.css">
    <script src="javascript/iziToast.min.js" type="text/javascript"></script>
 
+<script src="javascript/borrarResultadosDeBusqueda.js"></script>
   </head>
 
   <?php
@@ -364,7 +365,7 @@ el valor del ultimo hidden con el numero que necesito en el handler
 
 
 
-                        
+
 
         </script>
 

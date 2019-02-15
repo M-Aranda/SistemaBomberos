@@ -15,6 +15,8 @@
     <script type="text/javascript" src="javascript/sweetAlertMin.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
 
+    <script src="javascript/borrarResultadosDeBusqueda.js"></script>
+
   </head>
 
   <?php
@@ -495,7 +497,7 @@ if(isset($_SESSION["carguios"])){
  e.preventDefault();
  var form = $(this).parents('form');
  swal({
-     title: "Sistema de bomberos dice:",
+    title: "Sistema de bomberos",
      text: "Operación exitosa",
      type: "success",
      showCancelButton: true,
@@ -512,7 +514,7 @@ if(isset($_SESSION["carguios"])){
  e.preventDefault();
  var form = $(this).parents('form');
  swal({
-     title: "Sistema de bomberos dice:",
+     title: "Sistema de bomberos",
      text: "Operación exitosa",
      type: "success",
      showCancelButton: true,
@@ -529,7 +531,7 @@ if(isset($_SESSION["carguios"])){
  e.preventDefault();
  var form = $(this).parents('form');
  swal({
-     title: "Sistema de bomberos dice:",
+     title: "Sistema de bomberos",
      text: "Operación exitosa",
      type: "success",
      showCancelButton: true,

@@ -53,12 +53,7 @@ $d= new Data();
 
 $resultados=$d->buscarMaterialMenorPorNombreCompaniaOBodega($nombreABuscar, $id, $tipoDeBusqueda);
 
-
 $_SESSION["resultadosDeBusquedaDeMaterialMenor"] = $resultados;
-
-
-
-
 
 header("location:../buscarInventario.php ");
 

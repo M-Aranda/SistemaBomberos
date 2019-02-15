@@ -1,5 +1,4 @@
 <?php
-
 require_once("../model/Data.php");
 require_once("../model/VistaBusquedaDeUnidad.php");
 

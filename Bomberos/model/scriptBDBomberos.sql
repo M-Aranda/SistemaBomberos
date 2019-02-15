@@ -428,7 +428,6 @@ nombre_estado_material_menor VARCHAR (300),
 PRIMARY KEY(id_estado_material_menor)
 );
 
-
 CREATE TABLE tbl_material_menor (
 id_material_menor INT AUTO_INCREMENT,
 nombre_material_menor VARCHAR (300),
@@ -836,7 +835,6 @@ END IF;
 
 END //
 DELIMITER ;
-
 
 -- INSERTS simples
 

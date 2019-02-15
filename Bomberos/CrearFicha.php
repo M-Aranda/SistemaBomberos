@@ -30,6 +30,7 @@ dentro del directorio, pero no cacho bien como referenciarlo -->
 <script type="text/javascript" src="javascript/sweetAlertMin.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
 
+<script src="javascript/borrarResultadosDeBusqueda.js"></script>
   </head>
 
   <?php
@@ -742,9 +743,8 @@ if(isset($_SESSION['seEstaModificandoUBombero'])){
                                     }
                                      ?>
                                      <br>
-
-                                      Nombre: <input type="text" class="form-control" name="txtnombrecargo">
-                                      Marca: <input type="text" class="form-control" name="txtmarcacargo">
+                                      Nombre: <input type="text" class="form-control" id="nombreDeMaterialAAsignar" name="txtnombrecargo">
+                                      Marca: <input type="text" class="form-control" id="marcaDeMaterialAAsignar" name="txtmarcacargo">
                                       Talla: <input type="text" class="form-control" name="txttalla">
                                       Serie: <input type="text" class="form-control" name="txtserie">
                                       Fecha: <input type="date" class="form-control" name="txtfechacargo">
@@ -779,7 +779,7 @@ if(isset($_SESSION['seEstaModificandoUBombero'])){
                                     </select>
 
                                     Material menor a asignar:
-                                    <select name="cboMaterialesDisponibles" id="cboMaterialesDisponibles" class="form-control"  onchange="actualizarStockDisponible()">
+                                    <select name="cboMaterialesDisponibles" id="cboMaterialesDisponibles" class="form-control"  onchange="actualizarStockDisponible(), cargarDatosDeMaterialSeleccionado()">
                                       <?php
                                       $materialesDisponibles = $data->getMaterialesMenoresPorFkUbicacionFisica(1);
                                       foreach ($materialesDisponibles as $mat) {
@@ -798,8 +798,6 @@ if(isset($_SESSION['seEstaModificandoUBombero'])){
                                      </center>
 
                                    </form>
-
-
                                  </div>
 
                               </div>
@@ -884,7 +882,7 @@ intenta crear al bombero, llamandolo por su nombre, pero el mensaje de exito sol
     e.preventDefault();
     var form = $(this).parents('form');
     swal({
-        title: "Sistema de bomberos dice:",
+        title: "Sistema de bomberos",
         text: "Operación exitosa",
         type: "success",
         showCancelButton: true,
@@ -903,7 +901,7 @@ intenta crear al bombero, llamandolo por su nombre, pero el mensaje de exito sol
     e.preventDefault();
     var form = $(this).parents('form');
     swal({
-        title: "Sistema de bomberos dice:",
+        title: "Sistema de bomberos",
         text: "Operación exitosa",
         type: "success",
         showCancelButton: true,
@@ -920,7 +918,7 @@ intenta crear al bombero, llamandolo por su nombre, pero el mensaje de exito sol
     e.preventDefault();
     var form = $(this).parents('form');
     swal({
-        title: "Sistema de bomberos dice:",
+        title: "Sistema de bomberos",
         text: "Operación exitosa",
         type: "success",
         showCancelButton: true,
@@ -937,7 +935,7 @@ intenta crear al bombero, llamandolo por su nombre, pero el mensaje de exito sol
     e.preventDefault();
     var form = $(this).parents('form');
     swal({
-        title: "Sistema de bomberos dice:",
+        title: "Sistema de bomberos",
         text: "Operación exitosa",
         type: "success",
         showCancelButton: true,
@@ -956,7 +954,7 @@ intenta crear al bombero, llamandolo por su nombre, pero el mensaje de exito sol
     e.preventDefault();
     var form = $(this).parents('form');
     swal({
-        title: "Sistema de bomberos dice:",
+        title: "Sistema de bomberos",
         text: "Operación exitosa",
         type: "success",
         showCancelButton: true,
@@ -973,7 +971,7 @@ intenta crear al bombero, llamandolo por su nombre, pero el mensaje de exito sol
     e.preventDefault();
     var form = $(this).parents('form');
     swal({
-        title: "Sistema de bomberos dice:",
+        title: "Sistema de bomberos",
         text: "Operación exitosa",
         type: "success",
         showCancelButton: true,
@@ -990,7 +988,7 @@ intenta crear al bombero, llamandolo por su nombre, pero el mensaje de exito sol
     e.preventDefault();
     var form = $(this).parents('form');
     swal({
-        title: "Sistema de bomberos dice:",
+        title: "Sistema de bomberos",
         text: "Operación exitosa",
         type: "success",
         showCancelButton: true,
@@ -1008,7 +1006,7 @@ intenta crear al bombero, llamandolo por su nombre, pero el mensaje de exito sol
     e.preventDefault();
     var form = $(this).parents('form');
     swal({
-        title: "Sistema de bomberos dice:",
+        title: "Sistema de bomberos",
         text: "Operación exitosa",
         type: "success",
         showCancelButton: true,
@@ -1025,7 +1023,7 @@ intenta crear al bombero, llamandolo por su nombre, pero el mensaje de exito sol
     e.preventDefault();
     var form = $(this).parents('form');
     swal({
-        title: "Sistema de bomberos dice:",
+        title: "Sistema de bomberos",
         text: "Operación exitosa",
         type: "success",
         showCancelButton: true,
@@ -1037,6 +1035,24 @@ intenta crear al bombero, llamandolo por su nombre, pero el mensaje de exito sol
         //form.submit();
     });
     });
+
+
+    function cargarDatosDeMaterialSeleccionado(){
+         var id = document.getElementById("cboMaterialesDisponibles").value;
+
+         $.ajax({
+           url: "buscarMaterialMenorPorId.php",
+           type: "POST",
+           data:{"datos":id}
+         }).done(function(data) {
+           console.log(data);
+           var ob=$.parseJSON(data);
+
+           document.getElementById("nombreDeMaterialAAsignar").value = ob.nombre;
+           document.getElementById("marcaDeMaterialAAsignar").value = ob.fabricante;
+
+         });
+       }
 
        </script>
 
