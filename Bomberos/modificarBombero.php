@@ -989,18 +989,18 @@
                                  }
                                   ?>
                                   <br>
-
+                                  <!--
                                    Nombre: <input type="text" class="form-control" id="nombreDeMaterialAAsignar" name="txtnombrecargo" disabled>
                                    Marca: <input type="text" class="form-control" id="marcaDeMaterialAAsignar" name="txtmarcacargo" disabled>
                                    Talla: <input type="text" class="form-control" name="txttalla">
                                    Serie: <input type="text" class="form-control" name="txtserie">
                                    Fecha: <input type="date" class="form-control" name="txtfechacargo">
+                                 -->
                                    <br>
                               </div>
 
                               <div class="col-md-6">
                                 <br>
-
                                 Entidad a Cargo:
                                  <select name="cboEntidadACargo" id="cboEntidadACargo" class="form-control" onchange="actualizarComboBox()" >
                                      <?php
@@ -1014,7 +1014,7 @@
                                  </select>
 
                                 Ubicacion Fisica:
-                                 <select name="cboxUbicacion" id="cboxUbicacion" class="form-control" onchange="actualizarComboBoxDeMateriales()">
+                                 <select name="cboxUbicacion" id="cboxUbicacion" class="form-control" onchange="actualizarComboBoxDeMateriales()" >
                                    <?php
                                    $ubicacionesFisicas = $data->getUbicacionFisica(1);
                                    foreach ($ubicacionesFisicas as $ubi) {
@@ -1027,7 +1027,7 @@
                                  </select>
 
                                  Material menor a asignar:
-                                 <select name="cboMaterialesDisponibles" id="cboMaterialesDisponibles" class="form-control" onchange="actualizarStockDisponible(), cargarDatosDeMaterialSeleccionado()">
+                                 <select name="cboMaterialesDisponibles" id="cboMaterialesDisponibles" class="form-control"  onchange="actualizarStockDisponible(), cargarDatosDeMaterialSeleccionado()">
                                    <?php
                                    $materialesDisponibles = $data->getMaterialesMenoresPorFkUbicacionFisica(1);
                                    foreach ($materialesDisponibles as $mat) {
@@ -1038,50 +1038,66 @@
                                    ?>
                                  </select>
 
-                                 Cantidad a asignar:
-                                 <input type="number" class="form-control" value="1" id="cantidadDeMaterialesAsignados" name="cantidadDeMaterialesAsignados" min="1" max="10">
-                                  <br>
-                                  <center> <input type="submit" name="btnInfoCargos" id="btn_crearCargoEnModificar" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                                 Stock: <input type="number" class="form-control"  id="stock" name="stock" disabled>
+                                 Cantidad a asignar: <input type="number" class="form-control" value="1" id="cantidadDeMaterialesAsignados" name="cantidadDeMaterialesAsignados" min="1" max="10">
+                                 <br>
+                                  <center> <input type="submit" name="btnInfoCargos" id="btn_crearCargo" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
 
                                   </center>
-
                                 </form>
-
-                           </div>
+                                Marca: <input type="text" id="detalleMarca" name="detalleMarca" disabled>
+                                Color: <input type="text" id="detalleColor" name="detalleColor" disabled>
+                                Proveedor: <input type="text" id="detalleProveedor" name="detalleProveedor" disabled>
+                                Estado: <input type="text" id="detalleEstado" name="detalleEstado" disabled>
+                                Fecha de caducidad: <input type="text" id="detalleFecha" name="detalleFecha" disabled>
+                                <br>
+                                Medida: <input type="text" id="detalleMedida" name="detalleMedida" disabled>
+                                Tipo de medida: <input type="text" id="detalleTipoDeMedida" name="detalleTipoDeMedida" disabled>
+                                Observaciones: <input type="text" id="detalleObservaciones" name="detalleObservaciones" disabled>
+                              </div>
 
                              <table class="table table-striped" style="margin-left: 10px;">
-                                 <thead>
-                                   <tr>
-                                     <th>Nombre</th>
-                                     <th>Marca</th>
-                                     <th>Talla</th>
-                                     <th>Serie</th>
-                                     <th>Cantidad asignada</th>
-                                     <th>Fecha</th>
-                                   </tr>
-                                 </thead>
-                                 <tbody>
-                                   <?php
-                                   foreach ($infoCargos as $icargos => $datos) {
-                                   ?>
-                                   <tr>
-                                     <td><?php echo $datos->getNombre_informacionDeCargos();?></td>
-                                     <td><?php echo $datos->getMarca_informacionDeCargos();?></td>
-                                     <td><?php echo $datos->getTalla_informacionDeCargos();?></td>
-                                     <td><?php echo $datos->getSerie_informacionDeCargos();?></td>
-                                     <td><?php echo $datos->getCantidadAsignada_informacionDeCargos();?></td>
-                                     <td><?php
-                                     $fechaSinConvertir = $datos->getFecha_informacionDeCargos();
-                                     $fechaConvertida = date("d-m-Y", strtotime($fechaSinConvertir));
+                                   <thead>
+                                     <tr>
+                                       <th>Nombre</th>
+                                       <th>Entidad de procedencia</th>
+                                       <th>Color</th>
+                                       <th>Medida</th>
+                                       <th>Tipo de medida</th>
+                                       <th>Ubicación física de procedencia</th>
+                                       <th>Marca</th>
+                                       <th>Fecha de caducidad</th>
+                                       <th>Proveedor</th>
+                                       <th>Estado</th>
+                                       <th>Detalle</th>
+                                       <th>Cantidad asignada</th>
+                                     </tr>
+                                   </thead>
+                                   <tbody>
+                                     <?php
+                                     foreach ($infoCargos as $icargos => $datos) {
+                                       $material=$d->getMaterialeMenorPorId($datos->getFk_materialMenorAsignado_informacionDeCargos());
+                                     ?>
+                                     <tr>
+                                       <td><?php echo utf8_encode($material->getNombre_material_menor());?></td>
+                                       <td><?php echo utf8_encode($material->getFk_entidad_a_cargo_material_menor());?></td>
+                                       <td><?php echo utf8_encode($material->getColor_material_menor());?></td>
+                                       <td><?php echo utf8_encode($material->getMedida_material_menor());?></td>
+                                       <td><?php echo utf8_encode($material->getFk_unidad_de_medida_material_menor());?></td>
+                                       <td><?php echo utf8_encode($material->getFk_ubicacion_fisica_material_menor());?></td>
+                                       <td><?php echo utf8_encode($material->getFabricante_material_menor());?></td>
+                                       <td><?php echo utf8_encode($material->getFecha_de_caducidad_material_menor());?></td>
+                                       <td><?php echo utf8_encode($material->getProveedor_material_menor());?></td>
+                                       <td><?php echo utf8_encode($material->getFkEstadoMaterialMenor());?></td>
+                                       <td><?php echo utf8_encode($material->getDetalleMaterialMenor());?></td>
+                                       <td><?php echo $datos->getCantidadAsignada_informacionDeCargos();?></td>
+                                  <?php
+                                   }
+                                     ?>
+                                     </tr>
 
-                                     echo $fechaConvertida;?></td>
-                                <?php
-                                 }
-                                   ?>
-                                   </tr>
-
-                                 </tbody>
-                               </table>
+                                   </tbody>
+                                 </table>
         </div>
 </div>
  </div>
@@ -1143,6 +1159,7 @@ function actualizarComboBox(){
             success: function(data){
               var valorMaximo = document.getElementById("cantidadDeMaterialesAsignados");
               valorMaximo.setAttribute("max",data);
+              document.getElementById("stock").value=data;
             }
         });
       }
@@ -1321,10 +1338,15 @@ function actualizarComboBox(){
                  console.log(data);
                  var ob=$.parseJSON(data);
 
-                 document.getElementById("nombreDeMaterialAAsignar").value = ob.nombre;
-                 document.getElementById("marcaDeMaterialAAsignar").value = ob.fabricante;
-
-
+                 //document.getElementById("nombreDeMaterialAAsignar").value = ob.nombre;
+                 document.getElementById("detalleMarca").value = ob.fabricante;
+                 document.getElementById("detalleColor").value = ob.color;
+                 document.getElementById("detalleProveedor").value = ob.proveedor;
+                 document.getElementById("detalleEstado").value = ob.estado;
+                 document.getElementById("detalleFecha").value = ob.fechaDeCaducidad;
+                 document.getElementById("detalleMedida").value = ob.medida;
+                 document.getElementById("detalleTipoDeMedida").value = ob.fkUnidad;
+                 document.getElementById("detalleObservaciones").value = ob.detalle;
 
                });
              }

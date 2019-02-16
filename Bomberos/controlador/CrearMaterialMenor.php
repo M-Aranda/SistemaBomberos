@@ -16,6 +16,7 @@ $materialMenor->setFk_ubicacion_fisica_material_menor($_REQUEST["cboxUbicacion"]
 $materialMenor->setProveedor_material_menor($_REQUEST["txtProveedor"]);
 $materialMenor->setFabricante_material_menor($_REQUEST["txtmarca"]);
 $materialMenor->setFkEstadoMaterialMenor($_REQUEST["cboEstadoMaterial"]);
+$materialMenor->setDetalleMaterialMenor($_REQUEST["txtDetalle"]);
 
 
 $materialMenor->setFecha_de_caducidad_material_menor($_REQUEST["txtCaducidad"]);

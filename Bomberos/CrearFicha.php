@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <title>Mantenedor</title>
 
-
     <link rel ="stylesheet" href="css/style.css" type="text/css">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -13,7 +12,6 @@
 
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
    <script src="js/bootstrap.js"></script>
-
 
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.js"></script>
@@ -67,10 +65,7 @@ if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
   unset($_SESSION["resultadosDeBusquedaDeMaterialMenor"]);
 }
 
-
   ?>
-
-
 
 <body  background="images/fondofichaintranet.jpg">
 
@@ -756,11 +751,13 @@ if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
                                     }
                                      ?>
                                      <br>
+                                     <!-- Esto lo quite
                                       Nombre: <input type="text" class="form-control" id="nombreDeMaterialAAsignar" name="txtnombrecargo">
                                       Marca: <input type="text" class="form-control" id="marcaDeMaterialAAsignar" name="txtmarcacargo">
                                       Talla: <input type="text" class="form-control" name="txttalla">
                                       Serie: <input type="text" class="form-control" name="txtserie">
                                       Fecha: <input type="date" class="form-control" name="txtfechacargo">
+                                    -->
                                       <br>
                                   </div>
 
@@ -803,14 +800,22 @@ if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
                                       ?>
                                     </select>
 
-
+                                    Stock: <input type="number" class="form-control"  id="stock" name="stock" disabled>
                                     Cantidad a asignar: <input type="number" class="form-control" value="1" id="cantidadDeMaterialesAsignados" name="cantidadDeMaterialesAsignados" min="1" max="10">
                                     <br>
                                      <center> <input type="submit" name="btnInfoCargos" id="btn_crearCargo" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
 
                                      </center>
-
                                    </form>
+                                   Marca: <input type="text" id="detalleMarca" name="detalleMarca" disabled>
+                                   Color: <input type="text" id="detalleColor" name="detalleColor" disabled>
+                                   Proveedor: <input type="text" id="detalleProveedor" name="detalleProveedor" disabled>
+                                   Estado: <input type="text" id="detalleEstado" name="detalleEstado" disabled>
+                                   Fecha de caducidad: <input type="text" id="detalleFecha" name="detalleFecha" disabled>
+                                   <br>
+                                   Medida: <input type="text" id="detalleMedida" name="detalleMedida" disabled>
+                                   Tipo de medida: <input type="text" id="detalleTipoDeMedida" name="detalleTipoDeMedida" disabled>
+                                   Observaciones: <input type="text" id="detalleObservaciones" name="detalleObservaciones" disabled>
                                  </div>
 
                               </div>
@@ -881,6 +886,7 @@ intenta crear al bombero, llamandolo por su nombre, pero el mensaje de exito sol
              success: function(data){
                var valorMaximo = document.getElementById("cantidadDeMaterialesAsignados");
                valorMaximo.setAttribute("max",data);
+               document.getElementById("stock").value=data;
              }
          });
        }
@@ -897,7 +903,7 @@ intenta crear al bombero, llamandolo por su nombre, pero el mensaje de exito sol
         type: "success",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
-        confirmButtonText: "true",
+        confirmButtonText: "Ok",
         closeOnConfirm: false,
     }, function(isConfirm){
         if (isConfirm)  document.getElementById("formPersonal").submit();
@@ -1058,8 +1064,15 @@ intenta crear al bombero, llamandolo por su nombre, pero el mensaje de exito sol
            console.log(data);
            var ob=$.parseJSON(data);
 
-           document.getElementById("nombreDeMaterialAAsignar").value = ob.nombre;
-           document.getElementById("marcaDeMaterialAAsignar").value = ob.fabricante;
+           //document.getElementById("nombreDeMaterialAAsignar").value = ob.nombre;
+           document.getElementById("detalleMarca").value = ob.fabricante;
+           document.getElementById("detalleColor").value = ob.color;
+           document.getElementById("detalleProveedor").value = ob.proveedor;
+           document.getElementById("detalleEstado").value = ob.estado;
+           document.getElementById("detalleFecha").value = ob.fechaDeCaducidad;
+           document.getElementById("detalleMedida").value = ob.medida;
+           document.getElementById("detalleTipoDeMedida").value = ob.fkUnidad;
+           document.getElementById("detalleObservaciones").value = ob.detalle;
 
          });
        }

@@ -172,9 +172,7 @@
 
         <form id="formModificarMaterial" action="controlador/ActualizarMaterialMenor.php" method="post">
 
-
           <input type="hidden" name="idMaterialAModificar" value="<?php echo $material->getId_material_menor();?>">
-
 
           Nombre Material: &nbsp;&nbsp;&nbsp;&nbsp;
           <input type="text" name="txtnombreMaterial" id="txtnombreMaterial" style="width:575px;" value="<?php echo $material->getNombre_material_menor();?>" required><br><br>
@@ -193,7 +191,6 @@
                          <?php
                        }
                      }
-
                ?>
            </select>
 
@@ -297,6 +294,10 @@
 
 
           </select>
+          <br>
+          <br>
+          Detalle: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <input type="text" name="txtDetalle" value="<?php echo $material->getDetalleMaterialMenor();?>" style="width:230px;">
 
 
            <br><br>

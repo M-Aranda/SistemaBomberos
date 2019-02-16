@@ -260,6 +260,10 @@ if($_SESSION["usuarioIniciado"]!=null){
 
 
           </select>
+          <br>
+          <br>
+          Detalle: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <input type="text" name="txtDetalle"required style="width:230px;">
 
 
            <br><br>

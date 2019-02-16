@@ -289,9 +289,11 @@
 
             ?>
 
-
-
           </select>
+          <br>
+          <br>
+          Detalle: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <input type="text" name="txtDetalle" disabled value="<?php echo $material->getDetalleMaterialMenor();?>" style="width:230px;">
 
 
            <br><br>
