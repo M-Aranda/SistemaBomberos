@@ -7,8 +7,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-
-
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="javascript/borrarResultadosDeBusqueda.js"></script>
   </head>
@@ -23,6 +21,18 @@
    if($dataUsuario->verificarSiUsuarioTienePermiso($u,24)==0){
      header("location: paginaError.php");
    }
+ }
+
+ if(isset($_SESSION["resultadosDeBusquedaDeBomberos"])){
+   unset($_SESSION["resultadosDeBusquedaDeBomberos"]);
+ }
+
+ if(isset($_SESSION["resultadosDeBusquedaDeUnidad"])){
+   unset($_SESSION["resultadosDeBusquedaDeUnidad"]);;
+ }
+
+ if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
+   unset($_SESSION["resultadosDeBusquedaDeMaterialMenor"]);;;
  }
  ?>
   <body  background="images/fondointranet_opt.jpg" width="100%" height="100" >

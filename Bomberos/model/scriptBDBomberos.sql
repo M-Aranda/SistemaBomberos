@@ -282,19 +282,7 @@ FOREIGN KEY (fk_informacionPersonal_informacionHistorica) REFERENCES tbl_informa
 FOREIGN KEY (fk_region_informacionHistorica) REFERENCES tbl_region (id_region), 
 PRIMARY KEY (id_informacionHistorica)
 );
-
-CREATE TABLE tbl_informacionDeCargos (
-id_informacionDeCargos INT AUTO_INCREMENT,
-nombre_informacionDeCargos VARCHAR (500),
-marca_informacionDeCargos VARCHAR (500),
-talla_informacionDeCargos VARCHAR (500),
-serie_informacionDeCargos VARCHAR (500),
-fecha_informacionDeCargos VARCHAR (500),
-cantidadAsignada_informacionDeCargos INT,
-fk_personal_informacionDeCargos INT,
-FOREIGN KEY (fk_personal_informacionDeCargos) REFERENCES tbl_informacionPersonal (id_informacionPersonal),
-PRIMARY KEY (id_informacionDeCargos)
-);
+ 
 
 CREATE TABLE tbl_tipo_vehiculo (
 id_tipo_vehiculo INT AUTO_INCREMENT,
@@ -441,6 +429,7 @@ fabricante_material_menor VARCHAR (300),
 fecha_de_caducidad_material_menor DATE,
 proveedor_material_menor VARCHAR (300),
 fk_estado_material_menor INT,
+detalle_material_menor VARCHAR (500),
 FOREIGN KEY (fk_estado_material_menor) REFERENCES tbl_estado_material_menor (id_estado_material_menor),
 FOREIGN KEY (fk_entidad_a_cargo_material_menor) REFERENCES tbl_entidadACargo (id_entidadACargo),
 FOREIGN KEY (fk_unidad_de_medida_material_menor) REFERENCES tbl_unidad_de_medida (id_unidad_de_medida),
@@ -448,8 +437,24 @@ FOREIGN KEY (fk_ubicacion_fisica_material_menor) REFERENCES tbl_ubicacion_fisica
 PRIMARY KEY (id_material_menor)
 );
 
+CREATE TABLE tbl_informacionDeCargos (
+id_informacionDeCargos INT AUTO_INCREMENT,
+fk_materialMenorAsignado_informacionDeCargos INT,
+cantidadAsignada_informacionDeCargos INT,
+fk_personal_informacionDeCargos INT,
+FOREIGN KEY (fk_materialMenorAsignado_informacionDeCargos) REFERENCES tbl_material_menor (id_material_menor),
+FOREIGN KEY (fk_personal_informacionDeCargos) REFERENCES tbl_informacionPersonal (id_informacionPersonal),
+PRIMARY KEY (id_informacionDeCargos)
+);
 
-
+CREATE TABLE tbl_estado_oficial(
+id_estado_oficial INT AUTO_INCREMENT,
+fkCargo INT,
+nombreEstado_estado_oficial VARCHAR (50),
+momento DATETIME,
+FOREIGN KEY (fkCargo) REFERENCES tbl_cargo (id_cargo),
+PRIMARY KEY(id_estado_oficial)
+);
 
 -- Procedimientos
 
@@ -1524,6 +1529,16 @@ AND tbl_unidad.nombre_unidad LIKE '%Nombre de Prueba 1%';
 AND tbl_estado_unidad.id_estado_unidad=2;
 AND tbl_entidadACargo.id_entidadACargo=1;
 
+-- Query para obtener datos mas especificos de un material menor
+SELECT tbl_material_menor.id_material_menor, tbl_material_menor.nombre_material_menor, tbl_entidadACargo.nombre_entidadACargo, tbl_material_menor.color_material_menor,
+tbl_material_menor.cantidad_material_menor, tbl_material_menor.medida_material_menor, tbl_unidad_de_medida.nombre_unidad_de_medida, tbl_ubicacion_fisica.nombre_ubicacion_fisica,
+tbl_material_menor.fabricante_material_menor, DATE_FORMAT(fecha_de_caducidad_material_menor,'%d/%m/%Y'), tbl_material_menor.proveedor_material_menor, tbl_estado_material_menor.nombre_estado_material_menor, tbl_material_menor.detalle_material_menor
+FROM tbl_material_menor, tbl_estado_material_menor,tbl_entidadACargo,tbl_unidad_de_medida,tbl_ubicacion_fisica WHERE 
+tbl_material_menor.fk_entidad_a_cargo_material_menor=tbl_entidadACargo.id_entidadACargo AND
+tbl_material_menor.fk_unidad_de_medida_material_menor=tbl_unidad_de_medida.id_unidad_de_medida AND
+tbl_material_menor.fk_ubicacion_fisica_material_menor=tbl_ubicacion_fisica.id_ubicacion_fisica AND
+tbl_material_menor.fk_estado_material_menor=tbl_estado_material_menor.id_estado_material_menor  AND
+tbl_material_menor.id_material_menor=1;
 */
 
 
@@ -1567,7 +1582,7 @@ CALL CRUDInformacionPersonal (1,'20333088-2','Juanito', 'Pérez', 'Tatto','1991-
 CALL CRUDMedida (1,'XX','SS','42','41',1);
 CALL CRUDInformacionPersonal (1,'20898088-2','Marcelo', 'Aranda', 'Tatto','1991-12-16',1,1,'1,70','80,2','cheloz_20@hotmail.com',
 1,'123123123123','958677107','Carretera El Cobre','No sabe', 'Creo que no',1);
-CALL CRUDFichaInformacionBomberil(1,1,'Machali',1,1,'2001-12-16',1,1,1,1,1);
+CALL CRUDFichaInformacionBomberil(1,1,'Machali',1,2,'2001-12-16',1,1,1,1,1);
 CALL CRUDInformacionLaboral (1,'Acquiried','algun lado','598677','empleado','2018-08-12','ciencias','masvida','ingeniero', 1, 1);
 CALL CRUDInformacionMedica1 (1, 'alguna','ninguna', 'no hay', 1,1);
 CALL CRUDInformacionMedica2 (1,'Ninguno', 'Familiar', '96666',3, 'Sin especificar',0,0,6,1,1);
@@ -1579,7 +1594,6 @@ CALL CRUDInformacionEntrenamientoEstandar (1,'2018-09-09', 'algo',1,1,1);
 CALL CRUDInformacionHistorica (1,1,'Algun cuerpo','Alguna compania','2010-10-10', 'Transferencia', 'Solicitud personal', 'No disponible', 'Algo',1,1);
 CALL CRUDInformacionHistorica (1,1,'Algun cuerpo','Alguna compania','2010-10-10', 'Transferencia', 'Solicitud personal', 'No disponible', 'Algo',1,1);
 CALL CRUDInformacionHistorica (1,1,'Algun cuerpo','Alguna compania','2010-10-10', 'Transferencia', 'Solicitud personal', 'No disponible', 'Algo',1,1);
-
 
 
 CALL CRUDMedida (1,'XX','SS','42','41',1);
@@ -1595,7 +1609,7 @@ CALL CRUDInformacionFamiliar (1,'Alguno', '1311-12-05',3,2,1);
 CALL CRUDInformacionAcademica (1,'2019-05-06','Curso',1,2,1);
 CALL CRUDInformacionEntrenamientoEstandar (1,'2018-09-09', 'algo',1,2,1);
 CALL CRUDInformacionHistorica (1,1,'Algun cuerpo','Alguna compania','2010-10-10', 'Transferencia', 'Solicitud personal', 'No disponible', 'Algo',2,1);
-INSERT INTO tbl_informacionDeCargos VALUES (NULL, 'Algo', 'Una marca', 'Una talla', 'Una serie', '2018-03-08',1,1);
+
 
 CALL CRUDMedida (1,'XX','SS','42','41',1);
 CALL CRUDInformacionPersonal (1,'20898088-4','Marcelo', 'Aranda', 'Tatto','1991-12-16',1,1,'1,70','80,2','cheloz_20@hotmail.com',
@@ -1645,41 +1659,43 @@ INSERT INTO tbl_cargio_combustible VALUES (NULL, 'Alguien', '2018-11-11', 'Algun
 INSERT INTO tbl_ubicacion_fisica  (nombre_ubicacion_fisica, fk_entidad_a_cargo) VALUES ('Unidad B-0',1),('Bodega Cuerpo',1),('Cuartel cuerpo',1),
 ('Unidad B-1',2),('Bodega Primera',2),('Cuartel Primera',2), ('Unidad B-2',3),('Bodega Segunda',3),('Cuartel Segunda',3) , ('Unidad B-3',4),('Bodega Tercera',4),('Cuartel Tercera',4);
 
-INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Roja',3,20,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
-INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Roja',3,20,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
-INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Azul',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
-INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Verde',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
-INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Plomo',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
-INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Morada',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Roja',3,20,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1,'Algun detalle');
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Roja',3,20,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1,'Algun detalle');
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Azul',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1,'Algun detalle');
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Verde',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1,'Algun detalle');
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Plomo',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1,'Algun detalle');
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 1, 'Morada',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1,'Algun detalle');
 
-INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 2, 'Roja',3,20,1,2,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
-INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 2, 'Roja',3,20,1,2,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
-INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 2, 'Azul',3,30,1,2,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
-INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 2, 'Verde',3,30,1,2,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
-INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 2, 'Plomo',3,30,1,2,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
-INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 2, 'Morada',3,30,1,2,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 2, 'Roja',3,20,1,2,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1,'Algun detalle');
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 2, 'Roja',3,20,1,2,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1,'Algun detalle');
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 2, 'Azul',3,30,1,2,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1,'Algun detalle');
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 2, 'Verde',3,30,1,2,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1,'Algun detalle');
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 2, 'Plomo',3,30,1,2,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1,'Algun detalle');
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 2, 'Morada',3,30,1,2,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1,'Algun detalle');
 
-INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 3, 'Roja',3,20,1,3,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
-INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 3, 'Roja',3,20,1,3,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
-INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 3, 'Azul',3,30,1,3,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
-INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 3, 'Verde',3,30,1,3,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
-INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 3, 'Plomo',3,30,1,3,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
-INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 3, 'Morada',3,30,1,3,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 3, 'Roja',3,20,1,3,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1,'Algun detalle');
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 3, 'Roja',3,20,1,3,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1,'Algun detalle');
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 3, 'Azul',3,30,1,3,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1,'Algun detalle');
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 3, 'Verde',3,30,1,3,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1,'Algun detalle');
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 3, 'Plomo',3,30,1,3,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1,'Algun detalle');
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 3, 'Morada',3,30,1,3,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1,'Algun detalle');
 
-INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 4, 'Roja',3,20,1,4,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
-INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 4, 'Roja',3,20,1,4,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
-INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 4, 'Azul',3,30,1,4,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
-INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 4, 'Verde',3,30,1,4,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
-INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 4, 'Plomo',3,30,1,4,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
-INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 4, 'Morada',3,30,1,4,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 4, 'Roja',3,20,1,4,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1,'Algun detalle');
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 4, 'Roja',3,20,1,4,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1,'Algun detalle');
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 4, 'Azul',3,30,1,4,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1,'Algun detalle');
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 4, 'Verde',3,30,1,4,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1,'Algun detalle');
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 4, 'Plomo',3,30,1,4,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1,'Algun detalle');
+INSERT INTO tbl_material_menor VALUES (NULL, 'Manguera', 4, 'Morada',3,30,1,4,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1,'Algun detalle');
 
-INSERT INTO tbl_material_menor VALUES (NULL, 'Casco', 2, 'Rojo',3,20,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
-INSERT INTO tbl_material_menor VALUES (NULL, 'Hacha', 2, 'Roja',3,20,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
-INSERT INTO tbl_material_menor VALUES (NULL, 'Hacha', 2, 'Azul',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
-INSERT INTO tbl_material_menor VALUES (NULL, 'Hacha', 2, 'Verde',3,30,1,2,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
-INSERT INTO tbl_material_menor VALUES (NULL, 'Hacha', 2, 'Plomo',3,30,1,3,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
-INSERT INTO tbl_material_menor VALUES (NULL, 'Hacha', 2, 'Morada',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1);
+INSERT INTO tbl_material_menor VALUES (NULL, 'Casco', 2, 'Rojo',3,20,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1,'Algun detalle');
+INSERT INTO tbl_material_menor VALUES (NULL, 'Hacha', 2, 'Roja',3,20,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1,'Algun detalle');
+INSERT INTO tbl_material_menor VALUES (NULL, 'Hacha', 2, 'Azul',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1,'Algun detalle');
+INSERT INTO tbl_material_menor VALUES (NULL, 'Hacha', 2, 'Verde',3,30,1,2,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1,'Algun detalle');
+INSERT INTO tbl_material_menor VALUES (NULL, 'Hacha', 2, 'Plomo',3,30,1,3,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1,'Algun detalle');
+INSERT INTO tbl_material_menor VALUES (NULL, 'Hacha', 2, 'Morada',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1,'Algun detalle');
 
+INSERT INTO tbl_informacionDeCargos (fk_materialMenorAsignado_informacionDeCargos,cantidadAsignada_informacionDeCargos,fk_personal_informacionDeCargos) VALUES (1,1,1);
+INSERT INTO tbl_estado_oficial (fkCargo, nombreEstado_estado_oficial, momento) VALUES (7, '0-8',NOW()); 
 /*
 DROP DATABASE bomberosBD;
 */

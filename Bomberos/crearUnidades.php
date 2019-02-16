@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <title>Mantenedor</title>
 
-
     <link rel ="stylesheet" href="css/style.css" type="text/css">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -14,8 +13,6 @@
     <script src="javascript/JQuery.js"></script>
     <script type="text/javascript" src="javascript/sweetAlertMin.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
-
-
 
   </head>
 
@@ -29,6 +26,19 @@
    if($dataUsuario->verificarSiUsuarioTienePermiso($u,8)==0){
      header("location: paginaError.php");
    }
+ }
+
+
+ if(isset($_SESSION["resultadosDeBusquedaDeBomberos"])){
+   unset($_SESSION["resultadosDeBusquedaDeBomberos"]);
+ }
+ /*
+ if(isset($_SESSION["resultadosDeBusquedaDeUnidad"])){
+   unset($_SESSION["resultadosDeBusquedaDeUnidad"]);
+ }
+ */
+ if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
+   unset($_SESSION["resultadosDeBusquedaDeMaterialMenor"]);
  }
  ?>
 

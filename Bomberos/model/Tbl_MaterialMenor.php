@@ -14,6 +14,7 @@ private $fabricante_material_menor;
 private $fecha_de_caducidad_material_menor;
 private $proveedor_material_menor;
 private $fkEstadoMaterialMenor;
+private $detalleMaterialMenor;
 
 public function __construct(){
 }
@@ -120,6 +121,13 @@ public function setFkEstadoMaterialMenor($fkEstadoMaterialMenor){
     $this->fkEstadoMaterialMenor = $fkEstadoMaterialMenor;
 }
 
+public function getDetalleMaterialMenor(){
+    return $this->detalleMaterialMenor;
+}
+
+public function setDetalleMaterialMenor($detalleMaterialMenor){
+    $this->detalleMaterialMenor = $detalleMaterialMenor;
+}
 
 }
 

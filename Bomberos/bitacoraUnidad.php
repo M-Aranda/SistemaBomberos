@@ -1,4 +1,23 @@
 <!DOCTYPE html>
+<?php
+    // unir vista con el modelo sin pasar por un controlador
+    require_once("model/Data.php");
+    $data = new Data();
+
+    session_start();
+    if(isset($_SESSION["resultadosDeBusquedaDeBomberos"])){
+      unset($_SESSION["resultadosDeBusquedaDeBomberos"]);
+    }
+    /*
+    if(isset($_SESSION["resultadosDeBusquedaDeUnidad"])){
+      unset($_SESSION["resultadosDeBusquedaDeUnidad"])
+    }*/
+
+    if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
+      unset($_SESSION["resultadosDeBusquedaDeMaterialMenor"]);
+    }
+
+?>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -136,12 +155,7 @@ if($_SESSION["usuarioIniciado"]!=null){
 }
 
 </style>
-<?php
-    // unir vista con el modelo sin pasar por un controlador
-    require_once("model/Data.php");
-    $data = new Data();
 
-?>
 
 <div style="width: 800px" style="height: 400px">
     <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">

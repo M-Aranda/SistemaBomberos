@@ -303,8 +303,7 @@ class Data{
 
 
     public function crearInformacionCargos($infoCargos){
-      $query="INSERT INTO tbl_informacionDeCargos VALUES (NULL, '".$infoCargos->getNombre_informacionDeCargos()."', '".$infoCargos->getMarca_informacionDeCargos()."',
-      '".$infoCargos->getTalla_informacionDeCargos()."', '".$infoCargos->getSerie_informacionDeCargos()."', '".$infoCargos->getFecha_informacionDeCargos()."',".$infoCargos->getFk_personal_informacionDeCargos().");";
+      $query="INSERT INTO tbl_informacionDeCargos VALUES (NULL, ".$infoCargos->getFk_materialMenorAsignado_informacionDeCargos().",".$infoCargos->getCantidadAsignada_informacionDeCargos().",".$infoCargos->getFk_personal_informacionDeCargos().");";
 
       echo $query;
 
@@ -965,13 +964,9 @@ $rs = $this->c->ejecutar($query);
 while($reg = $rs->fetch_array()){
      $info= new Tbl_informacionDeCargos();
      $info->setId_informacionDeCargos($reg[0]);
-     $info->setNombre_informacionDeCargos($reg[1]);
-     $info->setMarca_informacionDeCargos($reg[2]);
-     $info->setTalla_informacionDeCargos($reg[3]);
-     $info->setSerie_informacionDeCargos($reg[4]);
-     $info->setFecha_informacionDeCargos($reg[5]);
-     $info->setCantidadAsignada_informacionDeCargos($reg[6]);
-     $info->setFk_personal_informacionDeCargos($reg[7]);
+     $info->setFk_materialMenorAsignado_informacionDeCargos($reg[1]);
+     $info->setCantidadAsignada_informacionDeCargos($reg[2]);
+     $info->setFk_personal_informacionDeCargos($reg[3]);
 
      $listado[]=$info;
  }
@@ -1097,6 +1092,7 @@ public function getMaterialesMenoresPorFkUbicacionFisica($fkUbicacionFisica){
        $obj->setFecha_de_caducidad_material_menor($reg[9]);
        $obj->setProveedor_material_menor($reg[10]);
        $obj->setFkEstadoMaterialMenor($reg[11]);
+       $obj->getDetalleMaterialMenor($reg[12]);
 
        $listado[]=$obj;
    }
@@ -1106,7 +1102,16 @@ public function getMaterialesMenoresPorFkUbicacionFisica($fkUbicacionFisica){
 
 public function getMaterialeMenorPorId($id){
   $this->c->conectar();
-  $query="SELECT * FROM tbl_material_menor WHERE id_material_menor=".$id.";";
+  //$query="SELECT * FROM tbl_material_menor WHERE id_material_menor=".$id.";";
+  $query="SELECT tbl_material_menor.id_material_menor, tbl_material_menor.nombre_material_menor, tbl_entidadACargo.nombre_entidadACargo, tbl_material_menor.color_material_menor,
+tbl_material_menor.cantidad_material_menor, tbl_material_menor.medida_material_menor, tbl_unidad_de_medida.nombre_unidad_de_medida, tbl_ubicacion_fisica.nombre_ubicacion_fisica,
+tbl_material_menor.fabricante_material_menor, DATE_FORMAT(fecha_de_caducidad_material_menor,'%d/%m/%Y'), tbl_material_menor.proveedor_material_menor, tbl_estado_material_menor.nombre_estado_material_menor, tbl_material_menor.detalle_material_menor
+FROM tbl_material_menor, tbl_estado_material_menor,tbl_entidadACargo,tbl_unidad_de_medida,tbl_ubicacion_fisica WHERE
+tbl_material_menor.fk_entidad_a_cargo_material_menor=tbl_entidadACargo.id_entidadACargo AND
+tbl_material_menor.fk_unidad_de_medida_material_menor=tbl_unidad_de_medida.id_unidad_de_medida AND
+tbl_material_menor.fk_ubicacion_fisica_material_menor=tbl_ubicacion_fisica.id_ubicacion_fisica AND
+tbl_material_menor.fk_estado_material_menor=tbl_estado_material_menor.id_estado_material_menor  AND
+tbl_material_menor.id_material_menor=".$id.";";
   $rs = $this->c->ejecutar($query);
   while($reg = $rs->fetch_array()){
        $obj = new Tbl_MaterialMenor();
@@ -1122,6 +1127,8 @@ public function getMaterialeMenorPorId($id){
        $obj->setFecha_de_caducidad_material_menor($reg[9]);
        $obj->setProveedor_material_menor($reg[10]);
        $obj->setFkEstadoMaterialMenor($reg[11]);
+       $obj->setDetalleMaterialMenor($reg[12]);
+
    }
    $this->c->desconectar();
    return $obj;
@@ -1503,7 +1510,7 @@ public function crerMaterialMenor($materialMenor){
 $query="INSERT INTO tbl_material_menor VALUES (NULL, '".$materialMenor->getNombre_material_menor()."', ".$materialMenor->getFk_entidad_a_cargo_material_menor().",
 '".$materialMenor->getColor_material_menor()."' , ".$materialMenor->getCantidad_material_menor().",
 ".$materialMenor->getMedida_material_menor().", ".$materialMenor->getFk_unidad_de_medida_material_menor().", ".$materialMenor->getFk_ubicacion_fisica_material_menor().", '".$materialMenor->getFabricante_material_menor()."',
-'".$materialMenor->getFecha_de_caducidad_material_menor()."', '".$materialMenor->getProveedor_material_menor()."', ".$materialMenor->getFkEstadoMaterialMenor().");";
+'".$materialMenor->getFecha_de_caducidad_material_menor()."', '".$materialMenor->getProveedor_material_menor()."', ".$materialMenor->getFkEstadoMaterialMenor().",'".$materialMenor->getDetalleMaterialMenor()."');";
 
   echo $query;
 
@@ -1533,6 +1540,7 @@ public function buscarMaterialMenorPorId($idABuscar){
        $obj->setFecha_de_caducidad_material_menor($reg[9]);
        $obj->setProveedor_material_menor($reg[10]);
        $obj->setFkEstadoMaterialMenor($reg[11]);
+       $obj->setDetalleMaterialMenor($reg[12]);
 
 
    }
@@ -1590,7 +1598,8 @@ public function actualizarMaterialMenor($materialMenor){
 $query="UPDATE tbl_material_menor SET nombre_material_menor='".$materialMenor->getNombre_material_menor()."', fk_entidad_a_cargo_material_menor=".$materialMenor->getFk_entidad_a_cargo_material_menor().", color_material_menor=
  '".$materialMenor->getColor_material_menor()."' , cantidad_material_menor= ".$materialMenor->getCantidad_material_menor().", medida_material_menor=
 ".$materialMenor->getMedida_material_menor().", fk_unidad_de_medida_material_menor=".$materialMenor->getFk_unidad_de_medida_material_menor().",  fk_ubicacion_fisica_material_menor=".$materialMenor->getFk_ubicacion_fisica_material_menor().", fabricante_material_menor='".$materialMenor->getFabricante_material_menor()."',
- fecha_de_caducidad_material_menor='".$materialMenor->getFecha_de_caducidad_material_menor()."', proveedor_material_menor= '".$materialMenor->getProveedor_material_menor()."', fk_estado_material_menor=".$materialMenor->getFkEstadoMaterialMenor()." WHERE id_material_menor=".$materialMenor->getId_material_menor()." ;";
+ fecha_de_caducidad_material_menor='".$materialMenor->getFecha_de_caducidad_material_menor()."', proveedor_material_menor= '".$materialMenor->getProveedor_material_menor()."', fk_estado_material_menor=".$materialMenor->getFkEstadoMaterialMenor().", detalle_material_menor='".$materialMenor->getDetalleMaterialMenor()."' WHERE id_material_menor=".$materialMenor->getId_material_menor()."
+  ;";
 
   echo $query;
 

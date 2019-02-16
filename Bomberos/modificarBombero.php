@@ -8,7 +8,6 @@
 
     session_start();
 
-
     if($_SESSION["usuarioIniciado"]!=null){
       $u=$_SESSION["usuarioIniciado"];
       if($data->verificarSiUsuarioTienePermiso($u,3)==0){
@@ -64,6 +63,18 @@
 
     $_SESSION['seEstaModificandoUBombero']=1;
 
+
+/*    if(isset($_SESSION["resultadosDeBusquedaDeBomberos"])){
+      unset($_SESSION["resultadosDeBusquedaDeBomberos"]);
+    }*/
+
+    if(isset($_SESSION["resultadosDeBusquedaDeUnidad"])){
+      unset($_SESSION["resultadosDeBusquedaDeUnidad"]);;
+    }
+
+    if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
+      unset($_SESSION["resultadosDeBusquedaDeMaterialMenor"]);;;
+    }
 ?>
 
 <html lang="en" dir="ltr">
@@ -77,7 +88,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
    <script src="js/bootstrap.js"></script>
 
@@ -88,7 +98,169 @@
    <script type="text/javascript" src="javascript/sweetAlertMin.js"></script>
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
 
+   <!-- -->
+   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+   <link rel="stylesheet" href="/resources/demos/style.css">
+   <style>
+   .custom-combobox {
+     position: relative;
+     display: inline-block;
+   }
+   .custom-combobox-toggle {
+     position: absolute;
+     top: 0;
+     bottom: 0;
+     margin-left: -1px;
+     padding: 0;
+   }
+   .custom-combobox-input {
+     margin: 0;
+     padding: 5px 10px;
+   }
+   </style>
+   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+   <script>
+   $( function() {
+     $.widget( "custom.combobox", {
+       _create: function() {
+         this.wrapper = $( "<span>" )
+           .addClass( "custom-combobox" )
+           .insertAfter( this.element );
 
+         this.element.hide();
+         this._createAutocomplete();
+         this._createShowAllButton();
+       },
+
+       _createAutocomplete: function() {
+         var selected = this.element.children( ":selected" ),
+           value = selected.val() ? selected.text() : "";
+
+
+         this.input = $( "<input>" )
+           .appendTo( this.wrapper )
+           .val( value )
+           .attr( "title", "" )
+           .addClass( "custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left" )
+           .autocomplete({
+             delay: 0,
+             minLength: 0,
+             source: $.proxy( this, "_source" )
+           })
+           .tooltip({
+             classes: {
+               "ui-tooltip": "ui-state-highlight"
+             }
+           });
+
+         this._on( this.input, {
+           autocompleteselect: function( event, ui ) {
+             ui.item.option.selected = true;
+             /*Aqui tiene que ir la funcion que creaste*/
+             cargarDatosDeMaterialSeleccionado();
+             actualizarStockDisponible();
+
+
+             this._trigger( "select", event, {
+               item: ui.item.option
+
+             });
+           },
+
+           autocompletechange: "_removeIfInvalid"
+         });
+       },
+
+       _createShowAllButton: function() {
+         var input = this.input,
+           wasOpen = false;
+
+         $( "<a>" )
+           .attr( "tabIndex", -1 )
+           .attr( "title", "Mostrar todo" )
+           .tooltip()
+           .appendTo( this.wrapper )
+           .button({
+             icons: {
+               primary: "ui-icon-triangle-1-s"
+             },
+             text: false
+           })
+           .removeClass( "ui-corner-all" )
+           .addClass( "custom-combobox-toggle ui-corner-right" )
+           .on( "mousedown", function() {
+             wasOpen = input.autocomplete( "widget" ).is( ":visible" );
+           })
+           .on( "click", function() {
+             input.trigger( "focus" );
+
+             if ( wasOpen ) {
+               return;
+             }
+
+             input.autocomplete( "search", "" );
+           });
+       },
+
+       _source: function( request, response ) {
+         var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
+         response( this.element.children( "option" ).map(function() {
+           var text = $( this ).text();
+           if ( this.value && ( !request.term || matcher.test(text) ) )
+             return {
+               label: text,
+               value: text,
+               option: this
+             };
+         }) );
+       },
+
+       _removeIfInvalid: function( event, ui ) {
+
+         if ( ui.item ) {
+           return;
+         }
+
+         var value = this.input.val(),
+           valueLowerCase = value.toLowerCase(),
+           valid = false;
+         this.element.children( "option" ).each(function() {
+           if ( $( this ).text().toLowerCase() === valueLowerCase ) {
+             this.selected = valid = true;
+             return false;
+           }
+         });
+
+         if ( valid ) {
+           return;
+         }
+
+         this.input
+           .val( "" )
+           .attr( "title", value + " No hay coincidencias" )
+           .tooltip( "open" );
+         this.element.val( "" );
+         this._delay(function() {
+           this.input.tooltip( "close" ).attr( "title", "" );
+         }, 2500 );
+         this.input.autocomplete( "instance" ).term = "";
+       },
+
+       _destroy: function() {
+         this.wrapper.remove();
+         this.element.show();
+       }
+     });
+
+     $( "#cboMaterialesDisponibles" ).combobox();
+     $( "#toggle" ).on( "click", function() {
+       $( "#cboMaterialesDisponibles" ).toggle();
+     });
+   } );
+   </script>
+
+   <!-- -->
   </head>
 
 <body  background="images/fondofichaintranet.jpg">
@@ -977,18 +1149,18 @@
                                  }
                                   ?>
                                   <br>
-
+                                  <!--
                                    Nombre: <input type="text" class="form-control" id="nombreDeMaterialAAsignar" name="txtnombrecargo" disabled>
                                    Marca: <input type="text" class="form-control" id="marcaDeMaterialAAsignar" name="txtmarcacargo" disabled>
                                    Talla: <input type="text" class="form-control" name="txttalla">
                                    Serie: <input type="text" class="form-control" name="txtserie">
                                    Fecha: <input type="date" class="form-control" name="txtfechacargo">
+                                 -->
                                    <br>
                               </div>
 
                               <div class="col-md-6">
                                 <br>
-
                                 Entidad a Cargo:
                                  <select name="cboEntidadACargo" id="cboEntidadACargo" class="form-control" onchange="actualizarComboBox()" >
                                      <?php
@@ -1002,7 +1174,7 @@
                                  </select>
 
                                 Ubicacion Fisica:
-                                 <select name="cboxUbicacion" id="cboxUbicacion" class="form-control" onchange="actualizarComboBoxDeMateriales()">
+                                 <select name="cboxUbicacion" id="cboxUbicacion" class="form-control" onchange="actualizarComboBoxDeMateriales()" >
                                    <?php
                                    $ubicacionesFisicas = $data->getUbicacionFisica(1);
                                    foreach ($ubicacionesFisicas as $ubi) {
@@ -1015,7 +1187,7 @@
                                  </select>
 
                                  Material menor a asignar:
-                                 <select name="cboMaterialesDisponibles" id="cboMaterialesDisponibles" class="form-control" onchange="actualizarStockDisponible(), cargarDatosDeMaterialSeleccionado()">
+                                 <select name="cboMaterialesDisponibles" id="cboMaterialesDisponibles" class="form-control"  onchange="actualizarStockDisponible(), cargarDatosDeMaterialSeleccionado()">
                                    <?php
                                    $materialesDisponibles = $data->getMaterialesMenoresPorFkUbicacionFisica(1);
                                    foreach ($materialesDisponibles as $mat) {
@@ -1025,51 +1197,67 @@
                                    }
                                    ?>
                                  </select>
-
-                                 Cantidad a asignar:
-                                 <input type="number" class="form-control" value="1" id="cantidadDeMaterialesAsignados" name="cantidadDeMaterialesAsignados" min="1" max="10">
-                                  <br>
-                                  <center> <input type="submit" name="btnInfoCargos" id="btn_crearCargoEnModificar" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                                 <br>
+                                 Stock: <input type="number" class="form-control"  id="stock" name="stock" disabled>
+                                 Cantidad a asignar: <input type="number" class="form-control" value="1" id="cantidadDeMaterialesAsignados" name="cantidadDeMaterialesAsignados" min="1" max="10">
+                                 <br>
+                                  <center> <input type="submit" name="btnInfoCargos" id="btn_crearCargo" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
 
                                   </center>
-
                                 </form>
-
-                           </div>
+                                Marca: <input type="text" id="detalleMarca" name="detalleMarca" disabled>
+                                Color: <input type="text" id="detalleColor" name="detalleColor" disabled>
+                                Proveedor: <input type="text" id="detalleProveedor" name="detalleProveedor" disabled>
+                                Estado: <input type="text" id="detalleEstado" name="detalleEstado" disabled>
+                                Fecha de caducidad: <input type="text" id="detalleFecha" name="detalleFecha" disabled>
+                                <br>
+                                Medida: <input type="text" id="detalleMedida" name="detalleMedida" disabled>
+                                Tipo de medida: <input type="text" id="detalleTipoDeMedida" name="detalleTipoDeMedida" disabled>
+                                Observaciones: <input type="text" id="detalleObservaciones" name="detalleObservaciones" disabled>
+                              </div>
 
                              <table class="table table-striped" style="margin-left: 10px;">
-                                 <thead>
-                                   <tr>
-                                     <th>Nombre</th>
-                                     <th>Marca</th>
-                                     <th>Talla</th>
-                                     <th>Serie</th>
-                                     <th>Cantidad asignada</th>
-                                     <th>Fecha</th>
-                                   </tr>
-                                 </thead>
-                                 <tbody>
-                                   <?php
-                                   foreach ($infoCargos as $icargos => $datos) {
-                                   ?>
-                                   <tr>
-                                     <td><?php echo $datos->getNombre_informacionDeCargos();?></td>
-                                     <td><?php echo $datos->getMarca_informacionDeCargos();?></td>
-                                     <td><?php echo $datos->getTalla_informacionDeCargos();?></td>
-                                     <td><?php echo $datos->getSerie_informacionDeCargos();?></td>
-                                     <td><?php echo $datos->getCantidadAsignada_informacionDeCargos();?></td>
-                                     <td><?php
-                                     $fechaSinConvertir = $datos->getFecha_informacionDeCargos();
-                                     $fechaConvertida = date("d-m-Y", strtotime($fechaSinConvertir));
+                                   <thead>
+                                     <tr>
+                                       <th>Nombre</th>
+                                       <th>Entidad de procedencia</th>
+                                       <th>Color</th>
+                                       <th>Medida</th>
+                                       <th>Tipo de medida</th>
+                                       <th>Ubicación física de procedencia</th>
+                                       <th>Marca</th>
+                                       <th>Fecha de caducidad</th>
+                                       <th>Proveedor</th>
+                                       <th>Estado</th>
+                                       <th>Detalle</th>
+                                       <th>Cantidad asignada</th>
+                                     </tr>
+                                   </thead>
+                                   <tbody>
+                                     <?php
+                                     foreach ($infoCargos as $icargos => $datos) {
+                                       $material=$d->getMaterialeMenorPorId($datos->getFk_materialMenorAsignado_informacionDeCargos());
+                                     ?>
+                                     <tr>
+                                       <td><?php echo utf8_encode($material->getNombre_material_menor());?></td>
+                                       <td><?php echo utf8_encode($material->getFk_entidad_a_cargo_material_menor());?></td>
+                                       <td><?php echo utf8_encode($material->getColor_material_menor());?></td>
+                                       <td><?php echo utf8_encode($material->getMedida_material_menor());?></td>
+                                       <td><?php echo utf8_encode($material->getFk_unidad_de_medida_material_menor());?></td>
+                                       <td><?php echo utf8_encode($material->getFk_ubicacion_fisica_material_menor());?></td>
+                                       <td><?php echo utf8_encode($material->getFabricante_material_menor());?></td>
+                                       <td><?php echo utf8_encode($material->getFecha_de_caducidad_material_menor());?></td>
+                                       <td><?php echo utf8_encode($material->getProveedor_material_menor());?></td>
+                                       <td><?php echo utf8_encode($material->getFkEstadoMaterialMenor());?></td>
+                                       <td><?php echo utf8_encode($material->getDetalleMaterialMenor());?></td>
+                                       <td><?php echo $datos->getCantidadAsignada_informacionDeCargos();?></td>
+                                  <?php
+                                   }
+                                     ?>
+                                     </tr>
 
-                                     echo $fechaConvertida;?></td>
-                                <?php
-                                 }
-                                   ?>
-                                   </tr>
-
-                                 </tbody>
-                               </table>
+                                   </tbody>
+                                 </table>
         </div>
 </div>
  </div>
@@ -1131,6 +1319,7 @@ function actualizarComboBox(){
             success: function(data){
               var valorMaximo = document.getElementById("cantidadDeMaterialesAsignados");
               valorMaximo.setAttribute("max",data);
+              document.getElementById("stock").value=data;
             }
         });
       }
@@ -1309,10 +1498,15 @@ function actualizarComboBox(){
                  console.log(data);
                  var ob=$.parseJSON(data);
 
-                 document.getElementById("nombreDeMaterialAAsignar").value = ob.nombre;
-                 document.getElementById("marcaDeMaterialAAsignar").value = ob.fabricante;
-
-
+                 //document.getElementById("nombreDeMaterialAAsignar").value = ob.nombre;
+                 document.getElementById("detalleMarca").value = ob.fabricante;
+                 document.getElementById("detalleColor").value = ob.color;
+                 document.getElementById("detalleProveedor").value = ob.proveedor;
+                 document.getElementById("detalleEstado").value = ob.estado;
+                 document.getElementById("detalleFecha").value = ob.fechaDeCaducidad;
+                 document.getElementById("detalleMedida").value = ob.medida;
+                 document.getElementById("detalleTipoDeMedida").value = ob.fkUnidad;
+                 document.getElementById("detalleObservaciones").value = ob.detalle;
 
                });
              }

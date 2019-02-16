@@ -18,16 +18,23 @@ $medida=$materialMenor->getMedida_material_menor();
 $fkUnidadMedida=$materialMenor->getFk_unidad_de_medida_material_menor();
 $fkUbicacionFisica=$materialMenor->getFk_ubicacion_fisica_material_menor();
 $fabricante=$materialMenor->getFabricante_material_menor();
+$fechaDeCaducidad=$materialMenor->getFecha_de_caducidad_material_menor();
+
+if($fechaDeCaducidad=='00/00/0000'){
+  $fechaDeCaducidad='No aplica';
+}
+
 $proveedor=$materialMenor->getProveedor_material_menor();
 $estado=$materialMenor->getFkEstadoMaterialMenor();
+$detalle=$materialMenor->getDetalleMaterialMenor();
 
 $arrayRepresentativoDelObjeto=array("id"=>$id ,"nombre"=> utf8_encode($nombre),
-                                  "fkEntidadACargo"=> $fkEntidadACargo,
+                                  "fkEntidadACargo"=> utf8_encode($fkEntidadACargo),
                                    "color"=> utf8_encode($color),
                                    "cantidad"=> $cantidad, "medida"=> $medida,
-                                   "fkUnidad"=> $fkUnidadMedida, "fkUbicacion"=> $fkUbicacionFisica, "fabricante"=> utf8_encode($fabricante),
-                                   "proveedor"=> utf8_encode($proveedor),
-                                   "estado"=> $estado);
+                                   "fkUnidad"=> utf8_encode($fkUnidadMedida), "fkUbicacion"=> utf8_encode($fkUbicacionFisica), "fabricante"=> utf8_encode($fabricante),
+                                   "fechaDeCaducidad"=>$fechaDeCaducidad, "proveedor"=> utf8_encode($proveedor),
+                                   "estado"=> utf8_encode($estado), "detalle"=> utf8_encode($detalle) );
 
 //var_dump($arrayACrear);
 //$algo=array('name' => "Marcelo",'age' => "27");

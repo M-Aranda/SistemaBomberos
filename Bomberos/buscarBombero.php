@@ -13,8 +13,6 @@
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
    <script src="js/bootstrap.js"></script>
 
-   <link rel="stylesheet" href="javascript/iziToast.min.css">
-   <script src="javascript/iziToast.min.js" type="text/javascript"></script>
 
   </head>
 
@@ -28,6 +26,19 @@ if($_SESSION["usuarioIniciado"]!=null){
   if($dataUsuario->verificarSiUsuarioTienePermiso($u,1)==0){
     header("location: paginaError.php");
   }
+}
+
+/*
+if(isset($_SESSION["resultadosDeBusquedaDeBomberos"])){
+  unset($_SESSION["resultadosDeBusquedaDeBomberos"])
+}*/
+
+if(isset($_SESSION["resultadosDeBusquedaDeUnidad"])){
+  unset($_SESSION["resultadosDeBusquedaDeUnidad"]);
+}
+
+if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
+  unset($_SESSION["resultadosDeBusquedaDeMaterialMenor"]);
 }
 ?>
 <body  background="images/fondofichaintranet.jpg">

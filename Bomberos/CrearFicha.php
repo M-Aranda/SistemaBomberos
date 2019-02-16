@@ -1,9 +1,37 @@
 <!DOCTYPE html>
+<?php
+require_once("model/Data.php");
+require_once("model/Tbl_Usuario.php");
+$dataUsuario= new Data();
+session_start();
+if($_SESSION["usuarioIniciado"]!=null){
+  $u=$_SESSION["usuarioIniciado"];
+  if($dataUsuario->verificarSiUsuarioTienePermiso($u,2)==0){
+    header("location: paginaError.php");
+  }
+}
+
+if(isset($_SESSION['idDeBomberoMasReciente'])){
+$idDeBomberoMasReciente=$_SESSION['idDeBomberoMasReciente'];
+}
+
+if(isset($_SESSION['seEstaModificandoUBombero'])){
+unset($_SESSION['seEstaModificandoUBombero']);
+}
+
+if(isset($_SESSION["resultadosDeBusquedaDeUnidad"])){
+unset($_SESSION["resultadosDeBusquedaDeUnidad"]);;
+}
+
+if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
+unset($_SESSION["resultadosDeBusquedaDeMaterialMenor"]);
+}
+
+?>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
     <title>Mantenedor</title>
-
 
     <link rel ="stylesheet" href="css/style.css" type="text/css">
 
@@ -14,14 +42,11 @@
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
    <script src="js/bootstrap.js"></script>
 
-
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/css/inputmask.min.css" rel="stylesheet"/>
 
-<link rel="stylesheet" href="javascript/iziToast.min.css">
-<script src="javascript/iziToast.min.js" type="text/javascript"></script>
 
 <script src="javascript/verificarRutv2.js"></script>
 <!-- Necesario poner estas 3 lineas aqui. Todas hacen referencia a un js dentro del directorio del programa, excepto el ultimo. Lo tengo
@@ -30,31 +55,171 @@ dentro del directorio, pero no cacho bien como referenciarlo -->
 <script type="text/javascript" src="javascript/sweetAlertMin.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
 
-  </head>
+<!-- -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<style>
+.custom-combobox {
+  position: relative;
+  display: inline-block;
+}
+.custom-combobox-toggle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin-left: -1px;
+  padding: 0;
+}
+.custom-combobox-input {
+  margin: 0;
+  padding: 5px 10px;
+}
+</style>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+$( function() {
+  $.widget( "custom.combobox", {
+    _create: function() {
+      this.wrapper = $( "<span>" )
+        .addClass( "custom-combobox" )
+        .insertAfter( this.element );
 
-  <?php
-  require_once("model/Data.php");
-  require_once("model/Tbl_Usuario.php");
-  $dataUsuario= new Data();
-  session_start();
-  if($_SESSION["usuarioIniciado"]!=null){
-    $u=$_SESSION["usuarioIniciado"];
-    if($dataUsuario->verificarSiUsuarioTienePermiso($u,2)==0){
-      header("location: paginaError.php");
+      this.element.hide();
+      this._createAutocomplete();
+      this._createShowAllButton();
+    },
+
+    _createAutocomplete: function() {
+      var selected = this.element.children( ":selected" ),
+        value = selected.val() ? selected.text() : "";
+
+
+      this.input = $( "<input>" )
+        .appendTo( this.wrapper )
+        .val( value )
+        .attr( "title", "" )
+        .addClass( "custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left" )
+        .autocomplete({
+          delay: 0,
+          minLength: 0,
+          source: $.proxy( this, "_source" )
+        })
+        .tooltip({
+          classes: {
+            "ui-tooltip": "ui-state-highlight"
+          }
+        });
+
+      this._on( this.input, {
+        autocompleteselect: function( event, ui ) {
+          ui.item.option.selected = true;
+          /*Aqui tiene que ir la funcion que creaste*/
+          cargarDatosDeMaterialSeleccionado();
+          actualizarStockDisponible();
+
+
+          this._trigger( "select", event, {
+            item: ui.item.option
+
+          });
+        },
+
+        autocompletechange: "_removeIfInvalid"
+      });
+    },
+
+    _createShowAllButton: function() {
+      var input = this.input,
+        wasOpen = false;
+
+      $( "<a>" )
+        .attr( "tabIndex", -1 )
+        .attr( "title", "Mostrar todo" )
+        .tooltip()
+        .appendTo( this.wrapper )
+        .button({
+          icons: {
+            primary: "ui-icon-triangle-1-s"
+          },
+          text: false
+        })
+        .removeClass( "ui-corner-all" )
+        .addClass( "custom-combobox-toggle ui-corner-right" )
+        .on( "mousedown", function() {
+          wasOpen = input.autocomplete( "widget" ).is( ":visible" );
+        })
+        .on( "click", function() {
+          input.trigger( "focus" );
+
+          if ( wasOpen ) {
+            return;
+          }
+
+          input.autocomplete( "search", "" );
+        });
+    },
+
+    _source: function( request, response ) {
+      var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
+      response( this.element.children( "option" ).map(function() {
+        var text = $( this ).text();
+        if ( this.value && ( !request.term || matcher.test(text) ) )
+          return {
+            label: text,
+            value: text,
+            option: this
+          };
+      }) );
+    },
+
+    _removeIfInvalid: function( event, ui ) {
+
+      if ( ui.item ) {
+        return;
+      }
+
+      var value = this.input.val(),
+        valueLowerCase = value.toLowerCase(),
+        valid = false;
+      this.element.children( "option" ).each(function() {
+        if ( $( this ).text().toLowerCase() === valueLowerCase ) {
+          this.selected = valid = true;
+          return false;
+        }
+      });
+
+      if ( valid ) {
+        return;
+      }
+
+      this.input
+        .val( "" )
+        .attr( "title", value + " No hay coincidencias" )
+        .tooltip( "open" );
+      this.element.val( "" );
+      this._delay(function() {
+        this.input.tooltip( "close" ).attr( "title", "" );
+      }, 2500 );
+      this.input.autocomplete( "instance" ).term = "";
+    },
+
+    _destroy: function() {
+      this.wrapper.remove();
+      this.element.show();
     }
-  }
+  });
 
+  $( "#cboMaterialesDisponibles" ).combobox();
+  $( "#toggle" ).on( "click", function() {
+    $( "#cboMaterialesDisponibles" ).toggle();
+  });
+} );
+</script>
 
-if(isset($_SESSION['idDeBomberoMasReciente'])){
-  $idDeBomberoMasReciente=$_SESSION['idDeBomberoMasReciente'];
-}
+<!-- -->
 
-if(isset($_SESSION['seEstaModificandoUBombero'])){
-  unset($_SESSION['seEstaModificandoUBombero']);
-}
-
-
-  ?>
+  </head>
 
 
 
@@ -742,11 +907,13 @@ if(isset($_SESSION['seEstaModificandoUBombero'])){
                                     }
                                      ?>
                                      <br>
+                                     <!-- Esto lo quite
                                       Nombre: <input type="text" class="form-control" id="nombreDeMaterialAAsignar" name="txtnombrecargo">
                                       Marca: <input type="text" class="form-control" id="marcaDeMaterialAAsignar" name="txtmarcacargo">
                                       Talla: <input type="text" class="form-control" name="txttalla">
                                       Serie: <input type="text" class="form-control" name="txtserie">
                                       Fecha: <input type="date" class="form-control" name="txtfechacargo">
+                                    -->
                                       <br>
                                   </div>
 
@@ -778,7 +945,8 @@ if(isset($_SESSION['seEstaModificandoUBombero'])){
                                     </select>
 
                                     Material menor a asignar:
-                                    <select name="cboMaterialesDisponibles" id="cboMaterialesDisponibles" class="form-control"  onchange="actualizarStockDisponible(), cargarDatosDeMaterialSeleccionado()">
+                                    <div class="ui-widget">
+                                    <select   name="cboMaterialesDisponibles" id="cboMaterialesDisponibles" class="form-control"  onchange="actualizarStockDisponible(), cargarDatosDeMaterialSeleccionado()">
                                       <?php
                                       $materialesDisponibles = $data->getMaterialesMenoresPorFkUbicacionFisica(1);
                                       foreach ($materialesDisponibles as $mat) {
@@ -788,17 +956,25 @@ if(isset($_SESSION['seEstaModificandoUBombero'])){
                                       }
                                       ?>
                                     </select>
-
-
+                                  </div>
+                                    <br>
+                                    Stock: <input type="number" class="form-control"  id="stock" name="stock" disabled>
                                     Cantidad a asignar: <input type="number" class="form-control" value="1" id="cantidadDeMaterialesAsignados" name="cantidadDeMaterialesAsignados" min="1" max="10">
                                     <br>
                                      <center> <input type="submit" name="btnInfoCargos" id="btn_crearCargo" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
 
                                      </center>
-
                                    </form>
+                                   Marca: <input type="text" id="detalleMarca" name="detalleMarca" disabled>
+                                   Color: <input type="text" id="detalleColor" name="detalleColor" disabled>
+                                   Proveedor: <input type="text" id="detalleProveedor" name="detalleProveedor" disabled>
+                                   Estado: <input type="text" id="detalleEstado" name="detalleEstado" disabled>
+                                   Fecha de caducidad: <input type="text" id="detalleFecha" name="detalleFecha" disabled>
+                                   <br>
+                                   Medida: <input type="text" id="detalleMedida" name="detalleMedida" disabled>
+                                   Tipo de medida: <input type="text" id="detalleTipoDeMedida" name="detalleTipoDeMedida" disabled>
+                                   Observaciones: <input type="text" id="detalleObservaciones" name="detalleObservaciones" disabled>
                                  </div>
-
                               </div>
                           </div>
                       </div>
@@ -857,7 +1033,6 @@ intenta crear al bombero, llamandolo por su nombre, pero el mensaje de exito sol
        }
 
 
-
        function actualizarStockDisponible(){
          var id = document.getElementById("cboMaterialesDisponibles").value;
          $.ajax({
@@ -867,6 +1042,7 @@ intenta crear al bombero, llamandolo por su nombre, pero el mensaje de exito sol
              success: function(data){
                var valorMaximo = document.getElementById("cantidadDeMaterialesAsignados");
                valorMaximo.setAttribute("max",data);
+               document.getElementById("stock").value=data;
              }
          });
        }
@@ -883,7 +1059,7 @@ intenta crear al bombero, llamandolo por su nombre, pero el mensaje de exito sol
         type: "success",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
-        confirmButtonText: "true",
+        confirmButtonText: "Ok",
         closeOnConfirm: false,
     }, function(isConfirm){
         if (isConfirm)  document.getElementById("formPersonal").submit();
@@ -1044,8 +1220,15 @@ intenta crear al bombero, llamandolo por su nombre, pero el mensaje de exito sol
            console.log(data);
            var ob=$.parseJSON(data);
 
-           document.getElementById("nombreDeMaterialAAsignar").value = ob.nombre;
-           document.getElementById("marcaDeMaterialAAsignar").value = ob.fabricante;
+           //document.getElementById("nombreDeMaterialAAsignar").value = ob.nombre;
+           document.getElementById("detalleMarca").value = ob.fabricante;
+           document.getElementById("detalleColor").value = ob.color;
+           document.getElementById("detalleProveedor").value = ob.proveedor;
+           document.getElementById("detalleEstado").value = ob.estado;
+           document.getElementById("detalleFecha").value = ob.fechaDeCaducidad;
+           document.getElementById("detalleMedida").value = ob.medida;
+           document.getElementById("detalleTipoDeMedida").value = ob.fkUnidad;
+           document.getElementById("detalleObservaciones").value = ob.detalle;
 
          });
        }

@@ -50,6 +50,18 @@
       $infoCargos=$_SESSION["infoCargosSolicitada"];
     }
 
+/*
+    if(isset($_SESSION["resultadosDeBusquedaDeBomberos"])){
+      unset($_SESSION["resultadosDeBusquedaDeBomberos"]);
+    }*/
+
+    if(isset($_SESSION["resultadosDeBusquedaDeUnidad"])){
+      unset($_SESSION["resultadosDeBusquedaDeUnidad"]);
+    }
+
+    if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
+      unset($_SESSION["resultadosDeBusquedaDeMaterialMenor"]);
+    }
 
 ?>
 
@@ -843,7 +855,7 @@
                <div class="col-md-12 collapse" id="cargos">
                    <div class="panel panel-primary">
                        <div class="panel-heading panel-title">
-                         <form action="controlador/CrearInformacionHistorica.php" method="post">
+
                            Información de Cargos
                        </div>
                        <div class="panel-body" style="margin-left: -20px;">
@@ -852,40 +864,49 @@
                                  <thead>
                                    <tr>
                                      <th>Nombre</th>
+                                     <th>Entidad de procedencia</th>
+                                     <th>Color</th>
+                                     <th>Medida</th>
+                                     <th>Tipo de medida</th>
+                                     <th>Ubicación física de procedencia</th>
                                      <th>Marca</th>
-                                     <th>Talla</th>
-                                     <th>Serie</th>
+                                     <th>Fecha de caducidad</th>
+                                     <th>Proveedor</th>
+                                     <th>Estado</th>
+                                     <th>Detalle</th>
                                      <th>Cantidad asignada</th>
-                                     <th>Fecha</th>
+
                                    </tr>
                                  </thead>
                                  <tbody>
                                    <?php
                                    foreach ($infoCargos as $icargos => $datos) {
+                                     $material=$d->getMaterialeMenorPorId($datos->getFk_materialMenorAsignado_informacionDeCargos());
                                    ?>
                                    <tr>
-                                     <td><?php echo $datos->getNombre_informacionDeCargos();?></td>
-                                     <td><?php echo $datos->getMarca_informacionDeCargos();?></td>
-                                     <td><?php echo $datos->getTalla_informacionDeCargos();?></td>
-                                     <td><?php echo $datos->getSerie_informacionDeCargos();?></td>
+                                     <td><?php echo utf8_encode($material->getNombre_material_menor());?></td>
+                                     <td><?php echo utf8_encode($material->getFk_entidad_a_cargo_material_menor());?></td>
+                                     <td><?php echo utf8_encode($material->getColor_material_menor());?></td>
+                                     <td><?php echo utf8_encode($material->getMedida_material_menor());?></td>
+                                     <td><?php echo utf8_encode($material->getFk_unidad_de_medida_material_menor());?></td>
+                                     <td><?php echo utf8_encode($material->getFk_ubicacion_fisica_material_menor());?></td>
+                                     <td><?php echo utf8_encode($material->getFabricante_material_menor());?></td>
+                                     <td><?php echo utf8_encode($material->getFecha_de_caducidad_material_menor());?></td>
+                                     <td><?php echo utf8_encode($material->getProveedor_material_menor());?></td>
+                                     <td><?php echo utf8_encode($material->getFkEstadoMaterialMenor());?></td>
+                                     <td><?php echo utf8_encode($material->getDetalleMaterialMenor());?></td>
                                      <td><?php echo $datos->getCantidadAsignada_informacionDeCargos();?></td>
-                                     <td><?php
-                                     $fechaSinConvertir = $datos->getFecha_informacionDeCargos();
-                                     $fechaConvertida = date("d-m-Y", strtotime($fechaSinConvertir));
-
-                                     echo $fechaConvertida;?></td>
                                 <?php
                                  }
                                    ?>
                                    </tr>
-
                                  </tbody>
                                </table>
                           </div>
                           <div class="col-md-6">
                              <br><br><br><br><br><br><br><br><br><br><br>
 
-                            </form>
+
 
                           </div>
                        </div>
