@@ -100,7 +100,169 @@
    <script type="text/javascript" src="javascript/sweetAlertMin.js"></script>
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
 
+   <!-- -->
+   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+   <link rel="stylesheet" href="/resources/demos/style.css">
+   <style>
+   .custom-combobox {
+     position: relative;
+     display: inline-block;
+   }
+   .custom-combobox-toggle {
+     position: absolute;
+     top: 0;
+     bottom: 0;
+     margin-left: -1px;
+     padding: 0;
+   }
+   .custom-combobox-input {
+     margin: 0;
+     padding: 5px 10px;
+   }
+   </style>
+   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+   <script>
+   $( function() {
+     $.widget( "custom.combobox", {
+       _create: function() {
+         this.wrapper = $( "<span>" )
+           .addClass( "custom-combobox" )
+           .insertAfter( this.element );
 
+         this.element.hide();
+         this._createAutocomplete();
+         this._createShowAllButton();
+       },
+
+       _createAutocomplete: function() {
+         var selected = this.element.children( ":selected" ),
+           value = selected.val() ? selected.text() : "";
+
+
+         this.input = $( "<input>" )
+           .appendTo( this.wrapper )
+           .val( value )
+           .attr( "title", "" )
+           .addClass( "custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left" )
+           .autocomplete({
+             delay: 0,
+             minLength: 0,
+             source: $.proxy( this, "_source" )
+           })
+           .tooltip({
+             classes: {
+               "ui-tooltip": "ui-state-highlight"
+             }
+           });
+
+         this._on( this.input, {
+           autocompleteselect: function( event, ui ) {
+             ui.item.option.selected = true;
+             /*Aqui tiene que ir la funcion que creaste*/
+             cargarDatosDeMaterialSeleccionado();
+             actualizarStockDisponible();
+
+
+             this._trigger( "select", event, {
+               item: ui.item.option
+
+             });
+           },
+
+           autocompletechange: "_removeIfInvalid"
+         });
+       },
+
+       _createShowAllButton: function() {
+         var input = this.input,
+           wasOpen = false;
+
+         $( "<a>" )
+           .attr( "tabIndex", -1 )
+           .attr( "title", "Mostrar todo" )
+           .tooltip()
+           .appendTo( this.wrapper )
+           .button({
+             icons: {
+               primary: "ui-icon-triangle-1-s"
+             },
+             text: false
+           })
+           .removeClass( "ui-corner-all" )
+           .addClass( "custom-combobox-toggle ui-corner-right" )
+           .on( "mousedown", function() {
+             wasOpen = input.autocomplete( "widget" ).is( ":visible" );
+           })
+           .on( "click", function() {
+             input.trigger( "focus" );
+
+             if ( wasOpen ) {
+               return;
+             }
+
+             input.autocomplete( "search", "" );
+           });
+       },
+
+       _source: function( request, response ) {
+         var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
+         response( this.element.children( "option" ).map(function() {
+           var text = $( this ).text();
+           if ( this.value && ( !request.term || matcher.test(text) ) )
+             return {
+               label: text,
+               value: text,
+               option: this
+             };
+         }) );
+       },
+
+       _removeIfInvalid: function( event, ui ) {
+
+         if ( ui.item ) {
+           return;
+         }
+
+         var value = this.input.val(),
+           valueLowerCase = value.toLowerCase(),
+           valid = false;
+         this.element.children( "option" ).each(function() {
+           if ( $( this ).text().toLowerCase() === valueLowerCase ) {
+             this.selected = valid = true;
+             return false;
+           }
+         });
+
+         if ( valid ) {
+           return;
+         }
+
+         this.input
+           .val( "" )
+           .attr( "title", value + " No hay coincidencias" )
+           .tooltip( "open" );
+         this.element.val( "" );
+         this._delay(function() {
+           this.input.tooltip( "close" ).attr( "title", "" );
+         }, 2500 );
+         this.input.autocomplete( "instance" ).term = "";
+       },
+
+       _destroy: function() {
+         this.wrapper.remove();
+         this.element.show();
+       }
+     });
+
+     $( "#cboMaterialesDisponibles" ).combobox();
+     $( "#toggle" ).on( "click", function() {
+       $( "#cboMaterialesDisponibles" ).toggle();
+     });
+   } );
+   </script>
+
+   <!-- -->
   </head>
 
 <body  background="images/fondofichaintranet.jpg">
@@ -1037,7 +1199,7 @@
                                    }
                                    ?>
                                  </select>
-
+                                 <br>
                                  Stock: <input type="number" class="form-control"  id="stock" name="stock" disabled>
                                  Cantidad a asignar: <input type="number" class="form-control" value="1" id="cantidadDeMaterialesAsignados" name="cantidadDeMaterialesAsignados" min="1" max="10">
                                  <br>

@@ -1,4 +1,33 @@
 <!DOCTYPE html>
+<?php
+require_once("model/Data.php");
+require_once("model/Tbl_Usuario.php");
+$dataUsuario= new Data();
+session_start();
+if($_SESSION["usuarioIniciado"]!=null){
+  $u=$_SESSION["usuarioIniciado"];
+  if($dataUsuario->verificarSiUsuarioTienePermiso($u,2)==0){
+    header("location: paginaError.php");
+  }
+}
+
+if(isset($_SESSION['idDeBomberoMasReciente'])){
+$idDeBomberoMasReciente=$_SESSION['idDeBomberoMasReciente'];
+}
+
+if(isset($_SESSION['seEstaModificandoUBombero'])){
+unset($_SESSION['seEstaModificandoUBombero']);
+}
+
+if(isset($_SESSION["resultadosDeBusquedaDeUnidad"])){
+unset($_SESSION["resultadosDeBusquedaDeUnidad"]);;
+}
+
+if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
+unset($_SESSION["resultadosDeBusquedaDeMaterialMenor"]);
+}
+
+?>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -28,44 +57,173 @@ dentro del directorio, pero no cacho bien como referenciarlo -->
 <script type="text/javascript" src="javascript/sweetAlertMin.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
 
+<!-- -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<style>
+.custom-combobox {
+  position: relative;
+  display: inline-block;
+}
+.custom-combobox-toggle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin-left: -1px;
+  padding: 0;
+}
+.custom-combobox-input {
+  margin: 0;
+  padding: 5px 10px;
+}
+</style>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+$( function() {
+  $.widget( "custom.combobox", {
+    _create: function() {
+      this.wrapper = $( "<span>" )
+        .addClass( "custom-combobox" )
+        .insertAfter( this.element );
+
+      this.element.hide();
+      this._createAutocomplete();
+      this._createShowAllButton();
+    },
+
+    _createAutocomplete: function() {
+      var selected = this.element.children( ":selected" ),
+        value = selected.val() ? selected.text() : "";
+
+
+      this.input = $( "<input>" )
+        .appendTo( this.wrapper )
+        .val( value )
+        .attr( "title", "" )
+        .addClass( "custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left" )
+        .autocomplete({
+          delay: 0,
+          minLength: 0,
+          source: $.proxy( this, "_source" )
+        })
+        .tooltip({
+          classes: {
+            "ui-tooltip": "ui-state-highlight"
+          }
+        });
+
+      this._on( this.input, {
+        autocompleteselect: function( event, ui ) {
+          ui.item.option.selected = true;
+          /*Aqui tiene que ir la funcion que creaste*/
+          cargarDatosDeMaterialSeleccionado();
+          actualizarStockDisponible();
+
+
+          this._trigger( "select", event, {
+            item: ui.item.option
+
+          });
+        },
+
+        autocompletechange: "_removeIfInvalid"
+      });
+    },
+
+    _createShowAllButton: function() {
+      var input = this.input,
+        wasOpen = false;
+
+      $( "<a>" )
+        .attr( "tabIndex", -1 )
+        .attr( "title", "Mostrar todo" )
+        .tooltip()
+        .appendTo( this.wrapper )
+        .button({
+          icons: {
+            primary: "ui-icon-triangle-1-s"
+          },
+          text: false
+        })
+        .removeClass( "ui-corner-all" )
+        .addClass( "custom-combobox-toggle ui-corner-right" )
+        .on( "mousedown", function() {
+          wasOpen = input.autocomplete( "widget" ).is( ":visible" );
+        })
+        .on( "click", function() {
+          input.trigger( "focus" );
+
+          if ( wasOpen ) {
+            return;
+          }
+
+          input.autocomplete( "search", "" );
+        });
+    },
+
+    _source: function( request, response ) {
+      var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
+      response( this.element.children( "option" ).map(function() {
+        var text = $( this ).text();
+        if ( this.value && ( !request.term || matcher.test(text) ) )
+          return {
+            label: text,
+            value: text,
+            option: this
+          };
+      }) );
+    },
+
+    _removeIfInvalid: function( event, ui ) {
+
+      if ( ui.item ) {
+        return;
+      }
+
+      var value = this.input.val(),
+        valueLowerCase = value.toLowerCase(),
+        valid = false;
+      this.element.children( "option" ).each(function() {
+        if ( $( this ).text().toLowerCase() === valueLowerCase ) {
+          this.selected = valid = true;
+          return false;
+        }
+      });
+
+      if ( valid ) {
+        return;
+      }
+
+      this.input
+        .val( "" )
+        .attr( "title", value + " No hay coincidencias" )
+        .tooltip( "open" );
+      this.element.val( "" );
+      this._delay(function() {
+        this.input.tooltip( "close" ).attr( "title", "" );
+      }, 2500 );
+      this.input.autocomplete( "instance" ).term = "";
+    },
+
+    _destroy: function() {
+      this.wrapper.remove();
+      this.element.show();
+    }
+  });
+
+  $( "#cboMaterialesDisponibles" ).combobox();
+  $( "#toggle" ).on( "click", function() {
+    $( "#cboMaterialesDisponibles" ).toggle();
+  });
+} );
+</script>
+
+<!-- -->
+
   </head>
 
-  <?php
-  require_once("model/Data.php");
-  require_once("model/Tbl_Usuario.php");
-  $dataUsuario= new Data();
-  session_start();
-  if($_SESSION["usuarioIniciado"]!=null){
-    $u=$_SESSION["usuarioIniciado"];
-    if($dataUsuario->verificarSiUsuarioTienePermiso($u,2)==0){
-      header("location: paginaError.php");
-    }
-  }
 
-
-if(isset($_SESSION['idDeBomberoMasReciente'])){
-  $idDeBomberoMasReciente=$_SESSION['idDeBomberoMasReciente'];
-}
-
-if(isset($_SESSION['seEstaModificandoUBombero'])){
-  unset($_SESSION['seEstaModificandoUBombero']);
-}
-
-/*
-if(isset($_SESSION["resultadosDeBusquedaDeBomberos"])){
-  unset($_SESSION["resultadosDeBusquedaDeBomberos"]);
-}
-*/
-
-if(isset($_SESSION["resultadosDeBusquedaDeUnidad"])){
-  unset($_SESSION["resultadosDeBusquedaDeUnidad"]);;
-}
-
-if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
-  unset($_SESSION["resultadosDeBusquedaDeMaterialMenor"]);
-}
-
-  ?>
 
 <body  background="images/fondofichaintranet.jpg">
 
@@ -789,7 +947,8 @@ if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
                                     </select>
 
                                     Material menor a asignar:
-                                    <select name="cboMaterialesDisponibles" id="cboMaterialesDisponibles" class="form-control"  onchange="actualizarStockDisponible(), cargarDatosDeMaterialSeleccionado()">
+                                    <div class="ui-widget">
+                                    <select   name="cboMaterialesDisponibles" id="cboMaterialesDisponibles" class="form-control"  onchange="actualizarStockDisponible(), cargarDatosDeMaterialSeleccionado()">
                                       <?php
                                       $materialesDisponibles = $data->getMaterialesMenoresPorFkUbicacionFisica(1);
                                       foreach ($materialesDisponibles as $mat) {
@@ -799,7 +958,8 @@ if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
                                       }
                                       ?>
                                     </select>
-
+                                  </div>
+                                    <br>
                                     Stock: <input type="number" class="form-control"  id="stock" name="stock" disabled>
                                     Cantidad a asignar: <input type="number" class="form-control" value="1" id="cantidadDeMaterialesAsignados" name="cantidadDeMaterialesAsignados" min="1" max="10">
                                     <br>
@@ -817,7 +977,6 @@ if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
                                    Tipo de medida: <input type="text" id="detalleTipoDeMedida" name="detalleTipoDeMedida" disabled>
                                    Observaciones: <input type="text" id="detalleObservaciones" name="detalleObservaciones" disabled>
                                  </div>
-
                               </div>
                           </div>
                       </div>
@@ -874,7 +1033,6 @@ intenta crear al bombero, llamandolo por su nombre, pero el mensaje de exito sol
 
          });
        }
-
 
 
        function actualizarStockDisponible(){
