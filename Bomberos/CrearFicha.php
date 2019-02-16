@@ -47,8 +47,6 @@ unset($_SESSION["resultadosDeBusquedaDeMaterialMenor"]);
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/css/inputmask.min.css" rel="stylesheet"/>
 
-<link rel="stylesheet" href="javascript/iziToast.min.css">
-<script src="javascript/iziToast.min.js" type="text/javascript"></script>
 
 <script src="javascript/verificarRutv2.js"></script>
 <!-- Necesario poner estas 3 lineas aqui. Todas hacen referencia a un js dentro del directorio del programa, excepto el ultimo. Lo tengo

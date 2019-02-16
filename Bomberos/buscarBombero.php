@@ -13,8 +13,6 @@
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
    <script src="js/bootstrap.js"></script>
 
-   <link rel="stylesheet" href="javascript/iziToast.min.css">
-   <script src="javascript/iziToast.min.js" type="text/javascript"></script>
 
   </head>
 
