@@ -29,9 +29,22 @@
     }
   }
   $data= new Data();
+
   if(isset($_SESSION["materialMenorAVerSolicitado"])){
     $material=$_SESSION["materialMenorAVerSolicitado"];
   }
+
+  if(isset($_SESSION["resultadosDeBusquedaDeBomberos"])){
+    unset($_SESSION["resultadosDeBusquedaDeBomberos"]);
+  }
+
+  if(isset($_SESSION["resultadosDeBusquedaDeUnidad"])){
+    unset($_SESSION["resultadosDeBusquedaDeUnidad"]);
+  }
+  /*
+  if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
+    unset($_SESSION["resultadosDeBusquedaDeMaterialMenor"]);
+  }*/
   ?>
 
 <body  background="images/fondofichaintranet.jpg">

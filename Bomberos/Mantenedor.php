@@ -128,6 +128,18 @@
     require_once("model/Data.php");
     $data = new Data();
 
+    if(isset($_SESSION["resultadosDeBusquedaDeBomberos"])){
+      unset($_SESSION["resultadosDeBusquedaDeBomberos"]);
+    }
+
+    if(isset($_SESSION["resultadosDeBusquedaDeUnidad"])){
+      unset($_SESSION["resultadosDeBusquedaDeUnidad"]);;
+    }
+
+    if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
+      unset($_SESSION["resultadosDeBusquedaDeMaterialMenor"]);;;
+    }
+
 ?>
 
 <div style="width: 800px" style="height: 900px">

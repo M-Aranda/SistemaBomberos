@@ -64,6 +64,18 @@
 
     $_SESSION['seEstaModificandoUBombero']=1;
 
+
+/*    if(isset($_SESSION["resultadosDeBusquedaDeBomberos"])){
+      unset($_SESSION["resultadosDeBusquedaDeBomberos"]);
+    }*/
+
+    if(isset($_SESSION["resultadosDeBusquedaDeUnidad"])){
+      unset($_SESSION["resultadosDeBusquedaDeUnidad"]);;
+    }
+
+    if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
+      unset($_SESSION["resultadosDeBusquedaDeMaterialMenor"]);;;
+    }
 ?>
 
 <html lang="en" dir="ltr">

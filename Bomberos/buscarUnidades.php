@@ -28,6 +28,18 @@ if($_SESSION["usuarioIniciado"]!=null){
     header("location: paginaError.php");
   }
 }
+
+if(isset($_SESSION["resultadosDeBusquedaDeBomberos"])){
+  unset($_SESSION["resultadosDeBusquedaDeBomberos"]);
+}
+/*
+if(isset($_SESSION["resultadosDeBusquedaDeUnidad"])){
+  unset($_SESSION["resultadosDeBusquedaDeUnidad"]);
+}*/
+
+if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
+  unset($_SESSION["resultadosDeBusquedaDeMaterialMenor"]);
+}
 ?>
 
 <body  background="images/fondofichaintranet.jpg">

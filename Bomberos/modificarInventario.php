@@ -36,6 +36,18 @@
   if(isset($_SESSION["materialMenorAModificarSolicitado"])){
     $material=$_SESSION["materialMenorAModificarSolicitado"];
   }
+
+  if(isset($_SESSION["resultadosDeBusquedaDeBomberos"])){
+    unset($_SESSION["resultadosDeBusquedaDeBomberos"]);
+  }
+
+  if(isset($_SESSION["resultadosDeBusquedaDeUnidad"])){
+    unset($_SESSION["resultadosDeBusquedaDeUnidad"]);;
+  }
+  /*
+  if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
+    unset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])
+  }*/
   ?>
 
 <body  background="images/fondofichaintranet.jpg">
