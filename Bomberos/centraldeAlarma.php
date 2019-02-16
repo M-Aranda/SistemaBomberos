@@ -34,7 +34,8 @@ if($_SESSION["usuarioIniciado"]!=null){
 <body  background="images/fondofichaintranet.jpg">
 
     <br>
-    <nav class="navbar navbar-default nav-stacked  navbar-pills" role="navigation">
+    <nav class="navbar navbar-default nav-stacked  navbar-pills responsive" role="navigation" >
+      <div class="jumbotron">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -116,6 +117,7 @@ if($_SESSION["usuarioIniciado"]!=null){
 
 
       </div><!-- /.navbar-collapse -->
+    </div>
     </nav>
 
   <div class = "cuerpo" style="
@@ -124,44 +126,56 @@ if($_SESSION["usuarioIniciado"]!=null){
     width: 75%;
     padding-left: 5%;
     padding-top: -100%;
-    margin-top: -589px;
+    margin-top: -850px;
     margin-bottom: -1000px;
-    width: 900px;
-    height: 550px;
+    width: 1000px;
+    height: 800px;
+
     ">
 
 <style>
 
+#transparencia{
+    opacity: .75;
+    -moz-opacity: .75;
+    filter: alpha(opacity=75);
+
+
+
+
+}
 
 #cuadro1{
 
   width: 350px;
-  height: 354px;
-  border: 5px black outset;
-  margin-top: -50px;
-  border-radius: 80px 80px 80px 80px
+  height: 358px;
+  border: 2px black outset;
+  margin-top: -25px;
+  margin-left: 50px;
+  border-radius: 60px 60px 60px 60px
 
 }
 
 
 #cuadro2{
 
-  width: 320px;
-  height: 369px;
-  margin-top: -350px;
+  width: 350px;
+  height: 355px;
+  margin-top: -355px;
   margin-left: 450px;
-  border: 5px black outset;
-  border-radius: 80px 80px 80px 80px
+  border: 2px black outset;
+  border-radius: 60px 60px 60px 60px
 
 }
 
 #cuadro3{
 
   width: 800px;
-  height: 120px;
+  height: 260px;
   margin-top: 10px;
-  border: 5px black outset;
-  border-radius: 80px 80px 80px 80px
+  margin-left: 30px;
+  border: 2px black outset;
+  border-radius: 60px 60px 60px 60px
 
 
 }
@@ -169,16 +183,28 @@ if($_SESSION["usuarioIniciado"]!=null){
 #cuadro4{
 
   width: 800px;
-  height: 198px;
+  height: 380px;
   margin-top: 5px;
-  border: 5px black outset;
-  border-radius: 80px 80px 80px 80px
+  margin-left: 30px;
+  border: 2px black outset;
+  border-radius: 60px 60px 60px 60px
 
 
 }
 
+#jum{
+
+    width: 900px;
+    height: 1000px;
+    margin-bottom: 100px;
+
+}
+
+
+
 
 </style>
+
 <?php
     // unir vista con el modelo sin pasar por un controlador
     require_once("model/Data.php");
@@ -187,43 +213,65 @@ if($_SESSION["usuarioIniciado"]!=null){
 ?>
 
 
-<div id="cuadro1">
+<div style="width: 900px" style="height: 1000px" style="margin-top: -100px" id="jum">
     <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
       <div class="container">
-        <center>  Oficiales en Servicio</center><br>
-        <div class="form-group" style="margin-left:10px;">
-<center>
-          &nbsp;
-        CB &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        3 &nbsp;&nbsp; <br><br>
-
-        1 <input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;&nbsp;
-        71 &nbsp;<input type="button" value="71" style="width:20px;height:20px;" > &nbsp;&nbsp;&nbsp;
-        72 <input type="button" value="72" style="width:20px;height:20px;" > &nbsp;&nbsp;&nbsp;
-        73 <input type="button" value="73" style="width:20px;height:20px;" > &nbsp;&nbsp;
-                  <br><br>
 
 
-        2  <input type="button" value="2" style="width:20px;height:20px;" > &nbsp;&nbsp;&nbsp;
-        41 &nbsp;<input type="button" value="41" style="width:20px;height:20px;" > &nbsp;&nbsp;&nbsp;
-        42   <input type="button" value="42" style="width:20px;height:20px;" > &nbsp;&nbsp;&nbsp;&nbsp;
-        43   <input type="button" value="43" style="width:20px;height:20px;" > &nbsp;&nbsp;
-        <br><br>
+<div id="cuadro1">
+    <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" >
+      <div class="container">
+        <center style="margin-top:-30px;font-weight:bold;"> Oficiales en Servicio</center><br>
+        <div class="form-group" style="margin-left: -35px;">
 
-        6  <input type="button" value="6" style="width:20px;height:20px;" > &nbsp;&nbsp;
-        104  <input type="button" value="104" style="width:20px;height:20px;" > &nbsp;&nbsp;
-        204  <input type="button" value="205" style="width:20px;height:20px;" > &nbsp;&nbsp;
-        304   <input type="button" value="304" style="width:20px;height:20px;" > &nbsp;&nbsp;
+          <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>CB&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                  <th>1Cia&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                  <th>2Cia&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                  <th>3Cia&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    1<input type="button" id="btn1" class="btn btn-danger" value="" style="width:20px;height:20px;" >
+                  </td>
+                  <td>71&nbsp;&nbsp;<input type="button" id="btn71" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
+                  <td>72&nbsp;&nbsp;<input type="button" id="btn72" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
+                  <td>73&nbsp;&nbsp;<input type="button" id="btn73" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
 
-        <br><br>
+                </tr>
 
-        7   <input type="button" value="7" style="width:20px;height:20px;" > &nbsp;&nbsp;
-        105  <input type="button" value="105" style="width:20px;height:20px;" > &nbsp;&nbsp;
-        205  <input type="button" value="205" style="width:20px;height:20px;" >  &nbsp;&nbsp;
-        305 <input type="button" value="305" style="width:20px;height:20px;" > &nbsp;&nbsp;
-      </center>
+                <tr>
+                  <td>2<input type="button" id="btn2" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
+                  <td>41&nbsp;&nbsp;<input type="button" id="btn41" class="btn btn-danger"  value="" style="width:20px;height:20px;" ></td>
+                  <td>42&nbsp;&nbsp;<input type="button" id="btn42" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
+                  <td>43&nbsp;&nbsp;<input type="button" id="btn43" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
+
+                </tr>
+
+                <tr>
+                  <td>6<input type="button" id="btn6" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
+                  <td>104<input type="button" id="btn104" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
+                  <td>204<input type="button" id="btn204" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
+                  <td>304<input type="button" id="btn304" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
+
+                </tr>
+
+                <tr>
+                  <td>7<input type="button" id="btn7" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
+                  <td>105<input type="button" id="btn105" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
+                  <td>205<input type="button" id="btn205" class="btn btn-danger"  value="" style="width:20px;height:20px;" ></td>
+                  <td>305<input type="button" id="btn305" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
+
+                </tr>
+
+              </tbody>
+              </table>
+
+
           </div>
         </div>
    </div>
@@ -231,30 +279,45 @@ if($_SESSION["usuarioIniciado"]!=null){
 
 
  <div id="cuadro2" >
-     <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
+     <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" >
        <div class="container">
-         <center style="margin-top:-30px;"> Unidades</center><br>
-       <div class="form-group" style="margin-left:10px;">
+         <center style="margin-top:-30px;font-weight:bold;"> Unidades en Servicio</center><br>
+       <div class="form-group" style="margin-left:10px;margin-top:-35px;">
 
+         <table class="table table-striped">
+             <thead>
+               <tr>
+               </tr>
+             </thead>
+             <tbody>
+               <tr>
+                 <td>B-1<input type="button" value="1" style="width:20px;height:20px;" ></td>
+                 <td>BX-1<input type="button" value="1" style="width:20px;height:20px;" ></td>
+                 <td>Q-1<input type="button" value="1" style="width:20px;height:20px;" ></td>
+              </tr>
 
-       b-1 <input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;&nbsp;
-       b-2 &nbsp;<input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;&nbsp;
-       b-3 <input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;
-       <br><br>
+               <tr>
 
-       bx-1  <input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;&nbsp;
-       bx-2 &nbsp;<input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;&nbsp;
+                 <td>X-1<input type="button" value="1" style="width:20px;height:20px;" ></td>
 
-       <br><br>
+                 <td>K-1&nbsp;&nbsp;<input type="button" value="1" style="width:20px;height:20px;" ></td>
+                 <td>R-1<input type="button" style="width:20px;height:20px;"></td>
+               </tr>
+               <br>
+               <tr>
+                 <td>B-2<input type="button" value="1" style="width:20px;height:20px;" ></td>&nbsp;
+                 <td>BX-2<input type="button" value="1" style="width:20px;height:20px;" ></td>&nbsp;
+                 <td>R-2<input type="button" value="1" style="width:20px;height:20px;" ></td>&nbsp;
 
-       Q-1  <input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;
-       R-2  <input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;
+               </tr>
+               <br>
+               <tr>
+                 <td>B-3<input type="button" value="1" style="width:20px;height:20px;" ></td>&nbsp;
+                 <td>J<input type="button" value="1" style="width:20px;height:20px;" ></td>&nbsp;
+               </tr>
 
-       <br><br>
-
-       R-1   <input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp;<br><br>
-       X-1  <input type="button" value="1" style="width:20px;height:20px;" > &nbsp;&nbsp; <br><br>
-       K-1  <input type="button" value="1" style="width:20px;height:20px;" >  &nbsp;&nbsp;
+             </tbody>
+             </table>
 
 
 
@@ -265,14 +328,33 @@ if($_SESSION["usuarioIniciado"]!=null){
     </div>
   </div>
 
-  <!--
 
   <div id="cuadro3">
-      <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
+      <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" >
         <div class="container">
-
+          <center style="margin-top:-30px;font-weight:bold;"> Últimos Servicios</center><br>
         <div class="form-group" style="margin-left:0px;">
 
+          <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Fecha</th>
+                  <th>Servicio</th>
+                  <th>Unidades</th>
+                  <th>Detalles</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>11-05-2019</td>
+                  <td>10-1</td>
+                  <td>b1</td>
+                  <td>asdajssj</td>
+
+                </tr>
+
+              </tbody>
+              </table>
 
 
         </div>
@@ -281,18 +363,32 @@ if($_SESSION["usuarioIniciado"]!=null){
      </div>
    </div>
 
--->
+
    <div id="cuadro4">
-       <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
+       <div class="jumbotron" style="border-radius: 70px 70px 70px 70px">
          <div class="container">
 
-         <div class="form-group" style="margin-left:20px;">
+         <div class="form-group" style="margin-left:-20px;">
 
-           Nombre: &nbsp;&nbsp;<input type="text" name="txtnombre"> Rut: <input type="text" name="txtrut">
-           Telefono: <input type="number" name="txtTF"><br><br>
-           Direccion: <input type="text" name="txtdireccion">
+           Nombre: <input type="text" name="txtnombre">
+           Rut: <input type="text" name="txtrut">
+           Telefono: <input type="number" name="txtTF" style="width:150px;"> <br><br>
+
+           Direccion: <input type="text" name="txtdireccion"> <br><br>
+
+           Esquina Nº1: <input type="text" name="txtdireccion">
+           Esquina Nº2: <input type="text" name="txtdireccion">
+           <br><br>
+
+           Sector:
+           <select>
+
+           </select>
+
+
+
            Tipo de Emergencia:
-           <select  name="cboTiposDeServicios" style="width:175px; height:30px;">
+           <select  name="cboTiposDeServicios" style="width:80px; height:30px;">
            <?php
 
 
@@ -304,8 +400,11 @@ if($_SESSION["usuarioIniciado"]!=null){
            }
            ?>
            </select>
+            <br><br>
 
-           <input type="submit" value="Despachar">
+
+           &nbsp;&nbsp;&nbsp;
+        <center>   <input type="submit" value="Despachar" style="width:100px;height:50px;"></center>
 
 
 
@@ -314,6 +413,121 @@ if($_SESSION["usuarioIniciado"]!=null){
         </div>
       </div>
     </div>
+
+
+
+
+
+
+     </div>
+   </div>
+ </div>
+
+</div>
+
+<script>
+
+
+
+$("#btn1").click(function(){
+$(this).toggleClass("btn-danger btn-success");
+});
+
+$("#btn71").click(function(){
+$(this).toggleClass("btn-danger btn-success");
+});
+
+$("#btn72").click(function(){
+$(this).toggleClass("btn-danger btn-success");
+});
+
+$("#btn73").click(function(){
+$(this).toggleClass("btn-danger btn-success");
+});
+
+$("#btn2").click(function(){
+$(this).toggleClass("btn-danger btn-success");
+});
+
+$("#btn41").click(function(){
+$(this).toggleClass("btn-danger btn-success");
+});
+
+$("#btn42").click(function(){
+$(this).toggleClass("btn-danger btn-success");
+});
+
+$("#btn43").click(function(){
+$(this).toggleClass("btn-danger btn-success");
+});
+
+$("#btn6").click(function(){
+$(this).toggleClass("btn-danger btn-success");
+});
+
+$("#btn104").click(function(){
+$(this).toggleClass("btn-danger btn-success");
+});
+
+$("#btn204").click(function(){
+$(this).toggleClass("btn-danger btn-success");
+});
+
+$("#btn304").click(function(){
+$(this).toggleClass("btn-danger btn-success");
+});
+
+$("#btn7").click(function(){
+$(this).toggleClass("btn-danger btn-success");
+});
+
+$("#btn105").click(function(){
+$(this).toggleClass("btn-danger btn-success");
+});
+
+$("#btn205").click(function(){
+$(this).toggleClass("btn-danger btn-success");
+});
+
+$("#btn305").click(function(){
+$(this).toggleClass("btn-danger btn-success");
+});
+
+$("#btn1").click(function(){
+$(this).toggleClass("btn-danger btn-success");
+});
+
+$("#btn1").click(function(){
+$(this).toggleClass("btn-danger btn-success");
+});
+
+$("#btn1").click(function(){
+$(this).toggleClass("btn-danger btn-success");
+});
+
+$("#btn1").click(function(){
+$(this).toggleClass("btn-danger btn-success");
+});
+
+
+$("#btn1").click(function(){
+$(this).toggleClass("btn-danger btn-success");
+});
+
+$("#btn1").click(function(){
+$(this).toggleClass("btn-danger btn-success");
+});
+
+$("#btn1").click(function(){
+$(this).toggleClass("btn-danger btn-success");
+});
+
+$("#btn1").click(function(){
+$(this).toggleClass("btn-danger btn-success");
+});
+
+
+</script>
 
 
   </body>
