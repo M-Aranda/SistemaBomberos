@@ -395,10 +395,10 @@ if($_SESSION["usuarioIniciado"]!=null){
            Rut: <input type="text" name="txtrut">
            Telefono: <input type="number" name="txtTF" style="width:150px;"> <br><br>
 
-           Direccion: <input type="text" name="txtdireccion"> <br><br>
+           Direccion: <input type="text" name="txtdireccion" style="width:595px;"> <br><br>
 
-           Esquina Nº1: <input type="text" name="txtdireccion">
-           Esquina Nº2: <input type="text" name="txtdireccion">
+           Esquina Nº1: <input type="text" name="txtdireccion" style="width:200px;">
+           Esquina Nº2: <input type="text" name="txtdireccion" style="width:200px;">
            <br><br>
 
            Sector:
