@@ -3,7 +3,6 @@ CREATE DATABASE bomberosBD;
 USE bomberosBD;
 SET lc_time_names = 'es_CL';
 
-
 CREATE TABLE tbl_permiso (
 id_permiso INT AUTO_INCREMENT,
 nombre_permiso VARCHAR (5000),

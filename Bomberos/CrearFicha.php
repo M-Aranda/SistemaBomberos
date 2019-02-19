@@ -288,7 +288,6 @@ $( function() {
             </ul>
           </li>
         </ul>
-
         <br>
         <br>
         <br>
@@ -954,7 +953,6 @@ $( function() {
                                      </form>
                                       <br>
                                   </div>
-
                                   <div class="col-md-6">
                                     <br>
                                     Marca: <input type="text" id="detalleMarca" name="detalleMarca" disabled style="width: 260px;">
@@ -1190,9 +1188,25 @@ intenta crear al bombero, llamandolo por su nombre, pero el mensaje de exito sol
     });
     });
 
+
     $('#btn_crearCargo').on('click',function(e){
-    e.preventDefault();
+    //e.preventDefault();
+    var stock= document.getElementById("stock").value;
+    var cantidadAsignada= document.getElementById("cantidadDeMaterialesAsignados").value;
+
     var form = $(this).parents('form');
+
+    if(cantidadAsignada>stock){
+      swal({
+          title: "Sistema de bomberos",
+          text: "El valor ingresado excede el límite",
+          type: "error",
+          showCancelButton: true,
+          confirmButtonColor: "#DD6B55",
+          confirmButtonText: "Ok",
+          closeOnConfirm: true,
+      });
+    }else if(cantidadAsignada<=stock){
     swal({
         title: "Sistema de bomberos",
         text: "Operación exitosa",
@@ -1202,11 +1216,12 @@ intenta crear al bombero, llamandolo por su nombre, pero el mensaje de exito sol
         confirmButtonText: "Ok",
         closeOnConfirm: true,
     }, function(isConfirm){
-        if (isConfirm)  document.getElementById("formCrearInfoCargos").submit();
-        //form.submit();
+        if (isConfirm){
+          document.getElementById("formCrearInfoCargosEnModificar").submit();
+        }
     });
+  }
     });
-
 
     function cargarDatosDeMaterialSeleccionado(){
          var id = document.getElementById("cboMaterialesDisponibles").value;
@@ -1219,7 +1234,6 @@ intenta crear al bombero, llamandolo por su nombre, pero el mensaje de exito sol
            console.log(data);
            var ob=$.parseJSON(data);
 
-           //document.getElementById("nombreDeMaterialAAsignar").value = ob.nombre;
            document.getElementById("detalleMarca").value = ob.fabricante;
            document.getElementById("detalleColor").value = ob.color;
            document.getElementById("detalleProveedor").value = ob.proveedor;

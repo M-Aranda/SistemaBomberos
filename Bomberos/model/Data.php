@@ -1071,10 +1071,10 @@ public function readInfoHistorica ($idABuscar){
    return $listado;
 }
 
-
+//Ahora muestra todos los materiales de la ubicacion fisica seleccionada, independiente  de su cantidad.
 public function getMaterialesMenoresPorFkUbicacionFisica($fkUbicacionFisica){
   $this->c->conectar();
-  $query="SELECT * FROM tbl_material_menor WHERE fk_ubicacion_fisica_material_menor=".$fkUbicacionFisica." AND cantidad_material_menor>0;";
+  $query="SELECT * FROM tbl_material_menor WHERE fk_ubicacion_fisica_material_menor=".$fkUbicacionFisica.";";
   $rs = $this->c->ejecutar($query);
   $listado = array();
   while($reg = $rs->fetch_array()){

@@ -1187,7 +1187,7 @@
                                    Cantidad a asignar: <input type="number" class="form-control" value="1" id="cantidadDeMaterialesAsignados" name="cantidadDeMaterialesAsignados" min="1" max="10">
                                    <br>
                                    <br>
-                                   <center> <input type="submit" name="btnInfoCargos" id="btn_crearCargo" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span></center>
+                                   <center> <input type="submit" name="btnInfoCargos" id="btn_crearCargoEnModificar" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span></center>
                                    </form>
                               </div>
 
@@ -1259,19 +1259,19 @@
                                    }
                                      ?>
                                      </tr>
-
                                    </tbody>
                                  </table>
         </div>
 </div>
  </div>
-
 <?php
 
 
 ?>
 
 <script>
+
+
 
 function actualizarComboBox(){
      var val= document.getElementById("cboEntidadACargo").value;
@@ -1432,7 +1432,8 @@ function actualizarComboBox(){
               confirmButtonText: "Ok",
               closeOnConfirm: true,
           }, function(isConfirm){
-              if (isConfirm)  document.getElementById("formCrearInfoAcademicaEnModificar").submit();
+              if (isConfirm)
+              document.getElementById("formCrearInfoAcademicaEnModificar").submit();
               //form.submit();
           });
           });
@@ -1474,7 +1475,23 @@ function actualizarComboBox(){
 
           $('#btn_crearCargoEnModificar').on('click',function(e){
           e.preventDefault();
+
+          var stock= document.getElementById("stock").value;
+          var cantidadAsignada= document.getElementById("cantidadDeMaterialesAsignados").value;
+
           var form = $(this).parents('form');
+
+          if(cantidadAsignada>stock){
+            swal({
+                title: "Sistema de bomberos",
+                text: "El valor ingresado excede el límite",
+                type: "error",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Ok",
+                closeOnConfirm: true,
+            });
+          }else if(cantidadAsignada<=stock){
           swal({
               title: "Sistema de bomberos",
               text: "Operación exitosa",
@@ -1484,9 +1501,11 @@ function actualizarComboBox(){
               confirmButtonText: "Ok",
               closeOnConfirm: true,
           }, function(isConfirm){
-              if (isConfirm)  document.getElementById("formCrearInfoCargosEnModificar").submit();
-              //form.submit();
+              if (isConfirm && cantidadAsignada<=stock){
+                document.getElementById("formCrearInfoCargosEnModificar").submit();
+              }
           });
+        }
           });
 
 
