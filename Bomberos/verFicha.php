@@ -193,7 +193,7 @@
     }
 
     </style>
-    <div style="width: 800px" style="height: 900px">
+    <div style="width: 1055px" style="height: 900px">
         <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
           <div class="container">
 

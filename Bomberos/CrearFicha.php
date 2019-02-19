@@ -74,7 +74,9 @@ dentro del directorio, pero no cacho bien como referenciarlo -->
   margin: 0;
   padding: 5px 10px;
 }
+
 </style>
+
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
@@ -414,7 +416,6 @@ $( function() {
                        </div>
                        <br>
                        <br>
-
 
                    </div>
                </div>
@@ -907,74 +908,72 @@ $( function() {
                                     }
                                      ?>
                                      <br>
-                                     <!-- Esto lo quite
-                                      Nombre: <input type="text" class="form-control" id="nombreDeMaterialAAsignar" name="txtnombrecargo">
-                                      Marca: <input type="text" class="form-control" id="marcaDeMaterialAAsignar" name="txtmarcacargo">
-                                      Talla: <input type="text" class="form-control" name="txttalla">
-                                      Serie: <input type="text" class="form-control" name="txtserie">
-                                      Fecha: <input type="date" class="form-control" name="txtfechacargo">
-                                    -->
+                                     Entidad a Cargo:
+                                      <select name="cboEntidadACargo" id="cboEntidadACargo" class="form-control" onchange="actualizarComboBox()" >
+                                          <?php
+                                              $entiPropietaria = $data->getEntidadACargo();
+                                              foreach ($entiPropietaria as $ep) {
+                                                  echo "<option value='".$ep->getIdEntidadACargo()."'>";
+                                                      echo utf8_encode($ep->getNombreEntidadACargo());
+                                                  echo"</option>";
+                                              }
+                                          ?>
+                                      </select>
+
+                                     Ubicacion Fisica:
+                                      <select name="cboxUbicacion" id="cboxUbicacion" class="form-control" onchange="actualizarComboBoxDeMateriales()" >
+                                        <?php
+                                        $ubicacionesFisicas = $data->getUbicacionFisica(1);
+                                        foreach ($ubicacionesFisicas as $ubi) {
+                                          echo "<option value='".$ubi->getIdUbicacionFisica()."'>";
+                                          echo utf8_encode($ubi->getNombreUbicacionFisica());
+                                          echo"</option>";
+                                        }
+                                        ?>
+                                      </select>
+
+                                      Material menor a asignar:
+                                      <div class="ui-widget">
+                                      <select   name="cboMaterialesDisponibles" id="cboMaterialesDisponibles" class="form-control"  onchange="actualizarStockDisponible(), cargarDatosDeMaterialSeleccionado()">
+                                        <?php
+                                        $materialesDisponibles = $data->getMaterialesMenoresPorFkUbicacionFisica(1);
+                                        foreach ($materialesDisponibles as $mat) {
+                                          echo "<option value='".$mat->getId_material_menor()."'>";
+                                          echo utf8_encode($mat->getNombre_material_menor());
+                                          echo"</option>";
+                                        }
+                                        ?>
+                                      </select>
+                                    </div>
+                                      <br>
+                                      Stock: <input type="number" class="form-control"  id="stock" name="stock" disabled>
+                                      Cantidad a asignar: <input type="number" class="form-control" value="1" id="cantidadDeMaterialesAsignados" name="cantidadDeMaterialesAsignados" min="1" max="10">
+                                      <br>
+                                       <center> <input type="submit" name="btnInfoCargos" id="btn_crearCargo" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                                       </center>
+                                     </form>
                                       <br>
                                   </div>
 
-                                 <div class="col-md-6">
-                                   <br>
-                                   Entidad a Cargo:
-                                    <select name="cboEntidadACargo" id="cboEntidadACargo" class="form-control" onchange="actualizarComboBox()" >
-                                        <?php
-                                            $entiPropietaria = $data->getEntidadACargo();
-                                            foreach ($entiPropietaria as $ep) {
-                                                echo "<option value='".$ep->getIdEntidadACargo()."'>";
-                                                    echo utf8_encode($ep->getNombreEntidadACargo());
-                                                echo"</option>";
-                                            }
-                                        ?>
-                                    </select>
-
-                                   Ubicacion Fisica:
-                                    <select name="cboxUbicacion" id="cboxUbicacion" class="form-control" onchange="actualizarComboBoxDeMateriales()" >
-                                      <?php
-                                      $ubicacionesFisicas = $data->getUbicacionFisica(1);
-                                      foreach ($ubicacionesFisicas as $ubi) {
-                                        echo "<option value='".$ubi->getIdUbicacionFisica()."'>";
-                                        echo utf8_encode($ubi->getNombreUbicacionFisica());
-                                        echo"</option>";
-                                      }
-                                      ?>
-
-                                    </select>
-
-                                    Material menor a asignar:
-                                    <div class="ui-widget">
-                                    <select   name="cboMaterialesDisponibles" id="cboMaterialesDisponibles" class="form-control"  onchange="actualizarStockDisponible(), cargarDatosDeMaterialSeleccionado()">
-                                      <?php
-                                      $materialesDisponibles = $data->getMaterialesMenoresPorFkUbicacionFisica(1);
-                                      foreach ($materialesDisponibles as $mat) {
-                                        echo "<option value='".$mat->getId_material_menor()."'>";
-                                        echo utf8_encode($mat->getNombre_material_menor());
-                                        echo"</option>";
-                                      }
-                                      ?>
-                                    </select>
+                                  <div class="col-md-6">
+                                    <br>
+                                    Marca: <input type="text" id="detalleMarca" name="detalleMarca" disabled style="width: 260px;">
+                                    <br>
+                                    Color: <input type="text" id="detalleColor" name="detalleColor" disabled style="width: 260px;">
+                                    <br>
+                                    Proveedor: <input type="text" id="detalleProveedor" name="detalleProveedor" disabled style="width: 260px;">
+                                    <br>
+                                    Estado: <input type="text" id="detalleEstado" name="detalleEstado" disabled style="width: 256px;">
+                                    <br>
+                                    Fecha de caducidad: <input type="text" id="detalleFecha" name="detalleFecha" disabled style="width: 260px;">
+                                    <br>
+                                    Medida: <input type="text" id="detalleMedida" name="detalleMedida" disabled style="width: 260px;">
+                                    <br>
+                                    Tipo de medida: <input type="text" id="detalleTipoDeMedida" name="detalleTipoDeMedida" disabled style="width: 260px;">
+                                    <br>
+                                    Observaciones: <input type="text" id="detalleObservaciones" name="detalleObservaciones" disabled style="width: 260px;">
+                                    <br>
                                   </div>
-                                    <br>
-                                    Stock: <input type="number" class="form-control"  id="stock" name="stock" disabled>
-                                    Cantidad a asignar: <input type="number" class="form-control" value="1" id="cantidadDeMaterialesAsignados" name="cantidadDeMaterialesAsignados" min="1" max="10">
-                                    <br>
-                                     <center> <input type="submit" name="btnInfoCargos" id="btn_crearCargo" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
-
-                                     </center>
-                                   </form>
-                                   Marca: <input type="text" id="detalleMarca" name="detalleMarca" disabled>
-                                   Color: <input type="text" id="detalleColor" name="detalleColor" disabled>
-                                   Proveedor: <input type="text" id="detalleProveedor" name="detalleProveedor" disabled>
-                                   Estado: <input type="text" id="detalleEstado" name="detalleEstado" disabled>
-                                   Fecha de caducidad: <input type="text" id="detalleFecha" name="detalleFecha" disabled>
-                                   <br>
-                                   Medida: <input type="text" id="detalleMedida" name="detalleMedida" disabled>
-                                   Tipo de medida: <input type="text" id="detalleTipoDeMedida" name="detalleTipoDeMedida" disabled>
-                                   Observaciones: <input type="text" id="detalleObservaciones" name="detalleObservaciones" disabled>
-                                 </div>
                               </div>
                           </div>
                       </div>
@@ -1232,10 +1231,7 @@ intenta crear al bombero, llamandolo por su nombre, pero el mensaje de exito sol
 
          });
        }
-
        </script>
-
-
 
   </body>
 </html>
