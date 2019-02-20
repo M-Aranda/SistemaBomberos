@@ -3,17 +3,13 @@
     // unir vista con el modelo sin pasar por un controlador
     require_once("model/Data.php");
     $data = new Data();
-
     session_start();
-
     if(isset($_SESSION["resultadosDeBusquedaDeBomberos"])){
       unset($_SESSION["resultadosDeBusquedaDeBomberos"]);
     }
-
     if(isset($_SESSION["resultadosDeBusquedaDeUnidad"])){
       unset($_SESSION["resultadosDeBusquedaDeUnidad"]);
     }
-
     if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
       unset($_SESSION["resultadosDeBusquedaDeMaterialMenor"]);
     }
@@ -148,79 +144,51 @@ if($_SESSION["usuarioIniciado"]!=null){
     margin-bottom: -1000px;
     width: 1000px;
     height: 800px;
-
     ">
 
 <style>
-
 #transparencia{
     opacity: .75;
     -moz-opacity: .75;
     filter: alpha(opacity=75);
-
-
-
-
 }
-
 #cuadro1{
-
   width: 350px;
   height: 358px;
   border: 2px black outset;
   margin-top: -25px;
   margin-left: 50px;
   border-radius: 60px 60px 60px 60px
-
 }
-
-
 #cuadro2{
-
   width: 350px;
   height: 355px;
   margin-top: -355px;
   margin-left: 450px;
   border: 2px black outset;
   border-radius: 60px 60px 60px 60px
-
 }
-
 #cuadro3{
-
   width: 800px;
   height: 260px;
   margin-top: 10px;
   margin-left: 30px;
   border: 2px black outset;
   border-radius: 60px 60px 60px 60px
-
-
 }
-
 #cuadro4{
-
   width: 800px;
   height: 380px;
   margin-top: 5px;
   margin-left: 30px;
   border: 2px black outset;
   border-radius: 60px 60px 60px 60px
-
-
 }
-
 #jum{
-
     width: 900px;
     height: 1000px;
     margin-bottom: 100px;
-
 }
-
-
-
-
 </style>
 
 
@@ -228,7 +196,6 @@ if($_SESSION["usuarioIniciado"]!=null){
     // unir vista con el modelo sin pasar por un controlador
     require_once("model/Data.php");
     $data = new Data();
-
 ?>
 
 
@@ -403,14 +370,14 @@ if($_SESSION["usuarioIniciado"]!=null){
 
            Sector:
            <select  name="cboSectores" style="width:175px; height:30px;">
-           <?php
-           $listado = $data->readSectores();
-           foreach($listado as $o => $objeto){
-           ?>
-           <option value="<?php echo $objeto->getIdSector(); ?>"><?php echo $objeto->getNombreSector(); ?></option>
-           <?php
-           }
-           ?>
+             <?php
+             $listado = $data->readSectores();
+             foreach($listado as $o => $objeto){
+               ?>
+               <option value="<?php echo $objeto->getIdSector(); ?>"><?php echo $objeto->getNombreSector(); ?></option>
+               <?php
+             }
+             ?>
            </select>
 
 
@@ -452,107 +419,78 @@ if($_SESSION["usuarioIniciado"]!=null){
 </div>
 
 <script>
-
-
-
 $("#btn1").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-
 $("#btn71").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-
 $("#btn72").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-
 $("#btn73").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-
 $("#btn2").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-
 $("#btn41").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-
 $("#btn42").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-
 $("#btn43").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-
 $("#btn6").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-
 $("#btn104").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-
 $("#btn204").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-
 $("#btn304").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-
 $("#btn7").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-
 $("#btn105").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-
 $("#btn205").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-
 $("#btn305").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-
 $("#btn1").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-
 $("#btn1").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-
 $("#btn1").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-
 $("#btn1").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-
-
 $("#btn1").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-
 $("#btn1").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-
 $("#btn1").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-
 $("#btn1").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-
-
 </script>
 
 
