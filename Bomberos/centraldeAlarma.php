@@ -402,8 +402,15 @@ if($_SESSION["usuarioIniciado"]!=null){
            <br><br>
 
            Sector:
-           <select>
-
+           <select  name="cboSectores" style="width:175px; height:30px;">
+           <?php
+           $listado = $data->readSectores();
+           foreach($listado as $o => $objeto){
+           ?>
+           <option value="<?php echo $objeto->getIdSector(); ?>"><?php echo $objeto->getNombreSector(); ?></option>
+           <?php
+           }
+           ?>
            </select>
 
 
@@ -411,8 +418,6 @@ if($_SESSION["usuarioIniciado"]!=null){
            Tipo de Emergencia:
            <select  name="cboTiposDeServicios" style="width:80px; height:30px;">
            <?php
-
-
            $listado = $data->readTiposDeServicios();
            foreach($listado as $o => $objeto){
            ?>

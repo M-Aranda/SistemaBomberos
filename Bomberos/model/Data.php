@@ -37,6 +37,7 @@ require_once("VistaBusquedaDeUnidad.php");
 require_once("Tbl_EstadoMaterialMenor.php");
 require_once("Tbl_informacionDeCargos.php");
 require_once("Tbl_MaterialMenor.php");
+require_once("Tbl_sector.php");
 
 
 class Data{
@@ -1686,45 +1687,22 @@ public function getStockDeMaterial ($idDeMaterial){
    return $obj;
 }
 
-/*
-
-public function borrarRegistrosBomberilesSegunFkPersonal($fkPersonal){
-  $query="DELETE FROM tbl_informacionBomberil WHERE fk_informacion_personal__informacionBomberil=".$fkPersonal.";";
-
-  echo $query;
+public function readSectores(){
   $this->c->conectar();
-  $this->c->ejecutar($query);
-  $this->c->desconectar();
+  $query="SELECT * FROM tbl_sector;";
+  $rs = $this->c->ejecutar($query);
+  $listado = array();
+  while($reg = $rs->fetch_array()){
+       $id=$reg[0];
+       $nombre=$reg[1];
+       $obj = new Tbl_sector();
+       $obj->setIdSector($id);
+       $obj->setNombreSector($nombre);
+       $listado[]=$obj;
+   }
+   $this->c->desconectar();
+   return $listado;
 }
-
-public function borrarRegistrosLaboralesSegunFkPersonal($fkPersonal){
-  $query="DELETE FROM tbl_informacionLaboral WHERE fk_informacion_personal_informacionLaboral=".$fkPersonal.";";
-
-  echo $query;
-  $this->c->conectar();
-  $this->c->ejecutar($query);
-  $this->c->desconectar();
-}
-
-public function borrarRegistrosMedicos1SegunFkPersonal($fkPersonal){
-  $query="DELETE FROM tbl_informacionMedica1 WHERE fk_informacion_personal_informacionMedica1=".$fkPersonal.";";
-
-  echo $query;
-  $this->c->conectar();
-  $this->c->ejecutar($query);
-  $this->c->desconectar();
-}
-
-public function borrarRegistrosMedicos2SegunFkPersonal($fkPersonal){
-  $query="DELETE FROM tbl_informacionMedica2 WHERE fk_informacion_personal_informacionMedica2=".$fkPersonal.";";
-
-  echo $query;
-  $this->c->conectar();
-  $this->c->ejecutar($query);
-  $this->c->desconectar();
-}
-
-*/
 
 
 

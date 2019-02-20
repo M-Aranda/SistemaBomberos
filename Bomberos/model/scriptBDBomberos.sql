@@ -455,6 +455,12 @@ FOREIGN KEY (fkCargo) REFERENCES tbl_cargo (id_cargo),
 PRIMARY KEY(id_estado_oficial)
 );
 
+CREATE TABLE tbl_sector(
+id_sector INT AUTO_INCREMENT,
+nombre_sector VARCHAR (300),
+PRIMARY KEY(id_sector)
+);
+
 -- Procedimientos
 
 DELIMITER //
@@ -1359,13 +1365,32 @@ INSERT INTO tbl_estadoBombero VALUES (NULL, 'Fallecido');
 INSERT INTO tbl_estadoBombero VALUES (NULL, 'Mártir');
 
 INSERT INTO tbl_cargo (nombre_cargo) VALUES
+('Voluntario'),
+('Comandante '),
+('Segundo Comandante'),
+('Tercer Comandante'),
+('Cuarto Comandante'),
+('Capitán de Guardia'),
 ('Superintendente'),
 ('Vice Superintendente'),
-('Comandante Primero'),
-('Comandante Segundo'),
 ('Tesorero General'),
 ('Secretario General'),
-('Voluntario');
+('Inspector de Investigación de Incendios / DET'),		
+('Inspector de Capacitación (EFB)'),	
+('Inspector de Seguridad y Medioambiente'),	
+('Inspector de Material Mayor'),		
+('Inspector de Material Mayor'),		
+('Inspector de Departamento Médico'),		
+('Inspector de Material Menor'),		
+('Inspector de Material Menor'),		
+('Inspector de Planificación de Operaciones contra incendios'),		
+('Inspector de Planificación de Operaciones de Rescate'),		
+('Ayudante de Comandancia'),		
+('Inspector de Servicios Administrativos'),		
+('Inspector de Secretaría de Comandancia'),		
+('Cirujano General'),		
+('Inspector de Desarrollo Organizacional'),		
+('Inspector de Comunicaciones e Informaciones');
 
 INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'A Negativo');
 INSERT INTO tbl_grupo_sanguineo VALUES (NULL,'B Negativo');
@@ -1436,7 +1461,41 @@ INSERT INTO tbl_unidad_de_medida  (nombre_unidad_de_medida,fk_tipo_de_medida_uni
 ('Byte',5),('Kilobyte',5),('Megabyte',5),('Gigabyte',5),('Terabyte',5),('Petabyte',5),('Meses',5),('Años',5),('Petabyte',5),('Exabyte',5),('Zetabyte',5),('Yottabyte',5),('Brontobyte',5),('Geopbyte',5),
 ('Milímetro cúbico',6),('Centímetro cúbico',6),('Decímetro cúbico',6),('Metro cúbico',6),('Decámetro cúbico',6),('Hectómetro cúbico',6),('Kilómetro cúbico',6);
 
-
+INSERT INTO tbl_sector (nombre_sector) VALUES
+('Barros Negros'),
+('Villa La Vinilla'),
+('Villa El Alamo'),
+('Poblacion La America'),
+('Poblacion 12 de Febrero'),
+('Villa El Llano'),
+('Cali Canto'),
+('Poblacion Bello Olivo'),
+('Poblacion Municipal'),
+('El Guindal'),
+('La Hacienda'),
+('Santa Sofia'),
+('Las Pircas'),
+('Las Rozas'),
+('Los Acantos'),
+('Lo Castillo'),
+('Plazas del campo'),
+('Plaza las Rosas'),
+('Valle lo Castillo'),
+('Santa Teresita'),
+('Acceso a Machali'),
+('Padre Huratado'),
+('La Reserva'),
+('El Remanso'),
+('El Polo'),
+('Cruce Nogales'),
+('Nogales'),
+('Camino a Sauzal'),
+('Carretera el Cobre (Acceso a Machali)'),
+('Carretera el Cobre (Subida a Coya)'),
+('Avenida Balaguer'),
+('Parque San Fuente'),
+('Coya'),
+('Ninguno de los Anteriores');
 
 
 -- SELECTs

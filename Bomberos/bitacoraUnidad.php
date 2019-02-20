@@ -131,8 +131,6 @@ if($_SESSION["usuarioIniciado"]!=null){
 
 
 
-
-
       </div><!-- /.navbar-collapse -->
     </nav>
   <div class = "cuerpo" style="
@@ -151,7 +149,6 @@ if($_SESSION["usuarioIniciado"]!=null){
     opacity: .85;
     -moz-opacity: .85;
     filter: alpha(opacity=85);
-
 }
 
 </style>
