@@ -3,13 +3,17 @@
     // unir vista con el modelo sin pasar por un controlador
     require_once("model/Data.php");
     $data = new Data();
+
     session_start();
+
     if(isset($_SESSION["resultadosDeBusquedaDeBomberos"])){
       unset($_SESSION["resultadosDeBusquedaDeBomberos"]);
     }
+
     if(isset($_SESSION["resultadosDeBusquedaDeUnidad"])){
       unset($_SESSION["resultadosDeBusquedaDeUnidad"]);
     }
+
     if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
       unset($_SESSION["resultadosDeBusquedaDeMaterialMenor"]);
     }
@@ -144,51 +148,78 @@ if($_SESSION["usuarioIniciado"]!=null){
     margin-bottom: -1000px;
     width: 1000px;
     height: 800px;
+
     ">
 
 <style>
+
 #transparencia{
     opacity: .75;
     -moz-opacity: .75;
     filter: alpha(opacity=75);
+
+
+
+
 }
+
 #cuadro1{
+
   width: 350px;
-  height: 358px;
+  height: 600px;
   border: 2px black outset;
   margin-top: -25px;
   margin-left: 50px;
-  border-radius: 60px 60px 60px 60px
+  border-radius: 70px 70px 70px 70px
 }
+
+
 #cuadro2{
+
   width: 350px;
-  height: 355px;
-  margin-top: -355px;
+  height: 300px;
+  margin-top: -260px;
   margin-left: 450px;
   border: 2px black outset;
-  border-radius: 60px 60px 60px 60px
+  border-radius: 70px 70px 70px 70px
+
 }
+
 #cuadro3{
+
   width: 800px;
   height: 260px;
-  margin-top: 10px;
+  margin-top: 20px;
   margin-left: 30px;
   border: 2px black outset;
   border-radius: 60px 60px 60px 60px
+
+
 }
+
 #cuadro4{
+
   width: 800px;
-  height: 380px;
+  height: 395px;
   margin-top: 5px;
   margin-left: 30px;
   border: 2px black outset;
   border-radius: 60px 60px 60px 60px
+
+
 }
+
 #jum{
+
     width: 900px;
     height: 1000px;
     margin-bottom: 100px;
+
 }
+
+
+
+
 </style>
 
 
@@ -196,6 +227,7 @@ if($_SESSION["usuarioIniciado"]!=null){
     // unir vista con el modelo sin pasar por un controlador
     require_once("model/Data.php");
     $data = new Data();
+
 ?>
 
 
@@ -206,13 +238,13 @@ if($_SESSION["usuarioIniciado"]!=null){
       <div class="container">
 
 
-<div id="cuadro1">
-    <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" >
-      <div class="container">
+<div id="cuadro1" style="height: 269px;">
+    <div class="jumbotron" style="height: 265px;  border-radius: 70px 70px 70px 70px"  >
+      <div class="container" style="height: 253px;">
         <center style="margin-top:-30px;font-weight:bold;"> Oficiales en Servicio</center><br>
         <div class="form-group" style="margin-left: -35px;">
 
-          <table class="table table-striped">
+         <table class="table table-striped">
               <thead>
                 <tr>
                   <th>CB&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
@@ -259,18 +291,17 @@ if($_SESSION["usuarioIniciado"]!=null){
               </tbody>
               </table>
 
-
           </div>
         </div>
    </div>
 </div>
 
 
- <div id="cuadro2" >
-     <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" >
-       <div class="container">
+ <div id="cuadro2" style="height: 245px;">
+     <div class="jumbotron" style="height: 240px;border-radius: 70px 70px 70px 70px">
+       <div class="container" style="height: 300px;">
          <center style="margin-top:-30px;font-weight:bold;"> Unidades en Servicio</center><br>
-       <div class="form-group" style="margin-left:10px;margin-top:-35px;">
+       <div class="form-group" style="margin-left:-15px;margin-top: -40px;">
 
          <table class="table table-striped">
              <thead>
@@ -279,29 +310,33 @@ if($_SESSION["usuarioIniciado"]!=null){
              </thead>
              <tbody>
                <tr>
-                 <td>B-1<input type="button" value="1" style="width:20px;height:20px;" ></td>
-                 <td>BX-1<input type="button" value="1" style="width:20px;height:20px;" ></td>
-                 <td>Q-1<input type="button" value="1" style="width:20px;height:20px;" ></td>
+                 <td>B-1<input type="button" value="" id="b1"  class="btn btn-danger" style="width:20px;height:20px;" ></td>
+                 <td>BX-1<input type="button" value="" id="bx1"  class="btn btn-danger" style="width:20px;height:20px;" ></td>
+                 <td>Q-1<input type="button" value="" id="q1"  class="btn btn-danger" style="width:20px;height:20px;" ></td>
+
               </tr>
 
+              <td>X-1<input type="button" value="" id="x1"  class="btn btn-danger" style="width:20px;height:20px;" ></td>
+
+              <td>K-1<input type="button" value="" id="k1"   class="btn btn-danger" style="width:20px;height:20px;" ></td>
+              <td>R-1<input type="button" id="r1"  class="btn btn-danger" style="width:20px;height:20px;"></td>
+
+              <tr>
+
+              </tr>
+
+
                <tr>
+                 <td>B-2<input type="button" value="" id="b2"  class="btn btn-danger" style="width:20px;height:20px;" ></td>&nbsp;
+                 <td>BX-2<input type="button" value="" id="bx2"  class="btn btn-danger" style="width:20px;height:20px;" ></td>&nbsp;
+                 <td>R-2<input type="button" value="" id="r2"  class="btn btn-danger" style="width:20px;height:20px;" ></td>&nbsp;
 
-                 <td>X-1<input type="button" value="1" style="width:20px;height:20px;" ></td>
-
-                 <td>K-1&nbsp;&nbsp;<input type="button" value="1" style="width:20px;height:20px;" ></td>
-                 <td>R-1<input type="button" style="width:20px;height:20px;"></td>
                </tr>
                <br>
                <tr>
-                 <td>B-2<input type="button" value="1" style="width:20px;height:20px;" ></td>&nbsp;
-                 <td>BX-2<input type="button" value="1" style="width:20px;height:20px;" ></td>&nbsp;
-                 <td>R-2<input type="button" value="1" style="width:20px;height:20px;" ></td>&nbsp;
-
-               </tr>
-               <br>
-               <tr>
-                 <td>B-3<input type="button" value="1" style="width:20px;height:20px;" ></td>&nbsp;
-                 <td>J<input type="button" value="1" style="width:20px;height:20px;" ></td>&nbsp;
+                 <td>B-3<input type="button" value="" id="b3"  class="btn btn-danger" style="width:20px;height:20px;" ></td>&nbsp;
+                 <td>J
+                   <input type="button" value="" id="j"  class="btn btn-danger" style="width:20px;height:20px;" ></td>&nbsp;
                </tr>
 
              </tbody>
@@ -358,33 +393,37 @@ if($_SESSION["usuarioIniciado"]!=null){
 
          <div class="form-group" style="margin-left:-20px;">
 
-           Nombre: <input type="text" name="txtnombre">
-           Rut: <input type="text" name="txtrut">
-           Telefono: <input type="number" name="txtTF" style="width:150px;"> <br><br>
+           Nombre:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="txtnombre" style="width:290px;">
+           Rut: <input type="text" name="txtrut" style="width:95px;">
+           Telefono: <input type="text" name="txtTF" style="width:95px;"> <br><br>
 
-           Direccion: <input type="text" name="txtdireccion" style="width:595px;"> <br><br>
+           Direccion:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="txtdireccion" style="width:580px;"> <br><br>
 
-           Esquina Nº1: <input type="text" name="txtdireccion" style="width:200px;">
-           Esquina Nº2: <input type="text" name="txtdireccion" style="width:200px;">
+           Esquina Nº1: <input type="text" name="txtdireccion" style="width:240px">&nbsp;
+           Esquina Nº2: <input type="text" name="txtdireccion" style="width:247px">
            <br><br>
 
-           Sector:
-           <select  name="cboSectores" style="width:175px; height:30px;">
-             <?php
-             $listado = $data->readSectores();
-             foreach($listado as $o => $objeto){
-               ?>
-               <option value="<?php echo $objeto->getIdSector(); ?>"><?php echo $objeto->getNombreSector(); ?></option>
-               <?php
-             }
-             ?>
+           Sector:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           <select  name="cboSectores" style="width:280px; height:30px;">
+           <?php
+           $listado = $data->readSectores();
+           foreach($listado as $o => $objeto){
+           ?>
+           <option value="<?php echo $objeto->getIdSector(); ?>"><?php echo $objeto->getNombreSector(); ?></option>
+           <?php
+           }
+           ?>
            </select>
 
-
+           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           &nbsp;&nbsp;&nbsp;&nbsp;
 
            Tipo de Emergencia:
            <select  name="cboTiposDeServicios" style="width:80px; height:30px;">
            <?php
+
+
            $listado = $data->readTiposDeServicios();
            foreach($listado as $o => $objeto){
            ?>
@@ -399,6 +438,14 @@ if($_SESSION["usuarioIniciado"]!=null){
            &nbsp;&nbsp;&nbsp;
         <center>   <input type="submit" value="Despachar" style="width:100px;height:50px;"></center>
 
+        <?php
+          date_default_timezone_set('America/Santiago');
+
+          ?>
+
+          
+          <?=date('l, d  F Y H:i:s');?>
+
 
 
          </div>
@@ -408,10 +455,6 @@ if($_SESSION["usuarioIniciado"]!=null){
     </div>
 
 
-
-
-
-
      </div>
    </div>
  </div>
@@ -419,78 +462,121 @@ if($_SESSION["usuarioIniciado"]!=null){
 </div>
 
 <script>
+
+
+
 $("#btn1").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
+
 $("#btn71").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
+
 $("#btn72").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
+
 $("#btn73").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
+
 $("#btn2").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
+
 $("#btn41").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
+
 $("#btn42").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
+
 $("#btn43").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
+
 $("#btn6").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
+
 $("#btn104").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
+
 $("#btn204").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
+
 $("#btn304").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
+
 $("#btn7").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
+
 $("#btn105").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
+
 $("#btn205").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
+
 $("#btn305").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-$("#btn1").click(function(){
+
+
+
+$("#b1").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-$("#btn1").click(function(){
+
+$("#bx1").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-$("#btn1").click(function(){
+
+$("#q1").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-$("#btn1").click(function(){
+
+$("#x1").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-$("#btn1").click(function(){
+
+
+$("#k1").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-$("#btn1").click(function(){
+
+$("#r1").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-$("#btn1").click(function(){
+
+$("#b2").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-$("#btn1").click(function(){
+
+$("#bx2").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
+
+$("#r2").click(function(){
+$(this).toggleClass("btn-danger btn-success");
+});
+
+$("#b3").click(function(){
+$(this).toggleClass("btn-danger btn-success");
+});
+
+$("#j").click(function(){
+$(this).toggleClass("btn-danger btn-success");
+});
+
+
 </script>
 
 
