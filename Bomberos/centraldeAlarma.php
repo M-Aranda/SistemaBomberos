@@ -242,21 +242,21 @@ if($_SESSION["usuarioIniciado"]!=null){
     <div class="jumbotron" style="height: 265px;  border-radius: 70px 70px 70px 70px"  >
       <div class="container" style="height: 253px;">
         <center style="margin-top:-30px;font-weight:bold;"> Oficiales en Servicio</center><br>
-        <div class="form-group" style="margin-left: -35px;">
+        <div class="form-group" style="margin-left: -48px;">
 
          <table class="table table-striped">
               <thead>
                 <tr>
-                  <th>CB&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                  <th>1Cia&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                  <th>2Cia&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                  <th>3Cia&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                  <th>&nbsp;&nbsp;CB&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                  <th>&nbsp;&nbsp;1Cia&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                  <th>&nbsp;&nbsp;2Cia&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                  <th>&nbsp;&nbsp;3Cia&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>
-                    1<input type="button" id="btn1" class="btn btn-danger" value="" style="width:20px;height:20px;" >
+                    1&nbsp;<input type="button" id="btn1" class="btn btn-danger" value="" style="width:20px;height:20px;" >
                   </td>
                   <td>71&nbsp;&nbsp;<input type="button" id="btn71" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
                   <td>72&nbsp;&nbsp;<input type="button" id="btn72" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
@@ -265,7 +265,7 @@ if($_SESSION["usuarioIniciado"]!=null){
                 </tr>
 
                 <tr>
-                  <td>2<input type="button" id="btn2" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
+                  <td>2&nbsp;<input type="button" id="btn2" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
                   <td>41&nbsp;&nbsp;<input type="button" id="btn41" class="btn btn-danger"  value="" style="width:20px;height:20px;" ></td>
                   <td>42&nbsp;&nbsp;<input type="button" id="btn42" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
                   <td>43&nbsp;&nbsp;<input type="button" id="btn43" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
@@ -273,18 +273,18 @@ if($_SESSION["usuarioIniciado"]!=null){
                 </tr>
 
                 <tr>
-                  <td>6<input type="button" id="btn6" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
-                  <td>104<input type="button" id="btn104" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
-                  <td>204<input type="button" id="btn204" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
-                  <td>304<input type="button" id="btn304" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
+                  <td>6&nbsp;<input type="button" id="btn6" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
+                  <td>104&nbsp;<input type="button" id="btn104" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
+                  <td>204&nbsp;<input type="button" id="btn204" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
+                  <td>304&nbsp;<input type="button" id="btn304" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
 
                 </tr>
 
                 <tr>
-                  <td>7<input type="button" id="btn7" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
-                  <td>105<input type="button" id="btn105" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
-                  <td>205<input type="button" id="btn205" class="btn btn-danger"  value="" style="width:20px;height:20px;" ></td>
-                  <td>305<input type="button" id="btn305" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
+                  <td>7&nbsp;<input type="button" id="btn7" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
+                  <td>105&nbsp;<input type="button" id="btn105" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
+                  <td>205&nbsp;<input type="button" id="btn205" class="btn btn-danger"  value="" style="width:20px;height:20px;" ></td>
+                  <td>305&nbsp;<input type="button" id="btn305" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
 
                 </tr>
 
@@ -443,7 +443,7 @@ if($_SESSION["usuarioIniciado"]!=null){
 
           ?>
 
-          
+
           <?=date('l, d  F Y H:i:s');?>
 
 
