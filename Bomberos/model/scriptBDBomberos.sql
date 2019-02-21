@@ -446,14 +446,86 @@ FOREIGN KEY (fk_personal_informacionDeCargos) REFERENCES tbl_informacionPersonal
 PRIMARY KEY (id_informacionDeCargos)
 );
 
+CREATE TABLE tbl_oficial(
+id_oficial INT AUTO_INCREMENT,
+rango_oficial VARCHAR (50),
+codigo INT,
+PRIMARY KEY(id_oficial)
+);
+
+INSERT INTO tbl_oficial (rango_oficial,codigo)VALUES 
+('Capitán',41),
+('Director',71),
+('Teniente 1°',101),
+('Teniente 2°',102),
+('Teniente 3°',103),
+('Ayudante',104),
+('Maquinista',105),
+('Secretario',106),
+('Tesorero',107),
+('Ayudante 2 °',108),
+('Capitán',42),
+('Director',72),
+('Teniente 1°',201),
+('Teniente 2°',202),
+('Teniente 3°',203),
+('Ayudante',204),
+('Maquinista',205),
+('Secretario',206),
+('Tesorero',207),
+('Ayudante 2 °',208),
+('Capitán',43),
+('Director',73),
+('Teniente 1°',301),
+('Teniente 2°',302),
+('Teniente 3°',303),
+('Ayudante',304),
+('Maquinista',305),
+('Secretario',306),
+('Tesorero',307),
+('Ayudante 2 °',308) ;
+
 CREATE TABLE tbl_estado_oficial(
 id_estado_oficial INT AUTO_INCREMENT,
-fkCargo INT,
+fkOficial INT,
 nombreEstado_estado_oficial VARCHAR (50),
 momento DATETIME,
-FOREIGN KEY (fkCargo) REFERENCES tbl_cargo (id_cargo),
+FOREIGN KEY (fkOficial) REFERENCES tbl_oficial (id_oficial),
 PRIMARY KEY(id_estado_oficial)
 );
+
+INSERT INTO tbl_estado_oficial (fkOficial,nombreEstado_estado_oficial,momento) VALUES (1,'0-8',NOW()),
+(2,'0-8',NOW()),
+(3,'0-8',NOW()),
+(4,'0-8',NOW()),
+(5,'0-8',NOW()),
+(6,'0-8',NOW()),
+(7,'0-8',NOW()),
+(8,'0-8',NOW()),
+(9,'0-8',NOW()),
+(10,'0-8',NOW()),
+(11,'0-8',NOW()),
+(12,'0-8',NOW()),
+(13,'0-8',NOW()),
+(14,'0-8',NOW()),
+(15,'0-8',NOW()),
+(16,'0-8',NOW()),
+(17,'0-8',NOW()),
+(18,'0-8',NOW()),
+(19,'0-8',NOW()),
+(20,'0-8',NOW()),
+(21,'0-8',NOW()),
+(22,'0-8',NOW()),
+(23,'0-8',NOW()),
+(24,'0-8',NOW()),
+(25,'0-8',NOW()),
+(26,'0-8',NOW()),
+(27,'0-8',NOW()),
+(28,'0-8',NOW()),
+(29,'0-8',NOW()),
+(30,'0-8',NOW())
+;
+
 
 CREATE TABLE tbl_sector(
 id_sector INT AUTO_INCREMENT,
@@ -1518,6 +1590,9 @@ INSERT INTO tbl_sector (nombre_sector) VALUES
 -- SELECT * FROM tbl_cargio_combustible;
 -- SELECT * FROM tbl_entidadACargo;
 -- SELECT * FROM tbl_material_menor;
+-- SELECT * FROM tbl_oficial;
+-- SELECT * FROM tbl_estado_oficial;
+
 
 /*
 Select para todo el inventario
@@ -1752,8 +1827,8 @@ INSERT INTO tbl_material_menor VALUES (NULL, 'Hacha', 2, 'Verde',3,30,1,2,'Algú
 INSERT INTO tbl_material_menor VALUES (NULL, 'Hacha', 2, 'Plomo',3,30,1,3,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1,'Algun detalle');
 INSERT INTO tbl_material_menor VALUES (NULL, 'Hacha', 2, 'Morada',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1,'Algun detalle');
 
-INSERT INTO tbl_informacionDeCargos (fk_materialMenorAsignado_informacionDeCargos,cantidadAsignada_informacionDeCargos,fk_personal_informacionDeCargos) VALUES (1,1,1);
-INSERT INTO tbl_estado_oficial (fkCargo, nombreEstado_estado_oficial, momento) VALUES (7, '0-8',NOW()); 
+-- INSERT INTO tbl_informacionDeCargos (fk_materialMenorAsignado_informacionDeCargos,cantidadAsignada_informacionDeCargos,fk_personal_informacionDeCargos) VALUES (1,1,1);
+
 /*
 DROP DATABASE bomberosBD;
 */

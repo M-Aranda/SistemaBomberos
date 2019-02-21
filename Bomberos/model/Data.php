@@ -38,6 +38,8 @@ require_once("Tbl_EstadoMaterialMenor.php");
 require_once("Tbl_informacionDeCargos.php");
 require_once("Tbl_MaterialMenor.php");
 require_once("Tbl_sector.php");
+require_once("Tbl_oficial.php");
+require_once("Tbl_estadoOficial.php");
 
 
 class Data{
@@ -1706,10 +1708,29 @@ public function readSectores(){
 
 
 
+public function ingresarCambioDeEstadoDeOficial($idOficial,$estado){
+$query="INSERT INTO tbl_estado_oficial (fkOficial, nombreEstado_estado_oficial, momento) VALUES (".$idOficial.", '".$estado."',NOW()); ";
+  echo $query;
+  $this->c->conectar();
+  $this->c->ejecutar($query);
+  $this->c->desconectar();
+}
+
+
+
+public function getEstadoActualDeOficial($idOficial){
+  $this->c->conectar();
+  $query="SELECT nombreEstado_estado_oficial FROM tbl_estado_oficial WHERE fkOficial=".$idOficial.";";
+  $rs = $this->c->ejecutar($query);
+  echo $query;
+  while($reg = $rs->fetch_array()){
+       $nombre=$reg[0];
+   }
+   $this->c->desconectar();
+   return $nombre;
+}
 
 
 
 }
-
-
  ?>

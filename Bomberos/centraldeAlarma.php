@@ -33,21 +33,12 @@
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
    <script src="js/bootstrap.js"></script>
 
+   <script src="javascript/JQuery.js"></script>
+   <script type="text/javascript" src="javascript/sweetAlertMin.js"></script>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+
   </head>
 
-  <?php
-/*
-require_once("model/Data.php");
-require_once("model/Tbl_Usuario.php");
-$dataUsuario= new Data();
-session_start();
-if($_SESSION["usuarioIniciado"]!=null){
-  $u=$_SESSION["usuarioIniciado"];
-  if($dataUsuario->verificarSiUsuarioTienePermiso($u,1)==0){
-    header("location: paginaError.php");
-  }
-}*/
-?>
 
 <body  background="images/fondofichaintranet.jpg">
 
@@ -125,13 +116,9 @@ if($_SESSION["usuarioIniciado"]!=null){
         <br>
         <br>
         <button class="btn btn-default" style="width: 150px;" style="margin-top: 400px"> <a href="crearUsuario.php" style="text-decoration:none;color:black;">Crear Usuario</a> </button>
-
         <br>
         <br>
         <button class="btn btn-danger" style="width: 150px;" style="margin-top: 400px"> <a href="controlador/CerrarSesion.php" style="text-decoration:none;color:black;">Cerrar Sesion</a> </button>
-
-
-
 
 
       </div><!-- /.navbar-collapse -->
@@ -404,7 +391,7 @@ if($_SESSION["usuarioIniciado"]!=null){
            <br><br>
 
            Sector:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-           <select  name="cboSectores" style="width:280px; height:30px;">
+           <select  name="cboSectores" id="cboSectores" style="width:280px; height:30px;">
            <?php
            $listado = $data->readSectores();
            foreach($listado as $o => $objeto){
@@ -420,10 +407,8 @@ if($_SESSION["usuarioIniciado"]!=null){
            &nbsp;&nbsp;&nbsp;&nbsp;
 
            Tipo de Emergencia:
-           <select  name="cboTiposDeServicios" style="width:80px; height:30px;">
+           <select  name="cboTiposDeServicios" id="cboTiposDeServicios" style="width:80px; height:30px;">
            <?php
-
-
            $listado = $data->readTiposDeServicios();
            foreach($listado as $o => $objeto){
            ?>
@@ -436,7 +421,7 @@ if($_SESSION["usuarioIniciado"]!=null){
 
 
            &nbsp;&nbsp;&nbsp;
-        <center>   <input type="submit" value="Despachar" style="width:100px;height:50px;"></center>
+        <center>   <input type="submit" value="Despachar" id="btn_despachar" name="btn_despachar" onclick="despachar()" style="width:100px;height:50px;"></center>
 
         <?php
           date_default_timezone_set('America/Santiago');
@@ -462,39 +447,71 @@ if($_SESSION["usuarioIniciado"]!=null){
 </div>
 
 <script>
+function despachar(){
+  var tipoDeServicio=$("#cboTiposDeServicios :selected").text();
+  var sector=$("#cboSectores :selected").text();
+  swal({
+      title: "Sistema de bomberos",
+      text: "Despachar "+tipoDeServicio+" a "+sector+"?",
+      type: "info",
+      showCancelButton: true,
+      confirmButtonColor: "#03fe00",
+      confirmButtonText: "Sí",
+      cancelButtonText: "No",
+      closeOnConfirm: false,
+  });
+}
 
+function registrarCambio(id){
+  $.ajax({
+      type: "POST",
+      url: 'registrarCambioDeEstado.php',
+      data: {"datos": id},
+      success: function(data){
+        console.log(data);
+      }
+  });
+}
 
 
 $("#btn1").click(function(){
 $(this).toggleClass("btn-danger btn-success");
+registrarCambio();
 });
 
 $("#btn71").click(function(){
 $(this).toggleClass("btn-danger btn-success");
+registrarCambio(2);
 });
 
 $("#btn72").click(function(){
 $(this).toggleClass("btn-danger btn-success");
+registrarCambio(12);
 });
 
 $("#btn73").click(function(){
 $(this).toggleClass("btn-danger btn-success");
+registrarCambio(22);
 });
 
 $("#btn2").click(function(){
 $(this).toggleClass("btn-danger btn-success");
+registrarCambio();
 });
 
 $("#btn41").click(function(){
 $(this).toggleClass("btn-danger btn-success");
+registrarCambio(1);
 });
 
 $("#btn42").click(function(){
 $(this).toggleClass("btn-danger btn-success");
+registrarCambio(11);
 });
 
 $("#btn43").click(function(){
 $(this).toggleClass("btn-danger btn-success");
+registrarCambio(21);
 });
 
 $("#btn6").click(function(){
@@ -503,30 +520,37 @@ $(this).toggleClass("btn-danger btn-success");
 
 $("#btn104").click(function(){
 $(this).toggleClass("btn-danger btn-success");
+registrarCambio(6);
 });
 
 $("#btn204").click(function(){
 $(this).toggleClass("btn-danger btn-success");
+registrarCambio(16);
 });
 
 $("#btn304").click(function(){
 $(this).toggleClass("btn-danger btn-success");
+registrarCambio(26);
 });
 
 $("#btn7").click(function(){
 $(this).toggleClass("btn-danger btn-success");
+registrarCambio();
 });
 
 $("#btn105").click(function(){
 $(this).toggleClass("btn-danger btn-success");
+registrarCambio(7);
 });
 
 $("#btn205").click(function(){
 $(this).toggleClass("btn-danger btn-success");
+registrarCambio(17);
 });
 
 $("#btn305").click(function(){
 $(this).toggleClass("btn-danger btn-success");
+registrarCambio(27);
 });
 
 
