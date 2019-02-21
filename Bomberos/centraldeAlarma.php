@@ -187,7 +187,7 @@
 #cuadro4{
 
   width: 800px;
-  height: 395px;
+  height: 445px;
   margin-top: 5px;
   margin-left: 30px;
   border: 2px black outset;
@@ -421,7 +421,10 @@
 
 
            &nbsp;&nbsp;&nbsp;
-        <center>   <input type="submit" value="Despachar" id="btn_despachar" name="btn_despachar" onclick="despachar()" style="width:100px;height:50px;"></center>
+        <center>  <!-- <input type="submit" src="images/camion.png" alt="Despachar" value="Despachar" id="btn_despachar" name="btn_despachar" onclick="despachar()" style="width:100px;height:50px;">-->
+        <button type="submit" value="Despachar" id="btn_despachar" name="btn_despachar" onclick="despachar()" style="width:100px;height:100px;">
+          <img src="images/camion3.png" alt="x" />Despachar</button>
+        </center>
 
         <?php
           date_default_timezone_set('America/Santiago');

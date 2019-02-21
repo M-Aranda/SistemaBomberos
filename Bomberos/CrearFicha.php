@@ -458,7 +458,7 @@ $( function() {
                            </select>
 
                          Compañía: <!-- <input class="form-control" type="text" name="txtcompania"> --> <!--Combobox-->
-                         <select name="compania" style="width:175px; height:30px;">
+                         <select name="compania"  class="form-control">
                            <?php
                                $compania = $data->readSoloCompanias();
                                foreach ($compania as $c) {
@@ -469,11 +469,11 @@ $( function() {
                            ?>
 
                          </select>
-                         <br>
                          Fecha Ingreso: <input class="form-control" type="date" name="txtfingreso" required>
                          Nº Reg.General: <input class="form-control" type="number" name="txtgeneral" required min="1" pattern="^[0-9]+" onkeydown="javascript: return event.keyCode == 69 ? false : true" >
                        </div>
                        <div class="col-md-6">
+                         <br>
                          Cuerpo: <input class="form-control" type="text" name="txtcuerpo" required>
                          Cargo:
                          <select class="form-control" name="cboCargo">
@@ -532,7 +532,7 @@ $( function() {
                        Información Laboral
                    </div>
                    <div class="panel-body">
-                       <div class="col-sm-5">
+                       <div class="col-sm-6">
                          Creando ficha para: <?php
                          if(isset($idDeBomberoMasReciente)){
                            echo utf8_encode($d->getNombreBomberoPorId($idDeBomberoMasReciente));
@@ -543,10 +543,11 @@ $( function() {
                          Dirección Empresa: <input class="form-control" type="text" name="txtdirecempresa" required>
                          Teléfono Empresa: <input class="form-control" type="text" name="txttlfempresa" required>
                          Fecha Ingreso: <input class="form-control" type="date" name="txfingresoempresa" required>
-                         cargo : <input class="form-control" type="text" name="txtcargo" required>
 
                        </div>
-                       <div class="col-md-5">
+                       <div class="col-md-6">
+                         <br>
+                         cargo : <input class="form-control" type="text" name="txtcargo" required>
 
                          Area/Depto de trabajo: <input class="form-control" type="text" name="txtareatrabajo" required>
                          AFP: <input class="form-control" type="text" name="txtafp" required>
@@ -592,7 +593,7 @@ $( function() {
 
                        </div>
                        <div class="col-md-6">
-
+                         <br>
                          Parentesco del Contacto:
                          <select class="form-control" name="cboParentesco1">
                            <?php
@@ -865,19 +866,22 @@ $( function() {
                              </select>
                            -->
                              Fecha: <input type="date" name="txtfechaCambioInfoHistorica" class="form-control" required>
-                             Cargo: <input type="text" name="cboxCargo" class="form-control" required>
-                             Premio: <input type="text" name="txtPremioInforHistorica" class="form-control" required>
-                             Motivo: <input type="text" name="txtMotivo" class="form-control" required>
-                             Detalle: <input type="text" name="txtDetalleHistorico" class="form-control" required>
+
 
                           </div>
 
                           <div class="col-md-6">
-                             <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-                              <center> <input type="submit" id="btn_crearInfoHistorica" name="btninfohistorica" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
-                              </center>
+                            <br>
+                            Cargo: <input type="text" name="cboxCargo" class="form-control" required>
+                            Premio: <input type="text" name="txtPremioInforHistorica" class="form-control" required>
+                            Motivo: <input type="text" name="txtMotivo" class="form-control" required>
+                            Detalle: <input type="text" name="txtDetalleHistorico" class="form-control" required>
+                            <br>
+
                             </form>
 
+                            <center> <input type="submit" id="btn_crearInfoHistorica" name="btninfohistorica" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                            </center>
 
                           </div>
                        </div>
@@ -919,20 +923,8 @@ $( function() {
                                           ?>
                                       </select>
 
-                                     Ubicacion Fisica:
-                                      <select name="cboxUbicacion" id="cboxUbicacion" class="form-control" onchange="actualizarComboBoxDeMateriales()" >
-                                        <?php
-                                        $ubicacionesFisicas = $data->getUbicacionFisica(1);
-                                        foreach ($ubicacionesFisicas as $ubi) {
-                                          echo "<option value='".$ubi->getIdUbicacionFisica()."'>";
-                                          echo utf8_encode($ubi->getNombreUbicacionFisica());
-                                          echo"</option>";
-                                        }
-                                        ?>
-                                      </select>
-
                                       Material menor a asignar:
-                                      <div class="ui-widget">
+                                      <div class="ui-widget" class="form-control" style="width:100px;">
                                       <select   name="cboMaterialesDisponibles" id="cboMaterialesDisponibles" class="form-control"  onchange="actualizarStockDisponible(), cargarDatosDeMaterialSeleccionado()">
                                         <?php
                                         $materialesDisponibles = $data->getMaterialesMenoresPorFkUbicacionFisica(1);
@@ -944,25 +936,60 @@ $( function() {
                                         ?>
                                       </select>
                                     </div>
+
                                       <br>
-                                      Stock: <input type="number" class="form-control"  id="stock" name="stock" disabled>
-                                      Cantidad a asignar: <input type="number" class="form-control" value="1" id="cantidadDeMaterialesAsignados" name="cantidadDeMaterialesAsignados" min="1" max="10">
-                                      <br>
+
                                        <center> <input type="submit" name="btnInfoCargos" id="btn_crearCargo" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
                                        </center>
+                                       <br>
+                                       <div>
+                                         Marca: <input type="text" id="detalleMarca" name="detalleMarca" disabled style="width: 260px;">
+                                         <br>
+                                         Color: <input type="text" id="detalleColor" name="detalleColor" disabled style="width: 260px;">
+                                         <br>
+                                         Proveedor: <input type="text" id="detalleProveedor" name="detalleProveedor" disabled style="width: 260px;">
+                                         <br>
+                                         Estado: <input type="text" id="detalleEstado" name="detalleEstado" disabled style="width: 256px;">
+                                         <br>
+
+                                      </div>
+
+
                                      </form>
                                       <br>
                                   </div>
                                   <div class="col-md-6">
                                     <br>
-                                    Marca: <input type="text" id="detalleMarca" name="detalleMarca" disabled style="width: 260px;">
+                                    <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-auto">
+                                          Ubicacion Fisica:
+                                           <select name="cboxUbicacion" id="cboxUbicacion" class="form-control" onchange="actualizarComboBoxDeMateriales()" >
+                                             <?php
+                                             $ubicacionesFisicas = $data->getUbicacionFisica(1);
+                                             foreach ($ubicacionesFisicas as $ubi) {
+                                               echo "<option value='".$ubi->getIdUbicacionFisica()."'>";
+                                               echo utf8_encode($ubi->getNombreUbicacionFisica());
+                                               echo"</option>";
+                                             }
+                                             ?>
+                                           </select>
+                                        </div>
+                                        <div class="col-md-auto">
+                                           Stock: <input type="number" class="form-control"  id="stock" name="stock" style="width:50px;" disabled>
+                                        </div>
+                                        <div class="col-md-auto" style="margin-left: 80px;margin-top:-55px;">
+                                          Cantidad a asignar:
+                                          <input type="number" class="form-control" style="width:50px;" value="1" id="cantidadDeMaterialesAsignados" name="cantidadDeMaterialesAsignados" min="1" max="10">
+                                          <br>
+
+                                        </div>
+                                      </div>
+                                    </div>
+
                                     <br>
-                                    Color: <input type="text" id="detalleColor" name="detalleColor" disabled style="width: 260px;">
-                                    <br>
-                                    Proveedor: <input type="text" id="detalleProveedor" name="detalleProveedor" disabled style="width: 260px;">
-                                    <br>
-                                    Estado: <input type="text" id="detalleEstado" name="detalleEstado" disabled style="width: 256px;">
-                                    <br>
+                                  <div>
+                                    <br><br>
                                     Fecha de caducidad: <input type="text" id="detalleFecha" name="detalleFecha" disabled style="width: 260px;">
                                     <br>
                                     Medida: <input type="text" id="detalleMedida" name="detalleMedida" disabled style="width: 260px;">
@@ -972,9 +999,14 @@ $( function() {
                                     Observaciones: <input type="text" id="detalleObservaciones" name="detalleObservaciones" disabled style="width: 260px;">
                                     <br>
                                   </div>
+                                  </div>
                               </div>
                           </div>
                       </div>
+
+
+
+
                 </div>
           </div>
 
