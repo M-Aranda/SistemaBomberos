@@ -313,6 +313,10 @@
         <div class="container">
           <center style="margin-top:-30px;font-weight:bold;"> Últimos Servicios</center><br>
         <div class="form-group" style="margin-left:0px;">
+          <?php
+          $ultimosServicios=$data->getUltimos5Servicios();
+
+          ?>
 
           <table class="table table-striped">
               <thead>
@@ -324,13 +328,27 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>11-05-2019</td>
-                  <td>10-1</td>
-                  <td>b1</td>
-                  <td>asdajssj</td>
+                <?php
+                foreach ($ultimosServicios as $s => $servicio) {?>
+                  <tr>
+                    <td><?php
+                    $fechaSinConvertir =  $servicio->getFecha_servicio();
+                    $fechaConvertida = date("d-m-Y", strtotime($fechaSinConvertir));
+                    echo $fechaConvertida;
+                    ?></td>
+                    <td><?php echo utf8_encode($data->verNombreDeServicioPorId($servicio->getFk_tipoDeServicio()));?></td>
+                    <td><?php
+                    $unidades=$data->getUnidadesInvolucradasEnServicio($servicio->getId_servicio());
+                    foreach ($unidades as $u => $unidad) {
+                      echo $unidad." ";
+                    }
+                    ?></td>
+                    <td><input type="submit" value="Ver detalles" onclick="verDetalles(<?php echo $servicio->getId_servicio(); ?>)"></td>
+                  </tr>
+              <?php
+                }
+                ?>
 
-                </tr>
 
               </tbody>
               </table>
@@ -348,6 +366,7 @@
          <div class="container">
 
          <div class="form-group" style="margin-left:-20px;">
+           <form id="formDespacho" action="controlador/CrearDespacho.php" method="post">
 
            Nombre:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="txtnombre" style="width:290px;">
            Rut: <input type="text" name="txtrut" style="width:95px;">
@@ -355,8 +374,8 @@
 
            Direccion:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="txtdireccion" style="width:580px;"> <br><br>
 
-           Esquina Nº1: <input type="text" name="txtdireccion" style="width:240px">&nbsp;
-           Esquina Nº2: <input type="text" name="txtdireccion" style="width:247px">
+           Esquina Nº1: <input type="text" name="txtEsquina1" style="width:240px">&nbsp;
+           Esquina Nº2: <input type="text" name="txtEsquina2" style="width:247px">
            <br><br>
 
            Sector:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -387,13 +406,15 @@
            ?>
            </select>
             <br><br>
-
+            Detalles: <input type="text" name="detalle" id="detalle">
+            <br>
 
            &nbsp;&nbsp;&nbsp;
         <center>  <!-- <input type="submit" src="images/camion.png" alt="Despachar" value="Despachar" id="btn_despachar" name="btn_despachar" onclick="despachar()" style="width:100px;height:50px;">-->
         <button type="submit" value="Despachar" id="btn_despachar" name="btn_despachar" onclick="despachar()" style="width:100px;height:100px;">
           <img src="images/camion3.png" alt="x" />Despachar</button>
         </center>
+        </form>
 
         <?php
           date_default_timezone_set('America/Santiago');
@@ -425,6 +446,8 @@
 
 <script>
 function despachar(){
+  event.preventDefault();
+
   var tipoDeServicio=$("#cboTiposDeServicios :selected").text();
   var sector=$("#cboSectores :selected").text();
 
@@ -570,8 +593,6 @@ function despachar(){
     unidadesADespachar=[];
   }
 
-
-
   swal({
       title: "Sistema de bomberos",
       text: "Despachar unidad/es "+unidadesADespachar.join(" y ")+" para servir un "+tipoDeServicio+" a "+sector+"?",
@@ -583,6 +604,23 @@ function despachar(){
       closeOnConfirm: false,
   });
 }
+
+
+function verDetalles(id){
+  $.ajax({
+      type: "POST",
+      url: 'verDetallesDeServicio.php',
+      data: {"datos": id},
+      success: function(data){
+        swal(data);
+      }
+  });
+
+
+
+}
+
+
 function registrarCambio(id){
   $.ajax({
       type: "POST",

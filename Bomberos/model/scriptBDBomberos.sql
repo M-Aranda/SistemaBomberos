@@ -295,7 +295,6 @@ nombre_estado_unidad VARCHAR (5000),
 PRIMARY KEY(id_estado_unidad)
 );
 
-
 CREATE TABLE tbl_unidad (
 id_unidad INT AUTO_INCREMENT,
 nombre_unidad VARCHAR (300),
@@ -365,6 +364,7 @@ codigo_tipo_servicio VARCHAR (5000),
 nombre_tipo_servicio VARCHAR (5000),
 PRIMARY KEY (id_tipo_servicio)
 );
+
 
 CREATE TABLE tbl_bitacora (
 id_bitacora INT AUTO_INCREMENT,
@@ -532,6 +532,36 @@ nombre_sector VARCHAR (300),
 PRIMARY KEY(id_sector)
 );
 
+CREATE TABLE tbl_servicio(
+id_servicio INT AUTO_INCREMENT,
+nombre_servicio VARCHAR (300),
+rut_servicio VARCHAR (300),
+telefono_servicio VARCHAR (300),
+direccion_servicio VARCHAR (300),
+esquina1_servicio VARCHAR (300),
+esquina2_servicio VARCHAR (300),
+fk_sector INT,
+fk_tipoDeServicio INT,
+detalles_servicio VARCHAR (1000),
+fecha_servicio DATE,
+FOREIGN KEY (fk_sector) REFERENCES tbl_sector(id_sector),
+FOREIGN KEY (fk_tipoDeServicio) REFERENCES tbl_tipo_servicio(id_tipo_servicio),
+PRIMARY KEY(id_servicio)
+);
+
+
+CREATE TABLE tbl_servicio_unidad(
+id_servicio_unidad INT AUTO_INCREMENT,
+fk_servicio INT,
+fk_unidad INT,
+FOREIGN KEY(fk_servicio) REFERENCES tbl_servicio (id_servicio),
+FOREIGN KEY(fk_unidad) REFERENCES tbl_unidad (id_unidad),
+PRIMARY KEY(id_servicio_unidad)
+);
+/*
+SELECT tbl_unidad.nombre_unidad FROM tbl_unidad, tbl_servicio_unidad,tbl_servicio WHERE tbl_unidad.id_unidad=tbl_servicio_unidad.fk_unidad AND
+tbl_servicio.id_servicio=tbl_servicio_unidad.fk_servicio AND tbl_servicio.id_servicio=1;
+*/
 -- Procedimientos
 
 DELIMITER //
@@ -1591,7 +1621,8 @@ INSERT INTO tbl_sector (nombre_sector) VALUES
 -- SELECT * FROM tbl_material_menor;
 -- SELECT * FROM tbl_oficial;
 -- SELECT * FROM tbl_estado_oficial;
-
+-- SELECT * FROM tbl_servicio;
+-- SELECT * FROM tbl_servicio_unidad;
 
 /*
 Select para todo el inventario
@@ -1825,6 +1856,25 @@ INSERT INTO tbl_material_menor VALUES (NULL, 'Hacha', 2, 'Azul',3,30,1,1,'Algún
 INSERT INTO tbl_material_menor VALUES (NULL, 'Hacha', 2, 'Verde',3,30,1,2,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1,'Algun detalle');
 INSERT INTO tbl_material_menor VALUES (NULL, 'Hacha', 2, 'Plomo',3,30,1,3,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1,'Algun detalle');
 INSERT INTO tbl_material_menor VALUES (NULL, 'Hacha', 2, 'Morada',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1,'Algun detalle');
+
+INSERT INTO tbl_servicio VALUES (NULL, 'Sujeto 1', '12345','+56789','Alguna direccion','esq1','esq2',1,1,'Algun detalle cualquiera','2015-02-10');
+INSERT INTO tbl_servicio VALUES (NULL, 'Sujeto 2', '12345','+56789','Alguna direccion','esq1','esq2',1,1,'Algun detalle cualquiera','2016-02-10');
+INSERT INTO tbl_servicio VALUES (NULL, 'Sujeto 3', '12345','+56789','Alguna direccion','esq1','esq2',1,1,'Algun detalle cualquiera','2017-02-10');
+INSERT INTO tbl_servicio VALUES (NULL, 'Sujeto 4', '12345','+56789','Alguna direccion','esq1','esq2',1,1,'Algun detalle cualquiera','2018-02-10');
+INSERT INTO tbl_servicio VALUES (NULL, 'Sujeto 5', '12345','+56789','Alguna direccion','esq1','esq2',1,1,'Algun detalle cualquiera','2019-02-10');
+
+INSERT INTO tbl_servicio_unidad VALUES (NULL, 1,7);
+INSERT INTO tbl_servicio_unidad VALUES (NULL, 1,8);
+INSERT INTO tbl_servicio_unidad VALUES (NULL, 2,7);
+INSERT INTO tbl_servicio_unidad VALUES (NULL, 2,8);
+INSERT INTO tbl_servicio_unidad VALUES (NULL, 3,7);
+INSERT INTO tbl_servicio_unidad VALUES (NULL, 3,8);
+INSERT INTO tbl_servicio_unidad VALUES (NULL, 4,7);
+INSERT INTO tbl_servicio_unidad VALUES (NULL, 4,8);
+INSERT INTO tbl_servicio_unidad VALUES (NULL, 5,7);
+INSERT INTO tbl_servicio_unidad VALUES (NULL, 5,8);
+
+
 
 -- INSERT INTO tbl_informacionDeCargos (fk_materialMenorAsignado_informacionDeCargos,cantidadAsignada_informacionDeCargos,fk_personal_informacionDeCargos) VALUES (1,1,1);
 

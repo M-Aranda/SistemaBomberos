@@ -40,6 +40,8 @@ require_once("Tbl_MaterialMenor.php");
 require_once("Tbl_sector.php");
 require_once("Tbl_oficial.php");
 require_once("Tbl_estadoOficial.php");
+require_once("Tbl_servicio.php");
+require_once("Tbl_servicio_unidad.php");
 
 
 class Data{
@@ -1728,6 +1730,111 @@ public function getEstadoActualDeOficial($idOficial){
    }
    $this->c->desconectar();
    return $nombre;
+}
+
+
+public function crearServicio($servicio){
+$query="INSERT INTO tbl_servicio VALUES (NULL, '".$servicio->getNombre_servicio()."',
+                                                '".$servicio->getRut_servicio()."',
+                                                '".$servicio->getTelefono_servicio()."',
+                                                '".$servicio->getDireccion_servicio()."',
+                                                '".$servicio->getEsquina1_servicio()."',
+                                                '".$servicio->getEsquina2_servicio()."',
+                                                ".$servicio->getFk_sector().",
+                                                ".$servicio->getFk_tipoDeServicio().",
+                                                '".$servicio->getDetalles_servicio()."',
+                                                '".$servicio->getFecha_servicio()."' )";
+  echo $query;
+  $this->c->conectar();
+  $this->c->ejecutar($query);
+  $this->c->desconectar();
+}
+
+
+public function getUltimos5Servicios(){
+  $this->c->conectar();
+  $query="SELECT * FROM tbl_servicio ORDER BY id_servicio DESC LIMIT 5;";
+  $rs = $this->c->ejecutar($query);
+  $listado=array();
+  while($reg = $rs->fetch_array()){
+    $servicio= new Tbl_servicio();
+    $servicio->setId_servicio($reg[0]);
+    $servicio->setNombre_servicio($reg[1]);
+    $servicio->setRut_servicio($reg[2]);
+    $servicio->setTelefono_servicio($reg[3]);
+    $servicio->setDireccion_servicio($reg[4]);
+    $servicio->setEsquina1_servicio($reg[5]);
+    $servicio->setEsquina2_servicio($reg[6]);
+    $servicio->setFk_sector($reg[7]);
+    $servicio->setFk_tipoDeServicio($reg[8]);
+    $servicio->setDetalles_servicio($reg[9]);
+    $servicio->setFecha_servicio($reg[10]);
+
+    $listado[]=$servicio;
+   }
+   $this->c->desconectar();
+   return $listado;
+}
+
+
+
+public function verDetallesDeServicioPorId($id){
+  $this->c->conectar();
+  $query="SELECT tbl_servicio.id_servicio, tbl_servicio.nombre_servicio, tbl_servicio.rut_servicio, tbl_servicio.telefono_servicio, tbl_servicio.direccion_servicio,
+tbl_servicio.esquina1_servicio,tbl_servicio.esquina2_servicio,tbl_sector.nombre_sector,tbl_tipo_servicio.codigo_tipo_servicio,tbl_servicio.detalles_servicio, tbl_servicio.fecha_servicio
+ FROM tbl_servicio, tbl_sector, tbl_tipo_servicio  WHERE tbl_servicio.fk_sector=tbl_sector.id_sector AND tbl_servicio.fk_tipoDeServicio=tbl_tipo_servicio.id_tipo_servicio  AND tbl_servicio.id_servicio=".$id.";";
+  $rs = $this->c->ejecutar($query);
+
+  while($reg = $rs->fetch_array()){
+    $servicio= new Tbl_servicio();
+    $servicio->setId_servicio($reg[0]);
+    $servicio->setNombre_servicio($reg[1]);
+    $servicio->setRut_servicio($reg[2]);
+    $servicio->setTelefono_servicio($reg[3]);
+    $servicio->setDireccion_servicio($reg[4]);
+    $servicio->setEsquina1_servicio($reg[5]);
+    $servicio->setEsquina2_servicio($reg[6]);
+    $servicio->setFk_sector($reg[7]);
+    $servicio->setFk_tipoDeServicio($reg[8]);
+    $servicio->setDetalles_servicio($reg[9]);
+    $servicio->setFecha_servicio($reg[10]);
+
+   }
+   $this->c->desconectar();
+   return $servicio;
+}
+
+
+public function verNombreDeServicioPorId($id){
+  $this->c->conectar();
+  $query="SELECT nombre_tipo_servicio FROM tbl_tipo_servicio WHERE id_tipo_servicio=".$id.";";
+  $rs = $this->c->ejecutar($query);
+
+  while($reg = $rs->fetch_array()){
+
+    $obj=$reg[0];
+
+   }
+   $this->c->desconectar();
+   return $obj;
+}
+
+
+
+public function getUnidadesInvolucradasEnServicio($id){
+  $this->c->conectar();
+  $query="SELECT tbl_unidad.nombre_unidad FROM tbl_unidad, tbl_servicio_unidad,tbl_servicio WHERE tbl_unidad.id_unidad=tbl_servicio_unidad.fk_unidad AND
+  tbl_servicio.id_servicio=tbl_servicio_unidad.fk_servicio AND tbl_servicio.id_servicio=".$id."";
+  $rs = $this->c->ejecutar($query);
+  $listado=array();
+  while($reg = $rs->fetch_array()){
+
+    $obj=$reg[0];
+
+    $listado[]=$obj;
+   }
+   $this->c->desconectar();
+   return $listado;
 }
 
 
