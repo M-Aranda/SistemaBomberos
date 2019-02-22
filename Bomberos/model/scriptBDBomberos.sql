@@ -15,7 +15,6 @@ nombre_tipo_usuario VARCHAR (2000),
 PRIMARY KEY (id_tipo_usuario)
 );
 
-
 CREATE TABLE tbl_tipo_usuario_permisos (
 id_tipo_usuario_permisos INT AUTO_INCREMENT,
 fk_tipo_usuario_tipo_usuario_permisos INT,

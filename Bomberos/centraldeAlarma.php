@@ -1,19 +1,16 @@
+
 <!DOCTYPE html>
 <?php
     // unir vista con el modelo sin pasar por un controlador
     require_once("model/Data.php");
     $data = new Data();
-
     session_start();
-
     if(isset($_SESSION["resultadosDeBusquedaDeBomberos"])){
       unset($_SESSION["resultadosDeBusquedaDeBomberos"]);
     }
-
     if(isset($_SESSION["resultadosDeBusquedaDeUnidad"])){
       unset($_SESSION["resultadosDeBusquedaDeUnidad"]);
     }
-
     if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
       unset($_SESSION["resultadosDeBusquedaDeMaterialMenor"]);
     }
@@ -135,23 +132,15 @@
     margin-bottom: -1000px;
     width: 1000px;
     height: 800px;
-
     ">
 
 <style>
-
 #transparencia{
     opacity: .75;
     -moz-opacity: .75;
     filter: alpha(opacity=75);
-
-
-
-
 }
-
 #cuadro1{
-
   width: 350px;
   height: 600px;
   border: 2px black outset;
@@ -159,54 +148,35 @@
   margin-left: 50px;
   border-radius: 70px 70px 70px 70px
 }
-
-
 #cuadro2{
-
   width: 350px;
   height: 300px;
   margin-top: -260px;
   margin-left: 450px;
   border: 2px black outset;
   border-radius: 70px 70px 70px 70px
-
 }
-
 #cuadro3{
-
   width: 800px;
   height: 260px;
   margin-top: 20px;
   margin-left: 30px;
   border: 2px black outset;
   border-radius: 60px 60px 60px 60px
-
-
 }
-
 #cuadro4{
-
   width: 800px;
   height: 445px;
   margin-top: 5px;
   margin-left: 30px;
   border: 2px black outset;
   border-radius: 60px 60px 60px 60px
-
-
 }
-
 #jum{
-
     width: 900px;
     height: 1000px;
     margin-bottom: 100px;
-
 }
-
-
-
-
 </style>
 
 
@@ -214,7 +184,6 @@
     // unir vista con el modelo sin pasar por un controlador
     require_once("model/Data.php");
     $data = new Data();
-
 ?>
 
 
@@ -429,11 +398,13 @@
         <?php
           date_default_timezone_set('America/Santiago');
 
+
           $dias = array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado");
           $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
 
           echo $dias[date('w')]." ".date('d')." de ".$meses[date('n')-1]. " del ".date('Y') ;
           echo date(" H:i:s");
+
 
           ?>
 
@@ -469,7 +440,6 @@ function despachar(){
       closeOnConfirm: false,
   });
 }
-
 function registrarCambio(id){
   $.ajax({
       type: "POST",
@@ -480,135 +450,102 @@ function registrarCambio(id){
       }
   });
 }
-
-
 $("#btn1").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 registrarCambio();
 });
-
 $("#btn71").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 registrarCambio(2);
 });
-
 $("#btn72").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 registrarCambio(12);
 });
-
 $("#btn73").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 registrarCambio(22);
 });
-
 $("#btn2").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 registrarCambio();
 });
-
 $("#btn41").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 registrarCambio(1);
 });
-
 $("#btn42").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 registrarCambio(11);
 });
-
 $("#btn43").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 registrarCambio(21);
 });
-
 $("#btn6").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-
 $("#btn104").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 registrarCambio(6);
 });
-
 $("#btn204").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 registrarCambio(16);
 });
-
 $("#btn304").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 registrarCambio(26);
 });
-
 $("#btn7").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 registrarCambio();
 });
-
 $("#btn105").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 registrarCambio(7);
 });
-
 $("#btn205").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 registrarCambio(17);
 });
-
 $("#btn305").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 registrarCambio(27);
 });
-
-
-
 $("#b1").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-
 $("#bx1").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-
 $("#q1").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-
 $("#x1").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-
-
 $("#k1").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-
 $("#r1").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-
 $("#b2").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-
 $("#bx2").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-
 $("#r2").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-
 $("#b3").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-
 $("#j").click(function(){
 $(this).toggleClass("btn-danger btn-success");
 });
-
-
 </script>
 
 

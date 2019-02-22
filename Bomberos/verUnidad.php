@@ -168,6 +168,7 @@
 
     ?>
 
+
     <div style="width: 800px" style="height: 900px">
         <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
           <div class="container">
@@ -397,7 +398,11 @@
 
           </div>
        </div>
+       <form action="buscarUnidades.php">
+       <center><input type="submit" value="Volver atrás"></center>
+       </form>
    </div>
+
  </div>
 </div>
  <script src="javascript/borrarVariablesEnSesionAlCargarPagina.js"></script>

@@ -372,6 +372,7 @@
     }
 
     </style>
+
     <div style="width: 1050px" style="height: 900px">
         <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
           <div class="container">
@@ -558,11 +559,11 @@
                            $cargos = $d->readCargos();
                            foreach($cargos as $c => $cargo){
                              if($infoBomberil->getfkCargoinformacionBomberil()==$cargo->getIdCargo()){?>
-                               <option value="<?php echo $cargo->getIdCargo(); ?>" selected ><?php echo $cargo->getNombreCargo(); ?></option>
+                               <option value="<?php echo $cargo->getIdCargo(); ?>" selected ><?php echo utf8_encode($cargo->getNombreCargo()); ?></option>
                                <?php
                              }else{
                                  ?>
-                                 <option value="<?php echo $cargo->getIdCargo(); ?>" ><?php echo $cargo->getNombreCargo(); ?></option>
+                                 <option value="<?php echo $cargo->getIdCargo(); ?>" ><?php echo utf8_encode($cargo->getNombreCargo()); ?></option>
                                  <?php
                                }
                              }
@@ -1263,15 +1264,19 @@
                                  </table>
         </div>
 </div>
+
  </div>
+
+
+ <form action="buscarBombero.php">
+ <center><input type="submit" value="Volver atrás"></center>
+ </form>
 <?php
 
 
 ?>
 
 <script>
-
-
 
 function actualizarComboBox(){
      var val= document.getElementById("cboEntidadACargo").value;
