@@ -429,10 +429,15 @@
         <?php
           date_default_timezone_set('America/Santiago');
 
+          $dias = array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado");
+          $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+
+          echo $dias[date('w')]." ".date('d')." de ".$meses[date('n')-1]. " del ".date('Y') ;
+          echo date(" H:i:s");
+
           ?>
 
 
-          <?=date('l, d  F Y H:i:s');?>
 
 
 
