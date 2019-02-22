@@ -158,19 +158,20 @@
 }
 #cuadro3{
   width: 800px;
-  height: 260px;
+  height: 385px;
   margin-top: 20px;
   margin-left: 30px;
   border: 2px black outset;
-  border-radius: 60px 60px 60px 60px
+  border-radius: 70px 70px 70px 70px;
+
 }
 #cuadro4{
   width: 800px;
-  height: 445px;
+  height: 434px;
   margin-top: 5px;
   margin-left: 30px;
   border: 2px black outset;
-  border-radius: 60px 60px 60px 60px
+  border-radius: 70px 70px 70px 70px;
 }
 #jum{
     width: 900px;
@@ -185,9 +186,6 @@
     require_once("model/Data.php");
     $data = new Data();
 ?>
-
-
-
 
 <div style="width: 900px" style="height: 1000px" style="margin-top: -100px" id="jum">
     <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
@@ -308,11 +306,11 @@
   </div>
 
 
-  <div id="cuadro3">
-      <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" >
-        <div class="container">
+  <div id="cuadro3" style="height: 334px;">
+      <div class="jumbotron"  style="height: 330px;border-radius: 70px 70px 70px 70px;">
+        <div class="container" style="height: 330px;">
           <center style="margin-top:-30px;font-weight:bold;"> Últimos Servicios</center><br>
-        <div class="form-group" style="margin-left:0px;">
+        <div class="form-group" style="margin-left:0px;Margin-top:-7px;">
           <?php
           $ultimosServicios=$data->getUltimos5Servicios();
 
@@ -360,12 +358,11 @@
      </div>
    </div>
 
-
    <div id="cuadro4">
        <div class="jumbotron" style="border-radius: 70px 70px 70px 70px">
          <div class="container">
 
-         <div class="form-group" style="margin-left:-20px;">
+         <div class="form-group" style="margin-left:-20px;margin-top:-35px;">
            <form id="formDespacho" action="controlador/CrearDespacho.php" method="post">
 
            Nombre:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="txtnombre" style="width:290px;">
@@ -405,17 +402,24 @@
            }
            ?>
            </select>
-            <br><br>
-            Detalles: <input type="text" name="detalle" id="detalle">
+           <br><br>
+            Detalles:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="detalle" id="detalle" style="width:580px;">
             <br>
 
            &nbsp;&nbsp;&nbsp;
-        <center>  <!-- <input type="submit" src="images/camion.png" alt="Despachar" value="Despachar" id="btn_despachar" name="btn_despachar" onclick="despachar()" style="width:100px;height:50px;">-->
+        <center>
         <button type="submit" value="Despachar" id="btn_despachar" name="btn_despachar" onclick="despachar()" style="width:100px;height:100px;">
           <img src="images/camion3.png" alt="x" />Despachar</button>
         </center>
         </form>
 
+         </div>
+
+
+        </div>
+
+      </div>
+      <div style="margin-top: -60px;margin-left: 60px;font-size:20px;">
         <?php
           date_default_timezone_set('America/Santiago');
 
@@ -423,17 +427,9 @@
           $dias = array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado");
           $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
 
-          echo $dias[date('w')]." ".date('d')." de ".$meses[date('n')-1]. " del ".date('Y') ;
-          echo date(" H:i:s");
+          echo "<b>".$dias[date('w')]." ".date('d')." de ".$meses[date('n')-1]. " del ".date('Y')."</b>" ;
+          echo "<b>".date(" H:i:s")."<b>";
           ?>
-
-
-
-
-
-         </div>
-
-        </div>
       </div>
     </div>
 
@@ -443,6 +439,7 @@
  </div>
 
 </div>
+
 
 <script>
 function despachar(){

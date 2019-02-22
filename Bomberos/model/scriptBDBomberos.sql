@@ -1626,20 +1626,17 @@ INSERT INTO tbl_sector (nombre_sector) VALUES
 
 /*
 Select para todo el inventario
-
 SELECT tbl_material_menor.nombre_material_menor, tbl_entidadACargo.nombre_entidadACargo, tbl_material_menor.color_material_menor, tbl_material_menor.cantidad_material_menor, tbl_material_menor.medida_material_menor,
 tbl_unidad_de_medida.nombre_unidad_de_medida, tbl_ubicacion_fisica.nombre_ubicacion_fisica, tbl_material_menor.fabricante_material_menor, tbl_material_menor.fecha_de_caducidad_material_menor,
 tbl_material_menor.proveedor_material_menor, tbl_tipo_de_bodega.nombre_tipo_de_bodega FROM tbl_material_menor, tbl_tipo_de_bodega, tbl_unidad_de_medida, tbl_ubicacion_fisica, tbl_entidadACargo
 WHERE tbl_material_menor.fk_entidad_a_cargo_material_menor=tbl_entidadACargo.id_entidadACargo AND  tbl_material_menor.fk_unidad_de_medida_material_menor=tbl_unidad_de_medida.id_unidad_de_medida AND
 tbl_material_menor.fk_ubicacion_fisica_material_menor=tbl_ubicacion_fisica.id_ubicacion_fisica AND tbl_material_menor.fk_tipo_de_bodega_material_menor=tbl_tipo_de_bodega.id_tipo_de_bodega;
-
 */
 
 
 
 
 /*Consulta que requiere id de permiso e id de tipo de usuario
-
 SELECT tbl_tipo_usuario_permisos.otorgado_tipo_usuario_permisos FROM tbl_tipo_usuario_permisos, tbl_permiso, tbl_tipo_usuario
 WHERE 
 tbl_tipo_usuario_permisos.fk_tipo_usuario_tipo_usuario_permisos=tbl_tipo_usuario.id_tipo_usuario AND
@@ -1649,49 +1646,40 @@ tbl_permiso.id_permiso=1 AND tbl_tipo_usuario.id_tipo_usuario=1;
 
 /*
 Consulta que requiere id de usuario e id de permiso
-
 SELECT tbl_tipo_usuario_permisos.otorgado_tipo_usuario_permisos FROM tbl_tipo_usuario_permisos, tbl_permiso, tbl_tipo_usuario, tbl_usuario
 WHERE 
 tbl_tipo_usuario_permisos.fk_tipo_usuario_tipo_usuario_permisos=tbl_tipo_usuario.id_tipo_usuario AND
 tbl_tipo_usuario_permisos.fk_permiso_tipo_usuario_permisos=tbl_permiso.id_permiso AND 
 tbl_tipo_usuario.id_tipo_usuario=tbl_usuario.fk_tipo_usuario__usuario AND tbl_permiso.id_permiso=27 AND tbl_usuario.id_usuario_usuario=2;
-
 */
 
 /*
 -- Usar la siguiente consulta primero para ver si no es nulo. Si es nulo, usar la primera consulta  despues de esta, cambiar el valor de entidad a cargo por 'Sin asignar', 
 sino, usar la segunda, despues de esta
 SELECT id_informacionPersonal FROM tbl_informacionPersonal WHERE nombre_informacionPersonal LIKE '%Juanito%';
-
 Consulta para buscar bomberos por nombre
-
 SELECT tbl_informacionPersonal.rut_informacionPersonal, tbl_informacionPersonal.nombre_informacionPersonal,
 tbl_informacionPersonal.apellido_paterno_informacionPersonal, tbl_entidadACargo.nombre_entidadACargo,
 tbl_informacionPersonal.id_informacionPersonal FROM tbl_informacionPersonal, tbl_informacionBomberil, tbl_entidadACargo
 WHERE tbl_informacionBomberil.fk_id_entidadACargo_informacionBomberil=tbl_entidadACargo.id_entidadACargo AND 
 tbl_informacionPersonal.id_informacionPersonal=tbl_informacionBomberil.fk_informacion_personal__informacionBomberil AND
 tbl_informacionPersonal.nombre_informacionPersonal LIKE '%Marcelo%';
-
-
 SELECT tbl_informacionPersonal.rut_informacionPersonal, tbl_informacionPersonal.nombre_informacionPersonal,
 tbl_informacionPersonal.apellido_paterno_informacionPersonal, tbl_entidadACargo.nombre_entidadACargo,
 tbl_informacionPersonal.id_informacionPersonal FROM tbl_informacionPersonal, tbl_informacionBomberil, tbl_entidadACargo
 WHERE 
 tbl_informacionPersonal.nombre_informacionPersonal LIKE '%Juanito%' GROUP BY tbl_informacionPersonal.rut_informacionPersonal;
-
 */
 
 
 /*
 Select para ver datos en la busqueda de buscar
-
 SELECT tbl_unidad.nombre_unidad, tbl_estado_unidad.nombre_estado_unidad, tbl_tipo_vehiculo.nombre_tipo_vehiculo, tbl_entidadACargo.nombre_entidadACargo, tbl_unidad.id_unidad FROM tbl_unidad,
 tbl_estado_unidad, tbl_tipo_vehiculo, tbl_entidadACargo WHERE tbl_unidad.fk_estado_unidad_unidad=tbl_estado_unidad.id_estado_unidad AND
 tbl_unidad.fk_tipo_vehiculo_unidad=tbl_tipo_vehiculo.id_tipo_vehiculo AND tbl_unidad.fk_entidadACargo=tbl_entidadACargo.id_entidadACargo 
 AND tbl_unidad.nombre_unidad LIKE '%Nombre de Prueba 1%';
 AND tbl_estado_unidad.id_estado_unidad=2;
 AND tbl_entidadACargo.id_entidadACargo=1;
-
 -- Query para obtener datos mas especificos de un material menor
 SELECT tbl_material_menor.id_material_menor, tbl_material_menor.nombre_material_menor, tbl_entidadACargo.nombre_entidadACargo, tbl_material_menor.color_material_menor,
 tbl_material_menor.cantidad_material_menor, tbl_material_menor.medida_material_menor, tbl_unidad_de_medida.nombre_unidad_de_medida, tbl_ubicacion_fisica.nombre_ubicacion_fisica,
