@@ -309,6 +309,9 @@
 
 
       </div>
+      <form action="buscarInventario.php">
+      <center><input type="submit" value="Volver atrás"></center>
+      </form>
 
 
 

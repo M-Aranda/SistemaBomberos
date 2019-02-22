@@ -193,6 +193,9 @@
     }
 
     </style>
+
+
+
     <div style="width: 1055px" style="height: 900px">
         <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
           <div class="container">
@@ -919,7 +922,13 @@
 
           </div>
 
+          <form action="buscarBombero.php">
+          <center><input type="submit" value="Volver atrás"></center>
+          </form>
+
    </div>
+
+
  </div>
  <script src="javascript/JQuery.js"></script>
  <script type="text/javascript">

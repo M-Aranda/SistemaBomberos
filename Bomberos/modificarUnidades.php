@@ -496,7 +496,11 @@ if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
 
           </div>
        </div>
+       <form action="buscarUnidades.php">
+       <center><input type="submit" value="Volver atrás"></center>
+       </form>
    </div>
+
  </div>
 
 
