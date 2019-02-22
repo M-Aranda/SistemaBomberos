@@ -1722,9 +1722,9 @@ $query="INSERT INTO tbl_estado_oficial (fkOficial, nombreEstado_estado_oficial, 
 
 public function getEstadoActualDeOficial($idOficial){
   $this->c->conectar();
-  $query="SELECT nombreEstado_estado_oficial FROM tbl_estado_oficial WHERE fkOficial=".$idOficial.";";
+  $query="SELECT nombreEstado_estado_oficial FROM tbl_estado_oficial WHERE fkOficial=".$idOficial." ORDER BY id_estado_oficial DESC LIMIT 1;";
   $rs = $this->c->ejecutar($query);
-  echo $query;
+
   while($reg = $rs->fetch_array()){
        $nombre=$reg[0];
    }

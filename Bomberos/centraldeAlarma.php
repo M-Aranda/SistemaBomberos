@@ -191,7 +191,6 @@
     <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
       <div class="container">
 
-
 <div id="cuadro1" style="height: 269px;">
     <div class="jumbotron" style="height: 265px;  border-radius: 70px 70px 70px 70px"  >
       <div class="container" style="height: 253px;">
@@ -210,35 +209,99 @@
               <tbody>
                 <tr>
                   <td>
-                    1&nbsp;<input type="button" id="btn1" class="btn btn-danger" value="" style="width:20px;height:20px;" >
+                    1&nbsp;<input type="button" id="btn1" class="<?php if($data->getEstadoActualDeOficial(31)=="0-8"){
+                      echo "btn btn-danger";
+                    }elseif ($data->getEstadoActualDeOficial(31)=="0-9"){
+                      echo "btn btn-success";
+                    }?>" value="" style="width:20px;height:20px;" >
                   </td>
-                  <td>71&nbsp;&nbsp;<input type="button" id="btn71" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
-                  <td>72&nbsp;&nbsp;<input type="button" id="btn72" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
-                  <td>73&nbsp;&nbsp;<input type="button" id="btn73" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
+                  <td>71&nbsp;&nbsp;<input type="button" id="btn71" class="<?php if($data->getEstadoActualDeOficial(2)=="0-8"){
+                    echo "btn btn-danger";
+                  }elseif ($data->getEstadoActualDeOficial(2)=="0-9"){
+                    echo "btn btn-success";
+                  }?>" value="" style="width:20px;height:20px;" ></td>
+                  <td>72&nbsp;&nbsp;<input type="button" id="btn72" class="<?php if($data->getEstadoActualDeOficial(12)=="0-8"){
+                    echo "btn btn-danger";
+                  }elseif ($data->getEstadoActualDeOficial(12)=="0-9"){
+                    echo "btn btn-success";
+                  }?>" value="" style="width:20px;height:20px;" ></td>
+                  <td>73&nbsp;&nbsp;<input type="button" id="btn73" class="<?php if($data->getEstadoActualDeOficial(22)=="0-8"){
+                    echo "btn btn-danger";
+                  }elseif ($data->getEstadoActualDeOficial(22)=="0-9"){
+                    echo "btn btn-success";
+                  }?>" value="" style="width:20px;height:20px;" ></td>
 
                 </tr>
 
                 <tr>
-                  <td>2&nbsp;<input type="button" id="btn2" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
-                  <td>41&nbsp;&nbsp;<input type="button" id="btn41" class="btn btn-danger"  value="" style="width:20px;height:20px;" ></td>
-                  <td>42&nbsp;&nbsp;<input type="button" id="btn42" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
-                  <td>43&nbsp;&nbsp;<input type="button" id="btn43" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
+                  <td>2&nbsp;<input type="button" id="btn2" class="<?php if($data->getEstadoActualDeOficial(32)=="0-8"){
+                    echo "btn btn-danger";
+                  }elseif ($data->getEstadoActualDeOficial(32)=="0-9"){
+                    echo "btn btn-success";
+                  }?>" value="" style="width:20px;height:20px;" ></td>
+                  <td>41&nbsp;&nbsp;<input type="button" id="btn41" class="<?php if($data->getEstadoActualDeOficial(1)=="0-8"){
+                    echo "btn btn-danger";
+                  }elseif ($data->getEstadoActualDeOficial(1)=="0-9"){
+                    echo "btn btn-success";
+                  }?>"  value="" style="width:20px;height:20px;" ></td>
+                  <td>42&nbsp;&nbsp;<input type="button" id="btn42" class="<?php if($data->getEstadoActualDeOficial(11)=="0-8"){
+                    echo "btn btn-danger";
+                  }elseif ($data->getEstadoActualDeOficial(11)=="0-9"){
+                    echo "btn btn-success";
+                  }?>" value="" style="width:20px;height:20px;" ></td>
+                  <td>43&nbsp;&nbsp;<input type="button" id="btn43" class="<?php if($data->getEstadoActualDeOficial(21)=="0-8"){
+                    echo "btn btn-danger";
+                  }elseif ($data->getEstadoActualDeOficial(21)=="0-9"){
+                    echo "btn btn-success";
+                  }?>" value="" style="width:20px;height:20px;" ></td>
 
                 </tr>
 
                 <tr>
-                  <td>6&nbsp;<input type="button" id="btn6" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
-                  <td>104&nbsp;<input type="button" id="btn104" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
-                  <td>204&nbsp;<input type="button" id="btn204" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
-                  <td>304&nbsp;<input type="button" id="btn304" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
+                  <td>6&nbsp;<input type="button" id="btn6" class="<?php if($data->getEstadoActualDeOficial(36)=="0-8"){
+                    echo "btn btn-danger";
+                  }elseif ($data->getEstadoActualDeOficial(36)=="0-9"){
+                    echo "btn btn-success";
+                  }?>" value="" style="width:20px;height:20px;" ></td>
+                  <td>104&nbsp;<input type="button" id="btn104" class="<?php if($data->getEstadoActualDeOficial(6)=="0-8"){
+                    echo "btn btn-danger";
+                  }elseif ($data->getEstadoActualDeOficial(6)=="0-9"){
+                    echo "btn btn-success";
+                  }?>" value="" style="width:20px;height:20px;" ></td>
+                  <td>204&nbsp;<input type="button" id="btn204" class="<?php if($data->getEstadoActualDeOficial(16)=="0-8"){
+                    echo "btn btn-danger";
+                  }elseif ($data->getEstadoActualDeOficial(16)=="0-9"){
+                    echo "btn btn-success";
+                  }?>" value="" style="width:20px;height:20px;" ></td>
+                  <td>304&nbsp;<input type="button" id="btn304" class="<?php if($data->getEstadoActualDeOficial(26)=="0-8"){
+                    echo "btn btn-danger";
+                  }elseif ($data->getEstadoActualDeOficial(26)=="0-9"){
+                    echo "btn btn-success";
+                  }?>" value="" style="width:20px;height:20px;" ></td>
 
                 </tr>
 
                 <tr>
-                  <td>7&nbsp;<input type="button" id="btn7" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
-                  <td>105&nbsp;<input type="button" id="btn105" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
-                  <td>205&nbsp;<input type="button" id="btn205" class="btn btn-danger"  value="" style="width:20px;height:20px;" ></td>
-                  <td>305&nbsp;<input type="button" id="btn305" class="btn btn-danger" value="" style="width:20px;height:20px;" ></td>
+                  <td>7&nbsp;<input type="button" id="btn7" class="<?php if($data->getEstadoActualDeOficial(37)=="0-8"){
+                    echo "btn btn-danger";
+                  }elseif ($data->getEstadoActualDeOficial(37)=="0-9"){
+                    echo "btn btn-success";
+                  }?>" value="" style="width:20px;height:20px;" ></td>
+                  <td>105&nbsp;<input type="button" id="btn105" class="<?php if($data->getEstadoActualDeOficial(7)=="0-8"){
+                    echo "btn btn-danger";
+                  }elseif ($data->getEstadoActualDeOficial(7)=="0-9"){
+                    echo "btn btn-success";
+                  }?>" value="" style="width:20px;height:20px;" ></td>
+                  <td>205&nbsp;<input type="button" id="btn205" class="<?php if($data->getEstadoActualDeOficial(17)=="0-8"){
+                    echo "btn btn-danger";
+                  }elseif ($data->getEstadoActualDeOficial(17)=="0-9"){
+                    echo "btn btn-success";
+                  }?>"  value="" style="width:20px;height:20px;" ></td>
+                  <td>305&nbsp;<input type="button" id="btn305" class="<?php if($data->getEstadoActualDeOficial(27)=="0-8"){
+                    echo "btn btn-danger";
+                  }elseif ($data->getEstadoActualDeOficial(27)=="0-9"){
+                    echo "btn btn-success";
+                  }?>" value="" style="width:20px;height:20px;" ></td>
 
                 </tr>
 
@@ -612,9 +675,6 @@ function verDetalles(id){
         swal(data);
       }
   });
-
-
-
 }
 
 
@@ -628,9 +688,10 @@ function registrarCambio(id){
       }
   });
 }
+
 $("#btn1").click(function(){
 $(this).toggleClass("btn-danger btn-success");
-registrarCambio();
+registrarCambio(31);
 });
 $("#btn71").click(function(){
 $(this).toggleClass("btn-danger btn-success");
@@ -646,7 +707,7 @@ registrarCambio(22);
 });
 $("#btn2").click(function(){
 $(this).toggleClass("btn-danger btn-success");
-registrarCambio();
+registrarCambio(32);
 });
 $("#btn41").click(function(){
 $(this).toggleClass("btn-danger btn-success");
@@ -662,6 +723,7 @@ registrarCambio(21);
 });
 $("#btn6").click(function(){
 $(this).toggleClass("btn-danger btn-success");
+registrarCambio(36);
 });
 $("#btn104").click(function(){
 $(this).toggleClass("btn-danger btn-success");
@@ -677,7 +739,7 @@ registrarCambio(26);
 });
 $("#btn7").click(function(){
 $(this).toggleClass("btn-danger btn-success");
-registrarCambio();
+registrarCambio(37);
 });
 $("#btn105").click(function(){
 $(this).toggleClass("btn-danger btn-success");
