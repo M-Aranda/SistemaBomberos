@@ -187,12 +187,9 @@
     $data = new Data();
 ?>
 
-
 <div style="width: 900px" style="height: 1000px" style="margin-top: -100px" id="jum">
     <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
-    <!--  <center style="font-weight:bold;font-size:20px;margin-top:-30px;">Central de Alarma</center>-->
       <div class="container">
-
 
 <div id="cuadro1" style="height: 269px;">
     <div class="jumbotron" style="height: 265px;  border-radius: 70px 70px 70px 70px"  >
@@ -218,21 +215,16 @@
                       echo "btn btn-success";
                     }?>" value="" style="width:20px;height:20px;" >
                   </td>
-
-                  <td>71&nbsp;&nbsp;&nbsp;<input type="button" id="btn71" class="<?php if($data->getEstadoActualDeOficial(2)=="0-8"){
+                  <td>71&nbsp;&nbsp;<input type="button" id="btn71" class="<?php if($data->getEstadoActualDeOficial(2)=="0-8"){
                     echo "btn btn-danger";
                   }elseif ($data->getEstadoActualDeOficial(2)=="0-9"){
                     echo "btn btn-success";
-                  }?>" value="" style="width:20px;height:20px;" >
-                </td>
-
+                  }?>" value="" style="width:20px;height:20px;" ></td>
                   <td>72&nbsp;&nbsp;<input type="button" id="btn72" class="<?php if($data->getEstadoActualDeOficial(12)=="0-8"){
                     echo "btn btn-danger";
                   }elseif ($data->getEstadoActualDeOficial(12)=="0-9"){
                     echo "btn btn-success";
-                  }?>" value="" style="width:20px;height:20px;" >
-                </td>
-
+                  }?>" value="" style="width:20px;height:20px;" ></td>
                   <td>73&nbsp;&nbsp;<input type="button" id="btn73" class="<?php if($data->getEstadoActualDeOficial(22)=="0-8"){
                     echo "btn btn-danger";
                   }elseif ($data->getEstadoActualDeOficial(22)=="0-9"){
@@ -247,7 +239,7 @@
                   }elseif ($data->getEstadoActualDeOficial(32)=="0-9"){
                     echo "btn btn-success";
                   }?>" value="" style="width:20px;height:20px;" ></td>
-                  <td>41&nbsp;&nbsp;&nbsp;<input type="button" id="btn41" class="<?php if($data->getEstadoActualDeOficial(1)=="0-8"){
+                  <td>41&nbsp;&nbsp;<input type="button" id="btn41" class="<?php if($data->getEstadoActualDeOficial(1)=="0-8"){
                     echo "btn btn-danger";
                   }elseif ($data->getEstadoActualDeOficial(1)=="0-9"){
                     echo "btn btn-success";
@@ -499,8 +491,10 @@
           $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
 
           echo "<b>".$dias[date('w')]." ".date('d')." de ".$meses[date('n')-1]. " del ".date('Y')."</b>" ;
-          echo "<b>".date(" H:i:s")."<b>";
+          echo "<b>".date(" H:i:s")."</b>";
           ?>
+
+
       </div>
     </div>
 
@@ -670,8 +664,7 @@ function despachar(){
       confirmButtonText: "Sí",
       cancelButtonText: "No",
       closeOnConfirm: false,
-  }),function(){
-        window.location.href = "centraldeDespacho.php";
+  });
 }
 
 
