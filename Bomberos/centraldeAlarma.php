@@ -331,13 +331,14 @@
                  <td>Q-1<input type="button" value="" id="q1"  class="btn btn-danger" style="width:20px;height:20px;" ></td>
 
               </tr>
+              <tr>
 
               <td>X-1<input type="button" value="" id="x1"  class="btn btn-danger" style="width:20px;height:20px;" ></td>
 
               <td>K-1<input type="button" value="" id="k1"   class="btn btn-danger" style="width:20px;height:20px;" ></td>
               <td>R-1<input type="button" id="r1"  class="btn btn-danger" style="width:20px;height:20px;"></td>
 
-              <tr>
+
 
               </tr>
 

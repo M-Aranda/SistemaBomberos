@@ -161,7 +161,7 @@
 #cuadro2{
   width: 800px;
   height: 385px;
-  margin-top: 20px;
+  margin-top: 21px;
   margin-left: 30px;
   border: 2px black outset;
   border-radius: 70px 70px 70px 70px;
@@ -170,7 +170,7 @@
 #cuadro3{
   width: 800px;
   height: 434px;
-  margin-top: 5px;
+  margin-top: 7px;
   margin-left: 30px;
   border: 2px black outset;
   border-radius: 70px 70px 70px 70px;
@@ -180,6 +180,10 @@
     height: 1000px;
     margin-bottom: 100px;
 }
+.something {
+      width: 90px;
+      background: red;
+    }
 </style>
 
 
@@ -188,15 +192,16 @@
     require_once("model/Data.php");
     $data = new Data();
 ?>
+
 <div style="width: 900px" style="height: 1000px" style="margin-top: -100px" id="jum">
     <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
         <center style="font-weight:bold;font-size:20px;">Central de Despacho</center>
       <div class="container">
 
-        <div id="cuadro1" style="height: 194px;">
-            <div class="jumbotron"  style="height: 190px;border-radius: 70px 70px 70px 70px;">
+        <div id="cuadro1" style="height: 125px;">
+            <div class="jumbotron"  style="height: 120px;border-radius: 70px 70px 70px 70px;">
               <div class="container" style="height: 190px;">
-              <div class="form-group" style="margin-left:50px;Margin-top:-7px;">
+              <div class="form-group" style="margin-left:50px;Margin-top:-40px;">
 
               Despacho:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input value="<?php echo utf8_encode($data->getTipoDeServicioYSectorDeServicio($idServicioCreado)->getServicio());
              echo "  "; echo utf8_encode($data->getTipoDeServicioYSectorDeServicio($idServicioCreado)->getSector()); echo " "; ?>" type="text" name="txtDespacho" disabled style="width:400px">
@@ -214,52 +219,34 @@
            </div>
          </div>
 
-  <div id="cuadro2" style="height: 334px;">
+  <div id="cuadro2" style="height: 340px;">
       <div class="jumbotron"  style="height: 330px;border-radius: 70px 70px 70px 70px;">
         <div class="container" style="height: 330px;">
-          <center style="margin-top:-30px;font-weight:bold;"> Últimos Servicios</center><br>
-        <div class="form-group" style="margin-left:0px;Margin-top:-7px;">
-          <?php
-          $ultimosServicios=$data->getUltimos5Servicios();
+          <center style="margin-top:-30px;font-weight:bold;"> Detalle del Servicio</center><br>
+        <div class="form-group" style="margin-left:0px;Margin-top:-9px;">
 
-          ?>
 
-          <table class="table table-striped">
+          <table class="table table-striped" RULES="cols" >
               <thead>
-                <tr>
-                  <th>Fecha</th>
-                  <th>Servicio</th>
-                  <th>Unidades</th>
-                  <th>Detalles</th>
-                </tr>
+                <TD>Unidad</TD>
+                <TD>6-0</TD>
+                <TD>boton</TD>
+                <TD>6-3</TD>
+                <TD>6-7</TD>
+                <TD>6-8</TD>
+                <TD>6-9</TD>
+                <TD>6-10</TD>
               </thead>
               <tbody>
-                <?php
-                foreach ($ultimosServicios as $s => $servicio) {?>
-                  <tr>
-                    <td><?php
-                    $fechaSinConvertir =  $servicio->getFecha_servicio();
-                    $fechaConvertida = date("d-m-Y", strtotime($fechaSinConvertir));
-                    echo $fechaConvertida;
-                    ?></td>
-                    <td><?php echo utf8_encode($data->verNombreDeServicioPorId($servicio->getFk_tipoDeServicio()));?></td>
-                    <td><?php
-                    $unidades=$data->getUnidadesInvolucradasEnServicio($servicio->getId_servicio());
-                    foreach ($unidades as $u => $unidad) {
-                      echo $unidad." ";
-                    }
-                    ?></td>
-                    <td><input type="submit" value="Ver detalles" onclick="verDetalles(<?php echo $servicio->getId_servicio(); ?>)"></td>
-                  </tr>
-              <?php
-                }
-                ?>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
 
+               </tr>
 
               </tbody>
               </table>
-
-
         </div>
 
        </div>
@@ -297,7 +284,6 @@
  </div>
 
 </div>
-
 
 <script>
 function despachar(){
