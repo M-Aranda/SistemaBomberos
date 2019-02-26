@@ -200,7 +200,7 @@
 
               Despacho:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input value="<?php echo utf8_encode($data->getTipoDeServicioYSectorDeServicio($idServicioCreado)->getServicio());
              echo "  "; echo utf8_encode($data->getTipoDeServicioYSectorDeServicio($idServicioCreado)->getSector()); echo " "; ?>" type="text" name="txtDespacho" disabled style="width:400px">
-              <button type="submit"  id="btn_despachar" name="btnsonido" style="width:50px;height:50px;">
+              <button type="submit"  id="btn_despachar" name="btnsonido" onclick="info6_10()" style="width:50px;height:50px;">
                 <img src="images/torre.png" alt="x" /></button>
             <br><br>
               En Despacho:&nbsp;
@@ -473,114 +473,32 @@ function verDetalles(id){
 }
 
 
-function registrarCambio(id){
-  $.ajax({
-      type: "POST",
-      url: 'registrarCambioDeEstado.php',
-      data: {"datos": id},
-      success: function(data){
-        console.log(data);
-      }
-  });
+function info6_10(){
+  swal({
+                    title: "Sistema de bomberos:",
+                    text: "¿Oficial o bombero a cargo?",
+                    type: "input",
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    animation: "slide-from-top",
+                    inputPlaceholder: "OBAC"
+                  },
+                  function(inputValue){
+                    if (inputValue === false) return false;
+
+                    if (inputValue === "") {
+                      swal.showInputError("Debe escribir algo");
+                      return false
+                    }
+                    swal("Guardando a " + inputValue, "como OBAC");
+                  });
+
 }
 
-$("#btn1").click(function(){
-$(this).toggleClass("btn-danger btn-success");
-registrarCambio(31);
-});
-$("#btn71").click(function(){
-$(this).toggleClass("btn-danger btn-success");
-registrarCambio(2);
-});
-$("#btn72").click(function(){
-$(this).toggleClass("btn-danger btn-success");
-registrarCambio(12);
-});
-$("#btn73").click(function(){
-$(this).toggleClass("btn-danger btn-success");
-registrarCambio(22);
-});
-$("#btn2").click(function(){
-$(this).toggleClass("btn-danger btn-success");
-registrarCambio(32);
-});
-$("#btn41").click(function(){
-$(this).toggleClass("btn-danger btn-success");
-registrarCambio(1);
-});
-$("#btn42").click(function(){
-$(this).toggleClass("btn-danger btn-success");
-registrarCambio(11);
-});
-$("#btn43").click(function(){
-$(this).toggleClass("btn-danger btn-success");
-registrarCambio(21);
-});
-$("#btn6").click(function(){
-$(this).toggleClass("btn-danger btn-success");
-registrarCambio(36);
-});
-$("#btn104").click(function(){
-$(this).toggleClass("btn-danger btn-success");
-registrarCambio(6);
-});
-$("#btn204").click(function(){
-$(this).toggleClass("btn-danger btn-success");
-registrarCambio(16);
-});
-$("#btn304").click(function(){
-$(this).toggleClass("btn-danger btn-success");
-registrarCambio(26);
-});
-$("#btn7").click(function(){
-$(this).toggleClass("btn-danger btn-success");
-registrarCambio(37);
-});
-$("#btn105").click(function(){
-$(this).toggleClass("btn-danger btn-success");
-registrarCambio(7);
-});
-$("#btn205").click(function(){
-$(this).toggleClass("btn-danger btn-success");
-registrarCambio(17);
-});
-$("#btn305").click(function(){
-$(this).toggleClass("btn-danger btn-success");
-registrarCambio(27);
-});
-$("#b1").click(function(){
-$(this).toggleClass("btn-danger btn-success");
-});
-$("#bx1").click(function(){
-$(this).toggleClass("btn-danger btn-success");
-});
-$("#q1").click(function(){
-$(this).toggleClass("btn-danger btn-success");
-});
-$("#x1").click(function(){
-$(this).toggleClass("btn-danger btn-success");
-});
-$("#k1").click(function(){
-$(this).toggleClass("btn-danger btn-success");
-});
-$("#r1").click(function(){
-$(this).toggleClass("btn-danger btn-success");
-});
-$("#b2").click(function(){
-$(this).toggleClass("btn-danger btn-success");
-});
-$("#bx2").click(function(){
-$(this).toggleClass("btn-danger btn-success");
-});
-$("#r2").click(function(){
-$(this).toggleClass("btn-danger btn-success");
-});
-$("#b3").click(function(){
-$(this).toggleClass("btn-danger btn-success");
-});
-$("#j").click(function(){
-$(this).toggleClass("btn-danger btn-success");
-});
+
+
+
+
 </script>
 
 
