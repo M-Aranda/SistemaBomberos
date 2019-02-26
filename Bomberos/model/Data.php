@@ -42,6 +42,7 @@ require_once("Tbl_oficial.php");
 require_once("Tbl_estadoOficial.php");
 require_once("Tbl_servicio.php");
 require_once("Tbl_servicio_unidad.php");
+require_once("ServicioYSector.php");
 
 
 class Data{
@@ -1835,6 +1836,44 @@ public function getUnidadesInvolucradasEnServicio($id){
    }
    $this->c->desconectar();
    return $listado;
+}
+
+
+public function crearDespachoInicial($fkServicio){
+  $this->c->conectar();
+  $query="INSERT INTO tbl_servicio_unidad (fk_servicio) VALUES (".$fkServicio.");";
+  $this->c->ejecutar($query);
+  $this->c->desconectar();
+}
+
+public function getIdServicioMasReciente(){
+  $this->c->conectar();
+  $query="SELECT MAX(id_servicio) FROM tbl_servicio;";
+  $rs = $this->c->ejecutar($query);
+
+  while($reg = $rs->fetch_array()){
+    $obj=$reg[0];
+   }
+
+   $this->c->desconectar();
+   return $obj;
+}
+
+
+public function getTipoDeServicioYSectorDeServicio($idServicio){
+  $this->c->conectar();
+  $query="SELECT tbl_tipo_servicio.codigo_tipo_servicio, tbl_sector.nombre_sector FROM tbl_servicio, tbl_sector, tbl_tipo_servicio WHERE tbl_servicio.fk_tipoDeServicio=tbl_tipo_servicio.id_tipo_servicio AND
+  tbl_servicio.fk_sector=tbl_sector.id_sector AND tbl_servicio.id_servicio=".$idServicio.";";
+  $rs = $this->c->ejecutar($query);
+
+  while($reg = $rs->fetch_array()){
+    $obj= new ServicioYSector();
+    $obj->setServicio($reg[0]);
+    $obj->setSector($reg[1]);
+   }
+
+   $this->c->desconectar();
+   return $obj;
 }
 
 

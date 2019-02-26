@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <?php
     // unir vista con el modelo sin pasar por un controlador

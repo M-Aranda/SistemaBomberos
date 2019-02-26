@@ -13,6 +13,14 @@
     if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
       unset($_SESSION["resultadosDeBusquedaDeMaterialMenor"]);
     }
+
+
+    if(isset($_SESSION["idDeServicioCreado"])){
+      $idServicioCreado=$_SESSION["idDeServicioCreado"];
+    }
+
+
+
 ?>
 <html lang="en" dir="ltr">
   <head>
@@ -190,7 +198,8 @@
               <div class="container" style="height: 190px;">
               <div class="form-group" style="margin-left:50px;Margin-top:-7px;">
 
-              Despacho:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="txtDespacho" style="width:400px">
+              Despacho:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input value="<?php echo utf8_encode($data->getTipoDeServicioYSectorDeServicio($idServicioCreado)->getServicio());
+             echo "  "; echo utf8_encode($data->getTipoDeServicioYSectorDeServicio($idServicioCreado)->getSector()); echo " "; ?>" type="text" name="txtDespacho" disabled style="width:400px">
               <button type="submit"  id="btn_despachar" name="btnsonido" style="width:50px;height:50px;">
                 <img src="images/torre.png" alt="x" /></button>
             <br><br>

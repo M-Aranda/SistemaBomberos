@@ -20,6 +20,7 @@ $servicio->setFecha_servicio(date("Y-m-d "));
 
 $d->crearServicio($servicio);
 
+$_SESSION["idDeServicioCreado"]=$d->getIdServicioMasReciente();
 
 header("location: ../centraldeDespacho.php");
 

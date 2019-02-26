@@ -573,11 +573,19 @@ CREATE TABLE tbl_servicio_unidad(
 id_servicio_unidad INT AUTO_INCREMENT,
 fk_servicio INT,
 fk_unidad INT,
+momento6_0 DATETIME,
+obac VARCHAR (100),
+conductor VARCHAR (100),
+nBomberos VARCHAR (100),
+momento6_3 DATETIME,
+momento6_7 DATETIME,
+momento6_8 DATETIME,
+momento6_9 DATETIME,
+momento6_10 DATETIME,
 FOREIGN KEY(fk_servicio) REFERENCES tbl_servicio (id_servicio),
 FOREIGN KEY(fk_unidad) REFERENCES tbl_unidad (id_unidad),
 PRIMARY KEY(id_servicio_unidad)
 );
-
 
 -- Procedimientos
 
@@ -1880,17 +1888,30 @@ INSERT INTO tbl_servicio VALUES (NULL, 'Sujeto 3', '12345','+56789','Alguna dire
 INSERT INTO tbl_servicio VALUES (NULL, 'Sujeto 4', '12345','+56789','Alguna direccion','esq1','esq2',1,1,'Algun detalle cualquiera','2018-02-10');
 INSERT INTO tbl_servicio VALUES (NULL, 'Sujeto 5', '12345','+56789','Alguna direccion','esq1','esq2',1,1,'Algun detalle cualquiera','2019-02-10');
 
-INSERT INTO tbl_servicio_unidad VALUES (NULL, 1,7);
-INSERT INTO tbl_servicio_unidad VALUES (NULL, 1,8);
-INSERT INTO tbl_servicio_unidad VALUES (NULL, 2,7);
-INSERT INTO tbl_servicio_unidad VALUES (NULL, 2,8);
-INSERT INTO tbl_servicio_unidad VALUES (NULL, 3,7);
-INSERT INTO tbl_servicio_unidad VALUES (NULL, 3,8);
-INSERT INTO tbl_servicio_unidad VALUES (NULL, 4,7);
-INSERT INTO tbl_servicio_unidad VALUES (NULL, 4,8);
-INSERT INTO tbl_servicio_unidad VALUES (NULL, 5,7);
-INSERT INTO tbl_servicio_unidad VALUES (NULL, 5,8);
+INSERT INTO tbl_servicio_unidad VALUES (NULL, 1,7, '2019-03-03 10:10:10','Alguien','Alguien','quince', '2019-03-03 10:10:10','2019-03-03 10:10:10','2019-03-03 10:10:10',
+'2019-03-03 10:10:10','2019-03-03 10:10:10');
+INSERT INTO tbl_servicio_unidad VALUES (NULL, 1,8, '2019-03-03 10:10:10','Alguien','Alguien','quince', '2019-03-03 10:10:10','2019-03-03 10:10:10','2019-03-03 10:10:10',
+'2019-03-03 10:10:10','2019-03-03 10:10:10');
 
+INSERT INTO tbl_servicio_unidad VALUES (NULL, 2,7, '2019-03-03 10:10:10','Alguien','Alguien','quince', '2019-03-03 10:10:10','2019-03-03 10:10:10','2019-03-03 10:10:10',
+'2019-03-03 10:10:10','2019-03-03 10:10:10');
+INSERT INTO tbl_servicio_unidad VALUES (NULL, 2,8, '2019-03-03 10:10:10','Alguien','Alguien','quince', '2019-03-03 10:10:10','2019-03-03 10:10:10','2019-03-03 10:10:10',
+'2019-03-03 10:10:10','2019-03-03 10:10:10');
+
+INSERT INTO tbl_servicio_unidad VALUES (NULL, 3,7, '2019-03-03 10:10:10','Alguien','Alguien','quince', '2019-03-03 10:10:10','2019-03-03 10:10:10','2019-03-03 10:10:10',
+'2019-03-03 10:10:10','2019-03-03 10:10:10');
+INSERT INTO tbl_servicio_unidad VALUES (NULL, 3,8, '2019-03-03 10:10:10','Alguien','Alguien','quince', '2019-03-03 10:10:10','2019-03-03 10:10:10','2019-03-03 10:10:10',
+'2019-03-03 10:10:10','2019-03-03 10:10:10');
+
+INSERT INTO tbl_servicio_unidad VALUES (NULL, 4,7, '2019-03-03 10:10:10','Alguien','Alguien','quince', '2019-03-03 10:10:10','2019-03-03 10:10:10','2019-03-03 10:10:10',
+'2019-03-03 10:10:10','2019-03-03 10:10:10');
+INSERT INTO tbl_servicio_unidad VALUES (NULL, 4,8, '2019-03-03 10:10:10','Alguien','Alguien','quince', '2019-03-03 10:10:10','2019-03-03 10:10:10','2019-03-03 10:10:10',
+'2019-03-03 10:10:10','2019-03-03 10:10:10');
+
+INSERT INTO tbl_servicio_unidad VALUES (NULL, 5,7, '2019-03-03 10:10:10','Alguien','Alguien','quince', '2019-03-03 10:10:10','2019-03-03 10:10:10','2019-03-03 10:10:10',
+'2019-03-03 10:10:10','2019-03-03 10:10:10');
+INSERT INTO tbl_servicio_unidad VALUES (NULL, 5,8, '2019-03-03 10:10:10','Alguien','Alguien','quince', '2019-03-03 10:10:10','2019-03-03 10:10:10','2019-03-03 10:10:10',
+'2019-03-03 10:10:10','2019-03-03 10:10:10');
 
 
 -- INSERT INTO tbl_informacionDeCargos (fk_materialMenorAsignado_informacionDeCargos,cantidadAsignada_informacionDeCargos,fk_personal_informacionDeCargos) VALUES (1,1,1);
