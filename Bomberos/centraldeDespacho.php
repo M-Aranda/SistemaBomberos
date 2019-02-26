@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <?php
     // unir vista con el modelo sin pasar por un controlador
@@ -140,23 +139,8 @@
     -moz-opacity: .75;
     filter: alpha(opacity=75);
 }
+
 #cuadro1{
-  width: 350px;
-  height: 600px;
-  border: 2px black outset;
-  margin-top: -25px;
-  margin-left: 50px;
-  border-radius: 70px 70px 70px 70px
-}
-#cuadro2{
-  width: 350px;
-  height: 300px;
-  margin-top: -260px;
-  margin-left: 450px;
-  border: 2px black outset;
-  border-radius: 70px 70px 70px 70px
-}
-#cuadro3{
   width: 800px;
   height: 385px;
   margin-top: 20px;
@@ -165,7 +149,17 @@
   border-radius: 70px 70px 70px 70px;
 
 }
-#cuadro4{
+
+#cuadro2{
+  width: 800px;
+  height: 385px;
+  margin-top: 20px;
+  margin-left: 30px;
+  border: 2px black outset;
+  border-radius: 70px 70px 70px 70px;
+
+}
+#cuadro3{
   width: 800px;
   height: 434px;
   margin-top: 5px;
@@ -186,198 +180,32 @@
     require_once("model/Data.php");
     $data = new Data();
 ?>
-
-
 <div style="width: 900px" style="height: 1000px" style="margin-top: -100px" id="jum">
     <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
-    <!--  <center style="font-weight:bold;font-size:20px;margin-top:-30px;">Central de Alarma</center>-->
+        <center style="font-weight:bold;font-size:20px;">Central de Despacho</center>
       <div class="container">
 
+        <div id="cuadro1" style="height: 194px;">
+            <div class="jumbotron"  style="height: 190px;border-radius: 70px 70px 70px 70px;">
+              <div class="container" style="height: 190px;">
+              <div class="form-group" style="margin-left:50px;Margin-top:-7px;">
 
-<div id="cuadro1" style="height: 269px;">
-    <div class="jumbotron" style="height: 265px;  border-radius: 70px 70px 70px 70px"  >
-      <div class="container" style="height: 253px;">
-        <center style="margin-top:-30px;font-weight:bold;"> Oficiales en Servicio</center><br>
-        <div class="form-group" style="margin-left: -48px;">
+              Despacho:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="txtDespacho" style="width:400px">
+              <button type="submit"  id="btn_despachar" name="btnsonido" style="width:50px;height:50px;">
+                <img src="images/torre.png" alt="x" /></button>
+            <br><br>
+              En Despacho:&nbsp;
+              <select name="cboxdespacho" style="width:400px">
 
-         <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>&nbsp;&nbsp;CB&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                  <th>&nbsp;&nbsp;1Cia&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                  <th>&nbsp;&nbsp;2Cia&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                  <th>&nbsp;&nbsp;3Cia&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    1&nbsp;<input type="button" id="btn1" class="<?php if($data->getEstadoActualDeOficial(31)=="0-8"){
-                      echo "btn btn-danger";
-                    }elseif ($data->getEstadoActualDeOficial(31)=="0-9"){
-                      echo "btn btn-success";
-                    }?>" value="" style="width:20px;height:20px;" >
-                  </td>
+              </select>
 
-                  <td>71&nbsp;&nbsp;&nbsp;<input type="button" id="btn71" class="<?php if($data->getEstadoActualDeOficial(2)=="0-8"){
-                    echo "btn btn-danger";
-                  }elseif ($data->getEstadoActualDeOficial(2)=="0-9"){
-                    echo "btn btn-success";
-                  }?>" value="" style="width:20px;height:20px;" >
-                </td>
+              </div>
 
-                  <td>72&nbsp;&nbsp;<input type="button" id="btn72" class="<?php if($data->getEstadoActualDeOficial(12)=="0-8"){
-                    echo "btn btn-danger";
-                  }elseif ($data->getEstadoActualDeOficial(12)=="0-9"){
-                    echo "btn btn-success";
-                  }?>" value="" style="width:20px;height:20px;" >
-                </td>
+             </div>
+           </div>
+         </div>
 
-                  <td>73&nbsp;&nbsp;<input type="button" id="btn73" class="<?php if($data->getEstadoActualDeOficial(22)=="0-8"){
-                    echo "btn btn-danger";
-                  }elseif ($data->getEstadoActualDeOficial(22)=="0-9"){
-                    echo "btn btn-success";
-                  }?>" value="" style="width:20px;height:20px;" ></td>
-
-                </tr>
-
-                <tr>
-                  <td>2&nbsp;<input type="button" id="btn2" class="<?php if($data->getEstadoActualDeOficial(32)=="0-8"){
-                    echo "btn btn-danger";
-                  }elseif ($data->getEstadoActualDeOficial(32)=="0-9"){
-                    echo "btn btn-success";
-                  }?>" value="" style="width:20px;height:20px;" ></td>
-                  <td>41&nbsp;&nbsp;&nbsp;<input type="button" id="btn41" class="<?php if($data->getEstadoActualDeOficial(1)=="0-8"){
-                    echo "btn btn-danger";
-                  }elseif ($data->getEstadoActualDeOficial(1)=="0-9"){
-                    echo "btn btn-success";
-                  }?>"  value="" style="width:20px;height:20px;" ></td>
-                  <td>42&nbsp;&nbsp;<input type="button" id="btn42" class="<?php if($data->getEstadoActualDeOficial(11)=="0-8"){
-                    echo "btn btn-danger";
-                  }elseif ($data->getEstadoActualDeOficial(11)=="0-9"){
-                    echo "btn btn-success";
-                  }?>" value="" style="width:20px;height:20px;" ></td>
-                  <td>43&nbsp;&nbsp;<input type="button" id="btn43" class="<?php if($data->getEstadoActualDeOficial(21)=="0-8"){
-                    echo "btn btn-danger";
-                  }elseif ($data->getEstadoActualDeOficial(21)=="0-9"){
-                    echo "btn btn-success";
-                  }?>" value="" style="width:20px;height:20px;" ></td>
-
-                </tr>
-
-                <tr>
-                  <td>6&nbsp;<input type="button" id="btn6" class="<?php if($data->getEstadoActualDeOficial(36)=="0-8"){
-                    echo "btn btn-danger";
-                  }elseif ($data->getEstadoActualDeOficial(36)=="0-9"){
-                    echo "btn btn-success";
-                  }?>" value="" style="width:20px;height:20px;" ></td>
-                  <td>104&nbsp;<input type="button" id="btn104" class="<?php if($data->getEstadoActualDeOficial(6)=="0-8"){
-                    echo "btn btn-danger";
-                  }elseif ($data->getEstadoActualDeOficial(6)=="0-9"){
-                    echo "btn btn-success";
-                  }?>" value="" style="width:20px;height:20px;" ></td>
-                  <td>204&nbsp;<input type="button" id="btn204" class="<?php if($data->getEstadoActualDeOficial(16)=="0-8"){
-                    echo "btn btn-danger";
-                  }elseif ($data->getEstadoActualDeOficial(16)=="0-9"){
-                    echo "btn btn-success";
-                  }?>" value="" style="width:20px;height:20px;" ></td>
-                  <td>304&nbsp;<input type="button" id="btn304" class="<?php if($data->getEstadoActualDeOficial(26)=="0-8"){
-                    echo "btn btn-danger";
-                  }elseif ($data->getEstadoActualDeOficial(26)=="0-9"){
-                    echo "btn btn-success";
-                  }?>" value="" style="width:20px;height:20px;" ></td>
-
-                </tr>
-
-                <tr>
-                  <td>7&nbsp;<input type="button" id="btn7" class="<?php if($data->getEstadoActualDeOficial(37)=="0-8"){
-                    echo "btn btn-danger";
-                  }elseif ($data->getEstadoActualDeOficial(37)=="0-9"){
-                    echo "btn btn-success";
-                  }?>" value="" style="width:20px;height:20px;" ></td>
-                  <td>105&nbsp;<input type="button" id="btn105" class="<?php if($data->getEstadoActualDeOficial(7)=="0-8"){
-                    echo "btn btn-danger";
-                  }elseif ($data->getEstadoActualDeOficial(7)=="0-9"){
-                    echo "btn btn-success";
-                  }?>" value="" style="width:20px;height:20px;" ></td>
-                  <td>205&nbsp;<input type="button" id="btn205" class="<?php if($data->getEstadoActualDeOficial(17)=="0-8"){
-                    echo "btn btn-danger";
-                  }elseif ($data->getEstadoActualDeOficial(17)=="0-9"){
-                    echo "btn btn-success";
-                  }?>"  value="" style="width:20px;height:20px;" ></td>
-                  <td>305&nbsp;<input type="button" id="btn305" class="<?php if($data->getEstadoActualDeOficial(27)=="0-8"){
-                    echo "btn btn-danger";
-                  }elseif ($data->getEstadoActualDeOficial(27)=="0-9"){
-                    echo "btn btn-success";
-                  }?>" value="" style="width:20px;height:20px;" ></td>
-
-                </tr>
-
-              </tbody>
-              </table>
-
-          </div>
-        </div>
-   </div>
-</div>
-
-
- <div id="cuadro2" style="height: 245px;">
-     <div class="jumbotron" style="height: 240px;border-radius: 70px 70px 70px 70px">
-       <div class="container" style="height: 300px;">
-         <center style="margin-top:-30px;font-weight:bold;"> Unidades en Servicio</center><br>
-       <div class="form-group" style="margin-left:-15px;margin-top: -40px;">
-
-         <table class="table table-striped">
-             <thead>
-               <tr>
-               </tr>
-             </thead>
-             <tbody>
-               <tr>
-                 <td>B-1<input type="button" value="" id="b1"  class="btn btn-danger" style="width:20px;height:20px;" ></td>
-                 <td>BX-1<input type="button" value="" id="bx1"  class="btn btn-danger" style="width:20px;height:20px;" ></td>
-                 <td>Q-1<input type="button" value="" id="q1"  class="btn btn-danger" style="width:20px;height:20px;" ></td>
-
-              </tr>
-
-              <td>X-1<input type="button" value="" id="x1"  class="btn btn-danger" style="width:20px;height:20px;" ></td>
-
-              <td>K-1<input type="button" value="" id="k1"   class="btn btn-danger" style="width:20px;height:20px;" ></td>
-              <td>R-1<input type="button" id="r1"  class="btn btn-danger" style="width:20px;height:20px;"></td>
-
-              <tr>
-
-              </tr>
-
-
-               <tr>
-                 <td>B-2<input type="button" value="" id="b2"  class="btn btn-danger" style="width:20px;height:20px;" ></td>&nbsp;
-                 <td>BX-2<input type="button" value="" id="bx2"  class="btn btn-danger" style="width:20px;height:20px;" ></td>&nbsp;
-                 <td>R-2<input type="button" value="" id="r2"  class="btn btn-danger" style="width:20px;height:20px;" ></td>&nbsp;
-
-               </tr>
-               <br>
-               <tr>
-                 <td>B-3<input type="button" value="" id="b3"  class="btn btn-danger" style="width:20px;height:20px;" ></td>&nbsp;
-                 <td>J
-                   <input type="button" value="" id="j"  class="btn btn-danger" style="width:20px;height:20px;" ></td>&nbsp;
-               </tr>
-
-             </tbody>
-             </table>
-
-
-
-
-       </div>
-
-      </div>
-    </div>
-  </div>
-
-
-  <div id="cuadro3" style="height: 334px;">
+  <div id="cuadro2" style="height: 334px;">
       <div class="jumbotron"  style="height: 330px;border-radius: 70px 70px 70px 70px;">
         <div class="container" style="height: 330px;">
           <center style="margin-top:-30px;font-weight:bold;"> Últimos Servicios</center><br>
@@ -429,82 +257,32 @@
      </div>
    </div>
 
-   <div id="cuadro4">
-       <div class="jumbotron" style="border-radius: 70px 70px 70px 70px">
-         <div class="container">
+
+   <div id="cuadro3" style="height: 244px;">
+       <div class="jumbotron" style="height: 240px;border-radius: 70px 70px 70px 70px">
+         <div class="container" style="height: 240px;">
 
          <div class="form-group" style="margin-left:-20px;margin-top:-35px;">
-           <form id="formDespacho" action="controlador/CrearDespacho.php" method="post">
 
-           Nombre:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="txtnombre" style="width:290px;">
-           Rut: <input type="text" name="txtrut" style="width:95px;">
-           Telefono: <input type="text" name="txtTF" style="width:95px;"> <br><br>
-
-           Direccion:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="txtdireccion" style="width:580px;"> <br><br>
-
-           Esquina Nº1: <input type="text" name="txtEsquina1" style="width:240px">&nbsp;
-           Esquina Nº2: <input type="text" name="txtEsquina2" style="width:247px">
-           <br><br>
-
-           Sector:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-           <select  name="cboSectores" id="cboSectores" style="width:280px; height:30px;">
-           <?php
-           $listado = $data->readSectores();
-           foreach($listado as $o => $objeto){
-           ?>
-           <option value="<?php echo $objeto->getIdSector(); ?>"><?php echo $objeto->getNombreSector(); ?></option>
-           <?php
-           }
-           ?>
-           </select>
-
-           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-           &nbsp;&nbsp;&nbsp;&nbsp;
-
-           Tipo de Emergencia:
-           <select  name="cboTiposDeServicios" id="cboTiposDeServicios" style="width:80px; height:30px;">
-           <?php
-           $listado = $data->readTiposDeServicios();
-           foreach($listado as $o => $objeto){
-           ?>
-           <option value="<?php echo $objeto->getId_tipo_servicio(); ?>"><?php echo $objeto->getCodigo_tipo_servicio(); ?></option>
-           <?php
-           }
-           ?>
-           </select>
-           <br><br>
-            Detalles:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="detalle" id="detalle" style="width:580px;">
-            <br>
-
-           &nbsp;&nbsp;&nbsp;
-        <center>
-        <button type="submit" value="Despachar" id="btn_despachar" name="btn_despachar" onclick="despachar()" style="width:100px;height:100px;">
-          <img src="images/camion3.png" alt="x" />Despachar</button>
-        </center>
-        </form>
+            Detalles:<br>
+            <textarea style="width:700px;height:150px">
+            </textarea>
 
          </div>
-
-
         </div>
 
       </div>
-      <div style="margin-top: -60px;margin-left: 60px;font-size:20px;">
-        <?php
-          date_default_timezone_set('America/Santiago');
-
-
-          $dias = array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado");
-          $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
-
-          echo "<b>".$dias[date('w')]." ".date('d')." de ".$meses[date('n')-1]. " del ".date('Y')."</b>" ;
-          echo "<b>".date(" H:i:s")."<b>";
-          ?>
+      <div style="margin-top: -69px;margin-left: 590px;">
+        Cerrar Servicio
+        <button type="submit"  id="btn_despachar" name="btnsonido" style="width:50px;height:33px;">
+          <img src="images/comprobar.png" alt="x" /></button>
       </div>
     </div>
-
-
+    <br>
+<center>
+    <button type="submit" id="btn_despachar" name="btnsonido" style="width:200px;height:33px;">
+      <img src="images/camion.png" alt="x" /><a href="centraldeAlarma.php" >Nuevo Despacho</a></button>
+</center>
      </div>
    </div>
  </div>
@@ -670,8 +448,7 @@ function despachar(){
       confirmButtonText: "Sí",
       cancelButtonText: "No",
       closeOnConfirm: false,
-  }),function(){
-        window.location.href = "centraldeDespacho.php";
+  });
 }
 
 

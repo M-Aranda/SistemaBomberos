@@ -21,8 +21,7 @@ $servicio->setFecha_servicio(date("Y-m-d "));
 $d->crearServicio($servicio);
 
 
-//header("location: ../Despachos.php");
-
+header("location: ../centraldeDespacho.php");
 
 
 
