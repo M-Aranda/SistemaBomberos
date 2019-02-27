@@ -228,9 +228,9 @@
 
           <table class="table table-striped" RULES="cols" >
               <thead>
-                <TD>Unidad</TD>
+                <TD style="width:80px;">Unidad</TD>
                 <TD>6-0</TD>
-                <TD>boton</TD>
+                <TD style="width:20px;">boton</TD>
                 <TD>6-3</TD>
                 <TD>6-7</TD>
                 <TD>6-8</TD>
@@ -239,6 +239,12 @@
               </thead>
               <tbody>
                 <tr>
+                  <td></td>
+                  <td><div  onclick="mostrarhora()">
+                  </div></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
                   <td></td>
                   <td></td>
                   <td></td>
@@ -479,6 +485,13 @@ function info6_10(){
                     swal("Guardando a " + inputValue, "como OBAC");
                   });
 
+}
+
+function mostrarhora(){
+var f=new Date();
+cad=f.getHours()+":"+f.getMinutes()+":"+f.getSeconds();
+window.status =cad;
+setTimeout("mostrarhora()",1000);
 }
 
 

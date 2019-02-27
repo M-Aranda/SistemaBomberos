@@ -201,10 +201,10 @@
             </thead>
             <tbody>
               <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>john@example.com</td>
-                <td>sadsda</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
               </tr>
 
             </tbody>

@@ -17,6 +17,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="refresh" content="50" />
     <title>Mantenedor</title>
 
 
@@ -37,6 +38,7 @@
 
 
 <body  background="images/fondofichaintranet.jpg">
+
 
     <br>
     <nav class="navbar navbar-default nav-stacked  navbar-pills responsive" role="navigation" >
@@ -484,7 +486,11 @@
       </div>
       <div style="margin-top: -60px;margin-left: 60px;font-size:20px;">
         <?php
+
+
+
           date_default_timezone_set('America/Santiago');
+
 
 
           $dias = array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado");
@@ -507,6 +513,12 @@
 
 
 <script>
+
+function actualizar(){location.reload(true);}
+    //Función para actualizar cada 4 segundos(4000 milisegundos)
+    setInterval("actualizar()",4000);
+
+
 function despachar(){
   event.preventDefault();
 
