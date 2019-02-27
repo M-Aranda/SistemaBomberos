@@ -38,8 +38,13 @@
    <script src="js/bootstrap.js"></script>
 
    <script src="javascript/JQuery.js"></script>
-   <script type="text/javascript" src="javascript/sweetAlertMin.js"></script>
+   <!-- <script type="text/javascript" src="javascript/sweetAlertMin.js"></script>
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+    -->
+
+
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.css">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.all.js"></script>
 
   </head>
 
@@ -205,7 +210,7 @@
 
               Despacho:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input value="<?php echo utf8_encode($data->getTipoDeServicioYSectorDeServicio($idServicioCreado)->getServicio());
              echo "  "; echo utf8_encode($data->getTipoDeServicioYSectorDeServicio($idServicioCreado)->getSector()); echo " "; ?>" type="text" name="txtDespacho" disabled style="width:400px">
-              <button type="submit"  id="btn_despachar" name="btnsonido" onclick="info6_10()" style="width:50px;height:50px;">
+              <button type="submit"  id="btn_despachar" name="btnsonido" onclick="actualizarDatosOBACConductoryNPersonal(2)" style="width:50px;height:50px;">
                 <img src="images/torre.png" alt="x" /></button>
             <br><br>
               En Despacho:&nbsp;
@@ -292,198 +297,51 @@
 </div>
 
 <script>
-function despachar(){
-  event.preventDefault();
 
-  var tipoDeServicio=$("#cboTiposDeServicios :selected").text();
-  var sector=$("#cboSectores :selected").text();
-
-  var unidadesADespachar =[];
-  // 10-0
-  if((tipoDeServicio=="10-0") && (sector=="Barros Negros")){
-    unidadesADespachar=["B-1","Q-1"];
-  }else if ((tipoDeServicio=="10-0") && (sector=="Villa La Vinilla")) {
-    unidadesADespachar=["B-1","Q-1"];
-  }else if ((tipoDeServicio=="10-0") && (sector=="Villa El Alamo")) {
-    unidadesADespachar=["B-1","Q-1"];
-  }else if ((tipoDeServicio=="10-0") && (sector=="Poblacion La America")) {
-    unidadesADespachar=["B-1","Q-1"];
-  }else if ((tipoDeServicio=="10-0") && (sector=="Poblacion 12 de Febrero")) {
-    unidadesADespachar=["B-1","Q-1"];
-  }else if ((tipoDeServicio=="10-0") && (sector=="Villa El Llano")) {
-    unidadesADespachar=["B-1","Q-1"];
-  }else if ((tipoDeServicio=="10-0") && (sector=="Cali Canto")) {
-    unidadesADespachar=["B-1","Q-1"];
-  }else if ((tipoDeServicio=="10-0") && (sector=="Poblacion Bello Olivo")) {
-    unidadesADespachar=["B-1","Q-1"];
-  }else if ((tipoDeServicio=="10-0") && (sector=="Poblacion Municipal")) {
-    unidadesADespachar=["B-1","Q-1"];
-  }else if ((tipoDeServicio=="10-0") && (sector=="El Guindal")) {
-    unidadesADespachar=["B-1","BX-1","Q-1"];
-  }else if ((tipoDeServicio=="10-0") && (sector=="La Hacienda")) {
-    unidadesADespachar=["B-1","BX-1","Q-1"];
-  }else if ((tipoDeServicio=="10-0") && (sector=="Santa Sofia")) {
-    unidadesADespachar=["B-1","Q-1"];
-  }else if ((tipoDeServicio=="10-0") && (sector=="Las Pircas")) {
-    unidadesADespachar=["B-3","Q-1"];
-  }else if ((tipoDeServicio=="10-0") && (sector=="Las Rozas")) {
-    unidadesADespachar=["B-3","Q-1"];
-  }else if ((tipoDeServicio=="10-0") && (sector=="Los Acantos")) {
-    unidadesADespachar=["B-3","Q-1"];
-  }else if ((tipoDeServicio=="10-0") && (sector=="Lo Castillo")) {
-    unidadesADespachar=["B-3","Q-1"];
-  }else if ((tipoDeServicio=="10-0") && (sector=="Plazas del campo")) {
-    unidadesADespachar=["B-3","Q-1"];
-  }else if ((tipoDeServicio=="10-0") && (sector=="Plaza las Rosas")) {
-    unidadesADespachar=["B-3","Q-1"];
-  }else if ((tipoDeServicio=="10-0") && (sector=="Valle lo Castillo")) {
-    unidadesADespachar=["B-3","Q-1"];
-  }else if ((tipoDeServicio=="10-0") && (sector=="Santa Teresita")) {
-    unidadesADespachar=["B-3","BX-1","Q-1"];
-  }else if ((tipoDeServicio=="10-0") && (sector=="Acceso a Machali")) {
-    unidadesADespachar=["B-3","BX-1","Q-1"];
-  }else if ((tipoDeServicio=="10-0") && (sector=="Padre Huratado")) {
-    unidadesADespachar=["B-3","BX-1","Q-1"];
-  }else if ((tipoDeServicio=="10-0") && (sector=="La Reserva")) {
-    unidadesADespachar=["B-3","Q-1"];
-  }else if ((tipoDeServicio=="10-0") && (sector=="El Remanso")) {
-    unidadesADespachar=["B-3","Q-1"];
-  }else if ((tipoDeServicio=="10-0") && (sector=="El Polo")) {
-    unidadesADespachar=["B-3","Q-1"];
-  }else if ((tipoDeServicio=="10-0") && (sector=="Cruce Nogales")) {
-    unidadesADespachar=["B-3","Q-1"];
-  }else if ((tipoDeServicio=="10-0") && (sector=="Nogales")) {
-    unidadesADespachar=["B-3","BX-1","Q-1"];
-  }else if ((tipoDeServicio=="10-0") && (sector=="Camino a Sauzal")) {
-    unidadesADespachar=["B-3","Q-1"];
-  }else if ((tipoDeServicio=="10-0") && (sector=="Carretera el Cobre (Acceso a Machali)")) {
-    unidadesADespachar=["B-3","BX-1","Q-1"];
-  }else if ((tipoDeServicio=="10-0") && (sector=="Carretera el Cobre (Subida a Coya)")) {
-    unidadesADespachar=["B-1","Q-1"];
-  }else if ((tipoDeServicio=="10-0") && (sector=="Avenida Balaguer")) {
-    unidadesADespachar=["B-3","Q-1"];
-  }else if ((tipoDeServicio=="10-0") && (sector=="Parque San Fuente")) {
-    unidadesADespachar=["B-3","BX-1","Q-1"];
-  }else if ((tipoDeServicio=="10-0") && (sector=="Coya")) {
-    unidadesADespachar=["B-2","BX-2"];
-  }else if ((tipoDeServicio=="10-0") && (sector=="Ninguno de los Anteriores")) {
-    unidadesADespachar=[];
-  }
-  //10-1
-  else if((tipoDeServicio=="10-1") && (sector=="Barros Negros")){
-    unidadesADespachar=["B-1"];
-  }else if ((tipoDeServicio=="10-1") && (sector=="Villa La Vinilla")) {
-    unidadesADespachar=["B-1"];
-  }else if ((tipoDeServicio=="10-1") && (sector=="Villa El Alamo")) {
-    unidadesADespachar=["B-1"];
-  }else if ((tipoDeServicio=="10-1") && (sector=="Poblacion La America")) {
-    unidadesADespachar=["B-1"];
-  }else if ((tipoDeServicio=="10-1") && (sector=="Poblacion 12 de Febrero")) {
-    unidadesADespachar=["B-1"];
-  }else if ((tipoDeServicio=="10-1") && (sector=="Villa El Llano")) {
-    unidadesADespachar=["B-1"];
-  }else if ((tipoDeServicio=="10-1") && (sector=="Cali Canto")) {
-    unidadesADespachar=["B-1"];
-  }else if ((tipoDeServicio=="10-1") && (sector=="Poblacion Bello Olivo")) {
-    unidadesADespachar=["B-1"];
-  }else if ((tipoDeServicio=="10-1") && (sector=="Poblacion Municipal")) {
-    unidadesADespachar=["B-1"];
-  }else if ((tipoDeServicio=="10-1") && (sector=="El Guindal")) {
-    unidadesADespachar=["B-1"];
-  }else if ((tipoDeServicio=="10-1") && (sector=="La Hacienda")) {
-    unidadesADespachar=["B-1"];
-  }else if ((tipoDeServicio=="10-1") && (sector=="Santa Sofia")) {
-    unidadesADespachar=["B-1"];
-  }else if ((tipoDeServicio=="10-1") && (sector=="Las Pircas")) {
-    unidadesADespachar=["B-3"];
-  }else if ((tipoDeServicio=="10-1") && (sector=="Las Rozas")) {
-    unidadesADespachar=["B-3"];
-  }else if ((tipoDeServicio=="10-1") && (sector=="Los Acantos")) {
-    unidadesADespachar=["B-3"];
-  }else if ((tipoDeServicio=="10-1") && (sector=="Lo Castillo")) {
-    unidadesADespachar=["B-3"];
-  }else if ((tipoDeServicio=="10-1") && (sector=="Plazas del campo")) {
-    unidadesADespachar=["B-3"];
-  }else if ((tipoDeServicio=="10-1") && (sector=="Plaza las Rosas")) {
-    unidadesADespachar=["B-3"];
-  }else if ((tipoDeServicio=="10-1") && (sector=="Valle lo Castillo")) {
-    unidadesADespachar=["B-3"];
-  }else if ((tipoDeServicio=="10-1") && (sector=="Santa Teresita")) {
-    unidadesADespachar=["B-3"];
-  }else if ((tipoDeServicio=="10-1") && (sector=="Acceso a Machali")) {
-    unidadesADespachar=["B-3"];
-  }else if ((tipoDeServicio=="10-1") && (sector=="Padre Huratado")) {
-    unidadesADespachar=["B-3"];
-  }else if ((tipoDeServicio=="10-1") && (sector=="La Reserva")) {
-    unidadesADespachar=["B-3"];
-  }else if ((tipoDeServicio=="10-1") && (sector=="El Remanso")) {
-    unidadesADespachar=["B-3"];
-  }else if ((tipoDeServicio=="10-1") && (sector=="El Polo")) {
-    unidadesADespachar=["B-3"];
-  }else if ((tipoDeServicio=="10-1") && (sector=="Cruce Nogales")) {
-    unidadesADespachar=["B-3"];
-  }else if ((tipoDeServicio=="10-1") && (sector=="Nogales")) {
-    unidadesADespachar=["B-3"];
-  }else if ((tipoDeServicio=="10-1") && (sector=="Camino a Sauzal")) {
-    unidadesADespachar=["B-3"];
-  }else if ((tipoDeServicio=="10-1") && (sector=="Carretera el Cobre (Acceso a Machali)")) {
-    unidadesADespachar=["B-3"];
-  }else if ((tipoDeServicio=="10-1") && (sector=="Carretera el Cobre (Subida a Coya)")) {
-    unidadesADespachar=["B-1"];
-  }else if ((tipoDeServicio=="10-1") && (sector=="Avenida Balaguer")) {
-    unidadesADespachar=["B-3"];
-  }else if ((tipoDeServicio=="10-1") && (sector=="Parque San Fuente")) {
-    unidadesADespachar=["B-3"];
-  }else if ((tipoDeServicio=="10-1") && (sector=="Coya")) {
-    unidadesADespachar=["B-2"];
-  }else if ((tipoDeServicio=="10-1") && (sector=="Ninguno de los Anteriores")) {
-    unidadesADespachar=[];
-  }
-
+function actualizarDatosOBACConductoryNPersonal(idSerUnidad){
   swal({
-      title: "Sistema de bomberos",
-      text: "Despachar unidad/es "+unidadesADespachar.join(" y ")+" para servir un "+tipoDeServicio+" a "+sector+"?",
-      type: "info",
-      showCancelButton: true,
-      confirmButtonColor: "#03fe00",
-      confirmButtonText: "Sí",
-      cancelButtonText: "No",
-      closeOnConfirm: false,
-  });
-}
+    title: 'Ingresar datos:',
+    html:
+      '<input placeholder="OBAC" type="text" id="OBAC" class="swal2-input">' +
+      '<input placeholder="Conductor" type="text" id="Conductor" class="swal2-input">'+
+      '<input placeholder="N° Personal" type="text" id="NPersonal" class="swal2-input">',
+    preConfirm: function () {
+      return new Promise(function (resolve) {
+        resolve([
+          $('#OBAC').val(),
+          $('#Conductor').val(),
+          $('#NPersonal').val()
+        ])
+      })
+    },
+    onOpen: function () {
+      $('#OBAC').focus()
+    }
+  }).then(function (result) {
 
+    var ar=(JSON.stringify(result)).split(/(?:,|{|}|")+/);
+    var nomOb=ar[3];
+    var nomCon=ar[4];
+    var nPer=ar[5];
 
-function verDetalles(id){
-  $.ajax({
+    swal({
+        title: "Sistema de bomberos",
+        text: "Operación exitosa",
+        type: "success",
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Ok",
+    })
+
+    $.ajax({
+      url: "actualizarOBACConductorYNPersonal.php",
       type: "POST",
-      url: 'verDetallesDeServicio.php',
-      data: {"datos": id},
-      success: function(data){
-        swal(data);
-      }
-  });
-}
+      data:{"nombreOBAC": nomOb,
+            "nombreConductor": nomCon,
+            "cantidadPersonal": nPer,
+            "idServicioUnidad": idSerUnidad,}
+    });
 
-
-function info6_10(){
-  swal({
-                    title: "Sistema de bomberos:",
-                    text: "¿Oficial o bombero a cargo?",
-                    type: "input",
-                    showCancelButton: true,
-                    closeOnConfirm: false,
-                    animation: "slide-from-top",
-                    inputPlaceholder: "OBAC"
-                  },
-                  function(inputValue){
-                    if (inputValue === false) return false;
-
-                    if (inputValue === "") {
-                      swal.showInputError("Debe escribir algo");
-                      return false
-                    }
-                    swal("Guardando a " + inputValue, "como OBAC");
-                  });
+  }).catch(swal.noop)
 
 }
 
@@ -493,10 +351,6 @@ cad=f.getHours()+":"+f.getMinutes()+":"+f.getSeconds();
 window.status =cad;
 setTimeout("mostrarhora()",1000);
 }
-
-
-
-
 
 </script>
 

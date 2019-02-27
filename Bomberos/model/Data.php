@@ -1876,6 +1876,15 @@ public function getTipoDeServicioYSectorDeServicio($idServicio){
    return $obj;
 }
 
+public function actualizarOBACConductorYNPersonalServicioUnidad($obac, $conductor, $nBomberos , $idServicio){
+  $this->c->conectar();
+  $query="UPDATE tbl_servicio_unidad SET obac='".$obac."', conductor='".$conductor."', nBomberos='".$nBomberos."' WHERE id_servicio_unidad=".$idServicio.";";
+  $this->c->ejecutar($query);
+  $this->c->desconectar();
+
+}
+
+
 
 
 }
