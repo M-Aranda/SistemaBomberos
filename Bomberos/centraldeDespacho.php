@@ -214,7 +214,7 @@
                 <img src="images/torre.png" alt="x" /></button>
             <br><br>
               En Despacho:&nbsp;
-              <select name="cboxdespacho" style="width:400px">
+              <select id="cboxdespacho" name="cboxdespacho" onchange="cargarTabla()"style="width:400px">
                 <?php $emergenciasActivas=$data->getServiciosDeEmergenciasActivas();
                 foreach ($emergenciasActivas as $e => $emer) {?>
 
@@ -245,7 +245,7 @@
         <div class="form-group" style="margin-left:0px;Margin-top:-9px;">
 
 
-          <table class="table table-striped" RULES="cols" >
+          <table id="tablaDeEmergencia" name="tablaDeEmergencia" class="table table-striped" RULES="cols" >
               <thead>
                 <TD style="width:80px;">Unidad</TD>
                 <TD>6-0</TD>
@@ -257,18 +257,7 @@
                 <TD>6-10</TD>
               </thead>
               <tbody>
-                <tr>
-                  <td></td>
-                  <td><div  onclick="mostrarhora()">
-                  </div></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
 
-               </tr>
 
               </tbody>
               </table>
@@ -365,6 +354,53 @@ cad=f.getHours()+":"+f.getMinutes()+":"+f.getSeconds();
 window.status =cad;
 setTimeout("mostrarhora()",1000);
 }
+
+
+
+function cargarTabla(){
+  var id = document.getElementById("cboxdespacho").value;
+
+  $.ajax({
+    url: "getServiciosUnidad.php",
+    type: "POST",
+    data:{"datos":id}
+  }).done(function(data) {
+    console.log(data);
+    var objetos=JSON.parse(data);
+
+     $("#tablaDeEmergencia tbody tr").remove();
+
+    var i;
+    for (i = 0; i < objetos.length; i++) {
+      var objetoJSON= $.parseJSON(objetos[i]);
+
+      var idEmergencia=objetoJSON.id;
+      var nombreUnidadEmergencia=objetoJSON.nombre;
+      var momento6_0Emergencia=objetoJSON.momento6_0;
+      var momento6_3Emergencia=objetoJSON.momento6_3;
+      var momento6_7Emergencia=objetoJSON.momento6_7;
+      var momento6_8Emergencia=objetoJSON.momento6_8;
+      var momento6_9Emergencia=objetoJSON.momento6_9;
+      var momento6_10Emergencia=objetoJSON.momento6_10;
+
+
+
+      if (!document.getElementsByTagName) return;
+      tabBody=document.getElementsByTagName("tbody").item(0);
+      row=document.createElement("tr");
+      cell1 = document.createElement("td");
+      textnode1=document.createTextNode(nombreUnidadEmergencia);
+      cell1.appendChild(textnode1);
+      row.appendChild(cell1);
+      tabBody.appendChild(row);
+
+
+    }
+
+  });
+
+}
+
 
 </script>
 

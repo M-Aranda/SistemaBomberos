@@ -1948,5 +1948,49 @@ public function getTodasLasEmergenciasActivas(){
 
 
 
+
+ public function getServicioUnidadPorFkServicio($fk){
+   $this->c->conectar();
+   $query="SELECT * FROM tbl_servicio_unidad WHERE fk_servicio=".$fk.";";
+   $rs = $this->c->ejecutar($query);
+   $listado=array();
+   while($reg = $rs->fetch_array()){
+     $obj= new Tbl_servicio_unidad();
+     $obj->setId_servicio_unidad($reg[0]);
+     $obj->setFk_servicio($reg[1]);
+     $obj->setFk_unidad($reg[2]);
+     $obj->setMomento6_0($reg[3]);
+     $obj->setObac($reg[4]);
+     $obj->setConductor($reg[5]);
+     $obj->setN_Bomberos($reg[6]);
+     $obj->setMomento6_3($reg[7]);
+     $obj->setMomento6_7($reg[8]);
+     $obj->setMomento6_8($reg[9]);
+     $obj->setMomento6_9($reg[10]);
+     $obj->setMomento6_10($reg[11]);
+     $obj->setEmergenciaActiva($reg[12]);
+
+     $listado[]=$obj;
+    }
+
+    $this->c->desconectar();
+    return $listado;
+ }
+
+
+
+public function getNombreDeUnidadPorId($id){
+  $this->c->conectar();
+  $query="SELECT nombre_unidad FROM tbl_unidad WHERE id_unidad=".$id.";";
+  $rs = $this->c->ejecutar($query);
+
+  while($reg = $rs->fetch_array()){
+    $obj=$reg[0];
+   }
+
+   $this->c->desconectar();
+   return $obj;
+}
+
 }
  ?>
