@@ -209,8 +209,24 @@
               <div class="form-group" style="margin-left:50px;Margin-top:-40px;">
 
               Despacho:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input value="<?php echo utf8_encode($data->getTipoDeServicioYSectorDeServicio($idServicioCreado)->getServicio());
-             echo "  "; echo utf8_encode($data->getTipoDeServicioYSectorDeServicio($idServicioCreado)->getSector()); echo " "; ?>" type="text" name="txtDespacho" disabled style="width:400px">
-              <button type="submit"  id="btn_despachar" name="btnsonido" style="width:50px;height:50px;">
+             echo "  "; echo utf8_encode($data->getTipoDeServicioYSectorDeServicio($idServicioCreado)->getSector()); echo " ";
+
+             $idTipoServ=$data->getTipoDeServicioYSectorDeServicio($idServicioCreado)->getServicio();
+             $idTipoServ=$data->getIdDeTipoDeServicioAPartirDelCodigo($idTipoServ);
+
+             $idSector=$data->getTipoDeServicioYSectorDeServicio($idServicioCreado)->getSector();
+             $idSector=$data->getIdDeSectorAPartirDelNombre($idSector);
+
+             $listadoDeUnidadesAEnviar=$data->determinarCarrosADespacharSegunCodigoDeServicioYSector
+             ($idTipoServ,$idSector);
+
+              foreach ($listadoDeUnidadesAEnviar as $lu => $unidad) {
+                  echo utf8_encode($data->getNombreDeUnidadPorId($unidad));
+                  echo " ";
+                }
+
+              ?>" type="text" name="txtDespacho" disabled style="width:400px">
+              <button type="submit"  id="btn_despachar" name="btnsonido" onclick="confirmarToquesYDespacho()" style="width:50px;height:50px;">
                 <img src="images/torre.png" alt="x" /></button>
             <br><br>
               En Despacho:&nbsp;
@@ -356,6 +372,23 @@ setTimeout("mostrarhora()",1000);
 }
 
 
+function confirmarToquesYDespacho(){
+
+  swal({
+      title: "Sistema de bomberos",
+      text: "Esta a punto de emitir una alarma para despacho. ¿Desea continuar?",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#03fe00",
+      confirmButtonText: "Sí",
+      cancelButtonText: "No",
+      closeOnConfirm: false,
+  })
+  /*aqui se debiese mandar un request a ajax para quitar la variable de sesion, y volver a cargar la pagina o
+  volver a cargar la tabla y el combobox de las unidades en despacho */
+
+}
+
 
 function cargarTabla(){
   var id = document.getElementById("cboxdespacho").value;
@@ -390,8 +423,50 @@ function cargarTabla(){
       row=document.createElement("tr");
       cell1 = document.createElement("td");
       textnode1=document.createTextNode(nombreUnidadEmergencia);
+
+
+      textnode2=document.createTextNode(momento6_0Emergencia);
+      cell2 = document.createElement("td");
+
+      textnode4=document.createTextNode(momento6_3Emergencia);
+      cell4 = document.createElement("td");
+
+      textnode5=document.createTextNode(momento6_7Emergencia);
+      cell5 = document.createElement("td");
+
+      textnode6=document.createTextNode(momento6_8Emergencia);
+      cell6 = document.createElement("td");
+
+      textnode7=document.createTextNode(momento6_9Emergencia);
+      cell7 = document.createElement("td");
+
+      textnode8=document.createTextNode(momento6_10Emergencia);
+      cell8 = document.createElement("td");
+
+      var cell3=document.createElement("INPUT");
+
+      cell3.setAttribute('onclick','actualizarDatosOBACConductoryNPersonal('+idEmergencia+')')
+
+      cell3.setAttribute("type", "submit");
+      cell3.setAttribute("value", "algun valor");
+
       cell1.appendChild(textnode1);
+      cell2.appendChild(textnode2);
+      cell4.appendChild(textnode4)
+      cell5.appendChild(textnode5);
+      cell6.appendChild(textnode6);
+      cell7.appendChild(textnode7);
+      cell8.appendChild(textnode8);
+
+
       row.appendChild(cell1);
+      row.appendChild(cell2);
+      row.appendChild(cell3);
+      row.appendChild(cell4);
+      row.appendChild(cell5);
+      row.appendChild(cell6);
+      row.appendChild(cell7);
+      row.appendChild(cell8);
       tabBody.appendChild(row);
 
 

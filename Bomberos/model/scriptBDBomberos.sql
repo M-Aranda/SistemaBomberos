@@ -544,7 +544,6 @@ INSERT INTO tbl_estado_oficial (fkOficial,nombreEstado_estado_oficial,momento) V
 (39,'0-8',NOW()),
 (40,'0-8',NOW());
 
-
 CREATE TABLE tbl_sector(
 id_sector INT AUTO_INCREMENT,
 nombre_sector VARCHAR (300),
@@ -1651,6 +1650,7 @@ INSERT INTO tbl_sector (nombre_sector) VALUES
 -- SELECT * FROM tbl_servicio;
 -- SELECT * FROM tbl_servicio_unidad;
 
+
 /*
 Select para todo el inventario
 
@@ -1916,7 +1916,6 @@ INSERT INTO tbl_servicio_unidad VALUES (NULL, 5,8, '2019-03-03 10:10:10','Alguie
 '2019-03-03 10:10:10','2019-03-03 10:10:10',0);
 
 
- 
 -- INSERT INTO tbl_informacionDeCargos (fk_materialMenorAsignado_informacionDeCargos,cantidadAsignada_informacionDeCargos,fk_personal_informacionDeCargos) VALUES (1,1,1);
 
 /*
