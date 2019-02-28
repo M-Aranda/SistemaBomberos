@@ -226,18 +226,20 @@
                   echo " ";
                 }
 
-              ?>" type="text" name="txtDespacho" disabled style="width:400px">
+              ?>" type="text" name="txtDespacho" disabled style="width:400px;margin-top:10px;height:30px;">
 
               <form action="controlador/despacharServicio.php" method="post">
                 <input type="hidden" name="tipoServicio" id="tipoServicio" value="<?php echo $idTipoServ;?>">
                 <input type="hidden" name="sector" id="sector" value="<?php echo $idSector;?>">
                 <input type="hidden" name="unidadesAEnviar" id="unidadesAEnviar" value="aqui van las unidades a enviar">
 
-              <button type="submit"  id="btn_despachar" name="btnsonido" onclick="confirmarToquesYDespacho()" style="width:50px;height:50px;">
+              <button type="submit"  id="btn_despachar" name="btnsonido" onclick="confirmarToquesYDespacho()" style="width:60px;height:60px;margin-left:530px;margin-top:-19px;">
                 <img src="images/torre.png" alt="x" /></button>
               </form>
+
+
               En Despacho:&nbsp;
-              <select id="cboxdespacho" name="cboxdespacho" onchange="cargarTabla()"style="width:400px">
+              <select id="cboxdespacho" name="cboxdespacho" onchange="cargarTabla()"style="width:400px;height:30px;margin-top:-12px;" >
                 <?php $emergenciasActivas=$data->getServiciosDeEmergenciasActivas();
                 foreach ($emergenciasActivas as $e => $emer) {?>
 
@@ -316,7 +318,7 @@
     <br>
 <center>
     <button type="submit" id="btn_despachar" name="btnsonido" style="width:200px;height:33px;">
-      <img src="images/camion.png" alt="x" /><a href="centraldeAlarma.php" >Nuevo Despacho</a></button>
+      <img src="images/camion.png" alt="x" /><a href="centraldeAlarma.php" style="text-decoration:none;color:black;" >Nuevo Despacho</a></button>
 </center>
      </div>
    </div>
