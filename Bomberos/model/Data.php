@@ -1886,6 +1886,67 @@ public function actualizarOBACConductorYNPersonalServicioUnidad($obac, $conducto
 
 
 
+/*
+public function getTodasLasEmergenciasActivas(){
+  $this->c->conectar();
+  $query="SELECT * FROM tbl_servicio_unidad WHERE emergenciaActiva=1;";
+  $rs = $this->c->ejecutar($query);
+  $listado=array();
+  while($reg = $rs->fetch_array()){
+    $obj= new Tbl_servicio_unidad();
+    $obj->setId_servicio_unidad($reg[0]);
+    $obj->setFk_servicio($reg[1]);
+    $obj->setFk_unidad($reg[2]);
+    $obj->setMomento6_0($reg[3]);
+    $obj->setObac($reg[4]);
+    $obj->setConductor($reg[5]);
+    $obj->setN_Bomberos($reg[6]);
+    $obj->setMomento6_3($reg[7]);
+    $obj->setMomento6_7($reg[8]);
+    $obj->setMomento6_8($reg[9]);
+    $obj->setMomento6_9($reg[10]);
+    $obj->setMomento6_10($reg[11]);
+    $obj->setEmergenciaActiva($reg[12]);
+
+    $listado[]=$obj;
+   }
+
+   $this->c->desconectar();
+   return $listado;
+}
+*/
+
+
+
+ public function getServiciosDeEmergenciasActivas(){
+   $this->c->conectar();
+   $query="SELECT tbl_servicio.id_servicio, tbl_servicio.nombre_servicio, tbl_servicio.rut_servicio, tbl_servicio.telefono_servicio, tbl_servicio.direccion_servicio, tbl_servicio.esquina1_servicio,
+   tbl_servicio.esquina2_servicio, tbl_sector.nombre_sector, tbl_tipo_servicio.codigo_tipo_servicio, tbl_servicio.detalles_servicio, tbl_servicio.fecha_servicio FROM tbl_servicio, tbl_sector, tbl_tipo_servicio,
+    tbl_servicio_unidad WHERE tbl_servicio.fk_sector=tbl_sector.id_sector AND tbl_servicio.fk_tipoDeServicio=tbl_tipo_servicio.id_tipo_servicio AND tbl_servicio_unidad.fk_servicio=tbl_servicio.id_servicio AND
+    tbl_servicio_unidad.emergenciaActiva=1 GROUP BY id_servicio;";
+   $rs = $this->c->ejecutar($query);
+   $listado=array();
+   while($reg = $rs->fetch_array()){
+     $servicio= new Tbl_servicio();
+     $servicio->setId_servicio($reg[0]);
+     $servicio->setNombre_servicio($reg[1]);
+     $servicio->setRut_servicio($reg[2]);
+     $servicio->setTelefono_servicio($reg[3]);
+     $servicio->setDireccion_servicio($reg[4]);
+     $servicio->setEsquina1_servicio($reg[5]);
+     $servicio->setEsquina2_servicio($reg[6]);
+     $servicio->setFk_sector($reg[7]);
+     $servicio->setFk_tipoDeServicio($reg[8]);
+     $servicio->setDetalles_servicio($reg[9]);
+     $servicio->setFecha_servicio($reg[10]);
+
+     $listado[]=$servicio;
+    }
+    $this->c->desconectar();
+    return $listado;
+ }
+
+
 
 }
  ?>

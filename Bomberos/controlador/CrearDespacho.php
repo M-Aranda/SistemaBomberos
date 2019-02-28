@@ -16,7 +16,7 @@ $servicio->setEsquina2_servicio($_REQUEST["txtEsquina2"]);
 $servicio->setFk_sector($_REQUEST["cboSectores"]);
 $servicio->setFk_tipoDeServicio($_REQUEST["cboTiposDeServicios"]);
 $servicio->setDetalles_servicio($_REQUEST["detalle"]);
-$servicio->setFecha_servicio(date("Y-m-d "));
+$servicio->setFecha_servicio(date("Y-m-d H:i:s"));
 
 $d->crearServicio($servicio);
 

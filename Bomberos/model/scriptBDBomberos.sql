@@ -562,11 +562,12 @@ esquina2_servicio VARCHAR (300),
 fk_sector INT,
 fk_tipoDeServicio INT,
 detalles_servicio VARCHAR (1000),
-fecha_servicio DATE,
+fecha_servicio DATETIME,
 FOREIGN KEY (fk_sector) REFERENCES tbl_sector(id_sector),
 FOREIGN KEY (fk_tipoDeServicio) REFERENCES tbl_tipo_servicio(id_tipo_servicio),
 PRIMARY KEY(id_servicio)
 );
+
 
 
 CREATE TABLE tbl_servicio_unidad(
@@ -582,6 +583,7 @@ momento6_7 DATETIME,
 momento6_8 DATETIME,
 momento6_9 DATETIME,
 momento6_10 DATETIME,
+emergenciaActiva BOOLEAN,
 FOREIGN KEY(fk_servicio) REFERENCES tbl_servicio (id_servicio),
 FOREIGN KEY(fk_unidad) REFERENCES tbl_unidad (id_unidad),
 PRIMARY KEY(id_servicio_unidad)
@@ -1882,38 +1884,39 @@ INSERT INTO tbl_material_menor VALUES (NULL, 'Hacha', 2, 'Verde',3,30,1,2,'Algú
 INSERT INTO tbl_material_menor VALUES (NULL, 'Hacha', 2, 'Plomo',3,30,1,3,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1,'Algun detalle');
 INSERT INTO tbl_material_menor VALUES (NULL, 'Hacha', 2, 'Morada',3,30,1,1,'Algún fabricante','2020-12-12', 'Mangueras Chile Ltda.',1,'Algun detalle');
 
-INSERT INTO tbl_servicio VALUES (NULL, 'Sujeto 1', '12345','+56789','Alguna direccion','esq1','esq2',1,1,'Algun detalle cualquiera','2015-02-10');
-INSERT INTO tbl_servicio VALUES (NULL, 'Sujeto 2', '12345','+56789','Alguna direccion','esq1','esq2',1,1,'Algun detalle cualquiera','2016-02-10');
-INSERT INTO tbl_servicio VALUES (NULL, 'Sujeto 3', '12345','+56789','Alguna direccion','esq1','esq2',1,1,'Algun detalle cualquiera','2017-02-10');
-INSERT INTO tbl_servicio VALUES (NULL, 'Sujeto 4', '12345','+56789','Alguna direccion','esq1','esq2',1,1,'Algun detalle cualquiera','2018-02-10');
-INSERT INTO tbl_servicio VALUES (NULL, 'Sujeto 5', '12345','+56789','Alguna direccion','esq1','esq2',1,1,'Algun detalle cualquiera','2019-02-10');
+INSERT INTO tbl_servicio VALUES (NULL, 'Sujeto 1', '12345','+56789','Alguna direccion','esq1','esq2',1,1,'Algun detalle cualquiera','2015-02-10 10:10:10');
+INSERT INTO tbl_servicio VALUES (NULL, 'Sujeto 2', '12345','+56789','Alguna direccion','esq1','esq2',1,1,'Algun detalle cualquiera','2016-02-10 10:10:10');
+INSERT INTO tbl_servicio VALUES (NULL, 'Sujeto 3', '12345','+56789','Alguna direccion','esq1','esq2',1,1,'Algun detalle cualquiera','2017-02-10 10:10:10');
+INSERT INTO tbl_servicio VALUES (NULL, 'Sujeto 4', '12345','+56789','Alguna direccion','esq1','esq2',1,1,'Algun detalle cualquiera','2018-02-10 10:10:10');
+INSERT INTO tbl_servicio VALUES (NULL, 'Sujeto 5', '12345','+56789','Alguna direccion','esq1','esq2',1,1,'Algun detalle cualquiera','2019-02-10 10:10:10');
 
 INSERT INTO tbl_servicio_unidad VALUES (NULL, 1,7, '2019-03-03 10:10:10','Alguien','Alguien','quince', '2019-03-03 10:10:10','2019-03-03 10:10:10','2019-03-03 10:10:10',
-'2019-03-03 10:10:10','2019-03-03 10:10:10');
+'2019-03-03 10:10:10','2019-03-03 10:10:10',1);
 INSERT INTO tbl_servicio_unidad VALUES (NULL, 1,8, '2019-03-03 10:10:10','Alguien','Alguien','quince', '2019-03-03 10:10:10','2019-03-03 10:10:10','2019-03-03 10:10:10',
-'2019-03-03 10:10:10','2019-03-03 10:10:10');
+'2019-03-03 10:10:10','2019-03-03 10:10:10',1);
 
 INSERT INTO tbl_servicio_unidad VALUES (NULL, 2,7, '2019-03-03 10:10:10','Alguien','Alguien','quince', '2019-03-03 10:10:10','2019-03-03 10:10:10','2019-03-03 10:10:10',
-'2019-03-03 10:10:10','2019-03-03 10:10:10');
+'2019-03-03 10:10:10','2019-03-03 10:10:10',1);
 INSERT INTO tbl_servicio_unidad VALUES (NULL, 2,8, '2019-03-03 10:10:10','Alguien','Alguien','quince', '2019-03-03 10:10:10','2019-03-03 10:10:10','2019-03-03 10:10:10',
-'2019-03-03 10:10:10','2019-03-03 10:10:10');
+'2019-03-03 10:10:10','2019-03-03 10:10:10',1);
 
 INSERT INTO tbl_servicio_unidad VALUES (NULL, 3,7, '2019-03-03 10:10:10','Alguien','Alguien','quince', '2019-03-03 10:10:10','2019-03-03 10:10:10','2019-03-03 10:10:10',
-'2019-03-03 10:10:10','2019-03-03 10:10:10');
+'2019-03-03 10:10:10','2019-03-03 10:10:10',1);
 INSERT INTO tbl_servicio_unidad VALUES (NULL, 3,8, '2019-03-03 10:10:10','Alguien','Alguien','quince', '2019-03-03 10:10:10','2019-03-03 10:10:10','2019-03-03 10:10:10',
-'2019-03-03 10:10:10','2019-03-03 10:10:10');
+'2019-03-03 10:10:10','2019-03-03 10:10:10',1);
 
 INSERT INTO tbl_servicio_unidad VALUES (NULL, 4,7, '2019-03-03 10:10:10','Alguien','Alguien','quince', '2019-03-03 10:10:10','2019-03-03 10:10:10','2019-03-03 10:10:10',
-'2019-03-03 10:10:10','2019-03-03 10:10:10');
+'2019-03-03 10:10:10','2019-03-03 10:10:10',1);
 INSERT INTO tbl_servicio_unidad VALUES (NULL, 4,8, '2019-03-03 10:10:10','Alguien','Alguien','quince', '2019-03-03 10:10:10','2019-03-03 10:10:10','2019-03-03 10:10:10',
-'2019-03-03 10:10:10','2019-03-03 10:10:10');
+'2019-03-03 10:10:10','2019-03-03 10:10:10',1);
 
 INSERT INTO tbl_servicio_unidad VALUES (NULL, 5,7, '2019-03-03 10:10:10','Alguien','Alguien','quince', '2019-03-03 10:10:10','2019-03-03 10:10:10','2019-03-03 10:10:10',
-'2019-03-03 10:10:10','2019-03-03 10:10:10');
+'2019-03-03 10:10:10','2019-03-03 10:10:10',0);
 INSERT INTO tbl_servicio_unidad VALUES (NULL, 5,8, '2019-03-03 10:10:10','Alguien','Alguien','quince', '2019-03-03 10:10:10','2019-03-03 10:10:10','2019-03-03 10:10:10',
-'2019-03-03 10:10:10','2019-03-03 10:10:10');
+'2019-03-03 10:10:10','2019-03-03 10:10:10',0);
 
 
+ 
 -- INSERT INTO tbl_informacionDeCargos (fk_materialMenorAsignado_informacionDeCargos,cantidadAsignada_informacionDeCargos,fk_personal_informacionDeCargos) VALUES (1,1,1);
 
 /*

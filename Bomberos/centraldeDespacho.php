@@ -210,11 +210,25 @@
 
               Despacho:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input value="<?php echo utf8_encode($data->getTipoDeServicioYSectorDeServicio($idServicioCreado)->getServicio());
              echo "  "; echo utf8_encode($data->getTipoDeServicioYSectorDeServicio($idServicioCreado)->getSector()); echo " "; ?>" type="text" name="txtDespacho" disabled style="width:400px">
-              <button type="submit"  id="btn_despachar" name="btnsonido" onclick="actualizarDatosOBACConductoryNPersonal(2)" style="width:50px;height:50px;">
+              <button type="submit"  id="btn_despachar" name="btnsonido" style="width:50px;height:50px;">
                 <img src="images/torre.png" alt="x" /></button>
             <br><br>
               En Despacho:&nbsp;
               <select name="cboxdespacho" style="width:400px">
+                <?php $emergenciasActivas=$data->getServiciosDeEmergenciasActivas();
+                foreach ($emergenciasActivas as $e => $emer) {?>
+
+                  <option value="<?php echo $emer->getId_servicio();?>"><?php echo $emer->getFecha_servicio();
+                  echo " "; echo $emer->getFk_tipoDeServicio(); echo " "; $unidadesDelServicio=$data->getUnidadesInvolucradasEnServicio($emer->getId_servicio());
+                  foreach ($unidadesDelServicio as $u => $unidad) {
+                    echo $unidad." ";
+                  }
+                  ?> </option>
+
+
+              <?php
+            }
+                ?>
 
               </select>
 
