@@ -208,6 +208,8 @@
               <div class="container" style="height: 190px;">
               <div class="form-group" style="margin-left:50px;Margin-top:-40px;">
 
+
+
               Despacho:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input value="<?php echo utf8_encode($data->getTipoDeServicioYSectorDeServicio($idServicioCreado)->getServicio());
              echo "  "; echo utf8_encode($data->getTipoDeServicioYSectorDeServicio($idServicioCreado)->getSector()); echo " ";
 
@@ -217,8 +219,7 @@
              $idSector=$data->getTipoDeServicioYSectorDeServicio($idServicioCreado)->getSector();
              $idSector=$data->getIdDeSectorAPartirDelNombre($idSector);
 
-             $listadoDeUnidadesAEnviar=$data->determinarCarrosADespacharSegunCodigoDeServicioYSector
-             ($idTipoServ,$idSector);
+             $listadoDeUnidadesAEnviar=$data->determinarCarrosADespacharSegunCodigoDeServicioYSector($idTipoServ,$idSector);
 
               foreach ($listadoDeUnidadesAEnviar as $lu => $unidad) {
                   echo utf8_encode($data->getNombreDeUnidadPorId($unidad));
@@ -226,9 +227,15 @@
                 }
 
               ?>" type="text" name="txtDespacho" disabled style="width:400px">
+
+              <form action="controlador/despacharServicio.php" method="post">
+                <input type="hidden" name="tipoServicio" id="tipoServicio" value="<?php echo $idTipoServ;?>">
+                <input type="hidden" name="sector" id="sector" value="<?php echo $idSector;?>">
+                <input type="hidden" name="unidadesAEnviar" id="unidadesAEnviar" value="aqui van las unidades a enviar">
+
               <button type="submit"  id="btn_despachar" name="btnsonido" onclick="confirmarToquesYDespacho()" style="width:50px;height:50px;">
                 <img src="images/torre.png" alt="x" /></button>
-            <br><br>
+              </form>
               En Despacho:&nbsp;
               <select id="cboxdespacho" name="cboxdespacho" onchange="cargarTabla()"style="width:400px">
                 <?php $emergenciasActivas=$data->getServiciosDeEmergenciasActivas();
@@ -247,6 +254,8 @@
                 ?>
 
               </select>
+
+            <br><br>
 
               </div>
 
