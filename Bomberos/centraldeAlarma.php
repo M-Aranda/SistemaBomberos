@@ -17,7 +17,6 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="refresh" content="50" />
     <title>Mantenedor</title>
 
 
@@ -492,7 +491,6 @@
           date_default_timezone_set('America/Santiago');
 
 
-
           $dias = array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado");
           $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
 
@@ -514,9 +512,6 @@
 
 <script>
 
-function actualizar(){location.reload(true);}
-    //Función para actualizar cada 4 segundos(4000 milisegundos)
-    setInterval("actualizar()",4000);
 
 
 function despachar(){
