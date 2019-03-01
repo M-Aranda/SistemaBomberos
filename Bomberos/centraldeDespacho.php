@@ -427,8 +427,15 @@ Swal.fire({
     document.getElementById("formEnviarUnidades").submit();
   }
 })
-
 }
+
+
+function obtenerHoraActual(){
+  var today = new Date();
+  var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  return time;
+}
+
 
 
 function cargarTabla(){
@@ -468,21 +475,27 @@ function cargarTabla(){
 
       textnode2=document.createTextNode(momento6_0Emergencia);
       cell2 = document.createElement("td");
+      cell2.setAttribute('onclick',"this.innerText = ' "+obtenerHoraActual()+" '");
 
       textnode4=document.createTextNode(momento6_3Emergencia);
       cell4 = document.createElement("td");
+      cell4.setAttribute('onclick',"this.innerText = ' "+obtenerHoraActual()+" '");
 
       textnode5=document.createTextNode(momento6_7Emergencia);
       cell5 = document.createElement("td");
+      cell5.setAttribute('onclick',"this.innerText = ' "+obtenerHoraActual()+" '");
 
       textnode6=document.createTextNode(momento6_8Emergencia);
       cell6 = document.createElement("td");
+      cell6.setAttribute('onclick',"this.innerText = ' "+obtenerHoraActual()+" '");
 
       textnode7=document.createTextNode(momento6_9Emergencia);
       cell7 = document.createElement("td");
+      cell7.setAttribute('onclick',"this.innerText = ' "+obtenerHoraActual()+" '");
 
       textnode8=document.createTextNode(momento6_10Emergencia);
       cell8 = document.createElement("td");
+      cell8.setAttribute('onclick',"this.innerText = ' "+obtenerHoraActual()+" '");
 
       var cell3=document.createElement("INPUT");
 
