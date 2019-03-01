@@ -44,7 +44,8 @@
 
 
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.css">
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.all.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.all.js"></script>
+
 
   </head>
 
@@ -210,32 +211,37 @@
 
 
 
-              Despacho:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input value="<?php echo utf8_encode($data->getTipoDeServicioYSectorDeServicio($idServicioCreado)->getServicio());
-             echo "  "; echo utf8_encode($data->getTipoDeServicioYSectorDeServicio($idServicioCreado)->getSector()); echo " ";
+              Despacho:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input value="<?php
+              if(isset($_SESSION["idDeServicioCreado"])){
+                echo utf8_encode($data->getTipoDeServicioYSectorDeServicio($idServicioCreado)->getServicio());
+               echo "  "; echo utf8_encode($data->getTipoDeServicioYSectorDeServicio($idServicioCreado)->getSector()); echo " ";
 
-             $idTipoServ=$data->getTipoDeServicioYSectorDeServicio($idServicioCreado)->getServicio();
-             $idTipoServ=$data->getIdDeTipoDeServicioAPartirDelCodigo($idTipoServ);
+               $idTipoServ=$data->getTipoDeServicioYSectorDeServicio($idServicioCreado)->getServicio();
+               $idTipoServ=$data->getIdDeTipoDeServicioAPartirDelCodigo($idTipoServ);
 
-             $idSector=$data->getTipoDeServicioYSectorDeServicio($idServicioCreado)->getSector();
-             $idSector=$data->getIdDeSectorAPartirDelNombre($idSector);
+               $idSector=$data->getTipoDeServicioYSectorDeServicio($idServicioCreado)->getSector();
+               $idSector=$data->getIdDeSectorAPartirDelNombre($idSector);
 
-             $listadoDeUnidadesAEnviar=$data->determinarCarrosADespacharSegunCodigoDeServicioYSector($idTipoServ,$idSector);
+               $listadoDeUnidadesAEnviar=$data->determinarCarrosADespacharSegunCodigoDeServicioYSector($idTipoServ,$idSector);
 
-              foreach ($listadoDeUnidadesAEnviar as $lu => $unidad) {
-                  echo utf8_encode($data->getNombreDeUnidadPorId($unidad));
-                  echo " ";
-                }
+                foreach ($listadoDeUnidadesAEnviar as $lu => $unidad) {
+                    echo utf8_encode($data->getNombreDeUnidadPorId($unidad));
+                    echo " ";
+                  }
+              }
 
-              ?>" type="text" name="txtDespacho" disabled style="width:400px;margin-top:10px;height:30px;">
 
-              <form action="controlador/despacharServicio.php" method="post">
+
+              ?>" type="text"id="txtDespacho" name="txtDespacho" disabled style="width:400px;margin-top:10px;height:30px;">
+
+              <form id="formEnviarUnidades" name="formEnviarUnidades" action="controlador/despacharUnidades.php" method="post">
                 <input type="hidden" name="tipoServicio" id="tipoServicio" value="<?php echo $idTipoServ;?>">
                 <input type="hidden" name="sector" id="sector" value="<?php echo $idSector;?>">
-                <input type="hidden" name="unidadesAEnviar" id="unidadesAEnviar" value="aqui van las unidades a enviar">
 
-              <button type="submit"  id="btn_despachar" name="btnsonido" onclick="confirmarToquesYDespacho()" style="width:60px;height:60px;margin-left:530px;margin-top:-19px;">
-                <img src="images/torre.png" alt="x" /></button>
               </form>
+              <button type="submit"  id="btn_despachar" name="btnsonido" onclick="despacharUnidadesALaEmergencia()" style="width:60px;height:60px;margin-left:530px;margin-top:-19px;">
+                <img src="images/torre.png" alt="x" /></button>
+
 
 
               En Despacho:&nbsp;
@@ -384,6 +390,7 @@ setTimeout("mostrarhora()",1000);
 
 
 function confirmarToquesYDespacho(){
+  event.preventDefault();
 
   swal({
       title: "Sistema de bomberos",
@@ -397,6 +404,29 @@ function confirmarToquesYDespacho(){
   })
   /*aqui se debiese mandar un request a ajax para quitar la variable de sesion, y volver a cargar la pagina o
   volver a cargar la tabla y el combobox de las unidades en despacho */
+
+}
+
+
+
+
+function despacharUnidadesALaEmergencia(){
+
+Swal.fire({
+  title: 'Sistema de bomberos',
+  text: "¿Despachar unidades?",
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Sí',
+  cancelButtonText: 'No'
+}).then((result) => {
+  if (result.value) {
+
+    document.getElementById("formEnviarUnidades").submit();
+  }
+})
 
 }
 

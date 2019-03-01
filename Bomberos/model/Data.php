@@ -2016,6 +2016,17 @@ public function getIdDeSectorAPartirDelNombre($sector){
    return $obj;
 }
 
+public function registrarDespachoEnviado($idServico, $idUnidad){
+
+  $this->c->conectar();
+  $query="INSERT INTO tbl_servicio_unidad (fk_servicio, fk_unidad, emergenciaActiva) VALUES (".$idServico.",".$idUnidad.",1);";
+  echo $query;
+  $this->c->ejecutar($query);
+  $this->c->desconectar();
+
+
+}
+
 
 
 public function determinarCarrosADespacharSegunCodigoDeServicioYSector($idServicio, $idSector){

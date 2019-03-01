@@ -588,6 +588,8 @@ FOREIGN KEY(fk_unidad) REFERENCES tbl_unidad (id_unidad),
 PRIMARY KEY(id_servicio_unidad)
 );
 
+
+
 -- Procedimientos
 
 DELIMITER //
