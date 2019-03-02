@@ -17,11 +17,8 @@ if(isset($_SESSION["idDeServicioCreado"])){
     $data->registrarDespachoEnviado($idServicio,$unidad);
   }
 
-
   unset($_SESSION["idDeServicioCreado"]);
 }
-
-
 
 //Mandar tonos aqui
 

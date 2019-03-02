@@ -326,11 +326,17 @@
     <button type="submit" id="btn_despachar" name="btnsonido" style="width:200px;height:33px;">
       <img src="images/camion.png" alt="x" /><a href="centraldeAlarma.php" style="text-decoration:none;color:black;" >Nuevo Despacho</a></button>
 </center>
+
+  <div id="currentTime"></div>
+
      </div>
    </div>
  </div>
 
+
 </div>
+
+
 
 <script>
 
@@ -388,7 +394,7 @@ window.status =cad;
 setTimeout("mostrarhora()",1000);
 }
 
-
+/*
 function confirmarToquesYDespacho(){
   event.preventDefault();
 
@@ -402,10 +408,7 @@ function confirmarToquesYDespacho(){
       cancelButtonText: "No",
       closeOnConfirm: false,
   })
-  /*aqui se debiese mandar un request a ajax para quitar la variable de sesion, y volver a cargar la pagina o
-  volver a cargar la tabla y el combobox de las unidades en despacho */
-
-}
+}*/
 
 
 
@@ -434,6 +437,20 @@ function obtenerHoraActual(){
   var today = new Date();
   var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
   return time;
+}
+
+
+$(document).ready(
+ function() {
+ setInterval(function() {
+ var hora = obtenerHoraActual();
+  $('#currentTime').text(hora);
+}, 1000);
+});
+
+function marcarHora(){
+
+  return $('#currentTime').text();
 }
 
 
@@ -475,27 +492,27 @@ function cargarTabla(){
 
       textnode2=document.createTextNode(momento6_0Emergencia);
       cell2 = document.createElement("td");
-      cell2.setAttribute('onclick',"this.innerText = ' "+obtenerHoraActual()+" '");
+      cell2.setAttribute('onclick',"this.innerText = ' "+marcarHora()+" '");
 
       textnode4=document.createTextNode(momento6_3Emergencia);
       cell4 = document.createElement("td");
-      cell4.setAttribute('onclick',"this.innerText = ' "+obtenerHoraActual()+" '");
+      cell4.setAttribute('onclick',"this.innerText = ' "+marcarHora()+" '");
 
       textnode5=document.createTextNode(momento6_7Emergencia);
       cell5 = document.createElement("td");
-      cell5.setAttribute('onclick',"this.innerText = ' "+obtenerHoraActual()+" '");
+      cell5.setAttribute('onclick',"this.innerText = ' "+marcarHora()+" '");
 
       textnode6=document.createTextNode(momento6_8Emergencia);
       cell6 = document.createElement("td");
-      cell6.setAttribute('onclick',"this.innerText = ' "+obtenerHoraActual()+" '");
+      cell6.setAttribute('onclick',"this.innerText = ' "+marcarHora()+" '");
 
       textnode7=document.createTextNode(momento6_9Emergencia);
       cell7 = document.createElement("td");
-      cell7.setAttribute('onclick',"this.innerText = ' "+obtenerHoraActual()+" '");
+      cell7.setAttribute('onclick',"this.innerText = ' "+marcarHora()+" '");
 
       textnode8=document.createTextNode(momento6_10Emergencia);
       cell8 = document.createElement("td");
-      cell8.setAttribute('onclick',"this.innerText = ' "+obtenerHoraActual()+" '");
+      cell8.setAttribute('onclick',"this.innerText = ' "+marcarHora()+" '");
 
       var cell3=document.createElement("INPUT");
 
@@ -522,12 +539,8 @@ function cargarTabla(){
       row.appendChild(cell7);
       row.appendChild(cell8);
       tabBody.appendChild(row);
-
-
     }
-
   });
-
 }
 
 

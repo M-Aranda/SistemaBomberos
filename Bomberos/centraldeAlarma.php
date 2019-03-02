@@ -485,9 +485,6 @@
       </div>
       <div style="margin-top: -60px;margin-left: 60px;font-size:20px;">
         <?php
-
-
-
           date_default_timezone_set('America/Santiago');
 
 
@@ -495,9 +492,10 @@
           $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
 
           echo "<b>".$dias[date('w')]." ".date('d')." de ".$meses[date('n')-1]. " del ".date('Y')."</b>" ;
-          echo "<b>".date(" H:i:s")."</b>";
-          ?>
 
+          //echo "<b>".date(" H:i:s")."</b>";
+          echo "<b><div id=horaActual></div></b>";
+          ?>
 
       </div>
     </div>
@@ -511,7 +509,19 @@
 
 
 <script>
+function obtenerHoraActual(){
+  var today = new Date();
+  var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  return time;
+}
 
+$(document).ready(
+ function() {
+ setInterval(function() {
+ var hora = obtenerHoraActual();
+  $('#horaActual').text(hora);
+}, 1000);
+});
 
 
 function despachar(){
