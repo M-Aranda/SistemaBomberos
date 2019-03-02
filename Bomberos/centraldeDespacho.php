@@ -181,6 +181,16 @@
   border: 2px black outset;
   border-radius: 70px 70px 70px 70px;
 }
+
+#cuadro4{
+  width: 800px;
+  height: 434px;
+  margin-top: 7px;
+  margin-left: 30px;
+  border: 2px black outset;
+  border-radius: 70px 70px 70px 70px;
+}
+
 #jum{
     width: 900px;
     height: 1000px;
@@ -201,7 +211,8 @@
 
 <div style="width: 900px" style="height: 1000px" style="margin-top: -100px" id="jum">
     <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
-        <center style="font-weight:bold;font-size:20px;">Central de Despacho</center>
+        <center style="font-weight:bold;font-size:20px;margin-top:-40px;">Central de Despacho</center>
+      <b> <div id="currentTime" style="margin-left:700px;margin-top:-20px"></div> </b>
       <div class="container">
 
         <div id="cuadro1" style="height: 125px;">
@@ -298,7 +309,6 @@
      </div>
    </div>
 
-
    <div id="cuadro3" style="height: 244px;">
        <div class="jumbotron" style="height: 240px;border-radius: 70px 70px 70px 70px">
          <div class="container" style="height: 240px;">
@@ -314,18 +324,44 @@
 
       </div>
       <div style="margin-top: -69px;margin-left: 590px;">
-        Cerrar Servicio
-        <button type="submit"  id="btn_despachar" name="btnsonido" style="width:50px;height:33px;">
-          <img src="images/comprobar.png" alt="x" /></button>
+        <button type="submit"  id="btn_despachar" name="btnsonido" style="width:100px;height:33px;">
+          <img src="images/guardar.png" alt="x" />&nbsp;Guardar</button>
+
+      </div>
+    </div>
+
+
+   <div id="cuadro4" style="height: 244px;">
+       <div class="jumbotron" style="height: 240px;border-radius: 70px 70px 70px 70px">
+         <div class="container" style="height: 240px;">
+
+         <div class="form-group" style="margin-left:-20px;margin-top:-35px;">
+
+            Detalles:<br>
+            <textarea style="width:700px;height:150px">
+            </textarea>
+
+         </div>
+        </div>
+
+      </div>
+      <div style="margin-top: -69px;margin-left: 590px;">
+        <button type="submit"  id="btn_despachar" name="btnsonido" style="width:100px;height:33px;">
+          <img src="images/guardar.png" alt="x" />&nbsp;Guardar</button>
+
       </div>
     </div>
     <br>
+
+
 <center>
-    <button type="submit" id="btn_despachar" name="btnsonido" style="width:200px;height:33px;">
-      <img src="images/camion.png" alt="x" /><a href="centraldeAlarma.php" style="text-decoration:none;color:black;" >Nuevo Despacho</a></button>
+  <button type="submit" id="btn_despachar" name="btnsonido" style="width:200px;height:33px;margin-top: -50px">
+      <img src="images/camion.png" alt="x" /><a href="centraldeAlarma.php" style="text-decoration:none;color:black;" >&nbsp;Nuevo Despacho</a></button>
+
+      <button type="submit"  id="btn_despachar" name="btnsonido" style="width:200px;height:33px;margin-top:-100px;">
+        <img src="images/comprobar.png" alt="x" /><a href="centraldeAlarma.php" style="text-decoration:none;color:black;">&nbsp;Cerrar Servicio</button>
 </center>
 
-  <div id="currentTime"></div>
 
      </div>
    </div>
