@@ -2017,14 +2017,11 @@ public function getIdDeSectorAPartirDelNombre($sector){
 }
 
 public function registrarDespachoEnviado($idServico, $idUnidad){
-
   $this->c->conectar();
   $query="INSERT INTO tbl_servicio_unidad (fk_servicio, fk_unidad, emergenciaActiva) VALUES (".$idServico.",".$idUnidad.",1);";
   echo $query;
   $this->c->ejecutar($query);
   $this->c->desconectar();
-
-
 }
 
 
@@ -4079,6 +4076,72 @@ public function determinarCarrosADespacharSegunCodigoDeServicioYSector($idServic
 
 }
 
+
+public function registrar6_0UnidadEnEmergencia($idEmergencia){
+  $this->c->conectar();
+  $query="UPDATE tbl_servicio_unidad SET momento6_0=NOW() WHERE id_servicio_unidad=".$idEmergencia.";";
+  echo $query;
+
+  $this->c->ejecutar($query);
+  $this->c->desconectar();
+}
+
+public function registrar6_3UnidadEnEmergencia($idEmergencia){
+  $this->c->conectar();
+  $query="UPDATE tbl_servicio_unidad SET momento6_3=NOW() WHERE id_servicio_unidad=".$idEmergencia.";";
+  echo $query;
+
+  $this->c->ejecutar($query);
+  $this->c->desconectar();
+}
+
+public function registrar6_7UnidadEnEmergencia($idEmergencia){
+  $this->c->conectar();
+  $query="UPDATE tbl_servicio_unidad SET momento6_7=NOW() WHERE id_servicio_unidad=".$idEmergencia.";";
+  echo $query;
+
+  $this->c->ejecutar($query);
+  $this->c->desconectar();
+}
+
+public function registrar6_8UnidadEnEmergencia($idEmergencia){
+  $this->c->conectar();
+  $query="UPDATE tbl_servicio_unidad SET momento6_8=NOW() WHERE id_servicio_unidad=".$idEmergencia.";";
+  echo $query;
+
+  $this->c->ejecutar($query);
+  $this->c->desconectar();
+}
+
+public function registrar6_9UnidadEnEmergencia($idEmergencia){
+  $this->c->conectar();
+  $query="UPDATE tbl_servicio_unidad SET momento6_9=NOW() WHERE id_servicio_unidad=".$idEmergencia.";";
+  echo $query;
+
+  $this->c->ejecutar($query);
+  $this->c->desconectar();
+}
+
+public function registrar6_10UnidadEnEmergencia($idEmergencia){
+  $this->c->conectar();
+  $query="UPDATE tbl_servicio_unidad SET momento6_10=NOW() WHERE id_servicio_unidad=".$idEmergencia.";";
+  echo $query;
+
+  $this->c->ejecutar($query);
+  $this->c->desconectar();
+}
+
+
+public function getHora6_0($id){
+  $this->c->conectar();
+  $query="SELECT momento6_0 FROM tbl_servicio_unidad WHERE id_servicio_unidad=".$id.";";
+  $rs = $this->c->ejecutar($query);
+  while($reg = $rs->fetch_array()){
+    $obj=$reg[0];
+   }
+   $this->c->desconectar();
+   return $obj;
+}
 
 
 }
