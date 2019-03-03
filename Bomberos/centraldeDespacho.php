@@ -538,23 +538,39 @@ function registrarHora6_10(idDeLaEmergencia){
 }
 
 //pendiente esta funcion
+function getHora6_0(idEmer){
+    $.ajax({
+    url: "obtenerHora6_0.php",
+    type: "POST",
+    data:{"identificadorDeEmergencia": idEmer},
+    success: function(data){
+      console.log(data);
+      document.getElementById(idEmer).innerHTML =data;
+    }
+  });
+
+}
+
+
+/*
+Esta funcion funciona, pero async esta deprecado. Evitar, de ser posible.
+
 function getHora6_0(idEmer,e){
 var aRetornar="algo";
   $.ajax({
     url: "obtenerHora6_0.php",
     type: "POST",
     data:{"identificadorDeEmergencia": idEmer},
+    async: false,
     success: function(data){
       console.log(data);
-      //Si le puedo pasar el elemento entero, pero necesito poder cambiar el valor que tiene
-      alert(e);
-
+      aRetornar=data;
     }
   });
-
   return aRetornar;
-
 }
+
+*/
 
 
 function cargarTabla(){
@@ -595,8 +611,9 @@ function cargarTabla(){
 
       textnode2=document.createTextNode(momento6_0Emergencia);
       cell2 = document.createElement("td");
-      cell2.setAttribute('onclick','registrarHora6_0('+idEmergencia+'), this.innerText = getHora6_0('+idEmergencia+',this');
-
+      cell2.setAttribute("id", idEmergencia);
+      cell2.setAttribute('onclick','registrarHora6_0('+idEmergencia+'),  getHora6_0('+idEmergencia+')');
+      //this.innerText = getHora6_0('+idEmergencia+',this)'
       textnode4=document.createTextNode(momento6_3Emergencia);
       cell4 = document.createElement("td");
       cell4.setAttribute('onclick','registrarHora6_3('+idEmergencia+') ');
