@@ -470,6 +470,7 @@ function marcarHora(){
   return $('#currentTime').text();
 }
 
+//registra el momento exacto y muestra la hora exacta en la que se hizo la actualizacion
 function registrarHora6_0(idDeLaEmergencia){
   $.ajax({
     url: "registrarEstadoDeCarro6_0.php",
@@ -477,6 +478,7 @@ function registrarHora6_0(idDeLaEmergencia){
     data:{"identificadorDeEmergencia": idDeLaEmergencia},
     success: function(data){
       console.log(data);
+      document.getElementById(idDeLaEmergencia).innerHTML =data;
     }
   });
 }
@@ -537,7 +539,8 @@ function registrarHora6_10(idDeLaEmergencia){
   });
 }
 
-//pendiente esta funcion
+
+//innecesario
 function getHora6_0(idEmer){
     $.ajax({
     url: "obtenerHora6_0.php",
@@ -612,7 +615,7 @@ function cargarTabla(){
       textnode2=document.createTextNode(momento6_0Emergencia);
       cell2 = document.createElement("td");
       cell2.setAttribute("id", idEmergencia);
-      cell2.setAttribute('onclick','registrarHora6_0('+idEmergencia+'),  getHora6_0('+idEmergencia+')');
+      cell2.setAttribute('onclick','registrarHora6_0('+idEmergencia+')');
       //this.innerText = getHora6_0('+idEmergencia+',this)'
       textnode4=document.createTextNode(momento6_3Emergencia);
       cell4 = document.createElement("td");

@@ -4070,17 +4070,13 @@ public function determinarCarrosADespacharSegunCodigoDeServicioYSector($idServic
         $carrosAEnviar[]=7;
         $carrosAEnviar[]=8;
       }
-
-
    return $carrosAEnviar;
-
 }
 
 
 public function registrar6_0UnidadEnEmergencia($idEmergencia){
   $this->c->conectar();
   $query="UPDATE tbl_servicio_unidad SET momento6_0=NOW() WHERE id_servicio_unidad=".$idEmergencia.";";
-  echo $query;
 
   $this->c->ejecutar($query);
   $this->c->desconectar();
@@ -4089,7 +4085,6 @@ public function registrar6_0UnidadEnEmergencia($idEmergencia){
 public function registrar6_3UnidadEnEmergencia($idEmergencia){
   $this->c->conectar();
   $query="UPDATE tbl_servicio_unidad SET momento6_3=NOW() WHERE id_servicio_unidad=".$idEmergencia.";";
-  echo $query;
 
   $this->c->ejecutar($query);
   $this->c->desconectar();
@@ -4098,7 +4093,6 @@ public function registrar6_3UnidadEnEmergencia($idEmergencia){
 public function registrar6_7UnidadEnEmergencia($idEmergencia){
   $this->c->conectar();
   $query="UPDATE tbl_servicio_unidad SET momento6_7=NOW() WHERE id_servicio_unidad=".$idEmergencia.";";
-  echo $query;
 
   $this->c->ejecutar($query);
   $this->c->desconectar();
@@ -4116,7 +4110,6 @@ public function registrar6_8UnidadEnEmergencia($idEmergencia){
 public function registrar6_9UnidadEnEmergencia($idEmergencia){
   $this->c->conectar();
   $query="UPDATE tbl_servicio_unidad SET momento6_9=NOW() WHERE id_servicio_unidad=".$idEmergencia.";";
-  echo $query;
 
   $this->c->ejecutar($query);
   $this->c->desconectar();
@@ -4125,7 +4118,6 @@ public function registrar6_9UnidadEnEmergencia($idEmergencia){
 public function registrar6_10UnidadEnEmergencia($idEmergencia){
   $this->c->conectar();
   $query="UPDATE tbl_servicio_unidad SET momento6_10=NOW() WHERE id_servicio_unidad=".$idEmergencia.";";
-  echo $query;
 
   $this->c->ejecutar($query);
   $this->c->desconectar();
