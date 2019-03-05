@@ -1,8 +1,8 @@
 <?php
   Class Tbl_apoyo{
 
-    private $idApoyo
-    private $fkEntidad
+    private $idApoyo;
+    private $fkEntidad;
     private $responsable;
     private $ppuu;
 

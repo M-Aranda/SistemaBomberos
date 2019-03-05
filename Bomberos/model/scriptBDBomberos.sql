@@ -603,6 +603,7 @@ FOREIGN KEY (fk_entidadExterior) REFERENCES tbl_entidad_exteriror (id_entidad_ex
 PRIMARY KEY(id_apoyo)
 );
 
+
 CREATE TABLE tbl_apoyoEntidadExterior_servicio(
 id_apoyoEntidadExterior_servicio INT AUTO_INCREMENT,
 fk_servicio INT,
@@ -1679,6 +1680,14 @@ INSERT INTO tbl_sector (nombre_sector) VALUES
 
 
 /*
+Select para obtener los apoyos del servicio 
+
+SELECT tbl_apoyo.id_apoyo, tbl_entidad_exteriror.nombre_entidad_exterior, tbl_apoyo.responsable, tbl_apoyo.PPUU FROM tbl_entidad_exteriror, tbl_apoyo, tbl_apoyoEntidadExterior_servicio, tbl_servicio
+WHERE tbl_entidad_exteriror.id_entidad_exterior=tbl_apoyo.fk_entidadExterior AND  tbl_apoyoEntidadExterior_servicio.fk_apoyo=tbl_apoyo.id_apoyo AND
+tbl_apoyoEntidadExterior_servicio.fk_servicio=tbl_servicio.id_servicio AND tbl_servicio.id_servicio=1;
+
+
+
 Select para todo el inventario
 
 SELECT tbl_material_menor.nombre_material_menor, tbl_entidadACargo.nombre_entidadACargo, tbl_material_menor.color_material_menor, tbl_material_menor.cantidad_material_menor, tbl_material_menor.medida_material_menor,
@@ -1943,7 +1952,9 @@ INSERT INTO tbl_servicio_unidad VALUES (NULL, 5,8, '2019-03-03 10:10:10','Alguie
 '2019-03-03 10:10:10','2019-03-03 10:10:10',0);
 
 INSERT INTO tbl_entidad_exteriror (nombre_entidad_exterior) VALUES ('Carabineros'), ('Samu'), ('Otro cuerpo de bomberos');
--- INSERT INTO tbl_informacionDeCargos (fk_materialMenorAsignado_informacionDeCargos,cantidadAsignada_informacionDeCargos,fk_personal_informacionDeCargos) VALUES (1,1,1);
+
+INSERT INTO tbl_apoyo (fk_entidadExterior,responsable, PPUU) VALUES (1,'alguien1','algo'),(1,'alguien1','algo'),(1,'alguien3','algo'),(1,'alguien4','algo'),(1,'alguien5','algo');
+INSERT INTO tbl_apoyoEntidadExterior_servicio (fk_servicio,fk_apoyo) VALUES (2,1),(2,2),(2,3),(2,4),(2,5);
 
 /*
 DROP DATABASE bomberosBD;

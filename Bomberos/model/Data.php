@@ -44,6 +44,7 @@ require_once("Tbl_servicio.php");
 require_once("Tbl_servicio_unidad.php");
 require_once("ServicioYSector.php");
 require_once("Tbl_entidad_exterior.php");
+require_once("Tbl_apoyo.php");
 
 
 class Data{
@@ -4231,6 +4232,27 @@ public function agregarEntidadExteriorComoApoyo($idServicio,$idApoyo){
   $query="INSERT INTO  tbl_apoyoEntidadExterior_servicio VALUES (NULL,".$idServicio.",".$idApoyo.");";
   $this->c->ejecutar($query);
   $this->c->desconectar();
+}
+
+public function getApoyosDelServicio($idServicio){
+  $this->c->conectar();
+  $query="SELECT tbl_apoyo.id_apoyo, tbl_entidad_exteriror.nombre_entidad_exterior, tbl_apoyo.responsable, tbl_apoyo.PPUU FROM tbl_entidad_exteriror, tbl_apoyo, tbl_apoyoEntidadExterior_servicio, tbl_servicio
+WHERE tbl_entidad_exteriror.id_entidad_exterior=tbl_apoyo.fk_entidadExterior AND  tbl_apoyoEntidadExterior_servicio.fk_apoyo=tbl_apoyo.id_apoyo AND
+tbl_apoyoEntidadExterior_servicio.fk_servicio=tbl_servicio.id_servicio AND tbl_servicio.id_servicio=".$idServicio.";";
+  $listado= array();
+  $rs = $this->c->ejecutar($query);
+  while($reg = $rs->fetch_array()){
+    $obj= new Tbl_apoyo();
+    $obj->setIdApoyo($reg[0]);
+    $obj->setFkEntidad($reg[1]);
+    $obj->setResponsable($reg[2]);
+    $obj->setPpuu($reg[3]);
+
+    $listado[]=$obj;
+   }
+   $this->c->desconectar();
+   return $listado;
+
 }
 
 

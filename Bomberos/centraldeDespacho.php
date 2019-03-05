@@ -148,6 +148,31 @@
     ">
 
 <style>
+/*
+
+Estas 2 agregan un scroll, pero me pitean la tabla
+
+td {
+  width: 120px;
+}
+
+thead,
+tbody {
+  display: block;
+}
+
+tbody {
+  height: 100px;
+  overflow: auto;
+}
+
+
+*/
+
+
+
+
+
 #transparencia{
     opacity: .75;
     -moz-opacity: .75;
@@ -343,7 +368,7 @@
 
             <br><br>
 
-            <table class="table table-striped" RULES="cols" style="overflow:scroll;" >
+            <table  id="tablaApoyosAEmergencia"  name="tablaApoyosAEmergencia" class="table table-striped" RULES="cols" style="overflow:scroll;" >
                 <thead>
                   <TD >Apoyo</TD>
                   <TD>Responsable</TD>
@@ -358,7 +383,6 @@
                 <div style="margin-top: 110px;margin-left:550px">
                   <button type="submit"  id="btn_despachar" name="btnsonido" style="width:100px;height:33px;">
                     <img src="images/guardar.png" alt="x" />&nbsp;Guardar</button>
-
                 </div>
               </form>
 
@@ -582,6 +606,56 @@ function cargarTabla(){
 
   //cargarInfoDeApoyos aqui
   document.getElementById("idDeServicioAlQueSeVaAApoyar").value=id;
+
+  $.ajax({
+    url: "getApoyosDelServicio.php",
+    type: "POST",
+    data:{"idServicio":id}
+  }).done(function(data) {
+    console.log(data);
+    var objetos=JSON.parse(data);
+
+     $("#tablaApoyosAEmergencia tbody tr").remove();
+
+    var i;
+    for (i = 0; i < objetos.length; i++) {
+      var objetoJSON= $.parseJSON(objetos[i]);
+
+      var idApoyo=objetoJSON.idApoyo;
+      var nombreEntidadApoyo=objetoJSON.nombreEntidadApoyo;
+      var responsableApoyo=objetoJSON.responsableApoyo;
+      var ppuuApoyo=objetoJSON.ppuuApoyo;
+
+
+      if (!document.getElementsByTagName) return;
+      //la siguiente linea obtiene el elemento por nombre del tag, pero la segunda coincidecnia se rescata
+      tabBody=document.getElementsByTagName("tbody").item(1);
+      row=document.createElement("tr");
+
+      cell1 = document.createElement("td");
+      textnode1=document.createTextNode(nombreEntidadApoyo);
+
+      textnode2=document.createTextNode(responsableApoyo);
+      cell2 = document.createElement("td");
+
+      textnode3=document.createTextNode(ppuuApoyo);
+      cell3 = document.createElement("td");
+
+      cell1.appendChild(textnode1);
+      cell2.appendChild(textnode2);
+      cell3.appendChild(textnode3)
+      row.appendChild(cell1);
+      row.appendChild(cell2);
+      row.appendChild(cell3);
+      tabBody.appendChild(row);
+    }
+  });
+
+
+
+
+
+
 
 
   $.ajax({
