@@ -281,13 +281,13 @@
            </div>
          </div>
 
-  <div id="cuadro2" style="height: 340px;">
-      <div class="jumbotron"  style="height: 330px;border-radius: 70px 70px 70px 70px;">
+  <div id="cuadro2" style="height: 305px;">
+      <div class="jumbotron"  style="height: 300px;border-radius: 70px 70px 70px 70px;">
         <div class="container" style="height: 330px;">
           <center style="margin-top:-30px;font-weight:bold;"> Detalle del Servicio</center><br>
         <div class="form-group" style="margin-left:0px;Margin-top:-9px;">
 
-          <table id="tablaDeEmergencia" name="tablaDeEmergencia" class="table table-striped" RULES="cols" >
+          <table id="tablaDeEmergencia" name="tablaDeEmergencia" class="table table-striped" RULES="cols" style="overflow:scroll;" >
               <thead>
                 <TD style="width:80px;">Unidad</TD>
                 <TD>6-0</TD>
@@ -309,50 +309,75 @@
      </div>
    </div>
 
-   <div id="cuadro3" style="height: 244px;">
-       <div class="jumbotron" style="height: 240px;border-radius: 70px 70px 70px 70px">
+   <div id="cuadro3" style="height: 290px;">
+       <div class="jumbotron" style="height: 285px;border-radius: 70px 70px 70px 70px">
          <div class="container" style="height: 240px;">
 
          <div class="form-group" style="margin-left:-20px;margin-top:-35px;">
 
-            Detalles:<br>
-            <textarea style="width:700px;height:150px">
-            </textarea>
+            Apoyo otra Entidad:
+            <select style="width:525px;height:25px;">
+            </select>
+
+            <br><br>
+
+            Responsable:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="text" name="txtresposableapoyo" style="width:300px;">
+
+
+            P.P.U.U:
+            <input type="text" name="txtppuapoyo">
+
+            <br><br>
+
+            <table class="table table-striped" RULES="cols" style="overflow:scroll;" >
+                <thead>
+                  <TD >Apoyo</TD>
+                  <TD>Responsable</TD>
+                  <TD>PPUU</TD>
+                </thead>
+                <tbody>
+
+
+                </tbody>
+                </table>
+
+                <div style="margin-top: 110px;margin-left:550px">
+                  <button type="submit"  id="btn_despachar" name="btnsonido" style="width:100px;height:33px;">
+                    <img src="images/guardar.png" alt="x" />&nbsp;Guardar</button>
+
+                </div>
+
+
 
          </div>
         </div>
 
       </div>
-      <div style="margin-top: -69px;margin-left: 590px;">
-        <button type="submit"  id="btn_despachar" name="btnsonido" style="width:100px;height:33px;">
-          <img src="images/guardar.png" alt="x" />&nbsp;Guardar</button>
 
-      </div>
     </div>
 
-
-   <div id="cuadro4" style="height: 244px;">
-       <div class="jumbotron" style="height: 240px;border-radius: 70px 70px 70px 70px">
+   <div id="cuadro4" style="height: 184px;">
+       <div class="jumbotron" style="height: 180px;border-radius: 70px 70px 70px 70px">
          <div class="container" style="height: 240px;">
 
          <div class="form-group" style="margin-left:-20px;margin-top:-35px;">
 
             Detalles:<br>
-            <textarea style="width:700px;height:150px">
+            <textarea style="width:700px;height:100px">
             </textarea>
 
          </div>
         </div>
 
       </div>
-      <div style="margin-top: -69px;margin-left: 590px;">
+      <div style="margin-top: -73px;margin-left: 590px;">
         <button type="submit"  id="btn_despachar" name="btnsonido" style="width:100px;height:33px;">
           <img src="images/guardar.png" alt="x" />&nbsp;Guardar</button>
 
       </div>
     </div>
     <br>
-
 
 <center>
   <button type="submit" id="btn_despachar" name="btnsonido" style="width:200px;height:33px;margin-top: -50px">
@@ -369,8 +394,6 @@
 
 
 </div>
-
-
 
 <script>
 
