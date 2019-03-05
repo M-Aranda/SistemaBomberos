@@ -314,9 +314,22 @@
          <div class="container" style="height: 240px;">
 
          <div class="form-group" style="margin-left:-20px;margin-top:-35px;">
+           <form action="controlador/AgregarApoyoEntidadExteriorAServicio.php" method="post">
+             <input type="hidden" id="idDeServicioAlQueSeVaAApoyar" name="idDeServicioAlQueSeVaAApoyar" value="">
 
+
+           <?php
+           $listadoDeEntidadesDeApoyo=$data->getTodasLasEntidadesExteriores();
+
+           ?>
             Apoyo otra Entidad:
-            <select style="width:525px;height:25px;">
+            <select id="entidadExteriorApoyando" name="entidadExteriorApoyando" style="width:525px;height:25px;">
+              <?php
+              foreach ($listadoDeEntidadesDeApoyo as $e => $entidadExterior) {?>
+                <option value="<?php echo $entidadExterior->getIdEntidadExterior();?>"><?php echo utf8_encode($entidadExterior->getNombreEntidadExterior());?> </option>
+
+          <?php    }
+              ?>
             </select>
 
             <br><br>
@@ -347,6 +360,7 @@
                     <img src="images/guardar.png" alt="x" />&nbsp;Guardar</button>
 
                 </div>
+              </form>
 
 
 
@@ -439,9 +453,7 @@ function actualizarDatosOBACConductoryNPersonal(idSerUnidad){
             "cantidadPersonal": nPer,
             "idServicioUnidad": idSerUnidad,}
     });
-
   }).catch(swal.noop)
-
 }
 
 function mostrarhora(){
@@ -455,7 +467,6 @@ setTimeout("mostrarhora()",1000);
 
 
 function despacharUnidadesALaEmergencia(){
-
 Swal.fire({
   title: 'Sistema de bomberos',
   text: "¿Despachar unidades?",
@@ -467,7 +478,6 @@ Swal.fire({
   cancelButtonText: 'No'
 }).then((result) => {
   if (result.value) {
-
     document.getElementById("formEnviarUnidades").submit();
   }
 })
@@ -488,7 +498,6 @@ $(document).ready(
 }, 1000);
 });
 
-
 function marcarHora(){
   return $('#currentTime').text();
 }
@@ -501,106 +510,79 @@ function registrarHora6_0(idDeLaEmergencia){
     data:{"identificadorDeEmergencia": idDeLaEmergencia},
     success: function(data){
       console.log(data);
-      document.getElementById(idDeLaEmergencia).innerHTML =data;
-    }
+      document.getElementById(idDeLaEmergencia).innerHTML = data;
+      }
   });
 }
 
 
-function registrarHora6_3(idDeLaEmergencia){
+function registrarHora6_3(idDeLaEmergencia, e){
   $.ajax({
     url: "registrarEstadoDeCarro6_3.php",
     type: "POST",
     data:{"identificadorDeEmergencia": idDeLaEmergencia},
     success: function(data){
       console.log(data);
+      e.innerHTML = data;
     }
   });
 }
 
-function registrarHora6_7(idDeLaEmergencia){
+function registrarHora6_7(idDeLaEmergencia, e){
   $.ajax({
     url: "registrarEstadoDeCarro6_7.php",
     type: "POST",
     data:{"identificadorDeEmergencia": idDeLaEmergencia},
     success: function(data){
       console.log(data);
+      e.innerHTML = data;
     }
   });
 }
 
-function registrarHora6_8(idDeLaEmergencia){
+function registrarHora6_8(idDeLaEmergencia, e){
   $.ajax({
     url: "registrarEstadoDeCarro6_8.php",
     type: "POST",
     data:{"identificadorDeEmergencia": idDeLaEmergencia},
     success: function(data){
       console.log(data);
+      e.innerHTML = data;
     }
   });
 }
 
-function registrarHora6_9(idDeLaEmergencia){
+function registrarHora6_9(idDeLaEmergencia,e){
   $.ajax({
     url: "registrarEstadoDeCarro6_9.php",
     type: "POST",
     data:{"identificadorDeEmergencia": idDeLaEmergencia},
     success: function(data){
       console.log(data);
+      e.innerHTML = data;
     }
   });
 }
 
-function registrarHora6_10(idDeLaEmergencia){
+function registrarHora6_10(idDeLaEmergencia, e){
   $.ajax({
     url: "registrarEstadoDeCarro6_10.php",
     type: "POST",
     data:{"identificadorDeEmergencia": idDeLaEmergencia},
     success: function(data){
       console.log(data);
+      e.innerHTML = data;
     }
   });
 }
-
-
-//innecesario
-function getHora6_0(idEmer){
-    $.ajax({
-    url: "obtenerHora6_0.php",
-    type: "POST",
-    data:{"identificadorDeEmergencia": idEmer},
-    success: function(data){
-      console.log(data);
-      document.getElementById(idEmer).innerHTML =data;
-    }
-  });
-
-}
-
-
-/*
-Esta funcion funciona, pero async esta deprecado. Evitar, de ser posible.
-
-function getHora6_0(idEmer,e){
-var aRetornar="algo";
-  $.ajax({
-    url: "obtenerHora6_0.php",
-    type: "POST",
-    data:{"identificadorDeEmergencia": idEmer},
-    async: false,
-    success: function(data){
-      console.log(data);
-      aRetornar=data;
-    }
-  });
-  return aRetornar;
-}
-
-*/
 
 
 function cargarTabla(){
   var id = document.getElementById("cboxdespacho").value;
+
+  //cargarInfoDeApoyos aqui
+  document.getElementById("idDeServicioAlQueSeVaAApoyar").value=id;
+
 
   $.ajax({
     url: "getServiciosUnidad.php",
@@ -637,28 +619,33 @@ function cargarTabla(){
 
       textnode2=document.createTextNode(momento6_0Emergencia);
       cell2 = document.createElement("td");
-      cell2.setAttribute("id", idEmergencia);
+      cell2.setAttribute("id",idEmergencia);
       cell2.setAttribute('onclick','registrarHora6_0('+idEmergencia+')');
       //this.innerText = getHora6_0('+idEmergencia+',this)'
       textnode4=document.createTextNode(momento6_3Emergencia);
       cell4 = document.createElement("td");
-      cell4.setAttribute('onclick','registrarHora6_3('+idEmergencia+') ');
+      cell4.setAttribute("id",idEmergencia);
+      cell4.setAttribute('onclick','registrarHora6_3('+idEmergencia+',this) ');
 
       textnode5=document.createTextNode(momento6_7Emergencia);
       cell5 = document.createElement("td");
-      cell5.setAttribute('onclick','registrarHora6_7('+idEmergencia+') ');
+      cell5.setAttribute("id",idEmergencia);
+      cell5.setAttribute('onclick','registrarHora6_7('+idEmergencia+',this) ');
 
       textnode6=document.createTextNode(momento6_8Emergencia);
       cell6 = document.createElement("td");
-      cell6.setAttribute('onclick','registrarHora6_8('+idEmergencia+') ');
+      cell6.setAttribute("id",idEmergencia);
+      cell6.setAttribute('onclick','registrarHora6_8('+idEmergencia+',this) ');
 
       textnode7=document.createTextNode(momento6_9Emergencia);
       cell7 = document.createElement("td");
-      cell7.setAttribute('onclick','registrarHora6_9('+idEmergencia+') ');
+      cell7.setAttribute("id", idEmergencia);
+      cell7.setAttribute('onclick','registrarHora6_9('+idEmergencia+',this) ');
 
       textnode8=document.createTextNode(momento6_10Emergencia);
       cell8 = document.createElement("td");
-      cell8.setAttribute('onclick','registrarHora6_10('+idEmergencia+') ');
+      cell8.setAttribute("id", idEmergencia);
+      cell8.setAttribute('onclick','registrarHora6_10('+idEmergencia+',this) ');
 
       var cell3=document.createElement("INPUT");
 

@@ -588,7 +588,29 @@ FOREIGN KEY(fk_unidad) REFERENCES tbl_unidad (id_unidad),
 PRIMARY KEY(id_servicio_unidad)
 );
 
+CREATE TABLE tbl_entidad_exteriror(
+id_entidad_exterior INT AUTO_INCREMENT,
+nombre_entidad_exterior VARCHAR (300),
+PRIMARY KEY(id_entidad_exterior)
+);
 
+CREATE TABLE tbl_apoyo(
+id_apoyo INT AUTO_INCREMENT,
+fk_entidadExterior INT,
+responsable VARCHAR (300),
+PPUU VARCHAR (300),
+FOREIGN KEY (fk_entidadExterior) REFERENCES tbl_entidad_exteriror (id_entidad_exterior),
+PRIMARY KEY(id_apoyo)
+);
+
+CREATE TABLE tbl_apoyoEntidadExterior_servicio(
+id_apoyoEntidadExterior_servicio INT AUTO_INCREMENT,
+fk_servicio INT,
+fk_apoyo INT,
+FOREIGN KEY(fk_servicio) REFERENCES tbl_servicio (id_servicio),
+FOREIGN KEY(fk_apoyo) REFERENCES tbl_apoyo (id_apoyo),
+PRIMARY KEY(id_apoyoEntidadExterior_servicio)
+);
 
 -- Procedimientos
 
@@ -1651,6 +1673,9 @@ INSERT INTO tbl_sector (nombre_sector) VALUES
 -- SELECT * FROM tbl_estado_oficial;
 -- SELECT * FROM tbl_servicio;
 -- SELECT * FROM tbl_servicio_unidad;
+-- SELECT * FROM tbl_entidad_exteriror;
+-- SELECT * FROM tbl_apoyo;
+-- SELECT * FROM tbl_apoyoEntidadExterior_servicio;
 
 
 /*
@@ -1917,7 +1942,7 @@ INSERT INTO tbl_servicio_unidad VALUES (NULL, 5,7, '2019-03-03 10:10:10','Alguie
 INSERT INTO tbl_servicio_unidad VALUES (NULL, 5,8, '2019-03-03 10:10:10','Alguien','Alguien','quince', '2019-03-03 10:10:10','2019-03-03 10:10:10','2019-03-03 10:10:10',
 '2019-03-03 10:10:10','2019-03-03 10:10:10',0);
 
-
+INSERT INTO tbl_entidad_exteriror (nombre_entidad_exterior) VALUES ('Carabineros'), ('Samu'), ('Otro cuerpo de bomberos');
 -- INSERT INTO tbl_informacionDeCargos (fk_materialMenorAsignado_informacionDeCargos,cantidadAsignada_informacionDeCargos,fk_personal_informacionDeCargos) VALUES (1,1,1);
 
 /*

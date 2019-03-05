@@ -43,6 +43,7 @@ require_once("Tbl_estadoOficial.php");
 require_once("Tbl_servicio.php");
 require_once("Tbl_servicio_unidad.php");
 require_once("ServicioYSector.php");
+require_once("Tbl_entidad_exterior.php");
 
 
 class Data{
@@ -4101,7 +4102,6 @@ public function registrar6_7UnidadEnEmergencia($idEmergencia){
 public function registrar6_8UnidadEnEmergencia($idEmergencia){
   $this->c->conectar();
   $query="UPDATE tbl_servicio_unidad SET momento6_8=NOW() WHERE id_servicio_unidad=".$idEmergencia.";";
-  echo $query;
 
   $this->c->ejecutar($query);
   $this->c->desconectar();
@@ -4133,6 +4133,104 @@ public function getHora6_0($id){
    }
    $this->c->desconectar();
    return $obj;
+}
+
+public function getHora6_3($id){
+  $this->c->conectar();
+  $query="SELECT momento6_3 FROM tbl_servicio_unidad WHERE id_servicio_unidad=".$id.";";
+  $rs = $this->c->ejecutar($query);
+  while($reg = $rs->fetch_array()){
+    $obj=$reg[0];
+   }
+   $this->c->desconectar();
+   return $obj;
+}
+
+public function getHora6_7($id){
+  $this->c->conectar();
+  $query="SELECT momento6_7 FROM tbl_servicio_unidad WHERE id_servicio_unidad=".$id.";";
+  $rs = $this->c->ejecutar($query);
+  while($reg = $rs->fetch_array()){
+    $obj=$reg[0];
+   }
+   $this->c->desconectar();
+   return $obj;
+}
+
+public function getHora6_8($id){
+  $this->c->conectar();
+  $query="SELECT momento6_8 FROM tbl_servicio_unidad WHERE id_servicio_unidad=".$id.";";
+  $rs = $this->c->ejecutar($query);
+  while($reg = $rs->fetch_array()){
+    $obj=$reg[0];
+   }
+   $this->c->desconectar();
+   return $obj;
+}
+
+public function getHora6_9($id){
+  $this->c->conectar();
+  $query="SELECT momento6_9 FROM tbl_servicio_unidad WHERE id_servicio_unidad=".$id.";";
+  $rs = $this->c->ejecutar($query);
+  while($reg = $rs->fetch_array()){
+    $obj=$reg[0];
+   }
+   $this->c->desconectar();
+   return $obj;
+}
+
+public function getHora6_10($id){
+  $this->c->conectar();
+  $query="SELECT momento6_10 FROM tbl_servicio_unidad WHERE id_servicio_unidad=".$id.";";
+  $rs = $this->c->ejecutar($query);
+  while($reg = $rs->fetch_array()){
+    $obj=$reg[0];
+   }
+   $this->c->desconectar();
+   return $obj;
+}
+
+
+public function getTodasLasEntidadesExteriores(){
+  $this->c->conectar();
+  $query="SELECT * FROM tbl_entidad_exteriror;";
+  $listado=array();
+  $rs = $this->c->ejecutar($query);
+  while($reg = $rs->fetch_array()){
+    $obj= new Tbl_entidad_exterior();
+    $obj->setIdEntidadExterior($reg[0]);
+    $obj->setNombreEntidadExterior($reg[1]);
+    $listado[]=$obj;
+   }
+   $this->c->desconectar();
+   return $listado;
+}
+
+
+public function crearNuevoApoyo($fkEntidadExterior, $responsable, $ppuu){
+  $this->c->conectar();
+  $query="INSERT INTO  tbl_apoyo VALUES (NULL,".$fkEntidadExterior.",'".$responsable. "', '".$ppuu."');";
+  $this->c->ejecutar($query);
+  $this->c->desconectar();
+}
+
+public function getIDApoyoMasReciente(){
+  $this->c->conectar();
+  $query="SELECT MAX(id_apoyo) FROM tbl_apoyo;";
+  $rs = $this->c->ejecutar($query);
+  while($reg = $rs->fetch_array()){
+    $obj=$reg[0];
+   }
+   $this->c->desconectar();
+   return $obj;
+}
+
+
+public function agregarEntidadExteriorComoApoyo($idServicio,$idApoyo){
+  $this->c->conectar();
+  $query="INSERT INTO  tbl_apoyoEntidadExterior_servicio VALUES (NULL,".$idServicio.",".$idApoyo.");";
+  $this->c->ejecutar($query);
+  $this->c->desconectar();
 }
 
 

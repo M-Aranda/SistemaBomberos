@@ -6,4 +6,11 @@ $id = isset($_REQUEST['identificadorDeEmergencia'])?$_REQUEST['identificadorDeEm
 
 $data->registrar6_10UnidadEnEmergencia($id);
 
+$diaYHora= $data->getHora6_10($id);
+
+$fragmentos = explode(" ", $diaYHora);
+$hora= $fragmentos[1];
+
+echo $hora;
+
 ?>
