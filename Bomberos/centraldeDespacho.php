@@ -225,6 +225,27 @@ tbody {
       width: 90px;
       background: red;
     }
+
+#divtabla{
+  overflow:scroll;
+  height:150px;
+     width:600px;
+}
+
+#divtabla table {
+    width:500px;
+}
+
+#divtabla2{
+  overflow:scroll;
+  height:250px;
+     width:700px;
+}
+
+#divtabla2 table {
+    width:700px;
+}
+
 </style>
 
 
@@ -310,13 +331,13 @@ tbody {
       <div class="jumbotron"  style="height: 300px;border-radius: 70px 70px 70px 70px;">
         <div class="container" style="height: 330px;">
           <center style="margin-top:-30px;font-weight:bold;"> Detalle del Servicio</center><br>
-        <div class="form-group" style="margin-left:0px;Margin-top:-9px;">
+        <div id="divtabla2" style="margin-left:-25px;Margin-top:-9px;">
 
-          <table id="tablaDeEmergencia" name="tablaDeEmergencia" class="table table-striped" RULES="cols" style="overflow:scroll;" >
+          <table id="tablaDeEmergencia" name="tablaDeEmergencia" class="table table-striped" RULES="cols" >
               <thead>
                 <TD style="width:80px;">Unidad</TD>
                 <TD>6-0</TD>
-                <TD style="width:20px;">boton</TD>
+                <TD style="width:50px;"></TD>
                 <TD>6-3</TD>
                 <TD>6-7</TD>
                 <TD>6-8</TD>
@@ -367,8 +388,8 @@ tbody {
             <input type="text" name="txtppuapoyo">
 
             <br><br>
-
-            <table  id="tablaApoyosAEmergencia"  name="tablaApoyosAEmergencia" class="table table-striped" RULES="cols" style="overflow:scroll;" >
+            <div id="divtabla" style="margin-left: 50px;">
+            <table  id="tablaApoyosAEmergencia"  name="tablaApoyosAEmergencia" class="table table-striped " RULES="cols" style="overflow:scroll" >
                 <thead>
                   <TD >Apoyo</TD>
                   <TD>Responsable</TD>
@@ -379,8 +400,9 @@ tbody {
 
                 </tbody>
                 </table>
+            </div >
 
-                <div style="margin-top: 110px;margin-left:550px">
+                <div style="margin-top: -5px;margin-left:550px">
                   <button type="submit"  id="btn_despachar" name="btnsonido" style="width:100px;height:33px;">
                     <img src="images/guardar.png" alt="x" />&nbsp;Guardar</button>
                 </div>
