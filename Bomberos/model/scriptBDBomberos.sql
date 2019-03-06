@@ -1646,8 +1646,7 @@ INSERT INTO tbl_sector (nombre_sector) VALUES
 ('Carretera el Cobre (Subida a Coya)'),
 ('Avenida Balaguer'),
 ('Parque San Fuente'),
-('Coya'),
-('Ninguno de los Anteriores');
+('Coya');
 
 
 -- SELECTs

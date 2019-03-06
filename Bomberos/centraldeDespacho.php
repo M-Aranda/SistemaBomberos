@@ -148,31 +148,6 @@
     ">
 
 <style>
-/*
-
-Estas 2 agregan un scroll, pero me pitean la tabla
-
-td {
-  width: 120px;
-}
-
-thead,
-tbody {
-  display: block;
-}
-
-tbody {
-  height: 100px;
-  overflow: auto;
-}
-
-
-*/
-
-
-
-
-
 #transparencia{
     opacity: .75;
     -moz-opacity: .75;
@@ -305,7 +280,14 @@ tbody {
                 <?php $emergenciasActivas=$data->getServiciosDeEmergenciasActivas();
                 foreach ($emergenciasActivas as $e => $emer) {?>
 
-                  <option value="<?php echo $emer->getId_servicio();?>"><?php echo $emer->getFecha_servicio();
+                  <option value="<?php echo $emer->getId_servicio();?>"><?php
+
+                  $momento;
+                  $pieces=explode(" ",$emer->getFecha_servicio());
+                  $momento = date("d-m-Y", strtotime($pieces[0]));
+                  $momento=$momento." ".$pieces[1];
+                  echo $momento;
+
                   echo " "; echo $emer->getFk_tipoDeServicio(); echo " "; $unidadesDelServicio=$data->getUnidadesInvolucradasEnServicio($emer->getId_servicio());
                   foreach ($unidadesDelServicio as $u => $unidad) {
                     echo $unidad." ";

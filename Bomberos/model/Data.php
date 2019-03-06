@@ -1746,8 +1746,7 @@ $query="INSERT INTO tbl_servicio VALUES (NULL, '".$servicio->getNombre_servicio(
                                                 ".$servicio->getFk_sector().",
                                                 ".$servicio->getFk_tipoDeServicio().",
                                                 '".$servicio->getDetalles_servicio()."',
-                                                '".$servicio->getFecha_servicio()."' )";
-  echo $query;
+                                                NOW() )";
   $this->c->conectar();
   $this->c->ejecutar($query);
   $this->c->desconectar();

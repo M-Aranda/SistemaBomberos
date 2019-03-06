@@ -189,6 +189,8 @@
 
 <div style="width: 900px" style="height: 1000px" style="margin-top: -100px" id="jum">
     <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
+      <center style="font-weight:bold;font-size:20px;margin-top:-40px;">Central de Alarma</center>
+      <br>
       <div class="container">
 
 <div id="cuadro1" style="height: 269px;">
@@ -429,18 +431,18 @@
          <div class="form-group" style="margin-left:-20px;margin-top:-35px;">
            <form id="formDespacho" action="controlador/CrearDespacho.php" method="post">
 
-           Nombre:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="txtnombre" style="width:290px;">
-           Rut: <input type="text" name="txtrut" style="width:95px;">
-           Telefono: <input type="text" name="txtTF" style="width:95px;"> <br><br>
+           Nombre:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" id="nombreDePersonaQueLlama" name="txtnombre" style="width:290px;">
+           Rut: <input type="text" id="rutDePersonaQueLlama" name="txtrut" style="width:95px;">
+           Telefono: <input type="text" id="telefonoDePersonaQueLlama" name="txtTF" style="width:95px;"> <br><br>
 
-           Direccion:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="txtdireccion" style="width:580px;"> <br><br>
-
+           Direccion:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="txtdireccion" id="direccionDePersonaQueLlama" style="width:580px;" > <br><br>
            Esquina Nº1: <input type="text" name="txtEsquina1" style="width:240px">&nbsp;
            Esquina Nº2: <input type="text" name="txtEsquina2" style="width:247px">
            <br><br>
 
            Sector:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-           <select  name="cboSectores" id="cboSectores" style="width:280px; height:30px;">
+           <select  name="cboSectores" id="cboSectores" onclick="borrarOpcionSeleccionarSector()" style="width:280px; height:30px;">
+           <option selected disabled value="0">Seleccione un sector</option>
            <?php
            $listado = $data->readSectores();
            foreach($listado as $o => $objeto){
@@ -456,7 +458,8 @@
            &nbsp;&nbsp;&nbsp;&nbsp;
 
            Tipo de Emergencia:
-           <select  name="cboTiposDeServicios" id="cboTiposDeServicios" style="width:80px; height:30px;">
+           <select  name="cboTiposDeServicios" id="cboTiposDeServicios" onclick="borrarOpcionElegirEmergencia()" style="width:80px; height:30px;">
+           <option selected disabled value="0">Servicio</option>
            <?php
            $listado = $data->readTiposDeServicios();
            foreach($listado as $o => $objeto){
@@ -487,13 +490,12 @@
         <?php
           date_default_timezone_set('America/Santiago');
 
-
           $dias = array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado");
           $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
 
           echo "<b>".$dias[date('w')]." ".date('d')." de ".$meses[date('n')-1]. " del ".date('Y')."</b>" ;
-
           //echo "<b>".date(" H:i:s")."</b>";
+
           echo "<b><div id=horaActual style='margin-top: -28px;margin-left:290px;';></div></b>";
           ?>
 
@@ -510,6 +512,13 @@
 
 <script>
 
+function borrarOpcionSeleccionarSector(){
+  $("#cboSectores option[value='0']").remove();
+}
+
+function borrarOpcionElegirEmergencia(){
+  $("#cboTiposDeServicios option[value='0']").remove();
+}
 
 
 
@@ -532,6 +541,13 @@ $(document).ready(
 
 function despachar(){
   event.preventDefault();
+
+  var nom=$('#nombreDePersonaQueLlama').val();
+  var rut=$('#rutDePersonaQueLlama').val();
+  var tel=$('#telefonoDePersonaQueLlama').val();
+  var dir=$('#direccionDePersonaQueLlama').val();
+  var sec=$('#cboSectores').val();
+  var tds=$('#cboTiposDeServicios').val();
 
   var tipoDeServicio=$("#cboTiposDeServicios :selected").text();
   var sector=$("#cboSectores :selected").text();
