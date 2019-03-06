@@ -332,7 +332,7 @@ tbody {
         <div class="container" style="height: 330px;">
           <center style="margin-top:-30px;font-weight:bold;"> Detalle del Servicio</center><br>
         <div id="divtabla2" style="margin-left:-25px;Margin-top:-9px;">
-
+        <!--  <img src="images/bombero.png" id="foto"> -->
           <table id="tablaDeEmergencia" name="tablaDeEmergencia" class="table table-striped" RULES="cols" >
               <thead>
                 <TD style="width:80px;">Unidad</TD>
@@ -744,11 +744,16 @@ function cargarTabla(){
       cell8.setAttribute('onclick','registrarHora6_10('+idEmergencia+',this) ');
 
       var cell3=document.createElement("INPUT");
+      var foto = document.getElementById("foto");
 
       cell3.setAttribute('onclick','actualizarDatosOBACConductoryNPersonal('+idEmergencia+')');
 
+
+
       cell3.setAttribute("type", "submit");
-      cell3.setAttribute("value", "algun valor");
+      cell3.setAttribute("value", "images/bombero.png");
+      cell3.setAttribute("style","border-radius: 70px 70px 70px 70px;width:50px;height:50px;");
+      cell3.setAttribute("img","images/bombero.png");
 
       cell1.appendChild(textnode1);
       cell2.appendChild(textnode2);
