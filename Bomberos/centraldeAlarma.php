@@ -480,6 +480,8 @@
         </center>
         </form>
 
+        <input type="submit" onclick="verificarDatosDeDespachoValidos()" name="btnTest" value="test">
+
          </div>
 
 
@@ -539,15 +541,52 @@ $(document).ready(
 });
 
 
-function despachar(){
-  event.preventDefault();
-
+function verificarDatosDeDespachoValidos(){
   var nom=$('#nombreDePersonaQueLlama').val();
   var rut=$('#rutDePersonaQueLlama').val();
   var tel=$('#telefonoDePersonaQueLlama').val();
   var dir=$('#direccionDePersonaQueLlama').val();
-  var sec=$('#cboSectores').val();
-  var tds=$('#cboTiposDeServicios').val();
+
+  var e = document.getElementById("cboSectores");
+  var valorSec = e.options[e.selectedIndex].value;
+
+  e = document.getElementById("cboTiposDeServicios");
+  var valorTds = e.options[e.selectedIndex].value;
+
+  if(nom.trim()==""){
+    document.getElementById("nombreDePersonaQueLlama").focus();
+    swal({
+      title: "Sistema de bomberos",
+      text: "Debe ingresar un nombre",
+      type: "error"
+    });
+
+  }
+
+
+  if(valorSec==0){
+    swal({
+      title: "Sistema de bomberos",
+      text: "Debe seleccionar un sector",
+      type: "error"
+    });
+  }
+
+
+  if(valorTds==0){
+    swal({
+      title: "Sistema de bomberos",
+      text: "Debe seleccionar un tipo de servicio",
+      type: "error"
+    });
+  }
+
+}
+
+
+
+function despachar(){
+  event.preventDefault();
 
   var tipoDeServicio=$("#cboTiposDeServicios :selected").text();
   var sector=$("#cboSectores :selected").text();
