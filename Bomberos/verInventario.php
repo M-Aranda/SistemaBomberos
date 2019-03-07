@@ -139,7 +139,7 @@
     width: 75%;
     padding-left: 5%;
     padding-top: -100%;
-    margin-top: -800px;
+    margin-top: -850px;
     margin-bottom: -1000px;
     ">
 
@@ -292,8 +292,8 @@
           </select>
           <br>
           <br>
-          Detalle: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <input type="text" name="txtDetalle" disabled value="<?php echo $material->getDetalleMaterialMenor();?>" style="width:230px;">
+          Detalle: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <input type="text" name="txtDetalle" disabled value="<?php echo $material->getDetalleMaterialMenor();?>" style="width:575px;">
 
 
            <br><br>

@@ -198,10 +198,10 @@
 
     <div style="width: 1055px" style="height: 900px">
         <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
-          <div class="container">
+          <div class="container" style="margin-left:-20px;">
 
 
-          <div style="margin-left:52px;">
+          <div style="margin-left:30px;">
              <div class="col-md-24">
                <button type="button" class="btn btn-default col-md-12" data-toggle="collapse" data-target="#antecedentes">
                    Información Personal
@@ -223,7 +223,7 @@
                          Talla Chaqueta/camisa : <input class="form-control" value="<?php echo $infoMedidas->getTallaChaquetaCamisa();?>" type="text" name="txtchaqueta" disabled>
                          Talla Pantalón: <input class="form-control" value="<?php echo $infoMedidas->getTallaPantalon();?>" type="text" name="txtpantalon" disabled>
                          Talla buzo: <input class="form-control" value="<?php echo $infoMedidas->getTallaBuzo();?>" type="text" name="txtbuzo" disabled>
-                         talla Calzado: <input class="form-control" value="<?php echo $infoMedidas->getTallaCalzado();?>" type="text" name="txtcalzado" disabled>
+                         Talla Calzado: <input class="form-control" value="<?php echo $infoMedidas->getTallaCalzado();?>" type="text" name="txtcalzado" disabled>
                          Altura :<input class="form-control" value="<?php echo $infoPersonal->getAlturaEnMetros();?>"  type="text" name="txtaltura" disabled>
                          Peso: <input class="form-control" value="<?php echo $infoPersonal->getPeso();?>"  type="text" name="txtpeso" disabled>
                          Perteneció a Brigada Juvenil? <input class="form-control" value="<?php echo $infoPersonal->getPertenecioABrigadaJuvenil();?>"  type="text" name="txtbrigada" disabled>
@@ -361,7 +361,7 @@
 
                                ?>
                              </select>
-                         <br>
+
                          Fecha Ingreso:
                          <br>
                          <input class="form-control" value="<?php echo $infoBomberil->getfechaIngresoinformacionBomberil();?>" type="date" name="txtfingreso" disabled>
@@ -461,19 +461,23 @@
                               echo $infoLaboral->gettelefonoEmpresainformacionLaboral();
                          }
                       ?>" type="text" name="txttlfempresa" disabled>
+
                          Fecha Ingreso: <input class="form-control" value="<?php
                          if(isset($infoLaboral)){
                                echo $infoLaboral->getfechaIngresoEmpresainformacionLaboral();
                          }
                         ?>" type="date" name="txfingresoempresa" disabled>
+
+
+
+                       </div>
+                       <div class="col-md-5">
+
                          cargo : <input class="form-control" value="<?php
                          if(isset($infoLaboral)){
                                 echo $infoLaboral->getcargoEmpresainformacionLaboral();
                          }
                         ?>" type="text" name="txtcargo" disabled>
-
-                       </div>
-                       <div class="col-md-5">
 
                          Area/Depto de trabajo: <input class="form-control" value="<?php
                          if(isset($infoLaboral)){
@@ -505,13 +509,13 @@
            <br>
            <div class="col-md-24">
                <button type="button" class="btn btn-default col-md-12" data-toggle="collapse" data-target="#medica">
-                   Informacion Médica
+                   Información Médica
                </button>
            </div>
            <div class="col-md-12 collapse" id="medica">
                <div class="panel panel-primary">
                    <div class="panel-heading panel-title">
-                       Informacion Médica
+                       Información Médica
                    </div>
                    <div class="panel-body">
                        <div class="col-sm-6">
@@ -615,7 +619,7 @@
 
 
                        <div class="col-sm-6">
-
+                  
                          <!-- Nivel de actividad fisica: <input class="form-control" type="text" name="txtactvfisica"> -->
                          <table class="table table-striped">
                              <thead>
@@ -645,8 +649,6 @@
                              </tbody>
                            </table>
 
-
-
                       </div>
                       <div class="col-md-6">
                          <br><br><br><br><br><br>
@@ -665,13 +667,13 @@
 
            <div class="col-md-24">
                <button type="button" class="btn btn-default col-md-12" data-toggle="collapse" data-target="#academica">
-                   Informacion Académica
+                   Información Académica
                </button>
            </div>
            <div class="col-md-12 collapse" id="academica">
                <div class="panel panel-primary">
                    <div class="panel-heading panel-title">
-                       Informacion Académica
+                       Información Académica
                    </div>
                    <div class="panel-body">
                        <div class="col-sm-6">
@@ -726,7 +728,7 @@
                <div class="col-md-12 collapse" id="estandar">
                    <div class="panel panel-primary">
                        <div class="panel-heading panel-title">
-                           Información Estandar
+                           Información Entrenamiento Estandar
                        </div>
                        <div class="panel-body">
                            <div class="col-sm-6">
@@ -921,7 +923,7 @@
 
 
           </div>
-
+          <br>
           <form action="buscarBombero.php">
           <center><input type="submit" value="Volver atrás"></center>
           </form>

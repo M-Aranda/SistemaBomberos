@@ -375,7 +375,7 @@
 
     <div style="width: 1050px" style="height: 900px">
         <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
-          <div class="container">
+          <div class="container" style="margin-left:-20px;">
 
 
           <div style="margin-left: 52px;">
@@ -399,7 +399,7 @@
                          Talla Chaqueta/camisa : <input class="form-control" value="<?php echo $infoMedidas->getTallaChaquetaCamisa();?>" type="text" name="txtchaqueta" >
                          Talla Pantalón: <input class="form-control" value="<?php echo $infoMedidas->getTallaPantalon();?>" type="text" name="txtpantalon" >
                          Talla buzo: <input class="form-control" value="<?php echo $infoMedidas->getTallaBuzo();?>" type="text" name="txtbuzo" >
-                         talla Calzado: <input class="form-control" value="<?php echo $infoMedidas->getTallaCalzado();?>" type="text" name="txtcalzado" >
+                         Talla Calzado: <input class="form-control" value="<?php echo $infoMedidas->getTallaCalzado();?>" type="text" name="txtcalzado" >
                          Altura :<input class="form-control" value="<?php echo $infoPersonal->getAlturaEnMetros();?>"  type="text" name="txtaltura" >
                          Peso: <input class="form-control" value="<?php echo $infoPersonal->getPeso();?>"  type="text" name="txtpeso" >
                          Perteneció a Brigada Juvenil? <input class="form-control" value="<?php echo $infoPersonal->getPertenecioABrigadaJuvenil();?>"  type="text" name="txtbrigada">
@@ -635,11 +635,10 @@
                          Dirección Empresa: <input class="form-control" value="<?php echo $infoLaboral->getdireccionEmpresainformacionLaboral();?>" type="text" name="txtdirecempresa" >
                          Teléfono Empresa: <input class="form-control" value="<?php echo $infoLaboral->gettelefonoEmpresainformacionLaboral();?>" type="text" name="txttlfempresa" >
                          Fecha Ingreso: <input class="form-control" value="<?php echo $infoLaboral->getfechaIngresoEmpresainformacionLaboral();?>" type="date" name="txfingresoempresa" >
-                         cargo : <input class="form-control" value="<?php echo $infoLaboral->getcargoEmpresainformacionLaboral();?>" type="text" name="txtcargo" >
 
                        </div>
                        <div class="col-md-5">
-
+                         cargo : <input class="form-control" value="<?php echo $infoLaboral->getcargoEmpresainformacionLaboral();?>" type="text" name="txtcargo" >
                          Area/Depto de trabajo: <input class="form-control" value="<?php echo $infoLaboral->getareaDeptoEmpresainformacionLaboral();?>" type="text" name="txtareatrabajo" >
                          AFP: <input class="form-control" value="<?php echo $infoLaboral->getafp_informacionLaboral();?>" type="text" name="txtafp" >
                          Profesión: <input class="form-control" value="<?php echo $infoLaboral->getprofesion_informacionLaboral();?>" name="txtprofesion" >
@@ -659,13 +658,13 @@
            <br>
            <div class="col-md-24">
                <button type="button" class="btn btn-default col-md-12" data-toggle="collapse" data-target="#medica">
-                   Informacion Médica
+                   Información Médica
                </button>
            </div>
            <div class="col-md-12 collapse" id="medica">
                <div class="panel panel-primary">
                    <div class="panel-heading panel-title">
-                       Informacion Médica
+                       Información Médica
                    </div>
                    <div class="panel-body">
                        <div class="col-sm-6">
@@ -801,10 +800,7 @@
                          <center> <input type="submit" name="btninfoFamiliar" value="Crear" class="btn button-primary" style="width: 150px;"> <span ></span>
                      <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>
                             -->
-                            <center>
-                              <input type="submit" id="btn_crearInfoFamiliarEnModificar" name="btninfoFamiliar" value="Crear" class="btn button-primary" style="width: 150px;"> <span ></span>
 
-                         </center>
 
                          </form>
 
@@ -846,7 +842,8 @@
                       <div class="col-md-6">
 
                          <br><br><br><br><br><br>
-                         <input class="form-control" value="" type="hidden" id="idPersonalFamiliar" name="idPersonalFamiliar">
+                           <input type="submit" id="btn_crearInfoFamiliarEnModificar" name="btninfoFamiliar" value="Agregar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                           <input class="form-control" value="" type="hidden" id="idPersonalFamiliar" name="idPersonalFamiliar">
                              <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
                       </div>
 
@@ -861,13 +858,13 @@
 
            <div class="col-md-24">
                <button type="button" class="btn btn-default col-md-12" data-toggle="collapse" data-target="#academica">
-                   Informacion Académica
+                   Información Académica
                </button>
            </div>
            <div class="col-md-12 collapse" id="academica">
                <div class="panel panel-primary">
                    <div class="panel-heading panel-title">
-                       Informacion Académica
+                       Información Académica
                    </div>
                    <div class="panel-body">
                        <div class="col-sm-6">
@@ -891,7 +888,6 @@
                            ?>
                            </select>
 
-                           <center><input type="submit" id="btn_crearInfoAcademicaEnModificar" name="btninfoAcademica" value="Crear" class="btn button-primary" style="width: 150px;"> <span ></span></center></center>
                         <!--   <input class="form-control" value="" type="hidden" id="idPersonalAcadem" name="idPersonalAcadem">
                            <br>
                            <center> <input type="submit" name="btninfoAcademica" value="Crear" class="btn button-primary" style="width: 150px;"> <span ></span></center>
@@ -935,6 +931,7 @@
                       </div>
                       <div class="col-md-6">
                          <br><br><br><br><br>
+                     <input type="submit" id="btn_crearInfoAcademicaEnModificar" name="btninfoAcademica" value="Agregar" class="btn button-primary" style="width: 150px;"> <span ></span>
                          <input class="form-control" value="" type="hidden" id="idPersonalAcadem" name="idPersonalAcadem">
                          <br>
 
@@ -956,7 +953,7 @@
                <div class="col-md-12 collapse" id="estandar">
                    <div class="panel panel-primary">
                        <div class="panel-heading panel-title">
-                           Información Estandar
+                           Información Entrenamiento Estandar
 
                        </div>
                        <div class="panel-body">
@@ -980,7 +977,6 @@
                                ?>
                                </select>
                                <br>
-                               <center> <input type="submit" id="btn_crearInfoEntrenEstandarEnModificar" name="btninfoEstandar" value="Crear" class="btn button-primary" style="width: 150px;"> <span ></span></center>
 
                              </form>
 
@@ -1017,7 +1013,9 @@
                           </div>
                           <div class="col-md-6">
                              <br><br><br><br><br>
-                              </center>
+                              <input type="submit" id="btn_crearInfoEntrenEstandarEnModificar" name="btninfoEstandar" value="Crear" class="btn button-primary" style="width: 150px;"> <span ></span>
+
+
 
                           </div>
                        </div>
@@ -1159,19 +1157,6 @@
                                        ?>
                                    </select>
 
-                                  Ubicacion Fisica:
-                                   <select name="cboxUbicacion" id="cboxUbicacion" class="form-control" onchange="actualizarComboBoxDeMateriales()" >
-                                     <?php
-                                     $ubicacionesFisicas = $data->getUbicacionFisica(1);
-                                     foreach ($ubicacionesFisicas as $ubi) {
-                                       echo "<option value='".$ubi->getIdUbicacionFisica()."'>";
-                                       echo utf8_encode($ubi->getNombreUbicacionFisica());
-                                       echo"</option>";
-                                     }
-                                     ?>
-                                   </select>
-                                   <br>
-
                                    Material menor a asignar:
                                    <select name="cboMaterialesDisponibles" id="cboMaterialesDisponibles" class="form-control"  onchange="actualizarStockDisponible(), cargarDatosDeMaterialSeleccionado()">
                                      <?php
@@ -1184,44 +1169,82 @@
                                      ?>
                                    </select>
                                    <br>
-                                   Stock: <input type="number" class="form-control"  id="stock" name="stock" disabled>
-                                   Cantidad a asignar: <input type="number" class="form-control" value="1" id="cantidadDeMaterialesAsignados" name="cantidadDeMaterialesAsignados" min="1" max="10">
+
+
+                                   <center>
+                                     <br>
+                                    <input type="submit" name="btnInfoCargos" id="btn_crearCargoEnModificar" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                                   </center>
                                    <br>
-                                   <br>
-                                   <center> <input type="submit" name="btnInfoCargos" id="btn_crearCargoEnModificar" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span></center>
+                                   <div>
+
+                                     Marca: <br>
+                                     <input  type="text" id="detalleMarca" name="detalleMarca" disabled style="width: 260px;">
+                                     <br>
+                                     Color:  <br>
+                                     <input  type="text" id="detalleColor" name="detalleColor" disabled style="width: 260px;">
+                                     <br>
+                                     Proveedor:  <br>
+                                     <input  type="text" id="detalleProveedor" name="detalleProveedor" disabled style="width: 230px;">
+                                     <br>
+                                     Estado:  <br>
+                                     <input  type="text" id="detalleEstado" name="detalleEstado" disabled style="width: 250px;">
+
+                                  </div>
                                    </form>
+                                   <br>
                               </div>
 
                               <div class="col-md-6">
+                                <div class="container">
+                                <div class="row">
+                                    <div class="col-md-auto">
+                                      <br>
+                                Ubicacion Fisica:
+                                 <select name="cboxUbicacion" id="cboxUbicacion" class="form-control" onchange="actualizarComboBoxDeMateriales()" >
+                                   <?php
+                                   $ubicacionesFisicas = $data->getUbicacionFisica(1);
+                                   foreach ($ubicacionesFisicas as $ubi) {
+                                     echo "<option value='".$ubi->getIdUbicacionFisica()."'>";
+                                     echo utf8_encode($ubi->getNombreUbicacionFisica());
+                                     echo"</option>";
+                                   }
+                                   ?>
+                                 </select>
+
+                                <div class="col-md-auto">
+                                 Stock: <input type="number" class="form-control"  id="stock" name="stock" style="width:50px;" disabled>
+                               </div>
+
+                               <div class="col-md-auto" style="margin-left: 80px;margin-top:-55px;">
+                                 Cantidad a asignar: <input type="number" class="form-control" style="width:50px;"  value="1" id="cantidadDeMaterialesAsignados" name="cantidadDeMaterialesAsignados" min="1" max="10">
+                               </div>
                                 <br>
-                                Marca: <input type="text" id="detalleMarca" name="detalleMarca" disabled style="width: 260px;">
+
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+
+                                <div>
+                                <br><br>
+                                Fecha de caducidad: <br>
+                                <input  type="text" id="detalleFecha" name="detalleFecha" disabled style="width: 170px;">
                                 <br>
+                                Medida: <br>
+                                <input  type="text" id="detalleMedida" name="detalleMedida" disabled style="width: 250px;">
                                 <br>
-                                Color: <input type="text" id="detalleColor" name="detalleColor" disabled style="width: 260px;">
+                                Tipo de medida:  <br>
+                                <input  type="text" id="detalleTipoDeMedida" name="detalleTipoDeMedida" disabled style="width: 200px;">
                                 <br>
-                                <br>
-                                Proveedor: <input type="text" id="detalleProveedor" name="detalleProveedor" disabled style="width: 230px;">
-                                <br>
-                                <br>
-                                Estado: <input type="text" id="detalleEstado" name="detalleEstado" disabled style="width: 250px;">
-                                <br>
-                                <br>
-                                Fecha de caducidad: <input type="text" id="detalleFecha" name="detalleFecha" disabled style="width: 170px;">
-                                <br>
-                                <br>
-                                Medida: <input type="text" id="detalleMedida" name="detalleMedida" disabled style="width: 250px;">
-                                <br>
-                                <br>
-                                Tipo de medida: <input type="text" id="detalleTipoDeMedida" name="detalleTipoDeMedida" disabled style="width: 200px;">
-                                <br>
-                                <br>
-                                Observaciones: <input type="text" id="detalleObservaciones" name="detalleObservaciones" disabled style="width: 200px;">
-                                <br>
+                                Observaciones: <br>
+                                <input  type="text" id="detalleObservaciones" name="detalleObservaciones" disabled style="width: 200px;">
                                 <br>
                               </div>
 
 
-                             <table class="table table-striped" style="margin-left: 10px;">
+                             <table class="table table-striped" style="margin-left: -450px;">
                                    <thead>
                                      <tr>
                                        <th>Nombre</th>
@@ -1268,6 +1291,12 @@
  </div>
 
 
+
+
+
+
+<br>
+<br>
  <form action="buscarBombero.php">
  <center><input type="submit" value="Volver atrás"></center>
  </form>

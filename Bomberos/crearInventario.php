@@ -147,7 +147,7 @@ if($_SESSION["usuarioIniciado"]!=null){
     width: 75%;
     padding-left: 5%;
     padding-top: -100%;
-    margin-top: -800px;
+    margin-top: -850px;
     margin-bottom: -1000px;
     ">
 
@@ -262,8 +262,8 @@ if($_SESSION["usuarioIniciado"]!=null){
           </select>
           <br>
           <br>
-          Detalle: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <input type="text" name="txtDetalle"required style="width:230px;">
+          Detalle: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <input type="text" name="txtDetalle"required style="width:575px;">
 
 
            <br><br>

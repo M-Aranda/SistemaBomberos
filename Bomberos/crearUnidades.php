@@ -386,19 +386,17 @@
                                         Comentarios/Observaciones: <textarea class="form-control" Type="textarea" name="txtcomentario" ></textarea>
 
                                           <br><br>
-                                        <center> <input id="btn_Crearcarguio" type="submit" name="btncrear" value="Crear carga" class="btn button-primary" style="width: 150px;"> <span ></span>
-                                            <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
-                                        </center>
+
                                       </form>
-                                                                <br>
                                       </div>
-                                      <br>
-                                      <br>
-
-
-
+                                      <center>
+                                        <input id="btn_Crearcarguio" type="submit" name="btncrear" value="Crear carga" class="btn button-primary" style="width: 150px;"> <span ></span>
+                                          <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
+                                      </center>
                                   </div>
+
                               </div>
+
                           </div>
 
 

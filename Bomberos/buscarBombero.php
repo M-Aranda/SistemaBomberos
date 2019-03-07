@@ -134,7 +134,7 @@ if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
     width: 75%;
     padding-left: 5%;
     padding-top: -100%;
-    margin-top: -800px;
+    margin-top: -850px;
     margin-bottom: -1000px;
     ">
 
@@ -260,7 +260,7 @@ if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
             }
              ?>
 
-
+             <br>
 
                 <table class="table table-striped">
                     <thead>

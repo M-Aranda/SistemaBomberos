@@ -233,7 +233,18 @@
 <div style="width: 900px" style="height: 1000px" style="margin-top: -100px" id="jum">
     <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
         <center style="font-weight:bold;font-size:20px;margin-top:-40px;">Central de Despacho</center>
-      <b> <div id="currentTime" style="margin-left:700px;margin-top:-20px"></div> </b>
+      <b>
+        <div style="margin-left:600px;margin-top:-20px">
+        <?php
+      date_default_timezone_set('America/Santiago');
+
+      $dias = array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado");
+      $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+
+      echo "<b>".$dias[date('w')]." ".date('d')." de ".$meses[date('n')-1]. " del ".date('Y')."</b>" ;
+          ?>
+        </div>
+        <div id="currentTime" style="margin-left:800px;margin-top:-20px"></div> </b>
       <div class="container">
 
         <div id="cuadro1" style="height: 125px;">
@@ -314,7 +325,7 @@
         <div class="container" style="height: 330px;">
           <center style="margin-top:-30px;font-weight:bold;"> Detalle del Servicio</center><br>
         <div id="divtabla2" style="margin-left:-25px;Margin-top:-9px;">
-        <!--  <img src="images/bombero.png" id="foto"> -->
+
           <table id="tablaDeEmergencia" name="tablaDeEmergencia" class="table table-striped" RULES="cols" >
               <thead>
                 <TD style="width:80px;">Unidad</TD>
@@ -337,8 +348,8 @@
      </div>
    </div>
 
-   <div id="cuadro3" style="height: 290px;">
-       <div class="jumbotron" style="height: 285px;border-radius: 70px 70px 70px 70px">
+   <div id="cuadro3" style="height: 301px;">
+       <div class="jumbotron" style="height: 297px;border-radius: 70px 70px 70px 70px">
          <div class="container" style="height: 240px;">
 
          <div class="form-group" style="margin-left:-20px;margin-top:-35px;">
@@ -384,7 +395,7 @@
                 </table>
             </div >
 
-                <div style="margin-top: -5px;margin-left:550px">
+                <div style="margin-top: 10px;margin-left:550px">
                   <button type="submit"  id="btn_despachar" name="btnsonido" style="width:100px;height:33px;">
                     <img src="images/guardar.png" alt="x" />&nbsp;Guardar</button>
                 </div>
@@ -413,7 +424,7 @@
         </div>
 
       </div>
-      <div style="margin-top: -73px;margin-left: 590px;">
+      <div style="margin-top: -73px;margin-left: 620px;">
         <button type="submit"  id="btn_despachar" name="btnsonido" style="width:100px;height:33px;">
           <img src="images/guardar.png" alt="x" />&nbsp;Guardar</button>
 

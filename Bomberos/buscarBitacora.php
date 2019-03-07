@@ -163,7 +163,7 @@ if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
 
       <div class="form-group" style="margin-left:50px;">
         <span><h5 style="font-weight:bold;">Buscar por Fecha</h5></span>
-        <form action="controlador/BuscarBomberoPorAlgunParametro.php" method="post">
+        <form action="" method="post">
 
         <input type="date" name="txtBuscar"  value="<?php echo date('Y-m-d'); ?>"placeholder="Buscar por fecha" style="height:30px;width: 175px;" >
 
@@ -172,7 +172,7 @@ if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
       <!--  <button class="btn btn-default" name="btnBuscar" style="width: 100px; height:30px;" style="margin-top: 400px"> <a href="·" style="text-decoration:none;color:black;">Buscar</a> </button> -->
     </form>
 
-        <form action="controlador/BuscarBomberoPorAlgunParametro.php" method="post">
+        <form action="" method="post">
         <span><h5 style="font-weight:bold;">Tipo de Servicio</h5></span>
               <select name="tipoServicio" style="width:175px; height:30px;">
                 <?php

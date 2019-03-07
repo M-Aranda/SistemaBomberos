@@ -17,10 +17,10 @@ a:active{
 
 
 
-@media (min-width: 768px) {
+@media (min-width: 900px) {
 
 .navbar-collapse {
-    height: 800px;
+    height:900px;
     border-top: 0;
     box-shadow: none;
     max-height: none;
@@ -41,7 +41,7 @@ a:active{
 
 .navbar{
 	max-width:200px;
-  height: 800px;
+  height: 900px;
 	margin-right: 0;
 	margin-left: 0;
 }

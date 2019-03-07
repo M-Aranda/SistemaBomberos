@@ -356,10 +356,10 @@ $( function() {
                            <img src="images/avatar_opt.jpg">
                          </div>
                          <form id="formPersonal" action="controlador/CrearInfoPersonal.php" method="post">
-                         Talla Chaqueta/camisa : <input class="form-control" type="text" name="txtchaqueta" required>
+                         Talla Chaqueta/Camisa : <input class="form-control" type="text" name="txtchaqueta" required>
                          Talla Pantalón: <input class="form-control" type="text" name="txtpantalon" required>
                          Talla buzo: <input class="form-control" type="text" name="txtbuzo" required>
-                         talla Calzado: <input class="form-control" type="text" name="txtcalzado" required>
+                         Talla Calzado: <input class="form-control" type="text" name="txtcalzado" required>
                          Altura :<input class="form-control" type="text" name="txtaltura" required>
                          Peso: <input class="form-control" type="text" name="txtpeso" required>
                          Perteneció a Brigada Juvenil? <input class="form-control" type="text" name="txtbrigada" required>
@@ -485,7 +485,7 @@ $( function() {
                            $cargos = $d->readCargos();
                            foreach($cargos as $c => $cargo){
                            ?>
-                           <option value="<?php echo $cargo->getIdCargo(); ?>"><?php echo $cargo->getNombreCargo(); ?></option>
+                           <option value="<?php echo $cargo->getIdCargo(); ?>"><?php echo utf8_encode($cargo->getNombreCargo()); ?></option>
                            <?php
                            }
                            ?>
@@ -547,7 +547,7 @@ $( function() {
                        </div>
                        <div class="col-md-6">
                          <br>
-                         cargo : <input class="form-control" type="text" name="txtcargo" required>
+                         Cargo : <input class="form-control" type="text" name="txtcargo" required>
 
                          Area/Depto de trabajo: <input class="form-control" type="text" name="txtareatrabajo" required>
                          AFP: <input class="form-control" type="text" name="txtafp" required>
@@ -567,14 +567,14 @@ $( function() {
            <br>
            <div class="col-md-20">
                <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#medica">
-                   Informacion Médica
+                   Información Médica
                </button>
            </div>
            <div class="col-md-11 collapse" id="medica">
                <div class="panel panel-primary">
                    <div class="panel-heading panel-title">
                      <form id="formCrearInfoMedica" action="controlador/CrearInformacionMedica.php" method="post">
-                       Informacion Médica
+                       Información Médica
                    </div>
                    <div class="panel-body">
                        <div class="col-sm-6">
@@ -682,7 +682,7 @@ $( function() {
 
                       </div>
                       <div class="col-md-6">
-                         <br><br><br><br><br><br>
+                         <br><br><br><br><br><br><br>
                           <center> <input type="submit" id="btn_crearInfoFamiliar" name="btninfoFamiliar" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
                               <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
 
@@ -702,14 +702,14 @@ $( function() {
 
            <div class="col-md-20">
                <button type="button" class="btn btn-default col-md-11" data-toggle="collapse" data-target="#academica">
-                   Informacion Académica
+                   Información Académica
                </button>
            </div>
            <div class="col-md-11 collapse" id="academica">
                <div class="panel panel-primary">
                    <div class="panel-heading panel-title">
                      <form id="formCrearInfoAcademica" action="controlador/CrearInformacionAcademica.php" method="post">
-                       Informacion Académica
+                       Información Académica
                    </div>
                    <div class="panel-body">
                        <div class="col-sm-6">
@@ -764,7 +764,7 @@ $( function() {
                    <div class="panel panel-primary">
                        <div class="panel-heading panel-title">
                          <form id="formCrearInfoEntrenamientoEstandar" action="controlador/CrearInfoEntrenamientoEstandar.php" method="post">
-                           Información Estandar
+                           Información Entrenamiento Estandar
                        </div>
                        <div class="panel-body">
                            <div class="col-sm-6">
@@ -939,7 +939,8 @@ $( function() {
 
                                       <br>
 
-                                       <center> <input type="submit" name="btnInfoCargos" id="btn_crearCargo" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                                       <center>
+                                           <input type="submit" name="btnInfoCargos" id="btn_crearCargo" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
                                        </center>
                                        <br>
                                        <div>
