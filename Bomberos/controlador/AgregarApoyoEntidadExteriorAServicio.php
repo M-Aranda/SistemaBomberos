@@ -1,17 +1,17 @@
 <?php
 require_once("../model/Data.php");
 $d= new Data();
-$idServicio=$_REQUEST["idDeServicioAlQueSeVaAApoyar"];
+$idServicio=$_REQUEST["idServicio"];
 
-$idEntidadExterna=$_REQUEST["entidadExteriorApoyando"];
-$responsable=$_REQUEST["txtresposableapoyo"];;
-$ppu=$_REQUEST["txtppuapoyo"];;
+$idEntidadExterna=$_REQUEST["entidad"];
+$responsable=$_REQUEST["res"];;
+$ppu=$_REQUEST["ppuu"];;
 
 $d->crearNuevoApoyo($idEntidadExterna, $responsable, $ppu);
 $idApoyo=$d->getIDApoyoMasReciente();
 
 $d->agregarEntidadExteriorComoApoyo($idServicio,$idApoyo);
 
-header("location:../centralDeDespacho.php");
+
 
 ?>

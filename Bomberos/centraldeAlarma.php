@@ -480,7 +480,7 @@
         </center>
         </form>
 
-        <input type="submit" onclick="verificarDatosDeDespachoValidos()" name="btnTest" value="test">
+        <input type="submit" onclick="reproducirSonido()" name="btnTest" value="test">
 
          </div>
 
@@ -522,6 +522,11 @@ function borrarOpcionElegirEmergencia(){
   $("#cboTiposDeServicios option[value='0']").remove();
 }
 
+function reproducirSonido(){
+  var music = new Audio('sonidos/bleep.mp3');
+  music.play();
+}
+
 
 
 
@@ -542,6 +547,8 @@ $(document).ready(
 
 
 function verificarDatosDeDespachoValidos(){
+  var todoOk=true;
+
   var nom=$('#nombreDePersonaQueLlama').val();
   var rut=$('#rutDePersonaQueLlama').val();
   var tel=$('#telefonoDePersonaQueLlama').val();
@@ -554,17 +561,47 @@ function verificarDatosDeDespachoValidos(){
   var valorTds = e.options[e.selectedIndex].value;
 
   if(nom.trim()==""){
+    todoOk=false;
     document.getElementById("nombreDePersonaQueLlama").focus();
     swal({
       title: "Sistema de bomberos",
       text: "Debe ingresar un nombre",
       type: "error"
     });
-
   }
 
+  if(rut.trim()==""){
+    todoOk=false;
+    document.getElementById("rutDePersonaQueLlama").focus();
+    swal({
+      title: "Sistema de bomberos",
+      text: "Debe ingresar un rut",
+      type: "error"
+    });
+  }
+
+  if(tel.trim()==""){
+    todoOk=false;
+    document.getElementById("telefonoDePersonaQueLlama").focus();
+    swal({
+      title: "Sistema de bomberos",
+      text: "Debe ingresar un telefono",
+      type: "error"
+    });
+  }
+
+  if(dir.trim()==""){
+    todoOk=false;
+    document.getElementById("direccionDePersonaQueLlama").focus();
+    swal({
+      title: "Sistema de bomberos",
+      text: "Debe ingresar un direccion",
+      type: "error"
+    });
+  }
 
   if(valorSec==0){
+    todoOk=false;
     swal({
       title: "Sistema de bomberos",
       text: "Debe seleccionar un sector",
@@ -572,8 +609,8 @@ function verificarDatosDeDespachoValidos(){
     });
   }
 
-
   if(valorTds==0){
+    todoOk=false;
     swal({
       title: "Sistema de bomberos",
       text: "Debe seleccionar un tipo de servicio",
@@ -581,12 +618,15 @@ function verificarDatosDeDespachoValidos(){
     });
   }
 
+  return todoOk;
 }
 
 
 
 function despachar(){
   event.preventDefault();
+
+  if(verificarDatosDeDespachoValidos()==true){
 
   var tipoDeServicio=$("#cboTiposDeServicios :selected").text();
   var sector=$("#cboSectores :selected").text();
@@ -605,6 +645,9 @@ function despachar(){
         document.getElementById("formDespacho").submit();
       }
   });
+}
+
+
 }
 
 

@@ -291,7 +291,7 @@
                 <?php $emergenciasActivas=$data->getServiciosDeEmergenciasActivas();
                 foreach ($emergenciasActivas as $e => $emer) {?>
 
-                  <option value="<?php echo $emer->getId_servicio();?>"><?php
+                  <option selected value="<?php echo $emer->getId_servicio();?>"><?php
 
                   $momento;
                   $pieces=explode(" ",$emer->getFecha_servicio());
@@ -353,9 +353,8 @@
          <div class="container" style="height: 240px;">
 
          <div class="form-group" style="margin-left:-20px;margin-top:-35px;">
-           <form action="controlador/AgregarApoyoEntidadExteriorAServicio.php" method="post">
-             <input type="hidden" id="idDeServicioAlQueSeVaAApoyar" name="idDeServicioAlQueSeVaAApoyar" value="">
 
+          <input type="hidden" id="idDeServicioAlQueSeVaAApoyar" name="idDeServicioAlQueSeVaAApoyar" value="">
 
            <?php
            $listadoDeEntidadesDeApoyo=$data->getTodasLasEntidadesExteriores();
@@ -374,11 +373,11 @@
             <br><br>
 
             Responsable:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="text" name="txtresposableapoyo" style="width:300px;">
+            <input type="text" id="txtresposableapoyo" name="txtresposableapoyo" style="width:300px;">
 
 
             P.P.U.U:
-            <input type="text" name="txtppuapoyo">
+            <input type="text" id="txtppuapoyo" name="txtppuapoyo">
 
             <br><br>
             <div id="divtabla" style="margin-left: 50px;">
@@ -396,10 +395,10 @@
             </div >
 
                 <div style="margin-top: 10px;margin-left:550px">
-                  <button type="submit"  id="btn_despachar" name="btnsonido" style="width:100px;height:33px;">
+                  <button type="submit" onclick="guardarApoyo()" id="btn_despachar" name="btnsonido" style="width:100px;height:33px;">
                     <img src="images/guardar.png" alt="x" />&nbsp;Guardar</button>
                 </div>
-              </form>
+
 
 
 
@@ -436,8 +435,8 @@
   <button type="submit" id="btn_despachar" name="btnsonido" style="width:200px;height:33px;margin-top: -50px">
       <img src="images/camion.png" alt="x" /><a href="centraldeAlarma.php" style="text-decoration:none;color:black;" >&nbsp;Nuevo Despacho</a></button>
 
-      <button type="submit"  id="btn_despachar" name="btnsonido" style="width:200px;height:33px;margin-top:-100px;">
-        <img src="images/comprobar.png" alt="x" /><a href="centraldeAlarma.php" style="text-decoration:none;color:black;">&nbsp;Cerrar Servicio</button>
+      <button type="submit"  id="btn_despachar" onclick="cerrarServicio()" name="btnsonido" style="width:200px;height:33px;margin-top:-100px;">
+        <img src="images/comprobar.png" alt="x" /><a style="text-decoration:none;color:black;">&nbsp;Cerrar Servicio</button>
 </center>
 
 
@@ -450,49 +449,207 @@
 
 <script>
 
+function cargarCboDeServiciosActivos(){
+
+  $.ajax({
+    url: "controlador/GetEmergenciasActivasMedianteAjax.php",
+    type: "POST",
+    data:{"datos": ""}
+  }).done(function(data) {
+    console.log(data);
+    $('#cboxdespacho')
+    .find('option')
+    .remove()
+    .end();
+    $('#cboxdespacho').append(data);
+    cargarTabla();
+
+  });
+}
+
+
+function cerrarServicio(){
+  var idSer=document.getElementById("idDeServicioAlQueSeVaAApoyar").value;
+
+  $.ajax({
+    url: "controlador/VerificarQueSeHayaAlcanzado6_10EnTodosLosCarrosInvolucrados.php",
+    type: "POST",
+    data:{"idServicioACerrar": idSer},
+    success: function(data){
+      var resultado = data;
+      if(resultado === "si"){
+        $.ajax({
+          url: "controlador/CerrarServicio.php",
+          type: "POST",
+          data:{"idServicioACerrar": idSer},
+          success: function(data){
+            console.log(data);
+            cargarCboDeServiciosActivos();
+            swal({
+              title: "Sistema de bomberos:",
+              text:"Servicio cerrado",
+              type: "success"
+            });
+
+            }
+        });
+      }else if(resultado === "no"){
+        swal({
+          title: "Sistema de bomberos",
+          text: "No puede cerrar el servicio hasta que todos los carros de la emergencia hayan dado el 6-10",
+          type: "error"
+        });
+      }
+
+      }
+  });
+}
+
+
+
+function guardarApoyo(){
+
+  var idSer=document.getElementById("idDeServicioAlQueSeVaAApoyar").value;
+  var entidadExterior=document.getElementById("entidadExteriorApoyando").value;
+  var responsable=document.getElementById("txtresposableapoyo").value;
+  var ppuu=document.getElementById("txtppuapoyo").value;
+
+  $.ajax({
+    url: "controlador/AgregarApoyoEntidadExteriorAServicio.php",
+    type: "POST",
+    data:{"idServicio": idSer, "entidad":entidadExterior,
+    "res":responsable, "ppuu":ppuu},
+    success: function(data){
+
+        swal({
+          title: "Sistema de bomberos",
+          text:" Operación exitosa",
+          type:"success"
+        });
+
+      document.getElementById("txtresposableapoyo").value="";
+      document.getElementById("txtppuapoyo").value="";
+
+
+
+      var id = document.getElementById("cboxdespacho").value;
+      document.getElementById("idDeServicioAlQueSeVaAApoyar").value=id;
+
+      $.ajax({
+        url: "getApoyosDelServicio.php",
+        type: "POST",
+        data:{"idServicio":id}
+      }).done(function(data) {
+        console.log(data);
+        var objetos=JSON.parse(data);
+
+         $("#tablaApoyosAEmergencia tbody tr").remove();
+
+        var i;
+        for (i = 0; i < objetos.length; i++) {
+          var objetoJSON= $.parseJSON(objetos[i]);
+
+          var idApoyo=objetoJSON.idApoyo;
+          var nombreEntidadApoyo=objetoJSON.nombreEntidadApoyo;
+          var responsableApoyo=objetoJSON.responsableApoyo;
+          var ppuuApoyo=objetoJSON.ppuuApoyo;
+
+
+          if (!document.getElementsByTagName) return;
+          //la siguiente linea obtiene el elemento por nombre del tag, pero la segunda coincidecnia se rescata
+          tabBody=document.getElementsByTagName("tbody").item(1);
+          row=document.createElement("tr");
+
+          cell1 = document.createElement("td");
+          textnode1=document.createTextNode(nombreEntidadApoyo);
+
+          textnode2=document.createTextNode(responsableApoyo);
+          cell2 = document.createElement("td");
+
+          textnode3=document.createTextNode(ppuuApoyo);
+          cell3 = document.createElement("td");
+
+          cell1.appendChild(textnode1);
+          cell2.appendChild(textnode2);
+          cell3.appendChild(textnode3)
+          row.appendChild(cell1);
+          row.appendChild(cell2);
+          row.appendChild(cell3);
+          tabBody.appendChild(row);
+        }
+      });
+
+      }
+  });
+
+}
+
+
+
+
 function actualizarDatosOBACConductoryNPersonal(idSerUnidad){
-  swal({
-    title: 'Ingresar datos:',
-    html:
-      '<input placeholder="OBAC" type="text" id="OBAC" class="swal2-input">' +
-      '<input placeholder="Conductor" type="text" id="Conductor" class="swal2-input">'+
-      '<input placeholder="N° Personal" type="text" id="NPersonal" class="swal2-input">',
-    preConfirm: function () {
-      return new Promise(function (resolve) {
-        resolve([
-          $('#OBAC').val(),
-          $('#Conductor').val(),
-          $('#NPersonal').val()
-        ])
-      })
-    },
-    onOpen: function () {
-      $('#OBAC').focus()
+
+  var htmlAPoner='OBAC <input type="text" id="OBAC" class="swal2-input">' +
+  'Conductor <input  type="text" id="Conductor" class="swal2-input">'+
+  'Cantidad de bomberos <input  type="text" id="NPersonal" class="swal2-input">';
+
+  $.ajax({
+    url: "getDatosOBACConductorYCantidad.php",
+    type: "POST",
+    data:{"idServicioUnidad": idSerUnidad},
+    success: function(data){
+      console.log(data);
+      var datosRescatados=JSON.parse(data);
+
+      if( (datosRescatados.obac!="") || (datosRescatados.conductor!="") || (datosRescatados.cantidad!="") ){
+        htmlAPoner=  'OBAC <input  value="'+datosRescatados.obac+'" type="text" id="OBAC" class="swal2-input">' +
+        'Conductor <input  value="'+datosRescatados.conductor+'" type="text" id="Conductor" class="swal2-input">'+
+        'Cantidad de bomberos <input  value="'+datosRescatados.cantidad+'" type="text" id="NPersonal" class="swal2-input">';
+      }
+      swal({
+        title: 'Ingresar datos:',
+        html: htmlAPoner,
+        preConfirm: function () {
+          return new Promise(function (resolve) {
+            resolve([
+              $('#OBAC').val(),
+              $('#Conductor').val(),
+              $('#NPersonal').val()
+            ])
+          })
+        },
+        onOpen: function () {
+          $('#OBAC').focus()
+        }
+      }).then(function (result) {
+
+        var ar=(JSON.stringify(result)).split(/(?:,|{|}|")+/);
+        var nomOb=ar[3];
+        var nomCon=ar[4];
+        var nPer=ar[5];
+
+        swal({
+            title: "Sistema de bomberos",
+            text: "Operación exitosa",
+            type: "success",
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Ok",
+        })
+
+        $.ajax({
+          url: "actualizarOBACConductorYNPersonal.php",
+          type: "POST",
+          data:{"nombreOBAC": nomOb,
+                "nombreConductor": nomCon,
+                "cantidadPersonal": nPer,
+                "idServicioUnidad": idSerUnidad,}
+        });
+      }).catch(swal.noop)
     }
-  }).then(function (result) {
+  });
 
-    var ar=(JSON.stringify(result)).split(/(?:,|{|}|")+/);
-    var nomOb=ar[3];
-    var nomCon=ar[4];
-    var nPer=ar[5];
 
-    swal({
-        title: "Sistema de bomberos",
-        text: "Operación exitosa",
-        type: "success",
-        confirmButtonColor: "#DD6B55",
-        confirmButtonText: "Ok",
-    })
 
-    $.ajax({
-      url: "actualizarOBACConductorYNPersonal.php",
-      type: "POST",
-      data:{"nombreOBAC": nomOb,
-            "nombreConductor": nomCon,
-            "cantidadPersonal": nPer,
-            "idServicioUnidad": idSerUnidad,}
-    });
-  }).catch(swal.noop)
 }
 
 function mostrarhora(){
@@ -506,20 +663,31 @@ setTimeout("mostrarhora()",1000);
 
 
 function despacharUnidadesALaEmergencia(){
-Swal.fire({
-  title: 'Sistema de bomberos',
-  text: "¿Despachar unidades?",
-  type: 'warning',
-  showCancelButton: true,
-  confirmButtonColor: '#3085d6',
-  cancelButtonColor: '#d33',
-  confirmButtonText: 'Sí',
-  cancelButtonText: 'No'
-}).then((result) => {
-  if (result.value) {
-    document.getElementById("formEnviarUnidades").submit();
+  var txtDespacho=document.getElementById("txtDespacho").value;
+  if(txtDespacho==""){
+    swal({
+      title: "Sistema de bomberos",
+      text: "No ha ingresado los datos para un nuevo despacho",
+      type: "error"
+    });
+  }else{
+    Swal.fire({
+      title: 'Sistema de bomberos',
+      text: "¿Despachar unidades?",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+        document.getElementById("formEnviarUnidades").submit();
+      }
+    });
   }
-})
+
+
 }
 
 
@@ -668,11 +836,6 @@ function cargarTabla(){
 
 
 
-
-
-
-
-
   $.ajax({
     url: "getServiciosUnidad.php",
     type: "POST",
@@ -770,6 +933,9 @@ function cargarTabla(){
   });
 }
 
+window.onload = function() {
+  cargarTabla();
+};
 
 </script>
 

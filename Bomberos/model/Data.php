@@ -45,6 +45,7 @@ require_once("Tbl_servicio_unidad.php");
 require_once("ServicioYSector.php");
 require_once("Tbl_entidad_exterior.php");
 require_once("Tbl_apoyo.php");
+require_once("OBACConductorNPersonal.php");
 
 
 class Data{
@@ -1944,7 +1945,6 @@ public function getTodasLasEmergenciasActivas(){
     $this->c->desconectar();
     return $listado;
  }
-
 
 
 
@@ -4253,6 +4253,47 @@ tbl_apoyoEntidadExterior_servicio.fk_servicio=tbl_servicio.id_servicio AND tbl_s
    return $listado;
 
 }
+
+
+public function getOBACCoonductorYCantidad($idServicio){
+  $this->c->conectar();
+  $query="SELECT tbl_servicio_unidad.obac, tbl_servicio_unidad.conductor, tbl_servicio_unidad.nBomberos FROM tbl_servicio_unidad WHERE id_servicio_unidad=".$idServicio.";";
+  $rs = $this->c->ejecutar($query);
+
+  while($reg = $rs->fetch_array()){
+    $obj= new OBACConductorNPersonal();
+    $obj->setObac($reg[0]);
+    $obj->setConductor($reg[1]);
+    $obj->setCantidad($reg[2]);
+   }
+
+  $this->c->desconectar();
+  return $obj;
+
+}
+
+
+public function cerrarServicio($idServicio){
+  $this->c->conectar();
+  $query="UPDATE tbl_servicio_unidad SET emergenciaActiva=0 WHERE fk_servicio=".$idServicio.";";
+  $this->c->ejecutar($query);
+  $this->c->desconectar();
+}
+
+
+public function getMomentos6_10DeUnServicio($idServicio){
+  $this->c->conectar();
+  $query="SELECT momento6_10 FROM tbl_servicio_unidad WHERE fk_servicio=".$idServicio.";";
+  $listado=array();
+  $rs = $this->c->ejecutar($query);
+  while($reg = $rs->fetch_array()){
+    $obj= $reg[0];
+    $listado[]=$obj;
+   }
+   $this->c->desconectar();
+   return $listado;
+}
+
 
 
 }
