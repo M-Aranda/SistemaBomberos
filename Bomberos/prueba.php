@@ -178,6 +178,10 @@
       </h4>
     </div>
     <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel panel-primary">
+          <div class="panel-heading panel-title">
+              Crear Unidades
+          </div>
       <div class="panel-body">
         <div class="col-sm-4" >
           <div style="margin-left: 0px;">
@@ -254,6 +258,7 @@
       </div>
     </div>
   </div>
+  </div>
 
   <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="headingTwo">
@@ -264,6 +269,10 @@
       </h4>
     </div>
     <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel panel-primary">
+          <div class="panel-heading panel-title">
+              Crear Unidades
+          </div>
       <div class="panel-body">
         <div class="col-sm-5" >
 
@@ -321,6 +330,7 @@
       </div>
     </div>
   </div>
+  </div>
 
   <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="headingThree">
@@ -331,6 +341,10 @@
       </h4>
     </div>
     <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+      <div class="panel panel-primary">
+          <div class="panel-heading panel-title">
+              Crear Unidades
+          </div>
       <div class="panel-body">
 
                                               <div class="col-sm-5" >
@@ -385,6 +399,7 @@
 
       </div>
     </div>
+  </div>
   </div>
 
 </div>
