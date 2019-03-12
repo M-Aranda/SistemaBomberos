@@ -481,6 +481,14 @@
         </form>
 
         <input type="submit" onclick="reproducirSonido()" name="btnTest" value="test">
+        <br>
+
+        <?php
+        if(isset($_SESSION["idDeServicioQueSeEstaManipulando"])){?>
+            <a href="centraldeDespacho.php">Volver a despacho</a>
+
+      <?php   }
+        ?>
 
          </div>
 

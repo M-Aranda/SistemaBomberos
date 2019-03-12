@@ -253,7 +253,6 @@
               <div class="form-group" style="margin-left:50px;Margin-top:-40px;">
 
 
-
               Despacho:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input value="<?php
               if(isset($_SESSION["idDeServicioCreado"])){
                 echo utf8_encode($data->getTipoDeServicioYSectorDeServicio($idServicioCreado)->getServicio());
@@ -287,28 +286,46 @@
 
 
               En Despacho:&nbsp;
-              <select id="cboxdespacho" name="cboxdespacho" onchange="cargarTabla()"style="width:400px;height:30px;margin-top:-12px;" >
+              <select id="cboxdespacho" name="cboxdespacho" onchange="cargarTabla(),guardarIdDeServicioManipuladoEnSesion()"style="width:400px;height:30px;margin-top:-12px;" >
                 <?php $emergenciasActivas=$data->getServiciosDeEmergenciasActivas();
-                foreach ($emergenciasActivas as $e => $emer) {?>
 
-                  <option selected value="<?php echo $emer->getId_servicio();?>"><?php
+                if(isset($_SESSION["idDeServicioQueSeEstaManipulando"])){
 
-                  $momento;
-                  $pieces=explode(" ",$emer->getFecha_servicio());
-                  $momento = date("d-m-Y", strtotime($pieces[0]));
-                  $momento=$momento." ".$pieces[1];
-                  echo $momento;
+                  foreach ($emergenciasActivas as $e => $emer) {?>
+                    <option <?php if($_SESSION["idDeServicioQueSeEstaManipulando"]==$emer->getId_servicio()){ echo "selected";}?> value="<?php echo $emer->getId_servicio();?>"><?php
+                    $momento;
+                    $pieces=explode(" ",$emer->getFecha_servicio());
+                    $momento = date("d-m-Y", strtotime($pieces[0]));
+                    $momento=$momento." ".$pieces[1];
+                    echo $momento;
+                    echo " "; echo $emer->getFk_tipoDeServicio(); echo " "; $unidadesDelServicio=$data->getUnidadesInvolucradasEnServicio($emer->getId_servicio());
+                    foreach ($unidadesDelServicio as $u => $unidad) {
+                      echo $unidad." ";
+                    }
+                    ?> </option>
+                <?php
+              }
+            }else{
+              foreach ($emergenciasActivas as $e => $emer) {?>
+                <option selected value="<?php echo $emer->getId_servicio();?>"><?php
+                $momento;
+                $pieces=explode(" ",$emer->getFecha_servicio());
+                $momento = date("d-m-Y", strtotime($pieces[0]));
+                $momento=$momento." ".$pieces[1];
+                echo $momento;
+                echo " "; echo $emer->getFk_tipoDeServicio(); echo " "; $unidadesDelServicio=$data->getUnidadesInvolucradasEnServicio($emer->getId_servicio());
+                foreach ($unidadesDelServicio as $u => $unidad) {
+                  echo $unidad." ";
+                }
+                ?> </option>
+            <?php
+          }
+        }
+              ?>
 
-                  echo " "; echo $emer->getFk_tipoDeServicio(); echo " "; $unidadesDelServicio=$data->getUnidadesInvolucradasEnServicio($emer->getId_servicio());
-                  foreach ($unidadesDelServicio as $u => $unidad) {
-                    echo $unidad." ";
-                  }
-                  ?> </option>
 
 
-              <?php
-            }
-                ?>
+
 
               </select>
 
@@ -432,8 +449,11 @@
     <br>
 
 <center>
-  <button type="submit" id="btn_despachar" name="btnsonido" style="width:200px;height:33px;margin-top: -50px">
+
+
+  <button type="submit"  id="nuevoDespacho" name="nuevoDespacho" style="width:200px;height:33px;margin-top: -50px">
       <img src="images/camion.png" alt="x" /><a href="centraldeAlarma.php" style="text-decoration:none;color:black;" >&nbsp;Nuevo Despacho</a></button>
+
 
       <button type="submit"  id="btn_despachar" onclick="cerrarServicio()" name="btnsonido" style="width:200px;height:33px;margin-top:-100px;">
         <img src="images/comprobar.png" alt="x" /><a style="text-decoration:none;color:black;">&nbsp;Cerrar Servicio</button>
@@ -447,7 +467,27 @@
 
 </div>
 
+<?php
+
+if(isset($_SESSION["idDeServicioQueSeEstaManipulando"])){
+  unset($_SESSION["idDeServicioQueSeEstaManipulando"]);
+}
+?>
+
 <script>
+function guardarIdDeServicioManipuladoEnSesion(){
+var id=document.getElementById("cboxdespacho").value;
+
+  $.ajax({
+    url: "controlador/IniciarIdServicioManipuladoEnSesion.php",
+    type: "POST",
+    data:{"idServicioSeleccionado": id}
+  }).done(function(data) {
+    console.log(data);
+  });
+
+}
+
 
 function cargarCboDeServiciosActivos(){
 
