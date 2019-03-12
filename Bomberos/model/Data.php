@@ -4294,6 +4294,17 @@ public function getMomentos6_10DeUnServicio($idServicio){
    return $listado;
 }
 
+public function getEstadoDeServicioDeMaquina($idMaquina){
+  $this->c->conectar();
+  $query="SELECT nombre_estado_de_servicio_de_maquina FROM tbl_estado_servicio_unidad WHERE id_estado_servicio_unidad=".$idMaquina.";";
+  $rs = $this->c->ejecutar($query);
+  while($reg = $rs->fetch_array()){
+    $obj= $reg[0];
+   }
+   $this->c->desconectar();
+   return $obj;
+}
+
 
 
 }

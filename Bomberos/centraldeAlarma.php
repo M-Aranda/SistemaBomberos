@@ -329,7 +329,9 @@
              </thead>
              <tbody>
                <tr>
-                 <td>B-1<input type="button" value="" id="b1"  class="btn btn-danger" style="width:20px;height:20px;" ></td>
+                 <td>B-1<input type="button" value="" id="b1"  class=
+
+                   "btn btn-danger" style="width:20px;height:20px;" ></td>
                  <td>BX-1<input type="button" value="" id="bx1"  class="btn btn-danger" style="width:20px;height:20px;" ></td>
                  <td>Q-1<input type="button" value="" id="q1"  class="btn btn-danger" style="width:20px;height:20px;" ></td>
 

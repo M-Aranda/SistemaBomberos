@@ -613,6 +613,23 @@ FOREIGN KEY(fk_apoyo) REFERENCES tbl_apoyo (id_apoyo),
 PRIMARY KEY(id_apoyoEntidadExterior_servicio)
 );
 
+CREATE TABLE tbl_estado_de_servicio_de_maquina(
+id_estado_de_servicio_de_maquina INT AUTO_INCREMENT,
+nombre_estado_de_servicio_de_maquina VARCHAR (50),
+PRIMARY KEY (id_estado_de_servicio_de_maquina)
+);
+
+CREATE TABLE tbl_estado_servicio_unidad(
+id_estado_servicio_unidad INT AUTO_INCREMENT,
+fk_unidad INT,
+fk_estado INT,
+FOREIGN KEY (fk_unidad) REFERENCES tbl_unidad (id_unidad),
+FOREIGN KEY (fk_estado) REFERENCES tbl_estado_de_servicio_de_maquina (id_estado_de_servicio_de_maquina),
+PRIMARY KEY(id_estado_servicio_unidad)
+);
+
+
+
 -- Procedimientos
 
 DELIMITER //
@@ -1954,6 +1971,10 @@ INSERT INTO tbl_entidad_exteriror (nombre_entidad_exterior) VALUES ('Carabineros
 
 INSERT INTO tbl_apoyo (fk_entidadExterior,responsable, PPUU) VALUES (1,'alguien1','algo'),(1,'alguien1','algo'),(1,'alguien3','algo'),(1,'alguien4','algo'),(1,'alguien5','algo');
 INSERT INTO tbl_apoyoEntidadExterior_servicio (fk_servicio,fk_apoyo) VALUES (2,1),(2,2),(2,3),(2,4),(2,5);
+
+INSERT INTO tbl_estado_de_servicio_de_maquina (nombre_estado_de_servicio_de_maquina) VALUES ('Disponible'),('No disponible'),('Fuera de servicio');
+
+INSERT INTO tbl_estado_servicio_unidad (fk_unidad,fk_estado)VALUES(1,7),(1,8),(1,9),(1,10),(1,11),(1,12),(1,13),(1,14),(1,16),(1,19);
 
 /*
 DROP DATABASE bomberosBD;
