@@ -43,9 +43,19 @@
     $unidad->setfkTipoVehiculo($fkTipoVehiculo);
     $unidad->setfkEntidadPropietaria($fkEntidadPropietaria);
 
-
     $data = new Data();
     $data->actualizarUnidad($unidad);
+
+    $estadoDeEmergenciaDeLaUnidad;
+
+    if($fkEstadoUnidad==1){
+      $estadoDeEmergenciaDeLaUnidad=1;
+    }else{
+      $estadoDeEmergenciaDeLaUnidad=3;
+    }
+
+    $data->actualizarEstadoDeEmergenciaDeMaquina($id,$estadoDeEmergenciaDeLaUnidad);
+
     echo "<br>";
     echo "<br>";
     echo "<br>";

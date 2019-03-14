@@ -251,9 +251,18 @@ if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
                                             <?php
                                                 $unidad = $data->getUnidades();
                                                 foreach ($unidad as $u) {
+
+                                                  if($unidadAModificar->getfkEstadoUnidad()==$u->getIdEstadoUnidad()){
+                                                    echo "<option selected value='".$u->getIdEstadoUnidad()."'>";
+                                                        echo $u->getNombreEstadoUnidad();
+                                                    echo"</option>";
+                                                  }else{
                                                     echo "<option value='".$u->getIdEstadoUnidad()."'>";
                                                         echo $u->getNombreEstadoUnidad();
                                                     echo"</option>";
+                                                  }
+
+
                                                 }
                                             ?>
                                         </select>
@@ -263,9 +272,17 @@ if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
                                           <?php
                                               $vehiculo = $data->getVehiculos();
                                               foreach ($vehiculo as $v) {
+
+                                                if($unidadAModificar->getfkTipoVehiculo()==$v->getIdTipoVehiculo()){
+                                                  echo "<option selected value='".$v->getIdTipoVehiculo()."'>";
+                                                      echo $v->getNombreTipoVehiculo();
+                                                  echo"</option>";
+                                                }else{
                                                   echo "<option value='".$v->getIdTipoVehiculo()."'>";
                                                       echo $v->getNombreTipoVehiculo();
                                                   echo"</option>";
+                                                }
+
                                               }
                                           ?>
                                       </select>
@@ -275,9 +292,18 @@ if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
                                         <?php
                                             $entiPropietaria = $data->getEntidadACargo();
                                             foreach ($entiPropietaria as $ep) {
+
+                                              if($unidadAModificar->getfkEntidadPropietaria()==$ep->getIdEntidadACargo()){
+                                                echo "<option selected value='".$ep->getIdEntidadACargo()."'>";
+                                                    echo utf8_encode($ep->getNombreEntidadACargo());
+                                                echo"</option>";
+                                              }else{
                                                 echo "<option value='".$ep->getIdEntidadACargo()."'>";
                                                     echo utf8_encode($ep->getNombreEntidadACargo());
                                                 echo"</option>";
+                                              }
+
+
                                             }
                                         ?>
                                     </select>

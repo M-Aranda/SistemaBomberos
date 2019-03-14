@@ -4,6 +4,10 @@
 
   $idServicio= isset($_REQUEST['idServicioACerrar'])?$_REQUEST['idServicioACerrar']:"";
 
-  $data->cerrarServicio($idServicio);
+  $listadoDeUnidades=$data->getIdDeUnidadesInvolucradasEnServicio($idServicio);
 
+  foreach ($listadoDeUnidades as $l => $idUnidad) {
+    $data->actualizarEstadoDeEmergenciaDeMaquina($idUnidad,1);
+  }
+  $data->cerrarServicio($idServicio);
  ?>

@@ -319,7 +319,7 @@
  <div id="cuadro2" style="height: 245px;">
      <div class="jumbotron" style="height: 240px;border-radius: 70px 70px 70px 70px">
        <div class="container" style="height: 300px;">
-         <center style="margin-top:-30px;font-weight:bold;"> Unidades en Servicio</center><br>
+         <center style="margin-top:-30px;font-weight:bold;"> Unidades en Servicio</center><br><br>
        <div class="form-group" style="margin-left:-15px;margin-top: -40px;">
 
          <table class="table table-striped">
@@ -328,38 +328,55 @@
                </tr>
              </thead>
              <tbody>
-               <tr>
-                 <td>B-1<input type="button" value="" id="b1"  class=
+               <?php
 
-                   "btn btn-danger" style="width:20px;height:20px;" ></td>
-                 <td>BX-1<input type="button" value="" id="bx1"  class="btn btn-danger" style="width:20px;height:20px;" ></td>
-                 <td>Q-1<input type="button" value="" id="q1"  class="btn btn-danger" style="width:20px;height:20px;" ></td>
+               $todasLasUnidades=$data->getTodasLasUnidades();
+               for ($i=0; $i < count($todasLasUnidades) ; $i=$i+3) {?>
+                 <tr>
+                   <?php
+                   if(isset($todasLasUnidades[$i])){?>
+                     <td><?php echo $todasLasUnidades[$i]->getNombreUnidad();?><input type="button" value="" id="<?php echo $todasLasUnidades[$i]->getNombreUnidad();?>"  class="<?php
+                     if($data->getEstadoDeEmergenciaDeLaUnidad($todasLasUnidades[$i]->getIdUnidad())==1){
+                       echo "btn btn-success";
+                     }elseif ($data->getEstadoDeEmergenciaDeLaUnidad($todasLasUnidades[$i]->getIdUnidad())==2) {
+                       echo "btn btn-warning";
+                     }elseif ($data->getEstadoDeEmergenciaDeLaUnidad($todasLasUnidades[$i]->getIdUnidad())==3) {
+                       echo "btn btn-danger";
+                     }
+                     ?>" style="width:20px;height:20px;" ></td>
+                  <?php }
+                   ?>
+                   <?php
+                   if(isset($todasLasUnidades[$i+1])){?>
+                     <td><?php echo $todasLasUnidades[$i+1]->getNombreUnidad();?><input type="button" value="" id="<?php echo $todasLasUnidades[$i+1]->getNombreUnidad();?>"  class="<?php
+                     if($data->getEstadoDeEmergenciaDeLaUnidad($todasLasUnidades[$i+1]->getIdUnidad())==1){
+                       echo "btn btn-success";
+                     }elseif ($data->getEstadoDeEmergenciaDeLaUnidad($todasLasUnidades[$i+1]->getIdUnidad())==2) {
+                       echo "btn btn-warning";
+                     }elseif ($data->getEstadoDeEmergenciaDeLaUnidad($todasLasUnidades[$i+1]->getIdUnidad())==3) {
+                       echo "btn btn-danger";
+                     }
+                     ?>" style="width:20px;height:20px;" ></td>
+                  <?php }
+                   ?>
+                   <?php
+                   if(isset($todasLasUnidades[$i+2])){?>
+                     <td><?php echo $todasLasUnidades[$i+2]->getNombreUnidad();?><input type="button" value="" id="<?php echo $todasLasUnidades[$i+2]->getNombreUnidad();?>"  class="<?php
+                     if($data->getEstadoDeEmergenciaDeLaUnidad($todasLasUnidades[$i+2]->getIdUnidad())==1){
+                       echo "btn btn-success";
+                     }elseif ($data->getEstadoDeEmergenciaDeLaUnidad($todasLasUnidades[$i+2]->getIdUnidad())==2) {
+                       echo "btn btn-warning";
+                     }elseif ($data->getEstadoDeEmergenciaDeLaUnidad($todasLasUnidades[$i+2]->getIdUnidad())==3) {
+                       echo "btn btn-danger";
+                     }
+                     ?>" style="width:20px;height:20px;" ></td>
+                  <?php }
+                   ?>
+                 </tr>
 
-              </tr>
-              <tr>
+              <?php }
 
-              <td>X-1<input type="button" value="" id="x1"  class="btn btn-danger" style="width:20px;height:20px;" ></td>
-
-              <td>K-1<input type="button" value="" id="k1"   class="btn btn-danger" style="width:20px;height:20px;" ></td>
-              <td>R-1<input type="button" id="r1"  class="btn btn-danger" style="width:20px;height:20px;"></td>
-
-
-
-              </tr>
-
-
-               <tr>
-                 <td>B-2<input type="button" value="" id="b2"  class="btn btn-danger" style="width:20px;height:20px;" ></td>&nbsp;
-                 <td>BX-2<input type="button" value="" id="bx2"  class="btn btn-danger" style="width:20px;height:20px;" ></td>&nbsp;
-                 <td>R-2<input type="button" value="" id="r2"  class="btn btn-danger" style="width:20px;height:20px;" ></td>&nbsp;
-
-               </tr>
-               <br>
-               <tr>
-                 <td>B-3<input type="button" value="" id="b3"  class="btn btn-danger" style="width:20px;height:20px;" ></td>&nbsp;
-                 <td>J
-                   <input type="button" value="" id="j"  class="btn btn-danger" style="width:20px;height:20px;" ></td>&nbsp;
-               </tr>
+               ?>
 
              </tbody>
              </table>

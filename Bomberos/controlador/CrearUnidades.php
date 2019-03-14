@@ -22,10 +22,10 @@
     $fkTipoVehiculo = $_REQUEST["vehiculos"];
     $fkEntidadPropietaria = $_REQUEST["entidad"];
 
-    //Construir un objeto con esos datos
+
 
     $unidad = new Tbl_Unidad();
-    //"seteo" los datos
+
     $unidad->setNombreUnidad($nombre);
     $unidad->setaniodeFabricacion($anioFabricacion);
     $unidad->setMarca($marca);
@@ -44,6 +44,18 @@
 
     $data = new Data();
     $data->crearUnidades($unidad);
+
+    $estadoEmer;
+
+    if($fkEstadoUnidad==1){
+      $estadoEmer=1;
+    }else{
+      $estadoEmer=3;
+    }
+
+
+    $idDeUnidadMasReciente=$data->rescatarIdDeMaquinaMasReciente();
+    $data->estabecerEstadoDeEmergenciaDeMaquina($idDeUnidadMasReciente,$estadoEmer);
 
 
   header("location: ../crearUnidades.php");

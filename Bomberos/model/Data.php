@@ -1404,6 +1404,54 @@ public function getUnidadPorId ($idUnidad){
 }
 
 
+public function getTodasLasUnidades (){
+  $this->c->conectar();
+  $query="SELECT * FROM tbl_unidad;";
+  $rs = $this->c->ejecutar($query);
+  $listado=array();
+
+  while($reg = $rs->fetch_array()){
+       $id=$reg[0];
+       $nombre=$reg[1];
+       $aniodeFabricacion=$reg[2];
+       $marca=$reg[3];
+       $Nmotor=$reg[4];
+       $Nchasis=$reg[5];
+       $NVIN=$reg[6];
+       $Color=$reg[7];
+       $PPu=$reg[8];
+       $fechaInscripcion=$reg[9];
+       $fechaAdquisicion=$reg[10];
+       $capacidadOcupantes=$reg[11];
+       $fkEstadoUnidad=$reg[12];
+       $fkTipoVehiculo=$reg[13];
+       $fkEntidadACargo=$reg[14];
+
+       $obj = new Tbl_Unidad();
+       $obj->setIdUnidad($id);
+       $obj->setNombreUnidad($nombre);
+       $obj->setaniodeFabricacion($aniodeFabricacion);
+       $obj->setMarca($marca);
+       $obj->setNmotor($Nmotor);
+       $obj->setNchasis($Nchasis);
+       $obj->setNVIN($NVIN);
+       $obj->setColor($Color);
+       $obj->setPPu($PPu);
+       $obj->setfechaInscripcion($fechaInscripcion);
+       $obj->setfechaAdquisicion($fechaAdquisicion);
+       $obj->setcapacidadOcupantes($capacidadOcupantes);
+       $obj->setfkEstadoUnidad($fkEstadoUnidad);
+       $obj->setfkTipoVehiculo($fkTipoVehiculo);
+       $obj->setfkEntidadPropietaria($fkEntidadACargo);
+
+       $listado[]=$obj;
+
+   }
+   $this->c->desconectar();
+   return $listado;
+}
+
+
 
 
 public function buscarMantencionesDeUnidad ($idABuscar){
@@ -1841,6 +1889,23 @@ public function getUnidadesInvolucradasEnServicio($id){
 }
 
 
+public function getIdDeUnidadesInvolucradasEnServicio($id){
+  $this->c->conectar();
+  $query="SELECT tbl_unidad.id_unidad FROM tbl_unidad, tbl_servicio_unidad,tbl_servicio WHERE tbl_unidad.id_unidad=tbl_servicio_unidad.fk_unidad AND
+  tbl_servicio.id_servicio=tbl_servicio_unidad.fk_servicio AND tbl_servicio.id_servicio=".$id."";
+  $rs = $this->c->ejecutar($query);
+  $listado=array();
+  while($reg = $rs->fetch_array()){
+
+    $obj=$reg[0];
+
+    $listado[]=$obj;
+   }
+   $this->c->desconectar();
+   return $listado;
+}
+
+
 public function crearDespachoInicial($fkServicio){
   $this->c->conectar();
   $query="INSERT INTO tbl_servicio_unidad (fk_servicio) VALUES (".$fkServicio.");";
@@ -2032,2045 +2097,2046 @@ public function determinarCarrosADespacharSegunCodigoDeServicioYSector($idServic
   $carrosAEnviar = array();
 
   if (($idSector==1 ) && ($idServicio==1 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==1 ) && ($idServicio==2 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==1 ) && ($idServicio==3 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==1 ) && ($idServicio==4 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==1 ) && ($idServicio==5 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==1 ) && ($idServicio==6 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==1 ) && ($idServicio==7 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==1 ) && ($idServicio==8 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==1 ) && ($idServicio==9 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==1 ) && ($idServicio==10 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==1 ) && ($idServicio==11 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==1 ) && ($idServicio==12 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==1 ) && ($idServicio==13 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==1 ) && ($idServicio==14 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==1 ) && ($idServicio==15 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==2 ) && ($idServicio==1 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==2 ) && ($idServicio==2 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==2 ) && ($idServicio==3 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==2 ) && ($idServicio==4 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==2 ) && ($idServicio==5 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==2 ) && ($idServicio==6 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==2 ) && ($idServicio==7 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==2 ) && ($idServicio==8 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==2 ) && ($idServicio==9 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==2 ) && ($idServicio==10 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==2 ) && ($idServicio==11 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==2 ) && ($idServicio==12 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==2 ) && ($idServicio==13 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==2 ) && ($idServicio==14 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==2 ) && ($idServicio==15 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==3 ) && ($idServicio==1 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==3 ) && ($idServicio==2 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==3 ) && ($idServicio==3 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==3 ) && ($idServicio==4 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==3 ) && ($idServicio==5 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==3 ) && ($idServicio==6 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==3 ) && ($idServicio==7 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==3 ) && ($idServicio==8 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==3 ) && ($idServicio==9 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==3 ) && ($idServicio==10 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==3 ) && ($idServicio==11 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==3 ) && ($idServicio==12 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==3 ) && ($idServicio==13 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==3 ) && ($idServicio==14 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==3 ) && ($idServicio==15 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==4 ) && ($idServicio==1 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==4 ) && ($idServicio==2 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==4 ) && ($idServicio==3 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==4 ) && ($idServicio==4 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==4 ) && ($idServicio==5 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==4 ) && ($idServicio==6 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==4 ) && ($idServicio==7 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==4 ) && ($idServicio==8 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==4 ) && ($idServicio==9 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==4 ) && ($idServicio==10 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==4 ) && ($idServicio==11 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==4 ) && ($idServicio==12 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==4 ) && ($idServicio==13 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==4 ) && ($idServicio==14 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==4 ) && ($idServicio==15 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==5 ) && ($idServicio==1 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==5 ) && ($idServicio==2 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==5 ) && ($idServicio==3 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==5 ) && ($idServicio==4 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==5 ) && ($idServicio==5 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==5 ) && ($idServicio==6 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==5 ) && ($idServicio==7 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==5 ) && ($idServicio==8 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==5 ) && ($idServicio==9 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==5 ) && ($idServicio==10 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==5 ) && ($idServicio==11 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==5 ) && ($idServicio==12 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==5 ) && ($idServicio==13 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==5 ) && ($idServicio==14 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==5 ) && ($idServicio==15 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==6 ) && ($idServicio==1 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==6 ) && ($idServicio==2 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==6 ) && ($idServicio==3 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==6 ) && ($idServicio==4 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==6 ) && ($idServicio==5 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==6 ) && ($idServicio==6 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==6 ) && ($idServicio==7 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==6 ) && ($idServicio==8 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==6 ) && ($idServicio==9 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==6 ) && ($idServicio==10 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==6 ) && ($idServicio==11 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==6 ) && ($idServicio==12 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==6 ) && ($idServicio==13 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==6 ) && ($idServicio==14 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==6 ) && ($idServicio==15 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==7 ) && ($idServicio==1 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==7 ) && ($idServicio==2 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==7 ) && ($idServicio==3 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==7 ) && ($idServicio==4 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==7 ) && ($idServicio==5 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==7 ) && ($idServicio==6 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==7 ) && ($idServicio==7 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==7 ) && ($idServicio==8 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==7 ) && ($idServicio==9 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==7 ) && ($idServicio==10 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==7 ) && ($idServicio==11 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==7 ) && ($idServicio==12 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==7 ) && ($idServicio==13 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==7 ) && ($idServicio==14 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==7 ) && ($idServicio==15 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==8 ) && ($idServicio==1 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==8 ) && ($idServicio==2 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==8 ) && ($idServicio==3 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==8 ) && ($idServicio==4 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==8 ) && ($idServicio==5 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==8 ) && ($idServicio==6 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==8 ) && ($idServicio==7 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==8 ) && ($idServicio==8 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==8 ) && ($idServicio==9 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==8 ) && ($idServicio==10 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==8 ) && ($idServicio==11 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==8 ) && ($idServicio==12 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==8 ) && ($idServicio==13 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==8 ) && ($idServicio==14 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==8 ) && ($idServicio==15 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==9 ) && ($idServicio==1 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==9 ) && ($idServicio==2 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==9 ) && ($idServicio==3 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==9 ) && ($idServicio==4 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==9 ) && ($idServicio==5 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==9 ) && ($idServicio==6 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==9 ) && ($idServicio==7 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==9 ) && ($idServicio==8 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==9 ) && ($idServicio==9 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==9 ) && ($idServicio==10 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==9 ) && ($idServicio==11 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==9 ) && ($idServicio==12 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==9 ) && ($idServicio==13 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==9 ) && ($idServicio==14 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==9 ) && ($idServicio==15 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==10 ) && ($idServicio==1 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==10 ) && ($idServicio==2 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==10 ) && ($idServicio==3 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==10 ) && ($idServicio==4 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==10 ) && ($idServicio==5 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==10 ) && ($idServicio==6 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==10 ) && ($idServicio==7 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==10 ) && ($idServicio==8 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==10 ) && ($idServicio==9 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==10 ) && ($idServicio==10 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==10 ) && ($idServicio==11 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==10 ) && ($idServicio==12 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==10 ) && ($idServicio==13 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==10 ) && ($idServicio==14 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==10 ) && ($idServicio==15 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==11 ) && ($idServicio==1 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==11 ) && ($idServicio==2 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==11 ) && ($idServicio==3 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==11 ) && ($idServicio==4 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==11 ) && ($idServicio==5 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==11 ) && ($idServicio==6 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==11 ) && ($idServicio==7 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==11 ) && ($idServicio==8 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==11 ) && ($idServicio==9 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==11 ) && ($idServicio==10 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==11 ) && ($idServicio==11 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==11 ) && ($idServicio==12 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==11 ) && ($idServicio==13 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==11 ) && ($idServicio==14 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==11 ) && ($idServicio==15 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==12 ) && ($idServicio==1 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==12 ) && ($idServicio==2 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==12 ) && ($idServicio==3 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==12 ) && ($idServicio==4 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==12 ) && ($idServicio==5 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==12 ) && ($idServicio==6 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==12 ) && ($idServicio==7 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==12 ) && ($idServicio==8 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==12 ) && ($idServicio==9 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==12 ) && ($idServicio==10 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==12 ) && ($idServicio==11 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==12 ) && ($idServicio==12 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==12 ) && ($idServicio==13 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==12 ) && ($idServicio==14 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==12 ) && ($idServicio==15 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==13 ) && ($idServicio==1 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==13 ) && ($idServicio==2 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==13 ) && ($idServicio==3 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==13 ) && ($idServicio==4 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==13 ) && ($idServicio==5 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==13 ) && ($idServicio==6 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==13 ) && ($idServicio==7 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==13 ) && ($idServicio==8 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==13 ) && ($idServicio==9 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==13 ) && ($idServicio==10 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==13 ) && ($idServicio==11 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==13 ) && ($idServicio==12 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==13 ) && ($idServicio==13 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==13 ) && ($idServicio==14 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==13 ) && ($idServicio==15 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==14 ) && ($idServicio==1 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==14 ) && ($idServicio==2 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==14 ) && ($idServicio==3 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==14 ) && ($idServicio==4 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==14 ) && ($idServicio==5 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==14 ) && ($idServicio==6 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==14 ) && ($idServicio==7 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==14 ) && ($idServicio==8 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==14 ) && ($idServicio==9 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==14 ) && ($idServicio==10 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==14 ) && ($idServicio==11 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==14 ) && ($idServicio==12 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==14 ) && ($idServicio==13 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==14 ) && ($idServicio==14 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==14 ) && ($idServicio==15 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==15 ) && ($idServicio==1 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==15 ) && ($idServicio==2 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==15 ) && ($idServicio==3 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==15 ) && ($idServicio==4 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==15 ) && ($idServicio==5 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==15 ) && ($idServicio==6 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==15 ) && ($idServicio==7 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==15 ) && ($idServicio==8 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==15 ) && ($idServicio==9 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==15 ) && ($idServicio==10 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==15 ) && ($idServicio==11 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==15 ) && ($idServicio==12 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==15 ) && ($idServicio==13 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==15 ) && ($idServicio==14 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==15 ) && ($idServicio==15 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==16 ) && ($idServicio==1 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==16 ) && ($idServicio==2 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==16 ) && ($idServicio==3 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==16 ) && ($idServicio==4 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==16 ) && ($idServicio==5 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==16 ) && ($idServicio==6 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==16 ) && ($idServicio==7 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==16 ) && ($idServicio==8 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==16 ) && ($idServicio==9 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==16 ) && ($idServicio==10 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==16 ) && ($idServicio==11 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==16 ) && ($idServicio==12 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==16 ) && ($idServicio==13 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==16 ) && ($idServicio==14 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==16 ) && ($idServicio==15 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==17 ) && ($idServicio==1 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==17 ) && ($idServicio==2 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==17 ) && ($idServicio==3 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==17 ) && ($idServicio==4 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==17 ) && ($idServicio==5 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==17 ) && ($idServicio==6 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==17 ) && ($idServicio==7 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==17 ) && ($idServicio==8 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==17 ) && ($idServicio==9 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==17 ) && ($idServicio==10 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==17 ) && ($idServicio==11 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==17 ) && ($idServicio==12 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==17 ) && ($idServicio==13 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==17 ) && ($idServicio==14 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==17 ) && ($idServicio==15 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==18 ) && ($idServicio==1 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==18 ) && ($idServicio==2 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==18 ) && ($idServicio==3 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==18 ) && ($idServicio==4 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==18 ) && ($idServicio==5 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==18 ) && ($idServicio==6 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==18 ) && ($idServicio==7 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==18 ) && ($idServicio==8 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==18 ) && ($idServicio==9 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==18 ) && ($idServicio==10 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==18 ) && ($idServicio==11 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==18 ) && ($idServicio==12 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==18 ) && ($idServicio==13 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==18 ) && ($idServicio==14 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==18 ) && ($idServicio==15 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==19 ) && ($idServicio==1 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==19 ) && ($idServicio==2 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==19 ) && ($idServicio==3 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==19 ) && ($idServicio==4 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==19 ) && ($idServicio==5 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==19 ) && ($idServicio==6 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==19 ) && ($idServicio==7 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==19 ) && ($idServicio==8 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==19 ) && ($idServicio==9 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==19 ) && ($idServicio==10 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==19 ) && ($idServicio==11 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==19 ) && ($idServicio==12 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==19 ) && ($idServicio==13 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==19 ) && ($idServicio==14 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==19 ) && ($idServicio==15 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==20 ) && ($idServicio==1 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==20 ) && ($idServicio==2 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==20 ) && ($idServicio==3 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==20 ) && ($idServicio==4 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==20 ) && ($idServicio==5 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==20 ) && ($idServicio==6 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==20 ) && ($idServicio==7 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==20 ) && ($idServicio==8 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==20 ) && ($idServicio==9 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==20 ) && ($idServicio==10 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==20 ) && ($idServicio==11 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==20 ) && ($idServicio==12 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==20 ) && ($idServicio==13 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==20 ) && ($idServicio==14 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==20 ) && ($idServicio==15 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==21 ) && ($idServicio==1 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==21 ) && ($idServicio==2 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==21 ) && ($idServicio==3 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==21 ) && ($idServicio==4 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==21 ) && ($idServicio==5 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==21 ) && ($idServicio==6 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==21 ) && ($idServicio==7 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==21 ) && ($idServicio==8 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==21 ) && ($idServicio==9 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==21 ) && ($idServicio==10 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==21 ) && ($idServicio==11 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==21 ) && ($idServicio==12 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==21 ) && ($idServicio==13 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==21 ) && ($idServicio==14 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==21 ) && ($idServicio==15 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==22 ) && ($idServicio==1 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==22 ) && ($idServicio==2 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==22 ) && ($idServicio==3 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==22 ) && ($idServicio==4 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==22 ) && ($idServicio==5 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==22 ) && ($idServicio==6 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==22 ) && ($idServicio==7 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==22 ) && ($idServicio==8 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==22 ) && ($idServicio==9 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==22 ) && ($idServicio==10 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==22 ) && ($idServicio==11 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==22 ) && ($idServicio==12 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==22 ) && ($idServicio==13 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==22 ) && ($idServicio==14 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==22 ) && ($idServicio==15 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==23 ) && ($idServicio==1 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==23 ) && ($idServicio==2 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==23 ) && ($idServicio==3 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==23 ) && ($idServicio==4 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==23 ) && ($idServicio==5 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==23 ) && ($idServicio==6 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==23 ) && ($idServicio==7 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==23 ) && ($idServicio==8 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==23 ) && ($idServicio==9 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==23 ) && ($idServicio==10 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==23 ) && ($idServicio==11 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==23 ) && ($idServicio==12 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==23 ) && ($idServicio==13 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==23 ) && ($idServicio==14 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==23 ) && ($idServicio==15 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==24 ) && ($idServicio==1 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==24 ) && ($idServicio==2 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==24 ) && ($idServicio==3 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==24 ) && ($idServicio==4 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==24 ) && ($idServicio==5 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==24 ) && ($idServicio==6 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==24 ) && ($idServicio==7 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==24 ) && ($idServicio==8 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==24 ) && ($idServicio==9 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==24 ) && ($idServicio==10 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==24 ) && ($idServicio==11 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==24 ) && ($idServicio==12 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==24 ) && ($idServicio==13 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==24 ) && ($idServicio==14 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==24 ) && ($idServicio==15 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==25 ) && ($idServicio==1 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==25 ) && ($idServicio==2 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==25 ) && ($idServicio==3 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==25 ) && ($idServicio==4 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==25 ) && ($idServicio==5 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==25 ) && ($idServicio==6 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==25 ) && ($idServicio==7 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==25 ) && ($idServicio==8 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==25 ) && ($idServicio==9 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==25 ) && ($idServicio==10 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==25 ) && ($idServicio==11 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==25 ) && ($idServicio==12 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==25 ) && ($idServicio==13 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==25 ) && ($idServicio==14 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==25 ) && ($idServicio==15 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==26 ) && ($idServicio==1 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==26 ) && ($idServicio==2 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==26 ) && ($idServicio==3 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==26 ) && ($idServicio==4 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==26 ) && ($idServicio==5 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==26 ) && ($idServicio==6 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==26 ) && ($idServicio==7 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==26 ) && ($idServicio==8 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==26 ) && ($idServicio==9 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==26 ) && ($idServicio==10 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==26 ) && ($idServicio==11 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==26 ) && ($idServicio==12 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==26 ) && ($idServicio==13 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==26 ) && ($idServicio==14 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==26 ) && ($idServicio==15 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==27 ) && ($idServicio==1 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==27 ) && ($idServicio==2 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==27 ) && ($idServicio==3 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==27 ) && ($idServicio==4 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==27 ) && ($idServicio==5 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==27 ) && ($idServicio==6 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==27 ) && ($idServicio==7 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==27 ) && ($idServicio==8 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==27 ) && ($idServicio==9 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==27 ) && ($idServicio==10 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==27 ) && ($idServicio==11 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==27 ) && ($idServicio==12 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==27 ) && ($idServicio==13 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==27 ) && ($idServicio==14 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==27 ) && ($idServicio==15 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==28 ) && ($idServicio==1 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==28 ) && ($idServicio==2 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==28 ) && ($idServicio==3 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==28 ) && ($idServicio==4 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==28 ) && ($idServicio==5 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==28 ) && ($idServicio==6 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==28 ) && ($idServicio==7 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==28 ) && ($idServicio==8 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==28 ) && ($idServicio==9 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==28 ) && ($idServicio==10 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==28 ) && ($idServicio==11 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==28 ) && ($idServicio==12 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==28 ) && ($idServicio==13 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==28 ) && ($idServicio==14 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==28 ) && ($idServicio==15 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==29 ) && ($idServicio==1 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==29 ) && ($idServicio==2 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==29 ) && ($idServicio==3 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==29 ) && ($idServicio==4 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==29 ) && ($idServicio==5 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==29 ) && ($idServicio==6 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==29 ) && ($idServicio==7 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==29 ) && ($idServicio==8 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==29 ) && ($idServicio==9 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==29 ) && ($idServicio==10 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==29 ) && ($idServicio==11 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==29 ) && ($idServicio==12 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==29 ) && ($idServicio==13 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==29 ) && ($idServicio==14 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==29 ) && ($idServicio==15 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==30 ) && ($idServicio==1 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==30 ) && ($idServicio==2 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==30 ) && ($idServicio==3 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==30 ) && ($idServicio==4 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==30 ) && ($idServicio==5 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==30 ) && ($idServicio==6 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==30 ) && ($idServicio==7 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==30 ) && ($idServicio==8 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==30 ) && ($idServicio==9 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==30 ) && ($idServicio==10 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==30 ) && ($idServicio==11 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==30 ) && ($idServicio==12 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==30 ) && ($idServicio==13 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==30 ) && ($idServicio==14 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==30 ) && ($idServicio==15 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==31 ) && ($idServicio==1 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==31 ) && ($idServicio==2 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==31 ) && ($idServicio==3 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==31 ) && ($idServicio==4 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==31 ) && ($idServicio==5 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==31 ) && ($idServicio==6 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==31 ) && ($idServicio==7 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==31 ) && ($idServicio==8 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==31 ) && ($idServicio==9 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==31 ) && ($idServicio==10 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==31 ) && ($idServicio==11 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==31 ) && ($idServicio==12 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==31 ) && ($idServicio==13 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==31 ) && ($idServicio==14 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==31 ) && ($idServicio==15 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==32 ) && ($idServicio==1 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==32 ) && ($idServicio==2 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==32 ) && ($idServicio==3 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==32 ) && ($idServicio==4 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==32 ) && ($idServicio==5 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==32 ) && ($idServicio==6 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==32 ) && ($idServicio==7 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==32 ) && ($idServicio==8 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==32 ) && ($idServicio==9 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==32 ) && ($idServicio==10 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==32 ) && ($idServicio==11 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==32 ) && ($idServicio==12 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==32 ) && ($idServicio==13 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==32 ) && ($idServicio==14 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==32 ) && ($idServicio==15 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==33 ) && ($idServicio==1 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==33 ) && ($idServicio==2 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==33 ) && ($idServicio==3 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==33 ) && ($idServicio==4 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==33 ) && ($idServicio==5 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==33 ) && ($idServicio==6 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==33 ) && ($idServicio==7 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==33 ) && ($idServicio==8 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==33 ) && ($idServicio==9 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==33 ) && ($idServicio==10 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==33 ) && ($idServicio==11 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==33 ) && ($idServicio==12 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==33 ) && ($idServicio==13 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==33 ) && ($idServicio==14 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==33 ) && ($idServicio==15 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==34 ) && ($idServicio==1 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==34 ) && ($idServicio==2 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==34 ) && ($idServicio==3 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==34 ) && ($idServicio==4 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==34 ) && ($idServicio==5 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==34 ) && ($idServicio==6 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==34 ) && ($idServicio==7 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==34 ) && ($idServicio==8 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==34 ) && ($idServicio==9 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==34 ) && ($idServicio==10 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==34 ) && ($idServicio==11 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==34 ) && ($idServicio==12 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==34 ) && ($idServicio==13 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==34 ) && ($idServicio==14 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
   elseif (($idSector==34 ) && ($idServicio==15 )) {
-        $carrosAEnviar[]=7;
-        $carrosAEnviar[]=8;
+        $carrosAEnviar[]=1;
+        $carrosAEnviar[]=2;
       }
+
    return $carrosAEnviar;
 }
 
@@ -4304,6 +4370,48 @@ public function getEstadoDeServicioDeMaquina($idMaquina){
    $this->c->desconectar();
    return $obj;
 }
+
+public function estabecerEstadoDeEmergenciaDeMaquina($idMaquina,$estado){
+  $this->c->conectar();
+  $query="INSERT INTO tbl_estado_servicio_unidad VALUES (NULL,".$idMaquina.",".$estado.");";
+  $this->c->ejecutar($query);
+  $this->c->desconectar();
+}
+
+public function actualizarEstadoDeEmergenciaDeMaquina($idMaquina,$estado){
+  $this->c->conectar();
+  $query="UPDATE tbl_estado_servicio_unidad SET fk_estado=".$estado." WHERE fk_unidad=".$idMaquina.";";
+  $this->c->ejecutar($query);
+  $this->c->desconectar();
+}
+
+
+
+public function rescatarIdDeMaquinaMasReciente(){
+  $this->c->conectar();
+  $query="SELECT MAX(id_unidad) FROM tbl_unidad;";
+  $rs = $this->c->ejecutar($query);
+  while($reg = $rs->fetch_array()){
+    $obj= $reg[0];
+   }
+   $this->c->desconectar();
+   return $obj;
+}
+
+
+public function getEstadoDeEmergenciaDeLaUnidad($idUnidad){
+  $this->c->conectar();
+  $query="SELECT fk_estado FROM tbl_estado_servicio_unidad WHERE fk_unidad=".$idUnidad.";";
+  $rs = $this->c->ejecutar($query);
+  while($reg = $rs->fetch_array()){
+    $obj= $reg[0];
+   }
+   $this->c->desconectar();
+   return $obj;
+}
+
+
+
 
 
 

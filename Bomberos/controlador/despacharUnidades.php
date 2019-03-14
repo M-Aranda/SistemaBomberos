@@ -3,8 +3,6 @@ require_once("../Model/Data.php");
 session_start();
 $data = new Data();
 
-
-
 if(isset($_SESSION["idDeServicioCreado"])){
  $idServicio=$_SESSION["idDeServicioCreado"];
 
@@ -15,13 +13,12 @@ if(isset($_SESSION["idDeServicioCreado"])){
 
   foreach ($listadoDeUnidadesAEnviar as $lis => $unidad) {
     $data->registrarDespachoEnviado($idServicio,$unidad);
+    $data->actualizarEstadoDeEmergenciaDeMaquina($unidad,2);
   }
 
   unset($_SESSION["idDeServicioCreado"]);
 }
-
 //Mandar tonos aqui
 
  header("location: ../centralDeDespacho.php");
-
 ?>
