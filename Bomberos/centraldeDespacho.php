@@ -941,7 +941,7 @@ function cargarTabla(){
 
 
       cell3.setAttribute("type", "submit");
-      cell3.setAttribute("value", "images/bombero.png");
+      cell3.setAttribute("value", "");
       cell3.setAttribute("style","border-radius: 70px 70px 70px 70px;width:50px;height:50px;");
       cell3.setAttribute("img","images/bombero.png");
 

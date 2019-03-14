@@ -358,7 +358,7 @@
     width: 75%;
     padding-left: 5%;
     padding-top: -100%;
-    margin-top: -800px;
+    margin-top: -950px;
     margin-bottom: -1000px;
     ">
 
@@ -1225,10 +1225,8 @@
                               </div>
                             </div>
                           </div>
-
-
-                                <div>
-                                <br><br>
+                                <div style="margin-top:120px;">
+                                <br><br><br><br>
                                 Fecha de caducidad: <br>
                                 <input  type="text" id="detalleFecha" name="detalleFecha" disabled style="width: 170px;">
                                 <br>
@@ -1244,7 +1242,7 @@
                               </div>
 
 
-                             <table class="table table-striped" style="margin-left: -450px;">
+                             <table class="table table-striped" style="margin-left: 10px;">
                                    <thead>
                                      <tr>
                                        <th>Nombre</th>
