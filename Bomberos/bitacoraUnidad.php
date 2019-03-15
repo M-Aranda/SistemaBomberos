@@ -16,6 +16,14 @@
       unset($_SESSION["resultadosDeBusquedaDeMaterialMenor"]);
     }
 
+
+    if($_SESSION["usuarioIniciado"]!=null){
+      $u=$_SESSION["usuarioIniciado"];
+      if($data->verificarSiUsuarioTienePermiso($u,11)==0){
+        header("location: paginaError.php");
+      }
+    }
+
 ?>
 <html lang="en" dir="ltr">
   <head>

@@ -19,6 +19,13 @@
       $idServicioCreado=$_SESSION["idDeServicioCreado"];
     }
 
+    if($_SESSION["usuarioIniciado"]!=null){
+      $u=$_SESSION["usuarioIniciado"];
+      if($data->verificarSiUsuarioTienePermiso($u,19)==0){
+        header("location: paginaError.php");
+      }
+    }
+
 
 
 ?>
@@ -503,6 +510,7 @@ function cargarCboDeServiciosActivos(){
 
 
 function cerrarServicio(){
+//Esto sirve para subir arriba$('html, body').animate({scrollTop:0}, "300");
   var idSer=document.getElementById("idDeServicioAlQueSeVaAApoyar").value;
 
   $.ajax({
@@ -525,6 +533,7 @@ function cerrarServicio(){
               type: "success"
             });
 
+
             }
         });
       }else if(resultado === "no"){
@@ -537,6 +546,7 @@ function cerrarServicio(){
 
       }
   });
+
 }
 
 
@@ -970,6 +980,8 @@ function cargarTabla(){
 window.onload = function() {
   cargarTabla();
 };
+
+
 
 </script>
 

@@ -26,7 +26,6 @@ unset($_SESSION["resultadosDeBusquedaDeUnidad"]);;
 if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
 unset($_SESSION["resultadosDeBusquedaDeMaterialMenor"]);
 }
-
 ?>
 <html lang="en" dir="ltr">
   <head>

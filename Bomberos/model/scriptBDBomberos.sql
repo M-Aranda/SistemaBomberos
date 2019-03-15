@@ -568,7 +568,6 @@ PRIMARY KEY(id_servicio)
 );
 
 
-
 CREATE TABLE tbl_servicio_unidad(
 id_servicio_unidad INT AUTO_INCREMENT,
 fk_servicio INT,
@@ -1667,6 +1666,7 @@ INSERT INTO tbl_sector (nombre_sector) VALUES
 
 
 -- SELECTs
+-- SELECT * FROM tbl_permiso;
 -- SELECT * FROM tbl_medida;
 -- SELECT * FROM tbl_informacionPersonal;
 -- SELECT * FROM tbl_informacionBomberil;
@@ -1781,6 +1781,16 @@ tbl_material_menor.fk_unidad_de_medida_material_menor=tbl_unidad_de_medida.id_un
 tbl_material_menor.fk_ubicacion_fisica_material_menor=tbl_ubicacion_fisica.id_ubicacion_fisica AND
 tbl_material_menor.fk_estado_material_menor=tbl_estado_material_menor.id_estado_material_menor  AND
 tbl_material_menor.id_material_menor=1;
+
+
+-- Query para obtener los ultimos 5 servicios cerrados
+
+SELECT tbl_servicio.id_servicio, tbl_servicio.nombre_servicio, tbl_servicio.rut_servicio, tbl_servicio.telefono_servicio,
+tbl_servicio.direccion_servicio, tbl_servicio.esquina1_servicio, 
+tbl_servicio.esquina2_servicio, tbl_servicio.fk_sector, tbl_servicio.fk_tipoDeServicio, tbl_servicio.detalles_servicio,
+tbl_servicio.fecha_servicio FROM tbl_servicio,tbl_servicio_unidad 
+WHERE tbl_servicio_unidad.fk_servicio=tbl_servicio.id_servicio AND tbl_servicio_unidad.emergenciaActiva=0  GROUP BY tbl_servicio.id_servicio
+ORDER BY id_servicio DESC LIMIT 5;
 */
 
 

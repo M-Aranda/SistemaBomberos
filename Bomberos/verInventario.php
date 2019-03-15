@@ -24,7 +24,7 @@
   session_start();
   if($_SESSION["usuarioIniciado"]!=null){
     $u=$_SESSION["usuarioIniciado"];
-    if($dataUsuario->verificarSiUsuarioTienePermiso($u,1)==0){
+    if($dataUsuario->verificarSiUsuarioTienePermiso($u,17)==0){
       header("location: paginaError.php");
     }
   }

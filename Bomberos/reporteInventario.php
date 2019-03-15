@@ -12,10 +12,14 @@
     if(isset($_SESSION["resultadosDeBusquedaDeUnidad"])){
       unset($_SESSION["resultadosDeBusquedaDeUnidad"]);
     }
-    /*
-    if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
-      unset($_SESSION["resultadosDeBusquedaDeMaterialMenor"]);
-    }*/
+
+
+    if($_SESSION["usuarioIniciado"]!=null){
+      $u=$_SESSION["usuarioIniciado"];
+      if($data->verificarSiUsuarioTienePermiso($u,18)==0){
+        header("location: paginaError.php");
+      }
+    }
 
 ?>
 <html lang="en" dir="ltr">

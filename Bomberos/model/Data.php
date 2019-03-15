@@ -1804,7 +1804,12 @@ $query="INSERT INTO tbl_servicio VALUES (NULL, '".$servicio->getNombre_servicio(
 
 public function getUltimos5Servicios(){
   $this->c->conectar();
-  $query="SELECT * FROM tbl_servicio ORDER BY id_servicio DESC LIMIT 5;";
+  $query="SELECT tbl_servicio.id_servicio, tbl_servicio.nombre_servicio, tbl_servicio.rut_servicio, tbl_servicio.telefono_servicio,
+tbl_servicio.direccion_servicio, tbl_servicio.esquina1_servicio,
+tbl_servicio.esquina2_servicio, tbl_servicio.fk_sector, tbl_servicio.fk_tipoDeServicio, tbl_servicio.detalles_servicio,
+tbl_servicio.fecha_servicio FROM tbl_servicio,tbl_servicio_unidad
+WHERE tbl_servicio_unidad.fk_servicio=tbl_servicio.id_servicio AND tbl_servicio_unidad.emergenciaActiva=0  GROUP BY tbl_servicio.id_servicio
+ORDER BY id_servicio DESC LIMIT 5;";
   $rs = $this->c->ejecutar($query);
   $listado=array();
   while($reg = $rs->fetch_array()){

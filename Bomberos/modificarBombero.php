@@ -16,7 +16,6 @@
     }
 
 
-
     if($_SESSION["infoPersonalSolicitada"]!=null){
       $infoPersonal=$_SESSION["infoPersonalSolicitada"];
     }
