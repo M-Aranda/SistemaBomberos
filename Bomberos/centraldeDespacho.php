@@ -751,7 +751,17 @@ function despacharUnidadesALaEmergencia(){
 
 function obtenerHoraActual(){
   var today = new Date();
-  var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  var minutos=today.getMinutes();
+  if (minutos<10){
+    minutos= "0"+minutos;
+  }
+
+  var segundos =today.getSeconds();
+  if (segundos<10){
+    segundos="0"+segundos;
+  }
+
+  var time = today.getHours() + ":" + minutos + ":" + segundos;
   return time;
 }
 
