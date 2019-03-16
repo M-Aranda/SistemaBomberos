@@ -508,15 +508,12 @@
         </center>
         </form>
 
-        <input type="submit" onclick="reproducirSonido()" name="btnTest" value="test">
         <br>
 
-        <?php
-        if(isset($_SESSION["idDeServicioQueSeEstaManipulando"])){?>
-            <a href="centraldeDespacho.php">Volver a despacho</a>
+        <form method="post" action="centraldeDespacho.php"><!-- Deberia mandar a controlador que se fije si hay emergencias activas-->
+        <input type="submit" value="Volver a despacho">
+        </form>
 
-      <?php   }
-        ?>
 
          </div>
 
@@ -557,14 +554,6 @@ function borrarOpcionSeleccionarSector(){
 function borrarOpcionElegirEmergencia(){
   $("#cboTiposDeServicios option[value='0']").remove();
 }
-
-function reproducirSonido(){
-  var music = new Audio('sonidos/bleep.mp3');
-  music.play();
-}
-
-
-
 
 
 function obtenerHoraActual(){

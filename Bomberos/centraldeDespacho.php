@@ -293,7 +293,8 @@
 
 
               En Despacho:&nbsp;
-              <select id="cboxdespacho" name="cboxdespacho" onchange="cargarTabla(),guardarIdDeServicioManipuladoEnSesion()"style="width:400px;height:30px;margin-top:-12px;" >
+              <select id="cboxdespacho" name="cboxdespacho" onchange="cargarTabla(),guardarIdDeServicioManipuladoEnSesion()" onclick="borrarOpcionSeleccionarEmergencia()"style="width:400px;height:30px;margin-top:-12px;" >
+                <option selected disabled value="0">Seleccionar emergencia</option>
                 <?php $emergenciasActivas=$data->getServiciosDeEmergenciasActivas();
 
                 if(isset($_SESSION["idDeServicioQueSeEstaManipulando"])){
@@ -314,7 +315,7 @@
               }
             }else{
               foreach ($emergenciasActivas as $e => $emer) {?>
-                <option selected value="<?php echo $emer->getId_servicio();?>"><?php
+                <option  value="<?php echo $emer->getId_servicio();?>"><?php
                 $momento;
                 $pieces=explode(" ",$emer->getFecha_servicio());
                 $momento = date("d-m-Y", strtotime($pieces[0]));
@@ -476,6 +477,17 @@ if(isset($_SESSION["idDeServicioQueSeEstaManipulando"])){
 ?>
 
 <script>
+function borrarOpcionSeleccionarEmergencia(){
+  $("#cboxdespacho option[value='0']").remove();
+}
+
+
+function reproducirSonido(){
+  var music = new Audio('sonidos/bleep.mp3');
+  music.play();
+}
+
+
 function guardarIdDeServicioManipuladoEnSesion(){
 var id=document.getElementById("cboxdespacho").value;
 
@@ -707,6 +719,7 @@ setTimeout("mostrarhora()",1000);
 
 
 function despacharUnidadesALaEmergencia(){
+
   var txtDespacho=document.getElementById("txtDespacho").value;
   if(txtDespacho==""){
     swal({
@@ -726,6 +739,7 @@ function despacharUnidadesALaEmergencia(){
       cancelButtonText: 'No'
     }).then((result) => {
       if (result.value) {
+        //necesito que este sonido se toque solo al enviar el form reproducirSonido();
         document.getElementById("formEnviarUnidades").submit();
       }
     });
