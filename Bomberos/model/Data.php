@@ -4428,6 +4428,23 @@ public function verificarExistenciaDeEmergenciasEnProgreso(){
 }
 
 
+public function obtenerUnidadesDisponibles(){
+  $this->c->conectar();
+  $query="SELECT tbl_unidad.id_unidad, tbl_unidad.nombre_unidad FROM tbl_unidad, tbl_estado_de_servicio_de_maquina, tbl_estado_servicio_unidad WHERE
+  tbl_estado_servicio_unidad.fk_estado=tbl_estado_de_servicio_de_maquina.id_estado_de_servicio_de_maquina AND
+  tbl_unidad.id_unidad=tbl_estado_servicio_unidad.fk_unidad AND
+  tbl_estado_servicio_unidad.fk_estado=1;";
+  $rs = $this->c->ejecutar($query);
+  $listado=array();
+  while($reg = $rs->fetch_array()){
+    $obj= new Tbl_Unidad();
+    $obj->setIdUnidad($reg[0]);
+    $obj->setNombreUnidad($reg[1]);
+    $listado[]=$obj;
+   }
+   $this->c->desconectar();
+   return $listado;
+}
 
 
 

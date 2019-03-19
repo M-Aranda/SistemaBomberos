@@ -8,5 +8,4 @@ $fkServicio=$_SESSION["idDeServicioCreado"];
 $d->crearDespachoInicial($fkServicio);
 
 header("location: ../centraldeDespacho.php");
-
 ?>

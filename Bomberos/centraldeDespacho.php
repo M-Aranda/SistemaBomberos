@@ -261,6 +261,7 @@
 
 
               Despacho:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input value="<?php
+
               if(isset($_SESSION["idDeServicioCreado"])){
                 echo utf8_encode($data->getTipoDeServicioYSectorDeServicio($idServicioCreado)->getServicio());
                echo "  "; echo utf8_encode($data->getTipoDeServicioYSectorDeServicio($idServicioCreado)->getSector()); echo " ";
@@ -271,11 +272,24 @@
                $idSector=$data->getTipoDeServicioYSectorDeServicio($idServicioCreado)->getSector();
                $idSector=$data->getIdDeSectorAPartirDelNombre($idSector);
 
+               function deleteElement($element, &$array){
+                   $index = array_search($element, $array);
+                   if($index !== false){
+                       unset($array[$index]);
+                   }
+               }
+
                $listadoDeUnidadesAEnviar=$data->determinarCarrosADespacharSegunCodigoDeServicioYSector($idTipoServ,$idSector);
 
                 foreach ($listadoDeUnidadesAEnviar as $lu => $unidad) {
+                  $disponibilidad=$data->getEstadoDeEmergenciaDeLaUnidad($unidad);
+                  if($disponibilidad!=1){
+                    deleteElement($unidad,$listadoDeUnidadesAEnviar);
+                  }else{
                     echo utf8_encode($data->getNombreDeUnidadPorId($unidad));
                     echo " ";
+                  }
+
                   }
               }
 
@@ -286,7 +300,7 @@
                 <input type="hidden" name="sector" id="sector" value="<?php echo $idSector;?>">
 
               </form>
-              <button type="submit"  id="btn_despachar" name="btnsonido" onclick="despacharUnidadesALaEmergencia()" style="width:60px;height:60px;margin-left:530px;margin-top:-19px;">
+              <button type="submit"  id="btn_despachar" name="btnsonido" onclick="verificarQueUnidadesSeleccionadasEstenDisponibles()" style="width:60px;height:60px;margin-left:530px;margin-top:-19px;">
                 <img src="images/torre.png" alt="x" /></button>
 
 
@@ -337,6 +351,17 @@
              </div>
            </div>
          </div>
+
+         <select name="cboUnidades" style="width: 180px;" >
+             <?php
+                 $unidad = $data->obtenerUnidadesDisponibles();
+                 foreach ($unidad as $u) {
+                     echo "<option value='".$u->getIdUnidad()."'>";
+                         echo $u->getNombreUnidad();
+                     echo"</option>";
+                 }
+             ?>
+         </select>
 
   <div id="cuadro2" style="height: 305px;">
       <div class="jumbotron"  style="height: 300px;border-radius: 70px 70px 70px 70px;">
@@ -476,6 +501,34 @@ if(isset($_SESSION["idDeServicioQueSeEstaManipulando"])){
 ?>
 
 <script>
+function verificarQueUnidadesSeleccionadasEstenDisponibles(){
+
+  var sector=document.getElementById("sector").value;;
+  var servicio=document.getElementById("tipoServicio").value;;
+
+  $.ajax({
+    url: "controlador/determinarUnidadesDisponiblesParaEmergencia.php",
+    type: "POST",
+    data:{"sector": sector, "servicio": servicio}
+  }).done(function(data) {
+    console.log(data);
+    if(data=="No se selecciono ninguna unidad disponible"){
+      swal({
+        title: "Sistema de bomberos",
+        text: data,
+        type: "error"
+      });
+    }else {
+      despacharUnidadesALaEmergencia();
+    }
+
+  });
+
+
+}
+
+
+
 function borrarOpcionSeleccionarEmergencia(){
   $("#cboxdespacho option[value='0']").remove();
 }
@@ -713,8 +766,6 @@ cad=f.getHours()+":"+f.getMinutes()+":"+f.getSeconds();
 window.status =cad;
 setTimeout("mostrarhora()",1000);
 }
-
-
 
 
 function despacharUnidadesALaEmergencia(){

@@ -4,9 +4,7 @@ require_once("../model/Data.php");
 
 session_start();
 
-
 $idABuscar=$_SESSION["idAModificar"];
-
 
 $d= new Data();
 
