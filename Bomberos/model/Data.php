@@ -4417,7 +4417,8 @@ public function getEstadoDeEmergenciaDeLaUnidad($idUnidad){
 
 public function verificarExistenciaDeEmergenciasEnProgreso(){
   $this->c->conectar();
-  $query="La consulta aca";
+  $query="SELECT COUNT(tbl_servicio.id_servicio) FROM tbl_servicio,tbl_servicio_unidad
+  WHERE tbl_servicio_unidad.fk_servicio=tbl_servicio.id_servicio AND tbl_servicio_unidad.emergenciaActiva=1;";
   $rs = $this->c->ejecutar($query);
   while($reg = $rs->fetch_array()){
     $obj= $reg[0];
