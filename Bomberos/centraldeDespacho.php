@@ -279,7 +279,6 @@
                   }
               }
 
-
               ?>" type="text"id="txtDespacho" name="txtDespacho" disabled style="width:400px;margin-top:10px;height:30px;">
 
               <form id="formEnviarUnidades" name="formEnviarUnidades" action="controlador/despacharUnidades.php" method="post">

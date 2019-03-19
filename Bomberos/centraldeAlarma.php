@@ -510,8 +510,8 @@
 
         <br>
 
-        <form method="post" action="centraldeDespacho.php"><!-- Deberia mandar a controlador que se fije si hay emergencias activas-->
-        <input type="submit" value="Volver a despacho">
+        <form method="post" id="formVolverADespacho" name="formVolverADespacho" action="centraldeDespacho.php">
+        <input type="submit" value="Volver a despacho" onclick="verificarExistenciaDeEmergenciasEnProgreso()">
         </form>
 
 
@@ -546,6 +546,27 @@
 
 
 <script>
+function verificarExistenciaDeEmergenciasEnProgreso(){
+  event.preventDefault();
+  $.ajax({
+      type: "POST",
+      url: 'controlador/ContarEmergenciasEnProgreso.php',
+      data: {"datos": "algo"},
+      success: function(data){
+        if(data==0){
+          swal({
+            title: "Sistema de bomberos",
+            text: "No hay emergencias en curso",
+            type: "error"
+          });
+        }else if (data>0) {
+          document.getElementById("formVolverADespacho").submit();
+        }
+      }
+  });
+
+
+}
 
 function borrarOpcionSeleccionarSector(){
   $("#cboSectores option[value='0']").remove();

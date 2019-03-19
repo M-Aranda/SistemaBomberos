@@ -4415,6 +4415,17 @@ public function getEstadoDeEmergenciaDeLaUnidad($idUnidad){
    return $obj;
 }
 
+public function verificarExistenciaDeEmergenciasEnProgreso(){
+  $this->c->conectar();
+  $query="La consulta aca";
+  $rs = $this->c->ejecutar($query);
+  while($reg = $rs->fetch_array()){
+    $obj= $reg[0];
+   }
+   $this->c->desconectar();
+   return $obj;
+}
+
 
 
 
