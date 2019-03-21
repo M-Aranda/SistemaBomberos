@@ -132,7 +132,7 @@
     width: 75%;
     padding-left: 5%;
     padding-top: -100%;
-    margin-top: -800px;
+    margin-top: -950px;
     margin-bottom: -1000px;
     ">
 
@@ -172,220 +172,240 @@
     <div style="width: 800px" style="height: 900px">
         <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
           <div class="container">
-
-          <div style="margin-left:52px;">
-
-                          <div class="col-md-24">
-                              <button type="button" class="btn btn-default col-md-12" data-toggle="collapse" data-target="#unidades">
-                                Ver Unidad
-                              </button>
-                          </div>
-
-                          <div class="col-md-12 collapse" id="unidades" >
-                              <div class="panel panel-primary">
-                                  <div class="panel-heading panel-title">
-                                      Ver Unidad
-                                  </div>
-                                  <div class="panel-body">
-
-                                      <div class="col-sm-4" >
-                                        <div style="margin-left: 0px;">
-                                          <img src="images/avatar_opt.jpg">
-                                        </div>
+            <div style="margin-left:52px;">
+              <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
 
 
-                                          Marca:<input id="nombre" type="text" name="txtmarca" class="form-control" disabled value="<?php echo $unidad->getMarca();?>">
-                                          Nº Motor:<input id="nombre" type="text" name="txtmotor" class="form-control" disabled value="<?php echo $unidad->getNmotor();?>">
-                                          Nº Chasis :<input id="nombre" type="text" name="txtchasis" class="form-control" disabled value="<?php echo $unidad->getNchasis();?>">
-                                          Nº VIN: <input id="nombre" type="text" name="txtvin" class="form-control" disabled value="<?php echo $unidad->getNVIN();?>">
-                                          Color:<br><input id="nombre" type="text" name="txtcolor" class="form-control" disabled value="<?php echo $unidad->getColor();?>">
-                                          PPU: <br><input id="nombre" type="text" name="txtppu" class="form-control" disabled value="<?php echo $unidad->getPPu();?>">
+            <!-- unidad-->
+
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title">
+                  <a role="button" style="text-decoration: none;" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <center>Ver Unidades</center>
+                  </a>
+                </h4>
+              </div>
+              <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel panel-primary">
+                    <div class="panel-heading panel-title">
+                        Ver Unidades
+                    </div>
+                <div class="panel-body">
+                  <div class="col-sm-4" >
+                    <div style="margin-left: 0px;">
+                      <img src="images/avatar_opt.jpg">
+                    </div>
 
 
 
-                                      </div>
-                                      <div class="col-sm-6" style="margin-left: 60px;">
+                      Marca:<input id="nombre" type="text" name="txtmarca" class="form-control" disabled value="<?php echo $unidad->getMarca();?>">
+                      Nº Motor:<input id="nombre" type="text" name="txtmotor" class="form-control" disabled value="<?php echo $unidad->getNmotor();?>">
+                      Nº Chasis :<input id="nombre" type="text" name="txtchasis" class="form-control" disabled value="<?php echo $unidad->getNchasis();?>">
+                      Nº VIN: <input id="nombre" type="text" name="txtvin" class="form-control" disabled value="<?php echo $unidad->getNVIN();?>">
+                      Color:<br><input id="nombre" type="text" name="txtcolor" class="form-control" disabled value="<?php echo $unidad->getColor();?>">
+                      PPU: <br><input id="nombre" type="text" name="txtppu" class="form-control" disabled value="<?php echo $unidad->getPPu();?>">
 
 
 
-                                        Nombre Unidad:<input id="nombre" type="txt" class="form-control" name="txtnombreUnidad"   value="<?php echo $unidad->getNombreUnidad();?>" disabled>
-                                        Año de Fabricacion:<input id="nombre" type="text" class="form-control" name="txtanioFabricacion" disabled value="<?php echo $unidad->getaniodeFabricacion();?>" >
-                                        Fecha de Inscripcion:<input id="nombre" type="date" class="form-control" name="txtfechainscripcion"  disabled  value="<?php
-                                         echo $unidad->getfechaInscripcion();?>">
-                                        Fecha de Adquisición:<input disabled id="nombre" type="date" class="form-control" name="txtfechaadquisicion" required="" value="<?php
-                                       echo $unidad->getfechaAdquisicion();?>">
-                                        Capacidad Ocupantes :<input id="nombre" type="number" class="form-control"  value="<?php echo $unidad->getcapacidadOcupantes();?>" name="txtcapaocupantes"  required="" min="1" pattern="^[0-9]+" onkeydown="javascript: return event.keyCode == 69 ? false : true" disabled>
-
-                                        Estado de Unidad:
-                                        <select name="unidades"  class="form-control" disabled>
-                                            <?php
-                                                $unidades = $data->getUnidades();
-                                                foreach ($unidades as $u) {
-                                                  if($unidad->getfkEstadoUnidad()==$u->getIdEstadoUnidad()){?>
-                                                    <option value="<?php echo $u->getIdEstadoUnidad(); ?>" selected ><?php echo $u->getNombreEstadoUnidad(); ?></option>
-                                                    <?php
-                                                  }else{
-                                                      ?>
-                                                      <option value="<?php echo $u->getIdEstadoUnidad(); ?>" ><?php echo $u->getNombreEstadoUnidad(); ?></option>
-                                                      <?php
-                                                    }
-                                                  }
-                                            ?>
-                                        </select>
-
-                                      Tipo de Vehiculo:
-                                      <select name="vehiculos"  class="form-control" disabled>
-                                          <?php
-                                              $vehiculos = $data->getVehiculos();
-                                              foreach ($vehiculos as $v) {
-                                                if($unidad->getfkTipoVehiculo()==$v->getIdTipoVehiculo()){?>
-                                                  <option value="<?php echo $v->getIdTipoVehiculo(); ?>" selected ><?php echo $v->getNombreTipoVehiculo(); ?></option>
-                                                  <?php
-                                                }else{
-                                                    ?>
-                                                    <option value="<?php echo $v->getIdTipoVehiculo(); ?>" ><?php echo $v->getNombreTipoVehiculo(); ?></option>
-                                                    <?php
-                                                  }
-                                                }
-                                          ?>
+                  </div>
+                  <div class="col-sm-6" style="margin-left: 60px;">
 
 
-                                      </select>
 
-                                   Entidad a Cargo:
-                                    <select name="entidad" class="form-control" disabled>
-                                        <?php
-                                            $entidadesPropietarias = $data->getEntidadACargo();
-                                            foreach ($entidadesPropietarias as $ep) {
-                                              if($unidad->getfkEntidadPropietaria()==$ep->getIdEntidadACargo()){?>
-                                                <option value="<?php echo $ep->getIdEntidadACargo(); ?>" selected ><?php echo utf8_encode($ep->getNombreEntidadACargo()); ?></option>
-                                                <?php
-                                              }else{
-                                                  ?>
-                                                  <option value="<?php echo $ep->getIdEntidadACargo(); ?>" ><?php echo utf8_encode($ep->getNombreEntidadACargo()); ?></option>
-                                                  <?php
-                                                }
-                                              }
-                                        ?>
+                    Nombre Unidad:<input id="nombre" type="txt" class="form-control" name="txtnombreUnidad"   value="<?php echo $unidad->getNombreUnidad();?>" disabled>
+                    Año de Fabricacion:<input id="nombre" type="text" class="form-control" name="txtanioFabricacion" disabled value="<?php echo $unidad->getaniodeFabricacion();?>" >
+                    Fecha de Inscripcion:<input id="nombre" type="date" class="form-control" name="txtfechainscripcion"  disabled  value="<?php
+                     echo $unidad->getfechaInscripcion();?>">
+                    Fecha de Adquisición:<input disabled id="nombre" type="date" class="form-control" name="txtfechaadquisicion" required="" value="<?php
+                   echo $unidad->getfechaAdquisicion();?>">
+                    Capacidad Ocupantes :<input id="nombre" type="number" class="form-control"  value="<?php echo $unidad->getcapacidadOcupantes();?>" name="txtcapaocupantes"  required="" min="1" pattern="^[0-9]+" onkeydown="javascript: return event.keyCode == 69 ? false : true" disabled>
 
-                                    </select>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
+                    Estado de Unidad:
+                    <select name="unidades"  class="form-control" disabled>
+                        <?php
+                            $unidades = $data->getUnidades();
+                            foreach ($unidades as $u) {
+                              if($unidad->getfkEstadoUnidad()==$u->getIdEstadoUnidad()){?>
+                                <option value="<?php echo $u->getIdEstadoUnidad(); ?>" selected ><?php echo $u->getNombreEstadoUnidad(); ?></option>
+                                <?php
+                              }else{
+                                  ?>
+                                  <option value="<?php echo $u->getIdEstadoUnidad(); ?>" ><?php echo $u->getNombreEstadoUnidad(); ?></option>
+                                  <?php
+                                }
+                              }
+                        ?>
+                    </select>
 
-                          <br>
-                          <br>
+                  Tipo de Vehiculo:
+                  <select name="vehiculos"  class="form-control" disabled>
+                      <?php
+                          $vehiculos = $data->getVehiculos();
+                          foreach ($vehiculos as $v) {
+                            if($unidad->getfkTipoVehiculo()==$v->getIdTipoVehiculo()){?>
+                              <option value="<?php echo $v->getIdTipoVehiculo(); ?>" selected ><?php echo $v->getNombreTipoVehiculo(); ?></option>
+                              <?php
+                            }else{
+                                ?>
+                                <option value="<?php echo $v->getIdTipoVehiculo(); ?>" ><?php echo $v->getNombreTipoVehiculo(); ?></option>
+                                <?php
+                              }
+                            }
+                      ?>
 
+
+                  </select>
+
+               Entidad a Cargo:
+                <select name="entidad" class="form-control" disabled>
+                    <?php
+                        $entidadesPropietarias = $data->getEntidadACargo();
+                        foreach ($entidadesPropietarias as $ep) {
+                          if($unidad->getfkEntidadPropietaria()==$ep->getIdEntidadACargo()){?>
+                            <option value="<?php echo $ep->getIdEntidadACargo(); ?>" selected ><?php echo utf8_encode($ep->getNombreEntidadACargo()); ?></option>
+                            <?php
+                          }else{
+                              ?>
+                              <option value="<?php echo $ep->getIdEntidadACargo(); ?>" ><?php echo utf8_encode($ep->getNombreEntidadACargo()); ?></option>
+                              <?php
+                            }
+                          }
+                    ?>
+
+                </select>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+            </div>
+
+                          <!-- unidad-->
                           <!--  Mantencion -->
-                          <div class="col-md-24">
-                              <button type="button" class="btn btn-default col-md-12" data-toggle="collapse" data-target="#mantencion">
-                                Mantenciones
-                              </button>
-                          </div>
 
-                          <div class="col-md-12 collapse" id="mantencion" >
-                              <div class="panel panel-primary">
-                                  <div class="panel-heading panel-title">
-                                      Mantenciones
-                                  </div>
-                                  <div class="panel-body">
 
-                                      <div class="col-sm-4">
-
-                                        <table class="table table-striped">
-                                          <thead>
-                                            <tr>
-                                              <th>Tipo de mantención</th>
-                                              <th>Fecha de Mantención</th>
-                                              <th>Responsable</th>
-                                              <th>Dirección</th>
-                                              <th>Comentarios/Observaciones</th>
-                                            </tr>
-                                          </thead>
-                                          <tbody>
-                                            <?php
-                                            foreach ($mantenciones as $m => $mantencion) { ?>
-                                              <tr>
-                                                <td><?php echo utf8_encode($data->buscarNombreDeMantencionPorId($mantencion->getFk_tipo_mantencion()));?></td>
-                                                <td><?php
-                                                  $fechaSinConvertir = $mantencion->getFecha_mantencion();
-                                                  $fechaConvertida = date("d-m-Y", strtotime($fechaSinConvertir));
-
-                                                  echo $fechaConvertida; ?>
-                                                </td>
-                                                <td><?php echo utf8_encode($mantencion->getResponsable_mantencion());?></td>
-                                                <td><?php echo utf8_encode($mantencion->getDireccion_mantencion());?></td>
-                                                <td><?php echo utf8_encode($mantencion->getComentarios_mantencion());?></td>
-                                              </tr>
-
-                                        <?php    }
-
-                                            ?>
-                                          </tbody>
-
-                                        </table>
-
-                                      </div>
-                                    </div>
+                            <div class="panel panel-default">
+                              <div class="panel-heading" role="tab" id="headingTwo">
+                                <h4 class="panel-title">
+                                  <a class="collapsed" style="text-decoration: none;" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    <center>Ver Mantencion</center>
+                                  </a>
+                                </h4>
                               </div>
-                          </div>
+                              <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading panel-title">
+                                        Ver Unidades
+                                    </div>
+                                <div class="panel-body">
 
-                          <br>
-                          <br>
+                                    <div class="col-sm-4">
+
+                                      <table class="table table-striped">
+                                      <thead>
+                                      <tr>
+                                      <th>Tipo de mantención</th>
+                                      <th>Fecha de Mantención</th>
+                                      <th>Responsable</th>
+                                      <th>Dirección</th>
+                                      <th>Comentarios/Observaciones</th>
+                                      </tr>
+                                      </thead>
+                                      <tbody>
+                                                                            <?php
+                                                                            foreach ($mantenciones as $m => $mantencion) { ?>
+                                                                                <tr>
+                                                                                  <td><?php echo utf8_encode($data->buscarNombreDeMantencionPorId($mantencion->getFk_tipo_mantencion()));?></td>
+                                                                                  <td><?php
+                                                                                    $fechaSinConvertir = $mantencion->getFecha_mantencion();
+                                                                                    $fechaConvertida = date("d-m-Y", strtotime($fechaSinConvertir));
+
+                                                                                    echo $fechaConvertida; ?>
+                                                                                  </td>
+                                                                                  <td><?php echo utf8_encode($mantencion->getResponsable_mantencion());?></td>
+                                                                                  <td><?php echo utf8_encode($mantencion->getDireccion_mantencion());?></td>
+                                                                                  <td><?php echo utf8_encode($mantencion->getComentarios_mantencion());?></td>
+                                                                                </tr>
+
+                                                                          <?php    }
+
+                                                                              ?>
+                                                                            </tbody>
+
+                                                                          </table>
+
+                                                                        </div>
+
+
+
+                                </div>
+                              </div>
+                            </div>
+                            </div>
+
+
                             <!--  Mantencion -->
                           <!--  Cargio de Combustible -->
-                          <div class="col-md-24">
-                              <button type="button" class="btn btn-default col-md-12" data-toggle="collapse" data-target="#combustible">
-                                Carguíos de Combustible
-                              </button>
-                          </div>
-                          <div class="col-md-12 collapse" id="combustible" >
+
+                          <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingThree">
+                              <h4 class="panel-title">
+                                <a class="collapsed" style="text-decoration: none;" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                  <center>Ver Carguio de combustible</center>
+                                </a>
+                              </h4>
+                            </div>
+                            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
                               <div class="panel panel-primary">
                                   <div class="panel-heading panel-title">
-                                      Carguíos de Combustible
+                                      Ver Unidades
                                   </div>
-                                  <div class="panel-body">
-                                      <div class="col-sm-4">
+                              <div class="panel-body">
+                                <div class="col-sm-4">
 
-                                        <table class="table table-striped">
-                                          <thead>
-                                            <tr>
-                                              <th>Responsable</th>
-                                              <th>Fecha de Carguio</th>
-                                              <th>Direccion</th>
-                                              <th>Tipo de combustible</th>
-                                              <th>Cantidad de litros</th>
-                                              <th>Precio por litro</th>
-                                              <th>Observaciones</th>
-                                            </tr>
-                                          </thead>
-                                          <tbody>
-                                            <?php
-                                            foreach ($carguios as $c => $carguio) { ?>
-                                              <tr>
-                                                <td><?php echo utf8_encode($carguio->getResponsable_cargio_combustible());?></td>
-                                                <td><?php
-                                                  $fechaSinConvertir = $carguio->getFecha_cargio();
-                                                  $fechaConvertida = date("d-m-Y", strtotime($fechaSinConvertir));
+                                  <table class="table table-striped">
+                                    <thead>
+                                      <tr>
+                                        <th>Responsable</th>
+                                        <th>Fecha de Carguio</th>
+                                        <th>Direccion</th>
+                                        <th>Tipo de combustible</th>
+                                        <th>Cantidad de litros</th>
+                                        <th>Precio por litro</th>
+                                        <th>Observaciones</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <?php
+                                      foreach ($carguios as $c => $carguio) { ?>
+                                        <tr>
+                                          <td><?php echo utf8_encode($carguio->getResponsable_cargio_combustible());?></td>
+                                          <td><?php
+                                            $fechaSinConvertir = $carguio->getFecha_cargio();
+                                            $fechaConvertida = date("d-m-Y", strtotime($fechaSinConvertir));
 
-                                                  echo $fechaConvertida; ?>
-                                                </td>
-                                                <td><?php echo utf8_encode($carguio->getDireccion_cargio());?></td>
-                                                <td><?php echo utf8_encode($data->buscarNombreDeCombustiblePorId($carguio->getFk_tipo_combustible_cargio_combustible()));?></td>
-                                                <td><?php echo utf8_encode($carguio->getCantidad_litros_cargio_combustible());?></td>
-                                                <td><?php echo utf8_encode($carguio->getPrecio_litro_cargio_combustible());?></td>
-                                                <td><?php echo utf8_encode($carguio->getObservacion_cargio_combustible());?></td>
-                                              </tr>
-                                          <?php  } ?>
-                                        </tbody>
-                                      </table>
+                                            echo $fechaConvertida; ?>
+                                          </td>
+                                          <td><?php echo utf8_encode($carguio->getDireccion_cargio());?></td>
+                                          <td><?php echo utf8_encode($data->buscarNombreDeCombustiblePorId($carguio->getFk_tipo_combustible_cargio_combustible()));?></td>
+                                          <td><?php echo utf8_encode($carguio->getCantidad_litros_cargio_combustible());?></td>
+                                          <td><?php echo utf8_encode($carguio->getPrecio_litro_cargio_combustible());?></td>
+                                          <td><?php echo utf8_encode($carguio->getObservacion_cargio_combustible());?></td>
+                                        </tr>
+                                    <?php  } ?>
+                                  </tbody>
+                                </table>
 
-                                      </div>
-                                  </div>
+                                </div>
+
                               </div>
+                            </div>
                           </div>
+                          </div>
+
 
                             <!--  Cargio de Combustible -->
 
@@ -404,6 +424,7 @@
    </div>
 
  </div>
+</div>
 </div>
  <script src="javascript/borrarVariablesEnSesionAlCargarPagina.js"></script>
 

@@ -2096,7 +2096,6 @@ public function registrarDespachoEnviado($idServico, $idUnidad){
 }
 
 
-
 public function determinarCarrosADespacharSegunCodigoDeServicioYSector($idServicio, $idSector){
 
   $carrosAEnviar = array();
