@@ -136,7 +136,7 @@ if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
     width: 75%;
     padding-left: 5%;
     padding-top: -100%;
-    margin-top: -850px;
+    margin-top: -950px;
     margin-bottom: -1000px;
     ">
 

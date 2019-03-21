@@ -146,7 +146,7 @@ if($_SESSION["usuarioIniciado"]!=null){
     width: 75%;
     padding-left: 5%;
     padding-top: -100%;
-    margin-top: -800px;
+    margin-top: -950px;
     margin-bottom: -1000px;
     ">
 

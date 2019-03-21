@@ -148,7 +148,7 @@
     width: 75%;
     padding-left: 5%;
     padding-top: -100%;
-    margin-top: -950px;
+    margin-top: -980px;
     margin-bottom: -1000px;
     width: 1000px;
     height: 800px;
@@ -237,11 +237,11 @@
     $data = new Data();
 ?>
 
-<div style="width: 900px" style="height: 1000px" style="margin-top: -100px" id="jum">
+<div style="width: 900px" style="height: 500px" style="margin-top: -100px" id="jum">
     <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
         <center style="font-weight:bold;font-size:20px;margin-top:-40px;">Central de Despacho</center>
       <b>
-        <div style="margin-left:600px;margin-top:-20px">
+        <div style="margin-left:590px;margin-top:-21px">
         <?php
       date_default_timezone_set('America/Santiago');
 
@@ -254,7 +254,7 @@
         <div id="currentTime" style="margin-left:800px;margin-top:-20px"></div> </b>
       <div class="container">
 
-        <div id="cuadro1" style="height: 125px;">
+        <div id="cuadro1" style="height: 125px;margin-top:7px;">
             <div class="jumbotron"  style="height: 120px;border-radius: 70px 70px 70px 70px;">
               <div class="container" style="height: 190px;">
               <div class="form-group" style="margin-left:50px;Margin-top:-40px;">
@@ -352,18 +352,42 @@
            </div>
          </div>
 
-         <select name="cboUnidades" style="width: 180px;" >
-             <?php
-                 $unidad = $data->obtenerUnidadesDisponibles();
-                 foreach ($unidad as $u) {
-                     echo "<option value='".$u->getIdUnidad()."'>";
-                         echo $u->getNombreUnidad();
-                     echo"</option>";
-                 }
-             ?>
-         </select>
+         <div id="cuadro1" style="height: 100px;margin-top:5px;">
+             <div class="jumbotron"  style="height: 10px;border-radius: 70px 70px 70px 70px;">
+               <div class="container" style="height: 190px;">
+               <div class="form-group" style="margin-left:50px;Margin-top:-40px;">
+                 <br>
 
-  <div id="cuadro2" style="height: 305px;">
+                 Asignar Otra Unidad:
+                   <select name="cboUnidades" style="width: 180px;" >
+                              <?php
+                                  $unidad = $data->obtenerUnidadesDisponibles();
+                                  foreach ($unidad as $u) {
+                                      echo "<option value='".$u->getIdUnidad()."'>";
+                                          echo $u->getNombreUnidad();
+                                      echo"</option>";
+                                  }
+                              ?>
+                    </select>
+
+                    <div style="margin-top: -26px;margin-left:340px">
+                      <button type="submit"  id="btn_despachar" name="btnsonido" style="width:100px;height:33px;">
+                        &nbsp;Asignar</button>
+                    </div>
+
+             <br><br>
+               </div>
+
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+  <div id="cuadro2" style="height: 305px;margin-top:6px;">
       <div class="jumbotron"  style="height: 300px;border-radius: 70px 70px 70px 70px;">
         <div class="container" style="height: 330px;">
           <center style="margin-top:-30px;font-weight:bold;"> Detalle del Servicio</center><br>
@@ -472,9 +496,8 @@
 
       </div>
     </div>
-    <br>
 
-<center>
+<center style="margin-top:20px;">
 
 
   <button type="submit"  id="nuevoDespacho" name="nuevoDespacho" style="width:200px;height:33px;margin-top: -50px">
