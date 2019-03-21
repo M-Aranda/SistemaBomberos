@@ -262,6 +262,8 @@
 
               Despacho:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input value="<?php
 
+
+
               if(isset($_SESSION["idDeServicioCreado"])){
                 echo utf8_encode($data->getTipoDeServicioYSectorDeServicio($idServicioCreado)->getServicio());
                echo "  "; echo utf8_encode($data->getTipoDeServicioYSectorDeServicio($idServicioCreado)->getSector()); echo " ";
@@ -291,6 +293,7 @@
                   }
 
                   }
+
               }
 
               ?>" type="text"id="txtDespacho" name="txtDespacho" disabled style="width:400px;margin-top:10px;height:30px;">
@@ -352,7 +355,7 @@
            </div>
          </div>
 
-         <select name="cboUnidades" style="width: 180px;" >
+         <select name="cboUnidades" id="cboUnidades" style="width: 180px;" >
              <?php
                  $unidad = $data->obtenerUnidadesDisponibles();
                  foreach ($unidad as $u) {
@@ -362,6 +365,10 @@
                  }
              ?>
          </select>
+
+         <form method="post" >
+           <input type="submit" value="Agregar unidad a despacho" onclick="agregarUnidadADespacho()">
+         </form>
 
   <div id="cuadro2" style="height: 305px;">
       <div class="jumbotron"  style="height: 300px;border-radius: 70px 70px 70px 70px;">
@@ -501,6 +508,31 @@ if(isset($_SESSION["idDeServicioQueSeEstaManipulando"])){
 ?>
 
 <script>
+function agregarUnidadADespacho(){
+  event.preventDefault();
+  var idDeUnidadAAgregar=document.getElementById("cboUnidades").value;
+
+  var e = document.getElementById("cboUnidades");
+  var nomUnidadAAgregar = e.options[e.selectedIndex].text;
+
+  var txtDespacho=document.getElementById("txtDespacho").value;
+
+  document.getElementById("txtDespacho").value=txtDespacho +" "+ nomUnidadAAgregar;
+
+  $.ajax({
+    url: "controlador/AgregarUnidadesADespachoInicial.php",
+    type: "POST",
+    data:{"idDeUnidadAAgregar": idDeUnidadAAgregar}
+  }).done(function(data) {
+    console.log(data);
+  });
+
+
+}
+
+
+
+
 function verificarQueUnidadesSeleccionadasEstenDisponibles(){
 
   var sector=document.getElementById("sector").value;;
@@ -515,7 +547,7 @@ function verificarQueUnidadesSeleccionadasEstenDisponibles(){
     if(data=="No se selecciono ninguna unidad disponible"){
       swal({
         title: "Sistema de bomberos",
-        text: data,
+        text: data + " o no ingreso destino y sector",
         type: "error"
       });
     }else {
@@ -548,7 +580,7 @@ var id=document.getElementById("cboxdespacho").value;
     type: "POST",
     data:{"idServicioSeleccionado": id}
   }).done(function(data) {
-    console.log(data);
+    //console.log(data);
   });
 
 }
@@ -572,6 +604,23 @@ function cargarCboDeServiciosActivos(){
   });
 }
 
+function recargarCboDeUnidadesDisponibles(){
+  $.ajax({
+    url: "controlador/RecargarUnidadesDisponiblesDelCboDeDespacho.php",
+    type: "POST",
+    data:{"datos":"nada"}
+  }).done(function(data) {
+    //console.log(data);
+    $('#cboUnidades')
+    .find('option')
+    .remove()
+    .end();
+    $('#cboUnidades').append(data);
+
+  });
+
+}
+
 
 function cerrarServicio(){
 //Esto sirve para subir arriba$('html, body').animate({scrollTop:0}, "300");
@@ -591,11 +640,13 @@ function cerrarServicio(){
           success: function(data){
             console.log(data);
             cargarCboDeServiciosActivos();
+            recargarCboDeUnidadesDisponibles();
             swal({
               title: "Sistema de bomberos:",
               text:"Servicio cerrado",
               type: "success"
             });
+
 
 
             }

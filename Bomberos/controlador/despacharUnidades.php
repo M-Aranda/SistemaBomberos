@@ -25,14 +25,29 @@ if(isset($_SESSION["idDeServicioCreado"])){
 
       deleteElement($unidad, $listadoDeUnidadesAEnviar);
     }else{
+
       $data->registrarDespachoEnviado($idServicio,$unidad);
       $data->actualizarEstadoDeEmergenciaDeMaquina($unidad,2);
     }
   }
 
+
+if(isset($_SESSION["unidadesExtraAAgregar"])){
+  $listadoDeUnidadesExtra=$_SESSION["unidadesExtraAAgregar"];
+
+  foreach ($listadoDeUnidadesExtra as $lue => $unidadExtra) {
+    $data->registrarDespachoEnviado($idServicio,$unidadExtra);
+    $data->actualizarEstadoDeEmergenciaDeMaquina($unidadExtra,2);
+  }
+  unset($_SESSION["unidadesExtraAAgregar"]);
+
+}
+
   unset($_SESSION["idDeServicioCreado"]);
 }
-//Mandar tonos aqui
+
+
+
 
  header("location: ../centralDeDespacho.php");
 ?>
