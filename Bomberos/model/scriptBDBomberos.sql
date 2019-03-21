@@ -1695,6 +1695,8 @@ INSERT INTO tbl_sector (nombre_sector) VALUES
 -- SELECT * FROM tbl_apoyoEntidadExterior_servicio;
 
 
+
+
 /*
 Select para obtener los apoyos del servicio 
 

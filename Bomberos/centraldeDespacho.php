@@ -355,7 +355,7 @@
            </div>
          </div>
 
-         <div id="cuadro1" style="height: 100px;margin-top:5px;">
+         <div id="cuadro1" style="height: 110px;margin-top:5px;">
              <div class="jumbotron"  style="height: 10px;border-radius: 70px 70px 70px 70px;">
                <div class="container" style="height: 190px;">
                <div class="form-group" style="margin-left:50px;Margin-top:-40px;">
@@ -379,6 +379,29 @@
                     </div>
 
              <br><br>
+               </div>
+               <div class="form-group" style="margin-left:50px;Margin-top:-40px;">
+
+
+                 Despachar unidad extra:
+                   <select name="cboUnidadExtra" id="cboUnidadExtra" style="width: 180px;" >
+                              <?php
+                                  $unidad = $data->obtenerUnidadesDisponibles();
+                                  foreach ($unidad as $u) {
+                                      echo "<option value='".$u->getIdUnidad()."'>";
+                                          echo $u->getNombreUnidad();
+                                      echo"</option>";
+                                  }
+                              ?>
+                    </select>
+
+                    <div style="margin-top: -26px;margin-left:340px">
+                      <button type="submit"  id="btn_despachar" onclick="agregarUnidadAEmergencia()" name="btnsonido" style="width:100px;height:33px;">
+                        &nbsp;Despachar</button>
+                    </div>
+
+             <br><br>
+
                </div>
 
               </div>
@@ -526,6 +549,46 @@ if(isset($_SESSION["idDeServicioQueSeEstaManipulando"])){
 ?>
 
 <script>
+
+function agregarUnidadAEmergencia(){
+  var idUnidadExtra=document.getElementById("cboUnidadExtra").value;
+  var idEmergencia=document.getElementById("cboxdespacho").value;
+
+
+
+  Swal.fire({
+    title: 'Sistema de bomberos',
+    text: "¿Despachar unidad extra?",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Sí',
+    cancelButtonText: 'No'
+  }).then((result) => {
+    if (result.value) {
+      $.ajax({
+        url: "controlador/AgregarUnidadAEmergencia.php",
+        type: "POST",
+        data:{"idUnidadExtra": idUnidadExtra,
+      "idEmergencia":idEmergencia}
+      }).done(function(data) {
+        console.log(data);
+        cargarTabla();
+      });
+    }
+  });
+
+
+
+
+
+
+
+}
+
+
+
 function agregarUnidadADespacho(){
   event.preventDefault();
   var idDeUnidadAAgregar=document.getElementById("cboUnidades").value;

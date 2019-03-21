@@ -1762,16 +1762,6 @@ public function readSectores(){
 
 
 
-public function ingresarCambioDeEstadoDeOficial($idOficial,$estado){
-$query="INSERT INTO tbl_estado_oficial (fkOficial, nombreEstado_estado_oficial, momento) VALUES (".$idOficial.", '".$estado."',NOW()); ";
-  echo $query;
-  $this->c->conectar();
-  $this->c->ejecutar($query);
-  $this->c->desconectar();
-}
-
-
-
 public function getEstadoActualDeOficial($idOficial){
   $this->c->conectar();
   $query="SELECT nombreEstado_estado_oficial FROM tbl_estado_oficial WHERE fkOficial=".$idOficial." ORDER BY id_estado_oficial DESC LIMIT 1;";
@@ -1955,36 +1945,6 @@ public function actualizarOBACConductorYNPersonalServicioUnidad($obac, $conducto
   $this->c->desconectar();
 
 }
-
-/*
-public function getTodasLasEmergenciasActivas(){
-  $this->c->conectar();
-  $query="SELECT * FROM tbl_servicio_unidad WHERE emergenciaActiva=1;";
-  $rs = $this->c->ejecutar($query);
-  $listado=array();
-  while($reg = $rs->fetch_array()){
-    $obj= new Tbl_servicio_unidad();
-    $obj->setId_servicio_unidad($reg[0]);
-    $obj->setFk_servicio($reg[1]);
-    $obj->setFk_unidad($reg[2]);
-    $obj->setMomento6_0($reg[3]);
-    $obj->setObac($reg[4]);
-    $obj->setConductor($reg[5]);
-    $obj->setN_Bomberos($reg[6]);
-    $obj->setMomento6_3($reg[7]);
-    $obj->setMomento6_7($reg[8]);
-    $obj->setMomento6_8($reg[9]);
-    $obj->setMomento6_9($reg[10]);
-    $obj->setMomento6_10($reg[11]);
-    $obj->setEmergenciaActiva($reg[12]);
-
-    $listado[]=$obj;
-   }
-
-   $this->c->desconectar();
-   return $listado;
-}
-*/
 
 
 
@@ -4386,6 +4346,7 @@ public function estabecerEstadoDeEmergenciaDeMaquina($idMaquina,$estado){
 public function actualizarEstadoDeEmergenciaDeMaquina($idMaquina,$estado){
   $this->c->conectar();
   $query="UPDATE tbl_estado_servicio_unidad SET fk_estado=".$estado." WHERE fk_unidad=".$idMaquina.";";
+
   $this->c->ejecutar($query);
   $this->c->desconectar();
 }
@@ -4445,6 +4406,10 @@ public function obtenerUnidadesDisponibles(){
    $this->c->desconectar();
    return $listado;
 }
+
+
+
+
 
 
 
