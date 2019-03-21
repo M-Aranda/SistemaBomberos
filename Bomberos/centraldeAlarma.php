@@ -202,11 +202,12 @@
       <br>
       <div class="container">
 
-<div id="cuadro1" style="height: 269px;">
+
+  <div id="cuadro1" style="height: 269px;margin-left:35px;">
     <div class="jumbotron" style="height: 265px;  border-radius: 70px 70px 70px 70px"  >
       <div class="container" style="height: 253px;">
         <center style="margin-top:-30px;font-weight:bold;"> Oficiales en Servicio</center><br>
-        <div class="form-group" style="margin-left: -48px;">
+         <div class="form-group" style="margin-left: -50px;">
 
          <table class="table table-striped">
               <thead>
@@ -325,10 +326,10 @@
 </div>
 
 
- <div id="cuadro2" style="height: 245px;">
+ <div id="cuadro2" style="height:260px;margin-left:470px;">
      <div class="jumbotron" style="height: 240px;border-radius: 70px 70px 70px 70px">
        <div class="container" style="height: 300px;">
-         <center style="margin-top:-30px;font-weight:bold;"> Unidades en Servicio</center><br><br>
+         <center style="margin-top:-30px;font-weight:bold;"> Unidades en Servicio</center><br><br><br>
        <div class="form-group" style="margin-left:-15px;margin-top: -40px;">
 
          <table class="table table-striped">
@@ -344,8 +345,7 @@
                  <tr>
                    <?php
                    if(isset($todasLasUnidades[$i])){?>
-                     <td><?php echo $todasLasUnidades[$i]->getNombreUnidad();?><input type="button" value="" id="<?php echo $todasLasUnidades[$i]->getNombreUnidad();?>"  class="<?php
-                     if($data->getEstadoDeEmergenciaDeLaUnidad($todasLasUnidades[$i]->getIdUnidad())==1){
+                     <td><?php echo $todasLasUnidades[$i]->getNombreUnidad();?>&nbsp;<input type="button" value="" id="<?php echo $todasLasUnidades[$i]->getNombreUnidad();?>"  class="<?php                     if($data->getEstadoDeEmergenciaDeLaUnidad($todasLasUnidades[$i]->getIdUnidad())==1){
                        echo "btn btn-success";
                      }elseif ($data->getEstadoDeEmergenciaDeLaUnidad($todasLasUnidades[$i]->getIdUnidad())==2) {
                        echo "btn btn-warning";
@@ -400,7 +400,7 @@
   </div>
 
 
-  <div id="cuadro3" style="height: 334px;">
+  <div id="cuadro3" style="height: 334px;margin-top:10px;">
       <div class="jumbotron"  style="height: 330px;border-radius: 70px 70px 70px 70px;">
         <div class="container" style="height: 330px;">
           <center style="margin-top:-30px;font-weight:bold;"> Últimos Servicios</center><br>
@@ -499,7 +499,7 @@
            </select>
            <br><br>
             Detalles:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="detalle" id="detalle" style="width:580px;">
-            <br>
+        <!-- aqui   <br>
 
            &nbsp;&nbsp;&nbsp;
         <center>
@@ -510,9 +510,19 @@
 
         <br>
 
+      aqui-->
+<!--
         <form method="post" id="formVolverADespacho" name="formVolverADespacho" action="centraldeDespacho.php">
         <input type="submit" value="Volver a despacho" onclick="verificarExistenciaDeEmergenciasEnProgreso()">
         </form>
+      -->
+<!--aca
+        <form method="post" id="formVolverADespacho" name="formVolverADespacho" action="centraldeDespacho.php">
+             <button type="submit" style="width:100px;height:100px;" value="" onclick="verificarExistenciaDeEmergenciasEnProgreso()">
+               <img src="images/fire-station.png">
+               volver
+             </button>
+           </form>
 
 
          </div>
@@ -521,6 +531,38 @@
         </div>
 
       </div>
+    aca-->
+    <br>
+
+   &nbsp;&nbsp;&nbsp;
+<center>
+<button type="submit" value="Despachar" id="btn_despachar" name="btn_despachar" onclick="despachar()" style="width:100px;height:100px;">
+  <img src="images/camion3.png" alt="x" />Despachar</button>
+
+  <form method="post" id="formVolverADespacho" name="formVolverADespacho" action="centraldeDespacho.php">
+       <button type="submit" style="width:100px;height:100px;" value="" onclick="verificarExistenciaDeEmergenciasEnProgreso()">
+         <img src="images/fire-station.png">
+         volver
+       </button>
+     </form>
+
+
+</center>
+</form>
+
+<br>
+
+<!--    <form method="post" id="formVolverADespacho" name="formVolverADespacho" action="centraldeDespacho.php">
+<input type="submit" value="Volver a despacho" onclick="verificarExistenciaDeEmergenciasEnProgreso()">
+</form> -->
+
+
+ </div>
+
+
+</div>
+
+</div>
       <div style="margin-top: -60px;margin-left: 60px;font-size:20px;">
         <?php
           date_default_timezone_set('America/Santiago');
@@ -531,7 +573,7 @@
           echo "<b>".$dias[date('w')]." ".date('d')." de ".$meses[date('n')-1]. " del ".date('Y')."</b>" ;
           //echo "<b>".date(" H:i:s")."</b>";
 
-          echo "<b><div id=horaActual style='margin-top: -28px;margin-left:290px;';></div></b>";
+          echo "<b><div id=horaActual style='margin-top: -28px;margin-left:300px;';></div></b>";
           ?>
 
       </div>
@@ -548,6 +590,7 @@
 <script>
 function verificarExistenciaDeEmergenciasEnProgreso(){
   event.preventDefault();
+
   $.ajax({
       type: "POST",
       url: 'controlador/ContarEmergenciasEnProgreso.php',
@@ -560,7 +603,9 @@ function verificarExistenciaDeEmergenciasEnProgreso(){
             type: "error"
           });
         }else if (data>0) {
-          document.getElementById("formVolverADespacho").submit();
+          //document.getElementById("formVolverADespacho").submit();
+          //reemplazado el submit por un window.location, porque este form en realidad no implica mandar nada necesario para la proxima pagina
+          window.location.href = 'centraldeDespacho.php';
         }
       }
   });
