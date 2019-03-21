@@ -1757,9 +1757,7 @@ tbl_informacionPersonal.apellido_paterno_informacionPersonal, tbl_entidadACargo.
 tbl_informacionPersonal.id_informacionPersonal FROM tbl_informacionPersonal, tbl_informacionBomberil, tbl_entidadACargo
 WHERE 
 tbl_informacionPersonal.nombre_informacionPersonal LIKE '%Juanito%' GROUP BY tbl_informacionPersonal.rut_informacionPersonal;
-
 */
-
 
 /*
 Select para ver datos en la busqueda de buscar
