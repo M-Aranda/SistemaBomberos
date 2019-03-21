@@ -567,15 +567,22 @@ function agregarUnidadAEmergencia(){
     cancelButtonText: 'No'
   }).then((result) => {
     if (result.value) {
-      $.ajax({
-        url: "controlador/AgregarUnidadAEmergencia.php",
-        type: "POST",
-        data:{"idUnidadExtra": idUnidadExtra,
-      "idEmergencia":idEmergencia}
-      }).done(function(data) {
-        console.log(data);
-        cargarTabla();
-      });
+      reproducirSonido();
+      //settimeout puede llamar una funcion despues de una cantidad especifica de milisegundos
+      setTimeout(function(){
+        $.ajax({
+          url: "controlador/AgregarUnidadAEmergencia.php",
+          type: "POST",
+          data:{"idUnidadExtra": idUnidadExtra,
+        "idEmergencia":idEmergencia}
+        }).done(function(data) {
+          console.log(data);
+          cargarTabla();
+        });
+       }, 5000);
+
+
+
     }
   });
 
@@ -921,8 +928,8 @@ function despacharUnidadesALaEmergencia(){
       cancelButtonText: 'No'
     }).then((result) => {
       if (result.value) {
-        //necesito que este sonido se toque solo al enviar el form reproducirSonido();
-        document.getElementById("formEnviarUnidades").submit();
+        reproducirSonido();
+        setTimeout(function(){ document.getElementById("formEnviarUnidades").submit(); }, 5000);
       }
     });
   }
