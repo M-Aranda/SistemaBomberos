@@ -306,11 +306,21 @@
               <button type="submit"  id="btn_despachar" name="btnsonido" onclick="verificarQueUnidadesSeleccionadasEstenDisponibles()" style="width:60px;height:60px;margin-left:530px;margin-top:-19px;">
                 <img src="images/torre.png" alt="x" /></button>
 
+                <?php
+                $emergenciasActivas=$data->getServiciosDeEmergenciasActivas();
+                if(empty($emergenciasActivas)){
+                  echo "<center><h5>No hay emergencias activas</h5></center>";
+                }else{?>
 
 
               En Despacho:&nbsp;
               <select id="cboxdespacho" name="cboxdespacho" onchange="cargarTabla(),guardarIdDeServicioManipuladoEnSesion()" onclick="borrarOpcionSeleccionarEmergencia()"style="width:400px;height:30px;margin-top:-12px;" >
-                <option selected disabled value="0">Seleccionar emergencia</option>
+                <?php $emergenciasActivas=$data->getServiciosDeEmergenciasActivas();
+                if(count($emergenciasActivas)>1){?>
+                  <option selected disabled value="0">Seleccionar emergencia</option>
+              <?php  }
+                ?>
+
                 <?php $emergenciasActivas=$data->getServiciosDeEmergenciasActivas();
 
                 if(isset($_SESSION["idDeServicioQueSeEstaManipulando"])){
@@ -345,7 +355,10 @@
             <?php
           }
         }
+      }
+
               ?>
+
 
               </select>
             <br><br>
@@ -546,7 +559,7 @@
       <img src="images/camion.png" alt="x" /><a href="centraldeAlarma.php" style="text-decoration:none;color:black;" >&nbsp;Nuevo Despacho</a></button>
 
 
-      <button type="submit"  id="btn_despachar" onclick="cerrarServicio()" name="btnsonido" style="width:200px;height:33px;margin-top:-100px;">
+      <button type="submit"  id="btn_despachar" onclick="cerrarServicio(),redirigirACentralDeAlarmaSiNoQuedanEmergenciasActivas()" name="btnsonido" style="width:200px;height:33px;margin-top:-100px;">
         <img src="images/comprobar.png" alt="x" /><a style="text-decoration:none;color:black;">&nbsp;Cerrar Servicio</button>
 </center>
 
@@ -566,6 +579,23 @@ if(isset($_SESSION["idDeServicioQueSeEstaManipulando"])){
 ?>
 
 <script>
+
+function redirigirACentralDeAlarmaSiNoQuedanEmergenciasActivas(){
+
+  var opcionesRestantes=$('#cboxdespacho option').length;
+  if(opcionesRestantes==1){
+
+setTimeout(function(){swal({title: "Sistema de Bomberos",
+     text: "No quedan emergencias en progreso",
+     type: "info"
+}); }, 1000);
+
+    setTimeout(function(){window.location.href = 'centraldeAlarma.php'; }, 3000);
+
+  }
+}
+
+
 
 function agregarUnidadAEmergencia(){
   var idUnidadExtra=document.getElementById("cboUnidadExtra").value;
@@ -771,8 +801,6 @@ function cerrarServicio(){
               text:"Servicio cerrado",
               type: "success"
             });
-
-
 
             }
         });
