@@ -355,16 +355,21 @@
            </div>
          </div>
 
-         <div id="cuadro1" style="height: 110px;margin-top:5px;">
+         <div id="cuadro1" style="height: 130px;margin-top:5px;">
              <div class="jumbotron"  style="height: 10px;border-radius: 70px 70px 70px 70px;">
                <div class="container" style="height: 190px;">
                <div class="form-group" style="margin-left:50px;Margin-top:-40px;">
                  <br>
 
-                 Asignar Otra Unidad:
+                 <?php $unidad = $data->obtenerUnidadesDisponibles();?>
+                 <?php if (empty($unidad)){?>
+                   No hay ninguna unidad disponible. Solicite apoyo a otro cuerpo.
+                 <?php }else{ ?>
+
+                   Añadir al despacho:
                    <select name="cboUnidades" id="cboUnidades" style="width: 180px;" >
                               <?php
-                                  $unidad = $data->obtenerUnidadesDisponibles();
+
                                   foreach ($unidad as $u) {
                                       echo "<option value='".$u->getIdUnidad()."'>";
                                           echo $u->getNombreUnidad();
@@ -372,33 +377,45 @@
                                   }
                               ?>
                     </select>
-
                     <div style="margin-top: -26px;margin-left:340px">
                       <button type="submit"  id="btn_despachar" onclick="agregarUnidadADespacho()" name="btnsonido" style="width:100px;height:33px;">
                         &nbsp;Asignar</button>
+
                     </div>
+
+
+                  <?php  }?>
+                  <br>
+
+
 
              <br><br>
                </div>
                <div class="form-group" style="margin-left:50px;Margin-top:-40px;">
+                 <?php $unidad = $data->obtenerUnidadesDisponibles();
+
+                 if(empty($unidad)){?>
+
+                 <?php }else{?>
+                   Despachar unidad extra:
+                     <select name="cboUnidadExtra" id="cboUnidadExtra" style="width: 180px;" >
+                                <?php
+                                    foreach ($unidad as $u) {
+                                        echo "<option value='".$u->getIdUnidad()."'>";
+                                            echo $u->getNombreUnidad();
+                                        echo"</option>";
+                                    }
+                                ?>
+                      </select>
+                      <div style="margin-top: -26px;margin-left:340px">
+                        <button type="submit"  id="btn_despachar" onclick="agregarUnidadAEmergencia()" name="btnsonido" style="width:100px;height:33px;">
+                          &nbsp;Despachar</button>
+                      </div>
+
+                 <?php }?>
 
 
-                 Despachar unidad extra:
-                   <select name="cboUnidadExtra" id="cboUnidadExtra" style="width: 180px;" >
-                              <?php
-                                  $unidad = $data->obtenerUnidadesDisponibles();
-                                  foreach ($unidad as $u) {
-                                      echo "<option value='".$u->getIdUnidad()."'>";
-                                          echo $u->getNombreUnidad();
-                                      echo"</option>";
-                                  }
-                              ?>
-                    </select>
 
-                    <div style="margin-top: -26px;margin-left:340px">
-                      <button type="submit"  id="btn_despachar" onclick="agregarUnidadAEmergencia()" name="btnsonido" style="width:100px;height:33px;">
-                        &nbsp;Despachar</button>
-                    </div>
 
              <br><br>
 
@@ -577,6 +594,7 @@ function agregarUnidadAEmergencia(){
         "idEmergencia":idEmergencia}
         }).done(function(data) {
           console.log(data);
+          recargarCboDeUnidadesDisponiblesParaEmergenciaEnCurso();
           cargarTabla();
         });
        }, 5000);
@@ -613,6 +631,7 @@ function agregarUnidadADespacho(){
     data:{"idDeUnidadAAgregar": idDeUnidadAAgregar}
   }).done(function(data) {
     console.log(data);
+    recargarCboDeUnidadesDisponibles();
   });
 
 
@@ -698,12 +717,30 @@ function recargarCboDeUnidadesDisponibles(){
     type: "POST",
     data:{"datos":"nada"}
   }).done(function(data) {
-    //console.log(data);
+    console.log(data);
     $('#cboUnidades')
     .find('option')
     .remove()
     .end();
     $('#cboUnidades').append(data);
+
+  });
+
+}
+
+
+function recargarCboDeUnidadesDisponiblesParaEmergenciaEnCurso(){
+  $.ajax({
+    url: "controlador/RecargarUnidadesDisponiblesDelCboDeDespacho.php",
+    type: "POST",
+    data:{"datos":"nada"}
+  }).done(function(data) {
+    console.log(data);
+    $('#cboUnidadExtra')
+    .find('option')
+    .remove()
+    .end();
+    $('#cboUnidadExtra').append(data);
 
   });
 

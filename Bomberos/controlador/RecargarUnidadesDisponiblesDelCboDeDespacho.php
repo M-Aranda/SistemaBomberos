@@ -1,5 +1,5 @@
 <?php
-require_once("..model/Data.php");
+require_once("../model/Data.php");
 
 $data = new Data();
 

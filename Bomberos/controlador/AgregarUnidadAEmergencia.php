@@ -8,6 +8,4 @@ $idServicio= isset($_REQUEST['idEmergencia'])?$_REQUEST['idEmergencia']:"";
 
 $data->registrarDespachoEnviado($idServicio,$idUnidadAAgregar);
 $data->actualizarEstadoDeEmergenciaDeMaquina($idUnidadAAgregar,2);
-
-
 ?>
