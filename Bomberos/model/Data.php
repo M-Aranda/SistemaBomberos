@@ -4408,6 +4408,48 @@ public function obtenerUnidadesDisponibles(){
 }
 
 
+public function getUltimos20Servicios(){
+  $this->c->conectar();
+  $query="SELECT tbl_servicio.id_servicio, tbl_servicio.nombre_servicio, tbl_servicio.rut_servicio, tbl_servicio.telefono_servicio,
+tbl_servicio.direccion_servicio, tbl_servicio.esquina1_servicio,
+tbl_servicio.esquina2_servicio, tbl_servicio.fk_sector, tbl_servicio.fk_tipoDeServicio, tbl_servicio.detalles_servicio,
+tbl_servicio.fecha_servicio FROM tbl_servicio,tbl_servicio_unidad
+WHERE tbl_servicio_unidad.fk_servicio=tbl_servicio.id_servicio AND tbl_servicio_unidad.emergenciaActiva=0  GROUP BY tbl_servicio.id_servicio
+ORDER BY id_servicio DESC LIMIT 20;";
+  $rs = $this->c->ejecutar($query);
+  $listado=array();
+  while($reg = $rs->fetch_array()){
+    $servicio= new Tbl_servicio();
+    $servicio->setId_servicio($reg[0]);
+    $servicio->setNombre_servicio($reg[1]);
+    $servicio->setRut_servicio($reg[2]);
+    $servicio->setTelefono_servicio($reg[3]);
+    $servicio->setDireccion_servicio($reg[4]);
+    $servicio->setEsquina1_servicio($reg[5]);
+    $servicio->setEsquina2_servicio($reg[6]);
+    $servicio->setFk_sector($reg[7]);
+    $servicio->setFk_tipoDeServicio($reg[8]);
+    $servicio->setDetalles_servicio($reg[9]);
+    $servicio->setFecha_servicio($reg[10]);
+
+    $listado[]=$servicio;
+   }
+   $this->c->desconectar();
+   return $listado;
+}
+
+public function getNombreDeSectorPorId($id){
+  $this->c->conectar();
+  $query="SELECT nombre_sector FROM tbl_sector WHERE id_sector=".$id.";";
+  $rs = $this->c->ejecutar($query);
+  while($reg = $rs->fetch_array()){
+    $obj=$reg[0];
+   }
+   $this->c->desconectar();
+   return $obj;
+}
+
+
 
 
 

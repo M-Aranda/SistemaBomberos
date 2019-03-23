@@ -1693,8 +1693,7 @@ INSERT INTO tbl_sector (nombre_sector) VALUES
 -- SELECT * FROM tbl_entidad_exteriror;
 -- SELECT * FROM tbl_apoyo;
 -- SELECT * FROM tbl_apoyoEntidadExterior_servicio;
-
-
+-- SELECT * FROM tbl_sector;
 
 
 /*
@@ -1970,6 +1969,7 @@ INSERT INTO tbl_apoyoEntidadExterior_servicio (fk_servicio,fk_apoyo) VALUES (2,1
 
 INSERT INTO tbl_estado_de_servicio_de_maquina (nombre_estado_de_servicio_de_maquina) VALUES ('Disponible'),('No disponible'),('Fuera de servicio');
 INSERT INTO tbl_estado_servicio_unidad (fk_unidad,fk_estado)VALUES(1,1),(2,1),(3,1),(4,1),(5,1),(6,1),(7,1),(8,1),(9,1),(10,1),(11,1);
+
 
 /*
 DROP DATABASE bomberosBD;
