@@ -348,66 +348,66 @@
                  <?php }else{ ?>
 
 
-                   <?
+                   <?php
                    //Si hay servicios disponibles y se esta creando un despacho, mostrar
-                   // añadir al despacho, si no se estaa creando un despacho, mostrar despachar undiad extra 
-                   if(isset($_SESSION["idDeServicioCreado"])){
+                   // añadir al despacho, si no se estaa creando un despacho, mostrar despachar undiad extra
+                   if(isset($_SESSION["idDeServicioCreado"])){?>
 
-                   }?>
+                                        Añadir al despacho:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <select name="cboUnidades" id="cboUnidades" style="width: 180px;height:30px;" >
+                                                   <?php
 
-                   Añadir al despacho:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                   <select name="cboUnidades" id="cboUnidades" style="width: 180px;height:30px;" >
-                              <?php
+                                                       foreach ($unidad as $u) {
+                                                         if(!in_array($u->getIdUnidad(),$listadoDeUnidadesAEnviar)){
+                                                           echo "<option value='".$u->getIdUnidad()."'>";
+                                                               echo $u->getNombreUnidad();
+                                                           echo"</option>";
+                                                         }
 
-                                  foreach ($unidad as $u) {
-                                    if(!in_array($u->getIdUnidad(),$listadoDeUnidadesAEnviar)){
-                                      echo "<option value='".$u->getIdUnidad()."'>";
-                                          echo $u->getNombreUnidad();
-                                      echo"</option>";
-                                    }
+                                                       }
+                                                   ?>
+                                         </select>
+                                         <div style="margin-top: -26px;margin-left:340px">
+                                           <button type="submit"  id="btn_despachar" onclick="agregarUnidadADespacho()" name="btnsonido" style="width:100px;height:33px;margin-top:-20px;">
+                                             &nbsp;Asignar</button>
+                     </div>
+                  <?php }else{?>
+                    <div class="form-group" style="margin-left:50px;Margin-top:-40px;">
+                      <?php $unidad = $data->obtenerUnidadesDisponibles();
+                      if(empty($unidad)){?>
 
-                                  }
-                              ?>
-                    </select>
-                    <div style="margin-top: -26px;margin-left:340px">
-                      <button type="submit"  id="btn_despachar" onclick="agregarUnidadADespacho()" name="btnsonido" style="width:100px;height:33px;margin-top:-20px;">
-                        &nbsp;Asignar</button>
+                      <?php }else{?>
+                        <br>
+                        <br>
+                        <br>
+                        Despachar unidad extra:
+                          <select name="cboUnidadExtra" id="cboUnidadExtra" style="width: 180px;height:30px;" >
+                                     <?php
+                                         foreach ($unidad as $u) {
+                                             echo "<option value='".$u->getIdUnidad()."'>";
+                                                 echo $u->getNombreUnidad();
+                                             echo"</option>";
+                                         }
+                                     ?>
+                           </select>
+                           <div style="margin-top: -26px;margin-left:340px">
+                             <button type="submit"  id="btn_despachar" onclick="agregarUnidadAEmergencia()" name="btnsonido" style="width:100px;height:33px;margin-top:-20px;">
+                               &nbsp;Despachar</button>
+                           </div>
+                           
+                      <?php }?>
 
+                  <br><br>
                     </div>
+                <?php  }?>
+
 
 
                   <?php  }?>
                 <br><br>
 
                </div>
-               <div class="form-group" style="margin-left:50px;Margin-top:-40px;">
-                 <?php $unidad = $data->obtenerUnidadesDisponibles();
-                 if(empty($unidad)){?>
 
-                 <?php }else{?>
-                   Despachar unidad extra:
-                     <select name="cboUnidadExtra" id="cboUnidadExtra" style="width: 180px;height:30px;" >
-                                <?php
-                                    foreach ($unidad as $u) {
-                                        echo "<option value='".$u->getIdUnidad()."'>";
-                                            echo $u->getNombreUnidad();
-                                        echo"</option>";
-                                    }
-                                ?>
-                      </select>
-                      <div style="margin-top: -26px;margin-left:340px">
-                        <button type="submit"  id="btn_despachar" onclick="agregarUnidadAEmergencia()" name="btnsonido" style="width:100px;height:33px;margin-top:-20px;">
-                          &nbsp;Despachar</button>
-                      </div>
-
-                 <?php }?>
-
-
-
-
-             <br><br>
-
-               </div>
 
               </div>
             </div>
