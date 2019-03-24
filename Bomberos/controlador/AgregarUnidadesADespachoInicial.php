@@ -6,12 +6,12 @@ if(isset($_SESSION["unidadesExtraAAgregar"])){
   $listadoDeUnidadesAAgregar=$_SESSION["unidadesExtraAAgregar"];
   $listadoDeUnidadesAAgregar[]=$idUnidadAAgregar;
   $_SESSION["unidadesExtraAAgregar"]=$listadoDeUnidadesAAgregar;
-  echo "Creado array y agregado id: ".$idUnidadAAgregar;
+  echo "Agregado id: ".$idUnidadAAgregar;
 }else{
   $listadoDeUnidadesAAgregar= array();
   $listadoDeUnidadesAAgregar[]=$idUnidadAAgregar;
   $_SESSION["unidadesExtraAAgregar"]=$listadoDeUnidadesAAgregar;
-  echo "Agregado id: ".$idUnidadAAgregar;
+  echo "Creado array y agregado id: ".$idUnidadAAgregar;
 }
 
 ?>

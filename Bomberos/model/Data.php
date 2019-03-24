@@ -4138,6 +4138,19 @@ public function registrar6_8UnidadEnEmergencia($idEmergencia){
   $this->c->desconectar();
 }
 
+public function getUnidadInvolucradaEnEmergencia($idEmergencia){
+  $this->c->conectar();
+  $query="SELECT fk_unidad FROM tbl_servicio_unidad WHERE id_servicio_unidad=".$idEmergencia.";";
+  $rs = $this->c->ejecutar($query);
+  while($reg = $rs->fetch_array()){
+    $obj=$reg[0];
+   }
+  $this->c->desconectar();
+  return $obj;
+}
+
+
+
 public function registrar6_9UnidadEnEmergencia($idEmergencia){
   $this->c->conectar();
   $query="UPDATE tbl_servicio_unidad SET momento6_9=NOW() WHERE id_servicio_unidad=".$idEmergencia.";";

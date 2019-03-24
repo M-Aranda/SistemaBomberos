@@ -13,21 +13,15 @@
     if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
       unset($_SESSION["resultadosDeBusquedaDeMaterialMenor"]);
     }
-
-
     if(isset($_SESSION["idDeServicioCreado"])){
       $idServicioCreado=$_SESSION["idDeServicioCreado"];
     }
-
     if($_SESSION["usuarioIniciado"]!=null){
       $u=$_SESSION["usuarioIniciado"];
       if($data->verificarSiUsuarioTienePermiso($u,19)==0){
         header("location: paginaError.php");
       }
     }
-
-
-
 ?>
 <html lang="en" dir="ltr">
   <head>
@@ -161,7 +155,6 @@
     -moz-opacity: .75;
     filter: alpha(opacity=75);
 }
-
 #cuadro1{
   width: 800px;
   height: 385px;
@@ -169,9 +162,7 @@
   margin-left: 30px;
   border: 2px black outset;
   border-radius: 50px 50px 50px 50px;
-
 }
-
 #cuadro2{
   width: 800px;
   height: 385px;
@@ -179,7 +170,6 @@
   margin-left: 30px;
   border: 2px black outset;
   border-radius: 50px 50px 50px 50px;
-
 }
 #cuadro3{
   width: 800px;
@@ -189,7 +179,6 @@
   border: 2px black outset;
   border-radius: 50px 50px 50px 50px;
 }
-
 #cuadro4{
   width: 800px;
   height: 434px;
@@ -198,7 +187,6 @@
   border: 2px black outset;
   border-radius: 50px 50px 50px 50px;
 }
-
 #jum{
     width: 900px;
     height: 1000px;
@@ -208,27 +196,22 @@
       width: 90px;
       background: red;
     }
-
 #divtabla{
   overflow:scroll;
   height:150px;
      width:600px;
 }
-
 #divtabla table {
     width:500px;
 }
-
 #divtabla2{
   overflow:scroll;
   height:250px;
      width:700px;
 }
-
 #divtabla2 table {
     width:700px;
 }
-
 </style>
 
 
@@ -245,10 +228,8 @@
         <div style="margin-left:590px;margin-top:-21px">
         <?php
       date_default_timezone_set('America/Santiago');
-
       $dias = array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado");
       $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
-
       echo "<b>".$dias[date('w')]." ".date('d')." de ".$meses[date('n')-1]. " del ".date('Y')."</b>" ;
           ?>
         </div>
@@ -262,28 +243,20 @@
 
 
               Despacho:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input value="<?php
-
-
-
               if(isset($_SESSION["idDeServicioCreado"])){
                 echo utf8_encode($data->getTipoDeServicioYSectorDeServicio($idServicioCreado)->getServicio());
                echo "  "; echo utf8_encode($data->getTipoDeServicioYSectorDeServicio($idServicioCreado)->getSector()); echo " ";
-
                $idTipoServ=$data->getTipoDeServicioYSectorDeServicio($idServicioCreado)->getServicio();
                $idTipoServ=$data->getIdDeTipoDeServicioAPartirDelCodigo($idTipoServ);
-
                $idSector=$data->getTipoDeServicioYSectorDeServicio($idServicioCreado)->getSector();
                $idSector=$data->getIdDeSectorAPartirDelNombre($idSector);
-
                function deleteElement($element, &$array){
                    $index = array_search($element, $array);
                    if($index !== false){
                        unset($array[$index]);
                    }
                }
-
                $listadoDeUnidadesAEnviar=$data->determinarCarrosADespacharSegunCodigoDeServicioYSector($idTipoServ,$idSector);
-
                 foreach ($listadoDeUnidadesAEnviar as $lu => $unidad) {
                   $disponibilidad=$data->getEstadoDeEmergenciaDeLaUnidad($unidad);
                   if($disponibilidad!=1){
@@ -292,11 +265,8 @@
                     echo utf8_encode($data->getNombreDeUnidadPorId($unidad));
                     echo " ";
                   }
-
                   }
-
               }
-
               ?>" type="text"id="txtDespacho" name="txtDespacho" disabled style="width:400px;margin-top:10px;height:30px;">
 
               <form id="formEnviarUnidades" name="formEnviarUnidades" action="controlador/despacharUnidades.php" method="post">
@@ -323,9 +293,7 @@
                 ?>
 
                 <?php $emergenciasActivas=$data->getServiciosDeEmergenciasActivas();
-
                 if(isset($_SESSION["idDeServicioQueSeEstaManipulando"])){
-
                   foreach ($emergenciasActivas as $e => $emer) {?>
                     <option <?php if($_SESSION["idDeServicioQueSeEstaManipulando"]==$emer->getId_servicio()){ echo "selected";}?> value="<?php echo $emer->getId_servicio();?>"><?php
                     $momento;
@@ -357,7 +325,6 @@
           }
         }
       }
-
               ?>
 
 
@@ -380,14 +347,25 @@
                    No hay ninguna unidad disponible. Solicite apoyo a otro cuerpo.
                  <?php }else{ ?>
 
+
+                   <?
+                   //Si hay servicios disponibles y se esta creando un despacho, mostrar
+                   // añadir al despacho, si no se estaa creando un despacho, mostrar despachar undiad extra 
+                   if(isset($_SESSION["idDeServicioCreado"])){
+
+                   }?>
+
                    Añadir al despacho:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                    <select name="cboUnidades" id="cboUnidades" style="width: 180px;height:30px;" >
                               <?php
 
                                   foreach ($unidad as $u) {
+                                    if(!in_array($u->getIdUnidad(),$listadoDeUnidadesAEnviar)){
                                       echo "<option value='".$u->getIdUnidad()."'>";
                                           echo $u->getNombreUnidad();
                                       echo"</option>";
+                                    }
+
                                   }
                               ?>
                     </select>
@@ -404,7 +382,6 @@
                </div>
                <div class="form-group" style="margin-left:50px;Margin-top:-40px;">
                  <?php $unidad = $data->obtenerUnidadesDisponibles();
-
                  if(empty($unidad)){?>
 
                  <?php }else{?>
@@ -477,7 +454,6 @@
 
            <?php
            $listadoDeEntidadesDeApoyo=$data->getTodasLasEntidadesExteriores();
-
            ?>
             Apoyo otra Entidad:
             <select id="entidadExteriorApoyando" name="entidadExteriorApoyando" style="width:525px;height:25px;">
@@ -570,37 +546,25 @@
 </div>
 
 <?php
-
 if(isset($_SESSION["idDeServicioQueSeEstaManipulando"])){
   unset($_SESSION["idDeServicioQueSeEstaManipulando"]);
 }
 ?>
 
 <script>
-
 function redirigirACentralDeAlarmaSiNoQuedanEmergenciasActivas(){
-
   var opcionesRestantes=$('#cboxdespacho option').length;
   if(opcionesRestantes==1){
-
 setTimeout(function(){swal({title: "Sistema de Bomberos",
      text: "No quedan emergencias en progreso",
      type: "info"
 }); }, 1000);
-
     setTimeout(function(){window.location.href = 'centraldeAlarma.php'; }, 3000);
-
   }
 }
-
-
-
 function agregarUnidadAEmergencia(){
   var idUnidadExtra=document.getElementById("cboUnidadExtra").value;
   var idEmergencia=document.getElementById("cboxdespacho").value;
-
-
-
   Swal.fire({
     title: 'Sistema de bomberos',
     text: "¿Despachar unidad extra?",
@@ -626,53 +590,45 @@ function agregarUnidadAEmergencia(){
           cargarTabla();
         });
        }, 5000);
-
-
-
     }
   });
-
-
-
-
-
-
-
 }
-
-
-
 function agregarUnidadADespacho(){
   event.preventDefault();
   var idDeUnidadAAgregar=document.getElementById("cboUnidades").value;
-
   var e = document.getElementById("cboUnidades");
   var nomUnidadAAgregar = e.options[e.selectedIndex].text;
-
   var txtDespacho=document.getElementById("txtDespacho").value;
 
-  document.getElementById("txtDespacho").value=txtDespacho +" "+ nomUnidadAAgregar;
 
-  $.ajax({
-    url: "controlador/AgregarUnidadesADespachoInicial.php",
-    type: "POST",
-    data:{"idDeUnidadAAgregar": idDeUnidadAAgregar}
-  }).done(function(data) {
-    console.log(data);
-    recargarCboDeUnidadesDisponibles();
+
+  Swal.fire({
+    title: 'Sistema de bomberos',
+    text: "¿Agregar unidad?",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Sí',
+    cancelButtonText: 'No'
+  }).then((result) => {
+    if (result.value) {
+      $.ajax({
+        url: "controlador/AgregarUnidadesADespachoInicial.php",
+        type: "POST",
+        data:{"idDeUnidadAAgregar": idDeUnidadAAgregar}
+      }).done(function(data) {
+        console.log(data);
+        document.getElementById("txtDespacho").value=txtDespacho +" "+ nomUnidadAAgregar;
+        recargarCboDeUnidadesDisponibles();
+      });
+    }
   });
-
-
 }
 
-
-
-
 function verificarQueUnidadesSeleccionadasEstenDisponibles(){
-
   var sector=document.getElementById("sector").value;;
   var servicio=document.getElementById("tipoServicio").value;;
-
   $.ajax({
     url: "controlador/determinarUnidadesDisponiblesParaEmergencia.php",
     type: "POST",
@@ -688,28 +644,17 @@ function verificarQueUnidadesSeleccionadasEstenDisponibles(){
     }else {
       despacharUnidadesALaEmergencia();
     }
-
   });
-
-
 }
-
-
-
 function borrarOpcionSeleccionarEmergencia(){
   $("#cboxdespacho option[value='0']").remove();
 }
-
-
 function reproducirSonido(){
   var music = new Audio('sonidos/bleep.mp3');
   music.play();
 }
-
-
 function guardarIdDeServicioManipuladoEnSesion(){
 var id=document.getElementById("cboxdespacho").value;
-
   $.ajax({
     url: "controlador/IniciarIdServicioManipuladoEnSesion.php",
     type: "POST",
@@ -717,12 +662,8 @@ var id=document.getElementById("cboxdespacho").value;
   }).done(function(data) {
     //console.log(data);
   });
-
 }
-
-
 function cargarCboDeServiciosActivos(){
-
   $.ajax({
     url: "controlador/GetEmergenciasActivasMedianteAjax.php",
     type: "POST",
@@ -735,10 +676,8 @@ function cargarCboDeServiciosActivos(){
     .end();
     $('#cboxdespacho').append(data);
     cargarTabla();
-
   });
 }
-
 function recargarCboDeUnidadesDisponibles(){
   $.ajax({
     url: "controlador/RecargarUnidadesDisponiblesDelCboDeDespacho.php",
@@ -751,12 +690,8 @@ function recargarCboDeUnidadesDisponibles(){
     .remove()
     .end();
     $('#cboUnidades').append(data);
-
   });
-
 }
-
-
 function recargarCboDeUnidadesDisponiblesParaEmergenciaEnCurso(){
   $.ajax({
     url: "controlador/RecargarUnidadesDisponiblesDelCboDeDespacho.php",
@@ -769,16 +704,11 @@ function recargarCboDeUnidadesDisponiblesParaEmergenciaEnCurso(){
     .remove()
     .end();
     $('#cboUnidadExtra').append(data);
-
   });
-
 }
-
-
 function cerrarServicio(){
 //Esto sirve para subir arriba$('html, body').animate({scrollTop:0}, "300");
   var idSer=document.getElementById("idDeServicioAlQueSeVaAApoyar").value;
-
   $.ajax({
     url: "controlador/VerificarQueSeHayaAlcanzado6_10EnTodosLosCarrosInvolucrados.php",
     type: "POST",
@@ -799,7 +729,6 @@ function cerrarServicio(){
               text:"Servicio cerrado",
               type: "success"
             });
-
             }
         });
       }else if(resultado === "no"){
@@ -809,42 +738,29 @@ function cerrarServicio(){
           type: "error"
         });
       }
-
       }
   });
-
 }
-
-
-
 function guardarApoyo(){
-
   var idSer=document.getElementById("idDeServicioAlQueSeVaAApoyar").value;
   var entidadExterior=document.getElementById("entidadExteriorApoyando").value;
   var responsable=document.getElementById("txtresposableapoyo").value;
   var ppuu=document.getElementById("txtppuapoyo").value;
-
   $.ajax({
     url: "controlador/AgregarApoyoEntidadExteriorAServicio.php",
     type: "POST",
     data:{"idServicio": idSer, "entidad":entidadExterior,
     "res":responsable, "ppuu":ppuu},
     success: function(data){
-
         swal({
           title: "Sistema de bomberos",
           text:" Operación exitosa",
           type:"success"
         });
-
       document.getElementById("txtresposableapoyo").value="";
       document.getElementById("txtppuapoyo").value="";
-
-
-
       var id = document.getElementById("cboxdespacho").value;
       document.getElementById("idDeServicioAlQueSeVaAApoyar").value=id;
-
       $.ajax({
         url: "getApoyosDelServicio.php",
         type: "POST",
@@ -852,33 +768,24 @@ function guardarApoyo(){
       }).done(function(data) {
         console.log(data);
         var objetos=JSON.parse(data);
-
          $("#tablaApoyosAEmergencia tbody tr").remove();
-
         var i;
         for (i = 0; i < objetos.length; i++) {
           var objetoJSON= $.parseJSON(objetos[i]);
-
           var idApoyo=objetoJSON.idApoyo;
           var nombreEntidadApoyo=objetoJSON.nombreEntidadApoyo;
           var responsableApoyo=objetoJSON.responsableApoyo;
           var ppuuApoyo=objetoJSON.ppuuApoyo;
-
-
           if (!document.getElementsByTagName) return;
           //la siguiente linea obtiene el elemento por nombre del tag, pero la segunda coincidecnia se rescata
           tabBody=document.getElementsByTagName("tbody").item(1);
           row=document.createElement("tr");
-
           cell1 = document.createElement("td");
           textnode1=document.createTextNode(nombreEntidadApoyo);
-
           textnode2=document.createTextNode(responsableApoyo);
           cell2 = document.createElement("td");
-
           textnode3=document.createTextNode(ppuuApoyo);
           cell3 = document.createElement("td");
-
           cell1.appendChild(textnode1);
           cell2.appendChild(textnode2);
           cell3.appendChild(textnode3)
@@ -888,21 +795,13 @@ function guardarApoyo(){
           tabBody.appendChild(row);
         }
       });
-
       }
   });
-
 }
-
-
-
-
 function actualizarDatosOBACConductoryNPersonal(idSerUnidad){
-
   var htmlAPoner='OBAC <input type="text" id="OBAC" class="swal2-input">' +
   'Conductor <input  type="text" id="Conductor" class="swal2-input">'+
   'Cantidad de bomberos <input  type="text" id="NPersonal" class="swal2-input">';
-
   $.ajax({
     url: "getDatosOBACConductorYCantidad.php",
     type: "POST",
@@ -910,7 +809,6 @@ function actualizarDatosOBACConductoryNPersonal(idSerUnidad){
     success: function(data){
       console.log(data);
       var datosRescatados=JSON.parse(data);
-
       if( (datosRescatados.obac!="") || (datosRescatados.conductor!="") || (datosRescatados.cantidad!="") ){
         htmlAPoner=  'OBAC <input  value="'+datosRescatados.obac+'" type="text" id="OBAC" class="swal2-input">' +
         'Conductor <input  value="'+datosRescatados.conductor+'" type="text" id="Conductor" class="swal2-input">'+
@@ -932,12 +830,10 @@ function actualizarDatosOBACConductoryNPersonal(idSerUnidad){
           $('#OBAC').focus()
         }
       }).then(function (result) {
-
         var ar=(JSON.stringify(result)).split(/(?:,|{|}|")+/);
         var nomOb=ar[3];
         var nomCon=ar[4];
         var nPer=ar[5];
-
         swal({
             title: "Sistema de bomberos",
             text: "Operación exitosa",
@@ -945,7 +841,6 @@ function actualizarDatosOBACConductoryNPersonal(idSerUnidad){
             confirmButtonColor: "#DD6B55",
             confirmButtonText: "Ok",
         })
-
         $.ajax({
           url: "actualizarOBACConductorYNPersonal.php",
           type: "POST",
@@ -957,21 +852,14 @@ function actualizarDatosOBACConductoryNPersonal(idSerUnidad){
       }).catch(swal.noop)
     }
   });
-
-
-
 }
-
 function mostrarhora(){
 var f=new Date();
 cad=f.getHours()+":"+f.getMinutes()+":"+f.getSeconds();
 window.status =cad;
 setTimeout("mostrarhora()",1000);
 }
-
-
 function despacharUnidadesALaEmergencia(){
-
   var txtDespacho=document.getElementById("txtDespacho").value;
   if(txtDespacho==""){
     swal({
@@ -996,27 +884,20 @@ function despacharUnidadesALaEmergencia(){
       }
     });
   }
-
-
 }
-
-
 function obtenerHoraActual(){
   var today = new Date();
   var minutos=today.getMinutes();
   if (minutos<10){
     minutos= "0"+minutos;
   }
-
   var segundos =today.getSeconds();
   if (segundos<10){
     segundos="0"+segundos;
   }
-
   var time = today.getHours() + ":" + minutos + ":" + segundos;
   return time;
 }
-
 $(document).ready(
  function() {
  setInterval(function() {
@@ -1024,11 +905,9 @@ $(document).ready(
   $('#currentTime').text(hora);
 }, 1000);
 });
-
 function marcarHora(){
   return $('#currentTime').text();
 }
-
 //registra el momento exacto y muestra la hora exacta en la que se hizo la actualizacion
 function registrarHora6_0(idDeLaEmergencia){
   $.ajax({
@@ -1041,8 +920,6 @@ function registrarHora6_0(idDeLaEmergencia){
       }
   });
 }
-
-
 function registrarHora6_3(idDeLaEmergencia, e){
   $.ajax({
     url: "registrarEstadoDeCarro6_3.php",
@@ -1054,7 +931,6 @@ function registrarHora6_3(idDeLaEmergencia, e){
     }
   });
 }
-
 function registrarHora6_7(idDeLaEmergencia, e){
   $.ajax({
     url: "registrarEstadoDeCarro6_7.php",
@@ -1066,7 +942,6 @@ function registrarHora6_7(idDeLaEmergencia, e){
     }
   });
 }
-
 function registrarHora6_8(idDeLaEmergencia, e){
   $.ajax({
     url: "registrarEstadoDeCarro6_8.php",
@@ -1078,7 +953,6 @@ function registrarHora6_8(idDeLaEmergencia, e){
     }
   });
 }
-
 function registrarHora6_9(idDeLaEmergencia,e){
   $.ajax({
     url: "registrarEstadoDeCarro6_9.php",
@@ -1090,7 +964,6 @@ function registrarHora6_9(idDeLaEmergencia,e){
     }
   });
 }
-
 function registrarHora6_10(idDeLaEmergencia, e){
   $.ajax({
     url: "registrarEstadoDeCarro6_10.php",
@@ -1102,14 +975,10 @@ function registrarHora6_10(idDeLaEmergencia, e){
     }
   });
 }
-
-
 function cargarTabla(){
   var id = document.getElementById("cboxdespacho").value;
-
   //cargarInfoDeApoyos aqui
   document.getElementById("idDeServicioAlQueSeVaAApoyar").value=id;
-
   $.ajax({
     url: "getApoyosDelServicio.php",
     type: "POST",
@@ -1117,33 +986,24 @@ function cargarTabla(){
   }).done(function(data) {
     console.log(data);
     var objetos=JSON.parse(data);
-
      $("#tablaApoyosAEmergencia tbody tr").remove();
-
     var i;
     for (i = 0; i < objetos.length; i++) {
       var objetoJSON= $.parseJSON(objetos[i]);
-
       var idApoyo=objetoJSON.idApoyo;
       var nombreEntidadApoyo=objetoJSON.nombreEntidadApoyo;
       var responsableApoyo=objetoJSON.responsableApoyo;
       var ppuuApoyo=objetoJSON.ppuuApoyo;
-
-
       if (!document.getElementsByTagName) return;
       //la siguiente linea obtiene el elemento por nombre del tag, pero la segunda coincidecnia se rescata
       tabBody=document.getElementsByTagName("tbody").item(1);
       row=document.createElement("tr");
-
       cell1 = document.createElement("td");
       textnode1=document.createTextNode(nombreEntidadApoyo);
-
       textnode2=document.createTextNode(responsableApoyo);
       cell2 = document.createElement("td");
-
       textnode3=document.createTextNode(ppuuApoyo);
       cell3 = document.createElement("td");
-
       cell1.appendChild(textnode1);
       cell2.appendChild(textnode2);
       cell3.appendChild(textnode3)
@@ -1153,9 +1013,6 @@ function cargarTabla(){
       tabBody.appendChild(row);
     }
   });
-
-
-
   $.ajax({
     url: "getServiciosUnidad.php",
     type: "POST",
@@ -1163,13 +1020,10 @@ function cargarTabla(){
   }).done(function(data) {
     console.log(data);
     var objetos=JSON.parse(data);
-
      $("#tablaDeEmergencia tbody tr").remove();
-
     var i;
     for (i = 0; i < objetos.length; i++) {
       var objetoJSON= $.parseJSON(objetos[i]);
-
       var idEmergencia=objetoJSON.id;
       var nombreUnidadEmergencia=objetoJSON.nombre;
       var momento6_0Emergencia=objetoJSON.momento6_0;
@@ -1178,17 +1032,11 @@ function cargarTabla(){
       var momento6_8Emergencia=objetoJSON.momento6_8;
       var momento6_9Emergencia=objetoJSON.momento6_9;
       var momento6_10Emergencia=objetoJSON.momento6_10;
-
-
-
       if (!document.getElementsByTagName) return;
       tabBody=document.getElementsByTagName("tbody").item(0);
       row=document.createElement("tr");
-
       cell1 = document.createElement("td");
       textnode1=document.createTextNode(nombreUnidadEmergencia);
-
-
       textnode2=document.createTextNode(momento6_0Emergencia);
       cell2 = document.createElement("td");
       cell2.setAttribute("id",idEmergencia);
@@ -1198,39 +1046,29 @@ function cargarTabla(){
       cell4 = document.createElement("td");
       cell4.setAttribute("id",idEmergencia);
       cell4.setAttribute('onclick','registrarHora6_3('+idEmergencia+',this) ');
-
       textnode5=document.createTextNode(momento6_7Emergencia);
       cell5 = document.createElement("td");
       cell5.setAttribute("id",idEmergencia);
       cell5.setAttribute('onclick','registrarHora6_7('+idEmergencia+',this) ');
-
       textnode6=document.createTextNode(momento6_8Emergencia);
       cell6 = document.createElement("td");
       cell6.setAttribute("id",idEmergencia);
       cell6.setAttribute('onclick','registrarHora6_8('+idEmergencia+',this) ');
-
       textnode7=document.createTextNode(momento6_9Emergencia);
       cell7 = document.createElement("td");
       cell7.setAttribute("id", idEmergencia);
       cell7.setAttribute('onclick','registrarHora6_9('+idEmergencia+',this) ');
-
       textnode8=document.createTextNode(momento6_10Emergencia);
       cell8 = document.createElement("td");
       cell8.setAttribute("id", idEmergencia);
       cell8.setAttribute('onclick','registrarHora6_10('+idEmergencia+',this) ');
-
       var cell3=document.createElement("INPUT");
       var foto = document.getElementById("foto");
-
       cell3.setAttribute('onclick','actualizarDatosOBACConductoryNPersonal('+idEmergencia+')');
-
-
-
       cell3.setAttribute("type", "submit");
       cell3.setAttribute("value", "");
       cell3.setAttribute("style","border-radius: 70px 70px 70px 70px;width:50px;height:50px;");
       cell3.setAttribute("img","images/bombero.png");
-
       cell1.appendChild(textnode1);
       cell2.appendChild(textnode2);
       cell4.appendChild(textnode4)
@@ -1238,8 +1076,6 @@ function cargarTabla(){
       cell6.appendChild(textnode6);
       cell7.appendChild(textnode7);
       cell8.appendChild(textnode8);
-
-
       row.appendChild(cell1);
       row.appendChild(cell2);
       row.appendChild(cell3);
@@ -1252,13 +1088,9 @@ function cargarTabla(){
     }
   });
 }
-
 window.onload = function() {
   cargarTabla();
 };
-
-
-
 </script>
 
 
