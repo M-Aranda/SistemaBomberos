@@ -117,6 +117,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Despacho <b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li><a href="centraldeAlarma.php">Central de Alarma</a></li>
+              <li><a href="Comunicaciones.php">Comunicaciones</a></li>
 
             </ul>
           </li>
@@ -243,9 +244,9 @@
 <center><button onclick="reproducirSonido()">Dar aviso</button></center>
 <br>
 <br>
-<div id="cuadro1" style="height: 1500px;margin-top:10px;">
-    <div class="jumbotron"  style="height: 1500px;border-radius: 70px 70px 70px 70px;">
-      <div class="container" style="height: 1500px;">
+<div id="cuadro1" style="height: 705px;margin-top:10px;">
+    <div class="jumbotron"  style="height: 700px;border-radius: 70px 70px 70px 70px;">
+      <div class="container" style="height: 700px;">
         <center style="margin-top:-30px;font-weight:bold;"> Últimos Servicios</center><br>
       <div class="form-group" style="margin-left:0px;Margin-top:-7px;">
         <?php

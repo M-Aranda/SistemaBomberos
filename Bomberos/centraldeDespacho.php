@@ -117,6 +117,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Despacho <b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li><a href="centraldeAlarma.php">Central de Alarma</a></li>
+              <li><a href="Comunicaciones.php">Comunicaciones</a></li>
 
             </ul>
           </li>
@@ -167,7 +168,7 @@
   margin-top: 20px;
   margin-left: 30px;
   border: 2px black outset;
-  border-radius: 70px 70px 70px 70px;
+  border-radius: 50px 50px 50px 50px;
 
 }
 
@@ -177,7 +178,7 @@
   margin-top: 21px;
   margin-left: 30px;
   border: 2px black outset;
-  border-radius: 70px 70px 70px 70px;
+  border-radius: 50px 50px 50px 50px;
 
 }
 #cuadro3{
@@ -186,7 +187,7 @@
   margin-top: 7px;
   margin-left: 30px;
   border: 2px black outset;
-  border-radius: 70px 70px 70px 70px;
+  border-radius: 50px 50px 50px 50px;
 }
 
 #cuadro4{
@@ -195,7 +196,7 @@
   margin-top: 7px;
   margin-left: 30px;
   border: 2px black outset;
-  border-radius: 70px 70px 70px 70px;
+  border-radius: 50px 50px 50px 50px;
 }
 
 #jum{
@@ -238,7 +239,7 @@
 ?>
 
 <div style="width: 900px" style="height: 500px" style="margin-top: -100px" id="jum">
-    <div class="jumbotron" style="border-radius: 70px 70px 70px 70px" id="transparencia">
+    <div class="jumbotron" style="border-radius: 50px 50px 50px 50px" id="transparencia">
         <center style="font-weight:bold;font-size:20px;margin-top:-40px;">Central de Despacho</center>
       <b>
         <div style="margin-left:590px;margin-top:-21px">
@@ -368,9 +369,9 @@
            </div>
          </div>
 
-         <div id="cuadro1" style="height: 130px;margin-top:5px;">
-             <div class="jumbotron"  style="height: 10px;border-radius: 70px 70px 70px 70px;">
-               <div class="container" style="height: 190px;">
+         <div id="cuadro1" style="height: 140px;margin-top:5px;">
+             <div class="jumbotron"  style="height: 10px;border-radius:  50px 50px 50px 50px">
+               <div class="container" style="height: 10px;">
                <div class="form-group" style="margin-left:50px;Margin-top:-40px;">
                  <br>
 
@@ -379,8 +380,8 @@
                    No hay ninguna unidad disponible. Solicite apoyo a otro cuerpo.
                  <?php }else{ ?>
 
-                   Añadir al despacho:
-                   <select name="cboUnidades" id="cboUnidades" style="width: 180px;" >
+                   Añadir al despacho:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                   <select name="cboUnidades" id="cboUnidades" style="width: 180px;height:30px;" >
                               <?php
 
                                   foreach ($unidad as $u) {
@@ -391,18 +392,15 @@
                               ?>
                     </select>
                     <div style="margin-top: -26px;margin-left:340px">
-                      <button type="submit"  id="btn_despachar" onclick="agregarUnidadADespacho()" name="btnsonido" style="width:100px;height:33px;">
+                      <button type="submit"  id="btn_despachar" onclick="agregarUnidadADespacho()" name="btnsonido" style="width:100px;height:33px;margin-top:-20px;">
                         &nbsp;Asignar</button>
 
                     </div>
 
 
                   <?php  }?>
-                  <br>
+                <br><br>
 
-
-
-             <br><br>
                </div>
                <div class="form-group" style="margin-left:50px;Margin-top:-40px;">
                  <?php $unidad = $data->obtenerUnidadesDisponibles();
@@ -411,7 +409,7 @@
 
                  <?php }else{?>
                    Despachar unidad extra:
-                     <select name="cboUnidadExtra" id="cboUnidadExtra" style="width: 180px;" >
+                     <select name="cboUnidadExtra" id="cboUnidadExtra" style="width: 180px;height:30px;" >
                                 <?php
                                     foreach ($unidad as $u) {
                                         echo "<option value='".$u->getIdUnidad()."'>";
@@ -421,7 +419,7 @@
                                 ?>
                       </select>
                       <div style="margin-top: -26px;margin-left:340px">
-                        <button type="submit"  id="btn_despachar" onclick="agregarUnidadAEmergencia()" name="btnsonido" style="width:100px;height:33px;">
+                        <button type="submit"  id="btn_despachar" onclick="agregarUnidadAEmergencia()" name="btnsonido" style="width:100px;height:33px;margin-top:-20px;">
                           &nbsp;Despachar</button>
                       </div>
 
@@ -441,8 +439,8 @@
 
 
 
-  <div id="cuadro2" style="height: 305px;margin-top:6px;">
-      <div class="jumbotron"  style="height: 300px;border-radius: 70px 70px 70px 70px;">
+  <div id="cuadro2" style="height: 305px;margin-top:5px;">
+      <div class="jumbotron"  style="height: 300px;border-radius: 50px 50px 50px 50px;">
         <div class="container" style="height: 330px;">
           <center style="margin-top:-30px;font-weight:bold;"> Detalle del Servicio</center><br>
         <div id="divtabla2" style="margin-left:-25px;Margin-top:-9px;">
@@ -469,7 +467,7 @@
      </div>
    </div>
 
-   <div id="cuadro3" style="height: 301px;">
+   <div id="cuadro3" style="height: 301px;margin-top:5px;">
        <div class="jumbotron" style="height: 297px;border-radius: 70px 70px 70px 70px">
          <div class="container" style="height: 240px;">
 
@@ -530,8 +528,8 @@
 
     </div>
 
-   <div id="cuadro4" style="height: 184px;">
-       <div class="jumbotron" style="height: 180px;border-radius: 70px 70px 70px 70px">
+   <div id="cuadro4" style="height: 184px;margin-top:5px;">
+       <div class="jumbotron" style="height: 180px;border-radius: 50px 50px 50px 50px">
          <div class="container" style="height: 240px;">
 
          <div class="form-group" style="margin-left:-20px;margin-top:-35px;">

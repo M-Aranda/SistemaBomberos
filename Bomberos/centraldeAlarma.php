@@ -106,6 +106,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Despacho <b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li><a href="centraldeAlarma.php">Central de Alarma</a></li>
+              <li><a href="Comunicaciones.php">Comunicaciones</a></li>
 
             </ul>
           </li>
@@ -153,7 +154,7 @@
   width: 350px;
   height: 600px;
   border: 2px black outset;
-  margin-top: -25px;
+  margin-top: -28px;
   margin-left: 50px;
   border-radius: 70px 70px 70px 70px
 }
@@ -168,7 +169,7 @@
 #cuadro3{
   width: 800px;
   height: 385px;
-  margin-top: 20px;
+  margin-top: 21px;
   margin-left: 30px;
   border: 2px black outset;
   border-radius: 70px 70px 70px 70px;
@@ -177,7 +178,7 @@
 #cuadro4{
   width: 800px;
   height: 434px;
-  margin-top: 5px;
+  margin-top: 6px;
   margin-left: 30px;
   border: 2px black outset;
   border-radius: 70px 70px 70px 70px;
@@ -203,7 +204,7 @@
       <div class="container">
 
 
-  <div id="cuadro1" style="height: 269px;margin-left:35px;">
+  <div id="cuadro1" style="height: 269px;margin-left:31px;">
     <div class="jumbotron" style="height: 265px;  border-radius: 70px 70px 70px 70px"  >
       <div class="container" style="height: 253px;">
         <center style="margin-top:-30px;font-weight:bold;"> Oficiales en Servicio</center><br>
@@ -499,40 +500,8 @@
            </select>
            <br><br>
             Detalles:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="detalle" id="detalle" style="width:580px;">
-        <!-- aqui   <br>
 
-           &nbsp;&nbsp;&nbsp;
-        <center>
-        <button type="submit" value="Despachar" id="btn_despachar" name="btn_despachar" onclick="despachar()" style="width:100px;height:100px;">
-          <img src="images/camion3.png" alt="x" />Despachar</button>
-        </center>
-        </form>
-
-        <br>
-
-      aqui-->
-<!--
-        <form method="post" id="formVolverADespacho" name="formVolverADespacho" action="centraldeDespacho.php">
-        <input type="submit" value="Volver a despacho" onclick="verificarExistenciaDeEmergenciasEnProgreso()">
-        </form>
-      -->
-<!--aca
-        <form method="post" id="formVolverADespacho" name="formVolverADespacho" action="centraldeDespacho.php">
-             <button type="submit" style="width:100px;height:100px;" value="" onclick="verificarExistenciaDeEmergenciasEnProgreso()">
-               <img src="images/fire-station.png">
-               volver
-             </button>
-           </form>
-
-
-         </div>
-
-
-        </div>
-
-      </div>
-    aca-->
-    <br>
+            <br>
 
    &nbsp;&nbsp;&nbsp;
 <center>
