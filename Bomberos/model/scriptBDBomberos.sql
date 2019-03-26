@@ -3,6 +3,15 @@ CREATE DATABASE bomberosBD;
 USE bomberosBD;
 SET lc_time_names = 'es_CL';
 
+/*
+5.7.6 en adelante
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'MyNewPass';
+
+5.7.5 y atras (esta es la que sirve en este caso para mi pc)
+SET PASSWORD FOR 'root'@'localhost' = PASSWORD('123');
+*/
+
+
 CREATE TABLE tbl_permiso (
 id_permiso INT AUTO_INCREMENT,
 nombre_permiso VARCHAR (5000),
