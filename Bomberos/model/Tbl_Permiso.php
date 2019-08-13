@@ -18,11 +18,11 @@
     }
 
     public function getNombrePermiso(){
-      return $this->nombrePermiso
+      return $this->nombrePermiso;
     }
 
     public function setNombrePermiso($nombrePermiso){
-      $this->nombrePermiso = $nombrePermiso
+      $this->nombrePermiso = $nombrePermiso;
     }
 
 

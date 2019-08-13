@@ -20,11 +20,11 @@
     }
 
     public function getfkTipoUsuario(){
-      return $this->fkTipoUsuario
+      return $this->fkTipoUsuario;
     }
 
     public function setfkTipoUsuario($fkTipoUsuario){
-      $this->fkTipoUsuario = $fkTipoUsuario
+      $this->fkTipoUsuario = $fkTipoUsuario;
     }
 
     public function getfkPermiso(){
@@ -36,11 +36,11 @@
     }
 
     public function getotorgadoTipoUsuarioPermiso(){
-      return $this->otorgadoTipoUsuarioPermiso
+      return $this->otorgadoTipoUsuarioPermiso;
     }
 
     public function setotorgadoTipoUsuarioPermiso($otorgadoTipoUsuarioPermiso){
-      $this->otorgadoTipoUsuarioPermiso = $otorgadoTipoUsuarioPermiso
+      $this->otorgadoTipoUsuarioPermiso = $otorgadoTipoUsuarioPermiso;
     }
 
 

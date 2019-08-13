@@ -56,6 +56,7 @@ class Data{
             "bomberosBD",
             "root",
             "");
+            //bomberoDirector
     }
 
     public function crearUsuario($usuario){
