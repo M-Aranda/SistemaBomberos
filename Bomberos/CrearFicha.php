@@ -471,7 +471,7 @@ $( function() {
                          $compania = $data->readSoloCompanias();
                          foreach ($compania as $c) {
                              echo "<option value='".$c->getIdEntidadACargo()."'>";
-                                 echo utf8_encode($c->getNombreEntidadACargo());
+                                 echo $c->getNombreEntidadACargo();
                              echo"</option>";
                          }
                      ?>
@@ -632,7 +632,7 @@ $( function() {
                      $parentescos = $d->readParentescos();
                      foreach($parentescos as $p => $parentesco){
                      ?>
-                     <option value="<?php echo $parentesco->getIdParentesco(); ?>"><?php echo utf8_encode($parentesco->getNombreParentesco()); ?></option>
+                     <option value="<?php echo $parentesco->getIdParentesco(); ?>"><?php echo $parentesco->getNombreParentesco(); ?></option>
                      <?php
                      }
                      ?>
@@ -877,7 +877,7 @@ $( function() {
                                   <div class="col-sm-6">
                                     Creando ficha para: <?php
                                     if(isset($idDeBomberoMasReciente)){
-                                      echo utf8_encode($d->getNombreBomberoPorId($idDeBomberoMasReciente));
+                                      echo $d->getNombreBomberoPorId($idDeBomberoMasReciente);
                                     }
                                      ?>
                                      <br>
@@ -955,23 +955,27 @@ $( function() {
                                 <div id="collapsenine" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingnueve">
                                   <div class="panel panel-primary">
                                       <div class="panel-heading panel-title">
-                                        <form id="formCrearInfoCargos" action="controlador/CrearInformacionDeCargos.php" method="post">
+                                        <form id="formCrearInfoCargos" action="controlador/CrearInformacionDeCargos.php" method="post"> 
+                                            
+                                            
+                                            
                                          Información de Cargos
                                       </div>
                                       <div class="col-sm-6">
                                         Creando ficha para: <?php
                                         if(isset($idDeBomberoMasReciente)){
-                                          echo utf8_encode($d->getNombreBomberoPorId($idDeBomberoMasReciente));
+                                          echo $d->getNombreBomberoPorId($idDeBomberoMasReciente);
                                         }
                                          ?>
                                          <br>
+                                         
                                          Entidad a Cargo:
                                           <select name="cboEntidadACargo" id="cboEntidadACargo" class="form-control" onchange="actualizarComboBox()" >
                                               <?php
                                                   $entiPropietaria = $data->getEntidadACargo();
                                                   foreach ($entiPropietaria as $ep) {
                                                       echo "<option value='".$ep->getIdEntidadACargo()."'>";
-                                                          echo utf8_encode($ep->getNombreEntidadACargo());
+                                                          echo $ep->getNombreEntidadACargo();
                                                       echo"</option>";
                                                   }
                                               ?>
@@ -984,7 +988,7 @@ $( function() {
                                             $materialesDisponibles = $data->getMaterialesMenoresPorFkUbicacionFisica(1);
                                             foreach ($materialesDisponibles as $mat) {
                                               echo "<option value='".$mat->getId_material_menor()."'>";
-                                              echo utf8_encode($mat->getNombre_material_menor());
+                                              echo $mat->getNombre_material_menor();
                                               echo"</option>";
                                             }
                                             ?>
@@ -1009,7 +1013,7 @@ $( function() {
                                            </div>
 
 
-                                         </form>
+                                         
                                           <br>
                                       </div>
 
@@ -1025,7 +1029,7 @@ $( function() {
                                                  $ubicacionesFisicas = $data->getUbicacionFisica(1);
                                                  foreach ($ubicacionesFisicas as $ubi) {
                                                    echo "<option value='".$ubi->getIdUbicacionFisica()."'>";
-                                                   echo utf8_encode($ubi->getNombreUbicacionFisica());
+                                                   echo $ubi->getNombreUbicacionFisica();
                                                    echo"</option>";
                                                  }
                                                  ?>
@@ -1038,6 +1042,7 @@ $( function() {
                                               Cantidad a asignar:
                                               <input type="number" class="form-control" style="width:50px;" value="1" id="cantidadDeMaterialesAsignados" name="cantidadDeMaterialesAsignados" min="1" max="10">
                                               <br>
+                                              </form>
 
                                             </div>
                                           </div>

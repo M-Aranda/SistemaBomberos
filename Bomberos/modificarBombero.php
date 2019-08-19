@@ -1223,6 +1223,9 @@
                                  Información de Cargos
                              </div>
                          <div class="panel-body">
+                             
+                             
+                             <form id="formCrearInfoCargosEnModificar" name="formCrearInfoCargosEnModificar" method="post" action="controlador/CrearInformacionDeCargos.php">
 
                            <div class="col-sm-6">
                               <br>
@@ -1232,7 +1235,7 @@
                                        $entiPropietaria = $data->getEntidadACargo();
                                        foreach ($entiPropietaria as $ep) {
                                            echo "<option value='".$ep->getIdEntidadACargo()."'>";
-                                               echo utf8_encode($ep->getNombreEntidadACargo());
+                                               echo $ep->getNombreEntidadACargo();
                                            echo"</option>";
                                        }
                                    ?>
@@ -1272,7 +1275,7 @@
                                  <input  type="text" id="detalleEstado" name="detalleEstado" disabled style="width: 250px;">
 
                               </div>
-                               </form>
+                               
                                <br>
                           </div>
 
@@ -1301,7 +1304,7 @@
                              Cantidad a asignar: <input type="number" class="form-control" style="width:50px;"  value="1" id="cantidadDeMaterialesAsignados" name="cantidadDeMaterialesAsignados" min="1" max="10">
                            </div>
                             <br>
-
+</form>
                             </div>
                           </div>
                         </div>
@@ -1346,17 +1349,17 @@
                                    $material=$d->getMaterialeMenorPorId($datos->getFk_materialMenorAsignado_informacionDeCargos());
                                  ?>
                                  <tr>
-                                   <td><?php echo utf8_encode($material->getNombre_material_menor());?></td>
-                                   <td><?php echo utf8_encode($material->getFk_entidad_a_cargo_material_menor());?></td>
-                                   <td><?php echo utf8_encode($material->getColor_material_menor());?></td>
-                                   <td><?php echo utf8_encode($material->getMedida_material_menor());?></td>
-                                   <td><?php echo utf8_encode($material->getFk_unidad_de_medida_material_menor());?></td>
-                                   <td><?php echo utf8_encode($material->getFk_ubicacion_fisica_material_menor());?></td>
-                                   <td><?php echo utf8_encode($material->getFabricante_material_menor());?></td>
-                                   <td><?php echo utf8_encode($material->getFecha_de_caducidad_material_menor());?></td>
-                                   <td><?php echo utf8_encode($material->getProveedor_material_menor());?></td>
-                                   <td><?php echo utf8_encode($material->getFkEstadoMaterialMenor());?></td>
-                                   <td><?php echo utf8_encode($material->getDetalleMaterialMenor());?></td>
+                                   <td><?php echo $material->getNombre_material_menor();?></td>
+                                   <td><?php echo $material->getFk_entidad_a_cargo_material_menor();?></td>
+                                   <td><?php echo $material->getColor_material_menor();?></td>
+                                   <td><?php echo $material->getMedida_material_menor();?></td>
+                                   <td><?php echo $material->getFk_unidad_de_medida_material_menor();?></td>
+                                   <td><?php echo $material->getFk_ubicacion_fisica_material_menor();?></td>
+                                   <td><?php echo $material->getFabricante_material_menor();?></td>
+                                   <td><?php echo $material->getFecha_de_caducidad_material_menor();?></td>
+                                   <td><?php echo $material->getProveedor_material_menor();?></td>
+                                   <td><?php echo $material->getFkEstadoMaterialMenor();?></td>
+                                   <td><?php echo $material->getDetalleMaterialMenor();?></td>
                                    <td><?php echo $datos->getCantidadAsignada_informacionDeCargos();?></td>
                               <?php
                                }

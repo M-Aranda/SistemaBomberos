@@ -183,7 +183,7 @@ if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
         <form>
         <input type="text" name="txtBuscarNombreUnidad"  value="<?php
         if(isset($nombreSeleccionado)){
-          echo utf8_encode($nombreSeleccionado);
+          echo $nombreSeleccionado;
         }
         ?>" placeholder="Buscar por nombre" style="height:30px;">
         <input type="hidden" name="tipoDeBusqueda" value="1">
@@ -203,7 +203,7 @@ if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
                         echo"</option>";
                       }else{
                         echo "<option value='".$tb->getIdEstadoUnidad()."'>";
-                            echo utf8_encode($tb->getNombreEstadoUnidad());
+                            echo $tb->getNombreEstadoUnidad();
                         echo"</option>";
                       }
 
@@ -223,11 +223,12 @@ if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
                       foreach ($compania as $c) {
                         if((isset($companiaSeleccionada)) && ($companiaSeleccionada==$c->getIdEntidadACargo())){
                           echo "<option selected value='".$c->getIdEntidadACargo()."'>";
-                              echo utf8_encode($c->getNombreEntidadACargo());
-                          echo"</option>";
+                              echo $c->getNombreEntidadACargo();
+      
+                          echo "</option>";
                         }else{
                           echo "<option value='".$c->getIdEntidadACargo()."'>";
-                              echo utf8_encode($c->getNombreEntidadACargo());
+                              echo $c->getNombreEntidadACargo();
                           echo"</option>";
                         }
 

@@ -28,17 +28,20 @@ $proveedor=$materialMenor->getProveedor_material_menor();
 $estado=$materialMenor->getFkEstadoMaterialMenor();
 $detalle=$materialMenor->getDetalleMaterialMenor();
 
-$arrayRepresentativoDelObjeto=array("id"=>$id ,"nombre"=> utf8_encode($nombre),
-                                  "fkEntidadACargo"=> utf8_encode($fkEntidadACargo),
-                                   "color"=> utf8_encode($color),
+$arrayRepresentativoDelObjeto=array("id"=>$id ,"nombre"=> $nombre,
+                                  "fkEntidadACargo"=> $fkEntidadACargo,
+                                   "color"=> $color,
                                    "cantidad"=> $cantidad, "medida"=> $medida,
-                                   "fkUnidad"=> utf8_encode($fkUnidadMedida), "fkUbicacion"=> utf8_encode($fkUbicacionFisica), "fabricante"=> utf8_encode($fabricante),
-                                   "fechaDeCaducidad"=>$fechaDeCaducidad, "proveedor"=> utf8_encode($proveedor),
-                                   "estado"=> utf8_encode($estado), "detalle"=> utf8_encode($detalle) );
+                                   "fkUnidad"=> $fkUnidadMedida, "fkUbicacion"=> $fkUbicacionFisica, "fabricante"=> $fabricante,
+                                   "fechaDeCaducidad"=>$fechaDeCaducidad, "proveedor"=> $proveedor,
+                                   "estado"=> $estado, "detalle"=> $detalle );
 
 //var_dump($arrayACrear);
 //$algo=array('name' => "Marcelo",'age' => "27");
 $obj=json_encode($arrayRepresentativoDelObjeto);
 echo $obj;
 
+/*
+"color"=> utf8_encode($color),
+ *  */
 ?>

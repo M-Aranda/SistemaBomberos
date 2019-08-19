@@ -15,7 +15,7 @@ if (isset($_POST['btnIniciarSesion'])) {
 
 
 
-         header("location: ../Mantenedor.html");
+         header("location: ../Mantenedor.php");
 
 
        } else {

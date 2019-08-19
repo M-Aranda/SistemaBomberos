@@ -351,11 +351,11 @@
                          $companias = $data->readSoloCompanias();
                          foreach ($companias as $c => $compania) {
                          if($infoBomberil->getfkCompaniainformacionBomberil()==$compania->getIdEntidadACargo()){?>
-                           <option value="<?php echo $compania->getIdEntidadACargo(); ?>" selected ><?php echo utf8_encode($compania->getNombreEntidadACargo()); ?></option>
+                           <option value="<?php echo $compania->getIdEntidadACargo(); ?>" selected ><?php echo $compania->getNombreEntidadACargo(); ?></option>
                            <?php
                          }else{
                              ?>
-                             <option value="<?php echo $compania->getIdEntidadACargo(); ?>" ><?php echo utf8_encode($compania->getNombreEntidadACargo()); ?></option>
+                             <option value="<?php echo $compania->getIdEntidadACargo(); ?>" ><?php echo $compania->getNombreEntidadACargo(); ?></option>
                              <?php
                            }
                          }
@@ -924,17 +924,17 @@
                                    $material=$d->getMaterialeMenorPorId($datos->getFk_materialMenorAsignado_informacionDeCargos());
                                  ?>
                                  <tr>
-                                   <td><?php echo utf8_encode($material->getNombre_material_menor());?></td>
-                                   <td><?php echo utf8_encode($material->getFk_entidad_a_cargo_material_menor());?></td>
-                                   <td><?php echo utf8_encode($material->getColor_material_menor());?></td>
-                                   <td><?php echo utf8_encode($material->getMedida_material_menor());?></td>
-                                   <td><?php echo utf8_encode($material->getFk_unidad_de_medida_material_menor());?></td>
-                                   <td><?php echo utf8_encode($material->getFk_ubicacion_fisica_material_menor());?></td>
-                                   <td><?php echo utf8_encode($material->getFabricante_material_menor());?></td>
-                                   <td><?php echo utf8_encode($material->getFecha_de_caducidad_material_menor());?></td>
-                                   <td><?php echo utf8_encode($material->getProveedor_material_menor());?></td>
-                                   <td><?php echo utf8_encode($material->getFkEstadoMaterialMenor());?></td>
-                                   <td><?php echo utf8_encode($material->getDetalleMaterialMenor());?></td>
+                                   <td><?php echo $material->getNombre_material_menor();?></td>
+                                   <td><?php echo $material->getFk_entidad_a_cargo_material_menor();?></td>
+                                   <td><?php echo $material->getColor_material_menor();?></td>
+                                   <td><?php echo $material->getMedida_material_menor();?></td>
+                                   <td><?php echo $material->getFk_unidad_de_medida_material_menor();?></td>
+                                   <td><?php echo $material->getFk_ubicacion_fisica_material_menor();?></td>
+                                   <td><?php echo $material->getFabricante_material_menor();?></td>
+                                   <td><?php echo $material->getFecha_de_caducidad_material_menor();?></td>
+                                   <td><?php echo $material->getProveedor_material_menor();?></td>
+                                   <td><?php echo $material->getFkEstadoMaterialMenor();?></td>
+                                   <td><?php echo $material->getDetalleMaterialMenor();?></td>
                                    <td><?php echo $datos->getCantidadAsignada_informacionDeCargos();?></td>
                               <?php
                                }
