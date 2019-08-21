@@ -503,7 +503,8 @@
       </div>
 
     </div>
-
+<!--    
+Este div de momento no me sirve
    <div id="cuadro4" style="height: 184px;margin-top:5px;">
        <div class="jumbotron" style="height: 180px;border-radius: 50px 50px 50px 50px">
          <div class="container" style="height: 240px;">
@@ -517,13 +518,15 @@
          </div>
         </div>
 
-      </div>
+
+
+</div>
       <div style="margin-top: -73px;margin-left: 620px;">
         <button type="submit"  id="btn_despachar" name="btnsonido" style="width:100px;height:33px;">
           <img src="images/guardar.png" alt="x" />&nbsp;Guardar</button>
 
       </div>
-    </div>
+    </div>-->
     <br>
 
 <center style="margin-top:20px;">
