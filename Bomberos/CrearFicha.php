@@ -871,6 +871,7 @@ $( function() {
                                 <div class="panel panel-primary">
                                     <div class="panel-heading panel-title">
                                        Información Historica
+                                        <form name="formCrearInfoHistorica" id="formCrearInfoHistorica" action="controlador/CrearInformacionHistorica.php" method="post">
                                     </div>
                                 <div class="panel-body">
 
@@ -928,11 +929,13 @@ $( function() {
                                    Detalle: <input type="text" name="txtDetalleHistorico" class="form-control" required>
                                    <br>
 
-                                   </form>
+                                 
 
                                    <center> <input type="submit" id="btn_crearInfoHistorica" name="btninfohistorica" value="Guardar" class="btn button-primary" style="width: 150px;"> <span ></span>
+                                   
                                    </center>
-
+                                  
+                                    </form>
                                  </div>
 
 
