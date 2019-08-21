@@ -342,14 +342,14 @@ if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
                               <div class="panel-heading" role="tab" id="headingTwo">
                                 <h4 class="panel-title">
                                   <a class="collapsed" style="text-decoration: none;" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    <center>Modificar Mantención</center>
+                                    <center>Crear Mantención</center>
                                   </a>
                                 </h4>
                               </div>
                               <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                                 <div class="panel panel-primary">
                                     <div class="panel-heading panel-title">
-                                        Modificar Mantención
+                                        Crear Mantención
                                     </div>
                                 <div class="panel-body">
                                   <div class="col-sm-4" >
@@ -390,7 +390,7 @@ if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
                                   </div>
                                   <br>
                                   <br>
-
+<!-- tabla comentada porque es innecesaria en modificar
                                   <table class="table table-striped">
                                     <thead>
                                       <tr>
@@ -423,7 +423,7 @@ if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
 
                                     </tbody>
 
-                                  </table>
+                                  </table>-->
 
 
 
@@ -442,14 +442,14 @@ if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
                               <div class="panel-heading" role="tab" id="headingThree">
                                 <h4 class="panel-title">
                                   <a class="collapsed" style="text-decoration: none;" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                    <center>Modificar Carguio de combustible</center>
+                                    <center>Crear Carguio de combustible</center>
                                   </a>
                                 </h4>
                               </div>
                               <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
                                 <div class="panel panel-primary">
                                     <div class="panel-heading panel-title">
-                                        Modificar Carguio de combustible
+                                        Crear Carguio de combustible
                                     </div>
                                 <div class="panel-body">
                                   <div class="col-sm-4" >
@@ -493,7 +493,8 @@ if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
                                   </div>
                                   <br>
                                   <br>
-                                  <table class="table table-striped">
+<!-- tabla comentada porque es innecesaria en modificar         
+<table class="table table-striped">
                                     <thead>
                                       <tr>
                                         <th>Responsable de carguio</th>
@@ -530,7 +531,7 @@ if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
 
                                     </tbody>
 
-                                  </table>
+                                  </table>-->
 
 
 

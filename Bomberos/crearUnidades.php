@@ -353,7 +353,7 @@
                                                 <form id="formCrearCarguio" action="controlador/CrearCarguioDeCombustible.php" method="post">
 
                                                   Unidad:
-                                                  <select name="cboUnidades2"  class="form-control">
+                                                  <select name="idUnidadAModificar"  class="form-control">
                                                       <?php
                                                           $unidad = $data->readUnidadesVehiculos();
                                                           foreach ($unidad as $u) {
@@ -390,10 +390,11 @@
 
                                                   <br><br>
 
-                                              </form>
+                                              
                                               </div>
                                               <center>
                                                 <input id="btn_Crearcarguio" type="submit" name="btncrear" value="Crear carga" class="btn button-primary" style="width: 150px;"> <span ></span>
+                                                </form>
                                                   <!--     <button class="btn button-primary" style="width: 150px;"> <a href="Mantenedor.php" style="text-decoration:none;color:black;">Volver</a> </button>-->
                                               </center>
 

@@ -34,4 +34,5 @@ if(isset($_SESSION['seEstaModificandoUnaUnidad'])){
 }else{
   header("location: ../CrearUnidades.php");
 }
+
 ?>
