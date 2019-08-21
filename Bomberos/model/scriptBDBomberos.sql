@@ -1819,7 +1819,7 @@ INSERT INTO tbl_ubicacion_fisica  (nombre_ubicacion_fisica, fk_entidad_a_cargo) 
 ('Unidad B-1',2),('Bodega Primera',2),('Cuartel Primera',2), ('Unidad B-2',3),('Bodega Segunda',3),('Cuartel Segunda',3) , ('Unidad B-3',4),('Bodega Tercera',4),('Cuartel Tercera',4);
 
 
-/*
+
 
 CALL CRUDUsuario (1,'Marcelo',1,'123',1); 
 
@@ -1993,7 +1993,7 @@ INSERT INTO tbl_apoyoEntidadExterior_servicio (fk_servicio,fk_apoyo) VALUES (2,1
 
 INSERT INTO tbl_estado_de_servicio_de_maquina (nombre_estado_de_servicio_de_maquina) VALUES ('Disponible'),('No disponible'),('Fuera de servicio');
 INSERT INTO tbl_estado_servicio_unidad (fk_unidad,fk_estado)VALUES(1,1),(2,1),(3,1),(4,1),(5,1),(6,1),(7,1),(8,1),(9,1),(10,1),(11,1);
-/*
+
 
 /*
 DROP DATABASE bomberosBD;

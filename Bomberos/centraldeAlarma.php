@@ -541,8 +541,10 @@
 
           echo "<b>".$dias[date('w')]." ".date('d')." de ".$meses[date('n')-1]. " del ".date('Y')."</b>" ;
           //echo "<b>".date(" H:i:s")."</b>";
+          
 
-          echo "<b><div id=horaActual style='margin-top: -28px;margin-left:300px;';></div></b>";
+
+          echo "<b><div id=horaActual style='margin-top: -28px;margin-left:350px;';></div></b>";
           ?>
 
       </div>

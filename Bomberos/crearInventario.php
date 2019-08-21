@@ -241,7 +241,7 @@ if($_SESSION["usuarioIniciado"]!=null){
            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
            No aplica:
            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-           <input type="checkbox" name="checknoaplica" style="width:100px;height:25px;">
+           <input type="checkbox" name="checknoaplica"  style="width:100px;height:25px;">
 
            <br><br>
 

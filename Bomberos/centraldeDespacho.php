@@ -233,7 +233,7 @@
       echo "<b>".$dias[date('w')]." ".date('d')." de ".$meses[date('n')-1]. " del ".date('Y')."</b>" ;
           ?>
         </div>
-        <div id="currentTime" style="margin-left:800px;margin-top:-20px"></div> </b>
+        <div id="currentTime" style="margin-left:825px;margin-top:-20px"></div> </b>
       <div class="container">
 
         <div id="cuadro1" style="height: 125px;margin-top:7px;">

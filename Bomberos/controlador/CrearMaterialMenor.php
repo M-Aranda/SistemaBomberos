@@ -20,8 +20,9 @@ $materialMenor->setDetalleMaterialMenor($_REQUEST["txtDetalle"]);
 
 
 $materialMenor->setFecha_de_caducidad_material_menor($_REQUEST["txtCaducidad"]);
-
-if ($_POST['checknoaplica'] == 'seleccionado') {
+//user isset($_POST['nombreDeCheckbox']) para ver si el checkbox esta chequeado en php
+if (isset($_POST['checknoaplica']))
+ {
   $noAplica=TRUE;
   $materialMenor->setFecha_de_caducidad_material_menor('0000-00-00');
 }else {
@@ -29,7 +30,6 @@ if ($_POST['checknoaplica'] == 'seleccionado') {
 }
 
 $data->crerMaterialMenor($materialMenor);
-
 header("location: ../crearInventario.php");
 
 ?>
