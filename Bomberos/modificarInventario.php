@@ -181,11 +181,11 @@
                    $entiPropietaria = $data->getEntidadACargo();
                    foreach ($entiPropietaria as $ep) {
                      if($material->getFk_entidad_a_cargo_material_menor()==$ep->getIdEntidadACargo()){?>
-                       <option value="<?php echo $ep->getIdEntidadACargo(); ?>" selected ><?php echo utf8_encode($ep->getNombreEntidadACargo()); ?></option>
+                       <option value="<?php echo $ep->getIdEntidadACargo(); ?>" selected ><?php echo ($ep->getNombreEntidadACargo()); ?></option>
                        <?php
                      }else{
                          ?>
-                         <option value="<?php echo $ep->getIdEntidadACargo(); ?>" ><?php echo utf8_encode($ep->getNombreEntidadACargo()); ?></option>
+                         <option value="<?php echo $ep->getIdEntidadACargo(); ?>" ><?php echo ($ep->getNombreEntidadACargo()); ?></option>
                          <?php
                        }
                      }
@@ -198,11 +198,11 @@
              $ubicacionesFisicas = $data->getUbicacionFisica($material->getFk_entidad_a_cargo_material_menor());
              foreach ($ubicacionesFisicas as $ubi) {
                if($material->getFk_ubicacion_fisica_material_menor()==$ubi->getIdUbicacionFisica()){?>
-                 <option value="<?php echo $ubi->getIdUbicacionFisica(); ?>" selected ><?php echo utf8_encode($ubi->getNombreUbicacionFisica()); ?></option>
+                 <option value="<?php echo $ubi->getIdUbicacionFisica(); ?>" selected ><?php echo ($ubi->getNombreUbicacionFisica()); ?></option>
                  <?php
                }else{
                    ?>
-                   <option value="<?php echo $ubi->getIdUbicacionFisica(); ?>" ><?php echo utf8_encode($ubi->getNombreUbicacionFisica()); ?></option>
+                   <option value="<?php echo $ubi->getIdUbicacionFisica(); ?>" ><?php echo ($ubi->getNombreUbicacionFisica()); ?></option>
                    <?php
                  }
                }
@@ -214,15 +214,15 @@
 
 
           Marca: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <input type="text" name="txtmarca"  style="width:230px;" value="<?php echo utf8_encode($material->getFabricante_material_menor());?>" required>
+          <input type="text" name="txtmarca"  style="width:230px;" value="<?php echo ($material->getFabricante_material_menor());?>" required>
 
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           Color:
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-           <input Type="text" name="txtColor" style="width:195px;" value="<?php echo utf8_encode($material->getColor_material_menor());?>" required ><br><br>
+           <input Type="text" name="txtColor" style="width:195px;" value="<?php echo ($material->getColor_material_menor());?>" required ><br><br>
 
            Proveedor: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="text" name="txtProveedor" style="width:230px;" value="<?php echo utf8_encode($material->getProveedor_material_menor());?>" required >
+            <input type="text" name="txtProveedor" style="width:230px;" value="<?php echo ($material->getProveedor_material_menor());?>" required >
 
 
            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -233,11 +233,11 @@
                $estados = $data->getEstadosInventario();
              foreach ($estados as $e) {
                if($material->getFkEstadoMaterialMenor()==$e->getId_estado_material_menor()){?>
-                 <option value="<?php echo $e->getId_estado_material_menor(); ?>" selected ><?php echo utf8_encode($e->getNombre_estado_material_menor()); ?></option>
+                 <option value="<?php echo $e->getId_estado_material_menor(); ?>" selected ><?php echo ($e->getNombre_estado_material_menor()); ?></option>
                  <?php
                }else{
                    ?>
-                   <option value="<?php echo $e->getId_estado_material_menor(); ?>" ><?php echo utf8_encode($e->getNombre_estado_material_menor()); ?></option>
+                   <option value="<?php echo $e->getId_estado_material_menor(); ?>" ><?php echo ($e->getNombre_estado_material_menor()); ?></option>
                    <?php
                  }
                }
@@ -278,11 +278,11 @@
              $medidas = $data->getMedidas();
              foreach ($medidas as $me) {
                if($material->getFk_unidad_de_medida_material_menor()==$me->getIdUnidadMedida()){?>
-                 <option value="<?php echo $me->getIdUnidadMedida(); ?>" selected ><?php echo utf8_encode($me->getNombreUnidadMedida()); ?></option>
+                 <option value="<?php echo $me->getIdUnidadMedida(); ?>" selected ><?php echo ($me->getNombreUnidadMedida()); ?></option>
                  <?php
                }else{
                    ?>
-                   <option value="<?php echo $me->getIdUnidadMedida(); ?>" ><?php echo utf8_encode($me->getNombreUnidadMedida()); ?></option>
+                   <option value="<?php echo $me->getIdUnidadMedida(); ?>" ><?php echo ($me->getNombreUnidadMedida()); ?></option>
                    <?php
                  }
                }

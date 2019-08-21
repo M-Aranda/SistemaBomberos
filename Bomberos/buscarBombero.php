@@ -182,7 +182,7 @@ if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
         <form>
         <input type="text" name="txtBuscar" value="<?php
         if(isset($nombreSeleccionado)){
-          echo utf8_encode($nombreSeleccionado);
+          echo ($nombreSeleccionado);
         }
         ?>" placeholder="Buscar por nombre" style="height:30px;">
         <input type="hidden" name="tipoDeBusqueda" value="1">

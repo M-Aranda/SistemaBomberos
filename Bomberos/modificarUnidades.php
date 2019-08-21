@@ -303,11 +303,11 @@ if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
 
                           if($unidadAModificar->getfkEntidadPropietaria()==$ep->getIdEntidadACargo()){
                             echo "<option selected value='".$ep->getIdEntidadACargo()."'>";
-                                echo utf8_encode($ep->getNombreEntidadACargo());
+                                echo ($ep->getNombreEntidadACargo());
                             echo"</option>";
                           }else{
                             echo "<option value='".$ep->getIdEntidadACargo()."'>";
-                                echo utf8_encode($ep->getNombreEntidadACargo());
+                                echo ($ep->getNombreEntidadACargo());
                             echo"</option>";
                           }
 

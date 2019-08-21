@@ -179,7 +179,7 @@ if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
                     $tipoBombero = $data->readTiposDeServicios();
                     foreach ($tipoBombero as $tb) {
                         echo "<option value='".$tb->getId_tipo_servicio()."'>";
-                            echo utf8_encode($tb->getNombre_tipo_servicio());
+                            echo ($tb->getNombre_tipo_servicio());
                         echo"</option>";
                     }
                 ?>
@@ -216,7 +216,7 @@ if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
                             <td><?php echo $objeto->getRut();?></td>
                             <td><?php echo $objeto->getNombre();?></td>
                             <td><?php echo $objeto->getApellidoPaterno();?></td>
-                            <td><?php echo utf8_encode($objeto->getCompania());?></td>
+                            <td><?php echo ($objeto->getCompania());?></td>
                             <td>
                               <form action="controlador/CargarFicha.php" method="post">
                                 <input type="hidden" id="idBombero" name="idBombero" value="<?php echo $objeto->getIdInfoPersonal();?>">

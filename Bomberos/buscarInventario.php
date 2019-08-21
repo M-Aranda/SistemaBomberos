@@ -205,11 +205,11 @@ if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
 
                                   if(isset($companiaSeleccionada)&& ($companiaSeleccionada)==$c->getIdEntidadACargo()){
                                     echo "<option selected value='".$c->getIdEntidadACargo()."'>";
-                                        echo utf8_encode($c->getNombreEntidadACargo());
+                                        echo ($c->getNombreEntidadACargo());
                                     echo"</option>";
                                   }else{
                                     echo "<option value='".$c->getIdEntidadACargo()."'>";
-                                        echo utf8_encode($c->getNombreEntidadACargo());
+                                        echo ($c->getNombreEntidadACargo());
                                     echo"</option>";
 
                                   }
@@ -229,11 +229,11 @@ if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
                     foreach ($estados as $e) {
                       if(isset($estadoSeleccionado)&& ($estadoSeleccionado)==$e->getId_estado_material_menor()){
                         echo "<option selected value='".$e->getId_estado_material_menor()."'>";
-                            echo utf8_encode($e->getNombre_estado_material_menor());
+                            echo ($e->getNombre_estado_material_menor());
                         echo"</option>";
                       }else{
                         echo "<option value='".$e->getId_estado_material_menor()."'>";
-                            echo utf8_encode($e->getNombre_estado_material_menor());
+                            echo ($e->getNombre_estado_material_menor());
                         echo"</option>";
                     }
                   }
@@ -305,7 +305,7 @@ if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
                             }
 
                           ?>  </td>
-                            <td><?php echo utf8_encode($objeto->getNombreEntidad());?></td>
+                            <td><?php echo ($objeto->getNombreEntidad());?></td>
 
 
 

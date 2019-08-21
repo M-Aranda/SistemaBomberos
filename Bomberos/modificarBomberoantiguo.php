@@ -408,9 +408,9 @@
                        <div class="col-md-5" style="margin-left: 50px;">
                          <input class="form-control" value="<?php echo $infoPersonal->getIdInfoPersonal();?>"  type="hidden" name="idPersonal">
                          Rut: <input class="form-control" value="<?php echo $infoPersonal->getRutInformacionPersonal();?>"  type="text" name="txtRut" onblur= "this.value = this.value.replace( /^(\d{2})(\d{3})(\d{3})(\w{1})$/, '$1.$2.$3-$4')">
-                         Nombre: <input class="form-control" value="<?php echo utf8_encode($infoPersonal->getNombreInformacionPersonal());?>" type="text" name="txtNombre" >
-                         Apellido Paterno: <input class="form-control" value="<?php echo utf8_encode($infoPersonal->getApellidoPaterno());?>" type="text" name="txtApePa" >
-                         Apellido Materno: <input class="form-control" value="<?php echo utf8_encode($infoPersonal->getApellidoMaterno());?>" name="txtApeMa" >
+                         Nombre: <input class="form-control" value="<?php echo ($infoPersonal->getNombreInformacionPersonal());?>" type="text" name="txtNombre" >
+                         Apellido Paterno: <input class="form-control" value="<?php echo ($infoPersonal->getApellidoPaterno());?>" type="text" name="txtApePa" >
+                         Apellido Materno: <input class="form-control" value="<?php echo ($infoPersonal->getApellidoMaterno());?>" name="txtApeMa" >
                          Fecha Nacimiento: <input class="form-control" value="<?php echo $infoPersonal->getFechaNacimiento();?>" name="txtFecha" type="date" >
                          Estado Civil:
                          <select class="form-control" name="cboEstadoCivil" >
@@ -506,11 +506,11 @@
                            $regiones = $d->readRegiones();
                            foreach($regiones as $r => $region){
                              if($infoBomberil->getfkRegioninformacionBomberil()==$region->getIdRegion()){?>
-                               <option value="<?php echo $region->getIdRegion(); ?>" selected ><?php echo utf8_encode($region->getNombreRegion()); ?></option>
+                               <option value="<?php echo $region->getIdRegion(); ?>" selected ><?php echo ($region->getNombreRegion()); ?></option>
                                <?php
                              }else{
                                  ?>
-                                 <option value="<?php echo $region->getIdRegion(); ?>" ><?php echo utf8_encode($region->getNombreRegion()); ?></option>
+                                 <option value="<?php echo $region->getIdRegion(); ?>" ><?php echo ($region->getNombreRegion()); ?></option>
                                  <?php
                                }
                              }
@@ -527,11 +527,11 @@
                                $companias = $data->readSoloCompanias();
                                foreach ($companias as $c => $compania) {
                                if($infoBomberil->getfkCompaniainformacionBomberil()==$compania->getIdEntidadACargo()){?>
-                                 <option value="<?php echo $compania->getIdEntidadACargo(); ?>" selected ><?php echo utf8_encode($compania->getNombreEntidadACargo()); ?></option>
+                                 <option value="<?php echo $compania->getIdEntidadACargo(); ?>" selected ><?php echo ($compania->getNombreEntidadACargo()); ?></option>
                                  <?php
                                }else{
                                    ?>
-                                   <option value="<?php echo $compania->getIdEntidadACargo(); ?>" ><?php echo utf8_encode($compania->getNombreEntidadACargo()); ?></option>
+                                   <option value="<?php echo $compania->getIdEntidadACargo(); ?>" ><?php echo ($compania->getNombreEntidadACargo()); ?></option>
                                    <?php
                                  }
                                }
@@ -558,11 +558,11 @@
                            $cargos = $d->readCargos();
                            foreach($cargos as $c => $cargo){
                              if($infoBomberil->getfkCargoinformacionBomberil()==$cargo->getIdCargo()){?>
-                               <option value="<?php echo $cargo->getIdCargo(); ?>" selected ><?php echo utf8_encode($cargo->getNombreCargo()); ?></option>
+                               <option value="<?php echo $cargo->getIdCargo(); ?>" selected ><?php echo ($cargo->getNombreCargo()); ?></option>
                                <?php
                              }else{
                                  ?>
-                                 <option value="<?php echo $cargo->getIdCargo(); ?>" ><?php echo utf8_encode($cargo->getNombreCargo()); ?></option>
+                                 <option value="<?php echo $cargo->getIdCargo(); ?>" ><?php echo ($cargo->getNombreCargo()); ?></option>
                                  <?php
                                }
                              }
@@ -584,11 +584,11 @@
                            $estados = $d->readEstadosDeBomberos();
                            foreach($estados as $e => $estado){
                              if($infoBomberil->getfkEstadoinformacionBomberil()==$estado->getIdEstado()){?>
-                               <option value="<?php echo $estado->getIdEstado(); ?>" selected ><?php echo utf8_encode($estado->getNombreEstado()); ?></option>
+                               <option value="<?php echo $estado->getIdEstado(); ?>" selected ><?php echo ($estado->getNombreEstado()); ?></option>
                                <?php
                              }else{
                                  ?>
-                                 <option value="<?php echo $estado->getIdEstado(); ?>" ><?php echo utf8_encode($estado->getNombreEstado()); ?></option>
+                                 <option value="<?php echo $estado->getIdEstado(); ?>" ><?php echo ($estado->getNombreEstado()); ?></option>
                                  <?php
                                }
                              }
@@ -697,11 +697,11 @@
                            $parentescos = $d->readParentescos();
                            foreach($parentescos as $p => $parentesco){
                              if($infoMedica2->getfkParentescoContactoinformacionMedica2()==$parentesco->getIdParentesco()){?>
-                               <option value="<?php echo $parentesco->getIdParentesco(); ?>" selected ><?php echo utf8_encode($parentesco->getNombreParentesco()); ?></option>
+                               <option value="<?php echo $parentesco->getIdParentesco(); ?>" selected ><?php echo ($parentesco->getNombreParentesco()); ?></option>
                                <?php
                              }else{
                                  ?>
-                                 <option value="<?php echo $parentesco->getIdParentesco(); ?>" ><?php echo utf8_encode($parentesco->getNombreParentesco()); ?></option>
+                                 <option value="<?php echo $parentesco->getIdParentesco(); ?>" ><?php echo ($parentesco->getNombreParentesco()); ?></option>
                                  <?php
                                }
                              }
@@ -789,7 +789,7 @@
                            $parentescos = $d->readParentescos();
                            foreach($parentescos as $p => $parentesco){
                            ?>
-                           <option value="<?php echo $parentesco->getIdParentesco(); ?>"><?php echo utf8_encode($parentesco->getNombreParentesco()); ?></option>
+                           <option value="<?php echo $parentesco->getIdParentesco(); ?>"><?php echo ($parentesco->getNombreParentesco()); ?></option>
                            <?php
                            }
                            ?>
@@ -970,7 +970,7 @@
                                $estadosDeCursos2 = $d->readEstadosCurso();
                                foreach($estadosDeCursos2 as $ec2 => $estado2){
                                ?>
-                               <option value="<?php echo $estado2->getIdEstadoCurso(); ?>"><?php echo utf8_encode($estado2->getNombreEstadoCurso()); ?></option>
+                               <option value="<?php echo $estado2->getIdEstadoCurso(); ?>"><?php echo ($estado2->getNombreEstadoCurso()); ?></option>
                                <?php
                                }
                                ?>
@@ -1051,7 +1051,7 @@
                                $regiones = $d->readRegiones();
                                foreach($regiones as $r => $region){
                                ?>
-                               <option value="<?php echo $region->getIdRegion(); ?>"><?php echo utf8_encode($region->getNombreRegion()); ?></option>
+                               <option value="<?php echo $region->getIdRegion(); ?>"><?php echo ($region->getNombreRegion()); ?></option>
                                <?php
                                }
                                ?>
@@ -1098,7 +1098,7 @@
                                    foreach ($infoHistorica as $iHistorica => $info) {
                                 ?>
                                 <tr>
-                                  <td><?php echo utf8_encode($d->buscarNombreDeRegionPorId($info->getfkRegioninformacionHistorica()));   ?></td>
+                                  <td><?php echo ($d->buscarNombreDeRegionPorId($info->getfkRegioninformacionHistorica()));   ?></td>
                                   <td><?php echo $info->getcuerpo();   ?></td>
                                   <td><?php echo $info->getcompania();  ?></td>
                                   <td><?php
@@ -1150,7 +1150,7 @@
                                            $entiPropietaria = $data->getEntidadACargo();
                                            foreach ($entiPropietaria as $ep) {
                                                echo "<option value='".$ep->getIdEntidadACargo()."'>";
-                                                   echo utf8_encode($ep->getNombreEntidadACargo());
+                                                   echo ($ep->getNombreEntidadACargo());
                                                echo"</option>";
                                            }
                                        ?>
@@ -1162,7 +1162,7 @@
                                      $materialesDisponibles = $data->getMaterialesMenoresPorFkUbicacionFisica(1);
                                      foreach ($materialesDisponibles as $mat) {
                                        echo "<option value='".$mat->getId_material_menor()."'>";
-                                       echo utf8_encode($mat->getNombre_material_menor());
+                                       echo ($mat->getNombre_material_menor());
                                        echo"</option>";
                                      }
                                      ?>
@@ -1205,7 +1205,7 @@
                                    $ubicacionesFisicas = $data->getUbicacionFisica(1);
                                    foreach ($ubicacionesFisicas as $ubi) {
                                      echo "<option value='".$ubi->getIdUbicacionFisica()."'>";
-                                     echo utf8_encode($ubi->getNombreUbicacionFisica());
+                                     echo ($ubi->getNombreUbicacionFisica());
                                      echo"</option>";
                                    }
                                    ?>
@@ -1264,17 +1264,17 @@
                                        $material=$d->getMaterialeMenorPorId($datos->getFk_materialMenorAsignado_informacionDeCargos());
                                      ?>
                                      <tr>
-                                       <td><?php echo utf8_encode($material->getNombre_material_menor());?></td>
-                                       <td><?php echo utf8_encode($material->getFk_entidad_a_cargo_material_menor());?></td>
-                                       <td><?php echo utf8_encode($material->getColor_material_menor());?></td>
-                                       <td><?php echo utf8_encode($material->getMedida_material_menor());?></td>
-                                       <td><?php echo utf8_encode($material->getFk_unidad_de_medida_material_menor());?></td>
-                                       <td><?php echo utf8_encode($material->getFk_ubicacion_fisica_material_menor());?></td>
-                                       <td><?php echo utf8_encode($material->getFabricante_material_menor());?></td>
-                                       <td><?php echo utf8_encode($material->getFecha_de_caducidad_material_menor());?></td>
-                                       <td><?php echo utf8_encode($material->getProveedor_material_menor());?></td>
-                                       <td><?php echo utf8_encode($material->getFkEstadoMaterialMenor());?></td>
-                                       <td><?php echo utf8_encode($material->getDetalleMaterialMenor());?></td>
+                                       <td><?php echo ($material->getNombre_material_menor());?></td>
+                                       <td><?php echo ($material->getFk_entidad_a_cargo_material_menor());?></td>
+                                       <td><?php echo ($material->getColor_material_menor());?></td>
+                                       <td><?php echo ($material->getMedida_material_menor());?></td>
+                                       <td><?php echo ($material->getFk_unidad_de_medida_material_menor());?></td>
+                                       <td><?php echo ($material->getFk_ubicacion_fisica_material_menor());?></td>
+                                       <td><?php echo ($material->getFabricante_material_menor());?></td>
+                                       <td><?php echo ($material->getFecha_de_caducidad_material_menor());?></td>
+                                       <td><?php echo ($material->getProveedor_material_menor());?></td>
+                                       <td><?php echo ($material->getFkEstadoMaterialMenor());?></td>
+                                       <td><?php echo ($material->getDetalleMaterialMenor());?></td>
                                        <td><?php echo $datos->getCantidadAsignada_informacionDeCargos();?></td>
                                   <?php
                                    }

@@ -70,7 +70,7 @@ foreach ($arrayDeEmergencias as $ae => $emer) {
   }
 
 
-  $arrayRepresentativoDelObjeto=array("id"=>$idSer ,"nombre"=> utf8_encode($nombreUnidad),
+  $arrayRepresentativoDelObjeto=array("id"=>$idSer ,"nombre"=> ($nombreUnidad),
                                     "momento6_0"=> $momento6_0,
                                      "momento6_3"=> $momento6_3,
                                      "momento6_7"=> $momento6_7, "momento6_8"=> $momento6_8,

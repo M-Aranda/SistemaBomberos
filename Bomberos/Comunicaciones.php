@@ -281,7 +281,7 @@
                     ?>
 
                   </td>
-                  <td><?php echo utf8_encode($data->verNombreDeServicioPorId($servicio->getFk_tipoDeServicio()));?></td>
+                  <td><?php echo ($data->verNombreDeServicioPorId($servicio->getFk_tipoDeServicio()));?></td>
                   <td><?php
                   $unidades=$data->getUnidadesInvolucradasEnServicio($servicio->getId_servicio());
                   foreach ($unidades as $u => $unidad) {

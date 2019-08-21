@@ -199,7 +199,7 @@ if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
                     foreach ($tipoBombero as $tb) {
                       if(isset($estadoSeleccionado) && ($estadoSeleccionado==$tb->getIdEstadoUnidad())){
                         echo "<option selected value='".$tb->getIdEstadoUnidad()."'>";
-                            echo utf8_encode($tb->getNombreEstadoUnidad());
+                            echo ($tb->getNombreEstadoUnidad());
                         echo"</option>";
                       }else{
                         echo "<option value='".$tb->getIdEstadoUnidad()."'>";
@@ -291,7 +291,7 @@ if(isset($_SESSION["resultadosDeBusquedaDeMaterialMenor"])){
                             <td><?php echo $objeto->getNombreUnidad();?></td>
                             <td><?php echo $objeto->getEstado();?></td>
                             <td><?php echo $objeto->getTipoVehiculo();?></td>
-                            <td><?php echo utf8_encode($objeto->getEntidadACargo());?></td>
+                            <td><?php echo ($objeto->getEntidadACargo());?></td>
                             <td>
                               <form action="controlador/CargarFichaUnidad.php" method="post">
                                 <input type="hidden" id="idUnidad" name="idUnidad" value="<?php echo $objeto->getIdUnidad();?>">

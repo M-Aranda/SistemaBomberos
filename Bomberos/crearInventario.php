@@ -186,7 +186,7 @@ if($_SESSION["usuarioIniciado"]!=null){
                    $entiPropietaria = $data->getEntidadACargo();
                    foreach ($entiPropietaria as $ep) {
                        echo "<option value='".$ep->getIdEntidadACargo()."'>";
-                           echo utf8_encode($ep->getNombreEntidadACargo());
+                           echo ($ep->getNombreEntidadACargo());
                        echo"</option>";
                    }
                ?>
@@ -198,7 +198,7 @@ if($_SESSION["usuarioIniciado"]!=null){
              $ubicacionesFisicas = $data->getUbicacionFisica(1);
              foreach ($ubicacionesFisicas as $ubi) {
                echo "<option value='".$ubi->getIdUbicacionFisica()."'>";
-               echo utf8_encode($ubi->getNombreUbicacionFisica());
+               echo ($ubi->getNombreUbicacionFisica());
                echo"</option>";
              }
              ?>
@@ -227,7 +227,7 @@ if($_SESSION["usuarioIniciado"]!=null){
               $estados = $data->getEstadosInventario();
               foreach ($estados as $e) {
                   echo "<option value='".$e->getId_estado_material_menor()."'>";
-                      echo utf8_encode($e->getNombre_estado_material_menor());
+                      echo ($e->getNombre_estado_material_menor());
                   echo"</option>";
               }
              ?>
@@ -257,7 +257,7 @@ if($_SESSION["usuarioIniciado"]!=null){
              $medidas = $data->getMedidas();
              foreach ($medidas as $me) {
                  echo "<option value='".$me->getIdUnidadMedida()."'>";
-                     echo utf8_encode($me->getNombreUnidadMedida());
+                     echo ($me->getNombreUnidadMedida());
                  echo"</option>";
              }
             ?>

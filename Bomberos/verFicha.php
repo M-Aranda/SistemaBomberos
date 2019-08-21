@@ -237,9 +237,9 @@
 
                   <div class="col-md-5" style="margin-left: 50px;">
                     Rut: <input class="form-control" value="<?php echo $infoPersonal->getRutInformacionPersonal();?>"  type="text" name="txtRut" disabled>
-                    Nombre: <input class="form-control" value="<?php echo utf8_encode($infoPersonal->getNombreInformacionPersonal());?>" type="text" name="txtNombre" disabled>
-                    Apellido Paterno: <input class="form-control" value="<?php echo utf8_encode($infoPersonal->getApellidoPaterno());?>" type="text" name="txtApePa" disabled>
-                    Apellido Materno: <input class="form-control" value="<?php echo utf8_encode($infoPersonal->getApellidoMaterno());?>" name="txtApeMa" disabled>
+                    Nombre: <input class="form-control" value="<?php echo ($infoPersonal->getNombreInformacionPersonal());?>" type="text" name="txtNombre" disabled>
+                    Apellido Paterno: <input class="form-control" value="<?php echo ($infoPersonal->getApellidoPaterno());?>" type="text" name="txtApePa" disabled>
+                    Apellido Materno: <input class="form-control" value="<?php echo ($infoPersonal->getApellidoMaterno());?>" name="txtApeMa" disabled>
                     Fecha Nacimiento: <input class="form-control" value="<?php echo $infoPersonal->getFechaNacimiento();?>" name="txtFecha" type="date" disabled>
                     Estado Civil:
                     <select class="form-control" name="cboEstadoCivil" disabled>
@@ -330,11 +330,11 @@
                      $regiones = $d->readRegiones();
                      foreach($regiones as $r => $region){
                        if($infoBomberil->getfkRegioninformacionBomberil()==$region->getIdRegion()){?>
-                         <option value="<?php echo $region->getIdRegion(); ?>" selected ><?php echo utf8_encode($region->getNombreRegion()); ?></option>
+                         <option value="<?php echo $region->getIdRegion(); ?>" selected ><?php echo ($region->getNombreRegion()); ?></option>
                          <?php
                        }else{
                            ?>
-                           <option value="<?php echo $region->getIdRegion(); ?>" ><?php echo utf8_encode($region->getNombreRegion()); ?></option>
+                           <option value="<?php echo $region->getIdRegion(); ?>" ><?php echo ($region->getNombreRegion()); ?></option>
                            <?php
                          }
                        }
@@ -409,11 +409,11 @@
                      $estados = $d->readEstadosDeBomberos();
                      foreach($estados as $e => $estado){
                        if($infoBomberil->getfkEstadoinformacionBomberil()==$estado->getIdEstado()){?>
-                         <option value="<?php echo $estado->getIdEstado(); ?>" selected ><?php echo utf8_encode($estado->getNombreEstado()); ?></option>
+                         <option value="<?php echo $estado->getIdEstado(); ?>" selected ><?php echo ($estado->getNombreEstado()); ?></option>
                          <?php
                        }else{
                            ?>
-                           <option value="<?php echo $estado->getIdEstado(); ?>" ><?php echo utf8_encode($estado->getNombreEstado()); ?></option>
+                           <option value="<?php echo $estado->getIdEstado(); ?>" ><?php echo ($estado->getNombreEstado()); ?></option>
                            <?php
                          }
                        }
@@ -555,11 +555,11 @@
                      $parentescos = $d->readParentescos();
                      foreach($parentescos as $p => $parentesco){
                        if($infoMedica2->getfkParentescoContactoinformacionMedica2()==$parentesco->getIdParentesco()){?>
-                         <option value="<?php echo $parentesco->getIdParentesco(); ?>" selected ><?php echo utf8_encode($parentesco->getNombreParentesco()); ?></option>
+                         <option value="<?php echo $parentesco->getIdParentesco(); ?>" selected ><?php echo ($parentesco->getNombreParentesco()); ?></option>
                          <?php
                        }else{
                            ?>
-                           <option value="<?php echo $parentesco->getIdParentesco(); ?>" ><?php echo utf8_encode($parentesco->getNombreParentesco()); ?></option>
+                           <option value="<?php echo $parentesco->getIdParentesco(); ?>" ><?php echo ($parentesco->getNombreParentesco()); ?></option>
                            <?php
                          }
                        }
@@ -660,7 +660,7 @@
                            $fechaConvertida = date("d-m-Y", strtotime($fechaSinConvertir));
 
                            echo $fechaConvertida;?></td>
-                           <td><?php echo utf8_encode($d->buscarNombreParentescoPorId($datos->getfkParentescoinformacionFamiliar())->getNombreParentesco());?></td>
+                           <td><?php echo ($d->buscarNombreParentescoPorId($datos->getfkParentescoinformacionFamiliar())->getNombreParentesco());?></td>
                       <?php
                        }
                          ?>
@@ -845,8 +845,8 @@
                                foreach ($infoHistorica as $iHistorica => $info) {
                             ?>
                             <tr>
-                              <td><?php echo utf8_encode($d->buscarNombreDeRegionPorId($info->getfkRegioninformacionHistorica()));   ?></td>
-                              <td><?php echo utf8_encode($info->getcuerpo());   ?></td>
+                              <td><?php echo ($d->buscarNombreDeRegionPorId($info->getfkRegioninformacionHistorica()));   ?></td>
+                              <td><?php echo ($info->getcuerpo());   ?></td>
                               <td><?php echo $info->getcompania();  ?></td>
                               <td><?php
                               $fechaSinConvertir = $info->getfechaDeCambio();
@@ -855,7 +855,7 @@
                               <td><?php echo $info->getPremio();   ?></td>
                               <td><?php echo $info->getmotivo();   ?></td>
                               <td><?php echo $info->getdetalle();   ?></td>
-                              <td><?php echo utf8_encode($info->getCargo());   ?></td>
+                              <td><?php echo ($info->getCargo());   ?></td>
                             </tr>
 
 

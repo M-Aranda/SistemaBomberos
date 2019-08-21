@@ -75,7 +75,7 @@
                                $perfil = $data->getPerfiles();
                                foreach ($perfil as $p) {
                                    echo "<option value='".$p->getidTipoUsuario()."'>";
-                                       echo utf8_encode($p->getnombreTipoUsuario());
+                                       echo ($p->getnombreTipoUsuario());
                                    echo"</option>";
                                }
                            ?>

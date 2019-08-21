@@ -16,9 +16,9 @@ foreach ($arrayDeApoyoss as $a => $apoyo) {
   $ppuu=$apoyo->getPpuu();
 
 
-  $arrayRepresentativoDelObjeto=array("idApoyo"=>$idApoyo ,"nombreEntidadApoyo"=> utf8_encode($entidad),
-                                    "responsableApoyo"=> utf8_encode($responsable),
-                                     "ppuuApoyo"=> utf8_encode($ppuu));
+  $arrayRepresentativoDelObjeto=array("idApoyo"=>$idApoyo ,"nombreEntidadApoyo"=> ($entidad),
+                                    "responsableApoyo"=> ($responsable),
+                                     "ppuuApoyo"=> ($ppuu));
 
   $obj=json_encode($arrayRepresentativoDelObjeto);
 

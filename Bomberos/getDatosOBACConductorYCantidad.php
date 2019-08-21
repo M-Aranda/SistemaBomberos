@@ -20,7 +20,7 @@ if($cantidad=="]"){
   $cantidad="";
 }
 
-$arrayRepresentativoDelObjeto=array("obac"=>utf8_encode($obac) ,"conductor"=> utf8_encode($conductor), "cantidad"=>utf8_encode($cantidad));
+$arrayRepresentativoDelObjeto=array("obac"=>($obac) ,"conductor"=> ($conductor), "cantidad"=>($cantidad));
 
 
 $obj=json_encode($arrayRepresentativoDelObjeto);

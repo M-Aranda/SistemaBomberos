@@ -265,11 +265,11 @@
                         $entidadesPropietarias = $data->getEntidadACargo();
                         foreach ($entidadesPropietarias as $ep) {
                           if($unidad->getfkEntidadPropietaria()==$ep->getIdEntidadACargo()){?>
-                            <option value="<?php echo $ep->getIdEntidadACargo(); ?>" selected ><?php echo utf8_encode($ep->getNombreEntidadACargo()); ?></option>
+                            <option value="<?php echo $ep->getIdEntidadACargo(); ?>" selected ><?php echo ($ep->getNombreEntidadACargo()); ?></option>
                             <?php
                           }else{
                               ?>
-                              <option value="<?php echo $ep->getIdEntidadACargo(); ?>" ><?php echo utf8_encode($ep->getNombreEntidadACargo()); ?></option>
+                              <option value="<?php echo $ep->getIdEntidadACargo(); ?>" ><?php echo ($ep->getNombreEntidadACargo()); ?></option>
                               <?php
                             }
                           }
@@ -319,16 +319,16 @@
                                                                             <?php
                                                                             foreach ($mantenciones as $m => $mantencion) { ?>
                                                                                 <tr>
-                                                                                  <td><?php echo utf8_encode($data->buscarNombreDeMantencionPorId($mantencion->getFk_tipo_mantencion()));?></td>
+                                                                                  <td><?php echo ($data->buscarNombreDeMantencionPorId($mantencion->getFk_tipo_mantencion()));?></td>
                                                                                   <td><?php
                                                                                     $fechaSinConvertir = $mantencion->getFecha_mantencion();
                                                                                     $fechaConvertida = date("d-m-Y", strtotime($fechaSinConvertir));
 
                                                                                     echo $fechaConvertida; ?>
                                                                                   </td>
-                                                                                  <td><?php echo utf8_encode($mantencion->getResponsable_mantencion());?></td>
-                                                                                  <td><?php echo utf8_encode($mantencion->getDireccion_mantencion());?></td>
-                                                                                  <td><?php echo utf8_encode($mantencion->getComentarios_mantencion());?></td>
+                                                                                  <td><?php echo ($mantencion->getResponsable_mantencion());?></td>
+                                                                                  <td><?php echo ($mantencion->getDireccion_mantencion());?></td>
+                                                                                  <td><?php echo ($mantencion->getComentarios_mantencion());?></td>
                                                                                 </tr>
 
                                                                           <?php    }
@@ -383,18 +383,18 @@
                                       <?php
                                       foreach ($carguios as $c => $carguio) { ?>
                                         <tr>
-                                          <td><?php echo utf8_encode($carguio->getResponsable_cargio_combustible());?></td>
+                                          <td><?php echo ($carguio->getResponsable_cargio_combustible());?></td>
                                           <td><?php
                                             $fechaSinConvertir = $carguio->getFecha_cargio();
                                             $fechaConvertida = date("d-m-Y", strtotime($fechaSinConvertir));
 
                                             echo $fechaConvertida; ?>
                                           </td>
-                                          <td><?php echo utf8_encode($carguio->getDireccion_cargio());?></td>
-                                          <td><?php echo utf8_encode($data->buscarNombreDeCombustiblePorId($carguio->getFk_tipo_combustible_cargio_combustible()));?></td>
-                                          <td><?php echo utf8_encode($carguio->getCantidad_litros_cargio_combustible());?></td>
-                                          <td><?php echo utf8_encode($carguio->getPrecio_litro_cargio_combustible());?></td>
-                                          <td><?php echo utf8_encode($carguio->getObservacion_cargio_combustible());?></td>
+                                          <td><?php echo ($carguio->getDireccion_cargio());?></td>
+                                          <td><?php echo ($data->buscarNombreDeCombustiblePorId($carguio->getFk_tipo_combustible_cargio_combustible()));?></td>
+                                          <td><?php echo ($carguio->getCantidad_litros_cargio_combustible());?></td>
+                                          <td><?php echo ($carguio->getPrecio_litro_cargio_combustible());?></td>
+                                          <td><?php echo ($carguio->getObservacion_cargio_combustible());?></td>
                                         </tr>
                                     <?php  } ?>
                                   </tbody>

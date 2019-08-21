@@ -42,6 +42,6 @@ $obj=json_encode($arrayRepresentativoDelObjeto);
 echo $obj;
 
 /*
-"color"=> utf8_encode($color),
+"color"=> ($color),
  *  */
 ?>

@@ -445,7 +445,7 @@ $( function() {
                  <div class="col-sm-6">
                    Creando ficha para: <?php
                    if(isset($idDeBomberoMasReciente)){
-                     echo utf8_encode($d->getNombreBomberoPorId($idDeBomberoMasReciente));
+                     echo ($d->getNombreBomberoPorId($idDeBomberoMasReciente));
                    }
                     ?>
                     <br>
@@ -459,7 +459,7 @@ $( function() {
                      $regiones = $d->readRegiones();
                      foreach($regiones as $r => $region){
                      ?>
-                     <option value="<?php echo $region->getIdRegion(); ?>"><?php echo utf8_encode($region->getNombreRegion()); ?></option>
+                     <option value="<?php echo $region->getIdRegion(); ?>"><?php echo ($region->getNombreRegion()); ?></option>
                      <?php
                      }
                      ?>
@@ -495,7 +495,7 @@ $( function() {
                      $cargos = $d->readCargos();
                      foreach($cargos as $c => $cargo){
                      ?>
-                     <option value="<?php echo $cargo->getIdCargo(); ?>"><?php echo utf8_encode($cargo->getNombreCargo()); ?></option>
+                     <option value="<?php echo $cargo->getIdCargo(); ?>"><?php echo ($cargo->getNombreCargo()); ?></option>
                      <?php
                      }
                      ?>
@@ -511,7 +511,7 @@ $( function() {
                      $estados = $d->readEstadosDeBomberos();
                      foreach($estados as $e => $estado){
                      ?>
-                     <option value="<?php echo $estado->getIdEstado(); ?>"><?php echo utf8_encode($estado->getNombreEstado()); ?></option>
+                     <option value="<?php echo $estado->getIdEstado(); ?>"><?php echo ($estado->getNombreEstado()); ?></option>
                      <?php
                      }
                      ?>
@@ -553,7 +553,7 @@ $( function() {
                  <div class="col-sm-6">
                    Creando ficha para: <?php
                    if(isset($idDeBomberoMasReciente)){
-                     echo utf8_encode($d->getNombreBomberoPorId($idDeBomberoMasReciente));
+                     echo ($d->getNombreBomberoPorId($idDeBomberoMasReciente));
                    }
                     ?>
                     <br>
@@ -607,7 +607,7 @@ $( function() {
                  <div class="col-sm-6">
                    Creando ficha para: <?php
                    if(isset($idDeBomberoMasReciente)){
-                     echo utf8_encode($d->getNombreBomberoPorId($idDeBomberoMasReciente));
+                     echo ($d->getNombreBomberoPorId($idDeBomberoMasReciente));
                    }
                     ?>
                     <br>
@@ -692,7 +692,7 @@ $( function() {
                             <div class="col-sm-6">
                               Creando ficha para: <?php
                               if(isset($idDeBomberoMasReciente)){
-                                echo utf8_encode($d->getNombreBomberoPorId($idDeBomberoMasReciente));
+                                echo ($d->getNombreBomberoPorId($idDeBomberoMasReciente));
                               }
                                ?>
                                <br>
@@ -708,7 +708,7 @@ $( function() {
                                 $parentescos = $d->readParentescos();
                                 foreach($parentescos as $p => $parentesco){
                                 ?>
-                                <option value="<?php echo $parentesco->getIdParentesco(); ?>"><?php echo utf8_encode($parentesco->getNombreParentesco()); ?></option>
+                                <option value="<?php echo $parentesco->getIdParentesco(); ?>"><?php echo ($parentesco->getNombreParentesco()); ?></option>
                                 <?php
                                 }
                                 ?>
@@ -755,7 +755,7 @@ $( function() {
                                 <div class="col-sm-6">
                                   Creando ficha para: <?php
                                   if(isset($idDeBomberoMasReciente)){
-                                    echo utf8_encode($d->getNombreBomberoPorId($idDeBomberoMasReciente));
+                                    echo ($d->getNombreBomberoPorId($idDeBomberoMasReciente));
                                   }
                                    ?>
                                    <br>
@@ -771,7 +771,7 @@ $( function() {
                                     $estadosDeCursos = $d->readEstadosCurso();
                                     foreach($estadosDeCursos as $ec => $estado){
                                     ?>
-                                    <option value="<?php echo $estado->getIdEstadoCurso(); ?>"><?php echo utf8_encode($estado->getNombreEstadoCurso()); ?></option>
+                                    <option value="<?php echo $estado->getIdEstadoCurso(); ?>"><?php echo ($estado->getNombreEstadoCurso()); ?></option>
                                     <?php
                                     }
                                     ?>
@@ -816,7 +816,7 @@ $( function() {
                                   <div class="col-sm-6">
                                     Creando ficha para: <?php
                                     if(isset($idDeBomberoMasReciente)){
-                                      echo utf8_encode($d->getNombreBomberoPorId($idDeBomberoMasReciente));
+                                      echo ($d->getNombreBomberoPorId($idDeBomberoMasReciente));
                                     }
                                      ?>
                                      <br>
@@ -832,7 +832,7 @@ $( function() {
                                       $estadosDeCursos2 = $d->readEstadosCurso();
                                       foreach($estadosDeCursos2 as $ec2 => $estado2){
                                       ?>
-                                      <option value="<?php echo $estado2->getIdEstadoCurso(); ?>"><?php echo utf8_encode($estado2->getNombreEstadoCurso()); ?></option>
+                                      <option value="<?php echo $estado2->getIdEstadoCurso(); ?>"><?php echo ($estado2->getNombreEstadoCurso()); ?></option>
                                       <?php
                                       }
                                       ?>
@@ -892,7 +892,7 @@ $( function() {
                                       $regiones = $d->readRegiones();
                                       foreach($regiones as $r => $region){
                                       ?>
-                                      <option value="<?php echo $region->getIdRegion(); ?>"><?php echo utf8_encode($region->getNombreRegion()); ?></option>
+                                      <option value="<?php echo $region->getIdRegion(); ?>"><?php echo ($region->getNombreRegion()); ?></option>
                                       <?php
                                       }
                                       ?>
@@ -909,7 +909,7 @@ $( function() {
                                       $companias = $d->readSoloCompanias();
                                       foreach($companias as $c => $compania){
                                       ?>
-                                      <option value="<?php /*echo $compania->getIdEntidadACargo(); ?>"><?php echo utf8_encode($compania->getNombreEntidadACargo());*/ ?></option>
+                                      <option value="<?php /*echo $compania->getIdEntidadACargo(); ?>"><?php echo ($compania->getNombreEntidadACargo());*/ ?></option>
                                       <?php
                                       }
                                       ?>

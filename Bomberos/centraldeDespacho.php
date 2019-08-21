@@ -244,8 +244,8 @@
 
               Despacho:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input value="<?php
               if(isset($_SESSION["idDeServicioCreado"])){
-                echo utf8_encode($data->getTipoDeServicioYSectorDeServicio($idServicioCreado)->getServicio());
-               echo "  "; echo utf8_encode($data->getTipoDeServicioYSectorDeServicio($idServicioCreado)->getSector()); echo " ";
+                echo ($data->getTipoDeServicioYSectorDeServicio($idServicioCreado)->getServicio());
+               echo "  "; echo ($data->getTipoDeServicioYSectorDeServicio($idServicioCreado)->getSector()); echo " ";
                $idTipoServ=$data->getTipoDeServicioYSectorDeServicio($idServicioCreado)->getServicio();
                $idTipoServ=$data->getIdDeTipoDeServicioAPartirDelCodigo($idTipoServ);
                $idSector=$data->getTipoDeServicioYSectorDeServicio($idServicioCreado)->getSector();
@@ -262,7 +262,7 @@
                   if($disponibilidad!=1){
                     deleteElement($unidad,$listadoDeUnidadesAEnviar);
                   }else{
-                    echo utf8_encode($data->getNombreDeUnidadPorId($unidad));
+                    echo ($data->getNombreDeUnidadPorId($unidad));
                     echo " ";
                   }
                   }
@@ -459,7 +459,7 @@
             <select id="entidadExteriorApoyando" name="entidadExteriorApoyando" style="width:525px;height:25px;">
               <?php
               foreach ($listadoDeEntidadesDeApoyo as $e => $entidadExterior) {?>
-                <option value="<?php echo $entidadExterior->getIdEntidadExterior();?>"><?php echo utf8_encode($entidadExterior->getNombreEntidadExterior());?> </option>
+                <option value="<?php echo $entidadExterior->getIdEntidadExterior();?>"><?php echo ($entidadExterior->getNombreEntidadExterior());?> </option>
 
           <?php    }
               ?>
