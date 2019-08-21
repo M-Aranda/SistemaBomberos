@@ -59,13 +59,17 @@ $infoMedica2->setesFumadorinformacionMedica2($esFumadorinformacionMedica2);
 $infoMedica2->setfkGrupoSanguineoinformacionMedica2($fkGrupoSanguineoinformacionMedica2);
 $infoMedica2->setfkInfoPersonalinformacionMedica2($fkInfoPersonalinformacionMedica2);
 
+
+
 if(isset($_SESSION['seEstaModificandoUBombero'])){
   $d->actualizarInformacionMedica1($infoMedica1);
   $d->actualizarInformacionMedica2($infoMedica2);
   header("location: CargarFichaAModificar.php");
 }else{
   $d->actualizarInformacionMedica1($infoMedica1);
-  $d->actualizarInformacionMedica2($infoMedica2);
-    header("location: ../CrearFicha.php");
+  $d->crearInformacionMedica2($infoMedica2);
+   header("location: ../CrearFicha.php");
 }
+
+
 ?>

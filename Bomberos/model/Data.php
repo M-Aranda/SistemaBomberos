@@ -250,6 +250,7 @@ class Data{
     public function crearInformacionMedica1($infoMedica1){
       $query="CALL CRUDInformacionMedica1 (1, '".$infoMedica1->getprestacionMedica_informacionMedica1()."', '".$infoMedica1->getalergias_informacionMedica1()."', '".$infoMedica1->getenfermedadesCronicasinformacionMedica1()."',
        ".$infoMedica1->getfkInfoPersonalinformacionMedica1().", 1);";
+      echo $query;
 
       $this->c->conectar();
       $this->c->ejecutar($query);
@@ -261,7 +262,8 @@ class Data{
       $query="CALL CRUDInformacionMedica2 (1, '".$infoMedica2->getmedicamentosHabitualesinformacionMedica2()."', '".$infoMedica2->getnombreContactoinformacionMedica2()."', '".$infoMedica2->gettelefonoContactoinformacionMedica2()."',
        ".$infoMedica2->getfkParentescoContactoinformacionMedica2().", '".$infoMedica2->getnivelActividadFisicainformacionMedica2()."', '".$infoMedica2->getesDonanteinformacionMedica2()."', '".$infoMedica2->getesFumadorinformacionMedica2()."',
        ".$infoMedica2->getfkGrupoSanguineoinformacionMedica2().", ".$infoMedica2->getfkInfoPersonalinformacionMedica2().", 1);";
-
+       echo $query;
+      
       $this->c->conectar();
       $this->c->ejecutar($query);
       $this->c->desconectar();
@@ -1214,6 +1216,7 @@ public function actualizarInformacionLaboral($infoLaboral){
 public function actualizarInformacionMedica1($infoMedica1){
   $query="CALL CRUDInformacionMedica1 (".$infoMedica1->getidInformacionMedica1().", '".$infoMedica1->getprestacionMedica_informacionMedica1()."', '".$infoMedica1->getalergias_informacionMedica1()."', '".$infoMedica1->getenfermedadesCronicasinformacionMedica1()."',
    ".$infoMedica1->getfkInfoPersonalinformacionMedica1().", 3);";
+  echo $query;
 
   $this->c->conectar();
   $this->c->ejecutar($query);

@@ -1691,6 +1691,7 @@ INSERT INTO tbl_sector (nombre_sector) VALUES
 -- SELECT * FROM tbl_informacionLaboral;
 -- SELECT * FROM tbl_informacionMedica1;
 -- SELECT * FROM tbl_informacionMedica2;
+
 -- SELECT * FROM tbl_informacionFamiliar;
 -- SELECT * FROM tbl_informacionAcademica;
 -- SELECT * FROM tbl_entrenamientoEstandar;
