@@ -7,7 +7,8 @@ $idServicioUni = isset($_REQUEST['idServicioUnidad'])?$_REQUEST['idServicioUnida
 $nombreOBAC = isset($_REQUEST['nombreOBAC'])?$_REQUEST['nombreOBAC']:"";
 $nombreConductor = isset($_REQUEST['nombreConductor'])?$_REQUEST['nombreConductor']:"";
 $cantidadBomberos = isset($_REQUEST['cantidadPersonal'])?$_REQUEST['cantidadPersonal']:"";
+ // este es un comentario adicional
 
-
+ 
 $data->actualizarOBACConductorYNPersonalServicioUnidad($nombreOBAC, $nombreConductor, $cantidadBomberos, $idServicioUni );
 ?>
